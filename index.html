@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Track and share your favorites across Portland food weeks — Pizza Week, Burger Week, and more." />
+  <meta name="theme-color" content="#1A1208" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="PDX Food Week" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PDX Food Week" />
+  <meta property="og:description" content="Bookmark, plan, and share your Portland food week favorites." />
+  <meta property="og:type" content="website" />
+
+  <title>PDX Food Week</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ── Header ── -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="app-wordmark">PDX Food Week</div>
+      <button class="week-switcher" title="More food weeks coming soon">More weeks ▾</button>
+    </div>
+    <h1 class="header-title"><em>Pizza</em> Week 2026</h1>
+    <div class="header-meta">
+      <span>April 20–26</span>
+      <span class="pill">$4 slice</span>
+      <span class="pill">$25 pie</span>
+      <span>70 locations</span>
+    </div>
+    <nav class="nav-tabs" role="tablist" aria-label="App sections">
+      <button class="nav-tab active" data-tab="browse" role="tab"
+        onclick="App.switchTab('browse')" aria-selected="true">
+        Browse
+        <span class="badge-dot"></span>
+      </button>
+      <button class="nav-tab" data-tab="saved" role="tab"
+        onclick="App.switchTab('saved')" aria-selected="false">
+        Saved
+        <span class="badge-dot"></span>
+      </button>
+      <button class="nav-tab" data-tab="friends" role="tab"
+        onclick="App.switchTab('friends')" aria-selected="false">
+        Friends
+        <span class="badge-dot"></span>
+      </button>
+      <button class="nav-tab" data-tab="map" role="tab"
+        onclick="App.switchTab('map')" aria-selected="false">
+        Map
+        <span class="badge-dot"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ── Browse View ── -->
+  <section class="view active" id="view-browse" role="tabpanel" aria-label="Browse dishes">
+    <div class="search-bar">
+      <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…" autocomplete="off" />
+    </div>
+    <div class="filter-row" role="group" aria-label="Filter dishes">
+      <button class="filter-chip active" onclick="App.setFilter('all', this)">All</button>
+      <button class="filter-chip" onclick="App.setFilter('meat', this)">🥩 Meat</button>
+      <button class="filter-chip" onclick="App.setFilter('vegetarian', this)">🌿 Vegetarian</button>
+      <button class="filter-chip" onclick="App.setFilter('vegan', this)">🌱 Vegan</button>
+      <button class="filter-chip" onclick="App.setFilter('gf', this)">🌾 Gluten-free</button>
+      <button class="filter-chip" onclick="App.setFilter('pie', this)">🍕 Whole Pie</button>
+      <button class="filter-chip" onclick="App.setFilter('minors', this)">👨‍👩‍👧 Family OK</button>
+    </div>
+    <div class="cards-list" id="cards-browse"></div>
+  </section>
+
+  <!-- ── Saved View ── -->
+  <section class="view" id="view-saved" role="tabpanel" aria-label="Saved dishes">
+    <div class="stats-bar">
+      <div class="stat-box">
+        <div class="stat-num" id="stat-count">0</div>
+        <div class="stat-label">Saved</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-hoods">0</div>
+        <div class="stat-label">Neighborhoods</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" id="stat-types">0</div>
+        <div class="stat-label">Dish types</div>
+      </div>
+    </div>
+    <div class="section-header">Your bookmarks</div>
+    <div class="cards-list" id="cards-saved"></div>
+  </section>
+
+  <!-- ── Friends View ── -->
+  <section class="view" id="view-friends" role="tabpanel" aria-label="Friends and sharing">
+    <div class="share-panel">
+      <h3>Share your list</h3>
+      <p>Copy your code and send it to friends. They paste it below to find spots you both want to try.</p>
+      <div class="code-box" id="share-code-box">
+        <span class="code-placeholder">Save some spots first…</span>
+      </div>
+      <button class="btn btn-primary" id="copy-btn" onclick="App.copyCode()" disabled>
+        Copy my code
+      </button>
+      <div class="paste-label">Add a friend's code</div>
+      <div class="paste-row">
+        <input id="friend-code-input" type="text" placeholder="PDX26-…" autocomplete="off" spellcheck="false" />
+        <button class="btn" onclick="App.addFriend()">Add</button>
+      </div>
+    </div>
+
+    <div class="friends-list" id="friends-list"></div>
+
+    <div class="overlap-section" id="overlap-section" style="display:none">
+      <div class="overlap-header">
+        <h3>🎉 Places you all want</h3>
+        <p>Spots that everyone in your group has bookmarked</p>
+      </div>
+      <div id="overlap-container"></div>
+    </div>
+  </section>
+
+  <!-- ── Map View ── -->
+  <section class="view" id="view-map" role="tabpanel" aria-label="Map of locations">
+    <div class="map-container">
+      <canvas id="map-canvas" aria-label="Map of Portland pizza week locations"></canvas>
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-dot saved"></div> Bookmarked
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot unsaved"></div> Not saved
+        </div>
+        <div class="legend-item" style="margin-left:auto;color:var(--ink-30);font-size:10px">
+          Tap a pin for details
+        </div>
+      </div>
+    </div>
+    <div class="map-selected" id="map-selected-card"></div>
+  </section>
+
+</div><!-- #app -->
+
+<!-- ── Detail Bottom Sheet ── -->
+<div id="detail-overlay" class="detail-overlay" role="dialog" aria-modal="true" aria-label="Dish details">
+  <div class="detail-sheet" id="detail-sheet-content"></div>
+</div>
+
+<!-- ── Toast ── -->
+<div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ── Scripts ── -->
+<script src="data/pizzaweek2026.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
