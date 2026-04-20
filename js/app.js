@@ -10,7 +10,6 @@ const App = (() => {
   let friends = [];
   let selectedDish = null;
   let currentWeekId = 'pizza-2026';
-  let mapRendered = false;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
@@ -186,7 +185,6 @@ const App = (() => {
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
-    if (name === 'map' && !mapRendered) { renderMap(); mapRendered = false; }
     if (name === 'map') renderMap();
   }
 
