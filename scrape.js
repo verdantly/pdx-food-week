@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /**
- * PDX Food Week Scraper
- * Scrapes the Portland Mercury's Pizza Week listings from EverOut.
+ * PDX Food Week Scraper — structured extraction from EverOut dish pages.
  *
  * Usage:
- *   npm install node-fetch cheerio
- *   node scrape.js
+ *   npm install
+ *   npm run scrape
  *
- * Output: data/pizzaweek2026.js  (ready to drop into the app)
+ * Output: data/pizzaweek2026.js (overwritten)
  */
 
 import fetch from 'node-fetch';
@@ -15,180 +14,257 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
 
-const BASE_URL = 'https://everout.com';
-const WEEK_URL = 'https://everout.com/portland/events/the-portland-mercurys-pizza-week-2026/e222744/';
-const DELAY_MS = 800; // be polite — don't hammer the server
+const BASE_URL    = 'https://everout.com';
+const WEEK_URL    = 'https://everout.com/portland/events/the-portland-mercurys-pizza-week-2026/e222744/';
+const PARENT_EID  = 'e222744'; // exclude the pizza-week event itself from sub-event list
+const PAGE_DELAY  = 600;       // ms between dish pages
+const GEO_DELAY   = 1100;      // Nominatim policy: <= 1 req/sec
+
+const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36';
+const GEO_UA = 'pdx-food-week-app/1.0 (https://github.com/oberonix/pdx-food-week)';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// ── Free geocoding via nominatim (no API key needed) ──────────────────────────
-async function geocode(address) {
-  try {
-    const q = encodeURIComponent(address);
-    const url = `https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1`;
-    const res = await fetch(url, {
-      headers: { 'User-Agent': 'pdx-food-week-app/1.0 (personal project)' }
-    });
-    const data = await res.json();
-    if (data && data[0]) {
-      return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
-    }
-  } catch (e) {
-    console.warn(`  ⚠ Geocode failed for: ${address}`);
-  }
-  return { lat: 45.5231, lng: -122.6765 }; // fallback: downtown Portland
+async function httpGet(url, ua = UA) {
+  const res = await fetch(url, { headers: { 'User-Agent': ua, 'Accept': 'text/html,*/*' } });
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  return await res.text();
 }
 
-// ── Scrape individual dish page ───────────────────────────────────────────────
-async function scrapeDishPage(url, id) {
-  console.log(`  Fetching: ${url}`);
-  const res = await fetch(url, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (compatible; pdx-food-week-scraper/1.0)',
-      'Accept': 'text/html'
-    }
-  });
+// ── Geocoding via Nominatim, with in-process cache + rate-limiter ─────────────
+// Rate limit enforced inside geocode() so cache hits don't pay the delay.
+const geoCache = new Map();
+let lastGeoAt = 0;
 
-  if (!res.ok) {
-    console.warn(`  ⚠ HTTP ${res.status} for ${url}`);
+async function geocode(address) {
+  if (!address) return null;
+  if (geoCache.has(address)) return geoCache.get(address);
+
+  const wait = Math.max(0, GEO_DELAY - (Date.now() - lastGeoAt));
+  if (wait > 0) await sleep(wait);
+
+  try {
+    const q = encodeURIComponent(address);
+    const url = `https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1&countrycodes=us`;
+    const res = await fetch(url, { headers: { 'User-Agent': GEO_UA } });
+    lastGeoAt = Date.now();
+    if (!res.ok) throw new Error(`Nominatim HTTP ${res.status}`);
+    const data = await res.json();
+    const hit = data && data[0]
+      ? { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) }
+      : null;
+    geoCache.set(address, hit);
+    return hit;
+  } catch (e) {
+    lastGeoAt = Date.now();
+    console.warn(`  ⚠ Geocode failed: ${address} (${e.message})`);
+    geoCache.set(address, null);
     return null;
   }
+}
 
-  const html = await res.text();
+// Portland-metro zip → city. Used to normalize a retry variant when the
+// full address doesn't geocode, without silently relocating a suburb venue
+// into Portland.
+const ZIP_CITY = {
+  '97005': 'Beaverton', '97006': 'Beaverton', '97007': 'Beaverton', '97008': 'Beaverton',
+  '97015': 'Clackamas', '97027': 'Clackamas', '97086': 'Happy Valley',
+  '97034': 'Lake Oswego', '97035': 'Lake Oswego',
+  '97062': 'Tualatin', '97140': 'Sherwood',
+  '97223': 'Tigard', '97224': 'Tigard',
+  '97060': 'Troutdale', '97030': 'Gresham', '97080': 'Gresham',
+};
+function cityFromZip(addr) {
+  const m = addr && addr.match(/\b(\d{5})\b/);
+  return m && ZIP_CITY[m[1]] ? ZIP_CITY[m[1]] : 'Portland';
+}
+
+// ── Parse a single dish page ──────────────────────────────────────────────────
+function parseDishPage(html, url) {
   const $ = cheerio.load(html);
+  const answerList = $('.answer-list').first();
+  if (answerList.length === 0) return null; // not a dish event
 
-  // Dish name — usually in <h1> or the page title
-  const dish = $('h1').first().text().trim()
-    || $('title').text().split('|')[0].trim()
-    || 'Unknown Dish';
+  const dish = answerList.find('.fs-2').first().text().trim();
+  const restaurant = answerList.find('.fs-4').first().text().trim();
+  const addressLine = answerList.find('.ff-condensed').first();
+  const neighborhood = addressLine.find('.text-muted').first().text().trim().replace(/^\(|\)$/g, '');
+  const streetAddress = addressLine.clone().children('.text-muted').remove().end().text().replace(/\s+/g, ' ').trim();
 
-  // Restaurant name — in breadcrumb or event subtitle
-  const restaurant = $('.event-venue').first().text().trim()
-    || $('[class*="venue"]').first().text().trim()
-    || $('h2').first().text().trim()
-    || 'Unknown Restaurant';
-
-  // Neighborhood — often in breadcrumb or subtitle
-  const neighborhood = $('[class*="neighborhood"]').first().text().trim()
-    || $('[class*="location"]').first().text().trim()
-    || '';
-
-  // Description
-  const desc = $('[class*="description"] p').first().text().trim()
-    || $('meta[name="description"]').attr('content')?.trim()
-    || '';
-
-  // Address — look for structured address or map link
-  let address = $('[class*="address"]').first().text().trim()
-    || $('address').first().text().trim()
-    || '';
-
-  // Dietary tags — EverOut uses filter labels
-  const pageText = $('body').text().toLowerCase();
-  const type = pageText.includes('vegan') ? 'vegan'
-    : pageText.includes('vegetarian') ? 'vegetarian'
-    : 'meat';
-  const glutenFree = pageText.includes('gluten free') || pageText.includes('gluten-free');
-  const wholePie = pageText.includes('whole pie') || pageText.includes('$25');
-  const minors = !pageText.includes('21+') && !pageText.includes('21 and over');
-  const takeout = pageText.includes('takeout') || pageText.includes('take out') || pageText.includes('to-go');
-
-  // Pick an emoji based on type/content
-  const emoji = type === 'vegan' ? '🌱'
-    : type === 'vegetarian' ? '🌿'
-    : pageText.includes('bacon') ? '🥓'
-    : pageText.includes('mushroom') ? '🍄'
-    : pageText.includes('buffalo') || pageText.includes('chicken') ? '🌶️'
-    : pageText.includes('egg') ? '🍳'
-    : pageText.includes('seafood') || pageText.includes('shrimp') ? '🦐'
-    : '🍕';
-
-  // Geocode the address
-  let coords = { lat: 45.5231, lng: -122.6765 };
-  if (address) {
-    await sleep(1100); // Nominatim rate limit: 1 req/sec
-    coords = await geocode(address.includes('Portland') ? address : `${address}, Portland, OR`);
+  // Full address with ZIP lives in the Google Maps iframe "q=" param.
+  let fullAddress = streetAddress;
+  const iframeSrc = $('.map iframe').attr('src') || '';
+  const qMatch = iframeSrc.match(/[?&]q=([^&]+)/);
+  if (qMatch) {
+    try { fullAddress = decodeURIComponent(qMatch[1].replace(/\+/g, ' ')); } catch (e) {}
   }
 
+  // Build a map of question → answer from the Q&A block.
+  const qa = {};
+  answerList.find('.answer').each((_, el) => {
+    const q = $(el).find('.question-text').text().trim().replace(/[\s ]+/g, ' ');
+    const a = $(el).find('.answer-text').text().trim();
+    if (q) qa[q] = a;
+  });
+
+  const whatsOnIt = qa["What's On It..."] || qa['What’s On It...'] || '';
+  const whatTheySay = qa['What They Say...'] || '';
+  const desc = (whatsOnIt || whatTheySay).slice(0, 260);
+
+  // EverOut's "Meat or Vegetarian?" is multi-select: e.g. "Meat, Vegetarian"
+  // means a meat pizza with a veg version available. Primary type prefers
+  // meat (because a meat pizza IS served), otherwise vegan (most restrictive
+  // available), otherwise vegetarian.
+  const typeRaw = (qa['Meat or Vegetarian?'] || '').toLowerCase();
+  const hasMeat  = /\bmeat\b/.test(typeRaw);
+  const hasVegan = /\bvegan\b/.test(typeRaw);
+  const hasVeg   = /\bvegetarian\b/.test(typeRaw);
+  const type = hasMeat ? 'meat'
+    : hasVegan ? 'vegan'
+    : hasVeg ? 'vegetarian'
+    : 'meat';
+
+  const sliceOrPie = (qa['By the Slice or Whole Pie?'] || '').toLowerCase();
+  const wholePie = sliceOrPie.includes('whole') || sliceOrPie.includes('pie');
+
+  const yesno = v => /^yes\b/i.test((v || '').trim());
+
+  if (!dish || !restaurant) return null;
+
+  // Emoji heuristic
+  const dishLc = dish.toLowerCase();
+  const descLc = desc.toLowerCase();
+  const both = dishLc + ' ' + descLc;
+  const emoji = type === 'vegan' ? '🌱'
+    : type === 'vegetarian' ? '🌿'
+    : /bacon/.test(both) ? '🥓'
+    : /mushroom/.test(both) ? '🍄'
+    : /buffalo|hot chicken/.test(both) ? '🌶️'
+    : /breakfast|egg\b/.test(both) ? '🍳'
+    : /shrimp|seafood|clam|crab/.test(both) ? '🦐'
+    : /truffle/.test(both) ? '🫐'
+    : /sausage|pork|lamb/.test(both) ? '🥩'
+    : '🍕';
+
   return {
-    id,
-    weekId: 'pizza-2026',
     dish,
-    restaurant: restaurant.replace(/\s*\(.*?\)\s*/, '').trim(), // strip "(neighborhood)" from name if present
-    neighborhood: neighborhood || extractNeighborhood(restaurant),
-    address: address || '',
-    lat: coords.lat,
-    lng: coords.lng,
+    restaurant,
+    neighborhood,
+    address: fullAddress || streetAddress,
+    streetAddress,
     type,
-    glutenFree,
+    glutenFree: yesno(qa['Gluten Free?']),
     wholePie,
-    minors,
-    takeout,
-    desc: desc.slice(0, 200),
+    minors: yesno(qa['Allow Minors?']),
+    takeout: yesno(qa['Allow Takeout?']),
+    desc,
     emoji,
     url,
   };
 }
 
-// EverOut sometimes puts neighborhood in parens after restaurant name
-function extractNeighborhood(restaurantText) {
-  const match = restaurantText.match(/\(([^)]+)\)/);
-  return match ? match[1] : '';
-}
-
-// ── Scrape main week page for dish links ──────────────────────────────────────
-async function scrapeWeekPage() {
-  console.log('Fetching Pizza Week index page…');
-  const res = await fetch(WEEK_URL, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (compatible; pdx-food-week-scraper/1.0)',
-      'Accept': 'text/html'
-    }
-  });
-  const html = await res.text();
-  const $ = cheerio.load(html);
-
-  // Collect all dish sub-event links
-  const links = new Set();
-  $('a[href]').each((_, el) => {
-    const href = $(el).attr('href');
-    if (href && href.includes('/portland/events/') && !href.includes('pizza-week-2026')) {
-      const full = href.startsWith('http') ? href : BASE_URL + href;
-      links.add(full);
-    }
-  });
-
-  console.log(`Found ${links.size} dish links on the index page.`);
-  return [...links];
+// ── Find all dish sub-event URLs on the week index page ───────────────────────
+async function getDishLinks() {
+  console.log('Fetching Pizza Week index…');
+  const html = await httpGet(WEEK_URL);
+  const re = /\/portland\/events\/[a-z0-9-]+\/e\d+\//gi;
+  const set = new Set();
+  for (const m of html.matchAll(re)) {
+    const p = m[0];
+    if (p.includes(PARENT_EID)) continue;
+    set.add(BASE_URL + p);
+  }
+  const links = [...set];
+  console.log(`Found ${links.length} dish links.`);
+  return links;
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
-  const dishLinks = await scrapeWeekPage();
-
+  const dishLinks = await getDishLinks();
   if (dishLinks.length === 0) {
-    console.error('No dish links found. EverOut may have changed their HTML structure.');
-    console.error('Try opening the page in a browser and inspecting the dish card links manually.');
+    console.error('No dish links. EverOut markup may have changed.');
     process.exit(1);
   }
 
-  const restaurants = [];
+  const entries = [];
+  let fallbackCount = 0;
+  let skipped = 0;
+
   for (let i = 0; i < dishLinks.length; i++) {
     const url = dishLinks[i];
-    console.log(`\n[${i + 1}/${dishLinks.length}] Scraping dish page…`);
-    const dish = await scrapeDishPage(url, i + 1);
-    if (dish) restaurants.push(dish);
-    await sleep(DELAY_MS);
+    console.log(`\n[${i + 1}/${dishLinks.length}] ${url}`);
+    let parsed;
+    try {
+      const html = await httpGet(url);
+      parsed = parseDishPage(html, url);
+    } catch (e) {
+      console.warn(`  ⚠ Fetch/parse failed: ${e.message}`);
+      skipped++;
+      await sleep(PAGE_DELAY);
+      continue;
+    }
+
+    if (!parsed) {
+      console.warn(`  ⚠ Skipped (no .answer-list): ${url}`);
+      skipped++;
+      await sleep(PAGE_DELAY);
+      continue;
+    }
+
+    console.log(`  → ${parsed.dish} @ ${parsed.restaurant} (${parsed.neighborhood || 'no hood'})`);
+
+    // Retry address: if the full address misses, try street + zip-derived city
+    // so a Beaverton venue doesn't silently get tagged "Portland, OR".
+    let coords = await geocode(parsed.address);
+    if (!coords) {
+      const retryCity = cityFromZip(parsed.address);
+      const retryAddr = `${parsed.streetAddress}, ${retryCity}, OR`;
+      if (retryAddr !== parsed.address) coords = await geocode(retryAddr);
+    }
+    if (!coords) {
+      fallbackCount++;
+      console.warn(`  ⚠ No coords: ${parsed.address}`);
+    }
+
+    // Stable per-dish ID from the EverOut event number (e.g. .../e234906/).
+    // This keeps saved bookmarks / share codes valid across re-scrapes even
+    // when the week's dish list reorders or shrinks.
+    const eidMatch = parsed.url.match(/\/e(\d+)\//);
+    const id = eidMatch ? parseInt(eidMatch[1], 10) : entries.length + 1;
+
+    entries.push({
+      id,
+      weekId: 'pizza-2026',
+      dish: parsed.dish,
+      restaurant: parsed.restaurant,
+      neighborhood: parsed.neighborhood,
+      address: parsed.address,
+      lat: coords ? coords.lat : 45.5231,
+      lng: coords ? coords.lng : -122.6765,
+      type: parsed.type,
+      glutenFree: parsed.glutenFree,
+      wholePie: parsed.wholePie,
+      minors: parsed.minors,
+      takeout: parsed.takeout,
+      desc: parsed.desc,
+      emoji: parsed.emoji,
+      url: parsed.url,
+    });
+
+    await sleep(PAGE_DELAY);
   }
 
-  // ── Write output file ───────────────────────────────────────────────────────
+  entries.sort((a, b) => a.id - b.id);
+
+  // ── Write output ────────────────────────────────────────────────────────────
   const outDir = path.join(process.cwd(), 'data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   const outPath = path.join(outDir, 'pizzaweek2026.js');
 
   const header = `// Portland Mercury's Pizza Week 2026 — scraped ${new Date().toISOString().slice(0, 10)}
-// ${restaurants.length} locations scraped from EverOut
-// Review and clean up addresses, descriptions, and coordinates before publishing.
+// ${entries.length} locations (skipped: ${skipped}, geocode fallbacks: ${fallbackCount})
+// Source: ${WEEK_URL}
 `;
 
   const weeksBlock = `window.FOOD_WEEKS = [
@@ -201,21 +277,16 @@ async function main() {
     pricePie: "$25",
     color: "#C94B2C",
     emoji: "🍕",
-    totalLocations: ${restaurants.length},
+    totalLocations: ${entries.length},
     url: "${WEEK_URL}",
   }
 ];\n`;
 
-  const restaurantsBlock = `window.RESTAURANTS = ${JSON.stringify(restaurants, null, 2)};\n`;
-
+  const restaurantsBlock = `window.RESTAURANTS = ${JSON.stringify(entries, null, 2)};\n`;
   fs.writeFileSync(outPath, header + '\n' + weeksBlock + '\n' + restaurantsBlock);
 
-  console.log(`\n✅ Done! Wrote ${restaurants.length} restaurants to ${outPath}`);
-  console.log('   Drop this file into your pdx-food-week/data/ folder and reload the app.');
-  console.log('\n   ⚠ Review the file — check for:');
-  console.log('     - Missing or wrong addresses (fill in manually if needed)');
-  console.log('     - Wrong dietary type detection (meat/vegetarian/vegan)');
-  console.log('     - Geocoding misses (lat/lng defaulted to downtown Portland: 45.5231, -122.6765)');
+  console.log(`\n✅ Wrote ${entries.length} restaurants to ${outPath}`);
+  console.log(`   Skipped: ${skipped}, geocode fallbacks: ${fallbackCount}`);
 }
 
 main().catch(err => {
