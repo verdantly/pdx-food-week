@@ -1,0 +1,13 @@
+{
+  "name": "pdx-food-week",
+  "version": "1.0.0",
+  "description": "PDX Food Week app + scraper",
+  "type": "module",
+  "scripts": {
+    "scrape": "node scrape.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "node-fetch": "^3.0.0"
+  }
+}

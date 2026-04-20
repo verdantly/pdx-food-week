@@ -271,6 +271,7 @@ const App = (() => {
     const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
     const overlapContainer = document.getElementById('overlap-container');
 
+    overlapContainer.className = 'cards-list';
     if (overlap.length === 0) {
       overlapContainer.innerHTML = `<div class="no-results" style="padding:20px 0"><p>No overlap yet — save more spots and add more friends!</p></div>`;
     } else {
