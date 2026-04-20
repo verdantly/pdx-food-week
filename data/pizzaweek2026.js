@@ -18,7 +18,7 @@ window.FOOD_WEEKS = [
 ];
 
 window.RESTAURANTS = [
-  {
+/*   {
     "id": 1,
     "weekId": "pizza-2026",
     "dish": "Submit an Event",
@@ -71,8 +71,8 @@ window.RESTAURANTS = [
     "desc": "",
     "emoji": "🍕",
     "url": "https://everout.com/portland/events/"
-  },
-  {
+  }, */
+/*   {
     "id": 4,
     "weekId": "pizza-2026",
     "dish": "Unknown",
@@ -89,7 +89,7 @@ window.RESTAURANTS = [
     "desc": "",
     "emoji": "🍕",
     "url": "https://everout.com/portland/events/?category=food-drink"
-  },
+  }, */
   {
     "id": 5,
     "weekId": "pizza-2026",
