@@ -79,6 +79,45 @@ function cityFromZip(addr) {
   return m && ZIP_CITY[m[1]] ? ZIP_CITY[m[1]] : 'Portland';
 }
 
+// Normalize common address quirks Nominatim stumbles on: spelled-out ordinals,
+// full street-type words, unit/building suffixes.
+function normalizeAddress(addr) {
+  return addr
+    .replace(/,?\s+(Unit|Ste|Suite|Building|Bldg|Apt)\s+\S+/i, '')
+    .replace(/\bStreet\b/i, 'St')
+    .replace(/\bAvenue\b/i, 'Ave')
+    .replace(/\bBoulevard\b/i, 'Blvd')
+    .replace(/\bFirst\b/gi, '1st').replace(/\bSecond\b/gi, '2nd')
+    .replace(/\bThird\b/gi, '3rd').replace(/\bFourth\b/gi, '4th')
+    .replace(/\bFifth\b/gi, '5th').replace(/\bSixth\b/gi, '6th')
+    .replace(/\bSeventh\b/gi, '7th').replace(/\bEighth\b/gi, '8th')
+    .replace(/\bNinth\b/gi, '9th').replace(/\bTenth\b/gi, '10th')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Try several geocoding variants before giving up. Each variant is a distinct
+// phrasing of the same physical address; we cache per-string so no redundant
+// network work.
+async function geocodeWithFallbacks(fullAddr, streetAddr) {
+  if (!fullAddr) return null;
+  const city = cityFromZip(fullAddr);
+  const variants = [
+    fullAddr,
+    normalizeAddress(fullAddr),
+    `${normalizeAddress(streetAddr)}, ${city}, OR`,
+    `${streetAddr}, ${city}, OR`,
+  ];
+  const seen = new Set();
+  for (const v of variants) {
+    if (!v || seen.has(v)) continue;
+    seen.add(v);
+    const hit = await geocode(v);
+    if (hit) return hit;
+  }
+  return null;
+}
+
 // ── Parse a single dish page ──────────────────────────────────────────────────
 function parseDishPage(html, url) {
   const $ = cheerio.load(html);
@@ -98,6 +137,12 @@ function parseDishPage(html, url) {
   if (qMatch) {
     try { fullAddress = decodeURIComponent(qMatch[1].replace(/\+/g, ' ')); } catch (e) {}
   }
+
+  // Hero image — the og:image meta tag is the dish's canonical photo.
+  // Fall back to the inline .item-image img if og:image is missing.
+  const image = $('meta[property="og:image"]').attr('content')
+    || $('.item-image img.img-fluid').attr('src')
+    || '';
 
   // Build a map of question → answer from the Q&A block.
   const qa = {};
@@ -159,6 +204,7 @@ function parseDishPage(html, url) {
     takeout: yesno(qa['Allow Takeout?']),
     desc,
     emoji,
+    image,
     url,
   };
 }
@@ -214,14 +260,7 @@ async function main() {
 
     console.log(`  → ${parsed.dish} @ ${parsed.restaurant} (${parsed.neighborhood || 'no hood'})`);
 
-    // Retry address: if the full address misses, try street + zip-derived city
-    // so a Beaverton venue doesn't silently get tagged "Portland, OR".
-    let coords = await geocode(parsed.address);
-    if (!coords) {
-      const retryCity = cityFromZip(parsed.address);
-      const retryAddr = `${parsed.streetAddress}, ${retryCity}, OR`;
-      if (retryAddr !== parsed.address) coords = await geocode(retryAddr);
-    }
+    const coords = await geocodeWithFallbacks(parsed.address, parsed.streetAddress);
     if (!coords) {
       fallbackCount++;
       console.warn(`  ⚠ No coords: ${parsed.address}`);
@@ -249,6 +288,7 @@ async function main() {
       takeout: parsed.takeout,
       desc: parsed.desc,
       emoji: parsed.emoji,
+      image: parsed.image,
       url: parsed.url,
     });
 
