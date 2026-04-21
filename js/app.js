@@ -5,12 +5,12 @@ const App = (() => {
   // ── State ──────────────────────────────────────────────────
   let activeTab = 'browse';
   let activeFilter = 'all';
+  let activeSort = 'default';
   let searchQuery = '';
   let saved = new Set();
   let friends = [];
   let selectedDish = null;
   let currentWeekId = 'pizza-2026';
-  let mapRendered = false;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
@@ -38,7 +38,7 @@ const App = (() => {
   }
 
   function getFiltered() {
-    return getRestaurants().filter(r => {
+    let filtered = getRestaurants().filter(r => {
       if (activeFilter === 'meat'       && r.type !== 'meat')       return false;
       if (activeFilter === 'vegetarian' && r.type !== 'vegetarian') return false;
       if (activeFilter === 'vegan'      && r.type !== 'vegan')      return false;
@@ -53,10 +53,26 @@ const App = (() => {
       }
       return true;
     });
+
+    if (activeSort === 'dish') {
+      filtered.sort((a, b) => a.dish.localeCompare(b.dish));
+    } else if (activeSort === 'restaurant') {
+      filtered.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    }
+
+    return filtered;
   }
 
   function getSaved() {
-    return getRestaurants().filter(r => saved.has(r.id));
+    let savedItems = getRestaurants().filter(r => saved.has(r.id));
+    
+    if (activeSort === 'dish') {
+      savedItems.sort((a, b) => a.dish.localeCompare(b.dish));
+    } else if (activeSort === 'restaurant') {
+      savedItems.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    }
+
+    return savedItems;
   }
 
   // ── Encode/decode share code ───────────────────────────────
@@ -186,16 +202,23 @@ const App = (() => {
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
-    if (name === 'map' && !mapRendered) { renderMap(); mapRendered = false; }
-    if (name === 'map') renderMap();
   }
 
   // ── Filter ────────────────────────────────────────────────
   function setFilter(f, el) {
     activeFilter = f;
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     renderBrowse();
+  }
+
+  // ── Sort ──────────────────────────────────────────────────
+  function setSort(s, el) {
+    activeSort = s;
+    el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    renderBrowse();
+    renderSaved(); // sorting also applies to your saved list
   }
 
   // ── Render: Browse ─────────────────────────────────────────
@@ -327,132 +350,11 @@ const App = (() => {
     showToast('Friend removed');
   }
 
-  // ── Map ────────────────────────────────────────────────────
-  function renderMap() {
-    const canvas = document.getElementById('map-canvas');
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width = canvas.offsetWidth;
-    const H = canvas.height = 300;
-
-    const restaurants = getRestaurants();
-    const lats = restaurants.map(r => r.lat);
-    const lngs = restaurants.map(r => r.lng);
-    const minLat = Math.min(...lats) - 0.008;
-    const maxLat = Math.max(...lats) + 0.008;
-    const minLng = Math.min(...lngs) - 0.012;
-    const maxLng = Math.max(...lngs) + 0.012;
-
-    const toX = lng => ((lng - minLng) / (maxLng - minLng)) * (W - 40) + 20;
-    const toY = lat => ((maxLat - lat) / (maxLat - minLat)) * (H - 40) + 20;
-
-    // Background
-    ctx.fillStyle = '#F0EBE1';
-    ctx.fillRect(0, 0, W, H);
-
-    // Grid lines (subtle)
-    ctx.strokeStyle = 'rgba(26,18,8,0.06)';
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i <= 8; i++) {
-      ctx.beginPath(); ctx.moveTo(i * W / 8, 0); ctx.lineTo(i * W / 8, H); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(0, i * H / 8); ctx.lineTo(W, i * H / 8); ctx.stroke();
-    }
-
-    // Willamette River (approximate)
-    ctx.strokeStyle = 'rgba(100,160,200,0.5)';
-    ctx.lineWidth = 8;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    const riverX = toX(-122.6745);
-    ctx.moveTo(riverX - 10, 0);
-    ctx.bezierCurveTo(riverX, H * 0.3, riverX - 15, H * 0.6, riverX - 5, H);
-    ctx.stroke();
-
-    // River label
-    ctx.fillStyle = 'rgba(100,160,200,0.7)';
-    ctx.font = '10px DM Sans, sans-serif';
-    ctx.fillText('Willamette', riverX - 40, H * 0.45);
-
-    // Draw pins
-    restaurants.forEach(r => {
-      const x = toX(r.lng);
-      const y = toY(r.lat);
-      const isSaved = saved.has(r.id);
-
-      // Pulse ring for saved
-      if (isSaved) {
-        ctx.beginPath();
-        ctx.arc(x, y, 13, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(201,75,44,0.15)';
-        ctx.fill();
-      }
-
-      // Pin body
-      ctx.beginPath();
-      ctx.arc(x, y, isSaved ? 9 : 7, 0, Math.PI * 2);
-      ctx.fillStyle = isSaved ? '#C94B2C' : '#888';
-      ctx.fill();
-
-      // Pin inner dot
-      ctx.beginPath();
-      ctx.arc(x, y, isSaved ? 3 : 2, 0, Math.PI * 2);
-      ctx.fillStyle = '#fff';
-      ctx.fill();
-
-      // Store position for click handling
-      r._mapX = x; r._mapY = y;
-    });
-
-    // Set up click handler
-    canvas.onclick = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      const mx = (e.clientX - rect.left) * scaleX;
-      const my = (e.clientY - rect.top) * scaleY;
-      let hit = null;
-      let minDist = Infinity;
-      restaurants.forEach(r => {
-        const dx = r._mapX - mx;
-        const dy = r._mapY - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 20 && dist < minDist) { minDist = dist; hit = r; }
-      });
-      if (hit) {
-        showMapSelected(hit);
-        // Redraw with highlight
-        renderMapHighlight(hit, restaurants, toX, toY, ctx, W, H, canvas);
-      }
-    };
-  }
-
-  function renderMapHighlight(selected, restaurants, toX, toY, ctx, W, H, canvas) {
-    renderMap(); // re-render base
-    const ctx2 = canvas.getContext('2d');
-    const x = toX(selected.lng);
-    const y = toY(selected.lat);
-    // Draw large highlight ring
-    ctx2.beginPath();
-    ctx2.arc(x, y, 16, 0, Math.PI * 2);
-    ctx2.strokeStyle = '#C94B2C';
-    ctx2.lineWidth = 2;
-    ctx2.stroke();
-  }
-
-  function showMapSelected(r) {
-    const el = document.getElementById('map-selected-card');
-    el.innerHTML = `
-      <div class="section-header">Selected location</div>
-      <div class="cards-list" style="padding:0 0 8px">
-        ${cardHTML(r)}
-      </div>`;
-  }
-
   // ── Render All ─────────────────────────────────────────────
   function renderAll() {
     renderBrowse();
     renderSaved();
     renderFriends();
-    if (activeTab === 'map') renderMap();
   }
 
   // ── Init ───────────────────────────────────────────────────
@@ -479,7 +381,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, setFilter, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend };
+  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

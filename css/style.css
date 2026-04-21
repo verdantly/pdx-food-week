@@ -481,28 +481,6 @@ body {
 .overlap-card { border-color: var(--teal) !important; background: var(--teal-light) !important; }
 .overlap-card .card-restaurant { color: var(--teal) !important; }
 
-/* ── Map ── */
-.map-container {
-  position: relative;
-  background: #F0EBE1;
-  margin: 14px 16px 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1.5px solid var(--border);
-}
-#map-canvas { width: 100%; height: 300px; display: block; }
-.map-legend {
-  display: flex; gap: 14px; padding: 10px 14px;
-  border-top: 1px solid var(--border);
-  background: var(--card-bg);
-  flex-wrap: wrap;
-}
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-60); font-weight: 500; }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-.legend-dot.saved { background: var(--pizza); }
-.legend-dot.unsaved { background: #888; }
-.map-selected { padding: 14px 16px 0; }
-
 /* ── Detail Sheet ── */
 .detail-overlay {
   position: fixed; inset: 0;
@@ -644,10 +622,6 @@ body {
   .share-panel { margin: 16px 24px 0; }
   .friends-list { padding: 16px 24px 0; }
   .overlap-section { padding: 16px 24px 0; }
-  .map-container { margin: 16px 24px 0; }
-  #map-canvas { height: 360px; }
-  .map-selected { padding: 14px 24px 0; }
-  .map-selected .cards-list { grid-template-columns: 1fr; }
 
   /* Modal-style detail sheet on tablet */
   .detail-overlay { align-items: center; }
@@ -806,11 +780,6 @@ body {
   .overlap-section { padding: 20px 32px 0; }
   #overlap-container { padding: 0; }
   #overlap-container.cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  .map-container { margin: 20px 32px 0; }
-  #map-canvas { height: 440px; }
-  .map-selected { padding: 16px 32px 0; }
-  .map-selected .cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 
@@ -826,8 +795,7 @@ body {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  #overlap-container.cards-list,
-  .map-selected .cards-list {
+  #overlap-container.cards-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
