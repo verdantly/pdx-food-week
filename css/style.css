@@ -490,7 +490,7 @@ body {
   overflow: hidden;
   border: 1.5px solid var(--border);
 }
-#map-canvas { width: 100%; height: 300px; display: block; }
+#map-canvas { width: 100%; height: 360px; display: block; }
 .map-legend {
   display: flex; gap: 14px; padding: 10px 14px;
   border-top: 1px solid var(--border);
@@ -502,6 +502,34 @@ body {
 .legend-dot.saved { background: var(--pizza); }
 .legend-dot.unsaved { background: #888; }
 .map-selected { padding: 14px 16px 0; }
+
+/* Leaflet pin overrides — replace the default blue marker with a colored
+   circle that matches the legend. */
+.pdx-pin {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #888;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+.pdx-pin.saved { background: var(--pizza); width: 22px; height: 22px; }
+.pdx-pin.selected { outline: 3px solid var(--pizza); outline-offset: 1px; }
+
+.leaflet-popup-content {
+  margin: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  min-width: 160px;
+}
+.leaflet-popup-content .popup-dish {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.leaflet-popup-content .popup-restaurant { color: var(--ink-60); font-size: 12px; }
+.leaflet-popup-content-wrapper { border-radius: var(--radius-sm); }
 
 /* ── Detail Sheet ── */
 .detail-overlay {
@@ -868,7 +896,7 @@ body {
   .friends-list { padding: 16px 24px 0; }
   .overlap-section { padding: 16px 24px 0; }
   .map-container { margin: 16px 24px 0; }
-  #map-canvas { height: 360px; }
+  #map-canvas { height: 440px; }
   .map-selected { padding: 14px 24px 0; }
   .map-selected .cards-list { grid-template-columns: 1fr; }
 
@@ -1031,7 +1059,7 @@ body {
   #overlap-container.cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .map-container { margin: 20px 32px 0; }
-  #map-canvas { height: 440px; }
+  #map-canvas { height: 520px; }
   .map-selected { padding: 16px 32px 0; }
   .map-selected .cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

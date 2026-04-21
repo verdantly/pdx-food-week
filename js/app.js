@@ -221,7 +221,12 @@ const App = (() => {
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
-    if (name === 'map') renderMap();
+    if (name === 'map') {
+      renderMap();
+      // The container's real dimensions are only known once the tab is
+      // visible; a deferred invalidateSize() forces Leaflet to remeasure.
+      requestAnimationFrame(refreshMapLayout);
+    }
     if (name === 'swipe') {
       if (!swipeQueue) buildSwipeQueue();
       renderSwipe();
@@ -365,124 +370,108 @@ const App = (() => {
     showToast('Friend removed');
   }
 
-  // ── Map ────────────────────────────────────────────────────
-  function renderMap() {
-    const canvas = document.getElementById('map-canvas');
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width = canvas.offsetWidth;
-    const H = canvas.height = 300;
+  // ── Map (Leaflet + OpenStreetMap tiles) ────────────────────
+  // `leafletMap` and the marker index are lazily created on first entry into
+  // the Map tab. renderMap() refreshes marker styling against the current
+  // saved set on each call.
+  let leafletMap = null;
+  let leafletMarkers = null; // Map<id, L.CircleMarker>
+  let selectedMapId = null;
 
-    const restaurants = getRestaurants();
-    const lats = restaurants.map(r => r.lat);
-    const lngs = restaurants.map(r => r.lng);
-    const minLat = Math.min(...lats) - 0.008;
-    const maxLat = Math.max(...lats) + 0.008;
-    const minLng = Math.min(...lngs) - 0.012;
-    const maxLng = Math.max(...lngs) + 0.012;
-
-    const toX = lng => ((lng - minLng) / (maxLng - minLng)) * (W - 40) + 20;
-    const toY = lat => ((maxLat - lat) / (maxLat - minLat)) * (H - 40) + 20;
-
-    // Background
-    ctx.fillStyle = '#F0EBE1';
-    ctx.fillRect(0, 0, W, H);
-
-    // Grid lines (subtle)
-    ctx.strokeStyle = 'rgba(26,18,8,0.06)';
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i <= 8; i++) {
-      ctx.beginPath(); ctx.moveTo(i * W / 8, 0); ctx.lineTo(i * W / 8, H); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(0, i * H / 8); ctx.lineTo(W, i * H / 8); ctx.stroke();
-    }
-
-    // Willamette River (approximate)
-    ctx.strokeStyle = 'rgba(100,160,200,0.5)';
-    ctx.lineWidth = 8;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    const riverX = toX(-122.6745);
-    ctx.moveTo(riverX - 10, 0);
-    ctx.bezierCurveTo(riverX, H * 0.3, riverX - 15, H * 0.6, riverX - 5, H);
-    ctx.stroke();
-
-    // River label
-    ctx.fillStyle = 'rgba(100,160,200,0.7)';
-    ctx.font = '10px DM Sans, sans-serif';
-    ctx.fillText('Willamette', riverX - 40, H * 0.45);
-
-    // Draw pins
-    restaurants.forEach(r => {
-      const x = toX(r.lng);
-      const y = toY(r.lat);
-      const isSaved = saved.has(r.id);
-
-      // Pulse ring for saved
-      if (isSaved) {
-        ctx.beginPath();
-        ctx.arc(x, y, 13, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(201,75,44,0.15)';
-        ctx.fill();
-      }
-
-      // Pin body
-      ctx.beginPath();
-      ctx.arc(x, y, isSaved ? 9 : 7, 0, Math.PI * 2);
-      ctx.fillStyle = isSaved ? '#C94B2C' : '#888';
-      ctx.fill();
-
-      // Pin inner dot
-      ctx.beginPath();
-      ctx.arc(x, y, isSaved ? 3 : 2, 0, Math.PI * 2);
-      ctx.fillStyle = '#fff';
-      ctx.fill();
-
-      // Store position for click handling
-      r._mapX = x; r._mapY = y;
+  function pinIcon(isSaved, isSelected) {
+    const cls = ['pdx-pin', isSaved ? 'saved' : '', isSelected ? 'selected' : '']
+      .filter(Boolean).join(' ');
+    const size = isSaved ? 22 : 18;
+    return L.divIcon({
+      className: '',
+      html: `<div class="${cls}"></div>`,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
     });
-
-    // Set up click handler
-    canvas.onclick = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const scaleX = canvas.width / rect.width;
-      const scaleY = canvas.height / rect.height;
-      const mx = (e.clientX - rect.left) * scaleX;
-      const my = (e.clientY - rect.top) * scaleY;
-      let hit = null;
-      let minDist = Infinity;
-      restaurants.forEach(r => {
-        const dx = r._mapX - mx;
-        const dy = r._mapY - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 20 && dist < minDist) { minDist = dist; hit = r; }
-      });
-      if (hit) {
-        showMapSelected(hit);
-        // Redraw with highlight
-        renderMapHighlight(hit, restaurants, toX, toY, ctx, W, H, canvas);
-      }
-    };
   }
 
-  function renderMapHighlight(selected, restaurants, toX, toY, ctx, W, H, canvas) {
-    renderMap(); // re-render base
-    const ctx2 = canvas.getContext('2d');
-    const x = toX(selected.lng);
-    const y = toY(selected.lat);
-    // Draw large highlight ring
-    ctx2.beginPath();
-    ctx2.arc(x, y, 16, 0, Math.PI * 2);
-    ctx2.strokeStyle = '#C94B2C';
-    ctx2.lineWidth = 2;
-    ctx2.stroke();
+  function renderMap() {
+    const host = document.getElementById('map-canvas');
+    if (typeof L === 'undefined') {
+      // Leaflet failed to load (CDN blocked, offline, restrictive CSP).
+      // Render a user-visible message so the tab isn't silently empty.
+      host.innerHTML = `
+        <div style="padding:24px;text-align:center;color:var(--ink-60);font-size:13px;line-height:1.5">
+          <div style="font-size:28px;margin-bottom:8px">🗺️</div>
+          Map couldn't load — check your connection or a blocker extension.<br>
+          The list and swipe tabs still work offline-cached.
+        </div>`;
+      return;
+    }
+    const restaurants = getRestaurants();
+    const points = restaurants.filter(r => isFinite(r.lat) && isFinite(r.lng));
+    if (points.length === 0) return;
+
+    if (!leafletMap) {
+      leafletMap = L.map(host, {
+        zoomControl: true,
+        scrollWheelZoom: true,
+        tap: true,
+      });
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+      }).addTo(leafletMap);
+
+      const bounds = L.latLngBounds(points.map(r => [r.lat, r.lng])).pad(0.12);
+      leafletMap.fitBounds(bounds);
+
+      leafletMarkers = new Map();
+      for (const r of points) {
+        const m = L.marker([r.lat, r.lng], {
+          icon: pinIcon(saved.has(r.id), false),
+          title: `${r.dish} — ${r.restaurant}`,
+          riseOnHover: true,
+        }).addTo(leafletMap);
+        m.bindPopup(
+          `<div class="popup-dish">${esc(r.dish)}</div>
+           <div class="popup-restaurant">${esc(r.restaurant)}</div>
+           <div style="margin-top:4px"><a href="#" data-popup-id="${r.id}">Details →</a></div>`
+        );
+        m.on('click', () => showMapSelected(r));
+        leafletMarkers.set(r.id, m);
+      }
+
+      // Delegate popup "Details" link clicks to openDetail.
+      leafletMap.on('popupopen', e => {
+        const link = e.popup.getElement().querySelector('a[data-popup-id]');
+        if (link) link.addEventListener('click', ev => {
+          ev.preventDefault();
+          openDetail(parseInt(link.dataset.popupId, 10));
+        });
+      });
+    } else {
+      // Refresh pin styling for current saved set, preserving selection.
+      for (const [id, m] of leafletMarkers) {
+        m.setIcon(pinIcon(saved.has(id), id === selectedMapId));
+      }
+    }
+  }
+
+  // Called when tab becomes visible so Leaflet can measure the container.
+  function refreshMapLayout() {
+    if (leafletMap) leafletMap.invalidateSize();
   }
 
   function showMapSelected(r) {
+    selectedMapId = r.id;
     const el = document.getElementById('map-selected-card');
     el.innerHTML = `
       <div class="section-header">Selected location</div>
       <div class="cards-list" style="padding:0 0 8px">
         ${cardHTML(r)}
       </div>`;
+    // Highlight the selected pin; reset the rest.
+    if (leafletMarkers) {
+      for (const [id, m] of leafletMarkers) {
+        m.setIcon(pinIcon(saved.has(id), id === r.id));
+      }
+    }
   }
 
   // ── Swipe ──────────────────────────────────────────────────
