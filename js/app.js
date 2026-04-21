@@ -5,6 +5,7 @@ const App = (() => {
   // ── State ──────────────────────────────────────────────────
   let activeTab = 'browse';
   let activeFilter = 'all';
+  let activeSort = 'default';
   let searchQuery = '';
   let saved = new Set();
   let passed = new Set();
@@ -63,7 +64,7 @@ const App = (() => {
   }
 
   function getFiltered() {
-    return getRestaurants().filter(r => {
+    let filtered = getRestaurants().filter(r => {
       if (activeFilter === 'meat'       && r.type !== 'meat')       return false;
       if (activeFilter === 'vegetarian' && r.type !== 'vegetarian') return false;
       if (activeFilter === 'vegan'      && r.type !== 'vegan')      return false;
@@ -78,10 +79,26 @@ const App = (() => {
       }
       return true;
     });
+
+    if (activeSort === 'dish') {
+      filtered.sort((a, b) => a.dish.localeCompare(b.dish));
+    } else if (activeSort === 'restaurant') {
+      filtered.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    }
+
+    return filtered;
   }
 
   function getSaved() {
-    return getRestaurants().filter(r => saved.has(r.id));
+    let savedItems = getRestaurants().filter(r => saved.has(r.id));
+    
+    if (activeSort === 'dish') {
+      savedItems.sort((a, b) => a.dish.localeCompare(b.dish));
+    } else if (activeSort === 'restaurant') {
+      savedItems.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    }
+
+    return savedItems;
   }
 
   // ── Encode/decode share code ───────────────────────────────
@@ -236,9 +253,18 @@ const App = (() => {
   // ── Filter ────────────────────────────────────────────────
   function setFilter(f, el) {
     activeFilter = f;
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     renderBrowse();
+  }
+
+  // ── Sort ──────────────────────────────────────────────────
+  function setSort(s, el) {
+    activeSort = s;
+    el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    renderBrowse();
+    renderSaved(); // sorting also applies to your saved list
   }
 
   // ── Render: Browse ─────────────────────────────────────────
@@ -683,7 +709,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, setFilter, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, resetSwipe, swipeOpenDetail };
+  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, resetSwipe, swipeOpenDetail };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);
