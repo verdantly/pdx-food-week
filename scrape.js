@@ -74,7 +74,12 @@ async function scrapeDishPage(url, id) {
     || '';
 
   // Description
-  const desc = $('[class*="description"] p').first().text().trim()
+  let desc = $('[itemprop="description"] p, [class*="description"] p, .event-body p').first().text().trim();
+  if (!desc) {
+    desc = $('[itemprop="description"], [class*="description"], .event-body').first().text().trim();
+  }
+  desc = desc 
+    || $('meta[property="og:description"]').attr('content')?.trim()
     || $('meta[name="description"]').attr('content')?.trim()
     || '';
 
@@ -124,7 +129,7 @@ async function scrapeDishPage(url, id) {
     wholePie,
     minors,
     takeout,
-    desc: desc.slice(0, 200),
+    desc: desc.replace(/\s+/g, ' ').slice(0, 200),
     emoji,
     url,
   };
