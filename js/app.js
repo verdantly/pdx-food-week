@@ -7,11 +7,16 @@ const App = (() => {
   let activeFilter = 'all';
   let searchQuery = '';
   let saved = new Set();
+  let passed = new Set();
   let friends = [];
   let selectedDish = null;
   let currentWeekId = 'pizza-2026';
+  let swipeQueue = null;
+  let swipeIdx = 0;
+  let swipeAnimating = false;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
+  const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
 
   // ── Persistence ────────────────────────────────────────────
@@ -19,6 +24,8 @@ const App = (() => {
     try {
       const s = localStorage.getItem(STORAGE_KEY_SAVED);
       if (s) saved = new Set(JSON.parse(s));
+      const p = localStorage.getItem(STORAGE_KEY_PASSED);
+      if (p) passed = new Set(JSON.parse(p));
       const f = localStorage.getItem(STORAGE_KEY_FRIENDS);
       if (f) friends = JSON.parse(f);
     } catch (e) {}
@@ -27,8 +34,27 @@ const App = (() => {
   function saveState() {
     try {
       localStorage.setItem(STORAGE_KEY_SAVED, JSON.stringify([...saved]));
+      localStorage.setItem(STORAGE_KEY_PASSED, JSON.stringify([...passed]));
       localStorage.setItem(STORAGE_KEY_FRIENDS, JSON.stringify(friends));
     } catch (e) {}
+  }
+
+  // Basic HTML-escape for interpolated scraped text. Keep conservative — we
+  // only need to neutralize tag/quote syntax, not full XSS hardening.
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Only allow http/https URLs to be interpolated into href. Drop anything
+  // else (javascript:, data:, etc.) to a safe fallback.
+  function safeUrl(u) {
+    const v = String(u || '').trim();
+    return /^https?:\/\//i.test(v) ? v : '#';
   }
 
   // ── Data helpers ───────────────────────────────────────────
@@ -92,14 +118,17 @@ const App = (() => {
   function cardHTML(r, overlap) {
     const isSaved = saved.has(r.id);
     const cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
+    const thumb = r.image
+      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy"></div>`
+      : `<div class="card-emoji">${esc(r.emoji)}</div>`;
     return `
       <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})">
-        <div class="card-emoji">${r.emoji}</div>
+        ${thumb}
         <div class="card-body">
-          <div class="card-dish">${r.dish}</div>
-          <div class="card-restaurant">${r.restaurant}</div>
-          <div class="card-neighborhood">📍 ${r.neighborhood}</div>
-          <div class="card-desc">${r.desc}</div>
+          <div class="card-dish">${esc(r.dish)}</div>
+          <div class="card-restaurant">${esc(r.restaurant)}</div>
+          <div class="card-neighborhood">📍 ${esc(r.neighborhood)}</div>
+          <div class="card-desc">${esc(r.desc)}</div>
           <div class="card-tags">${buildTags(r)}</div>
         </div>
         <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
@@ -117,9 +146,13 @@ const App = (() => {
       showToast('Removed from saved');
     } else {
       saved.add(id);
+      passed.delete(id);
       showToast('🍕 Saved!');
     }
     saveState();
+    // Any change to saved/passed from outside Swipe invalidates the deck so
+    // the next Swipe-tab entry rebuilds against current state.
+    swipeQueue = null;
     renderAll();
     // If detail sheet open, update its button
     if (selectedDish && selectedDish.id === id) {
@@ -138,20 +171,23 @@ const App = (() => {
     selectedDish = r;
     const isSaved = saved.has(r.id);
     const overlay = document.getElementById('detail-overlay');
+    const hero = r.image
+      ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" alt=""></div>`
+      : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
     document.getElementById('detail-sheet-content').innerHTML = `
       <div class="sheet-handle"></div>
-      <span class="sheet-emoji-hero">${r.emoji}</span>
-      <div class="sheet-dish">${r.dish}</div>
-      <div class="sheet-restaurant">${r.restaurant}</div>
-      <div class="sheet-address">📍 ${r.address}</div>
-      <div class="sheet-desc">${r.desc}</div>
+      ${hero}
+      <div class="sheet-dish">${esc(r.dish)}</div>
+      <div class="sheet-restaurant">${esc(r.restaurant)}</div>
+      <div class="sheet-address">📍 ${esc(r.address)}</div>
+      <div class="sheet-desc">${esc(r.desc)}</div>
       <div class="sheet-tags">${buildTags(r)}</div>
       <div class="sheet-actions">
         <button class="btn btn-save ${isSaved ? 'saved' : ''}" id="sheet-save-btn"
           onclick="App.toggleSave(${r.id})">
           ${isSaved ? '★ Saved' : '☆ Save'}
         </button>
-        <a class="btn btn-link" href="${r.url}" target="_blank" rel="noopener">
+        <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
           EverOut ↗
         </a>
       </div>
@@ -186,6 +222,10 @@ const App = (() => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
     if (name === 'map') renderMap();
+    if (name === 'swipe') {
+      if (!swipeQueue) buildSwipeQueue();
+      renderSwipe();
+    }
   }
 
   // ── Filter ────────────────────────────────────────────────
@@ -445,6 +485,172 @@ const App = (() => {
       </div>`;
   }
 
+  // ── Swipe ──────────────────────────────────────────────────
+  function buildSwipeQueue() {
+    const pool = getRestaurants().filter(r => !saved.has(r.id) && !passed.has(r.id));
+    // Fisher-Yates shuffle for variety on each rebuild.
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    swipeQueue = pool;
+    swipeIdx = 0;
+  }
+
+  function currentSwipeCard() {
+    return swipeQueue && swipeIdx < swipeQueue.length ? swipeQueue[swipeIdx] : null;
+  }
+
+  function renderSwipe() {
+    const cardEl = document.getElementById('swipe-card');
+    const emptyEl = document.getElementById('swipe-empty');
+    const ctrlsEl = document.getElementById('swipe-controls');
+    const counterEl = document.getElementById('swipe-counter');
+    const r = currentSwipeCard();
+
+    if (!r) {
+      cardEl.style.display = 'none';
+      emptyEl.style.display = 'flex';
+      ctrlsEl.style.display = 'none';
+      counterEl.textContent = 'Nothing left';
+      return;
+    }
+
+    cardEl.style.display = 'flex';
+    emptyEl.style.display = 'none';
+    ctrlsEl.style.display = 'flex';
+    cardEl.style.transform = '';
+    cardEl.style.opacity = '';
+    cardEl.style.transition = '';
+    cardEl.dataset.id = r.id;
+
+    const imageBlock = r.image
+      ? `<img src="${esc(r.image)}" alt="" loading="eager">`
+      : `<div class="swipe-card-emoji">${esc(r.emoji)}</div>`;
+
+    cardEl.innerHTML = `
+      <div class="swipe-card-image">${imageBlock}</div>
+      <div class="swipe-card-body">
+        <div class="swipe-card-dish">${esc(r.dish)}</div>
+        <div class="swipe-card-restaurant">${esc(r.restaurant)}</div>
+        <div class="swipe-card-neighborhood">📍 ${esc(r.neighborhood)}</div>
+        <div class="swipe-card-desc">${esc(r.desc)}</div>
+        <div class="swipe-card-tags">${buildTags(r)}</div>
+      </div>
+      <div class="swipe-stamp swipe-stamp-like">Save</div>
+      <div class="swipe-stamp swipe-stamp-pass">Pass</div>
+    `;
+
+    const remaining = swipeQueue.length - swipeIdx;
+    counterEl.textContent = `${remaining} to go · ${swipeIdx + 1}/${swipeQueue.length}`;
+  }
+
+  function swipe(dir) {
+    if (swipeAnimating) return; // prevent spam-click / held-key double-advance
+    const cardEl = document.getElementById('swipe-card');
+    const r = currentSwipeCard();
+    if (!r) return;
+
+    if (dir === 'right') {
+      saved.add(r.id);
+      passed.delete(r.id);
+      showToast('★ Saved!');
+    } else {
+      passed.add(r.id);
+      saved.delete(r.id);
+    }
+    saveState();
+
+    // Advance the index synchronously so guard + currentSwipeCard() reflect
+    // the committed state immediately; the animation runs on the detached
+    // visual card.
+    swipeIdx++;
+    swipeAnimating = true;
+
+    const tx = dir === 'right' ? window.innerWidth : -window.innerWidth;
+    const rot = dir === 'right' ? 18 : -18;
+    cardEl.style.transition = 'transform 0.32s ease-out, opacity 0.32s ease-out';
+    cardEl.style.transform = `translate(${tx}px, 40px) rotate(${rot}deg)`;
+    cardEl.style.opacity = '0';
+
+    setTimeout(() => {
+      swipeAnimating = false;
+      renderSwipe();
+      // Other tabs' contents reflect the updated saved set.
+      renderBrowse();
+      renderSaved();
+      renderFriends();
+    }, 300);
+  }
+
+  function resetSwipe() {
+    passed.clear();
+    saveState();
+    buildSwipeQueue();
+    renderSwipe();
+    showToast('Reshuffled');
+  }
+
+  function swipeOpenDetail() {
+    const r = currentSwipeCard();
+    if (r) openDetail(r.id);
+  }
+
+  function attachSwipeGestures() {
+    const cardEl = document.getElementById('swipe-card');
+    if (!cardEl) return;
+    let startX = 0, startY = 0, isDown = false, pointerId = null;
+
+    cardEl.addEventListener('pointerdown', e => {
+      if (!currentSwipeCard()) return;
+      isDown = true;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      cardEl.style.transition = '';
+      try { cardEl.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+
+    cardEl.addEventListener('pointermove', e => {
+      if (!isDown || e.pointerId !== pointerId) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      const rot = dx * 0.06;
+      cardEl.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+      const like = cardEl.querySelector('.swipe-stamp-like');
+      const pass = cardEl.querySelector('.swipe-stamp-pass');
+      if (like) like.style.opacity = Math.max(0, Math.min(1, dx / 120));
+      if (pass) pass.style.opacity = Math.max(0, Math.min(1, -dx / 120));
+    });
+
+    const snapBack = () => {
+      cardEl.style.transition = 'transform 0.2s ease';
+      cardEl.style.transform = '';
+      const like = cardEl.querySelector('.swipe-stamp-like');
+      const pass = cardEl.querySelector('.swipe-stamp-pass');
+      if (like) like.style.opacity = 0;
+      if (pass) pass.style.opacity = 0;
+    };
+
+    cardEl.addEventListener('pointerup', e => {
+      if (!isDown || e.pointerId !== pointerId) return;
+      isDown = false;
+      const dx = e.clientX - startX;
+      const threshold = 100;
+      if (dx > threshold) swipe('right');
+      else if (dx < -threshold) swipe('left');
+      else snapBack();
+    });
+
+    // pointercancel (gesture interruption, lost focus) — never commit.
+    // The event's clientX is unreliable here, so treat it as "reset card".
+    cardEl.addEventListener('pointercancel', () => {
+      if (!isDown) return;
+      isDown = false;
+      snapBack();
+    });
+  }
+
   // ── Render All ─────────────────────────────────────────────
   function renderAll() {
     renderBrowse();
@@ -473,11 +679,22 @@ const App = (() => {
       if (e.key === 'Enter') addFriend();
     });
 
+    // Swipe gestures + keyboard shortcuts
+    attachSwipeGestures();
+    document.addEventListener('keydown', e => {
+      if (activeTab !== 'swipe') return;
+      if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+      // Don't steer the underlying deck while the detail sheet is open.
+      if (document.getElementById('detail-overlay').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); swipe('right'); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
+    });
+
     renderAll();
   }
 
   // Public API
-  return { init, switchTab, setFilter, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend };
+  return { init, switchTab, setFilter, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, resetSwipe, swipeOpenDetail };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

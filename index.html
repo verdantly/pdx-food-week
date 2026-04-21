@@ -41,6 +41,11 @@
         Browse
         <span class="badge-dot"></span>
       </button>
+      <button class="nav-tab" data-tab="swipe" role="tab"
+        onclick="App.switchTab('swipe')" aria-selected="false">
+        Swipe
+        <span class="badge-dot"></span>
+      </button>
       <button class="nav-tab" data-tab="saved" role="tab"
         onclick="App.switchTab('saved')" aria-selected="false">
         Saved
@@ -88,6 +93,27 @@
       <button class="filter-chip" onclick="App.setFilter('minors', this)">👨‍👩‍👧 Family OK</button>
     </div>
     <div class="cards-list" id="cards-browse"></div>
+  </section>
+
+  <!-- ── Swipe View ── -->
+  <section class="view" id="view-swipe" role="tabpanel" aria-label="Swipe through dishes">
+    <div class="swipe-header">
+      <div class="swipe-counter" id="swipe-counter">Loading…</div>
+      <button class="swipe-reset" onclick="App.resetSwipe()" title="Start over — clear passed">↺ Reset</button>
+    </div>
+    <div class="swipe-deck">
+      <div class="swipe-card" id="swipe-card"></div>
+      <div class="swipe-empty" id="swipe-empty" style="display:none">
+        <div class="nr-emoji">🎉</div>
+        <p>No more to swipe!</p>
+        <button class="btn btn-primary" onclick="App.resetSwipe()">Start over</button>
+      </div>
+    </div>
+    <div class="swipe-controls" id="swipe-controls">
+      <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Pass">✕</button>
+      <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">ⓘ</button>
+      <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Save">★</button>
+    </div>
   </section>
 
   <!-- ── Saved View ── -->
