@@ -476,6 +476,20 @@ const App = (() => {
       for (const [id, m] of leafletMarkers) {
         m.setIcon(pinIcon(saved.has(id), id === selectedMapId));
       }
+      // Keep the "Selected location" card in sync with the saved set so
+      // its star/styling reflects changes made elsewhere (e.g. saving
+      // from the detail sheet while a pin is selected).
+      if (selectedMapId != null) {
+        const r = getRestaurants().find(x => x.id === selectedMapId);
+        if (r) {
+          const el = document.getElementById('map-selected-card');
+          el.innerHTML = `
+            <div class="section-header">Selected location</div>
+            <div class="cards-list" style="padding:0 0 8px">
+              ${cardHTML(r)}
+            </div>`;
+        }
+      }
     }
   }
 
@@ -672,6 +686,10 @@ const App = (() => {
     renderSaved();
     renderFriends();
     if (activeTab === 'map') renderMap();
+    if (activeTab === 'swipe') {
+      if (!swipeQueue) buildSwipeQueue();
+      renderSwipe();
+    }
   }
 
   // ── Init ───────────────────────────────────────────────────
