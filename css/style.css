@@ -51,6 +51,7 @@ body {
   max-width: 480px;
   margin: 0 auto;
   min-height: 100vh;
+  min-height: 100dvh;
   background: var(--cream);
   display: flex;
   flex-direction: column;
@@ -620,7 +621,7 @@ body {
 
 #view-swipe {
   display: none;
-  padding: 14px 16px 24px;
+  padding: 14px 16px calc(24px + env(safe-area-inset-bottom));
   overflow: hidden;
 }
 #view-swipe.active { display: flex; flex-direction: column; }
@@ -654,7 +655,7 @@ body {
 .swipe-deck {
   position: relative;
   flex: 1;
-  min-height: 460px;
+  min-height: 340px;
   max-height: 620px;
   margin-bottom: 14px;
   touch-action: none;
@@ -679,7 +680,7 @@ body {
 
 .swipe-card-image {
   flex: 1 1 auto;
-  min-height: 200px;
+  min-height: 140px;
   background: var(--pizza-pale);
   position: relative;
   overflow: hidden;
