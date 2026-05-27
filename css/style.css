@@ -208,6 +208,10 @@ body {
 
 /* ── Search & Filters ── */
 .search-bar { padding: 14px 16px 0; position: relative; }
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+}
 .search-bar input {
   width: 100%;
   font-family: var(--font-body);
@@ -224,7 +228,7 @@ body {
 .search-bar input::placeholder { color: var(--ink-30); }
 .search-icon {
   position: absolute;
-  left: 28px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   width: 16px;
