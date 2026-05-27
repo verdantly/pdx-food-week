@@ -749,7 +749,7 @@ const App = (() => {
     
     // Update select switcher value
     const select = document.getElementById('week-switcher');
-    if (select) select.value = currentWeekId;
+    if (select) select.value = '';
     
     // Update header title
     const titleEl = document.getElementById('header-title');
