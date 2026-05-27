@@ -20,8 +20,11 @@ pdx-food-week/
 │   └── style.css            ← all styles
 ├── js/
 │   └── app.js               ← app logic
-└── data/
-    └── pizzaweek2026.js     ← restaurant data (edit this each week!)
+├── data/
+│   ├── pizzaweek2026.js     ← pizza week restaurant data (generated)
+│   └── highballweek2026.js  ← highball week restaurant data (generated)
+├── scrape.js                ← Node.js automated scraper & geocoder
+└── scrape-console.js        ← Browser console utility scraper fallback
 ```
 
 ---
@@ -57,11 +60,11 @@ Your app will be live at:
 
 ### 3. Update data each food week
 
-Edit `data/pizzaweek2026.js` (or add a new file like `data/burgerweek2026.js`) and commit:
+Edit your data files or run the scraper, then commit:
 
 ```bash
 git add data/
-git commit -m "add burger week 2026 data"
+git commit -m "update food week data"
 git push
 ```
 
@@ -144,11 +147,29 @@ Share `http://192.168.x.x:8080` with friends on the same Wi-Fi.
 
 ## Adding Data for New Food Weeks
 
-1. Duplicate `data/pizzaweek2026.js` and rename (e.g. `data/burgerweek2026.js`)
-2. Add your new week to `window.FOOD_WEEKS` array
-3. Update `window.RESTAURANTS` with new entries, setting `weekId` to match
-4. In `index.html`, add `<script src="data/burgerweek2026.js"></script>` before `app.js`
-5. Change `currentWeekId` default in `app.js` or add a week switcher UI
+1. Create a data file under `data/` (e.g. `data/burgerweek2026.js`) containing the week's details.
+2. In the new data file, define your week in the `window.FOOD_WEEKS` array:
+   ```js
+   window.FOOD_WEEKS.push({
+     id: "burger-2026",
+     name: "Burger Week 2026",
+     dates: "August 10–16",
+     pricePills: ["$8 burger"],
+     totalLocations: 50,
+     emoji: "🍔",
+     color: "#D49E2A"
+   });
+   ```
+3. Populate `window.RESTAURANTS` with the dish entries, ensuring `weekId` matches (e.g. `"burger-2026"`).
+4. In `index.html`, load the new script tag **before** `js/app.js`:
+   ```html
+   <script src="data/burgerweek2026.js"></script>
+   ```
+5. Add the new option to the `<select id="week-switcher">` dropdown in `index.html`:
+   ```html
+   <option value="burger-2026">🍔 Burger Week</option>
+   ```
+6. Set the default active week `currentWeekId` in `js/app.js` if you want it to load by default.
 
 ## Restaurant Data Fields
 
@@ -164,8 +185,8 @@ Share `http://192.168.x.x:8080` with friends on the same Wi-Fi.
   lng: -122.6843,
   type: "meat",                 // "meat" | "vegetarian" | "vegan"
   glutenFree: false,            // true if GF option available
-  wholePie: false,              // true if $25 whole pie offered
-  minors: true,                 // true if minors allowed
+  wholePie: false,              // true if $25 whole pie offered (Pizza Week specific)
+  minors: true,                 // true if minors allowed / Family OK
   takeout: true,                // true if takeout available
   desc: "Short description of the dish.",
   emoji: "🍕",                  // display emoji
@@ -173,10 +194,21 @@ Share `http://192.168.x.x:8080` with friends on the same Wi-Fi.
 }
 ```
 
-## Scraping Tips
+---
 
-To pull the full 70-location list from EverOut:
-- Each pizza listing links to a sub-event page (e.g. `/portland/events/spuds-mackenzie/e234557/`)
-- Visit each page to get the address, description, and dietary tags
-- Geocode addresses using [geocode.maps.co](https://geocode.maps.co/) (free, no key needed for small volumes)
-- Or use Google Maps "Copy coordinates" by right-clicking each address
+## Scraping and Data Generation
+
+Instead of compiling restaurant data manually, you can use the automated scrapers included in this repository to fetch Portland food week events from EverOut:
+
+### 1. Node.js Scraper (`scrape.js`)
+Requires Node.js environment. It automatically fetches listings, parses details/dietary flags, geocodes addresses using Nominatim, and outputs the completed JS file.
+```bash
+# Install dependencies (cheerio, node-fetch)
+npm install
+
+# Run the scraper
+npm run scrape
+```
+
+### 2. Browser Console Scraper (`scrape-console.js`)
+If you are running in a restricted sandbox or get rate-limited during geocoding, open the EverOut food week index page in your browser DevTools, paste the contents of `scrape-console.js` into the console, and hit enter. It extracts coordinates directly from Google Maps links inside the page and prompts a file download.
