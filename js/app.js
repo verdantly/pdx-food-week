@@ -751,8 +751,12 @@ const App = (() => {
   function updateFilterDisplay() {
     const isHighball = (currentWeekId === 'highball-2026');
     const filtersRow = document.getElementById('browse-filters');
+    const sortRow = document.getElementById('sort-row');
     if (filtersRow) {
       filtersRow.style.display = isHighball ? 'none' : '';
+    }
+    if (sortRow) {
+      sortRow.style.paddingTop = isHighball ? '10px' : '0px';
     }
   }
 
