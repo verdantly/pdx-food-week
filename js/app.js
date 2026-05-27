@@ -11,7 +11,7 @@ const App = (() => {
   let passed = new Set();
   let friends = [];
   let selectedDish = null;
-  let currentWeekId = 'pizza-2026';
+  let currentWeekId = 'highball-2026';
   let swipeQueue = null;
   let swipeIdx = 0;
   let swipeAnimating = false;
