@@ -21,6 +21,24 @@ const App = (() => {
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
   const STORAGE_KEY_WEEK = 'pdxfw_current_week_v1';
 
+  const WEEK_FILTERS = {
+    'pizza-2026': [
+      { id: 'all', label: 'All' },
+      { id: 'meat', label: '🥩 Meat' },
+      { id: 'vegetarian', label: '🌿 Vegetarian' },
+      { id: 'vegan', label: '🌱 Vegan' },
+      { id: 'gf', label: '🌾 Gluten-free' },
+      { id: 'pie', label: '🍕 Whole Pie' },
+      { id: 'minors', label: '👨‍👩‍👧 Family OK' }
+    ],
+    'highball-2026': [
+      { id: 'all', label: 'All' },
+      { id: 'minors', label: '👨‍👩‍👧 Minors OK' },
+      { id: '21plus', label: '🥃 21+ Only' },
+      { id: 'takeout', label: '🥡 Takeout OK' }
+    ]
+  };
+
   // ── Persistence ────────────────────────────────────────────
   function loadState() {
     try {
@@ -75,6 +93,8 @@ const App = (() => {
       if (activeFilter === 'gf'         && !r.glutenFree)            return false;
       if (activeFilter === 'pie'        && !r.wholePie)              return false;
       if (activeFilter === 'minors'     && !r.minors)                return false;
+      if (activeFilter === '21plus'     && r.minors)                 return false;
+      if (activeFilter === 'takeout'    && !r.takeout)               return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
@@ -126,12 +146,18 @@ const App = (() => {
   // ── Tag builder ────────────────────────────────────────────
   function buildTags(r) {
     const t = [];
-    if (r.type === 'meat')       t.push('<span class="tag tag-meat">Meat</span>');
-    if (r.type === 'vegetarian') t.push('<span class="tag tag-veg">Vegetarian</span>');
-    if (r.type === 'vegan')      t.push('<span class="tag tag-vegan">Vegan</span>');
-    if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
-    if (r.wholePie)              t.push('<span class="tag tag-pie">Whole pie $25</span>');
-    else                         t.push('<span class="tag tag-slice">By the slice</span>');
+    if (currentWeekId === 'pizza-2026') {
+      if (r.type === 'meat')       t.push('<span class="tag tag-meat">Meat</span>');
+      if (r.type === 'vegetarian') t.push('<span class="tag tag-veg">Vegetarian</span>');
+      if (r.type === 'vegan')      t.push('<span class="tag tag-vegan">Vegan</span>');
+      if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
+      if (r.wholePie)              t.push('<span class="tag tag-pie">Whole pie $25</span>');
+      else                         t.push('<span class="tag tag-slice">By the slice</span>');
+    } else if (currentWeekId === 'highball-2026') {
+      if (r.minors)                t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
+      else                         t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
+      if (r.takeout)               t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
+    }
     return t.join('');
   }
 
@@ -748,16 +774,19 @@ const App = (() => {
     }
   }
 
+  function renderFilters() {
+    const filters = WEEK_FILTERS[currentWeekId] || [];
+    const container = document.getElementById('browse-filters');
+    if (!container) return;
+    
+    container.innerHTML = filters.map(f => {
+      const activeCls = activeFilter === f.id ? 'active' : '';
+      return `<button class="filter-chip ${activeCls}" onclick="App.setFilter('${f.id}', this)">${esc(f.label)}</button>`;
+    }).join('');
+  }
+
   function updateFilterDisplay() {
-    const isHighball = (currentWeekId === 'highball-2026');
-    const filtersRow = document.getElementById('browse-filters');
-    const sortRow = document.getElementById('sort-row');
-    if (filtersRow) {
-      filtersRow.style.display = isHighball ? 'none' : '';
-    }
-    if (sortRow) {
-      sortRow.style.paddingTop = isHighball ? '10px' : '0px';
-    }
+    renderFilters();
   }
 
   function switchWeek(weekId) {
@@ -774,8 +803,8 @@ const App = (() => {
     
     // Reset activeSort and sort chips active states
     activeSort = 'default';
-    document.querySelectorAll('.filter-row button.filter-chip').forEach(btn => {
-      if (btn.textContent.includes('All') || btn.textContent.includes('Default')) {
+    document.querySelectorAll('#sort-row button.filter-chip').forEach(btn => {
+      if (btn.textContent.includes('Default')) {
         btn.classList.add('active');
       } else {
         btn.classList.remove('active');
