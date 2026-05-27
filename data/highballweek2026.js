@@ -244,7 +244,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         "wholePie":  false,
         "minors":  true,
         "takeout":  false,
-        "desc":  "A dark, citrus-kissed twist on a whiskey sour, inspired by summer nights camping under the stars. Jim Beam meets our house-made Electric Mud Stout reduction ΓÇô rich, chocolatey, and earthy ΓÇô bri...",
+        "desc":  "A dark, citrus-kissed twist on a whiskey sour, inspired by summer nights camping under the stars. Jim Beam meets our house-made Electric Mud Stout reduction – rich, chocolatey, and earthy – bri...",
         "emoji":  "🥃",
         "image":  "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3ODUzMjA0NTI1MTY0LUZpcmUtb250aGUtTW91bnRhaW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
         "url":  "https://everout.com/portland/events/midnight-on-the-mountain/e239451/"
