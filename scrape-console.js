@@ -45,8 +45,14 @@
       const address = addrEl?.textContent?.replace(/\s+/g, ' ').trim() || '';
 
       // Description — first paragraph in the event body
-      const descEl = doc.querySelector('[class*="description"] p, [class*="body"] p, article p');
-      const desc = descEl?.textContent?.trim().slice(0, 220) || doc.querySelector('meta[name="description"]')?.content || '';
+      let descEl = doc.querySelector('[itemprop="description"] p, [class*="description"] p, .event-body p, article p');
+      if (!descEl) {
+        descEl = doc.querySelector('[itemprop="description"], [class*="description"], .event-body, article');
+      }
+      const descText = descEl?.textContent?.replace(/\s+/g, ' ').trim() 
+        || doc.querySelector('meta[property="og:description"]')?.content 
+        || doc.querySelector('meta[name="description"]')?.content || '';
+      const desc = descText.slice(0, 220);
 
       // Dietary detection
       const type = text.includes('vegan') ? 'vegan'

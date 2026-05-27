@@ -144,13 +144,15 @@ function parseDishPage(html, url) {
     || $('.item-image img.img-fluid').attr('src')
     || '';
 
-  // Build a map of question → answer from the Q&A block.
-  const qa = {};
-  answerList.find('.answer').each((_, el) => {
-    const q = $(el).find('.question-text').text().trim().replace(/[\s ]+/g, ' ');
-    const a = $(el).find('.answer-text').text().trim();
-    if (q) qa[q] = a;
-  });
+  // Description
+  let desc = $('[itemprop="description"] p, [class*="description"] p, .event-body p').first().text().trim();
+  if (!desc) {
+    desc = $('[itemprop="description"], [class*="description"], .event-body').first().text().trim();
+  }
+  desc = desc 
+    || $('meta[property="og:description"]').attr('content')?.trim()
+    || $('meta[name="description"]').attr('content')?.trim()
+    || '';
 
   const whatsOnIt = qa["What's On It..."] || qa['What’s On It...'] || '';
   const whatTheySay = qa['What They Say...'] || '';
@@ -200,9 +202,9 @@ function parseDishPage(html, url) {
     type,
     glutenFree: yesno(qa['Gluten Free?']),
     wholePie,
-    minors: yesno(qa['Allow Minors?']),
-    takeout: yesno(qa['Allow Takeout?']),
-    desc,
+    minors,
+    takeout,
+    desc: desc.replace(/\s+/g, ' ').slice(0, 200),
     emoji,
     image,
     url,
