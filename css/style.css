@@ -481,6 +481,56 @@ body {
 .overlap-card { border-color: var(--teal) !important; background: var(--teal-light) !important; }
 .overlap-card .card-restaurant { color: var(--teal) !important; }
 
+/* ── Map ── */
+.map-container {
+  position: relative;
+  background: #F0EBE1;
+  margin: 14px 16px 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+}
+#map-canvas { width: 100%; height: 360px; display: block; }
+.map-legend {
+  display: flex; gap: 14px; padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+  flex-wrap: wrap;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-60); font-weight: 500; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.legend-dot.saved { background: var(--pizza); }
+.legend-dot.unsaved { background: #888; }
+.map-selected { padding: 14px 16px 0; }
+
+/* Leaflet pin overrides — replace the default blue marker with a colored
+   circle that matches the legend. */
+.pdx-pin {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #888;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+.pdx-pin.saved { background: var(--pizza); width: 22px; height: 22px; }
+.pdx-pin.selected { outline: 3px solid var(--pizza); outline-offset: 1px; }
+
+.leaflet-popup-content {
+  margin: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  min-width: 160px;
+}
+.leaflet-popup-content .popup-dish {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.leaflet-popup-content .popup-restaurant { color: var(--ink-60); font-size: 12px; }
+.leaflet-popup-content-wrapper { border-radius: var(--radius-sm); }
+
 /* ── Detail Sheet ── */
 .detail-overlay {
   position: fixed; inset: 0;
@@ -533,6 +583,229 @@ body {
 .view::-webkit-scrollbar { width: 4px; }
 .view::-webkit-scrollbar-track { background: transparent; }
 .view::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+
+/* ── Swipe view ────────────────────────────────────────────── */
+
+#view-swipe {
+  display: none;
+  padding: 14px 16px 24px;
+  overflow: hidden;
+}
+#view-swipe.active { display: flex; flex-direction: column; }
+
+.swipe-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+.swipe-counter {
+  font-size: 13px;
+  color: var(--ink-60);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.swipe-reset {
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink-60);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+.swipe-reset:hover { color: var(--pizza); border-color: var(--pizza); }
+
+.swipe-deck {
+  position: relative;
+  flex: 1;
+  min-height: 460px;
+  max-height: 620px;
+  margin-bottom: 14px;
+  touch-action: none;
+}
+
+.swipe-card {
+  position: absolute;
+  inset: 0;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+.swipe-card:active { cursor: grabbing; }
+.swipe-card.empty { display: none; }
+
+.swipe-card-image {
+  flex: 1 1 auto;
+  min-height: 200px;
+  background: var(--pizza-pale);
+  position: relative;
+  overflow: hidden;
+}
+.swipe-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.swipe-card-emoji {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+}
+
+.swipe-card-body {
+  padding: 14px 16px 16px;
+  background: var(--card-bg);
+  flex: 0 0 auto;
+}
+.swipe-card-dish {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 3px;
+}
+.swipe-card-restaurant {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-60);
+  margin-bottom: 4px;
+}
+.swipe-card-neighborhood {
+  font-size: 12px;
+  color: var(--ink-30);
+  margin-bottom: 8px;
+}
+.swipe-card-desc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.swipe-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.swipe-stamp {
+  position: absolute;
+  top: 24px;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  border: 4px solid;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s linear;
+  text-transform: uppercase;
+}
+.swipe-stamp-like {
+  right: 22px;
+  color: var(--teal);
+  border-color: var(--teal);
+  transform: rotate(15deg);
+}
+.swipe-stamp-pass {
+  left: 22px;
+  color: var(--pizza-dark);
+  border-color: var(--pizza-dark);
+  transform: rotate(-15deg);
+}
+
+.swipe-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  gap: 14px;
+}
+.swipe-empty .nr-emoji { font-size: 52px; }
+.swipe-empty p { font-size: 16px; font-weight: 500; color: var(--ink-60); margin: 0; }
+
+.swipe-controls {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding: 4px 0 0;
+  flex-shrink: 0;
+}
+.swipe-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s ease, box-shadow var(--transition), color var(--transition), border-color var(--transition);
+}
+.swipe-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.swipe-btn:active { transform: translateY(0); }
+.swipe-pass { color: var(--pizza-dark); border-color: var(--pizza-dark); }
+.swipe-like { color: var(--teal); border-color: var(--teal); font-size: 28px; }
+.swipe-info { width: 44px; height: 44px; font-size: 18px; color: var(--ink-60); align-self: center; }
+
+/* Detail sheet hero image */
+.sheet-hero-image {
+  width: calc(100% + 40px);
+  margin: 0 -20px 16px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--pizza-pale);
+  border-radius: 8px;
+}
+.sheet-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Small card thumbnail reuses the .card-emoji square */
+.card-emoji.card-thumb { padding: 0; overflow: hidden; background: var(--pizza-pale); }
+.card-emoji.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 
 /* ════════════════════════════════════════════
@@ -622,6 +895,10 @@ body {
   .share-panel { margin: 16px 24px 0; }
   .friends-list { padding: 16px 24px 0; }
   .overlap-section { padding: 16px 24px 0; }
+  .map-container { margin: 16px 24px 0; }
+  #map-canvas { height: 440px; }
+  .map-selected { padding: 14px 24px 0; }
+  .map-selected .cards-list { grid-template-columns: 1fr; }
 
   /* Modal-style detail sheet on tablet */
   .detail-overlay { align-items: center; }
@@ -780,6 +1057,11 @@ body {
   .overlap-section { padding: 20px 32px 0; }
   #overlap-container { padding: 0; }
   #overlap-container.cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .map-container { margin: 20px 32px 0; }
+  #map-canvas { height: 520px; }
+  .map-selected { padding: 16px 32px 0; }
+  .map-selected .cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 
