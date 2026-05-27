@@ -750,11 +750,10 @@ const App = (() => {
 
   function updateFilterDisplay() {
     const isHighball = (currentWeekId === 'highball-2026');
-    const meatEl = document.getElementById('filter-meat');
-    const pieEl = document.getElementById('filter-pie');
-    
-    if (meatEl) meatEl.style.display = isHighball ? 'none' : '';
-    if (pieEl) pieEl.style.display = isHighball ? 'none' : '';
+    const filtersRow = document.getElementById('browse-filters');
+    if (filtersRow) {
+      filtersRow.style.display = isHighball ? 'none' : '';
+    }
   }
 
   function switchWeek(weekId) {
