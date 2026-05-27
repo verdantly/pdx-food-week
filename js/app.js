@@ -19,6 +19,7 @@ const App = (() => {
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
+  const STORAGE_KEY_WEEK = 'pdxfw_current_week_v1';
 
   // ── Persistence ────────────────────────────────────────────
   function loadState() {
@@ -29,6 +30,8 @@ const App = (() => {
       if (p) passed = new Set(JSON.parse(p));
       const f = localStorage.getItem(STORAGE_KEY_FRIENDS);
       if (f) friends = JSON.parse(f);
+      const w = localStorage.getItem(STORAGE_KEY_WEEK);
+      if (w) currentWeekId = w;
     } catch (e) {}
   }
 
@@ -37,6 +40,7 @@ const App = (() => {
       localStorage.setItem(STORAGE_KEY_SAVED, JSON.stringify([...saved]));
       localStorage.setItem(STORAGE_KEY_PASSED, JSON.stringify([...passed]));
       localStorage.setItem(STORAGE_KEY_FRIENDS, JSON.stringify(friends));
+      localStorage.setItem(STORAGE_KEY_WEEK, currentWeekId);
     } catch (e) {}
   }
 
@@ -692,6 +696,114 @@ const App = (() => {
     }
   }
 
+  // ── Week / Theme Switcher Logic ─────────────────────────────
+  function applyWeekTheme(week) {
+    if (!week) return;
+    const root = document.documentElement;
+    const themeColor = week.color || '#C94B2C';
+    let dark = week.colorDark || '#9E3318';
+    let light = week.colorLight || '#F5E6DF';
+    let pale = week.colorPale || '#FDF7F4';
+    
+    if (week.id === 'pizza-2026') {
+      dark = '#9E3318';
+      light = '#F5E6DF';
+      pale = '#FDF7F4';
+    }
+    
+    root.style.setProperty('--pizza', themeColor);
+    root.style.setProperty('--pizza-dark', dark);
+    root.style.setProperty('--pizza-light', light);
+    root.style.setProperty('--pizza-pale', pale);
+  }
+
+  function renderHeader() {
+    const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
+    if (!week) return;
+    
+    // Update select switcher value
+    const select = document.getElementById('week-switcher');
+    if (select) select.value = currentWeekId;
+    
+    // Update header title
+    const titleEl = document.getElementById('header-title');
+    if (titleEl) {
+      const parts = week.name.split(' ');
+      if (parts.length > 0) {
+        const first = parts[0];
+        const rest = parts.slice(1).join(' ');
+        titleEl.innerHTML = `<em>${esc(first)}</em> ${esc(rest)}`;
+      } else {
+        titleEl.textContent = week.name;
+      }
+    }
+    
+    // Update header meta (dates, price pills, location count)
+    const metaEl = document.getElementById('header-meta');
+    if (metaEl) {
+      const dates = `<span>${esc(week.dates)}</span>`;
+      const pills = (week.pricePills || []).map(p => `<span class="pill">${esc(p)}</span>`).join('');
+      const locations = `<span>${week.totalLocations || getRestaurants().length} locations</span>`;
+      metaEl.innerHTML = dates + pills + locations;
+    }
+  }
+
+  function updateFilterDisplay() {
+    const isHighball = (currentWeekId === 'highball-2026');
+    const meatEl = document.getElementById('filter-meat');
+    const pieEl = document.getElementById('filter-pie');
+    
+    if (meatEl) meatEl.style.display = isHighball ? 'none' : '';
+    if (pieEl) pieEl.style.display = isHighball ? 'none' : '';
+  }
+
+  function switchWeek(weekId) {
+    if (!window.FOOD_WEEKS.some(w => w.id === weekId)) return;
+    
+    currentWeekId = weekId;
+    saveState();
+    
+    // Reset filters and search
+    activeFilter = 'all';
+    searchQuery = '';
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.value = '';
+    
+    // Reset activeSort and sort chips active states
+    activeSort = 'default';
+    document.querySelectorAll('.filter-row button.filter-chip').forEach(btn => {
+      if (btn.textContent.includes('All') || btn.textContent.includes('Default')) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    
+    // Reset Swipe queue
+    swipeQueue = null;
+    
+    // Reset Leaflet Map
+    if (leafletMap) {
+      leafletMap.remove();
+      leafletMap = null;
+      leafletMarkers = null;
+    }
+    selectedMapId = null;
+    const mapCard = document.getElementById('map-selected-card');
+    if (mapCard) mapCard.innerHTML = '';
+    
+    // Update theme, header, and filter displays
+    const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
+    applyWeekTheme(week);
+    renderHeader();
+    updateFilterDisplay();
+    
+    // Full re-render
+    renderAll();
+    
+    showToast(`Switched to ${week.name}!`);
+  }
+
   // ── Init ───────────────────────────────────────────────────
   function init() {
     loadState();
@@ -723,11 +835,17 @@ const App = (() => {
       else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
     });
 
+    // Apply active week's initial theme, header metadata, and dynamic filters
+    const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
+    applyWeekTheme(week);
+    renderHeader();
+    updateFilterDisplay();
+
     renderAll();
   }
 
   // Public API
-  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, resetSwipe, swipeOpenDetail };
+  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, resetSwipe, swipeOpenDetail, switchWeek };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

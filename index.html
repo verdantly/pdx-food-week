@@ -35,10 +35,13 @@
   <header class="app-header">
     <div class="header-top">
       <div class="app-wordmark">PDX Food Week</div>
-      <button class="week-switcher" title="More food weeks coming soon">More weeks ▾</button>
+      <select class="week-switcher-select" id="week-switcher" onchange="App.switchWeek(this.value)" aria-label="Switch food week">
+        <option value="pizza-2026">🍕 Pizza Week 2026</option>
+        <option value="highball-2026">🥃 Highball Week 2026</option>
+      </select>
     </div>
-    <h1 class="header-title"><em>Pizza</em> Week 2026</h1>
-    <div class="header-meta">
+    <h1 class="header-title" id="header-title"><em>Pizza</em> Week 2026</h1>
+    <div class="header-meta" id="header-meta">
       <span>April 20–26</span>
       <span class="pill">$4 slice</span>
       <span class="pill">$25 pie</span>
@@ -94,12 +97,12 @@
     </div>
     <div class="filter-row" role="group" aria-label="Filter dishes">
       <button class="filter-chip active" onclick="App.setFilter('all', this)">All</button>
-      <button class="filter-chip" onclick="App.setFilter('meat', this)">🥩 Meat</button>
-      <button class="filter-chip" onclick="App.setFilter('vegetarian', this)">🌿 Vegetarian</button>
-      <button class="filter-chip" onclick="App.setFilter('vegan', this)">🌱 Vegan</button>
-      <button class="filter-chip" onclick="App.setFilter('gf', this)">🌾 Gluten-free</button>
-      <button class="filter-chip" onclick="App.setFilter('pie', this)">🍕 Whole Pie</button>
-      <button class="filter-chip" onclick="App.setFilter('minors', this)">👨‍👩‍👧 Family OK</button>
+      <button class="filter-chip" onclick="App.setFilter('meat', this)" id="filter-meat">🥩 Meat</button>
+      <button class="filter-chip" onclick="App.setFilter('vegetarian', this)" id="filter-veg">🌿 Vegetarian</button>
+      <button class="filter-chip" onclick="App.setFilter('vegan', this)" id="filter-vegan">🌱 Vegan</button>
+      <button class="filter-chip" onclick="App.setFilter('gf', this)" id="filter-gf">🌾 Gluten-free</button>
+      <button class="filter-chip" onclick="App.setFilter('pie', this)" id="filter-pie">🍕 Whole Pie</button>
+      <button class="filter-chip" onclick="App.setFilter('minors', this)" id="filter-minors">👨‍👩‍👧 Family OK</button>
     </div>
     <div class="filter-row" role="group" aria-label="Sort dishes" style="padding-top: 0;">
       <span style="font-size: 12px; color: var(--ink-60); align-self: center; font-weight: 500;">Sort:</span>
@@ -213,6 +216,7 @@
 
 <!-- ── Scripts ── -->
 <script src="data/pizzaweek2026.js"></script>
+<script src="data/highballweek2026.js"></script>
 <script src="js/app.js"></script>
 
 </body>
