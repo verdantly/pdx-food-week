@@ -13,25 +13,6 @@ A mobile-first web app to browse, bookmark, and share your favorite dishes from 
 
 ## Project Structure
 
-```
-pdx-food-week/
-├── index.html               ← main app shell
-├── css/
-# PDX Food Week App
-
-A mobile-first web app to browse, bookmark, and share your favorite dishes from Portland's themed food weeks (Pizza Week, Burger Week, etc.).
-
-## Features
-
-- 🍕 **Browse** — filter by meat/veg/vegan, gluten-free, whole pie, family-friendly
-- ★ **Bookmark** — save dishes you want to try; persists in browser storage
-- 👥 **Friends** — share a short code, paste friends' codes, see overlap
-- 🗺️ **Map** — tap pins to see details; saved spots highlighted
-
----
-
-## Project Structure
-
 The project is structured as a simple static web application with automated data scrapers:
 
 * **Core Frontend Layer**
