@@ -5,7 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 - `npm install` — install scraper deps (`cheerio`, `node-fetch`). Only needed before running the Node scraper.
-- `npm run scrape` — run `scrape.js` (Node, ESM). Fetches the EverOut Pizza Week index, scrapes each sub-event page, geocodes via Nominatim, and overwrites `data/pizzaweek2026.js`.
+- `npm run scrape` or `npm run scrape:everout` — run `scrape_everout.js` (Node, ESM). Fetches the EverOut Pizza Week index, scrapes each sub-event page, geocodes via Nominatim, and overwrites `data/pizzaweek2026.js`.
+- `npm run scrape:tacos` — run `scrape_tacos.js` (Node, ESM). Parses Taco Week KML coordinates, matches with Squarespace JSON, geocodes via Nominatim, and writes `data/tacoweek2026.js`.
 - Local preview: `python3 -m http.server 8080` from repo root, then open `http://localhost:8080`. No build step — static site.
 
 No test suite, no linter, no bundler. Edits to `index.html`, `css/style.css`, `js/app.js`, or `data/*.js` are live on reload.
@@ -26,9 +27,10 @@ Static vanilla-JS single-page app. Three layers that talk via `window` globals �
 
 ## Scrapers
 
-Two scrapers exist for the same source (EverOut), pick based on environment:
+Three scrapers exist depending on the food week and environment:
 
-- **`scrape.js`** (Node, run via `npm run scrape`) — writes `data/pizzaweek2026.js` directly. Rate-limited (~800ms between dish pages, ~1100ms for Nominatim geocoding — Nominatim enforces 1 req/sec). Addresses that fail to geocode default to downtown PDX (`45.5231, -122.6765`) — scan output for that coord pair and fix manually.
+- **`scrape_everout.js`** (Node, run via `npm run scrape` or `npm run scrape:everout`) — EverOut scraper. Writes `data/pizzaweek2026.js` directly. Rate-limited (~800ms between dish pages, ~1100ms for Nominatim geocoding — Nominatim enforces 1 req/sec). Addresses that fail to geocode default to downtown PDX (`45.5231, -122.6765`).
+- **`scrape_tacos.js`** (Node, run via `npm run scrape:tacos`) — Taco Week scraper. Parses Taco Week KML coordinates and Squarespace JSON context to generate `data/tacoweek2026.js` with full reverse-geocoded addresses and high-res image URLs. Uses `data/geocode_cache.json` for rate-limit protection.
 - **`scrape-console.js`** (browser console) — paste into DevTools on the EverOut week page. Uses `fetch` with same-origin cookies, extracts coords from embedded Google Maps links instead of geocoding, triggers a file download. Use when the Node scraper is blocked or when you already have the page open.
 
 Both use loose keyword matching (`text.includes('vegan')`, etc.) for dietary tags — review the output. Restaurant-name parsing strips `(Neighborhood)` parens into the `neighborhood` field.

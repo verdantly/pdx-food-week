@@ -17,14 +17,34 @@ A mobile-first web app to browse, bookmark, and share your favorite dishes from 
 pdx-food-week/
 ├── index.html               ← main app shell
 ├── css/
+# PDX Food Week App
+
+A mobile-first web app to browse, bookmark, and share your favorite dishes from Portland's themed food weeks (Pizza Week, Burger Week, etc.).
+
+## Features
+
+- 🍕 **Browse** — filter by meat/veg/vegan, gluten-free, whole pie, family-friendly
+- ★ **Bookmark** — save dishes you want to try; persists in browser storage
+- 👥 **Friends** — share a short code, paste friends' codes, see overlap
+- 🗺️ **Map** — tap pins to see details; saved spots highlighted
+
+---
+
+## Project Structure
+
+```
+pdx-food-week/
+├── index.html               ← main app shell
+├── css/
 │   └── style.css            ← all styles
 ├── js/
 │   └── app.js               ← app logic
 ├── data/
 │   ├── pizzaweek2026.js     ← pizza week restaurant data (generated)
 │   └── highballweek2026.js  ← highball week restaurant data (generated)
-├── scrape.js                ← Node.js automated scraper & geocoder
-└── scrape-console.js        ← Browser console utility scraper fallback
+├── scrape_everout.js        ← Node.js automated scraper & geocoder for EverOut
+├── scrape_tacos.js          ← Node.js scraper & geocoder for Taco Week 2026
+└── scrape-console.js        ← Browser console utility scraper fallback for EverOut
 ```
 
 ---
@@ -198,17 +218,24 @@ Share `http://192.168.x.x:8080` with friends on the same Wi-Fi.
 
 ## Scraping and Data Generation
 
-Instead of compiling restaurant data manually, you can use the automated scrapers included in this repository to fetch Portland food week events from EverOut:
+Instead of compiling restaurant data manually, you can use the automated scrapers included in this repository to fetch food week events:
 
-### 1. Node.js Scraper (`scrape.js`)
-Requires Node.js environment. It automatically fetches listings, parses details/dietary flags, geocodes addresses using Nominatim, and outputs the completed JS file.
+### 1. EverOut Food Weeks (e.g. Pizza Week) — `scrape_everout.js`
+Requires Node.js environment. It automatically fetches listings from EverOut, parses details/dietary flags, geocodes addresses using Nominatim, and outputs the completed JS file.
 ```bash
-# Install dependencies (cheerio, node-fetch)
+# Install dependencies
 npm install
 
-# Run the scraper
-npm run scrape
+# Run the EverOut scraper
+npm run scrape:everout
 ```
 
-### 2. Browser Console Scraper (`scrape-console.js`)
-If you are running in a restricted sandbox or get rate-limited during geocoding, open the EverOut food week index page in your browser DevTools, paste the contents of `scrape-console.js` into the console, and hit enter. It extracts coordinates directly from Google Maps links inside the page and prompts a file download.
+### 2. Taco Week (hosted on The Actual Portland) — `scrape_tacos.js`
+Uses Node.js to parse the Taco Week KML coordinates and Squarespace JSON context, matches items, applies geocoding with local caching (`data/geocode_cache.json`), and outputs the completed JS file.
+```bash
+# Run the Taco Week scraper
+npm run scrape:tacos
+```
+
+### 3. Browser Console Scraper (`scrape-console.js`)
+If you are running in a restricted sandbox or get rate-limited during geocoding on EverOut, open the EverOut food week index page in your browser DevTools, paste the contents of `scrape-console.js` into the console, and hit enter. It extracts coordinates directly from Google Maps links inside the page and prompts a file download.

@@ -36,6 +36,14 @@ const App = (() => {
       { id: 'minors', label: '👨‍👩‍👧 Minors OK' },
       { id: '21plus', label: '🥃 21+ Only' },
       { id: 'takeout', label: '🥡 Takeout OK' }
+    ],
+    'taco-2026': [
+      { id: 'all', label: 'All' },
+      { id: 'meat', label: '🥩 Meat' },
+      { id: 'vegetarian', label: '🌿 Vegetarian' },
+      { id: 'vegan', label: '🌱 Vegan' },
+      { id: 'gf', label: '🌾 Gluten-free' },
+      { id: 'spicy', label: '🌶️ Spicy' }
     ]
   };
 
@@ -95,6 +103,7 @@ const App = (() => {
       if (activeFilter === 'minors'     && !r.minors)                return false;
       if (activeFilter === '21plus'     && r.minors)                 return false;
       if (activeFilter === 'takeout'    && !r.takeout)               return false;
+      if (activeFilter === 'spicy'      && !r.spicy)                 return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
@@ -157,6 +166,12 @@ const App = (() => {
       if (r.minors)                t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
       else                         t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
       if (r.takeout)               t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
+    } else if (currentWeekId === 'taco-2026') {
+      if (r.type === 'meat')       t.push('<span class="tag tag-meat">Meat</span>');
+      if (r.type === 'vegetarian') t.push('<span class="tag tag-veg">Vegetarian</span>');
+      if (r.type === 'vegan')      t.push('<span class="tag tag-vegan">Vegan</span>');
+      if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
+      if (r.spicy)                 t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
     }
     return t.join('');
   }
@@ -235,7 +250,7 @@ const App = (() => {
           ${isSaved ? '★ Saved' : '☆ Save'}
         </button>
         <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
-          EverOut ↗
+          ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
         </a>
       </div>
     `;
@@ -750,6 +765,16 @@ const App = (() => {
     // Update select switcher value
     const select = document.getElementById('week-switcher');
     if (select) select.value = '';
+    
+    // Update sidebar footer
+    const footerEl = document.querySelector('.sidebar-footer');
+    if (footerEl) {
+      let dataSrc = week.organizer || 'EverOut';
+      if (week.organizer === 'Portland Mercury') {
+        dataSrc = 'EverOut &amp; Portland Mercury';
+      }
+      footerEl.innerHTML = `PDX Food Week<br>Data from ${esc(dataSrc)}.<br>Not affiliated with either.`;
+    }
     
     // Update header title
     const titleEl = document.getElementById('header-title');
