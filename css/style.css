@@ -965,8 +965,7 @@ body {
   #app {
     flex-direction: row;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+    max-width: 100%;
     min-height: 100vh;
     background: transparent;
   }
@@ -1111,5 +1110,27 @@ body {
 
   #overlap-container.cards-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ════════════════════════════════════════════
+   ULTRAWIDE DESKTOP  (≥ 1800px)
+   Five/six-column cards for maximum viewport usage
+   ════════════════════════════════════════════ */
+@media (min-width: 1800px) {
+  .cards-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  #overlap-container.cards-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 2200px) {
+  .cards-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  #overlap-container.cards-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
