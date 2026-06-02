@@ -635,21 +635,34 @@ const App = (() => {
     const counterEl = document.getElementById('swipe-counter');
     const r = currentSwipeCard();
 
+    // Update button states
+    const undoBtn = document.getElementById('swipe-btn-undo');
+    const passBtn = ctrlsEl.querySelector('.swipe-pass');
+    const infoBtn = ctrlsEl.querySelector('.swipe-info');
+    const likeBtn = ctrlsEl.querySelector('.swipe-like');
+
+    if (undoBtn) undoBtn.disabled = (swipeIdx <= 0);
+
     if (!r) {
       cardEl.style.display = 'none';
       emptyEl.style.display = 'flex';
-      ctrlsEl.style.display = 'none';
+      if (passBtn) passBtn.disabled = true;
+      if (infoBtn) infoBtn.disabled = true;
+      if (likeBtn) likeBtn.disabled = true;
       counterEl.textContent = 'Nothing left';
       return;
     }
 
     cardEl.style.display = 'flex';
     emptyEl.style.display = 'none';
-    ctrlsEl.style.display = 'flex';
     cardEl.style.transform = '';
     cardEl.style.opacity = '';
     cardEl.style.transition = '';
     cardEl.dataset.id = r.id;
+
+    if (passBtn) passBtn.disabled = false;
+    if (infoBtn) infoBtn.disabled = false;
+    if (likeBtn) likeBtn.disabled = false;
 
     const imageBlock = r.image
       ? `<img src="${esc(r.image)}" alt="" loading="eager">`
@@ -708,6 +721,34 @@ const App = (() => {
       renderSaved();
       renderFriends();
     }, 300);
+  }
+
+  function undoSwipe() {
+    if (swipeIdx <= 0 || !swipeQueue || swipeAnimating) return;
+    swipeIdx--;
+    const r = swipeQueue[swipeIdx];
+    saved.delete(r.id);
+    passed.delete(r.id);
+    saveState();
+    
+    // Animate card back from off-screen
+    renderSwipe();
+    
+    const cardEl = document.getElementById('swipe-card');
+    if (cardEl) {
+      cardEl.style.transition = 'none';
+      cardEl.style.transform = 'translate(-40px, 20px) rotate(-8deg)';
+      cardEl.style.opacity = '0';
+      cardEl.offsetHeight; // force reflow
+      cardEl.style.transition = 'transform 0.28s ease-out, opacity 0.28s ease-out';
+      cardEl.style.transform = 'translate(0, 0) rotate(0deg)';
+      cardEl.style.opacity = '1';
+    }
+
+    renderBrowse();
+    renderSaved();
+    renderFriends();
+    showToast('Undo successful');
   }
 
   function resetSwipe() {
@@ -971,7 +1012,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, resetSwipe, swipeOpenDetail, switchWeek };
+  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, switchWeek };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

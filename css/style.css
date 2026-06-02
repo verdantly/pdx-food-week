@@ -857,6 +857,8 @@ body {
 .swipe-pass { color: var(--pizza-dark); border-color: var(--pizza-dark); }
 .swipe-like { color: var(--teal); border-color: var(--teal); font-size: 28px; padding-bottom: 2px; /* Visual center correction for star */ }
 .swipe-info { width: 44px; height: 44px; font-size: 18px; color: var(--ink-60); align-self: center; }
+.swipe-undo { width: 44px; height: 44px; font-size: 18px; color: var(--pizza); border-color: var(--pizza); align-self: center; }
+.swipe-btn:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
 
 /* Detail sheet hero image */
 .sheet-hero-image {
