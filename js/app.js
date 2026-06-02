@@ -93,11 +93,38 @@ const App = (() => {
     return window.RESTAURANTS.filter(r => r.weekId === currentWeekId);
   }
 
+  function isVeganFriendly(r) {
+    if (r.type === 'vegan') return true;
+    const txt = `${r.dish} ${r.desc}`.toLowerCase();
+    return txt.includes('vegan option') || 
+           txt.includes('can be made vegan') || 
+           txt.includes('vegan available') || 
+           txt.includes('optionally vegan') || 
+           txt.includes('vegan version') ||
+           txt.includes('request vegan');
+  }
+
+  function isVegetarianFriendly(r) {
+    if (r.type === 'vegan' || r.type === 'vegetarian') return true;
+    const txt = `${r.dish} ${r.desc}`.toLowerCase();
+    return txt.includes('vegetarian option') || 
+           txt.includes('vegetarian available') || 
+           txt.includes('veggie option') || 
+           txt.includes('veggie available') || 
+           txt.includes('veg option') || 
+           txt.includes('can be made veg') ||
+           txt.includes('optionally veg') || 
+           txt.includes('or tofu') || 
+           txt.includes('vegetarian version') ||
+           txt.includes('request veg') ||
+           isVeganFriendly(r);
+  }
+
   function getFiltered() {
     let filtered = getRestaurants().filter(r => {
       if (activeFilter === 'meat'       && r.type !== 'meat')       return false;
-      if (activeFilter === 'vegetarian' && r.type !== 'vegetarian') return false;
-      if (activeFilter === 'vegan'      && r.type !== 'vegan')      return false;
+      if (activeFilter === 'vegetarian' && !isVegetarianFriendly(r)) return false;
+      if (activeFilter === 'vegan'      && !isVeganFriendly(r))      return false;
       if (activeFilter === 'gf'         && !r.glutenFree)            return false;
       if (activeFilter === 'pie'        && !r.wholePie)              return false;
       if (activeFilter === 'minors'     && !r.minors)                return false;
@@ -117,6 +144,8 @@ const App = (() => {
       filtered.sort((a, b) => a.dish.localeCompare(b.dish));
     } else if (activeSort === 'restaurant') {
       filtered.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    } else {
+      filtered.sort((a, b) => a.id - b.id);
     }
 
     return filtered;
@@ -156,9 +185,21 @@ const App = (() => {
   function buildTags(r) {
     const t = [];
     if (currentWeekId === 'pizza-2026') {
-      if (r.type === 'meat')       t.push('<span class="tag tag-meat">Meat</span>');
-      if (r.type === 'vegetarian') t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (r.type === 'vegan')      t.push('<span class="tag tag-vegan">Vegan</span>');
+      if (r.type === 'meat') {
+        t.push('<span class="tag tag-meat">Meat</span>');
+        if (isVeganFriendly(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else if (isVegetarianFriendly(r)) {
+          t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
+        }
+      } else if (r.type === 'vegetarian') {
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
+        if (isVeganFriendly(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        }
+      } else if (r.type === 'vegan') {
+        t.push('<span class="tag tag-vegan">Vegan</span>');
+      }
       if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
       if (r.wholePie)              t.push('<span class="tag tag-pie">Whole pie $25</span>');
       else                         t.push('<span class="tag tag-slice">By the slice</span>');
@@ -167,9 +208,21 @@ const App = (() => {
       else                         t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
       if (r.takeout)               t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
     } else if (currentWeekId === 'taco-2026') {
-      if (r.type === 'meat')       t.push('<span class="tag tag-meat">Meat</span>');
-      if (r.type === 'vegetarian') t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (r.type === 'vegan')      t.push('<span class="tag tag-vegan">Vegan</span>');
+      if (r.type === 'meat') {
+        t.push('<span class="tag tag-meat">Meat</span>');
+        if (isVeganFriendly(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else if (isVegetarianFriendly(r)) {
+          t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
+        }
+      } else if (r.type === 'vegetarian') {
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
+        if (isVeganFriendly(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        }
+      } else if (r.type === 'vegan') {
+        t.push('<span class="tag tag-vegan">Vegan</span>');
+      }
       if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
       if (r.spicy)                 t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
     }
@@ -766,15 +819,18 @@ const App = (() => {
     const select = document.getElementById('week-switcher');
     if (select) select.value = '';
     
-    // Update sidebar footer
-    const footerEl = document.querySelector('.sidebar-footer');
-    if (footerEl) {
-      let dataSrc = week.organizer || 'EverOut';
-      if (week.organizer === 'Portland Mercury') {
-        dataSrc = 'EverOut &amp; Portland Mercury';
-      }
-      footerEl.innerHTML = `PDX Food Week<br>Data from ${esc(dataSrc)}.<br>Not affiliated with either.`;
+    // Update all footer elements (sidebar on desktop, view footers on mobile/tablet)
+    let dataSrcHtml = '';
+    if (week.organizer === 'Portland Mercury') {
+      dataSrcHtml = `<a href="${esc(week.url)}" target="_blank" rel="noopener">EverOut</a> &amp; <a href="https://www.portlandmercury.com" target="_blank" rel="noopener">Portland Mercury</a>`;
+    } else {
+      const label = week.organizer || 'EverOut';
+      dataSrcHtml = `<a href="${esc(week.url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
     }
+    const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
+    footers.forEach(el => {
+      el.innerHTML = `PDX Food Week<br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>`;
+    });
     
     // Update header title
     const titleEl = document.getElementById('header-title');

@@ -166,6 +166,30 @@ body {
 /* sidebar footer — hidden on mobile */
 .sidebar-footer { display: none; }
 
+/* view footer — visible on mobile/tablet, hidden on desktop */
+.view-footer {
+  display: block;
+  margin: 40px 16px 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--ink-60);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Footer links styling */
+.sidebar-footer a,
+.view-footer a {
+  color: inherit;
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+.sidebar-footer a:hover,
+.view-footer a:hover {
+  color: var(--pizza);
+}
+
 /* ── Nav Tabs ── */
 .nav-tabs {
   display: flex;
@@ -869,6 +893,11 @@ body {
 
   body { display: block; }
 
+  .view-footer {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
   #app {
     max-width: 100%;
     min-height: 100vh;
@@ -982,6 +1011,10 @@ body {
 ════════════════════════════════════════════ */
 
 @media (min-width: 1100px) {
+
+  .view-footer {
+    display: none;
+  }
 
   body {
     display: flex;

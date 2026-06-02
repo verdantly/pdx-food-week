@@ -114,10 +114,12 @@ foreach ($pm in $placemarks) {
     
     # Image resolution: KML vs JSON
     $image = ""
+    $sqTitle = ""
     $key = Clean-Name $name
     if ($squarespaceMap.ContainsKey($key)) {
         $ssItem = $squarespaceMap[$key]
         $image = $ssItem.image.assetUrl
+        $sqTitle = $ssItem.title
     }
     
     # If no match in JSON, fallback to KML description image
@@ -221,10 +223,21 @@ foreach ($pm in $placemarks) {
     }
     
     # Dietary type & glutenFree tag detection
-    $bothText = ($dish + " " + $desc).ToLower()
+    $bothText = ($dish + " " + $desc + " " + $sqTitle).ToLower()
+    
+    $isMushroomBirria = ($bothText -match "mushroom|hongos|lion’s mane|lion's mane") -and ($bothText -notmatch "beef|pork|chicken")
+    $isSoyCurlAsada = $bothText -match "soy curl"
+    
+    $hasRealMeat = ($bothText -match "chicken|pollo|tinga|beef|steak|asada|birria|carnitas|pork|bacon|chorizo|longaniza|ribeye|rib eye|brisket|chicharron|shrimp|seafood|fish|salmon|crab|cod|ostrich|kebab|char siu") -and !$isSoyCurlAsada -and !$isMushroomBirria
+    
     $type = "meat"
-    if ($bothText -match "\bvegan\b") { $type = "vegan" }
-    elseif ($bothText -match "\bvegetarian\b|\bveggie\b|\bvegetariano\b") { $type = "vegetarian" }
+    if (!$hasRealMeat) {
+        if ($bothText -match "\bvegan\b" -or $isSoyCurlAsada) {
+            $type = "vegan"
+        } elseif ($bothText -match "\bvegetarian\b|\bveggie\b|\bvegetariano\b|\btofu\b" -or $isMushroomBirria -or $bothText -match "avocado" -or $bothText -match "s.more|s'more|tres leches" -or $name -match "Bring! Treats for Dogs") {
+            $type = "vegetarian"
+        }
+    }
     
     $glutenFree = $false
     if ($bothText -match "\bgluten[- ]free\b|\bgf\b") { $glutenFree = $true }
@@ -232,16 +245,18 @@ foreach ($pm in $placemarks) {
     $spicy = $false
     if ($bothText -match "\bspicy\b|\bchile\b|\bjalapeno\b|\bserrano\b|\bhabanero\b|\bhot\b") { $spicy = $true }
     
-    # Emoji heuristic based on ingredients
-    $emoji = "🌮" # default
-    if ($type -eq "vegan") { $emoji = "🌱" }
-    elseif ($type -eq "vegetarian") { $emoji = "🌿" }
-    elseif ($bothText -match "shrimp|seafood|fish|salmon|crab|cod") { $emoji = "🐟" }
-    elseif ($bothText -match "chicken|pollo") { $emoji = "🍗" }
-    elseif ($bothText -match "pork|carnitas|chorizo|al pastor|ham|bacon") { $emoji = "🐖" }
-    elseif ($bothText -match "beef|steak|asada|birria|carne|brisket") { $emoji = "🥩" }
-    elseif ($bothText -match "ostrich") { $emoji = "🦤" }
-    elseif ($bothText -match "spicy|hot|chile") { $emoji = "🌶️" }
+    # Emoji heuristic based on ingredients using encoding-safe escape sequences
+    $emoji = [char]::ConvertFromUtf32(0x1F32E) # default Taco 🌮
+    if ($bothText -match "shrimp|seafood|fish|salmon|crab|cod") { $emoji = [char]::ConvertFromUtf32(0x1F41F) } # Fish 🐟
+    elseif ($bothText -match "chicken|pollo") { $emoji = [char]::ConvertFromUtf32(0x1F357) } # Poultry leg 🍗
+    elseif ($bothText -match "pork|carnitas|chorizo|al pastor|ham|bacon|char siu") { $emoji = [char]::ConvertFromUtf32(0x1F416) } # Pig 🐖
+    elseif (($bothText -match "beef|steak|asada|birria|carne|brisket") -and !$isSoyCurlAsada -and !$isMushroomBirria) { $emoji = [char]::ConvertFromUtf32(0x1F969) } # Meat 🥩
+    elseif ($bothText -match "ostrich") { $emoji = [char]::ConvertFromUtf32(0x1FAB0) } # Dodo 🦤
+    elseif ($bothText -match "mushroom|hongos") { $emoji = [char]::ConvertFromUtf32(0x1F344) } # Mushroom 🍄
+    elseif ($bothText -match "avocado") { $emoji = [char]::ConvertFromUtf32(0x1F951) } # Avocado 🥑
+    elseif ($type -eq "vegan") { $emoji = [char]::ConvertFromUtf32(0x1F331) } # Seedling 🌱
+    elseif ($type -eq "vegetarian") { $emoji = [char]::ConvertFromUtf32(0x1F33F) } # Herb 🌿
+    elseif ($bothText -match "spicy|hot|chile") { $emoji = [char]::ConvertFromUtf32(0x1F336) + [char]0xFE0F } # Pepper 🌶️
     
     $entries += @{
         id = $counter

@@ -22,8 +22,9 @@ function isAllCaps(str) {
 
 function toTitleCase(str) {
   if (!str) return '';
-  if (!isAllCaps(str)) return str;
-  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())
+    .replace(/\bBbq\b/g, 'BBQ')
+    .replace(/\bGf\b/g, 'GF');
 }
 
 function toSentenceCase(str) {
@@ -249,12 +250,23 @@ while ((match = placemarkRegex.exec(kmlContent)) !== null) {
   }
 
   // Dietary type and tags
-  const bothText = `${dish} ${desc}`.toLowerCase();
+  const sqTitle = squarespaceItem ? (squarespaceItem.title || '') : '';
+  const bothText = `${dish} ${desc} ${sqTitle}`.toLowerCase();
+
+  const isMushroomBirria = (bothText.includes('mushroom') || bothText.includes('hongos') || bothText.includes('lion’s mane') || bothText.includes('lion\'s mane')) && !bothText.includes('beef') && !bothText.includes('pork') && !bothText.includes('chicken');
+  const isSoyCurlAsada = bothText.includes('soy curl');
+
+  const hasRealMeat = /chicken|pollo|tinga|beef|steak|asada|birria|carnitas|pork|bacon|chorizo|longaniza|ribeye|rib eye|brisket|chicharron|shrimp|seafood|fish|salmon|crab|cod|ostrich|kebab|char siu/i.test(bothText) 
+    && !isSoyCurlAsada 
+    && !isMushroomBirria;
+
   let type = 'meat';
-  if (bothText.includes('vegan')) {
-    type = 'vegan';
-  } else if (bothText.includes('vegetarian') || bothText.includes('veggie') || bothText.includes('vegetariano')) {
-    type = 'vegetarian';
+  if (!hasRealMeat) {
+    if (bothText.includes('vegan') || isSoyCurlAsada) {
+      type = 'vegan';
+    } else if (bothText.includes('vegetarian') || bothText.includes('veggie') || bothText.includes('vegetariano') || bothText.includes('tofu') || isMushroomBirria || bothText.includes('avocado') || bothText.includes('s’more') || bothText.includes('s'more') || bothText.includes('tres leches') || name.includes('Bring! Treats for Dogs')) {
+      type = 'vegetarian';
+    }
   }
 
   const glutenFree = bothText.includes('gluten-free') || bothText.includes('gluten free') || bothText.includes('gf');
@@ -262,13 +274,15 @@ while ((match = placemarkRegex.exec(kmlContent)) !== null) {
 
   // Emoji heuristic
   let emoji = '🌮';
-  if (type === 'vegan') emoji = '🌱';
-  else if (type === 'vegetarian') emoji = '🌿';
-  else if (/shrimp|seafood|fish|salmon|crab|cod/.test(bothText)) emoji = '🐟';
+  if (/shrimp|seafood|fish|salmon|crab|cod/.test(bothText)) emoji = '🐟';
   else if (/chicken|pollo/.test(bothText)) emoji = '🍗';
-  else if (/pork|carnitas|chorizo|al pastor|ham|bacon/.test(bothText)) emoji = '🐖';
-  else if (/beef|steak|asada|birria|carne|brisket/.test(bothText)) emoji = '🥩';
+  else if (/pork|carnitas|chorizo|al pastor|ham|bacon|char siu/.test(bothText)) emoji = '🐖';
+  else if (/beef|steak|asada|birria|carne|brisket/.test(bothText) && !isSoyCurlAsada && !isMushroomBirria) emoji = '🥩';
   else if (/ostrich/.test(bothText)) emoji = '🦤';
+  else if (/mushroom|hongos/.test(bothText)) emoji = '🍄';
+  else if (/avocado/.test(bothText)) emoji = '🥑';
+  else if (type === 'vegan') emoji = '🌱';
+  else if (type === 'vegetarian') emoji = '🌿';
   else if (/spicy|hot|chile/.test(bothText)) emoji = '🌶️';
 
   entries.push({
