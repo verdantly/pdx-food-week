@@ -280,7 +280,7 @@ const App = (() => {
   }
 
   // ── Detail sheet ───────────────────────────────────────────
-  function openDetail(id) {
+  function openDetail(id, fromPopState = false) {
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
     selectedDish = r;
@@ -313,12 +313,22 @@ const App = (() => {
     `;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+
+    if (!fromPopState) {
+      history.pushState({ detailDishId: id }, '');
+    }
   }
 
-  function closeDetail() {
+  function closeDetail(fromPopState = false) {
     document.getElementById('detail-overlay').classList.remove('open');
     document.body.style.overflow = '';
     selectedDish = null;
+
+    if (!fromPopState) {
+      if (history.state && history.state.detailDishId !== undefined) {
+        history.back();
+      }
+    }
   }
 
   // ── Toast ──────────────────────────────────────────────────
@@ -978,6 +988,15 @@ const App = (() => {
   // ── Init ───────────────────────────────────────────────────
   function init() {
     loadState();
+
+    // Wire up popstate to handle browser back button closing detail sheet
+    window.addEventListener('popstate', e => {
+      if (e.state && e.state.detailDishId !== undefined) {
+        openDetail(e.state.detailDishId, true);
+      } else if (selectedDish) {
+        closeDetail(true);
+      }
+    });
 
     // Wire up detail overlay close
     document.getElementById('detail-overlay').addEventListener('click', e => {
