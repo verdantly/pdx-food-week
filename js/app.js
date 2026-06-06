@@ -294,7 +294,11 @@ const App = (() => {
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}</div>
       <div class="sheet-restaurant">${esc(r.restaurant)}</div>
-      <div class="sheet-address">📍 ${esc(r.address)}</div>
+      <div class="sheet-address">
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps">
+          📍 ${esc(r.address)} ↗
+        </a>
+      </div>
       <div class="sheet-desc">${esc(r.desc)}</div>
       <div class="sheet-tags">${buildTags(r)}</div>
       <div class="sheet-actions">
