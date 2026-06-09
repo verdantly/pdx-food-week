@@ -119,15 +119,27 @@ async function geocodeWithFallbacks(fullAddr, streetAddr) {
 }
 
 // ── Parse a single dish page ──────────────────────────────────────────────────
+function decodeHTML(str) {
+  if (!str) return '';
+  return str
+    .replace(/&#x27;/ig, "'")
+    .replace(/&#39;/ig, "'")
+    .replace(/&amp;/ig, '&')
+    .replace(/&quot;/ig, '"')
+    .replace(/&lt;/ig, '<')
+    .replace(/&gt;/ig, '>')
+    .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+}
+
 function parseDishPage(html, url) {
   const $ = cheerio.load(html);
   const answerList = $('.answer-list').first();
   if (answerList.length === 0) return null; // not a dish event
 
-  const dish = answerList.find('.fs-2').first().text().trim();
-  const restaurant = answerList.find('.fs-4').first().text().trim();
+  const dish = decodeHTML(answerList.find('.fs-2').first().text().trim());
+  const restaurant = decodeHTML(answerList.find('.fs-4').first().text().trim());
   const addressLine = answerList.find('.ff-condensed').first();
-  const neighborhood = addressLine.find('.text-muted').first().text().trim().replace(/^\(|\)$/g, '');
+  const neighborhood = decodeHTML(addressLine.find('.text-muted').first().text().trim().replace(/^\(|\)$/g, ''));
   const streetAddress = addressLine.clone().children('.text-muted').remove().end().text().replace(/\s+/g, ' ').trim();
 
   // Full address with ZIP lives in the Google Maps iframe "q=" param.
@@ -145,18 +157,18 @@ function parseDishPage(html, url) {
     || '';
 
   // Description
-  let desc = $('[itemprop="description"] p, [class*="description"] p, .event-body p').first().text().trim();
-  if (!desc) {
-    desc = $('[itemprop="description"], [class*="description"], .event-body').first().text().trim();
+  let descText = $('[itemprop="description"] p, [class*="description"] p, .event-body p').first().text().trim();
+  if (!descText) {
+    descText = $('[itemprop="description"], [class*="description"], .event-body').first().text().trim();
   }
-  desc = desc 
+  descText = descText 
     || $('meta[property="og:description"]').attr('content')?.trim()
     || $('meta[name="description"]').attr('content')?.trim()
     || '';
 
   const whatsOnIt = qa["What's On It..."] || qa['What’s On It...'] || '';
   const whatTheySay = qa['What They Say...'] || '';
-  const desc = (whatsOnIt || whatTheySay).slice(0, 260);
+  const desc = decodeHTML((whatsOnIt || whatTheySay || descText).slice(0, 260));
 
   // EverOut's "Meat or Vegetarian?" is multi-select: e.g. "Meat, Vegetarian"
   // means a meat pizza with a veg version available. Primary type prefers
