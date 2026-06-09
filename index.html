@@ -135,11 +135,26 @@
       </div>
     </div>
     <div class="swipe-controls" id="swipe-controls">
-      <button class="swipe-btn swipe-undo" id="swipe-btn-undo" onclick="App.undoSwipe()" aria-label="Undo" disabled>↶</button>
-      <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Pass">✕</button>
-      <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now" style="font-size: 24px;">↓</button>
-      <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">ⓘ</button>
-      <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Save">★</button>
+      <div class="swipe-btn-wrapper">
+        <button class="swipe-btn swipe-undo" id="swipe-btn-undo" onclick="App.undoSwipe()" aria-label="Undo" disabled>↶</button>
+        <span class="swipe-btn-label">Undo</span>
+      </div>
+      <div class="swipe-btn-wrapper">
+        <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Pass">✕</button>
+        <span class="swipe-btn-label">Pass</span>
+      </div>
+      <div class="swipe-btn-wrapper">
+        <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now" style="font-size: 24px;">↓</button>
+        <span class="swipe-btn-label">Skip</span>
+      </div>
+      <div class="swipe-btn-wrapper">
+        <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">ⓘ</button>
+        <span class="swipe-btn-label">Info</span>
+      </div>
+      <div class="swipe-btn-wrapper">
+        <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Save">★</button>
+        <span class="swipe-btn-label">Save</span>
+      </div>
     </div>
   </section>
 
@@ -177,16 +192,22 @@
     <div class="share-panel">
       <h3>Share your list</h3>
       <p>Copy your code and send it to friends. They paste it below to find spots you both want to try.</p>
-      <div class="code-box" id="share-code-box">
-        <span class="code-placeholder">Save some spots first…</span>
-      </div>
-      <button class="btn btn-primary" id="copy-btn" onclick="App.copyCode()" disabled>
-        Copy my code
-      </button>
-      <div class="paste-label">Add a friend's code</div>
-      <div class="paste-row">
-        <input id="friend-code-input" type="text" placeholder="PDX26-…" autocomplete="off" spellcheck="false" />
-        <button class="btn" onclick="App.addFriend()">Add</button>
+      <div class="share-panel-columns">
+        <div class="share-column">
+          <div class="code-box" id="share-code-box">
+            <span class="code-placeholder">Save some spots first…</span>
+          </div>
+          <button class="btn btn-primary" id="copy-btn" onclick="App.copyCode()" disabled>
+            Copy my code
+          </button>
+        </div>
+        <div class="share-column">
+          <div class="paste-label">Add a friend's code</div>
+          <div class="paste-row">
+            <input id="friend-code-input" type="text" placeholder="PDX26-…" autocomplete="off" spellcheck="false" />
+            <button class="btn" onclick="App.addFriend()">Add</button>
+          </div>
+        </div>
       </div>
     </div>
 

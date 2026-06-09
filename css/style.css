@@ -498,6 +498,9 @@ body {
 .paste-row .btn { flex-shrink: 0; background: var(--pizza); color: #fff; padding: 9px 14px; }
 .paste-row .btn:hover { background: var(--pizza-dark); }
 
+.share-panel-columns { display: flex; flex-direction: column; gap: 24px; }
+.share-column { flex: 1; }
+.share-column .btn { margin-bottom: 0; }
 .friends-list { padding: 14px 16px 0; }
 .friend-item {
   background: var(--card-bg);
@@ -839,9 +842,23 @@ body {
 .swipe-controls {
   display: flex;
   justify-content: center;
-  gap: 18px;
+  align-items: flex-end;
+  gap: 16px;
   padding: 4px 0 0;
   flex-shrink: 0;
+}
+.swipe-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.swipe-btn-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-60);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .swipe-btn {
   width: 58px;
@@ -1152,9 +1169,10 @@ body {
   .stat-num { font-size: 32px; }
   .section-header { padding: 12px 32px 6px; font-size: 13px; }
 
-  .share-panel { margin: 20px 32px 0; max-width: 600px; }
-  .friends-list { padding: 20px 32px 0; }
-  .overlap-section { padding: 20px 32px 0; }
+  .share-panel { margin: 20px auto 0; max-width: 800px; }
+  .share-panel-columns { flex-direction: row; }
+  .friends-list { padding: 20px 32px 0; max-width: 800px; margin: 0 auto; }
+  .overlap-section { padding: 20px 32px 0; max-width: 800px; margin: 0 auto; }
   #overlap-container { padding: 0; }
   #overlap-container.cards-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
