@@ -709,7 +709,7 @@ body.is-landing .bottom-nav { display: none !important; }
 .badge-upcoming {
   position: absolute;
   top: 16px;
-  right: -32px;
+  right: -24px;
   background: #C94B2C;
   color: #fff;
   font-size: 10px;
@@ -718,6 +718,8 @@ body.is-landing .bottom-nav { display: none !important; }
   padding: 4px 32px;
   transform: rotate(45deg);
   letter-spacing: 1px;
+  text-align: center;
+  width: 100px;
 }
 
 @media (max-width: 768px) {
