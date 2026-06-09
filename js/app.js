@@ -295,7 +295,7 @@ const App = (() => {
       : '';
       
     const restaurantHtml = r.restaurantUrl 
-      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;" onclick="event.stopPropagation()">${esc(r.restaurant)}</a>` 
+      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` 
       : esc(r.restaurant);
 
     return `
@@ -399,11 +399,11 @@ const App = (() => {
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}</div>
       <div class="sheet-restaurant">
-        ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">${esc(r.restaurant)}</a>` : esc(r.restaurant)}
+        ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
       </div>
       <div class="sheet-address">
-        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps">
-          📍 ${esc(r.address)} ↗
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link">
+          📍 ${esc(r.address)} <span class="mobile-arrow">↗</span>
         </a>
       </div>
       <div class="sheet-desc">${esc(r.desc)}</div>
@@ -1340,7 +1340,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);
