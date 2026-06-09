@@ -163,7 +163,15 @@ window.FOOD_WEEKS.push({
   totalLocations: ${entries.length},
   url: "${WEEK_URL}",
 });\n`;
-  const restBlock = `window.RESTAURANTS_${entries[0].weekId.replace('-', '_')} = ${JSON.stringify(entries, null, 2)};\n`;
+  const restBlock = `window.RESTAURANTS = window.RESTAURANTS || [];
+(function() {
+  const newItems = ${JSON.stringify(entries, null, 2)};
+  newItems.forEach(item => {
+    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+      window.RESTAURANTS.push(item);
+    }
+  });
+})();\n`;
 
   fs.writeFileSync(outPath, header + weeksBlock + restBlock);
   console.log('Done!');

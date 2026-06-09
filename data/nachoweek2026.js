@@ -12,7 +12,9 @@ window.FOOD_WEEKS.push({
   totalLocations: 55,
   url: "https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/",
 });
-window.RESTAURANTS_nacho_2026 = [
+window.RESTAURANTS = window.RESTAURANTS || [];
+(function() {
+  const newItems = [
   {
     "id": 243678,
     "weekId": "nacho-2026",
@@ -1004,3 +1006,9 @@ window.RESTAURANTS_nacho_2026 = [
     "lng": -122.7705986
   }
 ];
+  newItems.forEach(item => {
+    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+      window.RESTAURANTS.push(item);
+    }
+  });
+})();
