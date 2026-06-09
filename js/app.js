@@ -16,6 +16,8 @@ const App = (() => {
   let swipeQueue = null;
   let swipeIdx = 0;
   let swipeAnimating = false;
+  let userLat = null;
+  let userLng = null;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
@@ -97,6 +99,20 @@ const App = (() => {
   }
 
   // ── Data helpers ───────────────────────────────────────────
+  function haversineDistance(lat1, lon1, lat2, lon2) {
+    if (!lat1 || !lon1 || !lat2 || !lon2) return Infinity;
+    const R = 3958.8; // Radius of the Earth in miles
+    const rlat1 = lat1 * (Math.PI/180);
+    const rlat2 = lat2 * (Math.PI/180);
+    const difflat = rlat2 - rlat1;
+    const difflon = (lon2 - lon1) * (Math.PI/180);
+    const a = Math.sin(difflat/2) * Math.sin(difflat/2) +
+              Math.cos(rlat1) * Math.cos(rlat2) *
+              Math.sin(difflon/2) * Math.sin(difflon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+
   function getRestaurants() {
     return window.RESTAURANTS.filter(r => r.weekId === currentWeekId);
   }
@@ -152,6 +168,12 @@ const App = (() => {
       filtered.sort((a, b) => a.dish.localeCompare(b.dish));
     } else if (activeSort === 'restaurant') {
       filtered.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    } else if (activeSort === 'distance' && userLat !== null && userLng !== null) {
+      filtered.sort((a, b) => {
+        const d1 = haversineDistance(userLat, userLng, a.lat, a.lng);
+        const d2 = haversineDistance(userLat, userLng, b.lat, b.lng);
+        return d1 - d2;
+      });
     } else {
       filtered.sort((a, b) => a.id - b.id);
     }
@@ -166,6 +188,12 @@ const App = (() => {
       savedItems.sort((a, b) => a.dish.localeCompare(b.dish));
     } else if (activeSort === 'restaurant') {
       savedItems.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    } else if (activeSort === 'distance' && userLat !== null && userLng !== null) {
+      savedItems.sort((a, b) => {
+        const d1 = haversineDistance(userLat, userLng, a.lat, a.lng);
+        const d2 = haversineDistance(userLat, userLng, b.lat, b.lng);
+        return d1 - d2;
+      });
     }
 
     return savedItems;
@@ -261,12 +289,21 @@ const App = (() => {
     const thumb = r.image
       ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy"></div>`
       : `<div class="card-emoji">${esc(r.emoji)}</div>`;
+      
+    const dist = (activeSort === 'distance' && userLat !== null && userLng !== null)
+      ? ` <span style="font-size: 13px; font-weight: normal; color: var(--ink-60);">(${haversineDistance(userLat, userLng, r.lat, r.lng).toFixed(1)} mi)</span>`
+      : '';
+      
+    const restaurantHtml = r.restaurantUrl 
+      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;" onclick="event.stopPropagation()">${esc(r.restaurant)}</a>` 
+      : esc(r.restaurant);
+
     return `
       <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})">
         ${thumb}
         <div class="card-body">
           <div class="card-dish">${esc(r.dish)}</div>
-          <div class="card-restaurant">${esc(r.restaurant)}</div>
+          <div class="card-restaurant">${restaurantHtml}${dist}</div>
           <div class="card-neighborhood">📍 ${esc(r.neighborhood)}</div>
           <div class="card-desc">${esc(r.desc)}</div>
           <div class="card-tags">${buildTags(r)}</div>
@@ -361,7 +398,9 @@ const App = (() => {
       <div class="sheet-handle"></div>
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}</div>
-      <div class="sheet-restaurant">${esc(r.restaurant)}</div>
+      <div class="sheet-restaurant">
+        ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">${esc(r.restaurant)}</a>` : esc(r.restaurant)}
+      </div>
       <div class="sheet-address">
         <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps">
           📍 ${esc(r.address)} ↗
@@ -476,8 +515,52 @@ const App = (() => {
     activeSort = s;
     el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
+    document.getElementById('zip-code-container').style.display = 'none';
     renderBrowse();
     renderSaved(); // sorting also applies to your saved list
+  }
+
+  function toggleDistanceSort(el) {
+    const zipContainer = document.getElementById('zip-code-container');
+    if (activeSort === 'distance') {
+      // Revert to default
+      setSort('restaurant', el.parentElement.querySelector('button.filter-chip'));
+    } else {
+      activeSort = 'distance';
+      el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      zipContainer.style.display = 'flex';
+      
+      if (userLat !== null && userLng !== null) {
+        renderBrowse();
+        renderSaved();
+      }
+    }
+  }
+
+  async function applyZipCode() {
+    const zipInput = document.getElementById('zip-code-input');
+    const zip = zipInput.value.trim();
+    if (!zip || zip.length !== 5) {
+      showToast('⚠️ Please enter a valid 5-digit zip code');
+      return;
+    }
+    
+    try {
+      const btn = zipInput.nextElementSibling;
+      btn.textContent = '...';
+      const res = await fetch(`https://api.zippopotam.us/us/${zip}`);
+      if (!res.ok) throw new Error('Not found');
+      const data = await res.json();
+      userLat = parseFloat(data.places[0].latitude);
+      userLng = parseFloat(data.places[0].longitude);
+      renderBrowse();
+      renderSaved();
+    } catch (e) {
+      showToast('⚠️ Could not find that zip code');
+    } finally {
+      zipInput.nextElementSibling.textContent = 'Go';
+    }
   }
 
   // ── Render: Browse ─────────────────────────────────────────
