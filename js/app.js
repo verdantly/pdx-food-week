@@ -711,10 +711,10 @@ const App = (() => {
         });
         firebaseSuccess = true;
       } catch (e) {
-        console.warn("Firebase save failed, falling back to local encoding:", e);
+        console.error("Firebase Firestore save failed! Verify that your Firestore security rules allow public write access to the 'shared_lists' collection.", e);
       }
     } else {
-      console.warn("Firebase not configured, falling back to local encoding");
+      console.warn("Firebase is not initialized (window.firebase is undefined or db is null). Falling back to local encoding.");
     }
 
     try {

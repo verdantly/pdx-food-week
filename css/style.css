@@ -1304,7 +1304,7 @@ body.is-landing .bottom-nav { display: none !important; }
     font-weight: 400;
     border-bottom: none;
     border-left: 3px solid transparent;
-    border-radius: var(--radius-sm);
+    border-radius: 2px;
     letter-spacing: 0;
     color: rgba(255,255,255,0.45);
   }
