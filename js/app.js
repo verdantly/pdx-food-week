@@ -4,7 +4,7 @@
 // ── Firebase Configuration ───────────────────────────────────
 // TODO: Replace with your actual Firebase configuration from the console
 const firebaseConfig = {
-  apiKey: "[GCP_API_KEY]",
+  apiKey: "AIzaSyD4aVF_dVWxrZ6F_GNQuZa1eBLOWdL0xXc",
   authDomain: "pdxfoodweek-6480b.firebaseapp.com",
   projectId: "pdxfoodweek-6480b",
   storageBucket: "pdxfoodweek-6480b.firebasestorage.app",
@@ -640,7 +640,7 @@ const App = (() => {
     if (copyBtn) {
       copyBtn.disabled = (saved.size === 0);
     }
-    
+
     if (saved.size === 0) {
       const resultsDiv = document.getElementById('share-results');
       if (resultsDiv) {
@@ -709,7 +709,7 @@ const App = (() => {
       showToast('⚠️ Save some spots first!');
       return;
     }
-    
+
     const btn = document.getElementById('copy-btn');
     const nameInput = document.getElementById('my-name-input');
     const myName = nameInput ? nameInput.value.trim() : '';
@@ -742,7 +742,7 @@ const App = (() => {
       const encodedBackup = encodeShareCode();
       const baseUrl = window.location.origin + window.location.pathname;
       let url;
-      
+
       if (firebaseSuccess) {
         url = `${baseUrl}?week=${currentWeekId}&list=${shortId}&fallback=${encodedBackup}`;
       } else {
