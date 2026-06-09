@@ -36,7 +36,8 @@
     <div class="header-top">
       <div class="app-wordmark">PDX Food Week</div>
       <select class="week-switcher-select" id="week-switcher" onchange="App.switchWeek(this.value)" aria-label="Switch food week">
-        <option value="" disabled selected>Select food week</option>
+        <option value="" disabled>Select food week</option>
+        <option value="nacho-2026" selected>🧀 Nacho Week</option>
         <option value="pizza-2026">🍕 Pizza Week</option>
         <option value="highball-2026">🥃 Highball Week</option>
         <option value="taco-2026">🌮 Taco Week</option>
@@ -231,6 +232,7 @@
 <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
 
 <!-- ── Scripts ── -->
+<script src="data/nachoweek2026.js"></script>
 <script src="data/pizzaweek2026.js"></script>
 <script src="data/highballweek2026.js"></script>
 <script src="data/tacoweek2026.js"></script>

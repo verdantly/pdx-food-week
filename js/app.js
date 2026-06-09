@@ -11,7 +11,7 @@ const App = (() => {
   let passed = new Set();
   let friends = [];
   let selectedDish = null;
-  let currentWeekId = 'taco-2026';
+  let currentWeekId = 'nacho-2026';
   let swipeQueue = null;
   let swipeIdx = 0;
   let swipeAnimating = false;
@@ -44,6 +44,15 @@ const App = (() => {
       { id: 'vegan', label: '🌱 Vegan' },
       { id: 'gf', label: '🌾 Gluten-free' },
       { id: 'spicy', label: '🌶️ Spicy' }
+    ],
+    'nacho-2026': [
+      { id: 'all', label: 'All' },
+      { id: 'meat', label: '🥩 Meat' },
+      { id: 'vegetarian', label: '🌿 Vegetarian' },
+      { id: 'vegan', label: '🌱 Vegan' },
+      { id: 'gf', label: '🌾 Gluten-free' },
+      { id: 'takeout', label: '🥡 Takeout OK' },
+      { id: 'minors', label: '👨‍👩‍👧 Minors OK' }
     ]
   };
 
@@ -225,6 +234,25 @@ const App = (() => {
       }
       if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
       if (r.spicy)                 t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
+    } else if (currentWeekId === 'nacho-2026') {
+      if (r.type === 'meat') {
+        t.push('<span class="tag tag-meat">Meat</span>');
+        if (isVeganFriendly(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else if (isVegetarianFriendly(r)) {
+          t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
+        }
+      } else if (r.type === 'vegetarian') {
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
+        if (isVeganFriendly(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        }
+      } else if (r.type === 'vegan') {
+        t.push('<span class="tag tag-vegan">Vegan</span>');
+      }
+      if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
+      if (r.minors)                t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
+      if (r.takeout)               t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
     }
     return t.join('');
   }
