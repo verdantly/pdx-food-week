@@ -1186,6 +1186,11 @@ body.is-landing .bottom-nav { display: none !important; }
   .view-footer {
     display: none;
   }
+  body.is-landing .view-footer {
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
   body {
     display: flex;

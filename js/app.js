@@ -1155,7 +1155,13 @@ const App = (() => {
       }
     });
 
-    grid.innerHTML = window.FOOD_WEEKS.map(w => {
+    const sortedWeeks = [...window.FOOD_WEEKS].sort((a, b) => {
+      const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
+      const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
+      return dateB - dateA; // reverse chronological (newest first)
+    });
+
+    grid.innerHTML = sortedWeeks.map(w => {
       const isNext = nextWeek && w.id === nextWeek.id;
       const badgeHTML = isNext ? '<div class="badge-upcoming">Next</div>' : '';
       return `
