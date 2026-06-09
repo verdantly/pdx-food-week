@@ -4,12 +4,13 @@
 // ── Firebase Configuration ───────────────────────────────────
 // TODO: Replace with your actual Firebase configuration from the console
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-app.firebaseapp.com",
-  projectId: "your-app",
-  storageBucket: "your-app.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+  apiKey: "[GCP_API_KEY]",
+  authDomain: "pdxfoodweek-6480b.firebaseapp.com",
+  projectId: "pdxfoodweek-6480b",
+  storageBucket: "pdxfoodweek-6480b.firebasestorage.app",
+  messagingSenderId: "1048667119257",
+  appId: "1:1048667119257:web:decc83e85fc5f5cc612346",
+  measurementId: "G-TGYBQLYQ80"
 };
 
 // Initialize Firebase only if the global object exists
@@ -85,7 +86,7 @@ const App = (() => {
       if (w) currentWeekId = w;
       const n = localStorage.getItem(STORAGE_KEY_NOTES);
       if (n) notes = JSON.parse(n);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   function saveState() {
@@ -95,7 +96,7 @@ const App = (() => {
       localStorage.setItem(STORAGE_KEY_FRIENDS, JSON.stringify(friends));
       localStorage.setItem(STORAGE_KEY_WEEK, currentWeekId);
       localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notes));
-    } catch (e) {}
+    } catch (e) { }
   }
 
   // Basic HTML-escape for interpolated scraped text. Keep conservative — we
@@ -120,14 +121,14 @@ const App = (() => {
   function haversineDistance(lat1, lon1, lat2, lon2) {
     if (!lat1 || !lon1 || !lat2 || !lon2) return Infinity;
     const R = 3958.8; // Radius of the Earth in miles
-    const rlat1 = lat1 * (Math.PI/180);
-    const rlat2 = lat2 * (Math.PI/180);
+    const rlat1 = lat1 * (Math.PI / 180);
+    const rlat2 = lat2 * (Math.PI / 180);
     const difflat = rlat2 - rlat1;
-    const difflon = (lon2 - lon1) * (Math.PI/180);
-    const a = Math.sin(difflat/2) * Math.sin(difflat/2) +
-              Math.cos(rlat1) * Math.cos(rlat2) *
-              Math.sin(difflon/2) * Math.sin(difflon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const difflon = (lon2 - lon1) * (Math.PI / 180);
+    const a = Math.sin(difflat / 2) * Math.sin(difflat / 2) +
+      Math.cos(rlat1) * Math.cos(rlat2) *
+      Math.sin(difflon / 2) * Math.sin(difflon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
 
@@ -138,46 +139,46 @@ const App = (() => {
   function isVeganFriendly(r) {
     if (r.type === 'vegan' || r.veganOption) return true;
     const txt = `${r.dish} ${r.desc}`.toLowerCase();
-    return txt.includes('vegan option') || 
-           txt.includes('can be made vegan') || 
-           txt.includes('vegan available') || 
-           txt.includes('optionally vegan') || 
-           txt.includes('vegan version') ||
-           txt.includes('request vegan');
+    return txt.includes('vegan option') ||
+      txt.includes('can be made vegan') ||
+      txt.includes('vegan available') ||
+      txt.includes('optionally vegan') ||
+      txt.includes('vegan version') ||
+      txt.includes('request vegan');
   }
 
   function isVegetarianFriendly(r) {
     if (r.type === 'vegan' || r.type === 'vegetarian' || r.vegOption) return true;
     const txt = `${r.dish} ${r.desc}`.toLowerCase();
-    return txt.includes('vegetarian option') || 
-           txt.includes('vegetarian available') || 
-           txt.includes('veggie option') || 
-           txt.includes('veggie available') || 
-           txt.includes('veg option') || 
-           txt.includes('can be made veg') ||
-           txt.includes('optionally veg') || 
-           txt.includes('or tofu') || 
-           txt.includes('vegetarian version') ||
-           txt.includes('request veg') ||
-           isVeganFriendly(r);
+    return txt.includes('vegetarian option') ||
+      txt.includes('vegetarian available') ||
+      txt.includes('veggie option') ||
+      txt.includes('veggie available') ||
+      txt.includes('veg option') ||
+      txt.includes('can be made veg') ||
+      txt.includes('optionally veg') ||
+      txt.includes('or tofu') ||
+      txt.includes('vegetarian version') ||
+      txt.includes('request veg') ||
+      isVeganFriendly(r);
   }
 
   function getFiltered() {
     let filtered = getRestaurants().filter(r => {
-      if (activeFilters.has('meat')       && r.type !== 'meat')       return false;
+      if (activeFilters.has('meat') && r.type !== 'meat') return false;
       if (activeFilters.has('vegetarian') && !isVegetarianFriendly(r)) return false;
-      if (activeFilters.has('vegan')      && !isVeganFriendly(r))      return false;
-      if (activeFilters.has('gf')         && !r.glutenFree)            return false;
-      if (activeFilters.has('pie')        && !r.wholePie)              return false;
-      if (activeFilters.has('minors')     && !r.minors)                return false;
-      if (activeFilters.has('21plus')     && r.minors)                 return false;
-      if (activeFilters.has('takeout')    && !r.takeout)               return false;
-      if (activeFilters.has('spicy')      && !r.spicy)                 return false;
+      if (activeFilters.has('vegan') && !isVeganFriendly(r)) return false;
+      if (activeFilters.has('gf') && !r.glutenFree) return false;
+      if (activeFilters.has('pie') && !r.wholePie) return false;
+      if (activeFilters.has('minors') && !r.minors) return false;
+      if (activeFilters.has('21plus') && r.minors) return false;
+      if (activeFilters.has('takeout') && !r.takeout) return false;
+      if (activeFilters.has('spicy') && !r.spicy) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
-            !r.restaurant.toLowerCase().includes(q) &&
-            !r.neighborhood.toLowerCase().includes(q)) return false;
+          !r.restaurant.toLowerCase().includes(q) &&
+          !r.neighborhood.toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -201,7 +202,7 @@ const App = (() => {
 
   function getSaved() {
     let savedItems = getRestaurants().filter(r => saved.has(r.id));
-    
+
     if (activeSort === 'dish') {
       savedItems.sort((a, b) => a.dish.localeCompare(b.dish));
     } else if (activeSort === 'restaurant') {
@@ -254,13 +255,13 @@ const App = (() => {
       } else if (r.type === 'vegan') {
         t.push('<span class="tag tag-vegan">Vegan only</span>');
       }
-      if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
-      if (r.wholePie)              t.push('<span class="tag tag-pie">Whole pie $25</span>');
-      else                         t.push('<span class="tag tag-slice">By the slice</span>');
+      if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
+      if (r.wholePie) t.push('<span class="tag tag-pie">Whole pie $25</span>');
+      else t.push('<span class="tag tag-slice">By the slice</span>');
     } else if (currentWeekId === 'highball-2026') {
-      if (r.minors)                t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
-      else                         t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
-      if (r.takeout)               t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
+      if (r.minors) t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
+      else t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
+      if (r.takeout) t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
     } else if (currentWeekId === 'taco-2026') {
       if (r.type === 'meat') {
         t.push('<span class="tag tag-meat">Meat</span>');
@@ -277,8 +278,8 @@ const App = (() => {
       } else if (r.type === 'vegan') {
         t.push('<span class="tag tag-vegan">Vegan only</span>');
       }
-      if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
-      if (r.spicy)                 t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
+      if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
+      if (r.spicy) t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
     } else if (currentWeekId === 'nacho-2026') {
       if (r.type === 'meat') {
         t.push('<span class="tag tag-meat">Meat</span>');
@@ -295,7 +296,7 @@ const App = (() => {
       } else if (r.type === 'vegan') {
         t.push('<span class="tag tag-vegan">Vegan only</span>');
       }
-      if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
+      if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
     }
     return t.join('');
   }
@@ -307,13 +308,13 @@ const App = (() => {
     const thumb = r.image
       ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy"></div>`
       : `<div class="card-emoji">${esc(r.emoji)}</div>`;
-      
+
     const dist = (activeSort === 'distance' && userLat !== null && userLng !== null)
       ? ` <span style="font-size: 13px; font-weight: normal; color: var(--ink-60);">(${haversineDistance(userLat, userLng, r.lat, r.lng).toFixed(1)} mi)</span>`
       : '';
-      
-    const restaurantHtml = r.restaurantUrl 
-      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` 
+
+    const restaurantHtml = r.restaurantUrl
+      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>`
       : esc(r.restaurant);
 
     return `
@@ -388,7 +389,7 @@ const App = (() => {
   function openDetail(id, fromPopState = false) {
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
-    
+
     const list = getCurrentContextList();
     const idx = list.findIndex(x => x.id === id);
     const prevId = idx > 0 ? list[idx - 1].id : null;
@@ -503,9 +504,9 @@ const App = (() => {
       if (!swipeQueue) buildSwipeQueue();
       renderSwipe();
     }
-    
+
     document.body.classList.toggle('is-landing', name === 'landing');
-    
+
     if (!fromPopState) {
       const url = new URL(window.location);
       if (name === 'browse') {
@@ -548,7 +549,7 @@ const App = (() => {
       el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
       zipContainer.style.display = 'flex';
-      
+
       if (userLat !== null && userLng !== null) {
         renderBrowse();
         renderSaved();
@@ -563,7 +564,7 @@ const App = (() => {
       showToast('⚠️ Please enter a valid 5-digit zip code');
       return;
     }
-    
+
     try {
       const btn = zipInput.nextElementSibling;
       btn.textContent = '...';
@@ -752,7 +753,7 @@ const App = (() => {
         if (rawVal.length <= 10 && !rawVal.startsWith('PDX')) listId = rawVal;
         else fallbackCode = rawVal;
       }
-    } catch(e) {}
+    } catch (e) { }
 
     let ids = null;
     let friendName = `Friend ${friends.length + 1}`;
@@ -765,7 +766,7 @@ const App = (() => {
           ids = data.ids || [];
           if (data.name) friendName = data.name;
         }
-      } catch(e) {
+      } catch (e) {
         console.error("Failed to fetch shared list", e);
       }
     }
@@ -1049,10 +1050,10 @@ const App = (() => {
     saved.delete(r.id);
     passed.delete(r.id);
     saveState();
-    
+
     // Animate card back from off-screen
     renderSwipe();
-    
+
     const cardEl = document.getElementById('swipe-card');
     if (cardEl) {
       cardEl.style.transition = 'none';
@@ -1073,7 +1074,7 @@ const App = (() => {
   function skipSwipe() {
     if (swipeIdx >= swipeQueue.length || swipeAnimating) return;
     const r = swipeQueue[swipeIdx];
-    
+
     // Move to end of queue instead of marking passed/saved
     swipeQueue.push(r);
     swipeIdx++;
@@ -1115,7 +1116,7 @@ const App = (() => {
       startX = e.clientX;
       startY = e.clientY;
       cardEl.style.transition = '';
-      try { cardEl.setPointerCapture(e.pointerId); } catch (err) {}
+      try { cardEl.setPointerCapture(e.pointerId); } catch (err) { }
     });
 
     cardEl.addEventListener('pointermove', e => {
@@ -1178,13 +1179,13 @@ const App = (() => {
     let dark = week.colorDark || '#9E3318';
     let light = week.colorLight || '#F5E6DF';
     let pale = week.colorPale || '#FDF7F4';
-    
+
     if (week.id === 'pizza-2026') {
       dark = '#9E3318';
       light = '#F5E6DF';
       pale = '#FDF7F4';
     }
-    
+
     root.style.setProperty('--pizza', themeColor);
     root.style.setProperty('--pizza-dark', dark);
     root.style.setProperty('--pizza-light', light);
@@ -1194,11 +1195,11 @@ const App = (() => {
   function renderHeader() {
     const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
     if (!week) return;
-    
+
     // Update select switcher value
     const select = document.getElementById('week-switcher');
     if (select) select.value = '';
-    
+
     // Update all footer elements (sidebar on desktop, view footers on mobile/tablet)
     let dataSrcHtml = '';
     if (week.organizer === 'Portland Mercury') {
@@ -1211,7 +1212,7 @@ const App = (() => {
     footers.forEach(el => {
       el.innerHTML = `PDX Food Week<br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>`;
     });
-    
+
     // Update header title
     const titleEl = document.getElementById('header-title');
     if (titleEl) {
@@ -1224,7 +1225,7 @@ const App = (() => {
         titleEl.textContent = week.name;
       }
     }
-    
+
     // Update header meta (dates, price pills, location count)
     const metaEl = document.getElementById('header-meta');
     if (metaEl) {
@@ -1252,7 +1253,7 @@ const App = (() => {
     const filters = WEEK_FILTERS[currentWeekId] || [];
     const container = document.getElementById('browse-filters');
     if (!container) return;
-    
+
     container.innerHTML = filters.map(f => {
       const activeCls = activeFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
@@ -1265,16 +1266,16 @@ const App = (() => {
 
   function switchWeek(weekId) {
     if (!window.FOOD_WEEKS.some(w => w.id === weekId)) return;
-    
+
     currentWeekId = weekId;
     saveState();
-    
+
     // Reset filters and search
     activeFilters.clear();
     searchQuery = '';
     const searchInput = document.getElementById('search-input');
     if (searchInput) searchInput.value = '';
-    
+
     // Reset activeSort and sort chips active states
     activeSort = 'restaurant';
     document.querySelectorAll('#sort-row button.filter-chip').forEach(btn => {
@@ -1284,10 +1285,10 @@ const App = (() => {
         btn.classList.remove('active');
       }
     });
-    
+
     // Reset Swipe queue
     swipeQueue = null;
-    
+
     // Reset Leaflet Map
     if (leafletMap) {
       leafletMap.remove();
@@ -1298,34 +1299,34 @@ const App = (() => {
     selectedMapId = null;
     const mapCard = document.getElementById('map-selected-card');
     if (mapCard) mapCard.innerHTML = '';
-    
+
     // Update theme, header, and filter displays
     const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
     applyWeekTheme(week);
     renderHeader();
     updateFilterDisplay();
-    
+
     const url = new URL(window.location);
     url.searchParams.set('week', weekId);
     url.searchParams.delete('tab');
     history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
     document.body.classList.remove('is-landing');
-    
+
     switchTab('browse');
     renderAll();
-    
+
     showToast(`Switched to ${week.name}!`);
   }
 
   function renderLanding() {
     const grid = document.getElementById('landing-grid');
     if (!grid) return;
-    
+
     // Determine the next upcoming event
     const now = new Date('2026-06-08T00:00:00Z'); // Using today's date context
     let nextWeek = null;
     let minDiff = Infinity;
-    
+
     window.FOOD_WEEKS.forEach(w => {
       if (w.startDate) {
         const start = new Date(w.startDate);
@@ -1372,7 +1373,7 @@ const App = (() => {
       } else if (selectedDish) {
         closeDetail(true);
       }
-      
+
       const tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
       if (activeTab !== tab && currentWeekId) {
         switchTab(tab, true);
