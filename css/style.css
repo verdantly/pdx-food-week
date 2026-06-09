@@ -1317,6 +1317,7 @@ body.is-landing .bottom-nav { display: none !important; }
     border-left-color: var(--pizza);
     color: #fff;
     font-weight: 500;
+    border-radius: 2px;
   }
   .nav-tab .badge-dot {
     top: 50%;

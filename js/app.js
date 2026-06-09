@@ -16,8 +16,12 @@ const firebaseConfig = {
 // Initialize Firebase only if the global object exists
 let db = null;
 if (window.firebase) {
-  firebase.initializeApp(firebaseConfig);
-  db = firebase.firestore();
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+  } catch (e) {
+    console.error("Firebase initialization failed:", e);
+  }
 }
 
 const App = (() => {
