@@ -636,17 +636,16 @@ const App = (() => {
 
   // ── Render: Friends ────────────────────────────────────────
   function renderFriends() {
-    const code = encodeShareCode();
-    const codeBox = document.getElementById('share-code-box');
     const copyBtn = document.getElementById('copy-btn');
-
-    if (code) {
-      codeBox.innerHTML = `<code>${code}</code>`;
-      copyBtn.disabled = false;
-      copyBtn.textContent = 'Copy my code';
-    } else {
-      codeBox.innerHTML = `<span class="code-placeholder">Save some spots first…</span>`;
-      copyBtn.disabled = true;
+    if (copyBtn) {
+      copyBtn.disabled = (saved.size === 0);
+    }
+    
+    if (saved.size === 0) {
+      const resultsDiv = document.getElementById('share-results');
+      if (resultsDiv) {
+        resultsDiv.style.display = 'none';
+      }
     }
 
     // Friends list
@@ -726,52 +725,108 @@ const App = (() => {
       if (firebaseSuccess) {
         url = `${baseUrl}?week=${currentWeekId}&list=${shortId}&fallback=${encodedBackup}`;
       } else {
-        // If Firebase fails, just use the fallback parameter so the link still works!
         url = `${baseUrl}?week=${currentWeekId}&fallback=${encodedBackup}`;
       }
 
-      // Update the old code display so the user can use it manually (do this before copying in case copying throws!)
-      const codeDisplay = document.getElementById('manual-code-display');
-      if (codeDisplay) {
-        codeDisplay.textContent = encodedBackup;
-        codeDisplay.parentElement.style.display = 'block';
+      // Populate displays
+      const magicDisplay = document.getElementById('magic-link-display');
+      if (magicDisplay) {
+        magicDisplay.value = url;
       }
 
+      const codeDisplay = document.getElementById('manual-code-display');
+      if (codeDisplay) {
+        codeDisplay.value = encodedBackup;
+      }
+
+      // Reveal results section
+      const resultsDiv = document.getElementById('share-results');
+      if (resultsDiv) {
+        resultsDiv.style.display = 'flex';
+      }
+
+      let copiedSuccessfully = false;
       try {
         if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(url).catch(fallbackCopy);
+          await navigator.clipboard.writeText(url);
+          copiedSuccessfully = true;
         } else {
-          fallbackCopy();
-        }
-
-        function fallbackCopy() {
           const ta = document.createElement('textarea');
           ta.value = url;
           ta.style.position = 'fixed';
           ta.style.opacity = '0';
           document.body.appendChild(ta);
           ta.select();
-          try {
-            document.execCommand('copy');
-          } catch (e) {
-            console.error("Fallback copy failed", e);
-          }
+          const successful = document.execCommand('copy');
           document.body.removeChild(ta);
+          if (successful) copiedSuccessfully = true;
         }
+      } catch (e) {
+        console.warn("Auto-copy failed:", e);
+      }
 
-        btn.textContent = 'Link Copied!';
+      if (copiedSuccessfully) {
+        btn.textContent = 'Generated & Copied!';
         btn.classList.add('copied');
         showToast('✅ Magic Link Copied!');
-      } catch (e) {
-        console.error("Clipboard API completely failed:", e);
-        showToast('⚠️ Error copying link to clipboard. Please copy it manually below!');
+      } else {
+        btn.textContent = 'Generated!';
+        showToast('✅ Magic Link generated! Copy it below.');
       }
-      
+    } catch (err) {
+      console.error("Error in generateShareLink:", err);
+      showToast('⚠️ Error generating share details');
+    } finally {
       setTimeout(() => {
-        btn.textContent = 'Copy Magic Link';
+        btn.textContent = 'Generate Magic Link';
         btn.classList.remove('copied');
         btn.disabled = false;
       }, 2000);
+    }
+  }
+
+  async function copyTextFromElement(inputId, btnId) {
+    const input = document.getElementById(inputId);
+    const btn = document.getElementById(btnId);
+    if (!input || !btn) return;
+
+    const text = input.value;
+    if (!text) return;
+
+    try {
+      let copied = false;
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (successful) copied = true;
+      }
+
+      if (copied) {
+        const origText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        showToast('✅ Copied to clipboard!');
+
+        setTimeout(() => {
+          btn.textContent = origText;
+          btn.classList.remove('copied');
+        }, 2000);
+      } else {
+        showToast('⚠️ Copy failed, please copy manually');
+      }
+    } catch (e) {
+      console.error("Failed to copy", e);
+      showToast('⚠️ Copy failed, please copy manually');
+    }
   }
 
   // ── Friends: Add friend ────────────────────────────────────
@@ -1496,7 +1551,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

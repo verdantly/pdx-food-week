@@ -221,10 +221,27 @@
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <input id="my-name-input" type="text" placeholder="Your Name (Optional)" autocomplete="off" spellcheck="false" style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
           <button class="btn btn-primary" id="copy-btn" onclick="App.generateShareLink()" style="margin-bottom: 0;">
-            Copy Magic Link
+            Generate Magic Link
           </button>
-          <div style="display: none; margin-top: 8px; font-size: 13px; text-align: center; color: rgba(255,255,255,0.7);">
-            Manual Code: <code id="manual-code-display" style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; user-select: all;"></code>
+          
+          <div id="share-results" style="display: none; margin-top: 16px; flex-direction: column; gap: 14px;">
+            <div>
+              <div class="paste-label">Magic Link</div>
+              <div class="paste-row">
+                <input id="magic-link-display" type="text" readonly onclick="this.select()" style="font-family: var(--font-body); font-size: 13px;" />
+                <button id="copy-magic-btn" class="btn" onclick="App.copyTextFromElement('magic-link-display', 'copy-magic-btn')">Copy</button>
+              </div>
+              <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">Tap to copy. Friends open this to automatically import your list.</p>
+            </div>
+            
+            <div>
+              <div class="paste-label">Backup Code (Bypasses Cloud)</div>
+              <div class="paste-row">
+                <input id="manual-code-display" type="text" readonly onclick="this.select()" />
+                <button id="copy-manual-btn" class="btn" onclick="App.copyTextFromElement('manual-code-display', 'copy-manual-btn')">Copy</button>
+              </div>
+              <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">A static copy of your list. Friends can paste this in the field below.</p>
+            </div>
           </div>
         </div>
       </div>
