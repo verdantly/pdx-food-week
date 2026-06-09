@@ -216,6 +216,7 @@ body.is-landing .bottom-nav { display: none !important; }
   transition: color var(--transition), border-color var(--transition), background var(--transition);
   position: relative;
   white-space: nowrap;
+}
 .nav-tab.has-items::after {
   content: attr(data-count);
   position: relative;
