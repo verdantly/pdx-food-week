@@ -535,7 +535,8 @@ const App = (() => {
   // ── Sort ──────────────────────────────────────────────────
   function setSort(s, el) {
     activeSort = s;
-    el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    const sortSection = document.getElementById('sort-section');
+    sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     document.getElementById('zip-code-container').style.display = 'none';
     renderBrowse();
@@ -544,12 +545,13 @@ const App = (() => {
 
   function toggleDistanceSort(el) {
     const zipContainer = document.getElementById('zip-code-container');
+    const sortSection = document.getElementById('sort-section');
     if (activeSort === 'distance') {
       // Revert to default
-      setSort('restaurant', el.parentElement.querySelector('button.filter-chip'));
+      setSort('restaurant', sortSection.querySelector('button.filter-chip'));
     } else {
       activeSort = 'distance';
-      el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       el.classList.add('active');
       zipContainer.style.display = 'flex';
 
