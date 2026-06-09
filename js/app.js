@@ -1563,8 +1563,8 @@ const App = (() => {
       switchTab(initialTab, true);
     } else {
       switchTab('browse', true);
-      renderAll();
     }
+    renderAll();
 
     // Deep linking: Open detail sheet if dish ID in URL
     const initialDishId = urlParams.get('dish');
