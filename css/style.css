@@ -1111,6 +1111,13 @@ body.is-landing .bottom-nav { display: none !important; }
     gap: 12px;
     flex-direction: unset;
   }
+  
+  .landing-grid {
+    padding: 20px 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
   /* Stack card contents vertically in grid */
   .dish-card {
@@ -1351,6 +1358,10 @@ body.is-landing .bottom-nav { display: none !important; }
 
   #overlap-container.cards-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .landing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 1200px;
   }
 }
 

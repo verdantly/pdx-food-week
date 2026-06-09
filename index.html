@@ -37,7 +37,7 @@
   <!-- ── Header ── -->
   <header class="app-header">
     <div class="header-top">
-      <div class="app-wordmark">PDX Food Week</div>
+      <a href="?" class="app-wordmark" style="text-decoration: none; color: inherit;">PDX Food Week</a>
       <select class="week-switcher-select" id="week-switcher" onchange="App.switchWeek(this.value)" aria-label="Switch food week">
         <option value="" disabled>Select food week</option>
         <option value="nacho-2026" selected>🧀 Nacho Week</option>
@@ -101,6 +101,11 @@
     </div>
     <div class="landing-grid" id="landing-grid">
       <!-- Populated dynamically -->
+    </div>
+    <div class="view-footer">
+      PDX Food Week<br>
+      Not affiliated with event organizers.<br>
+      Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>
     </div>
   </section>
 
