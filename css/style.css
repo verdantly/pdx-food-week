@@ -603,6 +603,48 @@ body {
   transition: opacity 0.25s ease;
 }
 .detail-overlay.open { opacity: 1; pointer-events: all; }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 10;
+  transition: all var(--transition);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.lightbox-nav:hover:not(:disabled) {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-50%) scale(1.05);
+}
+.lightbox-nav:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+.lightbox-nav.prev { left: 16px; }
+.lightbox-nav.next { right: 16px; }
+
+@media (max-width: 768px) {
+  .lightbox-nav { display: none; }
+}
+@media (min-width: 769px) {
+  .sheet-nav { display: none !important; }
+  /* on desktop, let's bring them a bit closer to the card instead of extreme edges if the screen is huge */
+  .lightbox-nav.prev { left: calc(50% - 320px); }
+  .lightbox-nav.next { right: calc(50% - 320px); }
+}
+
 .detail-sheet {
   background: var(--card-bg);
   border-radius: 20px 20px 0 0;

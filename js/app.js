@@ -347,6 +347,17 @@ const App = (() => {
     const prevId = idx > 0 ? list[idx - 1].id : null;
     const nextId = idx !== -1 && idx < list.length - 1 ? list[idx + 1].id : null;
 
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    if (prevBtn) {
+      prevBtn.onclick = prevId ? (e) => { e.stopPropagation(); App.openDetail(prevId); } : null;
+      prevBtn.disabled = !prevId;
+    }
+    if (nextBtn) {
+      nextBtn.onclick = nextId ? (e) => { e.stopPropagation(); App.openDetail(nextId); } : null;
+      nextBtn.disabled = !nextId;
+    }
+
     selectedDish = r;
     const isSaved = saved.has(r.id);
     const overlay = document.getElementById('detail-overlay');
