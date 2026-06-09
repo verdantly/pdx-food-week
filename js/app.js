@@ -357,6 +357,7 @@ const App = (() => {
       ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" alt=""></div>`
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
     document.getElementById('detail-sheet-content').innerHTML = `
+      <button class="sheet-close" onclick="App.closeDetail()" aria-label="Close">✕</button>
       <div class="sheet-handle"></div>
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}</div>

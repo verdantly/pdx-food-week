@@ -733,6 +733,7 @@ body.is-landing .bottom-nav { display: none !important; }
 }
 
 .detail-sheet {
+  position: relative;
   background: var(--card-bg);
   border-radius: 20px 20px 0 0;
   padding: 0 20px 40px;
@@ -741,6 +742,27 @@ body.is-landing .bottom-nav { display: none !important; }
   transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
 }
 .detail-overlay.open .detail-sheet { transform: translateY(0); }
+
+.sheet-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0,0,0,0.05);
+  border: none;
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+.sheet-close:hover {
+  background: rgba(0,0,0,0.1);
+}
 
 .sheet-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 12px auto 20px; }
 .sheet-emoji-hero { font-size: 68px; text-align: center; margin-bottom: 16px; display: block; line-height: 1; }
