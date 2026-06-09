@@ -155,13 +155,12 @@ window.FOOD_WEEKS.push({
   id: "nacho-2026",
   name: "Nacho Week 2026",
   organizer: "Portland Mercury",
-  dates: "October 12–17, 2026",
-  priceSlice: "$8",
-  pricePie: "$8",
-  color: "#D97B29",
-  emoji: "🧀",
-  totalLocations: ${entries.length},
-  url: "${WEEK_URL}",
+    dates: "June 22–28, 2026",
+    pricePills: ["$10 dish"],
+    color: "#D97B29",
+    emoji: "🧀",
+    totalLocations: ${entries.length},
+    url: "${WEEK_URL}",
 });\n`;
   const restBlock = `window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
