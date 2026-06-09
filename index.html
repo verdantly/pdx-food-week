@@ -214,22 +214,24 @@
     <div class="share-panel">
       <div class="share-section">
         <h3 style="margin-bottom: 6px;">Share your list</h3>
-        <p style="margin-bottom: 16px; font-size: 14px; color: rgba(255,255,255,0.8);">Copy your code and send it to friends so they can see which spots you want to try.</p>
-        <div class="code-box" id="share-code-box">
-          <span class="code-placeholder">Save some spots first…</span>
+        <p style="margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.8);">Generate a magic link to send to friends so they can easily import your saved spots.</p>
+        <p style="margin-bottom: 16px; font-size: 12px; color: var(--ink-60);">
+          <em>Privacy Note: Your shared list is anonymous and contains no personal information. Providing a name is entirely optional.</em>
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input id="my-name-input" type="text" placeholder="Your Name (Optional)" autocomplete="off" spellcheck="false" style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
+          <button class="btn btn-primary" id="copy-btn" onclick="App.generateShareLink()" style="margin-bottom: 0;">
+            Copy Magic Link
+          </button>
         </div>
-        <button class="btn btn-primary" id="copy-btn" onclick="App.copyCode()" disabled style="margin-bottom: 0;">
-          Copy my code
-        </button>
       </div>
       <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 24px 0;">
       <div class="share-section">
         <h3 style="margin-bottom: 6px;">Add a friend</h3>
-        <p style="margin-bottom: 16px; font-size: 14px; color: rgba(255,255,255,0.8);">Paste your friend's code below to compare your saved spots.</p>
+        <p style="margin-bottom: 16px; font-size: 14px; color: rgba(255,255,255,0.8);">If your friend sends you a Magic Link, just tap it to import! Or, paste the link here.</p>
         <div style="display: flex; flex-direction: column; gap: 8px;">
-          <input id="friend-name-input" type="text" placeholder="Friend's Name (Optional)" autocomplete="off" spellcheck="false" style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
           <div class="paste-row">
-            <input id="friend-code-input" type="text" placeholder="PDX26-…" autocomplete="off" spellcheck="false" />
+            <input id="friend-code-input" type="text" placeholder="Paste Magic Link or Code" autocomplete="off" spellcheck="false" />
             <button class="btn" onclick="App.addFriend()">Add</button>
           </div>
         </div>
@@ -298,6 +300,9 @@
 <script src="data/pizzaweek2026.js"></script>
 <script src="data/highballweek2026.js"></script>
 <script src="data/tacoweek2026.js"></script>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 <script src="js/app.js"></script>
 
 </body>

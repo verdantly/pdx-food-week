@@ -1,6 +1,24 @@
 /* ── PDX Food Week App ── */
 'use strict';
 
+// ── Firebase Configuration ───────────────────────────────────
+// TODO: Replace with your actual Firebase configuration from the console
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-app.firebaseapp.com",
+  projectId: "your-app",
+  storageBucket: "your-app.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef123456"
+};
+
+// Initialize Firebase only if the global object exists
+let db = null;
+if (window.firebase) {
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+}
+
 const App = (() => {
   // ── State ──────────────────────────────────────────────────
   let activeTab = 'browse';
@@ -662,46 +680,110 @@ const App = (() => {
     }
   }
 
-  // ── Friends: Copy code ─────────────────────────────────────
-  function copyCode() {
-    const code = encodeShareCode();
-    if (!code) return;
-    navigator.clipboard.writeText(code).catch(() => {
-      // fallback
-      const ta = document.createElement('textarea');
-      ta.value = code;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-    });
+  // ── Friends: Generate Magic Link ───────────────────────────
+  async function generateShareLink() {
+    if (saved.size === 0) return;
     const btn = document.getElementById('copy-btn');
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => {
-      btn.textContent = 'Copy my code';
-      btn.classList.remove('copied');
-    }, 2000);
+    const nameInput = document.getElementById('my-name-input');
+    const myName = nameInput ? nameInput.value.trim() : '';
+
+    btn.textContent = 'Generating...';
+    btn.disabled = true;
+
+    try {
+      const shortId = Math.random().toString(36).substring(2, 7);
+      if (db) {
+        await db.collection('shared_lists').doc(shortId).set({
+          ids: Array.from(saved),
+          name: myName,
+          weekId: currentWeekId,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } else {
+        // Fallback if Firebase isn't configured
+        console.warn("Firebase not configured, falling back to local encoding");
+      }
+
+      const encodedBackup = encodeShareCode();
+      const baseUrl = window.location.origin + window.location.pathname;
+      const url = `${baseUrl}?week=${currentWeekId}&list=${shortId}&fallback=${encodedBackup}`;
+
+      await navigator.clipboard.writeText(url).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      });
+
+      btn.textContent = 'Link Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy Magic Link';
+        btn.classList.remove('copied');
+        btn.disabled = false;
+      }, 2000);
+    } catch (e) {
+      console.error(e);
+      showToast('⚠️ Error generating link');
+      btn.textContent = 'Copy Magic Link';
+      btn.disabled = false;
+    }
   }
 
   // ── Friends: Add friend ────────────────────────────────────
-  function addFriend() {
+  async function addFriend() {
     const input = document.getElementById('friend-code-input');
-    const nameInput = document.getElementById('friend-name-input');
-    const code = input.value.trim();
-    if (!code) return;
-    const ids = decodeShareCode(code);
+    const nameInput = document.getElementById('my-name-input'); // not the friend's name, but keeping it generic or using a prompt
+    const rawVal = input.value.trim();
+    if (!rawVal) return;
+
+    // Check if it's a URL
+    let listId = null;
+    let fallbackCode = null;
+    try {
+      if (rawVal.startsWith('http')) {
+        const urlParams = new URL(rawVal).searchParams;
+        listId = urlParams.get('list');
+        fallbackCode = urlParams.get('fallback');
+      } else {
+        // If it's short, it's a list ID. Otherwise it's a raw code.
+        if (rawVal.length <= 10 && !rawVal.startsWith('PDX')) listId = rawVal;
+        else fallbackCode = rawVal;
+      }
+    } catch(e) {}
+
+    let ids = null;
+    let friendName = `Friend ${friends.length + 1}`;
+
+    if (listId && db) {
+      try {
+        const doc = await db.collection('shared_lists').doc(listId).get();
+        if (doc.exists) {
+          const data = doc.data();
+          ids = data.ids || [];
+          if (data.name) friendName = data.name;
+        }
+      } catch(e) {
+        console.error("Failed to fetch shared list", e);
+      }
+    }
+
+    if (!ids && fallbackCode) {
+      ids = decodeShareCode(fallbackCode);
+    }
+
     if (!ids) {
-      showToast('⚠️ Invalid code — check with your friend');
+      showToast('⚠️ Invalid link or code');
       return;
     }
-    const name = (nameInput && nameInput.value.trim() !== '') ? nameInput.value.trim() : `Friend ${friends.length + 1}`;
-    friends.push({ name, ids, code });
+
+    friends.push({ name: friendName, ids, code: fallbackCode || listId });
     saveState();
     input.value = '';
-    if (nameInput) nameInput.value = '';
     renderFriends();
-    showToast(`Added ${name}!`);
+    showToast(`Added ${friendName}!`);
   }
 
   // ── Friends: Rename friend ─────────────────────────────────
@@ -1307,6 +1389,21 @@ const App = (() => {
       searchQuery = e.target.value;
       renderBrowse();
     });
+
+    // Handle auto-import from URL Magic Link
+    const shareListId = urlParams.get('list');
+    const shareFallback = urlParams.get('fallback');
+    if (shareListId || shareFallback) {
+      setTimeout(async () => {
+        // Mocking an input event for addFriend
+        const input = document.getElementById('friend-code-input');
+        input.value = window.location.href;
+        await addFriend();
+        // Clean URL without reloading to avoid multiple imports
+        window.history.replaceState({}, document.title, window.location.pathname + '?week=' + currentWeekId);
+        if (activeTab !== 'friends') switchTab('friends');
+      }, 500);
+    }
 
     // Wire up friend code input (Enter key)
     document.getElementById('friend-code-input').addEventListener('keydown', e => {
