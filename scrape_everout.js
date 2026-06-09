@@ -182,6 +182,8 @@ function parseDishPage(html, url) {
     : hasVegan ? 'vegan'
     : hasVeg ? 'vegetarian'
     : 'meat';
+  const vegOption = hasMeat && hasVeg;
+  const veganOption = hasVegan && (hasMeat || hasVeg);
 
   const sliceOrPie = (qa['By the Slice or Whole Pie?'] || '').toLowerCase();
   const wholePie = sliceOrPie.includes('whole') || sliceOrPie.includes('pie');
@@ -212,6 +214,8 @@ function parseDishPage(html, url) {
     address: fullAddress || streetAddress,
     streetAddress,
     type,
+    vegOption,
+    veganOption,
     glutenFree: yesno(qa['Gluten Free?']),
     wholePie,
     minors,

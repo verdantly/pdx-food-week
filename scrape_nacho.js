@@ -104,9 +104,13 @@ function parseDishPage(html, url) {
   desc = decodeHTML(desc);
 
   const typeRaw = (qa['Meat or Vegetarian?'] || '').toLowerCase();
+  const hasMeat = /\bmeat\b/.test(typeRaw);
   const hasVegan = /\bvegan\b/.test(typeRaw);
   const hasVeg = /\bvegetarian\b/.test(typeRaw);
-  const type = hasVegan ? 'vegan' : hasVeg ? 'vegetarian' : 'meat';
+  
+  const type = hasMeat ? 'meat' : hasVegan ? 'vegan' : hasVeg ? 'vegetarian' : 'meat';
+  const vegOption = hasMeat && hasVeg;
+  const veganOption = hasVegan && (hasMeat || hasVeg);
   
   const glutenFree = /^yes\b/i.test((qa['Gluten Free?'] || '').trim());
   const takeout = /^yes\b/i.test((qa['Takeout?'] || '').trim());
@@ -124,7 +128,7 @@ function parseDishPage(html, url) {
     : /shrimp|seafood/.test(both) ? '🦐'
     : '🌮';
 
-  return { dish, restaurant, neighborhood, address, type, glutenFree, takeout, minors, desc: desc.replace(/\s+/g, ' '), emoji, image, url };
+  return { dish, restaurant, neighborhood, address, type, vegOption, veganOption, glutenFree, takeout, minors, desc: desc.replace(/\s+/g, ' '), emoji, image, url };
 }
 
 async function main() {
