@@ -1394,10 +1394,18 @@ const App = (() => {
     const container = document.getElementById('browse-filters');
     if (!container) return;
 
-    container.innerHTML = filters.map(f => {
+    if (filters.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    const labelHTML = `<span style="font-size: 12px; color: var(--ink-60); align-self: center; font-weight: 500; margin-right: 4px;">Filter:</span>`;
+    const chipsHTML = filters.map(f => {
       const activeCls = activeFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
     }).join('');
+
+    container.innerHTML = labelHTML + chipsHTML;
   }
 
   function updateFilterDisplay() {
