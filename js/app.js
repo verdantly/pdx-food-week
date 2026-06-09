@@ -427,7 +427,7 @@ const App = (() => {
   }
 
   // ── Tab switching ──────────────────────────────────────────
-  function switchTab(name) {
+  function switchTab(name, fromPopState = false) {
     activeTab = name;
     document.querySelectorAll('.nav-tab').forEach(el => {
       el.classList.toggle('active', el.dataset.tab === name);
@@ -444,6 +444,16 @@ const App = (() => {
     if (name === 'swipe') {
       if (!swipeQueue) buildSwipeQueue();
       renderSwipe();
+    }
+    
+    if (!fromPopState) {
+      const url = new URL(window.location);
+      if (name === 'browse') {
+        url.searchParams.delete('tab');
+      } else {
+        url.searchParams.set('tab', name);
+      }
+      history.pushState({ ...history.state, tab: name }, '', url);
     }
   }
 
@@ -1121,12 +1131,17 @@ const App = (() => {
   function init() {
     loadState();
 
-    // Wire up popstate to handle browser back button closing detail sheet
+    // Wire up popstate to handle browser back button closing detail sheet and tab navigation
     window.addEventListener('popstate', e => {
       if (e.state && e.state.detailDishId !== undefined) {
         openDetail(e.state.detailDishId, true);
       } else if (selectedDish) {
         closeDetail(true);
+      }
+      
+      const tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
+      if (activeTab !== tab) {
+        switchTab(tab, true);
       }
     });
 
@@ -1163,10 +1178,16 @@ const App = (() => {
     renderHeader();
     updateFilterDisplay();
 
-    renderAll();
+    // Set initial tab from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTab = urlParams.get('tab');
+    if (initialTab && ['browse', 'swipe', 'saved', 'friends', 'map'].includes(initialTab)) {
+      switchTab(initialTab, true);
+    } else {
+      renderAll();
+    }
 
     // Deep linking: Open detail sheet if dish ID in URL
-    const urlParams = new URLSearchParams(window.location.search);
     const initialDishId = urlParams.get('dish');
     if (initialDishId) {
       setTimeout(() => openDetail(parseInt(initialDishId, 10), true), 100);
