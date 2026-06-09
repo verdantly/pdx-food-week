@@ -50,6 +50,18 @@ async function geocode(address) {
   }
 }
 
+function decodeHTML(str) {
+  if (!str) return '';
+  return str
+    .replace(/&#x27;/ig, "'")
+    .replace(/&#39;/ig, "'")
+    .replace(/&amp;/ig, '&')
+    .replace(/&quot;/ig, '"')
+    .replace(/&lt;/ig, '<')
+    .replace(/&gt;/ig, '>')
+    .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+}
+
 function parseDishPage(html, url) {
   const qa = {};
   const regex = /<div class="question-text[^>]*>([\s\S]*?)<\/div>\s*<div class="answer-text[^>]*>([\s\S]*?)<\/div>/gi;
@@ -61,13 +73,13 @@ function parseDishPage(html, url) {
   }
 
   const dishMatch = html.match(/<h1 class="mb-0">([\s\S]*?)<\/h1>/i);
-  const dish = dishMatch ? dishMatch[1].trim() : null;
+  const dish = dishMatch ? decodeHTML(dishMatch[1].trim()) : null;
 
   const venueMatch = html.match(/<a href="[^"]*\/locations\/[a-z0-9-]+\/l\d+\/">([\s\S]*?)<\/a>/i);
-  const restaurant = venueMatch ? venueMatch[1].trim() : null;
+  const restaurant = venueMatch ? decodeHTML(venueMatch[1].trim()) : null;
 
   const neighborhoodMatch = html.match(/<span class="text-muted">([\s\S]*?)<\/span>/i);
-  const neighborhood = neighborhoodMatch ? neighborhoodMatch[1].trim().replace(/^\(|\)$/g, '') : '';
+  const neighborhood = neighborhoodMatch ? decodeHTML(neighborhoodMatch[1].trim().replace(/^\(|\)$/g, '')) : '';
 
   let address = '';
   const iframeMatch = html.match(/src="https:\/\/www.google.com\/maps\/embed\/v1\/place\?key=[^&]*&amp;q=([^"]*)"/i);
@@ -89,6 +101,7 @@ function parseDishPage(html, url) {
     const descMatch = html.match(/<meta property="og:description" content="([^"]+)"/i);
     desc = descMatch ? descMatch[1] : '';
   }
+  desc = decodeHTML(desc);
 
   const typeRaw = (qa['Meat or Vegetarian?'] || '').toLowerCase();
   const hasVegan = /\bvegan\b/.test(typeRaw);
@@ -111,7 +124,7 @@ function parseDishPage(html, url) {
     : /shrimp|seafood/.test(both) ? '🦐'
     : '🌮';
 
-  return { dish, restaurant, neighborhood, address, type, glutenFree, takeout, minors, desc: desc.replace(/\s+/g, ' ').slice(0, 200), emoji, image, url };
+  return { dish, restaurant, neighborhood, address, type, glutenFree, takeout, minors, desc: desc.replace(/\s+/g, ' '), emoji, image, url };
 }
 
 async function main() {
