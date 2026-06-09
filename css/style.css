@@ -759,7 +759,8 @@ body {
 .swipe-card-body {
   padding: 14px 16px 16px;
   background: var(--card-bg);
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  overflow-y: auto;
 }
 .swipe-card-dish {
   font-family: var(--font-display);
@@ -784,10 +785,6 @@ body {
   line-height: 1.45;
   color: var(--ink);
   margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .swipe-card-tags {
   display: flex;

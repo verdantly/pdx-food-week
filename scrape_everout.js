@@ -168,7 +168,7 @@ function parseDishPage(html, url) {
 
   const whatsOnIt = qa["What's On It..."] || qa['What’s On It...'] || '';
   const whatTheySay = qa['What They Say...'] || '';
-  const desc = decodeHTML((whatsOnIt || whatTheySay || descText).slice(0, 260));
+  const desc = decodeHTML((whatsOnIt || whatTheySay || descText));
 
   // EverOut's "Meat or Vegetarian?" is multi-select: e.g. "Meat, Vegetarian"
   // means a meat pizza with a veg version available. Primary type prefers
