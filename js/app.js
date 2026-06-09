@@ -4,8 +4,8 @@
 const App = (() => {
   // ── State ──────────────────────────────────────────────────
   let activeTab = 'browse';
-  let activeFilter = 'all';
-  let activeSort = 'default';
+  let activeFilters = new Set();
+  let activeSort = 'restaurant';
   let searchQuery = '';
   let saved = new Set();
   let passed = new Set();
@@ -25,7 +25,6 @@ const App = (() => {
 
   const WEEK_FILTERS = {
     'pizza-2026': [
-      { id: 'all', label: 'All' },
       { id: 'meat', label: '🥩 Meat' },
       { id: 'vegetarian', label: '🌿 Vegetarian' },
       { id: 'vegan', label: '🌱 Vegan' },
@@ -34,13 +33,11 @@ const App = (() => {
       { id: 'minors', label: '👨‍👩‍👧 Family OK' }
     ],
     'highball-2026': [
-      { id: 'all', label: 'All' },
       { id: 'minors', label: '👨‍👩‍👧 Minors OK' },
       { id: '21plus', label: '🥃 21+ Only' },
       { id: 'takeout', label: '🥡 Takeout OK' }
     ],
     'taco-2026': [
-      { id: 'all', label: 'All' },
       { id: 'meat', label: '🥩 Meat' },
       { id: 'vegetarian', label: '🌿 Vegetarian' },
       { id: 'vegan', label: '🌱 Vegan' },
@@ -48,7 +45,6 @@ const App = (() => {
       { id: 'spicy', label: '🌶️ Spicy' }
     ],
     'nacho-2026': [
-      { id: 'all', label: 'All' },
       { id: 'meat', label: '🥩 Meat' },
       { id: 'vegetarian', label: '🌿 Vegetarian' },
       { id: 'vegan', label: '🌱 Vegan' },
@@ -136,15 +132,15 @@ const App = (() => {
 
   function getFiltered() {
     let filtered = getRestaurants().filter(r => {
-      if (activeFilter === 'meat'       && r.type !== 'meat')       return false;
-      if (activeFilter === 'vegetarian' && !isVegetarianFriendly(r)) return false;
-      if (activeFilter === 'vegan'      && !isVeganFriendly(r))      return false;
-      if (activeFilter === 'gf'         && !r.glutenFree)            return false;
-      if (activeFilter === 'pie'        && !r.wholePie)              return false;
-      if (activeFilter === 'minors'     && !r.minors)                return false;
-      if (activeFilter === '21plus'     && r.minors)                 return false;
-      if (activeFilter === 'takeout'    && !r.takeout)               return false;
-      if (activeFilter === 'spicy'      && !r.spicy)                 return false;
+      if (activeFilters.has('meat')       && r.type !== 'meat')       return false;
+      if (activeFilters.has('vegetarian') && !isVegetarianFriendly(r)) return false;
+      if (activeFilters.has('vegan')      && !isVeganFriendly(r))      return false;
+      if (activeFilters.has('gf')         && !r.glutenFree)            return false;
+      if (activeFilters.has('pie')        && !r.wholePie)              return false;
+      if (activeFilters.has('minors')     && !r.minors)                return false;
+      if (activeFilters.has('21plus')     && r.minors)                 return false;
+      if (activeFilters.has('takeout')    && !r.takeout)               return false;
+      if (activeFilters.has('spicy')      && !r.spicy)                 return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
@@ -456,10 +452,13 @@ const App = (() => {
   }
 
   // ── Filter ────────────────────────────────────────────────
-  function setFilter(f, el) {
-    activeFilter = f;
-    el.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
+  function toggleFilter(f) {
+    if (activeFilters.has(f)) {
+      activeFilters.delete(f);
+    } else {
+      activeFilters.add(f);
+    }
+    renderFilters();
     renderBrowse();
   }
 
@@ -1065,8 +1064,8 @@ const App = (() => {
     if (!container) return;
     
     container.innerHTML = filters.map(f => {
-      const activeCls = activeFilter === f.id ? 'active' : '';
-      return `<button class="filter-chip ${activeCls}" onclick="App.setFilter('${f.id}', this)">${esc(f.label)}</button>`;
+      const activeCls = activeFilters.has(f.id) ? 'active' : '';
+      return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
     }).join('');
   }
 
@@ -1081,15 +1080,15 @@ const App = (() => {
     saveState();
     
     // Reset filters and search
-    activeFilter = 'all';
+    activeFilters.clear();
     searchQuery = '';
     const searchInput = document.getElementById('search-input');
     if (searchInput) searchInput.value = '';
     
     // Reset activeSort and sort chips active states
-    activeSort = 'default';
+    activeSort = 'restaurant';
     document.querySelectorAll('#sort-row button.filter-chip').forEach(btn => {
-      if (btn.textContent.includes('Default')) {
+      if (btn.textContent.includes('Restaurant')) {
         btn.classList.add('active');
       } else {
         btn.classList.remove('active');
@@ -1179,7 +1178,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);
