@@ -730,37 +730,48 @@ const App = (() => {
         url = `${baseUrl}?week=${currentWeekId}&fallback=${encodedBackup}`;
       }
 
-      await navigator.clipboard.writeText(url).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = url;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      });
-
-      // Update the old code display so the user can use it manually
+      // Update the old code display so the user can use it manually (do this before copying in case copying throws!)
       const codeDisplay = document.getElementById('manual-code-display');
       if (codeDisplay) {
         codeDisplay.textContent = encodedBackup;
         codeDisplay.parentElement.style.display = 'block';
       }
 
-      btn.textContent = 'Link Copied!';
-      btn.classList.add('copied');
-      showToast('✅ Magic Link Copied!');
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(url).catch(fallbackCopy);
+        } else {
+          fallbackCopy();
+        }
+
+        function fallbackCopy() {
+          const ta = document.createElement('textarea');
+          ta.value = url;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+          } catch (e) {
+            console.error("Fallback copy failed", e);
+          }
+          document.body.removeChild(ta);
+        }
+
+        btn.textContent = 'Link Copied!';
+        btn.classList.add('copied');
+        showToast('✅ Magic Link Copied!');
+      } catch (e) {
+        console.error("Clipboard API completely failed:", e);
+        showToast('⚠️ Error copying link to clipboard. Please copy it manually below!');
+      }
       
       setTimeout(() => {
         btn.textContent = 'Copy Magic Link';
         btn.classList.remove('copied');
         btn.disabled = false;
       }, 2000);
-    } catch (e) {
-      console.error(e);
-      showToast('⚠️ Error generating link');
-      btn.textContent = 'Copy Magic Link';
-      btn.disabled = false;
-    }
   }
 
   // ── Friends: Add friend ────────────────────────────────────
