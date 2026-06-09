@@ -1531,6 +1531,14 @@ const App = (() => {
       if (e.key === 'Enter') addFriend();
     });
 
+    // Wire up zip code input (Enter key)
+    const zipCodeInput = document.getElementById('zip-code-input');
+    if (zipCodeInput) {
+      zipCodeInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') applyZipCode();
+      });
+    }
+
     // Swipe gestures + keyboard shortcuts
     attachSwipeGestures();
     document.addEventListener('keydown', e => {
