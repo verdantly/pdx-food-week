@@ -123,13 +123,14 @@
         <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…" autocomplete="off" />
       </div>
     </div>
-    <div class="filter-row" role="group" aria-label="Filter dishes" id="browse-filters"></div>
+    <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
     <div class="sort-section" role="group" aria-label="Sort dishes" id="sort-section">
+      <span class="sort-label">Sort:</span>
       <div class="sort-main-group">
-        <span class="sort-label">Sort:</span>
         <button class="filter-chip active" onclick="App.setSort('restaurant', this)">Restaurant (A-Z)</button>
         <button class="filter-chip" onclick="App.setSort('dish', this)">Name (A-Z)</button>
       </div>
+      <span class="sort-label-empty"></span>
       <div class="sort-distance-group">
         <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
         <div id="zip-code-container" style="display: none; align-items: center; gap: 8px;">

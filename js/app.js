@@ -1401,11 +1401,11 @@ const App = (() => {
       return;
     }
 
-    const labelHTML = `<span style="font-size: 12px; color: var(--ink-60); align-self: center; font-weight: 500; margin-right: 4px;">Filter:</span>`;
-    const chipsHTML = filters.map(f => {
+    const labelHTML = `<span class="filter-label">Filter:</span>`;
+    const chipsHTML = `<div class="filter-chips-wrapper">` + filters.map(f => {
       const activeCls = activeFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
-    }).join('');
+    }).join('') + `</div>`;
 
     container.innerHTML = labelHTML + chipsHTML;
   }
