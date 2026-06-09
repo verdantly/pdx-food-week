@@ -10,6 +10,7 @@ const App = (() => {
   let saved = new Set();
   let passed = new Set();
   let friends = [];
+  let notes = {};
   let selectedDish = null;
   let currentWeekId = 'nacho-2026';
   let swipeQueue = null;
@@ -20,6 +21,7 @@ const App = (() => {
   const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
   const STORAGE_KEY_WEEK = 'pdxfw_current_week_v1';
+  const STORAGE_KEY_NOTES = 'pdxfw_notes_v1';
 
   const WEEK_FILTERS = {
     'pizza-2026': [
@@ -67,6 +69,8 @@ const App = (() => {
       if (f) friends = JSON.parse(f);
       const w = localStorage.getItem(STORAGE_KEY_WEEK);
       if (w) currentWeekId = w;
+      const n = localStorage.getItem(STORAGE_KEY_NOTES);
+      if (n) notes = JSON.parse(n);
     } catch (e) {}
   }
 
@@ -76,6 +80,7 @@ const App = (() => {
       localStorage.setItem(STORAGE_KEY_PASSED, JSON.stringify([...passed]));
       localStorage.setItem(STORAGE_KEY_FRIENDS, JSON.stringify(friends));
       localStorage.setItem(STORAGE_KEY_WEEK, currentWeekId);
+      localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notes));
     } catch (e) {}
   }
 
@@ -299,12 +304,24 @@ const App = (() => {
     renderAll();
     // If detail sheet open, update its button
     if (selectedDish && selectedDish.id === id) {
-      const btn = document.getElementById('sheet-save-btn');
-      if (btn) {
-        btn.textContent = saved.has(id) ? '★ Saved' : '☆ Save';
-        btn.className = 'btn btn-save' + (saved.has(id) ? ' saved' : '');
-      }
+      openDetail(id, true);
     }
+  }
+
+  // ── Notes & Ratings ─────────────────────────────────────────
+  function setRating(id, rating) {
+    if (!notes[id]) notes[id] = { rating: 0, note: '' };
+    notes[id].rating = rating;
+    saveState();
+    if (selectedDish && selectedDish.id === id) {
+      openDetail(id, true); // re-render to show stars
+    }
+  }
+
+  function setNote(id, note) {
+    if (!notes[id]) notes[id] = { rating: 0, note: '' };
+    notes[id].note = note;
+    saveState();
   }
 
   // ── Detail sheet ───────────────────────────────────────────
@@ -338,12 +355,22 @@ const App = (() => {
           ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
         </a>
       </div>
+      ${isSaved ? `
+      <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">
+        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Your Notes</div>
+        <div class="rating-stars" style="font-size: 24px; color: var(--ink-30); cursor: pointer; margin-bottom: 8px;">
+          ${[1, 2, 3, 4, 5].map(star => `<span style="${notes[r.id] && notes[r.id].rating >= star ? 'color: #FFB800;' : ''}" onclick="App.setRating(${r.id}, ${star})">★</span>`).join('')}
+        </div>
+        <textarea class="note-input" placeholder="Add your personal notes..." onchange="App.setNote(${r.id}, this.value)" style="width: 100%; border: 1px solid var(--ink-20); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; min-height: 80px;">${notes[r.id] && notes[r.id].note ? esc(notes[r.id].note) : ''}</textarea>
+      </div>` : ''}
     `;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 
     if (!fromPopState) {
-      history.pushState({ detailDishId: id }, '');
+      const url = new URL(window.location);
+      url.searchParams.set('dish', id);
+      history.pushState({ detailDishId: id }, '', url);
     }
   }
 
@@ -355,6 +382,10 @@ const App = (() => {
     if (!fromPopState) {
       if (history.state && history.state.detailDishId !== undefined) {
         history.back();
+      } else {
+        const url = new URL(window.location);
+        url.searchParams.delete('dish');
+        history.pushState(null, '', url);
       }
     }
   }
@@ -436,6 +467,22 @@ const App = (() => {
     } else {
       container.innerHTML = items.map(r => cardHTML(r)).join('');
     }
+  }
+
+  // ── Export Saved ───────────────────────────────────────────
+  function exportSavedToClipboard() {
+    const items = getSaved();
+    if (items.length === 0) {
+      showToast('Nothing to export!');
+      return;
+    }
+    const text = items.map(r => `• ${r.restaurant} - ${r.dish}\n  📍 ${r.address}`).join('\n\n');
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('List copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+      showToast('Failed to copy text');
+    });
   }
 
   // ── Render: Friends ────────────────────────────────────────
@@ -541,7 +588,8 @@ const App = (() => {
   // the Map tab. renderMap() refreshes marker styling against the current
   // saved set on each call.
   let leafletMap = null;
-  let leafletMarkers = null; // Map<id, L.CircleMarker>
+  let leafletMarkers = null;
+  let markerClusterGroup = null; // Map<id, L.CircleMarker>
   let selectedMapId = null;
 
   function pinIcon(isSaved, isSelected) {
@@ -588,12 +636,16 @@ const App = (() => {
       leafletMap.fitBounds(bounds);
 
       leafletMarkers = new Map();
+      markerClusterGroup = L.markerClusterGroup({
+        disableClusteringAtZoom: 16,
+        maxClusterRadius: 40
+      });
       for (const r of points) {
         const m = L.marker([r.lat, r.lng], {
           icon: pinIcon(saved.has(r.id), false),
           title: `${r.dish} — ${r.restaurant}`,
           riseOnHover: true,
-        }).addTo(leafletMap);
+        });
         m.bindPopup(
           `<div class="popup-dish">${esc(r.dish)}</div>
            <div class="popup-restaurant">${esc(r.restaurant)}</div>
@@ -601,7 +653,9 @@ const App = (() => {
         );
         m.on('click', () => showMapSelected(r));
         leafletMarkers.set(r.id, m);
+        markerClusterGroup.addLayer(m);
       }
+      leafletMap.addLayer(markerClusterGroup);
 
       // Delegate popup "Details" link clicks to openDetail.
       leafletMap.on('popupopen', e => {
@@ -996,6 +1050,7 @@ const App = (() => {
       leafletMap.remove();
       leafletMap = null;
       leafletMarkers = null;
+      markerClusterGroup = null;
     }
     selectedMapId = null;
     const mapCard = document.getElementById('map-selected-card');
@@ -1060,10 +1115,17 @@ const App = (() => {
     updateFilterDisplay();
 
     renderAll();
+
+    // Deep linking: Open detail sheet if dish ID in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialDishId = urlParams.get('dish');
+    if (initialDishId) {
+      setTimeout(() => openDetail(parseInt(initialDishId, 10), true), 100);
+    }
   }
 
   // Public API
-  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, switchWeek };
+  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, switchWeek, exportSavedToClipboard, setRating, setNote };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

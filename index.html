@@ -21,11 +21,14 @@
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="css/style.css" />
   <script defer
           src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
           crossorigin=""></script>
+  <script defer src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
 <body>
 
@@ -155,7 +158,10 @@
         <div class="stat-label">Dish types</div>
       </div>
     </div>
-    <div class="section-header">Your bookmarks</div>
+    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <span>Your bookmarks</span>
+      <button class="btn btn-primary" onclick="App.exportSavedToClipboard()" style="padding: 4px 12px; font-size: 12px;">Export List</button>
+    </div>
     <div class="cards-list" id="cards-saved"></div>
     <div class="view-footer">
       PDX Food Week<br>
