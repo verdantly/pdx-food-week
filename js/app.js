@@ -1459,7 +1459,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);
