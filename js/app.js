@@ -1379,12 +1379,8 @@ const App = (() => {
       metaEl.innerHTML = dates + pills + locations;
     }
 
-    // Dynamic browser tab title & favicon updates
+    // Dynamic browser tab title updates
     document.title = `PDX ${week.name}`;
-    const favicon = document.querySelector("link[rel='icon']");
-    if (favicon && week.emoji) {
-      favicon.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${week.emoji}</text></svg>`;
-    }
 
     // Dynamic map canvas accessibility label
     const mapCanvas = document.getElementById('map-canvas');
