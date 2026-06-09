@@ -684,6 +684,25 @@ const App = (() => {
     }
   }
 
+  // Helper to wrap promises with a timeout to prevent hanging on blocked networks/adblockers
+  function timeoutPromise(promise, ms, errorMsg) {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        reject(new Error(errorMsg || "Timeout"));
+      }, ms);
+      promise.then(
+        (res) => {
+          clearTimeout(timer);
+          resolve(res);
+        },
+        (err) => {
+          clearTimeout(timer);
+          reject(err);
+        }
+      );
+    });
+  }
+
   // ── Friends: Generate Magic Link ───────────────────────────
   async function generateShareLink() {
     if (saved.size === 0) {
@@ -703,12 +722,14 @@ const App = (() => {
 
     if (db) {
       try {
-        await db.collection('shared_lists').doc(shortId).set({
+        const writePromise = db.collection('shared_lists').doc(shortId).set({
           ids: Array.from(saved),
           name: myName,
           weekId: currentWeekId,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
+        // Wait at most 2000ms before falling back to client-side encoding
+        await timeoutPromise(writePromise, 2000, "Firestore write timeout");
         firebaseSuccess = true;
       } catch (e) {
         console.error("Firebase Firestore save failed! Verify that your Firestore security rules allow public write access to the 'shared_lists' collection.", e);
@@ -856,8 +877,10 @@ const App = (() => {
 
     if (listId && db) {
       try {
-        const doc = await db.collection('shared_lists').doc(listId).get();
-        if (doc.exists) {
+        const fetchPromise = db.collection('shared_lists').doc(listId).get();
+        // Wait at most 2000ms before falling back to local fallback decoding
+        const doc = await timeoutPromise(fetchPromise, 2000, "Firestore fetch timeout");
+        if (doc && doc.exists) {
           const data = doc.data();
           ids = data.ids || [];
           if (data.name) friendName = data.name;
