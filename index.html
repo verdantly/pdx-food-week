@@ -230,6 +230,7 @@
               <div class="paste-row">
                 <input id="magic-link-display" type="text" readonly onclick="this.select()" style="font-family: var(--font-body); font-size: 13px;" />
                 <button id="copy-magic-btn" class="btn" onclick="App.copyTextFromElement('magic-link-display', 'copy-magic-btn')">Copy</button>
+                <button id="share-native-btn" class="btn" style="display: none; background: var(--pizza); color: #fff;" onclick="App.shareNative()">Share</button>
               </div>
               <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">Tap to copy. Friends open this to automatically import your list.</p>
             </div>

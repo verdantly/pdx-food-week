@@ -765,6 +765,12 @@ const App = (() => {
         resultsDiv.style.display = 'flex';
       }
 
+      // Show/hide native share button depending on browser support
+      const shareNativeBtn = document.getElementById('share-native-btn');
+      if (shareNativeBtn) {
+        shareNativeBtn.style.display = navigator.share ? 'block' : 'none';
+      }
+
       let copiedSuccessfully = false;
       try {
         if (navigator.clipboard && window.isSecureContext) {
@@ -846,6 +852,26 @@ const App = (() => {
     } catch (e) {
       console.error("Failed to copy", e);
       showToast('⚠️ Copy failed, please copy manually');
+    }
+  }
+
+  async function shareNative() {
+    const magicDisplay = document.getElementById('magic-link-display');
+    const url = magicDisplay ? magicDisplay.value : '';
+    if (!url) return;
+
+    try {
+      await navigator.share({
+        title: 'PDX Food Week List',
+        text: 'Import my saved spots for PDX Food Week!',
+        url: url
+      });
+      showToast('✅ List shared!');
+    } catch (e) {
+      if (e.name !== 'AbortError') {
+        console.error("Native share failed", e);
+        showToast('⚠️ Native sharing failed, please copy the link.');
+      }
     }
   }
 
@@ -1581,7 +1607,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative };
 })();
 
 if (document.readyState === 'loading') {
