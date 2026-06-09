@@ -309,7 +309,8 @@ async function main() {
 // Source: ${WEEK_URL}
 `;
 
-  const weeksBlock = `window.FOOD_WEEKS = [
+  const weeksBlock = `window.FOOD_WEEKS = window.FOOD_WEEKS || [];
+window.FOOD_WEEKS.push(
   {
     id: "pizza-2026",
     name: "Pizza Week 2026",
@@ -322,9 +323,17 @@ async function main() {
     totalLocations: ${entries.length},
     url: "${WEEK_URL}",
   }
-];\n`;
+);\n`;
 
-  const restaurantsBlock = `window.RESTAURANTS = ${JSON.stringify(entries, null, 2)};\n`;
+  const restaurantsBlock = `window.RESTAURANTS = window.RESTAURANTS || [];
+(function() {
+  const newItems = ${JSON.stringify(entries, null, 2)};
+  newItems.forEach(item => {
+    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+      window.RESTAURANTS.push(item);
+    }
+  });
+})();\n`;
   fs.writeFileSync(outPath, header + '\n' + weeksBlock + '\n' + restaurantsBlock);
 
   console.log(`\n✅ Wrote ${entries.length} restaurants to ${outPath}`);

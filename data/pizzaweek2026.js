@@ -2,7 +2,8 @@
 // 70 locations (skipped: 0, geocode fallbacks: 1)
 // Source: https://everout.com/portland/events/the-portland-mercurys-pizza-week-2026/e222744/
 
-window.FOOD_WEEKS = [
+window.FOOD_WEEKS = window.FOOD_WEEKS || [];
+window.FOOD_WEEKS.push(
   {
     id: "pizza-2026",
     name: "Pizza Week 2026",
@@ -15,9 +16,11 @@ window.FOOD_WEEKS = [
     totalLocations: 70,
     url: "https://everout.com/portland/events/the-portland-mercurys-pizza-week-2026/e222744/",
   }
-];
+);
 
-window.RESTAURANTS = [
+window.RESTAURANTS = window.RESTAURANTS || [];
+(function() {
+  const newItems = [
   {
     "id": 233600,
     "weekId": "pizza-2026",
@@ -1349,3 +1352,9 @@ window.RESTAURANTS = [
     "url": "https://everout.com/portland/events/sausage-pesto/e236082/"
   }
 ];
+  newItems.forEach(item => {
+    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+      window.RESTAURANTS.push(item);
+    }
+  });
+})();
