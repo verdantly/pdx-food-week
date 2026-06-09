@@ -1329,6 +1329,7 @@ const App = (() => {
     if (initialTab && ['browse', 'swipe', 'saved', 'friends', 'map'].includes(initialTab)) {
       switchTab(initialTab, true);
     } else {
+      switchTab('browse', true);
       renderAll();
     }
 
