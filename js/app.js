@@ -847,6 +847,26 @@ const App = (() => {
     showToast('Undo successful');
   }
 
+  function skipSwipe() {
+    if (swipeIdx >= swipeQueue.length || swipeAnimating) return;
+    const r = swipeQueue[swipeIdx];
+    
+    // Move to end of queue instead of marking passed/saved
+    swipeQueue.push(r);
+    swipeIdx++;
+    swipeAnimating = true;
+
+    const cardEl = document.getElementById('swipe-card');
+    cardEl.style.transition = 'transform 0.3s ease-in, opacity 0.3s ease-in';
+    cardEl.style.transform = `translateY(${window.innerHeight}px)`;
+    cardEl.style.opacity = '0';
+
+    setTimeout(() => {
+      swipeAnimating = false;
+      renderSwipe();
+    }, 300);
+  }
+
   function resetSwipe() {
     passed.clear();
     saveState();
@@ -1125,7 +1145,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, switchWeek, exportSavedToClipboard, setRating, setNote };
+  return { init, switchTab, setFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);

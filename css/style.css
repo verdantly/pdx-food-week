@@ -711,7 +711,6 @@ body {
   position: relative;
   flex: 1;
   min-height: 340px;
-  max-height: 620px;
   margin-bottom: 14px;
   touch-action: none;
 }
