@@ -2,15 +2,6 @@
 'use strict';
 
 // ── Firebase Configuration ───────────────────────────────────
-// TODO: Replace with your actual Firebase configuration from the console
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyD4aVF_dVWxrZ6F_GNQuZa1eBLOWdL0xXc",
   authDomain: "pdx-food-week.firebaseapp.com",
@@ -21,9 +12,16 @@ const firebaseConfig = {
   measurementId: "G-78YTW9CPLJ"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Firebase only if the global object exists
+let db = null;
+if (window.firebase) {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+  } catch (e) {
+    console.error("Firebase initialization failed:", e);
+  }
+}
 
 const App = (() => {
   // ── State ──────────────────────────────────────────────────
