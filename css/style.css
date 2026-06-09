@@ -1311,6 +1311,7 @@ body.is-landing .bottom-nav { display: none !important; }
   .nav-tab:hover:not(.active) {
     background: rgba(255,255,255,0.06);
     color: rgba(255,255,255,0.8);
+    border-radius: 2px;
   }
   .nav-tab.active {
     background: rgba(201,75,44,0.15);
