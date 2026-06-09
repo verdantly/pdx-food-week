@@ -48,9 +48,7 @@ const App = (() => {
       { id: 'meat', label: '🥩 Meat' },
       { id: 'vegetarian', label: '🌿 Vegetarian' },
       { id: 'vegan', label: '🌱 Vegan' },
-      { id: 'gf', label: '🌾 Gluten-free' },
-      { id: 'takeout', label: '🥡 Takeout OK' },
-      { id: 'minors', label: '👨‍👩‍👧 Minors OK' }
+      { id: 'gf', label: '🌾 Gluten-free' }
     ]
   };
 
@@ -252,8 +250,6 @@ const App = (() => {
         t.push('<span class="tag tag-vegan">Vegan only</span>');
       }
       if (r.glutenFree)            t.push('<span class="tag tag-gf">GF available</span>');
-      if (r.minors)                t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
-      if (r.takeout)               t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
     }
     return t.join('');
   }
