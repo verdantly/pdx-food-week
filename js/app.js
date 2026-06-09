@@ -324,10 +324,29 @@ const App = (() => {
     saveState();
   }
 
+  function getCurrentContextList() {
+    if (activeTab === 'saved') return getSaved();
+    if (activeTab === 'friends') {
+      const myIds = [...saved];
+      const allSets = [myIds, ...friends.map(f => f.ids)];
+      const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
+      if (overlap.length > 0) return overlap;
+      return [];
+    }
+    if (activeTab === 'swipe') return swipeQueue || [];
+    return getFiltered();
+  }
+
   // ── Detail sheet ───────────────────────────────────────────
   function openDetail(id, fromPopState = false) {
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
+    
+    const list = getCurrentContextList();
+    const idx = list.findIndex(x => x.id === id);
+    const prevId = idx > 0 ? list[idx - 1].id : null;
+    const nextId = idx !== -1 && idx < list.length - 1 ? list[idx + 1].id : null;
+
     selectedDish = r;
     const isSaved = saved.has(r.id);
     const overlay = document.getElementById('detail-overlay');
@@ -354,6 +373,10 @@ const App = (() => {
         <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
           ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
         </a>
+      </div>
+      <div class="sheet-nav" style="display: flex; justify-content: space-between; margin-top: 16px; gap: 12px;">
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink);" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>&larr; Previous</button>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink);" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>Next &rarr;</button>
       </div>
       ${isSaved ? `
       <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">
