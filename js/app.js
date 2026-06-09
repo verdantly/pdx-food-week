@@ -687,7 +687,11 @@ const App = (() => {
 
   // ── Friends: Generate Magic Link ───────────────────────────
   async function generateShareLink() {
-    if (saved.size === 0) return;
+    if (saved.size === 0) {
+      showToast('⚠️ Save some spots first!');
+      return;
+    }
+    
     const btn = document.getElementById('copy-btn');
     const nameInput = document.getElementById('my-name-input');
     const myName = nameInput ? nameInput.value.trim() : '';
@@ -695,23 +699,36 @@ const App = (() => {
     btn.textContent = 'Generating...';
     btn.disabled = true;
 
-    try {
-      const shortId = Math.random().toString(36).substring(2, 7);
-      if (db) {
+    const shortId = Math.random().toString(36).substring(2, 7);
+    let firebaseSuccess = false;
+
+    if (db) {
+      try {
         await db.collection('shared_lists').doc(shortId).set({
           ids: Array.from(saved),
           name: myName,
           weekId: currentWeekId,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-      } else {
-        // Fallback if Firebase isn't configured
-        console.warn("Firebase not configured, falling back to local encoding");
+        firebaseSuccess = true;
+      } catch (e) {
+        console.warn("Firebase save failed, falling back to local encoding:", e);
       }
+    } else {
+      console.warn("Firebase not configured, falling back to local encoding");
+    }
 
+    try {
       const encodedBackup = encodeShareCode();
       const baseUrl = window.location.origin + window.location.pathname;
-      const url = `${baseUrl}?week=${currentWeekId}&list=${shortId}&fallback=${encodedBackup}`;
+      let url;
+      
+      if (firebaseSuccess) {
+        url = `${baseUrl}?week=${currentWeekId}&list=${shortId}&fallback=${encodedBackup}`;
+      } else {
+        // If Firebase fails, just use the fallback parameter so the link still works!
+        url = `${baseUrl}?week=${currentWeekId}&fallback=${encodedBackup}`;
+      }
 
       await navigator.clipboard.writeText(url).catch(() => {
         const ta = document.createElement('textarea');
@@ -722,8 +739,17 @@ const App = (() => {
         document.body.removeChild(ta);
       });
 
+      // Update the old code display so the user can use it manually
+      const codeDisplay = document.getElementById('manual-code-display');
+      if (codeDisplay) {
+        codeDisplay.textContent = encodedBackup;
+        codeDisplay.parentElement.style.display = 'block';
+      }
+
       btn.textContent = 'Link Copied!';
       btn.classList.add('copied');
+      showToast('✅ Magic Link Copied!');
+      
       setTimeout(() => {
         btn.textContent = 'Copy Magic Link';
         btn.classList.remove('copied');
