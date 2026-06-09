@@ -585,6 +585,7 @@ const App = (() => {
 
     const tab = document.querySelector('[data-tab="saved"]');
     tab.classList.toggle('has-items', items.length > 0);
+    tab.setAttribute('data-count', items.length);
 
     const container = document.getElementById('cards-saved');
     if (items.length === 0) {
@@ -636,6 +637,7 @@ const App = (() => {
               <div class="friend-name">${f.name}</div>
               <div class="friend-count">${f.ids.length} dish${f.ids.length === 1 ? '' : 'es'} saved</div>
             </div>
+            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${i})">✏️ Edit</button>
             <button class="friend-remove" onclick="App.removeFriend(${i})">Remove</button>
           </div>`).join('');
 
@@ -685,6 +687,7 @@ const App = (() => {
   // ── Friends: Add friend ────────────────────────────────────
   function addFriend() {
     const input = document.getElementById('friend-code-input');
+    const nameInput = document.getElementById('friend-name-input');
     const code = input.value.trim();
     if (!code) return;
     const ids = decodeShareCode(code);
@@ -692,12 +695,25 @@ const App = (() => {
       showToast('⚠️ Invalid code — check with your friend');
       return;
     }
-    const name = `Friend ${friends.length + 1}`;
+    const name = (nameInput && nameInput.value.trim() !== '') ? nameInput.value.trim() : `Friend ${friends.length + 1}`;
     friends.push({ name, ids, code });
     saveState();
     input.value = '';
+    if (nameInput) nameInput.value = '';
     renderFriends();
     showToast(`Added ${name}!`);
+  }
+
+  // ── Friends: Rename friend ─────────────────────────────────
+  function renameFriend(i) {
+    const currentName = friends[i].name;
+    const newName = prompt("Enter a new name for this friend:", currentName);
+    if (newName && newName.trim() !== "" && newName !== currentName) {
+      friends[i].name = newName.trim();
+      saveState();
+      renderFriends();
+      showToast('Name updated');
+    }
   }
 
   // ── Friends: Remove friend ─────────────────────────────────
@@ -1341,7 +1357,7 @@ const App = (() => {
   }
 
   // Public API
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, copyCode, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode };
 })();
 
 document.addEventListener('DOMContentLoaded', App.init);
