@@ -129,9 +129,10 @@
     <div class="swipe-deck">
       <div class="swipe-card" id="swipe-card"></div>
       <div class="swipe-empty" id="swipe-empty" style="display:none">
-        <div class="nr-emoji">🎉</div>
-        <p>No more to swipe!</p>
-        <button class="btn btn-primary" onclick="App.resetSwipe()">Start over</button>
+        <div class="nr-emoji fun-bounce">🥳</div>
+        <h3 class="fun-title">You did it!</h3>
+        <p>You've seen every single dish.</p>
+        <button class="btn btn-primary" onclick="App.resetSwipe()" style="margin-top: 10px;">Shuffle &amp; Start Over</button>
       </div>
     </div>
     <div class="swipe-controls" id="swipe-controls">
@@ -140,8 +141,8 @@
         <span class="swipe-btn-label">Undo</span>
       </div>
       <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Pass">✕</button>
-        <span class="swipe-btn-label">Pass</span>
+        <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Dislike">✕</button>
+        <span class="swipe-btn-label">Dislike</span>
       </div>
       <div class="swipe-btn-wrapper">
         <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now" style="font-size: 24px;">↓</button>
@@ -152,8 +153,8 @@
         <span class="swipe-btn-label">Info</span>
       </div>
       <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Save">★</button>
-        <span class="swipe-btn-label">Save</span>
+        <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Like">★</button>
+        <span class="swipe-btn-label">Like</span>
       </div>
     </div>
   </section>

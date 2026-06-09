@@ -738,6 +738,7 @@ body {
 .swipe-card-image {
   flex: 1 1 auto;
   min-height: 140px;
+  max-height: 380px;
   background: var(--pizza-pale);
   position: relative;
   overflow: hidden;
@@ -834,10 +835,19 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 24px;
-  gap: 14px;
+  gap: 8px;
 }
-.swipe-empty .nr-emoji { font-size: 52px; }
-.swipe-empty p { font-size: 16px; font-weight: 500; color: var(--ink-60); margin: 0; }
+.swipe-empty .nr-emoji { font-size: 72px; line-height: 1; }
+.fun-title { font-family: var(--font-display); font-size: 28px; color: var(--pizza); font-weight: 700; margin: 8px 0 4px; }
+.swipe-empty p { font-size: 16px; font-weight: 500; color: var(--ink-60); margin: 0 0 12px 0; }
+
+@keyframes funBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.1) rotate(5deg); }
+}
+.fun-bounce {
+  animation: funBounce 1.5s infinite ease-in-out;
+}
 
 .swipe-controls {
   display: flex;

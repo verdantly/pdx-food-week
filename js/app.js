@@ -773,8 +773,8 @@ const App = (() => {
         <div class="swipe-card-desc">${esc(r.desc)}</div>
         <div class="swipe-card-tags">${buildTags(r)}</div>
       </div>
-      <div class="swipe-stamp swipe-stamp-like">Save</div>
-      <div class="swipe-stamp swipe-stamp-pass">Pass</div>
+      <div class="swipe-stamp swipe-stamp-like">Like</div>
+      <div class="swipe-stamp swipe-stamp-pass">Dislike</div>
     `;
 
     const remaining = swipeQueue.length - swipeIdx;
