@@ -473,7 +473,7 @@ body.is-landing .bottom-nav { display: none !important; }
   font-size: 13px;
   font-weight: 500;
   padding: 9px 16px;
-  border-radius: var(--radius-sm);
+  border-radius: 20px;
   border: none;
   cursor: pointer;
   transition: all var(--transition);
@@ -749,8 +749,8 @@ body.is-landing .bottom-nav { display: none !important; }
   right: 16px;
   width: 32px;
   height: 32px;
-  background: rgba(0,0,0,0.05);
-  border: none;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
   border-radius: 50%;
   color: var(--ink);
   font-size: 16px;
@@ -758,10 +758,10 @@ body.is-landing .bottom-nav { display: none !important; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition);
+  transition: border-color var(--transition);
 }
 .sheet-close:hover {
-  background: rgba(0,0,0,0.1);
+  border-color: var(--ink-30);
 }
 
 .sheet-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 12px auto 20px; }
