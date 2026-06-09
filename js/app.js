@@ -743,7 +743,7 @@ const App = (() => {
       let url;
 
       if (firebaseSuccess) {
-        url = `${baseUrl}?week=${currentWeekId}&list=${shortId}&fallback=${encodedBackup}`;
+        url = `${baseUrl}?week=${currentWeekId}&list=${shortId}`;
       } else {
         url = `${baseUrl}?week=${currentWeekId}&fallback=${encodedBackup}`;
       }
