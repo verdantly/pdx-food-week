@@ -728,8 +728,8 @@ const App = (() => {
           weekId: currentWeekId,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        // Wait at most 2000ms before falling back to client-side encoding
-        await timeoutPromise(writePromise, 2000, "Firestore write timeout");
+        // Wait at most 5000ms before falling back to client-side encoding
+        await timeoutPromise(writePromise, 5000, "Firestore write timeout");
         firebaseSuccess = true;
       } catch (e) {
         console.error("Firebase Firestore save failed! Verify that your Firestore security rules allow public write access to the 'shared_lists' collection.", e);
@@ -878,8 +878,8 @@ const App = (() => {
     if (listId && db) {
       try {
         const fetchPromise = db.collection('shared_lists').doc(listId).get();
-        // Wait at most 2000ms before falling back to local fallback decoding
-        const doc = await timeoutPromise(fetchPromise, 2000, "Firestore fetch timeout");
+        // Wait at most 5000ms before falling back to local fallback decoding
+        const doc = await timeoutPromise(fetchPromise, 5000, "Firestore fetch timeout");
         if (doc && doc.exists) {
           const data = doc.data();
           ids = data.ids || [];
