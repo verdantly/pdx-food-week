@@ -446,6 +446,8 @@ const App = (() => {
       renderSwipe();
     }
     
+    document.body.classList.toggle('is-landing', name === 'landing');
+    
     if (!fromPopState) {
       const url = new URL(window.location);
       if (name === 'browse') {
@@ -1121,15 +1123,59 @@ const App = (() => {
     renderHeader();
     updateFilterDisplay();
     
-    // Full re-render
+    const url = new URL(window.location);
+    url.searchParams.set('week', weekId);
+    url.searchParams.delete('tab');
+    history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    document.body.classList.remove('is-landing');
+    
+    switchTab('browse');
     renderAll();
     
     showToast(`Switched to ${week.name}!`);
   }
 
+  function renderLanding() {
+    const grid = document.getElementById('landing-grid');
+    if (!grid) return;
+    
+    // Determine the next upcoming event
+    const now = new Date('2026-06-08T00:00:00Z'); // Using today's date context
+    let nextWeek = null;
+    let minDiff = Infinity;
+    
+    window.FOOD_WEEKS.forEach(w => {
+      if (w.startDate) {
+        const start = new Date(w.startDate);
+        const diff = start - now;
+        if (diff > 0 && diff < minDiff) {
+          minDiff = diff;
+          nextWeek = w;
+        }
+      }
+    });
+
+    grid.innerHTML = window.FOOD_WEEKS.map(w => {
+      const isNext = nextWeek && w.id === nextWeek.id;
+      const badgeHTML = isNext ? '<div class="badge-upcoming">Next</div>' : '';
+      return `
+        <a href="?week=${w.id}" class="landing-card" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
+          ${badgeHTML}
+          <div class="landing-emoji">${w.emoji || '🍽️'}</div>
+          <h3>${esc(w.name)}</h3>
+          <p>${esc(w.dates)}</p>
+          <button class="landing-btn" style="background: ${w.color || 'var(--ink)'}">Explore</button>
+        </a>
+      `;
+    }).join('');
+  }
+
   // ── Init ───────────────────────────────────────────────────
   function init() {
     loadState();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlWeekId = urlParams.get('week');
 
     // Wire up popstate to handle browser back button closing detail sheet and tab navigation
     window.addEventListener('popstate', e => {
@@ -1140,7 +1186,7 @@ const App = (() => {
       }
       
       const tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
-      if (activeTab !== tab) {
+      if (activeTab !== tab && currentWeekId) {
         switchTab(tab, true);
       }
     });
@@ -1172,6 +1218,16 @@ const App = (() => {
       else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
     });
 
+    if (!urlWeekId) {
+      currentWeekId = null;
+      switchTab('landing', true);
+      renderLanding();
+      return; // Stop app initialization
+    } else if (window.FOOD_WEEKS.some(w => w.id === urlWeekId)) {
+      currentWeekId = urlWeekId;
+      document.body.classList.remove('is-landing');
+    }
+
     // Apply active week's initial theme, header metadata, and dynamic filters
     const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
     applyWeekTheme(week);
@@ -1179,7 +1235,6 @@ const App = (() => {
     updateFilterDisplay();
 
     // Set initial tab from URL
-    const urlParams = new URLSearchParams(window.location.search);
     const initialTab = urlParams.get('tab');
     if (initialTab && ['browse', 'swipe', 'saved', 'friends', 'map'].includes(initialTab)) {
       switchTab(initialTab, true);

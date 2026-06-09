@@ -1,4 +1,4 @@
-﻿// Portland Mercury's Highball Week 2026 — scraped 2026-05-26
+// Portland Mercury's Highball Week 2026 — scraped 2026-05-26
 // 27 locations (skipped: 0, geocode fallbacks: 0)
 // Source: https://everout.com/portland/events/the-portland-mercurys-highball-week-2026/e222745/
 
@@ -8,6 +8,8 @@ window.FOOD_WEEKS.push({
   name: "Highball Week 2026",
   organizer: "Portland Mercury",
   dates: "May 25–31, 2026",
+  startDate: "2026-05-25",
+  endDate: "2026-05-31",
   pricePills: ["$10 drink"],
   color: "#2C69C9",
   colorDark: "#1B478C",

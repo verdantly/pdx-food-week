@@ -8,6 +8,8 @@ window.FOOD_WEEKS.push({
   name: "Taco Week 2026",
   organizer: "The Actual Portland",
   dates: "June 1–7, 2026",
+  startDate: "2026-06-01",
+  endDate: "2026-06-07",
   pricePills: ["$5 taco", "2 for $5"],
   color: "#D48C2C",
   colorDark: "#945B13",
