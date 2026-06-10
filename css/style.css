@@ -1952,11 +1952,10 @@ body.is-landing .bottom-nav {
 @media (min-width: 1100px) {
 
   .view-footer {
-    display: none;
+    display: block;
   }
 
   body.is-landing .view-footer {
-    display: block;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -2072,7 +2071,7 @@ body.is-landing .bottom-nav {
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
     line-height: 1.7;
   }
 
