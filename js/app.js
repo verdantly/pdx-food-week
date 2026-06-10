@@ -40,6 +40,7 @@ const App = (() => {
   let swipeAnimating = false;
   let userLat = null;
   let userLng = null;
+  let lastActiveElement = null;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
@@ -393,6 +394,11 @@ const App = (() => {
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
 
+    // Save current active element for accessibility focus restore
+    if (document.activeElement && document.activeElement !== document.body) {
+      lastActiveElement = document.activeElement;
+    }
+
     const list = getCurrentContextList();
     const idx = list.findIndex(x => x.id === id);
     const prevId = idx > 0 ? list[idx - 1].id : null;
@@ -455,6 +461,15 @@ const App = (() => {
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    // Shift focus to the close button inside the detail sheet for accessibility
+    setTimeout(() => {
+      const closeBtn = document.getElementById('detail-sheet-content')?.querySelector('.sheet-close') || 
+                       document.getElementById('detail-overlay')?.querySelector('.close-desktop');
+      if (closeBtn) {
+        closeBtn.focus();
+      }
+    }, 50);
+
     if (!fromPopState) {
       const url = new URL(window.location);
       url.searchParams.set('dish', id);
@@ -466,6 +481,15 @@ const App = (() => {
     document.getElementById('detail-overlay').classList.remove('open');
     document.body.style.overflow = '';
     selectedDish = null;
+
+    if (lastActiveElement) {
+      try {
+        lastActiveElement.focus();
+      } catch (e) {
+        console.warn("Could not restore focus:", e);
+      }
+      lastActiveElement = null;
+    }
 
     if (!fromPopState) {
       if (history.state && history.state.detailDishId !== undefined) {
@@ -492,7 +516,9 @@ const App = (() => {
   function switchTab(name, fromPopState = false) {
     activeTab = name;
     document.querySelectorAll('.nav-tab').forEach(el => {
-      el.classList.toggle('active', el.dataset.tab === name);
+      const isActive = el.dataset.tab === name;
+      el.classList.toggle('active', isActive);
+      el.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
