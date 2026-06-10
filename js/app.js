@@ -1196,8 +1196,14 @@ const App = (() => {
       if (isTop) {
         cardEl.id = 'swipe-card'; // Top card gets the ID so attachSwipeGestures works
       } else {
-        // Shift and scale background cards slightly down/back
-        cardEl.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 12}px)`;
+        // Shift and scale background cards based on viewport
+        if (window.innerWidth >= 768) {
+          // Hand of cards layout: fan out to the right
+          cardEl.style.transform = `translate(${i * 60}px, ${i * 12}px) rotate(${i * 4}deg) scale(${1 - i * 0.05})`;
+        } else {
+          // Vertical stack layout (mobile)
+          cardEl.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 12}px)`;
+        }
         cardEl.style.opacity = i === 1 ? '0.6' : '0.25';
         cardEl.style.pointerEvents = 'none';
       }
@@ -1728,6 +1734,11 @@ const App = (() => {
     if (initialDishId) {
       setTimeout(() => openDetail(parseInt(initialDishId, 10), true), 100);
     }
+
+    // Re-render swipe deck on window resize to ensure correct responsive fanning transforms
+    window.addEventListener('resize', () => {
+      if (activeTab === 'swipe') renderSwipe();
+    });
   }
 
   // Public API
