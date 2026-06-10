@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Privacy Policy for PDX Food Week - Learn how we handle your bookmarks, magic links, and local storage data.">
+  <title>Privacy Policy - PDX Food Week</title>
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --pizza: #C94B2C;
+      --pizza-dark: #9E3318;
+      --pizza-light: #F5E6DF;
+      --ink: #1A1208;
+      --ink-70: rgba(26, 18, 8, 0.72);
+      --ink-60: rgba(26, 18, 8, 0.72);
+      --ink-30: rgba(26, 18, 8, 0.45);
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --transition: 0.18s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #E8E0D5;
+      color: var(--ink);
+      line-height: 1.6;
+      padding: 20px 10px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(26, 18, 8, 0.08);
+      overflow: hidden;
+    }
+
+    header {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .back-link {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color var(--transition), transform var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-link:hover {
+      color: var(--pizza);
+      transform: translateX(-2px);
+    }
+
+    .app-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .content {
+      padding: 32px 24px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--ink-60);
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin: 28px 0 12px;
+      color: var(--pizza);
+    }
+
+    p {
+      font-size: 15px;
+      color: var(--ink-70);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    ul, ol {
+      margin: 12px 0 20px 20px;
+      color: var(--ink-70);
+      font-size: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--pizza);
+      text-decoration: underline;
+      transition: color var(--transition);
+    }
+
+    a:hover {
+      color: var(--pizza-dark);
+    }
+
+    .alert-box {
+      background: var(--pizza-light);
+      border-left: 4px solid var(--pizza);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      margin: 24px 0;
+      font-size: 14.5px;
+    }
+
+    .alert-box strong {
+      color: var(--pizza-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--ink-60);
+      border-top: 1px solid var(--border);
+      background: rgba(26, 18, 8, 0.02);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+      .container {
+        border-radius: 0;
+        border: none;
+      }
+      .content {
+        padding: 24px 16px;
+      }
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <a href="index.html" class="back-link">← Back to App</a>
+    <span class="app-title">PDX Food Week</span>
+  </header>
+
+  <main class="content">
+    <h1>Privacy Policy</h1>
+    <div class="subtitle">Last updated: June 10, 2026</div>
+
+    <p>This Privacy Policy explains how the <strong>PDX Food Week</strong> web application ("we", "us", or "our") processes, stores, and protects your information when you use our website. We are committed to maintaining a transparent, privacy-first experience.</p>
+
+    <div class="alert-box">
+      <strong>Core Principle:</strong> We do not track you across the web, we do not show ads, and we do not sell your data. Most of your information is stored entirely on your own device.
+    </div>
+
+    <h2>1. Data Stored on Your Device (Local Storage)</h2>
+    <p>To provide a highly responsive and functional offline-capable experience, the app uses your browser's local storage (LocalStorage) to persist your personal data. This data includes:</p>
+    <ul>
+      <li><strong>Bookmarks & Passed Lists:</strong> Dishes you bookmark (Save) or swipe past (Pass).</li>
+      <li><strong>Personal Notes & Ratings:</strong> Text notes and star ratings you add to bookmarked dishes.</li>
+      <li><strong>Added Friends:</strong> Names and sharing identifiers of friends whose lists you have imported.</li>
+    </ul>
+    <p>This data remains stored locally on your device and is never automatically transmitted to us or any servers. You can erase this data at any time by clearing your browser cache/site data or by selecting the reset options within the app.</p>
+
+    <h2>2. Cloud Storage (Magic Link Sharing)</h2>
+    <p>If you choose to use the <strong>Magic Link Sharing</strong> feature in the Friends tab to share your bookmarks with others:</p>
+    <ul>
+      <li>The app compiles your saved dish IDs, the current food week identifier, and an <strong>optional name</strong> that you provide.</li>
+      <li>This package is saved to our Google Firebase Firestore database under a randomly generated 5-character document identifier (e.g., <code>?list=abcde</code>).</li>
+      <li>Anyone with your specific Magic Link can access and view the bookmarked restaurant IDs and the name you entered.</li>
+      <li><strong>Privacy Control:</strong> Providing a name is completely optional. If left blank, your list remains anonymous. The data stored contains no email addresses, phone numbers, IP locations, or account credentials.</li>
+    </ul>
+
+    <h2>3. Third-Party Services and APIs</h2>
+    <p>To render maps, perform sorting, and support sharing, our application communicates with the following third-party services. When your browser requests resources from these services, they may receive your IP address and web browser user-agent:</p>
+    <ul>
+      <li><strong>Google Firebase Firestore:</strong> Used to host shared lists for the Magic Link functionality. Firebase operates under Google's privacy and data protection agreements.</li>
+      <li><strong>OpenStreetMap (tile.openstreetmap.org):</strong> Used to load the maps tiles for the Leaflet interactive map view.</li>
+      <li><strong>Zippopotam.us:</strong> Used to resolve 5-digit US zip codes to latitude and longitude coordinates when you use the "Distance" sorting feature. This search is performed client-side and is not logged by us.</li>
+    </ul>
+
+    <h2>4. Outbound Links</h2>
+    <p>Our website contains links to external sites such as <em>The Actual Portland</em>, <em>EverOut</em>, Google Maps (for navigation directions), and developer GitHub profiles. We are not responsible for the privacy practices or content of these external websites.</p>
+
+    <h2>5. Changes to This Policy</h2>
+    <p>We may update our Privacy Policy from time to time. Any changes will be posted directly to this page with an updated revision date.</p>
+
+    <h2>6. Contact Us</h2>
+    <p>If you have questions about this policy or would like to request manual deletion of a shared Magic Link list from our Firestore database, you can contact the project maintainers via our GitHub profiles linked in the footer of the main application.</p>
+  </main>
+
+  <footer>
+    &copy; 2026 PDX Food Week App. Not affiliated with the official food week events.
+  </footer>
+</div>
+
+</body>
+</html>
