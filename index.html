@@ -114,16 +114,19 @@
 
   <!-- ── Browse View ── -->
   <section class="view" id="view-browse" role="tabpanel" aria-label="Browse dishes">
-    <div class="search-bar">
-      <div class="search-input-wrapper">
-        <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…" autocomplete="off" />
+    <div class="browse-header">
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…" autocomplete="off" />
+          <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">✕</button>
+        </div>
       </div>
+      <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
     </div>
-    <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
     <div class="sort-section" role="group" aria-label="Sort dishes" id="sort-section">
       <span class="sort-label">Sort:</span>
       <div class="sort-main-group">
@@ -157,7 +160,7 @@
       <button class="swipe-reset" onclick="App.resetSwipe()" title="Start over — clear passed">↺ Reset</button>
     </div>
     <div class="swipe-deck">
-      <div class="swipe-card" id="swipe-card"></div>
+      <!-- Cards dynamically generated in JS -->
       <div class="swipe-empty" id="swipe-empty" style="display:none">
         <div class="nr-emoji fun-bounce">🥳</div>
         <h3 class="fun-title">You did it!</h3>

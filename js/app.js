@@ -360,20 +360,43 @@ const App = (() => {
     }
   }
 
+  // Helper to show inline save indicator in detail sheet
+  function showSaveIndicator() {
+    const ind = document.getElementById('note-save-indicator');
+    if (ind) {
+      ind.style.opacity = '1';
+      ind.textContent = 'Saving...';
+      setTimeout(() => {
+        ind.textContent = 'Saved to device ✓';
+        setTimeout(() => {
+          ind.style.opacity = '0';
+        }, 1200);
+      }, 300);
+    }
+  }
+
   // ── Notes & Ratings ─────────────────────────────────────────
   function setRating(id, rating) {
     if (!notes[id]) notes[id] = { rating: 0, note: '' };
     notes[id].rating = rating;
     saveState();
-    if (selectedDish && selectedDish.id === id) {
-      openDetail(id, true); // re-render to show stars
+    
+    // Update active stars in DOM directly instead of re-rendering openDetail!
+    const starsContainer = document.querySelector('.rating-stars');
+    if (starsContainer) {
+      const stars = starsContainer.querySelectorAll('span');
+      stars.forEach((star, index) => {
+        star.style.color = (index < rating) ? '#FFB800' : '';
+      });
     }
+    showSaveIndicator();
   }
 
   function setNote(id, note) {
     if (!notes[id]) notes[id] = { rating: 0, note: '' };
     notes[id].note = note;
     saveState();
+    showSaveIndicator();
   }
 
   function getCurrentContextList() {
@@ -451,7 +474,10 @@ const App = (() => {
       </div>
       ${isSaved ? `
       <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">
-        <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Your Notes</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 14px; font-weight: 600;">Your Notes</span>
+          <span id="note-save-indicator" style="font-size: 11px; color: var(--pizza); opacity: 0; transition: opacity 0.3s ease; font-weight: 500;">Saved to device ✓</span>
+        </div>
         <div class="rating-stars" style="font-size: 24px; color: var(--ink-30); cursor: pointer; margin-bottom: 8px;">
           ${[1, 2, 3, 4, 5].map(star => `<span style="${notes[r.id] && notes[r.id].rating >= star ? 'color: #FFB800;' : ''}" onclick="App.setRating(${r.id}, ${star})">★</span>`).join('')}
         </div>
@@ -1121,22 +1147,25 @@ const App = (() => {
   }
 
   function renderSwipe() {
-    const cardEl = document.getElementById('swipe-card');
+    const deckEl = document.querySelector('.swipe-deck');
+    if (!deckEl) return;
+
     const emptyEl = document.getElementById('swipe-empty');
     const ctrlsEl = document.getElementById('swipe-controls');
     const counterEl = document.getElementById('swipe-counter');
-    const r = currentSwipeCard();
 
-    // Update button states
+    // Remove any existing card elements
+    deckEl.querySelectorAll('.swipe-card').forEach(el => el.remove());
+
     const undoBtn = document.getElementById('swipe-btn-undo');
-    const passBtn = ctrlsEl.querySelector('.swipe-pass');
-    const infoBtn = ctrlsEl.querySelector('.swipe-info');
-    const likeBtn = ctrlsEl.querySelector('.swipe-like');
+    const passBtn = ctrlsEl ? ctrlsEl.querySelector('.swipe-pass') : null;
+    const infoBtn = ctrlsEl ? ctrlsEl.querySelector('.swipe-info') : null;
+    const likeBtn = ctrlsEl ? ctrlsEl.querySelector('.swipe-like') : null;
 
     if (undoBtn) undoBtn.disabled = (swipeIdx <= 0);
 
+    const r = currentSwipeCard();
     if (!r) {
-      cardEl.style.display = 'none';
       emptyEl.style.display = 'flex';
       if (passBtn) passBtn.disabled = true;
       if (infoBtn) infoBtn.disabled = true;
@@ -1145,33 +1174,58 @@ const App = (() => {
       return;
     }
 
-    cardEl.style.display = 'flex';
     emptyEl.style.display = 'none';
-    cardEl.style.transform = '';
-    cardEl.style.opacity = '';
-    cardEl.style.transition = '';
-    cardEl.dataset.id = r.id;
-
     if (passBtn) passBtn.disabled = false;
     if (infoBtn) infoBtn.disabled = false;
     if (likeBtn) likeBtn.disabled = false;
 
-    const imageBlock = r.image
-      ? `<img src="${esc(r.image)}" alt="" loading="eager">`
-      : `<div class="swipe-card-emoji">${esc(r.emoji)}</div>`;
+    // Render up to 3 cards in the deck
+    const maxStacked = 3;
+    for (let i = maxStacked - 1; i >= 0; i--) {
+      const idx = swipeIdx + i;
+      if (idx >= swipeQueue.length) continue;
 
-    cardEl.innerHTML = `
-      <div class="swipe-card-image">${imageBlock}</div>
-      <div class="swipe-card-body">
-        <div class="swipe-card-dish">${esc(r.dish)}</div>
-        <div class="swipe-card-restaurant">${esc(r.restaurant)}</div>
-        <div class="swipe-card-neighborhood">📍 ${esc(r.neighborhood)}</div>
-        <div class="swipe-card-desc">${esc(r.desc)}</div>
-        <div class="swipe-card-tags">${buildTags(r)}</div>
-      </div>
-      <div class="swipe-stamp swipe-stamp-like">Like</div>
-      <div class="swipe-stamp swipe-stamp-pass">Dislike</div>
-    `;
+      const item = swipeQueue[idx];
+      const isTop = (i === 0);
+
+      const cardEl = document.createElement('div');
+      cardEl.className = `swipe-card ${isTop ? 'swipe-card-top' : 'swipe-card-bg'}`;
+      cardEl.dataset.id = item.id;
+      cardEl.style.zIndex = 10 - i;
+
+      if (isTop) {
+        cardEl.id = 'swipe-card'; // Top card gets the ID so attachSwipeGestures works
+      } else {
+        // Shift and scale background cards slightly down/back
+        cardEl.style.transform = `scale(${1 - i * 0.05}) translateY(${i * 12}px)`;
+        cardEl.style.opacity = i === 1 ? '0.6' : '0.25';
+        cardEl.style.pointerEvents = 'none';
+      }
+
+      const imageBlock = item.image
+        ? `<img src="${esc(item.image)}" alt="" loading="eager">`
+        : `<div class="swipe-card-emoji">${esc(item.emoji)}</div>`;
+
+      cardEl.innerHTML = `
+        <div class="swipe-card-image">${imageBlock}</div>
+        <div class="swipe-card-body">
+          <div class="swipe-card-dish">${esc(item.dish)}</div>
+          <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
+          <div class="swipe-card-neighborhood">📍 ${esc(item.neighborhood)}</div>
+          <div class="swipe-card-desc">${esc(item.desc)}</div>
+          <div class="swipe-card-tags">${buildTags(item)}</div>
+        </div>
+        ${isTop ? `
+          <div class="swipe-stamp swipe-stamp-like">Like</div>
+          <div class="swipe-stamp swipe-stamp-pass">Dislike</div>
+        ` : ''}
+      `;
+
+      deckEl.insertBefore(cardEl, deckEl.firstChild);
+    }
+
+    // Re-attach gestures to the newly rendered top card
+    attachSwipeGestures();
 
     const remaining = swipeQueue.length - swipeIdx;
     counterEl.textContent = `${remaining} to go · ${swipeIdx + 1}/${swipeQueue.length}`;
@@ -1382,7 +1436,7 @@ const App = (() => {
     }
     const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
     footers.forEach(el => {
-      el.innerHTML = `PDX Food Week<br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>`;
+      el.innerHTML = `PDX Food Week — <a href="privacy.html">Privacy Policy</a> &amp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>`;
     });
 
     // Update header title
@@ -1562,10 +1616,22 @@ const App = (() => {
     });
 
     // Wire up search
-    document.getElementById('search-input').addEventListener('input', e => {
-      searchQuery = e.target.value;
-      renderBrowse();
-    });
+    const searchInput = document.getElementById('search-input');
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    if (searchInput && searchClearBtn) {
+      searchInput.addEventListener('input', e => {
+        searchQuery = e.target.value;
+        searchClearBtn.style.display = searchQuery ? 'flex' : 'none';
+        renderBrowse();
+      });
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        searchClearBtn.style.display = 'none';
+        searchInput.focus();
+        renderBrowse();
+      });
+    }
 
     // Handle auto-import from URL Magic Link
     const shareListId = urlParams.get('list');
@@ -1598,10 +1664,36 @@ const App = (() => {
     // Swipe gestures + keyboard shortcuts
     attachSwipeGestures();
     document.addEventListener('keydown', e => {
+      // Handle keydown events when the detail overlay is open
+      const overlay = document.getElementById('detail-overlay');
+      if (overlay && overlay.classList.contains('open')) {
+        if (e.target && /INPUT|TEXTAREA/i.test(e.target.tagName)) return;
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeDetail();
+        } else if (e.key === 'ArrowLeft') {
+          const list = getCurrentContextList();
+          const idx = selectedDish ? list.findIndex(x => x.id === selectedDish.id) : -1;
+          const prevId = idx > 0 ? list[idx - 1].id : null;
+          if (prevId) {
+            e.preventDefault();
+            openDetail(prevId);
+          }
+        } else if (e.key === 'ArrowRight') {
+          const list = getCurrentContextList();
+          const idx = selectedDish ? list.findIndex(x => x.id === selectedDish.id) : -1;
+          const nextId = idx !== -1 && idx < list.length - 1 ? list[idx + 1].id : null;
+          if (nextId) {
+            e.preventDefault();
+            openDetail(nextId);
+          }
+        }
+        return;
+      }
+
+      // Handle swipe view shortcuts
       if (activeTab !== 'swipe') return;
       if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
-      // Don't steer the underlying deck while the detail sheet is open.
-      if (document.getElementById('detail-overlay').classList.contains('open')) return;
       if (e.key === 'ArrowRight') { e.preventDefault(); swipe('right'); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
     });

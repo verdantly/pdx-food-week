@@ -204,46 +204,46 @@
     <h1>Privacy Policy</h1>
     <div class="subtitle">Last updated: June 10, 2026</div>
 
-    <p>This Privacy Policy explains how the <strong>PDX Food Week</strong> web application ("we", "us", or "our") processes, stores, and protects your information when you use our website. We are committed to maintaining a transparent, privacy-first experience.</p>
+    <p>We built the <strong>PDX Food Week</strong> app to help you find delicious local food, plan your routes, and share favorites with friends—not to track you. We believe in keeping things simple, transparent, and privacy-first. Here is exactly how we handle your data (spoiler: we don't collect much at all!).</p>
 
     <div class="alert-box">
-      <strong>Core Principle:</strong> We do not track you across the web, we do not show ads, and we do not sell your data. Most of your information is stored entirely on your own device.
+      <strong>Our Promise:</strong> We don't track you across the web, we don't show annoying ads, and we absolutely never sell your data. Almost everything you do in the app stays right on your own device.
     </div>
 
-    <h2>1. Data Stored on Your Device (Local Storage)</h2>
-    <p>To provide a highly responsive and functional offline-capable experience, the app uses your browser's local storage (LocalStorage) to persist your personal data. This data includes:</p>
+    <h2>1. Data Stored on Your Device (Keep it Local)</h2>
+    <p>To make the app super fast and let it work even when your cellular connection is spotty, we save your choices directly inside your browser's local storage. This is like a private notebook stored on your own phone or computer, and it contains:</p>
     <ul>
-      <li><strong>Bookmarks & Passed Lists:</strong> Dishes you bookmark (Save) or swipe past (Pass).</li>
-      <li><strong>Personal Notes & Ratings:</strong> Text notes and star ratings you add to bookmarked dishes.</li>
-      <li><strong>Added Friends:</strong> Names and sharing identifiers of friends whose lists you have imported.</li>
+      <li><strong>Saved & Passed Dishes:</strong> The list of food week dishes you bookmarked (Like) or swiped past (Pass).</li>
+      <li><strong>Your Notes & Ratings:</strong> Any personal reviews, notes, and star ratings you add to your saved spots.</li>
+      <li><strong>Friends' Lists:</strong> The names and lists of friends you choose to add so you can see where your cravings overlap.</li>
     </ul>
-    <p>This data remains stored locally on your device and is never automatically transmitted to us or any servers. You can erase this data at any time by clearing your browser cache/site data or by selecting the reset options within the app.</p>
+    <p>This data stays on your device. We do not automatically send it to any servers. If you ever want to wipe the slate clean, you can clear your browser's cache/site data or click the reset options inside the app.</p>
 
-    <h2>2. Cloud Storage (Magic Link Sharing)</h2>
-    <p>If you choose to use the <strong>Magic Link Sharing</strong> feature in the Friends tab to share your bookmarks with others:</p>
+    <h2>2. Magic Link Sharing (Only If You Choose to Share)</h2>
+    <p>If you decide to use the <strong>Magic Link</strong> feature in the Friends tab to share your bookmarks with friends:</p>
     <ul>
-      <li>The app compiles your saved dish IDs, the current food week identifier, and an <strong>optional name</strong> that you provide.</li>
-      <li>This package is saved to our Google Firebase Firestore database under a randomly generated 5-character document identifier (e.g., <code>?list=abcde</code>).</li>
-      <li>Anyone with your specific Magic Link can access and view the bookmarked restaurant IDs and the name you entered.</li>
-      <li><strong>Privacy Control:</strong> Providing a name is completely optional. If left blank, your list remains anonymous. The data stored contains no email addresses, phone numbers, IP locations, or account credentials.</li>
-    </ul>
-
-    <h2>3. Third-Party Services and APIs</h2>
-    <p>To render maps, perform sorting, and support sharing, our application communicates with the following third-party services. When your browser requests resources from these services, they may receive your IP address and web browser user-agent:</p>
-    <ul>
-      <li><strong>Google Firebase Firestore:</strong> Used to host shared lists for the Magic Link functionality. Firebase operates under Google's privacy and data protection agreements.</li>
-      <li><strong>OpenStreetMap (tile.openstreetmap.org):</strong> Used to load the maps tiles for the Leaflet interactive map view.</li>
-      <li><strong>Zippopotam.us:</strong> Used to resolve 5-digit US zip codes to latitude and longitude coordinates when you use the "Distance" sorting feature. This search is performed client-side and is not logged by us.</li>
+      <li>The app bundles up your saved dish IDs, the current food week name, and an <strong>optional nickname</strong> you provide.</li>
+      <li>It uploads this bundle to a secure Google Firebase database and generates a unique, random 5-letter web link for you (like <code>?list=abcde</code>).</li>
+      <li>Anyone you send this link to will be able to see the dishes you saved and your nickname.</li>
+      <li><strong>You're in Control:</strong> Sharing is totally optional. Entering a nickname is also optional—if you leave it blank, your list is completely anonymous. The shared data never contains your email address, phone number, physical location, or passwords.</li>
     </ul>
 
-    <h2>4. Outbound Links</h2>
-    <p>Our website contains links to external sites such as <em>The Actual Portland</em>, <em>EverOut</em>, Google Maps (for navigation directions), and developer GitHub profiles. We are not responsible for the privacy practices or content of these external websites.</p>
+    <h2>3. Friendly Helpers (Third-Party Services)</h2>
+    <p>To show you maps, calculate distances, and support sharing, our app talks to a few standard web services. When your browser requests info from them, they may see your device's IP address and browser type (standard internet stuff):</p>
+    <ul>
+      <li><strong>Google Firebase:</strong> This is where your shared lists live when you generate a Magic Link. It runs under Google's robust security standards.</li>
+      <li><strong>OpenStreetMap:</strong> We load map graphics from here to show you where restaurants are located in Portland.</li>
+      <li><strong>Zippopotam.us:</strong> When you sort dishes by "Distance" and enter a zip code, this service translates that zip code into map coordinates. This calculation happens instantly and is not saved by us.</li>
+    </ul>
 
-    <h2>5. Changes to This Policy</h2>
-    <p>We may update our Privacy Policy from time to time. Any changes will be posted directly to this page with an updated revision date.</p>
+    <h2>4. Links to Other Websites</h2>
+    <p>We link out to websites like <em>The Actual Portland</em>, <em>EverOut</em>, Google Maps (for driving/walking directions), and our developer GitHub profiles. Once you click those links and leave our site, the privacy policies of those other websites will apply to you.</p>
 
-    <h2>6. Contact Us</h2>
-    <p>If you have questions about this policy or would like to request manual deletion of a shared Magic Link list from our Firestore database, you can contact the project maintainers via our GitHub profiles linked in the footer of the main application.</p>
+    <h2>5. Updates to This Policy</h2>
+    <p>If we update how the app works, we might tweak this policy. If we do, we will update the "Last updated" date at the top of this page.</p>
+
+    <h2>6. Say Hello</h2>
+    <p>Have questions, ideas, or want us to manually delete a shared Magic Link list from our database? You can easily contact us by clicking our GitHub profile links at the bottom of the main app's sidebar.</p>
   </main>
 
   <footer>
