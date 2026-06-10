@@ -445,7 +445,7 @@ const App = (() => {
       ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" alt=""></div>`
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
     document.getElementById('detail-sheet-content').innerHTML = `
-      <button class="sheet-close" onclick="App.closeDetail()" aria-label="Close">✕</button>
+      <button class="sheet-close" onclick="App.closeDetail()" aria-label="Close">×</button>
       <div class="sheet-handle"></div>
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}</div>
@@ -1436,7 +1436,7 @@ const App = (() => {
     }
     const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
     footers.forEach(el => {
-      el.innerHTML = `PDX Food Week — <a href="privacy.html">Privacy Policy</a> &amp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>`;
+      el.innerHTML = `PDX Food Week<br><a href="privacy.html">Privacy Policy</a> &amp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a> &amp; <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a>`;
     });
 
     // Update header title

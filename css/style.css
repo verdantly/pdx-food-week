@@ -1251,9 +1251,11 @@ body.is-landing .bottom-nav {
   color: var(--ink);
   font-size: 16px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
+  padding: 0 0 1px 0; /* center standard multiplication sign perfectly */
   transition: border-color var(--transition);
 }
 
@@ -1713,11 +1715,11 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 24px;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-  /* Reset line-height to prevent offset inside circle */
+  padding: 0;
   box-shadow: var(--shadow);
   transition: transform 0.1s ease, box-shadow var(--transition), color var(--transition), border-color var(--transition);
 }
