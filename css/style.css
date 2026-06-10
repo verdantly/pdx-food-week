@@ -349,12 +349,14 @@ body.is-landing .bottom-nav {
   border: none;
   background: var(--border);
   color: var(--ink-60);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: bold;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
+  padding: 0 0 1px 0; /* slight bottom offset to perfectly center standard multiplication character */
   transition: background var(--transition), color var(--transition);
 }
 
@@ -1479,6 +1481,7 @@ body.is-landing .bottom-nav {
 
 .swipe-deck {
   position: relative;
+  width: 100%;
   flex: 1;
   min-height: 340px;
   margin-bottom: 14px;
@@ -1520,6 +1523,7 @@ input[type="search"]::-webkit-search-cancel-button {
 /* Centered stacked card deck on tablet and desktop */
 @media (min-width: 768px) {
   .swipe-deck {
+    width: 100%;
     max-width: 380px;
     height: 560px;
     margin: 20px auto 32px;
