@@ -32,6 +32,7 @@ const App = (() => {
   let saved = new Set();
   let passed = new Set();
   let friends = [];
+  let viewedNew = new Set();
   let notes = {};
   let selectedDish = null;
   let currentWeekId = 'nacho-2026';
@@ -47,6 +48,7 @@ const App = (() => {
   const STORAGE_KEY_FRIENDS = 'pdxfw_friends_v1';
   const STORAGE_KEY_WEEK = 'pdxfw_current_week_v1';
   const STORAGE_KEY_NOTES = 'pdxfw_notes_v1';
+  const STORAGE_KEY_VIEWED_NEW = 'pdxfw_viewed_new_v1';
 
   const WEEK_FILTERS = {
     'pizza-2026': [
@@ -90,6 +92,8 @@ const App = (() => {
       if (w) currentWeekId = w;
       const n = localStorage.getItem(STORAGE_KEY_NOTES);
       if (n) notes = JSON.parse(n);
+      const vn = localStorage.getItem(STORAGE_KEY_VIEWED_NEW);
+      if (vn) viewedNew = new Set(JSON.parse(vn));
     } catch (e) { }
   }
 
@@ -100,6 +104,7 @@ const App = (() => {
       localStorage.setItem(STORAGE_KEY_FRIENDS, JSON.stringify(friends));
       localStorage.setItem(STORAGE_KEY_WEEK, currentWeekId);
       localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notes));
+      localStorage.setItem(STORAGE_KEY_VIEWED_NEW, JSON.stringify([...viewedNew]));
     } catch (e) { }
   }
 
@@ -321,11 +326,13 @@ const App = (() => {
       ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>`
       : esc(r.restaurant);
 
+    const isNew = r.isNew && !viewedNew.has(r.id);
+
     return `
       <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})">
         ${thumb}
         <div class="card-body">
-          <div class="card-dish">${esc(r.dish)}${r.isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+          <div class="card-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="card-restaurant">${restaurantHtml}${dist}</div>
           <div class="card-neighborhood">📍 ${esc(r.neighborhood)}</div>
           <div class="card-desc">${esc(r.desc)}</div>
@@ -417,6 +424,8 @@ const App = (() => {
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
 
+    const isNew = r.isNew && !viewedNew.has(r.id);
+
     // Save current active element for accessibility focus restore
     if (document.activeElement && document.activeElement !== document.body) {
       lastActiveElement = document.activeElement;
@@ -450,7 +459,7 @@ const App = (() => {
       </button>
       <div class="sheet-handle"></div>
       ${hero}
-      <div class="sheet-dish">${esc(r.dish)}${r.isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+      <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
       <div class="sheet-restaurant">
         ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
       </div>
@@ -488,6 +497,23 @@ const App = (() => {
     `;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+
+    // Mark as viewed
+    if (isNew) {
+      viewedNew.add(r.id);
+      saveState();
+      // Dynamically remove the new-badge from the card in browse/saved lists in the DOM
+      const card = document.querySelector(`.dish-card[data-id="${r.id}"]`);
+      if (card) {
+        const badge = card.querySelector('.new-badge');
+        if (badge) badge.remove();
+      }
+      const swipeCard = document.querySelector(`.swipe-card[data-id="${r.id}"]`);
+      if (swipeCard) {
+        const badge = swipeCard.querySelector('.new-badge');
+        if (badge) badge.remove();
+      }
+    }
 
     // Shift focus to the close button inside the detail sheet for accessibility
     setTimeout(() => {
@@ -1214,10 +1240,12 @@ const App = (() => {
         ? `<img src="${esc(item.image)}" alt="" loading="eager">`
         : `<div class="swipe-card-emoji">${esc(item.emoji)}</div>`;
 
+      const isNew = item.isNew && !viewedNew.has(item.id);
+
       cardEl.innerHTML = `
         <div class="swipe-card-image">${imageBlock}</div>
         <div class="swipe-card-body">
-          <div class="swipe-card-dish">${esc(item.dish)}${item.isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+          <div class="swipe-card-dish">${esc(item.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
           <div class="swipe-card-neighborhood">📍 ${esc(item.neighborhood)}</div>
           <div class="swipe-card-desc">${esc(item.desc)}</div>
