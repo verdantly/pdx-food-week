@@ -1745,8 +1745,11 @@ const App = (() => {
   return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative };
 })();
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', App.init);
-} else {
-  App.init();
+const isTestMode = window.location.search.includes('test=true');
+if (!isTestMode) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', App.init);
+  } else {
+    App.init();
+  }
 }
