@@ -1741,9 +1741,10 @@ const App = (() => {
     });
   }
 
-  // Public API
   return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative };
 })();
+
+window.App = App;
 
 const isTestMode = window.location.search.includes('test=true');
 if (!isTestMode) {
