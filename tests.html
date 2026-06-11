@@ -441,7 +441,7 @@
 
   // ── Helper: Sandbox Reloader ────────────────────────────────
   function reloadSandbox(queryString = '', clearStorage = true) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const iframe = document.getElementById('test-iframe');
       if (clearStorage) {
         try {
@@ -450,8 +450,26 @@
       }
       
       const targetSearch = '?test=true' + (queryString ? '&' + queryString : '');
+      
+      // 1. Reset to about:blank to guarantee unload of previous document
+      iframe.src = 'about:blank';
+      
+      // Wait up to 1 second for about:blank reset to complete
+      let resetPassed = false;
+      for (let i = 0; i < 20; i++) {
+        try {
+          if (iframe.contentWindow.location.href.includes('about:blank')) {
+            resetPassed = true;
+            break;
+          }
+        } catch (e) {}
+        await new Promise(r => setTimeout(r, 50));
+      }
+      
+      // 2. Set the target destination URL
       iframe.src = 'index.html' + targetSearch;
       
+      // 3. Poll for target page to be fully loaded and initialized
       let attempts = 0;
       const interval = setInterval(() => {
         attempts++;
@@ -459,7 +477,8 @@
           const win = iframe.contentWindow;
           const doc = iframe.contentDocument;
           
-          if (win && win.location.search === targetSearch) {
+          // Ensure we are on the same-origin index.html (search contains test=true)
+          if (win.location.search.includes('test=true')) {
             if (win.App && (doc.readyState === 'interactive' || doc.readyState === 'complete')) {
               clearInterval(interval);
               setTimeout(() => resolve(iframe), 150);
