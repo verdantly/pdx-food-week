@@ -468,6 +468,7 @@
       
       // 2. Set the target destination URL
       iframe.src = 'index.html' + targetSearch;
+      console.log(`reloadSandbox: Reset done. Loading target: ${targetSearch}`);
       
       // 3. Poll for target page to be fully loaded and initialized
       let attempts = 0;
@@ -476,17 +477,28 @@
         try {
           const win = iframe.contentWindow;
           const doc = iframe.contentDocument;
+          const search = win.location.search;
+          const hasApp = !!(win.App);
+          const rState = doc ? doc.readyState : 'unknown';
+          
+          if (attempts % 15 === 1 || hasApp) {
+            console.log(`Poll #${attempts}: href='${win.location.href}', search='${search}', hasApp=${hasApp}, readyState='${rState}'`);
+          }
           
           // Ensure we are on the same-origin index.html (search contains test=true)
-          if (win.location.search.includes('test=true')) {
-            if (win.App && (doc.readyState === 'interactive' || doc.readyState === 'complete')) {
+          if (search.includes('test=true')) {
+            if (hasApp && (rState === 'interactive' || rState === 'complete')) {
               clearInterval(interval);
+              console.log(`reloadSandbox: Successfully loaded ${targetSearch}`);
               setTimeout(() => resolve(iframe), 150);
               return;
             }
           }
         } catch (e) {
           // Ignore transient cross-origin errors during transition
+          if (attempts % 15 === 1) {
+            console.log(`Poll #${attempts}: cross-origin / loading transition error:`, e);
+          }
         }
         
         if (attempts > 80) { // 4 seconds timeout
