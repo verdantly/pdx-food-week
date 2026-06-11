@@ -50,30 +50,30 @@ const App = (() => {
 
   const WEEK_FILTERS = {
     'pizza-2026': [
-      { id: 'meat', label: '🥩 Meat' },
-      { id: 'vegetarian', label: '🌿 Vegetarian' },
-      { id: 'vegan', label: '🌱 Vegan' },
-      { id: 'gf', label: '🌾 Gluten-free' },
-      { id: 'pie', label: '🍕 Whole Pie' },
-      { id: 'minors', label: '👨‍👩‍👧 Family OK' }
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'pie', label: 'Whole Pie' },
+      { id: 'minors', label: 'Family OK' }
     ],
     'highball-2026': [
-      { id: 'minors', label: '👨‍👩‍👧 Minors OK' },
-      { id: '21plus', label: '🥃 21+ Only' },
-      { id: 'takeout', label: '🥡 Takeout OK' }
+      { id: 'minors', label: 'Minors OK' },
+      { id: '21plus', label: '21+ Only' },
+      { id: 'takeout', label: 'Takeout OK' }
     ],
     'taco-2026': [
-      { id: 'meat', label: '🥩 Meat' },
-      { id: 'vegetarian', label: '🌿 Vegetarian' },
-      { id: 'vegan', label: '🌱 Vegan' },
-      { id: 'gf', label: '🌾 Gluten-free' },
-      { id: 'spicy', label: '🌶️ Spicy' }
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'spicy', label: 'Spicy' }
     ],
     'nacho-2026': [
-      { id: 'meat', label: '🥩 Meat' },
-      { id: 'vegetarian', label: '🌿 Vegetarian' },
-      { id: 'vegan', label: '🌱 Vegan' },
-      { id: 'gf', label: '🌾 Gluten-free' }
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' }
     ]
   };
 
