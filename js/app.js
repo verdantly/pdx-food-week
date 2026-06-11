@@ -1442,7 +1442,7 @@ const App = (() => {
     }
     const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
     footers.forEach(el => {
-      el.innerHTML = `PDX Food Week<br><a href="privacy.html">Privacy Policy</a> &amp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
+      el.innerHTML = `PDX Food Week<br><a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
     });
 
     // Update header title
