@@ -325,7 +325,7 @@ const App = (() => {
       <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})">
         ${thumb}
         <div class="card-body">
-          <div class="card-dish">${esc(r.dish)}</div>
+          <div class="card-dish">${esc(r.dish)}${r.isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="card-restaurant">${restaurantHtml}${dist}</div>
           <div class="card-neighborhood">📍 ${esc(r.neighborhood)}</div>
           <div class="card-desc">${esc(r.desc)}</div>
@@ -450,7 +450,7 @@ const App = (() => {
       </button>
       <div class="sheet-handle"></div>
       ${hero}
-      <div class="sheet-dish">${esc(r.dish)}</div>
+      <div class="sheet-dish">${esc(r.dish)}${r.isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
       <div class="sheet-restaurant">
         ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
       </div>
@@ -1217,7 +1217,7 @@ const App = (() => {
       cardEl.innerHTML = `
         <div class="swipe-card-image">${imageBlock}</div>
         <div class="swipe-card-body">
-          <div class="swipe-card-dish">${esc(item.dish)}</div>
+          <div class="swipe-card-dish">${esc(item.dish)}${item.isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
           <div class="swipe-card-neighborhood">📍 ${esc(item.neighborhood)}</div>
           <div class="swipe-card-desc">${esc(item.desc)}</div>

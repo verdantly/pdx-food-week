@@ -17,6 +17,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244643,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Deconstructed Lasagna Nachos",
     "restaurant": "Adolfo at Malpractice",
     "neighborhood": "Buckman - Southeast Portland",
@@ -297,6 +298,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244638,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Verano Oscuro Chorizo Nachos",
     "restaurant": "Deschutes Brewery & Public House",
     "neighborhood": "Northwest Portland",
@@ -477,6 +479,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244641,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Fuego Nacho Crunch",
     "restaurant": "Habaneros Mexican Food",
     "neighborhood": "Lloyd District - Northeast Portland",
@@ -517,6 +520,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244642,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Spam Huli-Huli Nachos",
     "restaurant": "High Horse at The Bidwell",
     "neighborhood": "Downtown Portland - Southwest Portland",
