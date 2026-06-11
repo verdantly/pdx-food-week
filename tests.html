@@ -448,11 +448,26 @@
           iframe.contentWindow.localStorage.clear();
         } catch (e) {}
       }
-      iframe.src = 'index.html?test=true' + (queryString ? '&' + queryString : '');
+      
+      const targetSearch = '?test=true' + (queryString ? '&' + queryString : '');
+      
       iframe.onload = () => {
-        // Yield execution briefly to ensure DOM triggers complete
-        setTimeout(() => resolve(iframe), 150);
+        try {
+          const currentSearch = iframe.contentWindow.location.search;
+          if (currentSearch !== targetSearch) {
+            // Ignore load events from old documents/intermediate states
+            return;
+          }
+        } catch (e) {
+          // If cross-origin error occurs, it's not our target page yet
+          return;
+        }
+        
+        iframe.onload = null;
+        setTimeout(() => resolve(iframe), 250);
       };
+      
+      iframe.src = 'index.html' + targetSearch;
     });
   }
 
@@ -621,7 +636,9 @@
         await wait(200);
 
         log("Switching to Swipe tab...");
-        win.App.switchTab('swipe');
+        const swipeTabBtn = doc.querySelector('.nav-tab[data-tab="swipe"]');
+        assert(swipeTabBtn, "Swipe tab button should exist");
+        swipeTabBtn.click();
         await wait(100);
 
         const doc = iframe.contentDocument;
@@ -689,7 +706,9 @@
         await wait(150);
 
         log("Navigating to Friends tab...");
-        win.App.switchTab('friends');
+        const friendsTabBtn = doc.querySelector('.nav-tab[data-tab="friends"]');
+        assert(friendsTabBtn, "Friends tab button should exist");
+        friendsTabBtn.click();
         await wait(100);
 
         log("Simulating click on 'Generate Magic Link'...");
@@ -714,7 +733,9 @@
         await wait(200);
 
         const doc2 = iframe.contentDocument;
-        win2.App.switchTab('friends');
+        const friendsTabBtn2 = doc2.querySelector('.nav-tab[data-tab="friends"]');
+        assert(friendsTabBtn2, "Friends tab button should exist on reload");
+        friendsTabBtn2.click();
         await wait(100);
 
         const importInput = doc2.getElementById('friend-code-input');
@@ -751,8 +772,12 @@
         await wait(200);
 
         const doc = iframe.contentDocument;
-        log("Selecting 'Distance' sorting row...");
-        win.App.toggleDistanceSort(true);
+        log("Finding and clicking 'Distance' sorting pill...");
+        const distBtn = doc.querySelector('.sort-distance-group button.filter-chip') || 
+                        Array.from(doc.querySelectorAll('#sort-section button.filter-chip'))
+                             .find(c => c.textContent.includes('Distance'));
+        assert(distBtn, "Distance sort button should exist");
+        distBtn.click();
         await wait(100);
 
         log("Entering zip code 97214 and clicking Go...");
