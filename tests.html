@@ -605,12 +605,15 @@
 
         log("Finding first dish card and clicking its bookmark star button...");
         const card = doc.querySelector('.dish-card');
+        const dishId = card.getAttribute('data-id');
         const bookmarkBtn = card.querySelector('.bookmark-btn');
         bookmarkBtn.click();
-        await wait(100);
+        await wait(200);
 
-        assert(card.classList.contains('bookmarked'), "Card element should receive '.bookmarked' class");
-        assert(bookmarkBtn.classList.contains('saved'), "Bookmark button should have '.saved' class state");
+        const updatedCard = doc.querySelector(`.dish-card[data-id="${dishId}"]`);
+        assert(updatedCard, "Updated card should exist in DOM");
+        assert(updatedCard.classList.contains('bookmarked'), "Card element should receive '.bookmarked' class");
+        assert(updatedCard.querySelector('.bookmark-btn').classList.contains('saved'), "Bookmark button should have '.saved' class state");
 
         log("Reloading iframe *without* clearing localStorage to verify persistence...");
         await reloadSandbox("week=pizza-2026", false);
@@ -618,7 +621,7 @@
         await wait(200);
 
         const doc2 = iframe.contentDocument;
-        const restoredCard = doc2.querySelector('.dish-card[data-id="233600"]');
+        const restoredCard = doc2.querySelector(`.dish-card[data-id="${dishId}"]`);
         assert(restoredCard.classList.contains('bookmarked'), "Bookmarked card state should persist in localStorage across page loads");
         log("Bookmarks persistent storage synchronized successfully.", "pass");
       }
@@ -677,13 +680,12 @@
         win.App.init();
         await wait(200);
 
+        const doc = iframe.contentDocument;
         log("Switching to Swipe tab...");
         const swipeTabBtn = doc.querySelector('.nav-tab[data-tab="swipe"]');
         assert(swipeTabBtn, "Swipe tab button should exist");
         swipeTabBtn.click();
         await wait(100);
-
-        const doc = iframe.contentDocument;
         const deck = doc.querySelector('.swipe-deck');
         assert(deck, "Swipe deck container should exist");
 
@@ -742,10 +744,15 @@
 
         log("Adding test bookmarks...");
         const doc = iframe.contentDocument;
-        const stars = doc.querySelectorAll('.bookmark-btn');
+        
+        let stars = doc.querySelectorAll('.bookmark-btn');
+        assert(stars.length >= 2, "Should find at least 2 bookmark buttons");
         stars[0].click();
+        await wait(200);
+
+        stars = doc.querySelectorAll('.bookmark-btn');
         stars[1].click();
-        await wait(150);
+        await wait(200);
 
         log("Navigating to Friends tab...");
         const friendsTabBtn = doc.querySelector('.nav-tab[data-tab="friends"]');
