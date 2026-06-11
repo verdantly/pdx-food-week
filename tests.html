@@ -441,7 +441,7 @@
 
   // ── Helper: Sandbox Reloader ────────────────────────────────
   function reloadSandbox(queryString = '', clearStorage = true) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const iframe = document.getElementById('test-iframe');
       if (clearStorage) {
         try {
@@ -450,24 +450,31 @@
       }
       
       const targetSearch = '?test=true' + (queryString ? '&' + queryString : '');
+      iframe.src = 'index.html' + targetSearch;
       
-      iframe.onload = () => {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
         try {
-          const currentSearch = iframe.contentWindow.location.search;
-          if (currentSearch !== targetSearch) {
-            // Ignore load events from old documents/intermediate states
-            return;
+          const win = iframe.contentWindow;
+          const doc = iframe.contentDocument;
+          
+          if (win && win.location.search === targetSearch) {
+            if (win.App && (doc.readyState === 'interactive' || doc.readyState === 'complete')) {
+              clearInterval(interval);
+              setTimeout(() => resolve(iframe), 150);
+              return;
+            }
           }
         } catch (e) {
-          // If cross-origin error occurs, it's not our target page yet
-          return;
+          // Ignore transient cross-origin errors during transition
         }
         
-        iframe.onload = null;
-        setTimeout(() => resolve(iframe), 250);
-      };
-      
-      iframe.src = 'index.html' + targetSearch;
+        if (attempts > 80) { // 4 seconds timeout
+          clearInterval(interval);
+          reject(new Error("Timeout waiting for sandbox to load: " + targetSearch));
+        }
+      }, 50);
     });
   }
 
@@ -490,6 +497,10 @@
 
         assert(win.App, "App namespace should exist on window");
         
+        log("Initializing App manually...");
+        win.App.init();
+        await wait(200);
+
         log("Asserting that landing page elements are visible...");
         const landing = doc.getElementById('view-landing');
         assertEqual(landing.style.display || getComputedStyle(landing).display, 'block', "Landing page should be active by default");
