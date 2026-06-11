@@ -689,30 +689,36 @@
         const deck = doc.querySelector('.swipe-deck');
         assert(deck, "Swipe deck container should exist");
 
-        log("Checking desktop fanning card transforms (viewport is default width)...");
+        log("Mocking desktop width (window.innerWidth = 1024px)...");
+        Object.defineProperty(win, 'innerWidth', { writable: true, configurable: true, value: 1024 });
+        win.dispatchEvent(new Event('resize'));
+        await wait(200);
+
+        log("Checking desktop fanning card transforms...");
         const cards = deck.querySelectorAll('.swipe-card');
         assert(cards.length > 0, "Deck should render swipe cards");
 
         // Top card is active, cards i=1 and i=2 are fanned out
         if (cards.length > 1) {
-          const bgCard = cards[cards.length - 2]; // Elements are pre-inserted before firstChild, top card is at the end or styled by zIndex
+          const bgCard = deck.querySelector('.swipe-card-bg');
+          assert(bgCard, "Should find background swipe card");
           const transformStyle = bgCard.style.transform;
           log(`Background card transform: ${transformStyle}`);
           assertContains(transformStyle, 'rotate', "Desktop background card should fan out with rotate transforms");
           assertContains(transformStyle, 'translate', "Desktop background card should fan out with translate transforms");
         }
 
-        log("Mocking mobile width (window.innerWidth < 768px)...");
-        // Inject a property override for innerWidth
-        Object.defineProperty(win, 'innerWidth', { writable: true, value: 500 });
+        log("Mocking mobile width (window.innerWidth = 500px)...");
+        Object.defineProperty(win, 'innerWidth', { writable: true, configurable: true, value: 500 });
         
         log("Triggering resize event listener...");
         win.dispatchEvent(new Event('resize'));
-        await wait(100);
+        await wait(200);
 
         const cardsMobile = deck.querySelectorAll('.swipe-card');
         if (cardsMobile.length > 1) {
           const bgCardMobile = deck.querySelector('.swipe-card-bg');
+          assert(bgCardMobile, "Should find mobile background swipe card");
           const transformMobile = bgCardMobile.style.transform;
           log(`Mobile background card transform: ${transformMobile}`);
           assert(!transformMobile.includes('rotate'), "Mobile card transform should not contain rotation values");
@@ -761,8 +767,16 @@
         await wait(100);
 
         log("Simulating click on 'Generate Magic Link'...");
-        // Override Firestore connection to force local backup encoding fallback
-        win.db = null; 
+        // Stub Firestore collection method to force local backup encoding fallback immediately
+        if (win.firebase && win.firebase.firestore) {
+          try {
+            win.firebase.firestore().collection = function() {
+              throw new Error("Simulated Firestore Failure for testing");
+            };
+          } catch (e) {
+            console.error("Failed to stub Firestore", e);
+          }
+        }
         doc.getElementById('my-name-input').value = "Integrator";
         
         const generateBtn = doc.getElementById('copy-btn');
