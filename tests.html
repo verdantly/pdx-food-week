@@ -395,6 +395,17 @@
       </div>
     </div>
   </div>
+
+  <!-- Consolidated Error Log Panel -->
+  <div class="panel" id="error-log-panel" style="display: none; margin-top: 20px;">
+    <div class="panel-header" style="background: var(--red); color: #fff;">
+      <span>Consolidated Error Logs</span>
+      <button class="btn btn-secondary" id="copy-errors-btn" onclick="copyErrorLogs()" style="padding: 4px 12px; font-size: 12px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25);">Copy Errors</button>
+    </div>
+    <div style="padding: 16px; background: #1A1208; color: #FAF2F0; font-family: 'DM Mono', monospace; font-size: 13px; width: 100%;">
+      <textarea id="error-log-textarea" readonly style="width: 100%; height: 160px; background: transparent; color: #FAF2F0; border: none; font-family: inherit; font-size: inherit; resize: none; outline: none;"></textarea>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -403,6 +414,7 @@
   let testStartTime = 0;
   let passedCount = 0;
   let failedCount = 0;
+  let errorLogs = [];
 
   // ── Helper: Assertions ──────────────────────────────────────
   function assert(condition, message) {
@@ -830,6 +842,7 @@
       passed = true;
     } catch (err) {
       testLog(err.message, 'error');
+      errorLogs.push(`[${tc.name}]\n  ✘ ${err.message}`);
       console.error(err);
     }
 
@@ -860,6 +873,9 @@
     // Reset stats
     passedCount = 0;
     failedCount = 0;
+    errorLogs = [];
+    document.getElementById('error-log-panel').style.display = 'none';
+    document.getElementById('error-log-textarea').value = '';
     document.getElementById('stat-passed').textContent = 0;
     document.getElementById('stat-failed').textContent = 0;
     document.getElementById('stat-time').textContent = '0ms';
@@ -885,6 +901,29 @@
 
     runBtn.disabled = false;
     runBtn.textContent = 'Run All Tests';
+
+    // Update Consolidated Error Log Panel
+    const errorPanel = document.getElementById('error-log-panel');
+    const errorTextarea = document.getElementById('error-log-textarea');
+    if (errorLogs.length > 0) {
+      errorTextarea.value = "=== PDX FOOD WEEK TEST RUN ERRORS ===\n\n" + errorLogs.join('\n\n');
+      errorPanel.style.display = 'block';
+    } else {
+      errorPanel.style.display = 'none';
+    }
+  }
+
+  function copyErrorLogs() {
+    const txt = document.getElementById('error-log-textarea');
+    const btn = document.getElementById('copy-errors-btn');
+    if (!txt || !txt.value) return;
+    
+    navigator.clipboard.writeText(txt.value).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => {
+        btn.textContent = 'Copy Errors';
+      }, 2000);
+    });
   }
 
   window.onload = () => {
