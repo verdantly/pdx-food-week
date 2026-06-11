@@ -4,6 +4,7 @@
   "description": "PDX Food Week app + scraper",
   "type": "module",
   "scripts": {
+    "start": "npx -y serve .",
     "scrape": "node scrape_everout.js",
     "scrape:everout": "node scrape_everout.js",
     "scrape:tacos": "node scrape_tacos.js"
