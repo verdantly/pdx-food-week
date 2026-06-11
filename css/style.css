@@ -1255,24 +1255,23 @@ body.is-landing .bottom-nav {
   position: absolute;
   top: 16px;
   right: 16px;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   background: var(--card-bg);
   border: 1.5px solid var(--border);
   border-radius: 50%;
   color: var(--ink);
-  font-size: 16px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1;
-  padding: 0 0 1px 0; /* center standard multiplication sign perfectly */
-  transition: border-color var(--transition);
+  transition: all var(--transition);
 }
 
 .sheet-close:hover {
-  border-color: var(--ink-30);
+  border-color: var(--pizza);
+  color: var(--pizza);
+  transform: scale(1.05);
 }
 
 .sheet-handle {
