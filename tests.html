@@ -831,6 +831,19 @@
           success({ coords: mockCoords });
         };
 
+        // Mock fetch for Zippopotam.us API to be offline-friendly and instant
+        win.fetch = async (url) => {
+          if (url.includes('api.zippopotam.us')) {
+            return {
+              ok: true,
+              json: async () => ({
+                places: [{ latitude: "45.5135", longitude: "-122.6468" }]
+              })
+            };
+          }
+          return { ok: false };
+        };
+
         win.App.init();
         await wait(200);
 
@@ -847,8 +860,8 @@
         const zipInput = doc.getElementById('zip-code-input');
         zipInput.value = '97214';
         
-        win.App.applyZipCode();
-        await wait(300);
+        await win.App.applyZipCode();
+        await wait(200);
 
         // Verify distance labels appear in card items
         const cardTitle = doc.querySelector('#cards-browse .card-restaurant');
@@ -1004,7 +1017,7 @@
         assert(!badge.classList.contains('show'), "Browse tab badge dot should no longer have 'show' class");
 
         log("Reloading sandbox to test local storage persistence...");
-        await reloadSandbox("week=nacho-2026");
+        await reloadSandbox("week=nacho-2026", false);
         const win2 = iframe.contentWindow;
         win2.App.init();
         await wait(200);
