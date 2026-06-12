@@ -624,7 +624,13 @@ const App = (() => {
       sheetEl.style.transition = '';
       doUpdate();
       overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      document.getElementById('app').classList.add('detail-open');
+      if (window.innerWidth <= 768) {
+        document.body.style.overflow = 'hidden';
+      }
+      if (activeTab === 'map') {
+        setTimeout(refreshMapLayout, 360);
+      }
     }
 
     if (!fromPopState) {
@@ -636,8 +642,13 @@ const App = (() => {
 
   function closeDetail(fromPopState = false) {
     document.getElementById('detail-overlay').classList.remove('open');
+    document.getElementById('app').classList.remove('detail-open');
     document.body.style.overflow = '';
     selectedDish = null;
+
+    if (activeTab === 'map') {
+      setTimeout(refreshMapLayout, 360);
+    }
 
     if (lastActiveElement) {
       try {
