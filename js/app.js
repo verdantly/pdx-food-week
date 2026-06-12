@@ -1242,6 +1242,12 @@ const App = (() => {
     tab.classList.toggle('has-items', items.length > 0);
     tab.setAttribute('data-count', items.length);
 
+    const hasSavedItems = saved.size > 0;
+    const savedHeader = document.querySelector('#view-saved .saved-header');
+    const savedSort = document.getElementById('saved-sort-section');
+    if (savedHeader) savedHeader.style.display = hasSavedItems ? '' : 'none';
+    if (savedSort) savedSort.style.display = hasSavedItems ? '' : 'none';
+
     const container = document.getElementById('cards-saved');
     if (!container) return;
     if (items.length === 0) {
@@ -1253,8 +1259,11 @@ const App = (() => {
     void container.offsetWidth; // trigger reflow
     container.classList.add('fade-in');
 
-    if (activeSavedSort === 'custom') {
-      setupSavedDragEvents();
+    if (hasSavedItems) {
+      renderSavedFilters();
+      if (activeSavedSort === 'custom') {
+        setupSavedDragEvents();
+      }
     }
 
     // Restore focus if selector matches a rendered element
@@ -2292,6 +2301,12 @@ const App = (() => {
       const st = currentView.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
       const appContainer = document.getElementById('app');
       const fabButton = document.getElementById('mobile-filter-fab');
+
+      if (activeTab === 'saved' && saved.size === 0) {
+        if (fabButton) fabButton.classList.remove('show-fab');
+        return;
+      }
+
       const delta = st - lastScrollTop;
 
       if (st <= 60) {
