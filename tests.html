@@ -832,8 +832,10 @@
         };
 
         // Mock fetch for Zippopotam.us API to be offline-friendly and instant
+        let fetchCallCount = 0;
         win.fetch = async (url) => {
           if (url.includes('api.zippopotam.us')) {
+            fetchCallCount++;
             return {
               ok: true,
               json: async () => ({
@@ -856,12 +858,23 @@
         distBtn.click();
         await wait(100);
 
-        log("Entering zip code 97214 and clicking Go...");
+        log("Entering zip code 97214 (Portland cache hit) and clicking Go...");
         const zipInput = doc.getElementById('zip-code-input');
         zipInput.value = '97214';
         
         await win.App.applyZipCode();
         await wait(200);
+
+        log(`Fetch calls after cache-hit zip submission: ${fetchCallCount}`);
+        assertEqual(fetchCallCount, 0, "Fetch should not be called for zip code 97214 since it exists in Portland cache");
+
+        log("Entering zip code 10001 (cache miss, network fallback) and clicking Go...");
+        zipInput.value = '10001';
+        await win.App.applyZipCode();
+        await wait(200);
+
+        log(`Fetch calls after cache-miss zip submission: ${fetchCallCount}`);
+        assertEqual(fetchCallCount, 1, "Fetch should be called exactly once for zip code 10001 (fallback to API)");
 
         // Verify distance labels appear in card items
         const cardTitle = doc.querySelector('#cards-browse .card-restaurant');
