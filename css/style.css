@@ -92,7 +92,7 @@ body.is-landing .bottom-nav {
   padding: 18px 20px 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1100; /* Set above Leaflet map panes and controls (max 1000) so they scroll underneath */
   flex-shrink: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
