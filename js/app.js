@@ -462,6 +462,29 @@ const App = (() => {
     showSaveIndicator();
   }
 
+  let noteSaveTimeout = null;
+  function handleNoteInput(id, text) {
+    const ind = document.getElementById('note-save-indicator');
+    if (ind) {
+      ind.style.opacity = '1';
+      ind.textContent = 'Saving...';
+    }
+    clearTimeout(noteSaveTimeout);
+    noteSaveTimeout = setTimeout(() => {
+      if (!notes[id]) notes[id] = { rating: 0, note: '' };
+      notes[id].note = text;
+      saveState();
+      if (ind) {
+        ind.textContent = 'Saved to device ✓';
+        setTimeout(() => {
+          if (ind.textContent === 'Saved to device ✓') {
+            ind.style.opacity = '0';
+          }
+        }, 1200);
+      }
+    }, 500);
+  }
+
   function getCurrentContextList() {
     if (activeTab === 'saved') return getSaved();
     if (activeTab === 'share') {
@@ -509,7 +532,8 @@ const App = (() => {
     const hero = r.image
       ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" alt=""></div>`
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
-    document.getElementById('detail-sheet-content').innerHTML = `
+
+    const contentHtml = `
       <button class="sheet-close" onclick="App.closeDetail()" aria-label="Close">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
@@ -548,38 +572,60 @@ const App = (() => {
         <div class="rating-stars" style="font-size: 24px; color: var(--ink-30); cursor: pointer; margin-bottom: 8px;">
           ${[1, 2, 3, 4, 5].map(star => `<span style="${notes[r.id] && notes[r.id].rating >= star ? 'color: #FFB800;' : ''}" onclick="App.setRating(${r.id}, ${star})">★</span>`).join('')}
         </div>
-        <textarea class="note-input" placeholder="Add your personal notes..." onchange="App.setNote(${r.id}, this.value)" style="width: 100%; border: 1px solid var(--ink-20); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; min-height: 80px;">${notes[r.id] && notes[r.id].note ? esc(notes[r.id].note) : ''}</textarea>
+        <textarea class="note-input" placeholder="Add your personal notes..." oninput="App.handleNoteInput(${r.id}, this.value)" style="width: 100%; border: 1px solid var(--ink-20); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; min-height: 80px;">${notes[r.id] && notes[r.id].note ? esc(notes[r.id].note) : ''}</textarea>
       </div>` : ''}
     `;
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
 
-    // Mark as viewed
-    if (isNew) {
-      viewedNew.add(r.id);
-      saveState();
-      // Dynamically remove the new-badge from the card in browse/saved lists in the DOM
-      const card = document.querySelector(`.dish-card[data-id="${r.id}"]`);
-      if (card) {
-        const badge = card.querySelector('.new-badge');
-        if (badge) badge.remove();
+    const sheetEl = document.getElementById('detail-sheet-content');
+    if (!sheetEl) return;
+
+    const doUpdate = () => {
+      sheetEl.innerHTML = contentHtml;
+
+      // Mark as viewed
+      if (isNew) {
+        viewedNew.add(r.id);
+        saveState();
+        const card = document.querySelector(`.dish-card[data-id="${r.id}"]`);
+        if (card) {
+          const badge = card.querySelector('.new-badge');
+          if (badge) badge.remove();
+        }
+        const swipeCard = document.querySelector(`.swipe-card[data-id="${r.id}"]`);
+        if (swipeCard) {
+          const badge = swipeCard.querySelector('.new-badge');
+          if (badge) badge.remove();
+        }
+        updateBrowseBadge();
       }
-      const swipeCard = document.querySelector(`.swipe-card[data-id="${r.id}"]`);
-      if (swipeCard) {
-        const badge = swipeCard.querySelector('.new-badge');
-        if (badge) badge.remove();
-      }
-      updateBrowseBadge();
+
+      // Shift focus to the close button inside the detail sheet for accessibility
+      setTimeout(() => {
+        const closeBtn = sheetEl.querySelector('.sheet-close') || 
+                         document.getElementById('detail-overlay')?.querySelector('.close-desktop');
+        if (closeBtn) {
+          closeBtn.focus();
+        }
+      }, 50);
+    };
+
+    if (overlay.classList.contains('open')) {
+      // If already open, apply smooth content cross-fade
+      sheetEl.style.transition = 'opacity 0.15s ease-out';
+      sheetEl.style.opacity = '0';
+      setTimeout(() => {
+        doUpdate();
+        sheetEl.style.transition = 'opacity 0.2s ease-in';
+        sheetEl.style.opacity = '1';
+      }, 150);
+    } else {
+      // Opening fresh: reset opacity immediately
+      sheetEl.style.opacity = '1';
+      sheetEl.style.transition = '';
+      doUpdate();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
-
-    // Shift focus to the close button inside the detail sheet for accessibility
-    setTimeout(() => {
-      const closeBtn = document.getElementById('detail-sheet-content')?.querySelector('.sheet-close') || 
-                       document.getElementById('detail-overlay')?.querySelector('.close-desktop');
-      if (closeBtn) {
-        closeBtn.focus();
-      }
-    }, 50);
 
     if (!fromPopState) {
       const url = new URL(window.location);
@@ -795,11 +841,15 @@ const App = (() => {
   function renderBrowse() {
     const filtered = getFiltered();
     const container = document.getElementById('cards-browse');
+    if (!container) return;
     if (filtered.length === 0) {
       container.innerHTML = `<div class="no-results"><div class="nr-emoji">🤷</div><p>No results. Try a different filter!</p></div>`;
     } else {
       container.innerHTML = filtered.map(r => cardHTML(r)).join('');
     }
+    container.classList.remove('fade-in');
+    void container.offsetWidth; // trigger reflow
+    container.classList.add('fade-in');
   }
 
   // ── Render: Saved ──────────────────────────────────────────
@@ -816,11 +866,15 @@ const App = (() => {
     tab.setAttribute('data-count', items.length);
 
     const container = document.getElementById('cards-saved');
+    if (!container) return;
     if (items.length === 0) {
       container.innerHTML = `<div class="no-results"><div class="nr-emoji">☆</div><p>Bookmark spots from Browse to build your list!</p></div>`;
     } else {
       container.innerHTML = items.map(r => cardHTML(r)).join('');
     }
+    container.classList.remove('fade-in');
+    void container.offsetWidth; // trigger reflow
+    container.classList.add('fade-in');
   }
 
   // ── Export Saved ───────────────────────────────────────────
@@ -1412,17 +1466,22 @@ const App = (() => {
     saveState();
     updateBrowseBadge();
 
-    // Advance the index synchronously so guard + currentSwipeCard() reflect
-    // the committed state immediately; the animation runs on the detached
-    // visual card.
     swipeIdx++;
     swipeAnimating = true;
 
-    const tx = dir === 'right' ? window.innerWidth : -window.innerWidth;
-    const rot = dir === 'right' ? 18 : -18;
-    cardEl.style.transition = 'transform 0.32s ease-out, opacity 0.32s ease-out';
-    cardEl.style.transform = `translate(${tx}px, 40px) rotate(${rot}deg)`;
-    cardEl.style.opacity = '0';
+    // Tactile spring punch before card flies off-screen
+    cardEl.style.transition = 'transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    const punchX = dir === 'right' ? 30 : -30;
+    const punchRot = dir === 'right' ? 6 : -6;
+    cardEl.style.transform = `translate(${punchX}px, 6px) rotate(${punchRot}deg) scale(1.03)`;
+
+    setTimeout(() => {
+      cardEl.style.transition = 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-out';
+      const tx = dir === 'right' ? window.innerWidth : -window.innerWidth;
+      const rot = dir === 'right' ? 18 : -18;
+      cardEl.style.transform = `translate(${tx}px, 40px) rotate(${rot}deg) scale(0.95)`;
+      cardEl.style.opacity = '0';
+    }, 100);
 
     setTimeout(() => {
       swipeAnimating = false;
@@ -1431,7 +1490,7 @@ const App = (() => {
       renderBrowse();
       renderSaved();
       renderFriends();
-    }, 300);
+    }, 450);
   }
 
   function undoSwipe() {
@@ -1664,6 +1723,40 @@ const App = (() => {
     renderFilters();
   }
 
+  function renderShimmer() {
+    const container = document.getElementById('cards-browse');
+    if (!container) return;
+    container.innerHTML = `
+      <div class="shimmer-card">
+        <div class="shimmer-emoji"></div>
+        <div class="shimmer-body">
+          <div class="shimmer-line title"></div>
+          <div class="shimmer-line sub"></div>
+          <div class="shimmer-line desc"></div>
+          <div class="shimmer-line desc2"></div>
+        </div>
+      </div>
+      <div class="shimmer-card">
+        <div class="shimmer-emoji"></div>
+        <div class="shimmer-body">
+          <div class="shimmer-line title"></div>
+          <div class="shimmer-line sub"></div>
+          <div class="shimmer-line desc"></div>
+          <div class="shimmer-line desc2"></div>
+        </div>
+      </div>
+      <div class="shimmer-card">
+        <div class="shimmer-emoji"></div>
+        <div class="shimmer-body">
+          <div class="shimmer-line title"></div>
+          <div class="shimmer-line sub"></div>
+          <div class="shimmer-line desc"></div>
+          <div class="shimmer-line desc2"></div>
+        </div>
+      </div>
+    `;
+  }
+
   function switchWeek(weekId) {
     if (!window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
@@ -1713,10 +1806,12 @@ const App = (() => {
     document.body.classList.remove('is-landing');
 
     switchTab('browse');
-    renderAll();
-    updateBrowseBadge();
-
-    showToast(`Switched to ${week.name}!`);
+    renderShimmer();
+    setTimeout(() => {
+      renderAll();
+      updateBrowseBadge();
+      showToast(`Switched to ${week.name}!`);
+    }, 450);
   }
 
   function renderLanding() {
@@ -1995,7 +2090,7 @@ const App = (() => {
     setupMobileScrollListener();
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput };
 })();
 
 window.App = App;

@@ -1223,7 +1223,8 @@ body.is-landing .bottom-nav {
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1235,8 +1236,8 @@ body.is-landing .bottom-nav {
 }
 
 .landing-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px) scale(1.025);
+  box-shadow: 0 16px 36px rgba(26, 18, 8, 0.12);
 }
 
 .landing-emoji {
@@ -2704,4 +2705,103 @@ select:focus-visible {
 
 .drawer-footer .btn-apply:hover {
   background: var(--pizza-dark);
+}
+
+/* ── Skeleton Shimmer Loading ── */
+.shimmer-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  pointer-events: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.shimmer-emoji {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: rgba(26, 18, 8, 0.06);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shimmer-line {
+  height: 12px;
+  background: rgba(26, 18, 8, 0.06);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-line.title {
+  height: 18px;
+  width: 65%;
+  border-radius: 6px;
+}
+
+.shimmer-line.sub {
+  width: 40%;
+  height: 12px;
+}
+
+.shimmer-line.desc {
+  width: 90%;
+  height: 10px;
+}
+
+.shimmer-line.desc2 {
+  width: 80%;
+  height: 10px;
+}
+
+/* Shimmer Animation Sweep */
+.shimmer-emoji::after,
+.shimmer-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0.6) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerAnim 1.4s infinite linear;
+}
+
+@keyframes shimmerAnim {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ── Content Fade-in animation ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
