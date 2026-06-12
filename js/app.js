@@ -1768,7 +1768,7 @@ const App = (() => {
     const viewBrowse = document.getElementById('view-browse');
     if (!viewBrowse) return;
 
-    viewBrowse.addEventListener('scroll', () => {
+    const onScroll = () => {
       if (window.innerWidth > 768) {
         // Reset compact header if switched to desktop/tablet
         document.getElementById('app').classList.remove('compact-header');
@@ -1777,7 +1777,9 @@ const App = (() => {
         return;
       }
 
-      const st = viewBrowse.scrollTop;
+      if (activeTab !== 'browse') return;
+
+      const st = viewBrowse.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
       const appContainer = document.getElementById('app');
       const fabButton = document.getElementById('mobile-filter-fab');
 
@@ -1793,7 +1795,10 @@ const App = (() => {
         }
       }
       lastScrollTop = st <= 0 ? 0 : st;
-    });
+    };
+
+    viewBrowse.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   function openFilterDrawer() {
