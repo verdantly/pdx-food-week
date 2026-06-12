@@ -364,7 +364,7 @@ body.is-landing .bottom-nav {
 }
 
 /* ── Search & Filters ── */
-.browse-header {
+.browse-header, .saved-header {
   position: sticky;
   top: 0;
   z-index: 30;
@@ -2549,7 +2549,8 @@ select:focus-visible {
   }
 
   /* Make browse search and filter bar scroll away naturally instead of sticking, preventing layout shifts */
-  .compact-header .browse-header {
+  .compact-header .browse-header,
+  .compact-header .saved-header {
     position: relative !important;
     border-bottom-color: transparent;
   }
@@ -2843,4 +2844,108 @@ select:focus-visible {
 
 .fade-in {
   animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* ── Custom Reordering (Drag and Drop / Mobile arrows) ── */
+.dish-card.dragging {
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+/* Drop Target Visual Indicators using pseudo-elements to avoid layout shifting */
+.dish-card.drag-over-top::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--pizza);
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.dish-card.drag-over-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--pizza);
+  border-radius: 2px;
+  z-index: 10;
+}
+
+.drag-handle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-right: 6px;
+  margin-right: -4px;
+  cursor: grab;
+  align-self: stretch;
+  user-select: none;
+}
+
+.drag-handle-container:active {
+  cursor: grabbing;
+}
+
+.drag-grip {
+  color: var(--ink-30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition);
+}
+
+.dish-card:hover .drag-grip {
+  color: var(--ink-60);
+}
+
+.reorder-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reorder-btn {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--ink-60);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reorder-btn:hover:not(:disabled) {
+  border-color: var(--pizza);
+  color: var(--pizza);
+  background: var(--pizza-light);
+  transform: scale(1.05);
+}
+
+.reorder-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.reorder-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  border-color: var(--border);
+  color: var(--ink-30);
+}
+
+.reorder-btn:focus-visible {
+  outline: 2px solid var(--pizza);
+  outline-offset: 1px;
 }

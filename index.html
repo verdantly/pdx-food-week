@@ -155,22 +155,6 @@
       Not affiliated with either.<br>
       Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
     </div>
-    
-    <!-- Floating Action Button (FAB) for Mobile Filter Drawer -->
-    <button id="mobile-filter-fab" class="mobile-filter-fab" onclick="App.openFilterDrawer()" aria-label="Open filter and sort drawer">
-      <svg viewBox="0 0 24 24" class="fab-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="4" y1="21" x2="4" y2="14"></line>
-        <line x1="4" y1="10" x2="4" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="12"></line>
-        <line x1="12" y1="8" x2="12" y2="3"></line>
-        <line x1="20" y1="21" x2="20" y2="16"></line>
-        <line x1="20" y1="12" x2="20" y2="3"></line>
-        <line x1="1" y1="14" x2="7" y2="14"></line>
-        <line x1="9" y1="8" x2="15" y2="8"></line>
-        <line x1="17" y1="16" x2="23" y2="16"></line>
-      </svg>
-      <span>Filter & Sort</span>
-    </button>
   </section>
 
   <!-- ── Swipe View ── -->
@@ -226,6 +210,37 @@
       <div class="stat-box">
         <div class="stat-num" id="stat-types">0</div>
         <div class="stat-label">Dish types</div>
+      </div>
+    </div>
+    <div class="saved-header">
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input id="saved-search-input" type="search" placeholder="Search saved dish, restaurant, neighborhood…" autocomplete="off" />
+          <button id="saved-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">×</button>
+        </div>
+      </div>
+      <div class="filter-section" role="group" aria-label="Filter saved dishes" id="saved-filters"></div>
+    </div>
+    <div class="sort-section" role="group" aria-label="Sort saved dishes" id="saved-sort-section">
+      <span class="sort-label">Sort:</span>
+      <div class="sort-main-group">
+        <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant (A-Z)</button>
+        <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
+        <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
+      </div>
+      <span class="sort-label-empty"></span>
+      <div class="sort-distance-group">
+        <button class="filter-chip" id="saved-sort-distance-btn" onclick="App.toggleSavedDistanceSort(this)">Distance</button>
+        <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px;">
+          <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
+            style="width: 80px; padding: 4px 8px; border-radius: 12px; border: 1px solid var(--border); font-size: 13px;"
+            aria-label="Enter Zip Code for distance sorting">
+          <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applySavedZipCode()">Go</button>
+        </div>
       </div>
     </div>
     <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
@@ -330,6 +345,22 @@
   </section>
 
   </div><!-- .app-main -->
+
+  <!-- Floating Action Button (FAB) for Mobile Filter Drawer -->
+  <button id="mobile-filter-fab" class="mobile-filter-fab" onclick="App.openFilterDrawer()" aria-label="Open filter and sort drawer">
+    <svg viewBox="0 0 24 24" class="fab-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" y1="21" x2="4" y2="14"></line>
+      <line x1="4" y1="10" x2="4" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12" y2="3"></line>
+      <line x1="20" y1="21" x2="20" y2="16"></line>
+      <line x1="20" y1="12" x2="20" y2="3"></line>
+      <line x1="1" y1="14" x2="7" y2="14"></line>
+      <line x1="9" y1="8" x2="15" y2="8"></line>
+      <line x1="17" y1="16" x2="23" y2="16"></line>
+    </svg>
+    <span>Filter & Sort</span>
+  </button>
 
 </div><!-- #app -->
 

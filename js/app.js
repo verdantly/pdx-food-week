@@ -29,6 +29,10 @@ const App = (() => {
   let activeFilters = new Set();
   let activeSort = 'restaurant';
   let searchQuery = '';
+  let activeSavedFilters = new Set();
+  let savedSearchQuery = '';
+  let activeSavedSort = 'restaurant';
+  let customSavedOrder = [];
   let saved = new Set();
   let passed = new Set();
   let friends = [];
@@ -49,6 +53,8 @@ const App = (() => {
   const STORAGE_KEY_WEEK = 'pdxfw_current_week_v1';
   const STORAGE_KEY_NOTES = 'pdxfw_notes_v1';
   const STORAGE_KEY_VIEWED_NEW = 'pdxfw_viewed_new_v1';
+  const STORAGE_KEY_SAVED_SORT = 'pdxfw_saved_sort_v1';
+  const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
 
   const WEEK_FILTERS = {
     'pizza-2026': [
@@ -94,6 +100,21 @@ const App = (() => {
       if (n) notes = JSON.parse(n);
       const vn = localStorage.getItem(STORAGE_KEY_VIEWED_NEW);
       if (vn) viewedNew = new Set(JSON.parse(vn));
+      const ss = localStorage.getItem(STORAGE_KEY_SAVED_SORT);
+      if (ss) activeSavedSort = ss;
+      const co = localStorage.getItem(STORAGE_KEY_CUSTOM_ORDER);
+      if (co) {
+        customSavedOrder = JSON.parse(co);
+      } else {
+        customSavedOrder = [...saved];
+      }
+      // Keep customSavedOrder in sync with saved items
+      for (const id of saved) {
+        if (!customSavedOrder.includes(id)) {
+          customSavedOrder.push(id);
+        }
+      }
+      customSavedOrder = customSavedOrder.filter(id => saved.has(id));
     } catch (e) { }
   }
 
@@ -105,6 +126,8 @@ const App = (() => {
       localStorage.setItem(STORAGE_KEY_WEEK, currentWeekId);
       localStorage.setItem(STORAGE_KEY_NOTES, JSON.stringify(notes));
       localStorage.setItem(STORAGE_KEY_VIEWED_NEW, JSON.stringify([...viewedNew]));
+      localStorage.setItem(STORAGE_KEY_SAVED_SORT, activeSavedSort);
+      localStorage.setItem(STORAGE_KEY_CUSTOM_ORDER, JSON.stringify(customSavedOrder));
     } catch (e) { }
   }
 
@@ -268,15 +291,46 @@ const App = (() => {
   function getSaved() {
     let savedItems = getRestaurants().filter(r => saved.has(r.id));
 
-    if (activeSort === 'dish') {
+    savedItems = savedItems.filter(r => {
+      if (activeSavedFilters.has('meat') && r.type !== 'meat') return false;
+      if (activeSavedFilters.has('vegetarian') && !isVegetarianFriendly(r)) return false;
+      if (activeSavedFilters.has('vegan') && !isVeganFriendly(r)) return false;
+      if (activeSavedFilters.has('gf') && !r.glutenFree) return false;
+      if (activeSavedFilters.has('pie') && !r.wholePie) return false;
+      if (activeSavedFilters.has('minors') && !r.minors) return false;
+      if (activeSavedFilters.has('21plus') && r.minors) return false;
+      if (activeSavedFilters.has('takeout') && !r.takeout) return false;
+      if (activeSavedFilters.has('spicy') && !r.spicy) return false;
+      if (activeSavedFilters.has('new') && !(r.isNew && !viewedNew.has(r.id))) return false;
+      if (savedSearchQuery) {
+        const q = savedSearchQuery.toLowerCase();
+        if (!r.dish.toLowerCase().includes(q) &&
+          !r.restaurant.toLowerCase().includes(q) &&
+          !r.neighborhood.toLowerCase().includes(q)) return false;
+      }
+      return true;
+    });
+
+    if (activeSavedSort === 'dish') {
       savedItems.sort((a, b) => a.dish.localeCompare(b.dish));
-    } else if (activeSort === 'restaurant') {
+    } else if (activeSavedSort === 'restaurant') {
       savedItems.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
-    } else if (activeSort === 'distance' && userLat !== null && userLng !== null) {
+    } else if (activeSavedSort === 'distance' && userLat !== null && userLng !== null) {
       savedItems.sort((a, b) => {
         const d1 = haversineDistance(userLat, userLng, a.lat, a.lng);
         const d2 = haversineDistance(userLat, userLng, b.lat, b.lng);
         return d1 - d2;
+      });
+    } else if (activeSavedSort === 'custom') {
+      savedItems.sort((a, b) => {
+        let idxA = customSavedOrder.indexOf(a.id);
+        let idxB = customSavedOrder.indexOf(b.id);
+        if (idxA === -1) idxA = 999999;
+        if (idxB === -1) idxB = 999999;
+        if (idxA === idxB) {
+          return a.id - b.id;
+        }
+        return idxA - idxB;
       });
     }
 
@@ -367,14 +421,15 @@ const App = (() => {
   }
 
   // ── Card HTML ──────────────────────────────────────────────
-  function cardHTML(r, overlap) {
+  function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount = -1) {
     const isSaved = saved.has(r.id);
     const cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
     const thumb = r.image
       ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy"></div>`
       : `<div class="card-emoji">${esc(r.emoji)}</div>`;
 
-    const dist = (activeSort === 'distance' && userLat !== null && userLng !== null)
+    const sortType = isSavedTab ? activeSavedSort : activeSort;
+    const dist = (sortType === 'distance' && userLat !== null && userLng !== null)
       ? ` <span style="font-size: 13px; font-weight: normal; color: var(--ink-60);">(${haversineDistance(userLat, userLng, r.lat, r.lng).toFixed(1)} mi)</span>`
       : '';
 
@@ -384,8 +439,37 @@ const App = (() => {
 
     const isNew = r.isNew && !viewedNew.has(r.id);
 
+    let dragHandleHtml = '';
+    if (isSavedTab && activeSavedSort === 'custom') {
+      const isFirst = index === 0;
+      const isLast = index === totalCount - 1;
+      dragHandleHtml = `
+        <div class="drag-handle-container" onclick="event.stopPropagation()">
+          <div class="drag-grip" title="Drag to reorder">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="5" r="1" fill="currentColor"></circle>
+              <circle cx="9" cy="12" r="1" fill="currentColor"></circle>
+              <circle cx="9" cy="19" r="1" fill="currentColor"></circle>
+              <circle cx="15" cy="5" r="1" fill="currentColor"></circle>
+              <circle cx="15" cy="12" r="1" fill="currentColor"></circle>
+              <circle cx="15" cy="19" r="1" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <div class="reorder-btns">
+            <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
+              ▲
+            </button>
+            <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
+              ▼
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
     return `
-      <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})">
+      <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})" ${isSavedTab && activeSavedSort === 'custom' ? 'draggable="true"' : ''}>
+        ${dragHandleHtml}
         ${thumb}
         <div class="card-body">
           <div class="card-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
@@ -406,10 +490,14 @@ const App = (() => {
   function toggleSave(id) {
     if (saved.has(id)) {
       saved.delete(id);
+      customSavedOrder = customSavedOrder.filter(x => x !== id);
       showToast('Removed from saved');
     } else {
       saved.add(id);
       passed.delete(id);
+      if (!customSavedOrder.includes(id)) {
+        customSavedOrder.push(id);
+      }
       showToast('🍕 Saved!');
     }
     saveState();
@@ -707,6 +795,12 @@ const App = (() => {
 
     document.body.classList.toggle('is-landing', name === 'landing');
 
+    const appContainer = document.getElementById('app');
+    const fabButton = document.getElementById('mobile-filter-fab');
+    if (appContainer) appContainer.classList.remove('compact-header');
+    if (fabButton) fabButton.classList.remove('show-fab');
+    lastScrollTop = 0;
+
     if (!fromPopState) {
       const url = new URL(window.location);
       if (name === 'browse') {
@@ -733,11 +827,13 @@ const App = (() => {
   function setSort(s, el) {
     activeSort = s;
     const sortSection = document.getElementById('sort-section');
-    sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('zip-code-container').style.display = 'none';
+    if (sortSection) {
+      sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    }
+    if (el) el.classList.add('active');
+    const zipContainer = document.getElementById('zip-code-container');
+    if (zipContainer) zipContainer.style.display = 'none';
     renderBrowse();
-    renderSaved(); // sorting also applies to your saved list
   }
 
   function toggleDistanceSort(el) {
@@ -745,16 +841,19 @@ const App = (() => {
     const sortSection = document.getElementById('sort-section');
     if (activeSort === 'distance') {
       // Revert to default
-      setSort('restaurant', sortSection.querySelector('button.filter-chip'));
+      setSort('restaurant', sortSection ? sortSection.querySelector('button.filter-chip') : null);
     } else {
       activeSort = 'distance';
-      sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      el.classList.add('active');
-      zipContainer.style.display = 'flex';
+      if (sortSection) {
+        sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      }
+      if (el) el.classList.add('active');
 
       if (userLat !== null && userLng !== null) {
+        if (zipContainer) zipContainer.style.display = 'none';
         renderBrowse();
-        renderSaved();
+      } else {
+        if (zipContainer) zipContainer.style.display = 'flex';
       }
     }
   }
@@ -826,6 +925,16 @@ const App = (() => {
     if (PORTLAND_ZIP_CACHE[zip]) {
       userLat = PORTLAND_ZIP_CACHE[zip].lat;
       userLng = PORTLAND_ZIP_CACHE[zip].lng;
+      
+      // Sync ZIP inputs
+      const savedZipInput = document.getElementById('saved-zip-code-input');
+      if (savedZipInput) savedZipInput.value = zip;
+      
+      const zipContainer = document.getElementById('zip-code-container');
+      if (zipContainer) zipContainer.style.display = 'none';
+      const savedZipContainer = document.getElementById('saved-zip-code-container');
+      if (savedZipContainer) savedZipContainer.style.display = 'none';
+
       renderBrowse();
       renderSaved();
       return;
@@ -839,6 +948,16 @@ const App = (() => {
       const data = await res.json();
       userLat = parseFloat(data.places[0].latitude);
       userLng = parseFloat(data.places[0].longitude);
+
+      // Sync ZIP inputs
+      const savedZipInput = document.getElementById('saved-zip-code-input');
+      if (savedZipInput) savedZipInput.value = zip;
+
+      const zipContainer = document.getElementById('zip-code-container');
+      if (zipContainer) zipContainer.style.display = 'none';
+      const savedZipContainer = document.getElementById('saved-zip-code-container');
+      if (savedZipContainer) savedZipContainer.style.display = 'none';
+
       renderBrowse();
       renderSaved();
     } catch (e) {
@@ -846,6 +965,236 @@ const App = (() => {
     } finally {
       zipInput.nextElementSibling.textContent = 'Go';
     }
+  }
+
+  // ── Saved Tab Filter & Sort & Reorder ───────────────────────
+  function toggleSavedFilter(f) {
+    if (activeSavedFilters.has(f)) {
+      activeSavedFilters.delete(f);
+    } else {
+      activeSavedFilters.add(f);
+    }
+    renderSavedFilters();
+    renderSaved();
+  }
+
+  function renderSavedFilters() {
+    let filters = [...(WEEK_FILTERS[currentWeekId] || [])];
+    const activeWeekRestaurants = getRestaurants();
+    const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
+    if (hasAnyNew) {
+      filters.push({ id: 'new', label: 'New' });
+    }
+    const container = document.getElementById('saved-filters');
+    if (!container) return;
+
+    if (filters.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    const labelHTML = `<span class="filter-label">Filter:</span>`;
+    const chipsHTML = `<div class="filter-chips-wrapper">` + filters.map(f => {
+      const activeCls = activeSavedFilters.has(f.id) ? 'active' : '';
+      return `<button class="filter-chip ${activeCls}" onclick="App.toggleSavedFilter('${f.id}')">${esc(f.label)}</button>`;
+    }).join('') + `</div>`;
+
+    container.innerHTML = labelHTML + chipsHTML;
+  }
+
+  function setSavedSort(s, el) {
+    activeSavedSort = s;
+    const sortSection = document.getElementById('saved-sort-section');
+    if (sortSection) {
+      sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    }
+    if (el) el.classList.add('active');
+    const zipContainer = document.getElementById('saved-zip-code-container');
+    if (zipContainer) zipContainer.style.display = 'none';
+    saveState();
+    renderSaved();
+  }
+
+  function toggleSavedDistanceSort(el) {
+    const zipContainer = document.getElementById('saved-zip-code-container');
+    const sortSection = document.getElementById('saved-sort-section');
+    if (activeSavedSort === 'distance') {
+      // Revert to default
+      setSavedSort('restaurant', sortSection ? sortSection.querySelector('button.filter-chip') : null);
+    } else {
+      activeSavedSort = 'distance';
+      if (sortSection) {
+        sortSection.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      }
+      if (el) el.classList.add('active');
+
+      if (userLat !== null && userLng !== null) {
+        if (zipContainer) zipContainer.style.display = 'none';
+        saveState();
+        renderSaved();
+      } else {
+        if (zipContainer) zipContainer.style.display = 'flex';
+      }
+    }
+  }
+
+  async function applySavedZipCode() {
+    const zipInput = document.getElementById('saved-zip-code-input');
+    const zip = zipInput.value.trim();
+    if (!zip || zip.length !== 5) {
+      showToast('⚠️ Please enter a valid 5-digit zip code');
+      return;
+    }
+
+    if (PORTLAND_ZIP_CACHE[zip]) {
+      userLat = PORTLAND_ZIP_CACHE[zip].lat;
+      userLng = PORTLAND_ZIP_CACHE[zip].lng;
+      
+      // Sync ZIP inputs
+      const browseZipInput = document.getElementById('zip-code-input');
+      if (browseZipInput) browseZipInput.value = zip;
+
+      const zipContainer = document.getElementById('zip-code-container');
+      if (zipContainer) zipContainer.style.display = 'none';
+      const savedZipContainer = document.getElementById('saved-zip-code-container');
+      if (savedZipContainer) savedZipContainer.style.display = 'none';
+
+      renderBrowse();
+      renderSaved();
+      return;
+    }
+
+    try {
+      const btn = zipInput.nextElementSibling;
+      btn.textContent = '...';
+      const res = await fetch(`https://api.zippopotam.us/us/${zip}`);
+      if (!res.ok) throw new Error('Not found');
+      const data = await res.json();
+      userLat = parseFloat(data.places[0].latitude);
+      userLng = parseFloat(data.places[0].longitude);
+
+      // Sync ZIP inputs
+      const browseZipInput = document.getElementById('zip-code-input');
+      if (browseZipInput) browseZipInput.value = zip;
+
+      const zipContainer = document.getElementById('zip-code-container');
+      if (zipContainer) zipContainer.style.display = 'none';
+      const savedZipContainer = document.getElementById('saved-zip-code-container');
+      if (savedZipContainer) savedZipContainer.style.display = 'none';
+
+      renderBrowse();
+      renderSaved();
+    } catch (e) {
+      showToast('⚠️ Could not find that zip code');
+    } finally {
+      zipInput.nextElementSibling.textContent = 'Go';
+    }
+  }
+
+  function moveSavedItem(id, direction) {
+    const currentSavedItems = getSaved();
+    const savedIds = currentSavedItems.map(r => r.id);
+    const idx = savedIds.indexOf(id);
+    if (idx === -1) return;
+
+    const newIdx = idx + direction;
+    if (newIdx < 0 || newIdx >= savedIds.length) return;
+
+    // Swap items
+    const targetId = savedIds[newIdx];
+    savedIds[idx] = targetId;
+    savedIds[newIdx] = id;
+
+    // Update customSavedOrder
+    const remainingIds = [...saved].filter(x => !savedIds.includes(x));
+    customSavedOrder = [...savedIds, ...remainingIds];
+
+    saveState();
+    renderSaved();
+  }
+
+  function reorderSavedItems(draggedId, targetId, insertAfter) {
+    const currentSavedItems = getSaved();
+    const savedIds = currentSavedItems.map(r => r.id);
+    const dragIdx = savedIds.indexOf(draggedId);
+    let targetIdx = savedIds.indexOf(targetId);
+
+    if (dragIdx === -1 || targetIdx === -1) return;
+
+    savedIds.splice(dragIdx, 1);
+    targetIdx = savedIds.indexOf(targetId);
+    if (insertAfter) {
+      savedIds.splice(targetIdx + 1, 0, draggedId);
+    } else {
+      savedIds.splice(targetIdx, 0, draggedId);
+    }
+
+    const remainingIds = [...saved].filter(x => !savedIds.includes(x));
+    customSavedOrder = [...savedIds, ...remainingIds];
+
+    saveState();
+    renderSaved();
+  }
+
+  let draggedCardId = null;
+
+  function setupSavedDragEvents() {
+    const cards = document.querySelectorAll('#cards-saved .dish-card');
+    cards.forEach(card => {
+      card.addEventListener('dragstart', (e) => {
+        if (activeSavedSort !== 'custom') return;
+        draggedCardId = Number(card.getAttribute('data-id'));
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', draggedCardId);
+      });
+
+      card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+        cards.forEach(c => {
+          c.classList.remove('drag-over-top');
+          c.classList.remove('drag-over-bottom');
+        });
+        draggedCardId = null;
+      });
+
+      card.addEventListener('dragover', (e) => {
+        if (activeSavedSort !== 'custom' || draggedCardId === null) return;
+        const targetId = Number(card.getAttribute('data-id'));
+        if (targetId === draggedCardId) return;
+
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+
+        const rect = card.getBoundingClientRect();
+        const relativeY = e.clientY - rect.top;
+        if (relativeY < rect.height / 2) {
+          card.classList.add('drag-over-top');
+          card.classList.remove('drag-over-bottom');
+        } else {
+          card.classList.add('drag-over-bottom');
+          card.classList.remove('drag-over-top');
+        }
+      });
+
+      card.addEventListener('dragleave', () => {
+        card.classList.remove('drag-over-top');
+        card.classList.remove('drag-over-bottom');
+      });
+
+      card.addEventListener('drop', (e) => {
+        if (activeSavedSort !== 'custom' || draggedCardId === null) return;
+        e.preventDefault();
+        const targetId = Number(card.getAttribute('data-id'));
+        if (targetId === draggedCardId) return;
+
+        const rect = card.getBoundingClientRect();
+        const relativeY = e.clientY - rect.top;
+        const insertAfter = relativeY >= rect.height / 2;
+
+        reorderSavedItems(draggedCardId, targetId, insertAfter);
+      });
+    });
   }
 
   // ── Render: Browse ─────────────────────────────────────────
@@ -865,6 +1214,23 @@ const App = (() => {
 
   // ── Render: Saved ──────────────────────────────────────────
   function renderSaved() {
+    // Preserve focus state for accessibility
+    const activeEl = document.activeElement;
+    let focusSelector = null;
+    if (activeEl && activeEl.closest('#cards-saved')) {
+      const card = activeEl.closest('.dish-card');
+      if (card) {
+        const id = card.getAttribute('data-id');
+        const isUp = activeEl.classList.contains('reorder-up');
+        const isDown = activeEl.classList.contains('reorder-down');
+        if (isUp) {
+          focusSelector = `#cards-saved .dish-card[data-id="${id}"] .reorder-up`;
+        } else if (isDown) {
+          focusSelector = `#cards-saved .dish-card[data-id="${id}"] .reorder-down`;
+        }
+      }
+    }
+
     const items = getSaved();
     const hoods = new Set(items.map(r => r.neighborhood)).size;
     const types = new Set(items.map(r => r.type)).size;
@@ -881,11 +1247,23 @@ const App = (() => {
     if (items.length === 0) {
       container.innerHTML = `<div class="no-results"><div class="nr-emoji">☆</div><p>Bookmark spots from Browse to build your list!</p></div>`;
     } else {
-      container.innerHTML = items.map(r => cardHTML(r)).join('');
+      container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
     }
     container.classList.remove('fade-in');
     void container.offsetWidth; // trigger reflow
     container.classList.add('fade-in');
+
+    if (activeSavedSort === 'custom') {
+      setupSavedDragEvents();
+    }
+
+    // Restore focus if selector matches a rendered element
+    if (focusSelector) {
+      const elToFocus = document.querySelector(focusSelector);
+      if (elToFocus) {
+        elToFocus.focus();
+      }
+    }
   }
 
   // ── Export Saved ───────────────────────────────────────────
@@ -1780,15 +2158,38 @@ const App = (() => {
     const searchInput = document.getElementById('search-input');
     if (searchInput) searchInput.value = '';
 
+    activeSavedFilters.clear();
+    savedSearchQuery = '';
+    const savedSearchInput = document.getElementById('saved-search-input');
+    if (savedSearchInput) {
+      savedSearchInput.value = '';
+      const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
+      if (savedSearchClearBtn) savedSearchClearBtn.style.display = 'none';
+    }
+
     // Reset activeSort and sort chips active states
     activeSort = 'restaurant';
-    document.querySelectorAll('#sort-row button.filter-chip').forEach(btn => {
+    document.querySelectorAll('#sort-row button.filter-chip, #sort-section button.filter-chip').forEach(btn => {
       if (btn.textContent.includes('Restaurant')) {
         btn.classList.add('active');
       } else {
         btn.classList.remove('active');
       }
     });
+
+    activeSavedSort = 'restaurant';
+    document.querySelectorAll('#saved-sort-section button.filter-chip').forEach(btn => {
+      if (btn.textContent.includes('Restaurant')) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    const zipContainer = document.getElementById('zip-code-container');
+    if (zipContainer) zipContainer.style.display = 'none';
+    const savedZipContainer = document.getElementById('saved-zip-code-container');
+    if (savedZipContainer) savedZipContainer.style.display = 'none';
 
     // Reset Swipe queue
     swipeQueue = null;
@@ -1809,6 +2210,7 @@ const App = (() => {
     applyWeekTheme(week);
     renderHeader();
     updateFilterDisplay();
+    renderSavedFilters();
 
     const url = new URL(window.location);
     url.searchParams.set('week', weekId);
@@ -1872,7 +2274,8 @@ const App = (() => {
 
   function setupMobileScrollListener() {
     const viewBrowse = document.getElementById('view-browse');
-    if (!viewBrowse) return;
+    const viewSaved = document.getElementById('view-saved');
+    if (!viewBrowse || !viewSaved) return;
 
     const onScroll = () => {
       if (window.innerWidth > 768) {
@@ -1883,9 +2286,10 @@ const App = (() => {
         return;
       }
 
-      if (activeTab !== 'browse') return;
+      if (activeTab !== 'browse' && activeTab !== 'saved') return;
 
-      const st = viewBrowse.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+      const currentView = activeTab === 'browse' ? viewBrowse : viewSaved;
+      const st = currentView.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
       const appContainer = document.getElementById('app');
       const fabButton = document.getElementById('mobile-filter-fab');
       const delta = st - lastScrollTop;
@@ -1906,48 +2310,79 @@ const App = (() => {
     };
 
     viewBrowse.addEventListener('scroll', onScroll, { passive: true });
+    viewSaved.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   function openFilterDrawer() {
     if (filterDrawerOpen) return;
 
-    const searchBar = document.querySelector('#view-browse .search-bar');
-    const browseFilters = document.getElementById('browse-filters');
-    const sortSection = document.getElementById('sort-section');
-    const drawerBody = document.getElementById('filter-drawer-body');
     const overlay = document.getElementById('filter-drawer-overlay');
+    const drawerBody = document.getElementById('filter-drawer-body');
+    if (!overlay || !drawerBody) return;
 
-    if (searchBar && browseFilters && sortSection && drawerBody && overlay) {
-      drawerBody.appendChild(searchBar);
-      drawerBody.appendChild(browseFilters);
-      drawerBody.appendChild(sortSection);
+    if (activeTab === 'saved') {
+      const searchBar = document.querySelector('#view-saved .search-bar');
+      const savedFilters = document.getElementById('saved-filters');
+      const sortSection = document.getElementById('saved-sort-section');
+      if (searchBar && savedFilters && sortSection) {
+        drawerBody.appendChild(searchBar);
+        drawerBody.appendChild(savedFilters);
+        drawerBody.appendChild(sortSection);
 
-      overlay.classList.add('open');
-      filterDrawerOpen = true;
-      document.body.style.overflow = 'hidden'; // prevent underlying body scroll
+        overlay.classList.add('open');
+        filterDrawerOpen = true;
+        document.body.style.overflow = 'hidden'; // prevent underlying body scroll
+      }
+    } else {
+      const searchBar = document.querySelector('#view-browse .search-bar');
+      const browseFilters = document.getElementById('browse-filters');
+      const sortSection = document.getElementById('sort-section');
+      if (searchBar && browseFilters && sortSection) {
+        drawerBody.appendChild(searchBar);
+        drawerBody.appendChild(browseFilters);
+        drawerBody.appendChild(sortSection);
+
+        overlay.classList.add('open');
+        filterDrawerOpen = true;
+        document.body.style.overflow = 'hidden'; // prevent underlying body scroll
+      }
     }
   }
 
   function closeFilterDrawer() {
     if (!filterDrawerOpen) return;
 
-    const searchBar = document.querySelector('#filter-drawer-body .search-bar');
-    const browseFilters = document.getElementById('browse-filters');
-    const sortSection = document.getElementById('sort-section');
-    const browseHeader = document.querySelector('#view-browse .browse-header');
-    const cardsBrowse = document.getElementById('cards-browse');
     const overlay = document.getElementById('filter-drawer-overlay');
+    if (!overlay) return;
 
-    if (searchBar && browseFilters && sortSection && browseHeader && cardsBrowse && overlay) {
-      browseHeader.appendChild(searchBar);
-      browseHeader.appendChild(browseFilters);
-      document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
-
-      overlay.classList.remove('open');
-      filterDrawerOpen = false;
-      document.body.style.overflow = ''; // restore body scroll
+    if (activeTab === 'saved') {
+      const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+      const savedFilters = document.getElementById('saved-filters');
+      const sortSection = document.getElementById('saved-sort-section');
+      const savedHeader = document.querySelector('#view-saved .saved-header');
+      const cardsSaved = document.getElementById('cards-saved');
+      if (searchBar && savedFilters && sortSection && savedHeader && cardsSaved) {
+        savedHeader.appendChild(searchBar);
+        savedHeader.appendChild(savedFilters);
+        document.getElementById('view-saved').insertBefore(sortSection, document.querySelector('#view-saved .section-header') || cardsSaved);
+      }
+    } else {
+      const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+      const browseFilters = document.getElementById('browse-filters');
+      const sortSection = document.getElementById('sort-section');
+      const browseHeader = document.querySelector('#view-browse .browse-header');
+      const cardsBrowse = document.getElementById('cards-browse');
+      if (searchBar && browseFilters && sortSection && browseHeader && cardsBrowse) {
+        browseHeader.appendChild(searchBar);
+        browseHeader.appendChild(browseFilters);
+        document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
+      }
     }
+
+    overlay.classList.remove('open');
+    filterDrawerOpen = false;
+    document.body.style.overflow = ''; // restore body scroll
   }
 
   // ── Init ───────────────────────────────────────────────────
@@ -1995,6 +2430,24 @@ const App = (() => {
       });
     }
 
+    // Wire up saved search
+    const savedSearchInput = document.getElementById('saved-search-input');
+    const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
+    if (savedSearchInput && savedSearchClearBtn) {
+      savedSearchInput.addEventListener('input', e => {
+        savedSearchQuery = e.target.value;
+        savedSearchClearBtn.style.display = savedSearchQuery ? 'flex' : 'none';
+        renderSaved();
+      });
+      savedSearchClearBtn.addEventListener('click', () => {
+        savedSearchInput.value = '';
+        savedSearchQuery = '';
+        savedSearchClearBtn.style.display = 'none';
+        savedSearchInput.focus();
+        renderSaved();
+      });
+    }
+
     // Handle auto-import from URL Magic Link
     const shareListId = urlParams.get('list');
     const shareFallback = urlParams.get('fallback');
@@ -2015,11 +2468,17 @@ const App = (() => {
       if (e.key === 'Enter') addFriend();
     });
 
-    // Wire up zip code input (Enter key)
+    // Wire up zip code inputs (Enter key)
     const zipCodeInput = document.getElementById('zip-code-input');
     if (zipCodeInput) {
       zipCodeInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') applyZipCode();
+      });
+    }
+    const savedZipCodeInput = document.getElementById('saved-zip-code-input');
+    if (savedZipCodeInput) {
+      savedZipCodeInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') applySavedZipCode();
       });
     }
 
@@ -2101,7 +2560,7 @@ const App = (() => {
     setupMobileScrollListener();
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem };
 })();
 
 window.App = App;
