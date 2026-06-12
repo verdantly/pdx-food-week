@@ -1782,17 +1782,19 @@ const App = (() => {
       const st = viewBrowse.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
       const appContainer = document.getElementById('app');
       const fabButton = document.getElementById('mobile-filter-fab');
+      const delta = st - lastScrollTop;
 
-      if (st > lastScrollTop && st > 120) {
-        // Scroll Down
+      if (st <= 60) {
+        // Near the top: always show full header and hide FAB
+        appContainer.classList.remove('compact-header');
+        if (fabButton) fabButton.classList.remove('show-fab');
+      } else if (delta > 20 && st > 150) {
+        // Significant scroll down: hide header and show FAB
         appContainer.classList.add('compact-header');
         if (fabButton) fabButton.classList.add('show-fab');
-      } else if (st < lastScrollTop) {
-        // Scroll Up
+      } else if (delta < -30) {
+        // Significant scroll up: show header
         appContainer.classList.remove('compact-header');
-        if (st < 100 && fabButton) {
-          fabButton.classList.remove('show-fab');
-        }
       }
       lastScrollTop = st <= 0 ? 0 : st;
     };

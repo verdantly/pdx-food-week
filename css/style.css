@@ -2508,13 +2508,10 @@ select:focus-visible {
     padding-top: 0 !important;
   }
 
-  /* Hide browse search and filter bar from main list on scroll */
+  /* Make browse search and filter bar scroll away naturally instead of sticking, preventing layout shifts */
   .compact-header .browse-header {
-    display: none !important;
-  }
-
-  .compact-header .sort-section {
-    display: none !important;
+    position: relative !important;
+    border-bottom-color: transparent;
   }
 }
 
