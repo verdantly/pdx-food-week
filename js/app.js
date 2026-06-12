@@ -238,6 +238,7 @@ const App = (() => {
       if (activeFilters.has('21plus') && r.minors) return false;
       if (activeFilters.has('takeout') && !r.takeout) return false;
       if (activeFilters.has('spicy') && !r.spicy) return false;
+      if (activeFilters.has('new') && !(r.isNew && !viewedNew.has(r.id))) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
@@ -1569,7 +1570,12 @@ const App = (() => {
   }
 
   function renderFilters() {
-    const filters = WEEK_FILTERS[currentWeekId] || [];
+    let filters = [...(WEEK_FILTERS[currentWeekId] || [])];
+    const activeWeekRestaurants = getRestaurants();
+    const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
+    if (hasAnyNew) {
+      filters.push({ id: 'new', label: 'New' });
+    }
     const container = document.getElementById('browse-filters');
     if (!container) return;
 

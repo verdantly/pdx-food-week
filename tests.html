@@ -898,6 +898,59 @@
         assertEqual(banner.style.display || getComputedStyle(banner).display, 'flex', "Banner should have display: flex");
         assertContains(banner.textContent, "There are 4 new nacho listings for Nacho Week!", "Banner should have correct custom copy");
 
+        log("Verifying 'New' filter chip is rendered in the filter section...");
+        const filterChips = Array.from(doc.querySelectorAll('#browse-filters .filter-chip'));
+        const newFilterChip = filterChips.find(chip => chip.textContent.trim() === 'New');
+        assert(newFilterChip, "A filter chip with label 'New' should exist");
+
+        log("Clicking 'New' filter chip to show only unviewed new items...");
+        newFilterChip.click();
+        await wait(200);
+
+        log("Verifying Browse view displays exactly 4 listings (since all 4 are new & unviewed)...");
+        let activeCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
+          return card.style.display !== 'none';
+        });
+        log(`Found ${activeCards.length} visible cards under 'New' filter`);
+        assertEqual(activeCards.length, 4, "Should display exactly 4 cards under 'New' filter");
+
+        const firstCard = activeCards[0];
+        const firstId = parseInt(firstCard.dataset.id, 10);
+        log(`Opening detail overlay for first new item (ID: ${firstId}) to mark it viewed...`);
+        win.App.openDetail(firstId);
+        await wait(200);
+
+        log("Verifying card badge was dynamically removed...");
+        const badgeAfterOpen = firstCard.querySelector('.new-badge');
+        assert(!badgeAfterOpen, "NEW badge element should be removed from the card on view");
+
+        log("Closing detail overlay...");
+        win.App.closeDetail();
+        await wait(100);
+
+        log("Verifying card is still temporarily visible in list to prevent jarring layout jumps...");
+        activeCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
+          return card.style.display !== 'none';
+        });
+        assertEqual(activeCards.length, 4, "Should still show 4 cards immediately after closing details");
+
+        log("Toggling 'New' filter off and on to trigger list refresh...");
+        newFilterChip.click();
+        await wait(100);
+        newFilterChip.click();
+        await wait(200);
+
+        log("Verifying the viewed card is now filtered out (leaving 3 cards)...");
+        activeCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
+          return card.style.display !== 'none';
+        });
+        log(`Found ${activeCards.length} visible cards after toggling 'New' filter`);
+        assertEqual(activeCards.length, 3, "Viewed card should be filtered out, leaving exactly 3 cards");
+
+        log("Toggling 'New' filter off to restore full menu browse list...");
+        newFilterChip.click();
+        await wait(200);
+
         log("Checking that new dish cards have the 'NEW' badge...");
         const newCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
           return card.querySelector('.new-badge');
@@ -906,21 +959,21 @@
         assert(newCards.length > 0, "There should be cards with 'NEW' badge styled");
 
         const firstNewCard = newCards[0];
-        const firstId = parseInt(firstNewCard.dataset.id, 10);
-        log(`Opening detail overlay for first new item (ID: ${firstId})...`);
-        win.App.openDetail(firstId);
+        const firstId2 = parseInt(firstNewCard.dataset.id, 10);
+        log(`Opening detail overlay for next new item (ID: ${firstId2})...`);
+        win.App.openDetail(firstId2);
         await wait(200);
 
         log("Verifying card badge was dynamically removed...");
-        const badgeAfterOpen = firstNewCard.querySelector('.new-badge');
-        assert(!badgeAfterOpen, "NEW badge element should be removed from the card on view");
+        const badgeAfterOpen2 = firstNewCard.querySelector('.new-badge');
+        assert(!badgeAfterOpen2, "NEW badge element should be removed from the card on view");
 
         log("Closing detail overlay...");
         win.App.closeDetail();
         await wait(100);
 
-        log("Verifying banner text updated to show 3 remaining...");
-        assertContains(banner.textContent, "There are 3 new nacho listings for Nacho Week!", "Banner text should update when count decreases");
+        log("Verifying banner text updated to show 2 remaining...");
+        assertContains(banner.textContent, "There are 2 new nacho listings for Nacho Week!", "Banner text should update when count decreases");
 
         log("Verifying Browse tab badge dot is still showing (since other items are not viewed yet)...");
         assert(badge.classList.contains('show'), "Badge dot should still show on tab");
