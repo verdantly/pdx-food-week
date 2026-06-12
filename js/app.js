@@ -591,6 +591,7 @@ const App = (() => {
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
 
+    const wasAlreadyOpen = document.getElementById('detail-overlay').classList.contains('open');
     const isNew = r.isNew && !viewedNew.has(r.id);
 
     // Save current active element for accessibility focus restore
@@ -724,7 +725,11 @@ const App = (() => {
     if (!fromPopState) {
       const url = new URL(window.location);
       url.searchParams.set('dish', id);
-      history.pushState({ detailDishId: id }, '', url);
+      if (wasAlreadyOpen) {
+        history.replaceState({ detailDishId: id }, '', url);
+      } else {
+        history.pushState({ detailDishId: id }, '', url);
+      }
     }
   }
 
