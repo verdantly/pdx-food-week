@@ -1120,7 +1120,7 @@ body.is-landing .bottom-nav {
   position: fixed;
   inset: 0;
   background: rgba(26, 18, 8, 0.5);
-  z-index: 200;
+  z-index: 2000;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -1498,7 +1498,7 @@ body.is-landing .bottom-nav {
   font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
-  z-index: 300;
+  z-index: 3000;
   transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   pointer-events: none;
 }
