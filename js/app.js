@@ -688,14 +688,16 @@ const App = (() => {
         updateBrowseBadge();
       }
 
-      // Shift focus to the close button inside the detail sheet for accessibility
-      setTimeout(() => {
-        const closeBtn = sheetEl.querySelector('.sheet-close') || 
-                         document.getElementById('detail-overlay')?.querySelector('.close-desktop');
-        if (closeBtn) {
-          closeBtn.focus();
-        }
-      }, 50);
+      // Shift focus to the close button inside the detail sheet for accessibility (only on mobile modal layout)
+      if (window.innerWidth <= 768) {
+        setTimeout(() => {
+          const closeBtn = sheetEl.querySelector('.sheet-close') || 
+                           document.getElementById('detail-overlay')?.querySelector('.close-desktop');
+          if (closeBtn) {
+            closeBtn.focus();
+          }
+        }, 50);
+      }
     };
 
     if (overlay.classList.contains('open')) {
