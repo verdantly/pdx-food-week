@@ -19,7 +19,7 @@ Static vanilla-JS single-page app. Three layers that talk via `window` globals �
 
 **App layer (`js/app.js`)** — one IIFE-wrapped `App` module. All state (active tab, filter, search, saved set, friends, selected dish, `currentWeekId`) lives in closure vars. Persistence is `localStorage` under `pdxfw_saved_v1` and `pdxfw_friends_v1`. Multi-week switching is implemented at the data level (`getRestaurants()` filters by `currentWeekId`) but the UI switcher is a placeholder — adding a new week means adding a `<script src="data/...">` to `index.html` before `app.js` and wiring a chooser.
 
-**View layer (`index.html` + `css/style.css`)** — four tab-panel sections (`view-browse`, `view-saved`, `view-friends`, `view-map`) plus a bottom-sheet detail overlay and a toast. Event wiring is inline `onclick="App.*"` on buttons/cards; `App.init` only wires overlay-close, search input, and friend-code Enter key. Responsive breakpoints: 768px (tablet), 1100px (desktop sidebar layout), 1400px (wide).
+**View layer (`index.html` + `css/style.css`)** — four tab-panel sections (`view-browse`, `view-saved`, `view-share`, `view-map`) plus a bottom-sheet detail overlay and a toast. Event wiring is inline `onclick="App.*"` on buttons/cards; `App.init` only wires overlay-close, search input, and friend-code Enter key. Responsive breakpoints: 768px (tablet), 1100px (desktop sidebar layout), 1400px (wide).
 
 **Share codes** — `encodeShareCode()` / `decodeShareCode()` in `app.js`: sorted saved IDs joined by `,`, base64'd (padding stripped), prefixed `PDX26-`. Changing the format breaks every previously-shared code.
 

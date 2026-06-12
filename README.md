@@ -6,7 +6,7 @@ A mobile-first web app to browse, bookmark, and share your favorite dishes from 
 
 - 🍕 **Browse** — filter by meat/veg/vegan, gluten-free, whole pie, family-friendly
 - ★ **Bookmark** — save dishes you want to try; persists in browser storage
-- 👥 **Friends** — share a short code, paste friends' codes, see overlap
+- 👥 **Share** — share a short code, paste friends' codes, see overlap
 - 🗺️ **Map** — tap pins to see details; saved spots highlighted
 
 ---

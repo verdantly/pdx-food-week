@@ -464,7 +464,7 @@ const App = (() => {
 
   function getCurrentContextList() {
     if (activeTab === 'saved') return getSaved();
-    if (activeTab === 'friends') {
+    if (activeTab === 'share') {
       const myIds = [...saved];
       const allSets = [myIds, ...friends.map(f => f.ids)];
       const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
@@ -1708,7 +1708,8 @@ const App = (() => {
         closeDetail(true);
       }
 
-      const tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
+      let tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
+      if (tab === 'friends') tab = 'share';
       if (activeTab !== tab && currentWeekId) {
         switchTab(tab, true);
       }
@@ -1748,7 +1749,7 @@ const App = (() => {
         await addFriend();
         // Clean URL without reloading to avoid multiple imports
         window.history.replaceState({}, document.title, window.location.pathname + '?week=' + currentWeekId);
-        if (activeTab !== 'friends') switchTab('friends');
+        if (activeTab !== 'share') switchTab('share');
       }, 500);
     }
 
@@ -1819,8 +1820,9 @@ const App = (() => {
     updateFilterDisplay();
 
     // Set initial tab from URL
-    const initialTab = urlParams.get('tab');
-    if (initialTab && ['browse', 'swipe', 'saved', 'friends', 'map'].includes(initialTab)) {
+    let initialTab = urlParams.get('tab');
+    if (initialTab === 'friends') initialTab = 'share';
+    if (initialTab && ['browse', 'swipe', 'saved', 'share', 'map'].includes(initialTab)) {
       switchTab(initialTab, true);
     } else {
       switchTab('browse', true);

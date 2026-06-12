@@ -760,9 +760,9 @@
         stars[1].click();
         await wait(200);
 
-        log("Navigating to Friends tab...");
-        const friendsTabBtn = doc.querySelector('.nav-tab[data-tab="friends"]');
-        assert(friendsTabBtn, "Friends tab button should exist");
+        log("Navigating to Share tab...");
+        const friendsTabBtn = doc.querySelector('.nav-tab[data-tab="share"]');
+        assert(friendsTabBtn, "Share tab button should exist");
         friendsTabBtn.click();
         await wait(100);
 
@@ -796,8 +796,8 @@
         await wait(200);
 
         const doc2 = iframe.contentDocument;
-        const friendsTabBtn2 = doc2.querySelector('.nav-tab[data-tab="friends"]');
-        assert(friendsTabBtn2, "Friends tab button should exist on reload");
+        const friendsTabBtn2 = doc2.querySelector('.nav-tab[data-tab="share"]');
+        assert(friendsTabBtn2, "Share tab button should exist on reload");
         friendsTabBtn2.click();
         await wait(100);
 
