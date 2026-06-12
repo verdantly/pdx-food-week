@@ -1927,6 +1927,14 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   /* Header full-width */
+  .week-switcher-select {
+    font-size: 12.5px;
+    padding: 6px 26px 6px 12px;
+    background-size: 11px;
+    background-position: right 8px center;
+    max-width: 60%;
+  }
+
   .app-header {
     position: sticky;
     top: 0;
@@ -2163,11 +2171,15 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .week-switcher-select {
-    font-size: 10px;
-    padding: 3px 20px 3px 6px;
-    margin-top: 4px;
-    background-position: right 5px center;
-    background-size: 8px;
+    font-size: 13.5px;
+    padding: 10px 32px 10px 14px;
+    margin-top: 12px;
+    width: 100%;
+    max-width: 100%;
+    background-size: 12px;
+    background-position: right 12px center;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
   }
 
   .header-title {
