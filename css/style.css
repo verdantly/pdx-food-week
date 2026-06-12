@@ -2414,7 +2414,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
   /* Squeeze grid to 2 columns to prevent narrow card scanning issues */
   #app.detail-open .cards-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -2431,6 +2431,10 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .cards-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #app.detail-open .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   #overlap-container.cards-list {
@@ -2452,6 +2456,10 @@ input[type="search"]::-webkit-search-cancel-button {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
+  #app.detail-open .cards-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   #overlap-container.cards-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -2460,6 +2468,10 @@ input[type="search"]::-webkit-search-cancel-button {
 @media (min-width: 2200px) {
   .cards-list {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  #app.detail-open .cards-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   #overlap-container.cards-list {
