@@ -866,6 +866,120 @@
         }
         log("Haversine math, geolocation fallback, and visual distance sorting successfully verified.", "pass");
       }
+    },
+    {
+      id: "newbadge",
+      name: "Browse Tab 'NEW' Badge Visibility, Dismissal & Sync",
+      fn: async (iframe, log) => {
+        log("Loading Nacho Week 2026...");
+        await reloadSandbox("week=nacho-2026");
+        const win = iframe.contentWindow;
+
+        log("Clearing viewedNew and storage state...");
+        win.localStorage.removeItem("pdxfw_viewed_new_v1");
+        win.localStorage.removeItem("pdxfw_dismissed_banner_nacho-2026");
+
+        log("Initializing App manually...");
+        win.App.init();
+        await wait(200);
+
+        const doc = iframe.contentDocument;
+
+        log("Verifying Browse tab has the badge-dot with 'show' class...");
+        const browseTab = doc.querySelector('[data-tab="browse"]');
+        assert(browseTab, "Browse tab button should exist");
+        const badge = browseTab.querySelector('.badge-dot');
+        assert(badge, "Browse tab badge dot should exist");
+        assert(badge.classList.contains('show'), "Browse tab badge dot should have 'show' class");
+
+        log("Verifying new listings notification banner is visible and contains expected text...");
+        const banner = doc.getElementById('new-listings-banner');
+        assert(banner, "Notification banner element should exist");
+        assertEqual(banner.style.display || getComputedStyle(banner).display, 'flex', "Banner should have display: flex");
+        assertContains(banner.textContent, "There are 4 new nacho listings for Nacho Week!", "Banner should have correct custom copy");
+
+        log("Checking that new dish cards have the 'NEW' badge...");
+        const newCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
+          return card.querySelector('.new-badge');
+        });
+        log(`Found ${newCards.length} cards with 'NEW' badge`);
+        assert(newCards.length > 0, "There should be cards with 'NEW' badge styled");
+
+        const firstNewCard = newCards[0];
+        const firstId = parseInt(firstNewCard.dataset.id, 10);
+        log(`Opening detail overlay for first new item (ID: ${firstId})...`);
+        win.App.openDetail(firstId);
+        await wait(200);
+
+        log("Verifying card badge was dynamically removed...");
+        const badgeAfterOpen = firstNewCard.querySelector('.new-badge');
+        assert(!badgeAfterOpen, "NEW badge element should be removed from the card on view");
+
+        log("Closing detail overlay...");
+        win.App.closeDetail();
+        await wait(100);
+
+        log("Verifying banner text updated to show 3 remaining...");
+        assertContains(banner.textContent, "There are 3 new nacho listings for Nacho Week!", "Banner text should update when count decreases");
+
+        log("Verifying Browse tab badge dot is still showing (since other items are not viewed yet)...");
+        assert(badge.classList.contains('show'), "Badge dot should still show on tab");
+
+        log("Simulating manual dismissal of notification banner...");
+        const closeBtn = banner.querySelector('.banner-close');
+        assert(closeBtn, "Banner close button should exist");
+        closeBtn.click();
+        await wait(100);
+
+        log("Verifying banner is hidden after dismissal...");
+        assertEqual(banner.style.display, 'none', "Banner should hide immediately on close click");
+
+        log("Viewing all remaining new listings...");
+        const activeWeekRestaurants = win.RESTAURANTS.filter(r => r.weekId === 'nacho-2026');
+        const newDishes = activeWeekRestaurants.filter(r => r.isNew);
+        log(`Found total of ${newDishes.length} new dishes in the week`);
+
+        for (const dish of newDishes) {
+          log(`Opening detail for dish ${dish.id}: ${dish.dish}`);
+          win.App.openDetail(dish.id);
+          await wait(100);
+          win.App.closeDetail();
+          await wait(100);
+        }
+
+        log("Verifying Browse tab badge dot is now hidden...");
+        assert(!badge.classList.contains('show'), "Browse tab badge dot should no longer have 'show' class");
+
+        log("Reloading sandbox to test local storage persistence...");
+        await reloadSandbox("week=nacho-2026");
+        const win2 = iframe.contentWindow;
+        win2.App.init();
+        await wait(200);
+
+        const doc2 = iframe.contentDocument;
+        const browseTab2 = doc2.querySelector('[data-tab="browse"]');
+        const badge2 = browseTab2.querySelector('.badge-dot');
+        assert(!badge2.classList.contains('show'), "Browse tab badge dot should remain hidden after reload");
+        const banner2 = doc2.getElementById('new-listings-banner');
+        assertEqual(banner2.style.display, 'none', "Banner should remain dismissed/hidden after reload");
+
+        log("Clearing localStorage and reloading to verify badge and banner return...");
+        win2.localStorage.removeItem("pdxfw_viewed_new_v1");
+        win2.localStorage.removeItem("pdxfw_dismissed_banner_nacho-2026");
+        await reloadSandbox("week=nacho-2026");
+        const win3 = iframe.contentWindow;
+        win3.App.init();
+        await wait(200);
+
+        const doc3 = iframe.contentDocument;
+        const browseTab3 = doc3.querySelector('[data-tab="browse"]');
+        const badge3 = browseTab3.querySelector('.badge-dot');
+        assert(badge3.classList.contains('show'), "Browse tab badge dot should show again after clearing viewed storage");
+        const banner3 = doc3.getElementById('new-listings-banner');
+        assertEqual(banner3.style.display || getComputedStyle(banner3).display, 'flex', "Banner should return after clearing dismissal state");
+
+        log("Browse tab badge visibility, dismissal, and local storage persistence verified.", "pass");
+      }
     }
   ];
 

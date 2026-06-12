@@ -145,6 +145,61 @@ const App = (() => {
     return window.RESTAURANTS.filter(r => r.weekId === currentWeekId);
   }
 
+  function updateBrowseBadge() {
+    const browseTab = document.querySelector('[data-tab="browse"]');
+    if (!browseTab) return;
+    const badge = browseTab.querySelector('.badge-dot');
+    if (!badge) return;
+
+    const banner = document.getElementById('new-listings-banner');
+
+    if (!currentWeekId) {
+      badge.classList.remove('show');
+      if (banner) banner.style.display = 'none';
+      return;
+    }
+
+    const activeWeekRestaurants = getRestaurants();
+    const newItems = activeWeekRestaurants.filter(r => r.isNew);
+    const unviewedNewItems = newItems.filter(r => !viewedNew.has(r.id));
+    const hasUnviewedNew = unviewedNewItems.length > 0;
+
+    badge.classList.toggle('show', hasUnviewedNew);
+
+    if (banner) {
+      const isDismissed = localStorage.getItem(`pdxfw_dismissed_banner_${currentWeekId}`) === 'true';
+      if (hasUnviewedNew && !isDismissed) {
+        const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
+        const foodType = week ? week.name.split(' ')[0].toLowerCase() : 'listing';
+        const weekDisplayName = week ? week.name.replace(/\s*\d{4}/, '') : 'this week';
+        
+        let message = '';
+        if (unviewedNewItems.length === 1) {
+          message = `There is one new ${foodType} listing for ${weekDisplayName}!`;
+        } else {
+          message = `There are ${unviewedNewItems.length} new ${foodType} listings for ${weekDisplayName}!`;
+        }
+
+        banner.style.display = 'flex';
+        banner.innerHTML = `
+          <span class="banner-icon">✨</span>
+          <span class="banner-text">${message}</span>
+          <button class="banner-close" aria-label="Dismiss notification" onclick="App.dismissNewBanner()">×</button>
+        `;
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+  }
+
+  function dismissNewBanner() {
+    if (currentWeekId) {
+      localStorage.setItem(`pdxfw_dismissed_banner_${currentWeekId}`, 'true');
+      updateBrowseBadge();
+    }
+  }
+
+
   function isVeganFriendly(r) {
     if (r.type === 'vegan' || r.veganOption) return true;
     const txt = `${r.dish} ${r.desc}`.toLowerCase();
@@ -513,6 +568,7 @@ const App = (() => {
         const badge = swipeCard.querySelector('.new-badge');
         if (badge) badge.remove();
       }
+      updateBrowseBadge();
     }
 
     // Shift focus to the close button inside the detail sheet for accessibility
@@ -1281,7 +1337,12 @@ const App = (() => {
       passed.add(r.id);
       saved.delete(r.id);
     }
+
+    if (r.isNew && !viewedNew.has(r.id)) {
+      viewedNew.add(r.id);
+    }
     saveState();
+    updateBrowseBadge();
 
     // Advance the index synchronously so guard + currentSwipeCard() reflect
     // the committed state immediately; the animation runs on the detached
@@ -1580,6 +1641,7 @@ const App = (() => {
 
     switchTab('browse');
     renderAll();
+    updateBrowseBadge();
 
     showToast(`Switched to ${week.name}!`);
   }
@@ -1758,6 +1820,7 @@ const App = (() => {
       switchTab('browse', true);
     }
     renderAll();
+    updateBrowseBadge();
 
     // Deep linking: Open detail sheet if dish ID in URL
     const initialDishId = urlParams.get('dish');
@@ -1771,7 +1834,7 @@ const App = (() => {
     });
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner };
 })();
 
 window.App = App;

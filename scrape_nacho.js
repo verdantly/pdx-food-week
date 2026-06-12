@@ -172,6 +172,7 @@ window.FOOD_WEEKS.push({
   id: "nacho-2026",
   name: "Nacho Week 2026",
   organizer: "Portland Mercury",
+    startDate: "2026-06-22",
     dates: "June 22–28, 2026",
     pricePills: ["$10 Nachos"],
     color: "#D97B29",
