@@ -625,6 +625,9 @@ const App = (() => {
 
   // ── Tab switching ──────────────────────────────────────────
   function switchTab(name, fromPopState = false) {
+    if (typeof filterDrawerOpen !== 'undefined' && filterDrawerOpen) {
+      closeFilterDrawer();
+    }
     activeTab = name;
     document.querySelectorAll('.nav-tab').forEach(el => {
       const isActive = el.dataset.tab === name;
@@ -1757,6 +1760,83 @@ const App = (() => {
     }).join('');
   }
 
+  // ── Mobile Scroll-to-Hide & Filter Drawer Logic ────────────
+  let lastScrollTop = 0;
+  let filterDrawerOpen = false;
+
+  function setupMobileScrollListener() {
+    const viewBrowse = document.getElementById('view-browse');
+    if (!viewBrowse) return;
+
+    viewBrowse.addEventListener('scroll', () => {
+      if (window.innerWidth > 768) {
+        // Reset compact header if switched to desktop/tablet
+        document.getElementById('app').classList.remove('compact-header');
+        const fab = document.getElementById('mobile-filter-fab');
+        if (fab) fab.classList.remove('show-fab');
+        return;
+      }
+
+      const st = viewBrowse.scrollTop;
+      const appContainer = document.getElementById('app');
+      const fabButton = document.getElementById('mobile-filter-fab');
+
+      if (st > lastScrollTop && st > 120) {
+        // Scroll Down
+        appContainer.classList.add('compact-header');
+        if (fabButton) fabButton.classList.add('show-fab');
+      } else if (st < lastScrollTop) {
+        // Scroll Up
+        appContainer.classList.remove('compact-header');
+        if (st < 100 && fabButton) {
+          fabButton.classList.remove('show-fab');
+        }
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
+    });
+  }
+
+  function openFilterDrawer() {
+    if (filterDrawerOpen) return;
+
+    const searchBar = document.querySelector('#view-browse .search-bar');
+    const browseFilters = document.getElementById('browse-filters');
+    const sortSection = document.getElementById('sort-section');
+    const drawerBody = document.getElementById('filter-drawer-body');
+    const overlay = document.getElementById('filter-drawer-overlay');
+
+    if (searchBar && browseFilters && sortSection && drawerBody && overlay) {
+      drawerBody.appendChild(searchBar);
+      drawerBody.appendChild(browseFilters);
+      drawerBody.appendChild(sortSection);
+
+      overlay.classList.add('open');
+      filterDrawerOpen = true;
+      document.body.style.overflow = 'hidden'; // prevent underlying body scroll
+    }
+  }
+
+  function closeFilterDrawer() {
+    if (!filterDrawerOpen) return;
+
+    const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+    const browseFilters = document.getElementById('browse-filters');
+    const sortSection = document.getElementById('sort-section');
+    const browseHeader = document.querySelector('#view-browse .browse-header');
+    const cardsBrowse = document.getElementById('cards-browse');
+    const overlay = document.getElementById('filter-drawer-overlay');
+
+    if (searchBar && browseFilters && sortSection && browseHeader && cardsBrowse && overlay) {
+      browseHeader.appendChild(searchBar);
+      browseHeader.appendChild(browseFilters);
+      document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
+
+      overlay.classList.remove('open');
+      filterDrawerOpen = false;
+      document.body.style.overflow = ''; // restore body scroll
+    }
+  }
+
   // ── Init ───────────────────────────────────────────────────
   function init() {
     loadState();
@@ -1904,9 +1984,11 @@ const App = (() => {
     window.addEventListener('resize', () => {
       if (activeTab === 'swipe') renderSwipe();
     });
+
+    setupMobileScrollListener();
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer };
 })();
 
 window.App = App;
