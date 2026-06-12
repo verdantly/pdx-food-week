@@ -112,3 +112,29 @@ npm run scrape:tacos
 
 ### 3. Browser Console Scraper (`scrape-console.js`)
 If you are running in a restricted sandbox or get rate-limited during geocoding on EverOut, open the EverOut food week index page in your browser DevTools, paste the contents of `scrape-console.js` into the console, and hit enter. It extracts coordinates directly from Google Maps links inside the page and prompts a file download.
+
+---
+
+## Development & Visual Testing
+
+The codebase includes an interactive E2E integration test dashboard (**[tests.html](file:///q:/My%20Drive/GitHub/pdx-food-week/tests.html)**) built with a custom terraform-inspired, styled cream theme. It uses an embedded iframe sandbox to mock user environments (including location details and local storage configurations) and verify critical app flows.
+
+### Covered Scenarios:
+1. **Smoke Test - Landing Week Selector**: Asserts that landing page week selectors, lists, and metadata are populated.
+2. **Deep-linking & Routing Fallbacks**: Verifies dynamic detail sheet rendering from dish parameters and checks routing safety.
+3. **Bookmarks & Persistence**: Validates that bookmark additions write and persist in local storage correctly across page reloads.
+4. **Search Filter & Clear Button**: Verifies text query matching and the dismiss/clear text field interaction.
+5. **Swipe Tinder-style transforms**: Simulates mouse drag/gestures and checks the rotation offsets (fans out layout on desktop, stacks vertically on mobile).
+6. **Share tab & Friends list import**: Validates Magic Link URLs, Base64 fallback protocols, and name mappings during code inputs.
+7. **Distance Sorting & Coordinates Lookup**: Mocks coordinates, resolves zip codes, and asserts ascending geographical sorting orders.
+8. **Browse Tab 'NEW' Badge**: Verifies notification dots, listings capsule badges, viewed lists storage sync, and banner updates.
+
+### How to Run the Tests:
+1. Start the local development web server:
+   ```bash
+   npm start
+   ```
+2. Open the visual test dashboard in your browser:
+   `http://localhost:3000/tests.html`
+3. Click the **Run All Tests** button at the top. The results and individual assertion steps will compile dynamically with a diagnostic error reporter if any fail.
+

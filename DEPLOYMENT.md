@@ -125,3 +125,44 @@ If `.local` addresses are not resolved by your router, find the Pi's internal IP
 hostname -I
 ```
 Share `http://192.168.x.x:8080` with friends connected to the same Wi-Fi network.
+
+---
+
+## Firebase Cloud Setup (for Magic Link Sharing)
+
+The app features a list sharing system that can store saved locations in the cloud to generate short, user-friendly Magic Links (e.g. `?week=pizza-2026&list=123456`). If cloud communication fails or is unconfigured, the app falls back to local Base64 URL encoding (prefixed with `PDX26-`).
+
+To configure your own Cloud Firebase backend:
+
+### 1. Set Up Firebase Project & Firestore
+1. Create a project at [console.firebase.google.com](https://console.firebase.google.com/).
+2. Select **Firestore Database** in the sidebar and click **Create database**.
+3. Choose your database location and select **Start in production mode** or **test mode**.
+
+### 2. Configure Firestore Security Rules
+For public list exchange to succeed, the database needs to allow public read/write requests to the `shared_lists` collection. Go to the **Rules** tab in the Firebase console and apply the following security schema:
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /shared_lists/{document} {
+      allow read, write: if true;
+    }
+  }
+}
+```
+
+### 3. Update Configuration Keys
+Update `firebaseConfig` at the top of [js/app.js](file:///q:/My%20Drive/GitHub/pdx-food-week/js/app.js) with your newly created project's configuration settings:
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_GCP_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
+};
+```
+
