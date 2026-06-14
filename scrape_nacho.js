@@ -133,6 +133,13 @@ function parseDishPage(html, url) {
 
   if (!dish || !restaurant) return null;
 
+  let finalAddress = address;
+  let finalNeighborhood = neighborhood;
+  if (restaurant === 'Pacific Standard') {
+    finalAddress = '100 NE Martin Luther King Jr. Blvd, Portland, OR 97232';
+    finalNeighborhood = 'Kerns';
+  }
+
   const both = (dish + ' ' + desc).toLowerCase();
   const emoji = type === 'vegan' ? '🌱'
     : type === 'vegetarian' ? '🌿'
@@ -143,7 +150,7 @@ function parseDishPage(html, url) {
     : /shrimp|seafood/.test(both) ? '🦐'
     : '🌮';
 
-  return { dish, restaurant, neighborhood, address, type, vegOption, veganOption, glutenFree, takeout, minors, desc: desc.replace(/\s+/g, ' '), emoji, image, url };
+  return { dish, restaurant, neighborhood: finalNeighborhood, address: finalAddress, type, vegOption, veganOption, glutenFree, takeout, minors, desc: desc.replace(/\s+/g, ' '), emoji, image, url };
 }
 
 async function main() {

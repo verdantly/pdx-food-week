@@ -924,8 +924,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "isNew": true,
     "dish": "Shrimply Irresistable",
     "restaurant": "Pacific Standard",
-    "neighborhood": "Salem",
-    "address": "195 Commercial St SE, Salem, OR 97301",
+    "neighborhood": "Kerns",
+    "address": "100 NE Martin Luther King Jr. Blvd, Portland, OR 97232",
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -936,8 +936,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🦐",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTMwMDExNTM4MjkxOS1sMTAwOTExM183MjAuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/shrimply-irresistable/e245105/",
-    "lat": 44.9397708,
-    "lng": -123.0413338
+    "lat": 45.5238125,
+    "lng": -122.6614094
   },
   {
     "id": 243805,
