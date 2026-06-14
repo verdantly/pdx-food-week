@@ -7,7 +7,8 @@
     "start": "npx -y serve .",
     "scrape": "node scrape_everout.js",
     "scrape:everout": "node scrape_everout.js",
-    "scrape:tacos": "node scrape_tacos.js"
+    "scrape:tacos": "node scrape_tacos.js",
+    "scrape:nacho": "node scrape_nacho.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0",

@@ -9,7 +9,7 @@ window.FOOD_WEEKS.push({
     pricePills: ["$10 Nachos"],
     color: "#D97B29",
     emoji: "🧀",
-    totalLocations: 59,
+    totalLocations: 60,
     url: "https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/",
 });
 window.RESTAURANTS = window.RESTAURANTS || [];
@@ -18,7 +18,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244643,
     "weekId": "nacho-2026",
-    "isNew": true,
     "dish": "Deconstructed Lasagna Nachos",
     "restaurant": "Adolfo at Malpractice",
     "neighborhood": "Buckman - Southeast Portland",
@@ -77,26 +76,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6405278
   },
   {
-    "id": 243842,
-    "weekId": "nacho-2026",
-    "dish": "Trans-Pacific Flight",
-    "restaurant": "Ate-Oh-Ate",
-    "neighborhood": "Beaverton",
-    "address": "4570 SW Watson Avenue, Beaverton, OR 97005",
-    "type": "meat",
-    "vegOption": false,
-    "veganOption": false,
-    "glutenFree": true,
-    "takeout": false,
-    "minors": false,
-    "desc": "If Poke on Wonton chips can be Nachos, then these can too! Inspired by Vietnamese cuisine, our nachos combine big, bold flavors in a refreshing spin on the classic.",
-    "emoji": "🌮",
-    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDA1MzI1MzQ1Ni04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/trans-pacific-flight/e243842/",
-    "lat": 45.4866472,
-    "lng": -122.8058927
-  },
-  {
     "id": 243843,
     "weekId": "nacho-2026",
     "dish": "Trans-Pacific Flight",
@@ -115,6 +94,26 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243843/",
     "lat": 45.4790178,
     "lng": -122.6085256
+  },
+  {
+    "id": 243842,
+    "weekId": "nacho-2026",
+    "dish": "Trans-Pacific Flight",
+    "restaurant": "Ate-Oh-Ate",
+    "neighborhood": "Beaverton",
+    "address": "4570 SW Watson Avenue, Beaverton, OR 97005",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "takeout": false,
+    "minors": false,
+    "desc": "If Poke on Wonton chips can be Nachos, then these can too! Inspired by Vietnamese cuisine, our nachos combine big, bold flavors in a refreshing spin on the classic.",
+    "emoji": "🌮",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDA1MzI1MzQ1Ni04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/trans-pacific-flight/e243842/",
+    "lat": 45.4866472,
+    "lng": -122.8058927
   },
   {
     "id": 243675,
@@ -299,7 +298,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244638,
     "weekId": "nacho-2026",
-    "isNew": true,
     "dish": "Verano Oscuro Chorizo Nachos",
     "restaurant": "Deschutes Brewery & Public House",
     "neighborhood": "Northwest Portland",
@@ -354,8 +352,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTE1NjE0Nzg4Ny1GT1RNX0ZyZW1vbnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/esquites-nacho/e243656/",
-    "lat": 45.5480432,
-    "lng": -122.6049402
+    "lat": 45.547998,
+    "lng": -122.6048592
   },
   {
     "id": 244198,
@@ -480,7 +478,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244641,
     "weekId": "nacho-2026",
-    "isNew": true,
     "dish": "Fuego Nacho Crunch",
     "restaurant": "Habaneros Mexican Food",
     "neighborhood": "Lloyd District - Northeast Portland",
@@ -521,7 +518,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244642,
     "weekId": "nacho-2026",
-    "isNew": true,
     "dish": "Spam Huli-Huli Nachos",
     "restaurant": "High Horse at The Bidwell",
     "neighborhood": "Downtown Portland - Southwest Portland",
@@ -836,8 +832,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTYzMDgxNzg4Mi1OYWNoby1Ib3VzZV85Mm5kLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/al-pastor/e243631/",
-    "lat": 45.4811293,
-    "lng": -122.5684644
+    "lat": 45.4811343,
+    "lng": -122.5684662
   },
   {
     "id": 244202,
@@ -878,6 +874,26 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://everout.com/portland/events/nacho-nonnas-caprese/e243545/",
     "lat": 45.5249598,
     "lng": -122.6827897
+  },
+  {
+    "id": 245105,
+    "weekId": "nacho-2026",
+    "dish": "Shrimply Irresistable",
+    "restaurant": "Pacific Standard",
+    "neighborhood": "Salem",
+    "address": "195 Commercial St SE, Salem, OR 97301",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "takeout": false,
+    "minors": false,
+    "desc": "Inspired by summertime vibes, endless shrimp, and that perfect first sip of fresh verdita on a sunny day.",
+    "emoji": "🦐",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTMwMDExNTM4MjkxOS1sMTAwOTExM183MjAuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/shrimply-irresistable/e245105/",
+    "lat": 44.9397708,
+    "lng": -123.0413338
   },
   {
     "id": 243805,
@@ -1196,8 +1212,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMjczMzU4OTIwMi1Xb3ctQ293LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/holy-cow-chos/e243540/",
-    "lat": 45.4286191,
-    "lng": -122.7704684
+    "lat": 45.4287045,
+    "lng": -122.7705986
   }
 ];
   newItems.forEach(item => {
