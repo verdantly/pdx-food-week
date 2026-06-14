@@ -5,6 +5,7 @@
  */
 import fs from 'fs';
 import path from 'path';
+import vm from 'vm';
 
 const BASE_URL = 'https://everout.com';
 const WEEK_URL = 'https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/';
@@ -16,6 +17,20 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
 const GEO_UA = 'pdx-food-week-app/1.0';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function getExistingRestaurants(filePath) {
+  try {
+    if (!fs.existsSync(filePath)) return [];
+    const content = fs.readFileSync(filePath, 'utf8');
+    const sandbox = { window: { FOOD_WEEKS: [], RESTAURANTS: [] } };
+    vm.createContext(sandbox);
+    vm.runInContext(content, sandbox);
+    return sandbox.window.RESTAURANTS || [];
+  } catch (e) {
+    console.warn('Could not read/parse existing restaurants from data file:', e.message);
+  }
+  return [];
+}
 
 async function httpGet(url) {
   const res = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html,*/*' } });
@@ -132,6 +147,11 @@ function parseDishPage(html, url) {
 }
 
 async function main() {
+  const outPath = path.join(process.cwd(), 'data', 'nachoweek2026.js');
+  const existingRestaurants = getExistingRestaurants(outPath);
+  const existingMap = new Map(existingRestaurants.map(r => [r.id, r]));
+  console.log(`Loaded ${existingMap.size} existing listings from cache.`);
+
   console.log('Fetching index…');
   const html = await httpGet(WEEK_URL);
   const re = /\/portland\/events\/[a-z0-9-]+\/e\d+\//gi;
@@ -151,9 +171,22 @@ async function main() {
         console.log(` -> ${parsed.dish} @ ${parsed.restaurant}`);
         const coords = await geocode(parsed.address);
         const idMatch = url.match(/\/e(\d+)\//);
+        const id = idMatch ? parseInt(idMatch[1], 10) : i + 1;
+
+        // Preserve isNew flag if it already exists, or auto-tag if it's completely new.
+        const existing = existingMap.get(id);
+        let isNew = false;
+        if (existing) {
+          isNew = !!existing.isNew;
+        } else if (existingMap.size > 0) {
+          isNew = true;
+          console.log(`   ✨ New dish detected: ${parsed.dish}`);
+        }
+
         entries.push({
-          id: idMatch ? parseInt(idMatch[1], 10) : i + 1,
+          id,
           weekId: 'nacho-2026',
+          isNew,
           ...parsed,
           lat: coords ? coords.lat : 45.5231,
           lng: coords ? coords.lng : -122.6765,
@@ -164,8 +197,6 @@ async function main() {
     }
     await sleep(PAGE_DELAY);
   }
-
-  const outPath = path.join(process.cwd(), 'data', 'nachoweek2026.js');
   const header = `// Portland Mercury's Nacho Week 2026\n`;
   const weeksBlock = `window.FOOD_WEEKS = window.FOOD_WEEKS || [];
 window.FOOD_WEEKS.push({

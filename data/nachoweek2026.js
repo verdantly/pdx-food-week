@@ -18,6 +18,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244643,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Deconstructed Lasagna Nachos",
     "restaurant": "Adolfo at Malpractice",
     "neighborhood": "Buckman - Southeast Portland",
@@ -38,6 +39,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243678,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Big Kahuna Nacho",
     "restaurant": "Aji Tram Restaurant and Bar",
     "neighborhood": "Lake Oswego",
@@ -58,6 +60,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243845,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Trans-Pacific Flight",
     "restaurant": "Ate-Oh-Ate",
     "neighborhood": "Buckman - Southeast Portland",
@@ -78,6 +81,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243843,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Trans-Pacific Flight",
     "restaurant": "Ate-Oh-Ate",
     "neighborhood": "Southeast Portland",
@@ -98,6 +102,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243842,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Trans-Pacific Flight",
     "restaurant": "Ate-Oh-Ate",
     "neighborhood": "Beaverton",
@@ -118,6 +123,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243675,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Dirty Chicken Nachos",
     "restaurant": "Backwoods Brewing Company",
     "neighborhood": "Pearl District - Northwest Portland",
@@ -138,6 +144,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243673,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Teriyakimoto's Spamzilla",
     "restaurant": "Binary Brewing",
     "neighborhood": "Beaverton",
@@ -158,6 +165,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243672,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Boke Smoked Pork Wonton Nachos",
     "restaurant": "Boke Bowl",
     "neighborhood": "Buckman - Southeast Portland",
@@ -178,6 +186,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243670,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Verde AF",
     "restaurant": "Breakside Brewery - Slabtown",
     "neighborhood": "Northwest Portland",
@@ -198,6 +207,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243669,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Braised Pork Nachos",
     "restaurant": "Brix Tavern",
     "neighborhood": "Pearl District - Northwest Portland",
@@ -218,6 +228,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243665,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Cochon de Lait Nachos",
     "restaurant": "Bunk Bar",
     "neighborhood": "Buckman - Southeast Portland",
@@ -238,6 +249,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243663,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Dulce & Picante Birria Nachos",
     "restaurant": "Carlita's",
     "neighborhood": "Northwest Portland",
@@ -258,6 +270,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243661,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Tinga Chicken Nachos",
     "restaurant": "Chez José",
     "neighborhood": "Southwest Portland",
@@ -278,6 +291,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243660,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Al Fiery Pastor Nachos",
     "restaurant": "Daily Planet",
     "neighborhood": "Powellhurst-Gilbert - Southeast Portland",
@@ -298,6 +312,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244638,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Verano Oscuro Chorizo Nachos",
     "restaurant": "Deschutes Brewery & Public House",
     "neighborhood": "Northwest Portland",
@@ -318,6 +333,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243968,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Tropic Thunder Nachos",
     "restaurant": "Duke's Public House",
     "neighborhood": "Lake Oswego",
@@ -338,6 +354,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243656,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Esquites Nacho",
     "restaurant": "Fire on the Mountain",
     "neighborhood": "Rose City Park - Northeast Portland",
@@ -358,6 +375,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244198,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Texas Transplant",
     "restaurant": "Fire on the Mountain",
     "neighborhood": "Buckman - Southeast Portland",
@@ -378,6 +396,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243655,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "The Randy Arozarena",
     "restaurant": "Fire on the Mountain",
     "neighborhood": "Overlook - North Portland",
@@ -398,6 +417,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243653,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "The Bangkok Mala Nachos",
     "restaurant": "Gin Thai Brasserie",
     "neighborhood": "Tanasbourne",
@@ -418,6 +438,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243817,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "CHEESE BURGER NACHOS",
     "restaurant": "Grand Fir Brewing",
     "neighborhood": "Buckman - Southeast Portland",
@@ -438,6 +459,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243809,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Nacho Ordinary Mac and Cheese",
     "restaurant": "Grassa",
     "neighborhood": "Hawthorne District - Southeast Portland",
@@ -458,6 +480,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243649,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Grays Verde Loaded Nachos",
     "restaurant": "Grays Restaurant and Bar",
     "neighborhood": "Vancouver",
@@ -478,6 +501,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244641,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Fuego Nacho Crunch",
     "restaurant": "Habaneros Mexican Food",
     "neighborhood": "Lloyd District - Northeast Portland",
@@ -498,6 +522,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243836,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Loaded Orange Chicken Nachos",
     "restaurant": "Hawker Station PDX",
     "neighborhood": "Buckman - Southeast Portland",
@@ -518,6 +543,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244642,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Spam Huli-Huli Nachos",
     "restaurant": "High Horse at The Bidwell",
     "neighborhood": "Downtown Portland - Southwest Portland",
@@ -538,6 +564,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244200,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Chili Braised Beef Nachos",
     "restaurant": "Honorable Mention",
     "neighborhood": "Southwest Portland",
@@ -558,6 +585,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243647,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Pizza Nachos",
     "restaurant": "Hopworks Brewery",
     "neighborhood": "Creston - Kenilworth - Southeast Portland",
@@ -578,6 +606,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243644,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Three Chilies Nachos",
     "restaurant": "Hungry Tiger",
     "neighborhood": "Buckman - Southeast Portland",
@@ -598,6 +627,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244197,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Longanisa Shrimp Chip Nacho",
     "restaurant": "Hunny Beez",
     "neighborhood": "Downtown Portland - Southwest Portland",
@@ -618,6 +648,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243642,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Sweet Heat Street Nachos",
     "restaurant": "Kooks Sports Bar",
     "neighborhood": "Boise - Northeast Portland",
@@ -638,6 +669,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243641,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "K-Town Nachos",
     "restaurant": "Lardo",
     "neighborhood": "Ladd's Addition - Southeast Portland",
@@ -658,6 +690,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243639,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "NotChorizo",
     "restaurant": "Laughing Planet",
     "neighborhood": "Sunnyside - Southeast Portland",
@@ -678,6 +711,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244063,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Can't Stop, Won't Stop",
     "restaurant": "Lazy Days Brewing",
     "neighborhood": "Eliot - Northeast Portland",
@@ -698,6 +732,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243636,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "BBQ in Beaverton",
     "restaurant": "Lazy Days Brewing - Beaverton",
     "neighborhood": "Beaverton",
@@ -718,6 +753,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243634,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Bavarian Brat-Chos",
     "restaurant": "Loyal Legion",
     "neighborhood": "Buckman - Southeast Portland",
@@ -738,6 +774,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243632,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Wonton-a-Mia!",
     "restaurant": "Migration Brewing",
     "neighborhood": "Boise - Northeast Portland",
@@ -758,6 +795,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243683,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Andrea's Huevos",
     "restaurant": "Migration Brewing Co.",
     "neighborhood": "Kerns - Southeast Portland",
@@ -778,6 +816,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243832,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Spicy Succotash Nacho",
     "restaurant": "Moreland Ale House",
     "neighborhood": "Southeast Portland",
@@ -798,6 +837,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243629,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Crispy Carnitas",
     "restaurant": "Nacho's House Mexican Kitchen",
     "neighborhood": "Kerns - Southeast Portland",
@@ -818,6 +858,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243631,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Al Pastor",
     "restaurant": "Nacho’s House Mexican Kitchen",
     "neighborhood": "Lents",
@@ -838,6 +879,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244202,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Nepalese Inspired Chilaquiles",
     "restaurant": "Nom Nom Wings",
     "neighborhood": "Pearl District - Northwest Portland",
@@ -858,6 +900,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243545,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Nacho Nonna's Caprese",
     "restaurant": "Oven & Shaker",
     "neighborhood": "Pearl District - Northwest Portland",
@@ -878,6 +921,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 245105,
     "weekId": "nacho-2026",
+    "isNew": true,
     "dish": "Shrimply Irresistable",
     "restaurant": "Pacific Standard",
     "neighborhood": "Salem",
@@ -898,6 +942,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243805,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Nacho Cuban Papi",
     "restaurant": "Pambiche",
     "neighborhood": "Kerns - Southeast Portland",
@@ -918,6 +963,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243806,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Nachos Vulcan",
     "restaurant": "Pepino's",
     "neighborhood": "Richmond - Southeast Portland",
@@ -938,6 +984,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243819,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Knot Nachos. Knotchos",
     "restaurant": "Pizza Machine",
     "neighborhood": "Mount Tabor - Southeast Portland",
@@ -958,6 +1005,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244083,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Al Pastor Nachos",
     "restaurant": "Que Pasa Cantina",
     "neighborhood": "Buckman - Southeast Portland",
@@ -978,6 +1026,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243800,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Reubenachos!",
     "restaurant": "Steeplejack Brewing Co.",
     "neighborhood": "Sullivan's Gulch - Northeast Portland",
@@ -998,6 +1047,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243543,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Cilantro Pulled Pork",
     "restaurant": "Sticky Wicket",
     "neighborhood": "St. Johns - North Portland",
@@ -1018,6 +1068,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243542,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Twice Baked Nachos",
     "restaurant": "Take Two",
     "neighborhood": "Concordia - Northeast Portland",
@@ -1038,6 +1089,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243668,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Balkan Kebab Nachos",
     "restaurant": "The Bulgarian Job",
     "neighborhood": "Rose City Park - Northeast Portland",
@@ -1058,6 +1110,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243633,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Cadillac Nachos",
     "restaurant": "The Matador North Portland",
     "neighborhood": "North Portland",
@@ -1078,6 +1131,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243801,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Pastrami Reuben Nachos",
     "restaurant": "The Oaks Pub",
     "neighborhood": "Southeast Portland",
@@ -1098,6 +1152,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243544,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Smokey and The Bandit",
     "restaurant": "The Pharmacy",
     "neighborhood": "Northwest Portland",
@@ -1118,6 +1173,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243813,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Porklandia Nachos",
     "restaurant": "Three Mermaids Public House",
     "neighborhood": "Tigard",
@@ -1138,6 +1194,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243812,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Street Corn Nachos",
     "restaurant": "Vanguard Brewing Company",
     "neighborhood": "",
@@ -1158,6 +1215,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243541,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "NACHFERATU!",
     "restaurant": "Wayfinder Beer",
     "neighborhood": "Buckman - Southeast Portland",
@@ -1178,6 +1236,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 244201,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "PORKLAND TROUGH-CHOS",
     "restaurant": "Wonderboy's Smokestack",
     "neighborhood": "King - Northeast Portland",
@@ -1198,6 +1257,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 243540,
     "weekId": "nacho-2026",
+    "isNew": false,
     "dish": "Holy-cow-cho’s",
     "restaurant": "Wow Cow",
     "neighborhood": "Tigard",
