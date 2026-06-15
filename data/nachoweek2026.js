@@ -33,6 +33,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwOTM1Mzk1MDk5Ni1NYWxwcmFjdGljZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/deconstructed-lasagna-nachos/e244643/",
+    "restaurantUrl": "https://malpracticepdx.com/",
     "lat": 45.5159718,
     "lng": -122.6652225
   },
@@ -54,6 +55,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjY1MjA0MTk3Mi1BamktVHJhbS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/big-kahuna-nacho/e243678/",
+    "restaurantUrl": "http://www.ajitram.com/",
     "lat": 45.4046371,
     "lng": -122.7231779
   },
@@ -75,6 +77,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDE2MDQwMDUwMi04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243845/",
+    "restaurantUrl": "http://www.ateohate.com",
     "lat": 45.523177,
     "lng": -122.6405278
   },
@@ -96,6 +99,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDEzMjY5NDczNy04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243843/",
+    "restaurantUrl": "http://ate-oh-ate.com/",
     "lat": 45.4790178,
     "lng": -122.6085256
   },
@@ -117,6 +121,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDA1MzI1MzQ1Ni04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243842/",
+    "restaurantUrl": "https://www.ate-oh-ate.com/",
     "lat": 45.4866472,
     "lng": -122.8058927
   },
@@ -138,6 +143,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🍗",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjQ4NjU0NTE1Ny1CYWNrd29vZHMtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/dirty-chicken-nachos/e243675/",
+    "restaurantUrl": "www.backwoodsbrewingcompany.com",
     "lat": 45.5249571,
     "lng": -122.6824607
   },
@@ -159,6 +165,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjM5ODAxNDc5Ni1CaW5hcnktQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/teriyakimotos-spamzilla/e243673/",
+    "restaurantUrl": "http://binarybrewing.co/",
     "lat": 45.4877651,
     "lng": -122.803378
   },
@@ -180,6 +187,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjI3OTkyNDI4MS1Cb2tlLUJvd2wuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/boke-smoked-pork-wonton-nachos/e243672/",
+    "restaurantUrl": "http://bokebowl.com",
     "lat": 45.5152161,
     "lng": -122.66543
   },
@@ -201,6 +209,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjE5MDE1ODM0NC1CcmVha3NpZGVfU2xhYnRvd24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/verde-af/e243670/",
+    "restaurantUrl": "http://www.breakside.com/locations/nw-portland/",
     "lat": 45.5339814,
     "lng": -122.6965163
   },
@@ -222,6 +231,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjA5MDY3NjUwNi1Ccml4LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/braised-pork-nachos/e243669/",
+    "restaurantUrl": "https://brixtavern.com/",
     "lat": 45.5270778,
     "lng": -122.6848826
   },
@@ -243,6 +253,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTg3NTc1MzUxMi1CdW5rLUJhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/cochon-de-lait-nachos/e243665/",
+    "restaurantUrl": "https://shows.bunksandwiches.com/",
     "lat": 45.5153287,
     "lng": -122.66553
   },
@@ -264,6 +275,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTc1NzIwMzAzLUNhcmxpdGFzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/dulce-picante-birria-nachos/e243663/",
+    "restaurantUrl": "http://www.carlitaspdx.com/",
     "lat": 45.5316354,
     "lng": -122.6826333
   },
@@ -285,6 +297,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTY1NzE1MjEwOS1DaGV6LUpvc2UuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/tinga-chicken-nachos/e243661/",
+    "restaurantUrl": "http://chezjoserestaurant.com/",
     "lat": 45.4635878,
     "lng": -122.6837494
   },
@@ -327,6 +340,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwODk5NDc2NDk4Ni1EZXNjaHV0ZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/verano-oscuro-chorizo-nachos/e244638/",
+    "restaurantUrl": "http://www.deschutesbrewery.com/BrewPub/Portland+Pub/default.aspx",
     "lat": 45.52468,
     "lng": -122.6818808
   },
@@ -348,6 +362,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDY3MzgxOTM3MzI1Ny1EdWtlcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/tropic-thunder-nachos/e243968/",
+    "restaurantUrl": "https://www.dukesph.com/",
     "lat": 45.4197283,
     "lng": -122.6695379
   },
@@ -369,6 +384,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTE1NjE0Nzg4Ny1GT1RNX0ZyZW1vbnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/esquites-nacho/e243656/",
+    "restaurantUrl": "http://portlandwings.com",
     "lat": 45.547998,
     "lng": -122.6048592
   },
@@ -390,6 +406,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzY1NDE2OTAzLUZPVE1fQnVybnNpZGUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/texas-transplant/e244198/",
+    "restaurantUrl": "http://www.portlandwings.com/",
     "lat": 45.5227164,
     "lng": -122.6483079
   },
@@ -411,6 +428,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzQ3OTAxMzA3LUZPVE1fSW50ZXJzdGF0ZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/the-randy-arozarena/e243655/",
+    "restaurantUrl": "http://www.portlandwings.com/",
     "lat": 45.5541013,
     "lng": -122.6819048
   },
@@ -453,6 +471,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzA0OTE0MDE2My1HcmFuZC1GaXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/cheese-burger-nachos/e243817/",
+    "restaurantUrl": "https://www.grandfirbrewing.com/",
     "lat": 45.5194405,
     "lng": -122.6514243
   },
@@ -495,6 +514,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDYzMTM5NDIzOC1HcmF5cy1SZXN0YXVyYW50LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/grays-verde-loaded-nachos/e243649/",
+    "restaurantUrl": "https://www.graysatthepark.com/?SEO_id=GMB--R-PDXVAHH&amp;y_source=1_MTk1OTQ3MjgtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D#masthead",
     "lat": 45.5231,
     "lng": -122.6765
   },
@@ -516,6 +536,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwODc4NTQ1ODc4Ni1IYWJhbmVyb3MuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/fuego-nacho-crunch/e244641/",
+    "restaurantUrl": "https://habanerosmex.com/habaneros-portland/",
     "lat": 45.5345296,
     "lng": -122.658361
   },
@@ -558,6 +579,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwOTIwMjYxNTQ2NC1IaWdoLUhvcnNlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/spam-huli-huli-nachos/e244642/",
+    "restaurantUrl": "https://www.facebook.com/PDXHighHorse/",
     "lat": 45.5203616,
     "lng": -122.6787178
   },
@@ -579,6 +601,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzc4MjUwNjQ1Ni1Ib25vcmFibGUtTWVudGlvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/chili-braised-beef-nachos/e244200/",
+    "restaurantUrl": "https://honorablementionpdx.com/",
     "lat": 45.521693,
     "lng": -122.678749
   },
@@ -600,6 +623,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDU2MjE4Njg2OC1Ib3B3b3Jrcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/pizza-nachos/e243647/",
+    "restaurantUrl": "http://www.hopworksbeer.com",
     "lat": 45.4968753,
     "lng": -122.6348432
   },
@@ -621,6 +645,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDUwMTkzNDc2My1IdW5ncnktVGlnZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/three-chilies-nachos/e243644/",
+    "restaurantUrl": "http://hungrytigerpdx.com/",
     "lat": 45.5212875,
     "lng": -122.653828
   },
@@ -642,6 +667,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🦐",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzQ3MTM3OTQwMS1IdW5ueS1CZWV6LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/longanisa-shrimp-chip-nacho/e244197/",
+    "restaurantUrl": "https://www.facebook.com/HunnyBeezFoodTruck/",
     "lat": 45.5144928,
     "lng": -122.6832057
   },
@@ -663,6 +689,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDQzNTE2OTEyOC1Lb29rcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/sweet-heat-street-nachos/e243642/",
+    "restaurantUrl": "https://www.kookspdx.com/",
     "lat": 45.551338,
     "lng": -122.6752962
   },
@@ -684,6 +711,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDM1OTYzNDQwMy1MYXJkby5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/k-town-nachos/e243641/",
+    "restaurantUrl": "http://lardopdx.com",
     "lat": 45.5120735,
     "lng": -122.6529865
   },
@@ -705,6 +733,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDE0NzI3MjU4NS1MYXVnaGluZy1QbGFuZXRfQmVsbW9udC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/notchorizo/e243639/",
+    "restaurantUrl": "http://www.laughingplanetcafe.com/",
     "lat": 45.5163481,
     "lng": -122.630481
   },
@@ -768,6 +797,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTkzMTM5MzgxMS1Mb3lhbC1MZWdpb24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/bavarian-brat-chos/e243634/",
+    "restaurantUrl": "http://loyallegionpdx.com",
     "lat": 45.5177924,
     "lng": -122.6594942
   },
@@ -789,6 +819,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDY3Mzc0MzgxNDk1MS1NaWdyYXRpb25fV2lsbGlhbXNfMS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/wonton-a-mia/e243632/",
+    "restaurantUrl": "https://migrationbrewing.com/",
     "lat": 45.5513609,
     "lng": -122.6669369
   },
@@ -810,6 +841,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMzIxOTU5OTg1LU1pZ3JhdGlvbl9HbGlzYW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/andreas-huevos/e243683/",
+    "restaurantUrl": "http://migrationbrewing.com/",
     "lat": 45.5261871,
     "lng": -122.6363567
   },
@@ -831,6 +863,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzcyOTI5ODIyOC1Nb3JlbGFuZC1BbGUtSG91c2UuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/spicy-succotash-nacho/e243832/",
+    "restaurantUrl": "https://morelandalehouse.com/",
     "lat": 45.4659168,
     "lng": -122.6476838
   },
@@ -852,6 +885,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTUzMDI2NjczMS1OYWNoby1Ib3VzZV9TYW5keS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/crispy-carnitas/e243629/",
+    "restaurantUrl": "https://nachospdx.com/",
     "lat": 45.5241772,
     "lng": -122.6507871
   },
@@ -873,6 +907,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTYzMDgxNzg4Mi1OYWNoby1Ib3VzZV85Mm5kLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/al-pastor/e243631/",
+    "restaurantUrl": "https://nachospdx.com/",
     "lat": 45.4811343,
     "lng": -122.5684662
   },
@@ -894,6 +929,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzkyODM3NTYyNS1Ob20tTm9tLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/nepalese-inspired-chilaquiles/e244202/",
+    "restaurantUrl": "https://www.nomnomnw.com/",
     "lat": 45.5268924,
     "lng": -122.6851349
   },
@@ -936,6 +972,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🦐",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTMwMDExNTM4MjkxOS1sMTAwOTExM183MjAuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/shrimply-irresistable/e245105/",
+    "restaurantUrl": "https://kexhotels.com/eat-drink/pacificstandard",
     "lat": 45.5238125,
     "lng": -122.6614094
   },
@@ -957,6 +994,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTc1MjMxNDM2OS1QYW1iaWNoZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/nacho-cuban-papi/e243805/",
+    "restaurantUrl": "http://www.pambiche.com/",
     "lat": 45.526559,
     "lng": -122.6369298
   },
@@ -978,6 +1016,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTg4ODQyNzEwNi1QZXBpbm9zLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/nachos-vulcan/e243806/",
+    "restaurantUrl": "http://www.pepinos.org/",
     "lat": 45.5118913,
     "lng": -122.6236954
   },
@@ -999,6 +1038,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzEzOTU1MjIxOC1QaXp6YS1NYWNoaW5lLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/knot-nachos-knotchos/e243819/",
+    "restaurantUrl": "https://pizzamachinepdx.com/",
     "lat": 45.5070789,
     "lng": -122.6109609
   },
@@ -1041,6 +1081,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTQzNTU3MDM1Ny1TdGVlcGxlamFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/reubenachos/e243800/",
+    "restaurantUrl": "https://www.steeplejackbrewingcompany.com/",
     "lat": 45.5349227,
     "lng": -122.6408032
   },
@@ -1062,6 +1103,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMzE0MjEwNTcxNi1TdGlja3ktV2lja2V0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/cilantro-pulled-pork/e243543/",
+    "restaurantUrl": "https://www.facebook.com/people/Sticky-Wicket/61573806573292/",
     "lat": 45.5891601,
     "lng": -122.7534583
   },
@@ -1083,6 +1125,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMjk3MDA2MjI5OC1UYWtlLVR3by5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/twice-baked-nachos/e243542/",
+    "restaurantUrl": "https://www.taketwopdx.com/",
     "lat": 45.5625854,
     "lng": -122.634678
   },
@@ -1104,6 +1147,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTk1NTkwOTE4Mi1CdWxnYXJpYW4tSm9iLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/balkan-kebab-nachos/e243668/",
+    "restaurantUrl": "https://thebulgarianjob.com/",
     "lat": 45.5339195,
     "lng": -122.601318
   },
@@ -1125,6 +1169,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTc4NTM3MDc0My1NYXRhZG9yLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/cadillac-nachos/e243633/",
+    "restaurantUrl": "https://matadorrestaurants.com/",
     "lat": 45.5534761,
     "lng": -122.6669555
   },
@@ -1146,6 +1191,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTU1OTM1OS1UaGUtT2Frcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/pastrami-reuben-nachos/e243801/",
+    "restaurantUrl": "https://www.theoakspubpdx.com/",
     "lat": 45.4738685,
     "lng": -122.649401
   },
@@ -1188,6 +1234,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MjM4OTE2Nzg5MS1UaHJlZS1NZXJtYWlkcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/porklandia-nachos/e243813/",
+    "restaurantUrl": "https://www.threemermaidspub.com/",
     "lat": 45.391522,
     "lng": -122.7516204
   },
@@ -1209,6 +1256,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MjI0MTU0NjQ4OS1WYW5ndWFyZC1CcmV3aW5nLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/street-corn-nachos/e243812/",
+    "restaurantUrl": "https://www.vanguardbrewing.com/",
     "lat": 45.3211582,
     "lng": -122.7733742
   },
@@ -1251,6 +1299,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzgzMjk3NTg4NC1Xb25kZXJib3ktU21va2VzdGFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/porkland-trough-chos/e244201/",
+    "restaurantUrl": "https://www.wonderboyssmokestack.com/",
     "lat": 45.5592283,
     "lng": -122.6549426
   },
