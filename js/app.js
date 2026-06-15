@@ -2708,6 +2708,9 @@ const App = (() => {
     // Re-render swipe deck on window resize to ensure correct responsive fanning transforms
     window.addEventListener('resize', () => {
       if (activeTab === 'swipe') renderSwipe();
+      if (window.innerWidth > 768 && filterDrawerOpen) {
+        closeFilterDrawer();
+      }
     });
 
     setupMobileScrollListener();
