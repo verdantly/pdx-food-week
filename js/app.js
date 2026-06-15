@@ -628,7 +628,7 @@ const App = (() => {
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
 
     const contentHtml = `
-      <button class="bookmark-btn ${isSaved ? 'saved' : ''}" style="top: 16px; right: 16px;" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
+      <button class="bookmark-btn ${isSaved ? 'saved' : ''}" style="top: 16px; right: 16px; padding: 0 16px 0 12px; width: auto;" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
         <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
@@ -638,7 +638,7 @@ const App = (() => {
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
       <div class="sheet-restaurant">
-        ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
+        ${r.url ? `<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener" class="venue-link" style="color: inherit; text-decoration: none;">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
       </div>
       <div class="sheet-address">
         <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link">
