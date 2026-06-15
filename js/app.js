@@ -436,7 +436,7 @@ const App = (() => {
       : '';
 
     const restaurantHtml = r.restaurantUrl
-      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)}</a>`
+      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" style="display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">${esc(r.restaurant)} <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink-30);"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>`
       : esc(r.restaurant);
 
     const isNew = r.isNew && !viewedNew.has(r.id);
@@ -638,11 +638,18 @@ const App = (() => {
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
       <div class="sheet-restaurant">
-        ${r.restaurantUrl ? `<a href="${esc(safeUrl(r.restaurantUrl))}" target="_blank" rel="noopener" class="venue-link" style="color: inherit;">${esc(r.restaurant)}</a>` : esc(r.restaurant)}
+        ${r.restaurantUrl ? `<a href="${esc(safeUrl(r.restaurantUrl))}" target="_blank" rel="noopener" class="venue-link sheet-link-grid" style="color: inherit;"><span class="link-text">${esc(r.restaurant)}</span><span class="link-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></span></a>` : esc(r.restaurant)}
       </div>
       <div class="sheet-address">
-        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link">
-          📍 ${esc(r.address)}
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link sheet-link-grid">
+          <span class="link-text">📍 ${esc(r.address)}</span>
+          <span class="link-icon">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </span>
         </a>
       </div>
       <div class="sheet-desc">${esc(r.desc)}</div>
