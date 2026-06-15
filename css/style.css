@@ -785,9 +785,9 @@ body.is-landing .bottom-nav {
 }
 
 .stat-num {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--pizza);
   line-height: 1;
 }
