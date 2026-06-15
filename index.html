@@ -125,7 +125,9 @@
             <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…" autocomplete="off" />
-          <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">×</button>
+          <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
         </div>
       </div>
       <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
@@ -178,7 +180,9 @@
         <span class="swipe-btn-label">Undo</span>
       </div>
       <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Dislike">×</button>
+        <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Dislike">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
         <span class="swipe-btn-label">Dislike</span>
       </div>
       <div class="swipe-btn-wrapper">
@@ -220,7 +224,9 @@
             <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <input id="saved-search-input" type="search" placeholder="Search saved dish, restaurant, neighborhood…" autocomplete="off" />
-          <button id="saved-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">×</button>
+          <button id="saved-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
         </div>
       </div>
       <div class="filter-section" role="group" aria-label="Filter saved dishes" id="saved-filters"></div>
@@ -383,7 +389,9 @@
   <div class="filter-drawer" onclick="event.stopPropagation()">
     <div class="drawer-header">
       <h3 class="drawer-title">Filter & Sort</h3>
-      <button class="drawer-close" onclick="App.closeFilterDrawer()" aria-label="Close filters">×</button>
+      <button class="drawer-close" onclick="App.closeFilterDrawer()" aria-label="Close filters">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
     </div>
     <div id="filter-drawer-body">
       <!-- Dynamically reparented elements -->

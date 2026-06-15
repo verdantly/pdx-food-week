@@ -428,6 +428,9 @@ body.is-landing .bottom-nav {
   color: var(--ink-60);
   font-size: 11px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1810,13 +1813,13 @@ input[type="search"]::-webkit-search-cancel-button {
   border-radius: 50%;
   border: 1.5px solid var(--border);
   background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--ink);
   font-size: 24px;
   font-weight: 600;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   line-height: 1;
   padding: 0;
   box-shadow: var(--shadow);
