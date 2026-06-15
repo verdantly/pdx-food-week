@@ -1427,8 +1427,11 @@ body.is-landing .bottom-nav {
 
 .venue-link {
   color: inherit !important;
-  text-decoration: none !important;
-  transition: opacity 0.2s ease;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(0,0,0,0.3);
+  transition: opacity 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .venue-link:hover {

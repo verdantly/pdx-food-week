@@ -436,7 +436,7 @@ const App = (() => {
       : '';
 
     const restaurantHtml = r.restaurantUrl
-      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>`
+      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)}</a>`
       : esc(r.restaurant);
 
     const isNew = r.isNew && !viewedNew.has(r.id);
@@ -638,11 +638,11 @@ const App = (() => {
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
       <div class="sheet-restaurant">
-        ${r.url ? `<a href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener" class="venue-link" style="color: inherit; text-decoration: none;">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
+        ${r.restaurantUrl ? `<a href="${esc(safeUrl(r.restaurantUrl))}" target="_blank" rel="noopener" class="venue-link" style="color: inherit;">${esc(r.restaurant)}</a>` : esc(r.restaurant)}
       </div>
       <div class="sheet-address">
         <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link">
-          📍 ${esc(r.address)} <span class="mobile-arrow">↗</span>
+          📍 ${esc(r.address)}
         </a>
       </div>
       <div class="sheet-desc">${esc(r.desc)}</div>
