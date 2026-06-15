@@ -2594,7 +2594,7 @@ select:focus-visible {
     display: none;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px;
+    padding: 18px 0;
     background: transparent;
     border-bottom: none;
   }
@@ -2612,7 +2612,8 @@ select:focus-visible {
   .compact-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    margin-right: -8px;
   }
 
   .compact-icon-btn {
@@ -2652,6 +2653,26 @@ select:focus-visible {
 
   .compact-dropdown .search-input-wrapper {
     margin-bottom: 0;
+  }
+
+  .compact-dropdown .search-input-wrapper input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--cream);
+  }
+  
+  .compact-dropdown .search-input-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .compact-dropdown .search-input-wrapper .search-icon {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .compact-dropdown .search-clear-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--cream);
+    border-radius: 50%;
   }
 
   @keyframes slideDownFade {
