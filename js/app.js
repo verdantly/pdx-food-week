@@ -357,6 +357,14 @@ const App = (() => {
     }
   }
 
+  function hasVeganOptionInDesc(r) {
+    if (r.veganOption) return true;
+    const txt = `${r.dish} ${r.desc}`.toLowerCase();
+    return txt.includes('vegan option') ||
+      txt.includes('can be made vegan') ||
+      txt.includes('vegan available');
+  }
+
   // ── Tag builder ────────────────────────────────────────────
   function buildTags(r) {
     const t = [];
@@ -369,12 +377,16 @@ const App = (() => {
           t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
         }
       } else if (r.type === 'vegetarian') {
-        t.push('<span class="tag tag-veg">Vegetarian only</span>');
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
         if (isVeganFriendly(r)) {
           t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
         }
       } else if (r.type === 'vegan') {
-        t.push('<span class="tag tag-vegan">Vegan only</span>');
+        if (hasVeganOptionInDesc(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else {
+          t.push('<span class="tag tag-vegan">Vegan</span>');
+        }
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
       if (r.wholePie) t.push('<span class="tag tag-pie">Whole pie $25</span>');
@@ -392,12 +404,16 @@ const App = (() => {
           t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
         }
       } else if (r.type === 'vegetarian') {
-        t.push('<span class="tag tag-veg">Vegetarian only</span>');
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
         if (isVeganFriendly(r)) {
           t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
         }
       } else if (r.type === 'vegan') {
-        t.push('<span class="tag tag-vegan">Vegan only</span>');
+        if (hasVeganOptionInDesc(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else {
+          t.push('<span class="tag tag-vegan">Vegan</span>');
+        }
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
       if (r.spicy) t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
@@ -410,12 +426,16 @@ const App = (() => {
           t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
         }
       } else if (r.type === 'vegetarian') {
-        t.push('<span class="tag tag-veg">Vegetarian only</span>');
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
         if (isVeganFriendly(r)) {
           t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
         }
       } else if (r.type === 'vegan') {
-        t.push('<span class="tag tag-vegan">Vegan only</span>');
+        if (hasVeganOptionInDesc(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else {
+          t.push('<span class="tag tag-vegan">Vegan</span>');
+        }
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
     }
