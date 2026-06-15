@@ -14,10 +14,10 @@ button, input, textarea, select {
 }
 
 :root {
-  --pizza: #C94B2C;
-  --pizza-dark: #9E3318;
-  --pizza-light: #F5E6DF;
-  --pizza-pale: #FDF7F4;
+  --pizza: #B5472E;
+  --pizza-dark: #8C3420;
+  --pizza-light: #F2DFD8;
+  --pizza-pale: #FBF4F1;
   --ink: #1A1208;
   --ink-70: rgba(26, 18, 8, 0.72);
   /* Enhanced contrast for body/meta text (exceeds WCAG 4.5:1) */
@@ -28,10 +28,10 @@ button, input, textarea, select {
   --ink-10: rgba(26, 18, 8, 0.1);
   --cream: #FBF6EF;
   --card-bg: #FFFFFF;
-  --teal: #1D7B6B;
-  --teal-light: #E0F0ED;
-  --amber: #915700;
-  --amber-light: #FDF0D6;
+  --teal: #286A5F;
+  --teal-light: #E5EFEA;
+  --amber: #8A5C14;
+  --amber-light: #F7EAD0;
   --border: rgba(26, 18, 8, 0.12);
   --radius: 12px;
   --radius-sm: 8px;
@@ -625,12 +625,12 @@ body.is-landing .bottom-nav {
 }
 
 .card-restaurant {
-  font-size: 14px;
-  /* Increased from 12px */
+  font-size: 12px;
   color: var(--pizza-dark);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-bottom: 2px;
-  letter-spacing: 0.01em;
 }
 
 .card-neighborhood {

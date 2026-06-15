@@ -1212,7 +1212,18 @@ const App = (() => {
     const container = document.getElementById('cards-browse');
     if (!container) return;
     if (filtered.length === 0) {
-      container.innerHTML = `<div class="no-results"><div class="nr-emoji">🤷</div><p>No results. Try a different filter!</p></div>`;
+      container.innerHTML = `<div class="no-results">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="6" stroke-opacity="0.3" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+        </svg>
+        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">Nothing on the menu</p>
+        <p style="color: var(--ink-60);">Try a different filter!</p>
+      </div>`;
     } else {
       container.innerHTML = filtered.map(r => cardHTML(r)).join('');
     }
@@ -1260,7 +1271,13 @@ const App = (() => {
     const container = document.getElementById('cards-saved');
     if (!container) return;
     if (items.length === 0) {
-      container.innerHTML = `<div class="no-results"><div class="nr-emoji">☆</div><p>Bookmark spots from Browse to build your list!</p></div>`;
+      container.innerHTML = `<div class="no-results">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+        </svg>
+        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No saved spots yet</p>
+        <p style="color: var(--ink-60);">Bookmark spots from Browse to build your list!</p>
+      </div>`;
     } else {
       container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
     }
@@ -1317,7 +1334,15 @@ const App = (() => {
     // Friends list
     const fl = document.getElementById('friends-list');
     fl.innerHTML = friends.length === 0
-      ? `<div class="no-results" style="padding:24px 0"><div class="nr-emoji" style="font-size:28px">👥</div><p>No friends added yet.</p></div>`
+      ? `<div class="no-results" style="padding:24px 0">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No friends added yet.</p>
+        </div>`
       : friends.map((f, i) => `
           <div class="friend-item">
             <div class="friend-avatar">${f.name.charAt(0).toUpperCase()}</div>
@@ -1344,7 +1369,13 @@ const App = (() => {
 
     overlapContainer.className = 'cards-list';
     if (overlap.length === 0) {
-      overlapContainer.innerHTML = `<div class="no-results" style="padding:20px 0"><p>No overlap yet — save more spots and add more friends!</p></div>`;
+      overlapContainer.innerHTML = `<div class="no-results" style="padding:20px 0">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; opacity: 0.8">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <p style="font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No overlap yet</p>
+        <p style="color: var(--ink-60);">Save more spots and add more friends!</p>
+      </div>`;
     } else {
       overlapContainer.innerHTML = overlap.map(r => cardHTML(r, true)).join('');
     }
