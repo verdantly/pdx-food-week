@@ -40,7 +40,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mojo braised Anderson Ranch lamb, harissa spiced tomato sauce, feta, kalamata olive tapenade, Mama Lil's peppers",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDA4MDc5NDI5Ni1DbGFya2xld2lzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/mediterranean-mojo-lamb/e233600/"
+    "url": "https://everout.com/portland/events/mediterranean-mojo-lamb/e233600/",
+    "whatTheySay": "Mediterranean flavors meet PNW ingredients.  Succulent local lamb braised in a blend of mint, orange, Greek oregano, and cumin.  Rounded out with a subtle harissa kick tempered by salty and briny feta & kalamata olives."
   },
   {
     "id": 234094,
@@ -59,7 +60,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mozzarella-cheddar blend, yellow curry chicken, jalapeño, pickled carrot & daikon, cilantro, sweet chili mayo",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDEzODk4ODE4Ny1Cb3hjYXItUGl6emEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/banh-to-be-wild/e234094/"
+    "url": "https://everout.com/portland/events/banh-to-be-wild/e234094/",
+    "whatTheySay": "This is a bánh mì-inspired pizza, completely vegan, and available gluten free for an additional charge."
   },
   {
     "id": 234225,
@@ -78,7 +80,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Provolone, mozzarella, romano, crumbled Italian fennel sausage, picked red onion, toasted sesame, kosher dill pickles, and a secret burger sauce.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDMxMTYzNjcyNi1ZdW1zLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-italian-big-mac/e234225/"
+    "url": "https://everout.com/portland/events/the-italian-big-mac/e234225/",
+    "whatTheySay": "What happens when a wood-fired pizzaiola's best friend says, \"Make me something epic for my birthday— and I love burgers\"? You get The Italian Big Mac and honestly, the world is a better place for it. Born out of pure love and debuted in Brooklyn, this pizza sold out at every single event it touched, and one bite tells you exactly why. We're talking a cloud-like, blistered wood-fired crust layered with provolone, mozzarella, and romano, then piled with crumbled Italian fennel sausage, tangy pickled red onion, briny kosher dill pickles, and finished with toasted sesame and our secret burger sauce. It's everything you love about a perfect cheeseburger, reimagined with Italian soul and fired in a wood-fired oven. Bold claim, but we'll stand behind it: this is quite possibly the greatest cheeseburger pizza on the planet."
   },
   {
     "id": 234226,
@@ -97,7 +100,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Red sauce base loaded with mozzarella cheese, Italian sausage, red and green bell peppers, mushrooms, peaches and basil.",
     "emoji": "🍄",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDIxODgwOTQwNS1SdWR5cy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/super-mario-galaxy-pizza/e234226/"
+    "url": "https://everout.com/portland/events/super-mario-galaxy-pizza/e234226/",
+    "whatTheySay": "Born from a Mario galaxy sized imagination, this pizza exists to play. We pull power-ups from everywhere, blending comfort with surprise. It’s a delicious warp-pipe to fun because every bite should help you level up. Vegan, vegetarian and gluten free substitutions available."
   },
   {
     "id": 234340,
@@ -116,7 +120,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "White Pie (garlic + evoo), Roasted Pork, Rapini, Calabrian Chili, Caciocavallo",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDI1MDczNDU3NS1DaGVja2VyYm9hcmQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/snyder-weccacoe/e234340/"
+    "url": "https://everout.com/portland/events/snyder-weccacoe/e234340/",
+    "whatTheySay": "Slow roasted pork shank, braised rapini, fermented Calabrian chili sauce topped with grated caciocavallo...inspired from Johns in Philly"
   },
   {
     "id": 234546,
@@ -135,7 +140,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Built on our artisan gluten-free crust, this pizza is topped with a bold Buffalo blue cheese sauce, butter-and-cheesy cracker-battered chicken baked to perfection, then finished with fresh scallions and crumbled blue cheese.",
     "emoji": "🌶️",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDI4NDE4MjAxOS1OZXctQ2FzY2FkaWEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/gluten-free-buffalo-blue-cheese-chicken-pizza/e234546/"
+    "url": "https://everout.com/portland/events/gluten-free-buffalo-blue-cheese-chicken-pizza/e234546/",
+    "whatTheySay": "Built on our artisan gluten-free crust, this pizza brings the heat and the taste. A bold buffalo blue cheese sauce delivers just the right kick, layered with tender chicken that’s been dredged in butter and crushed cheesy crackers then roasted for an irresistible taste. Finished with fresh scallions for a pop of brightness, every slice hits spicy, savory and creamy. Oh, and it’s all gluten-free."
   },
   {
     "id": 234547,
@@ -154,7 +160,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Caesar dressing base, spinach, chicken, mozzarella, and shredded Parmesan, finished with lemon vinaigrette",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDQxMTYzMjg0Mi1CbGluZC1Pbmlvbi1Ccm9hZHdheS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-caeza/e234547/"
+    "url": "https://everout.com/portland/events/the-caeza/e234547/",
+    "whatTheySay": "We wanted to combine the two best things our restaurant has to offer (pizza and Caesar salad) into one e-money tasty treat, and thus the Cae'Za was born!!"
   },
   {
     "id": 234548,
@@ -173,7 +180,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Ranch base with chicken, mozzarella cheese, crispy bacon, and a light dusting of cheddar. Finished with a ranch drizzle and fresh herbs.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDQ0NzExNTcwMS1CbGluZC1Pbmlvbi1CZWxtb250LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/chicken-bacon-ranch-pizza/e234548/"
+    "url": "https://everout.com/portland/events/chicken-bacon-ranch-pizza/e234548/",
+    "whatTheySay": "Fan favorite in-house and by customers, this pizza has only been limited availability until now. Our inspiration? Who doesn't love ranch! A delightful combination of flavors and texture: this pizza is light and fresh yet indulgent."
   },
   {
     "id": 234553,
@@ -192,7 +200,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "We want to highlight comfort food all on one pie! Pizza, mac' n cheese, and Flaming Hots are a trio guaranteed to bring you a few moments of comfort and nostalgia!",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDUzNjI4NTUtVm9uLUViZXJ0LUJlYXZlcnRvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/flaming-mac-n-cheeto/e234553/"
+    "url": "https://everout.com/portland/events/flaming-mac-n-cheeto/e234553/",
+    "whatTheySay": "Creamy buffalo béchamel base, mac n' cheese layered between cheddar and mozzarella, topped with crushed Flaming Hots and fresh jalapeño."
   },
   {
     "id": 234557,
@@ -211,7 +220,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Whipped potato base, shredded mozzarella and cheddar cheese, smoked bacon, pickled jalapeños topped with green onions, garden herbs, parmesan cheese and sour cream.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE1MjM5MDY2NjI0NS0xMC1CYXJyZWwuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/spuds-mackenzie/e234557/"
+    "url": "https://everout.com/portland/events/spuds-mackenzie/e234557/",
+    "whatTheySay": "You've had your mom's baked potato, throw that out the window and jump on this hype train to the future! CHOO CHOO! Babes will cry, longtime enemies will become old friends, and the dead will come back to life for these flavors. They say world peace is unobtainable, not with this on the menu."
   },
   {
     "id": 234708,
@@ -230,7 +240,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Olympia Provisions Soppressata, Mama Lil's Peppers, pickled fennel, creme fraiche, parsley, mozzarella, provolone, Asiago, and a guanciale-Calabrian chile marinara",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDU5ODcyNzQyNi1Tb2NpYWwtU3Bvb24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/cash-rules-everything-guanciale-creme-fraiche-get-salami-pickled-pickled-fennel-yall/e234708/"
+    "url": "https://everout.com/portland/events/cash-rules-everything-guanciale-creme-fraiche-get-salami-pickled-pickled-fennel-yall/e234708/",
+    "whatTheySay": "Pizza is the ultimate culinary tabula rasa. It can be a vehicle for anything, as Pizza Week proves, so why not have it be a vehicle for greatness? Unctuous Soppressata, juicy Mama Lil's, house-pickled fennel, creme fraiche, and a sauce rich with cubes of guanciale and the tangy heat of Calabrian chiles. Mangia!"
   },
   {
     "id": 234709,
@@ -249,7 +260,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Chicken thigh, capers, Taggiasca olives, provolone, parsley, pecorino",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDY2NjA3OTA2MS1NZXRhLVBpenphLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/chicken-piccata/e234709/"
+    "url": "https://everout.com/portland/events/chicken-piccata/e234709/",
+    "whatTheySay": "A classic east coast Italian-American dish that’s close to my heart!  I added cream and olives to make it delicious and unforgettable!"
   },
   {
     "id": 234894,
@@ -268,7 +280,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Chorizo gravy base, mozzarella and white cheddar, bright pickled corn, a warm yolk drizzle designed to break over each slice, finished with fresh chives—inspired by classic biscuits and gravy.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDcwNjM2NDA5NS1Mb293aXQtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-gravy-train/e234894/"
+    "url": "https://everout.com/portland/events/the-gravy-train/e234894/",
+    "whatTheySay": "Inspired by the morning after an evening of questionable decision making, the quest for comfort and the savory embrace of all things gravy based. No recompense, no regrets, just the certainty of manifest chorizo destiny and the promise of glorious satisfaction!"
   },
   {
     "id": 234897,
@@ -287,7 +300,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Grilled chicken, tangy BBQ, red onion, fresh basil, crispy bacon, mozzarella cheese, garlic oil",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDc0NzAzMzkwNy1QTFMtU2l4dGguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/peace-love-n-chicken/e234897/"
+    "url": "https://everout.com/portland/events/peace-love-n-chicken/e234897/",
+    "whatTheySay": "PLS stands for \"peace, love, and soul,\" and what's just as good as peace and love? BBQ chicken! Combined with bacon?! Sign us up. Our chef knows exactly how to combine everything you've been craving."
   },
   {
     "id": 234898,
@@ -306,7 +320,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Capicola ham, hot cherry bomb peppers, chèvre, hot honey.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE1MjM0NjkyMjI1Ny1GaXJlLW9udGhlLU1vdW50YWluLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-goat-father/e234898/"
+    "url": "https://everout.com/portland/events/the-goat-father/e234898/",
+    "whatTheySay": "Salty, funky, sweet—just like Fire on the Mountain!"
   },
   {
     "id": 234899,
@@ -325,7 +340,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Double pepperoni",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDgxNzE4NTI0NC1EYW50ZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/pepperoni-pony/e234899/"
+    "url": "https://everout.com/portland/events/pepperoni-pony/e234899/",
+    "whatTheySay": "Double the meat, double the treat! At PizzaSlut we keep it greasy so it slides in easy!"
   },
   {
     "id": 234900,
@@ -344,7 +360,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Guajillo chipotle sauce, mozzarella, potato, chorizo, red onion, roasted red pepper, crema, salsa cerde, cilantro",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDg1MTE1MTQ5MS1IdW1kaW5nZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-lilia/e234900/"
+    "url": "https://everout.com/portland/events/the-lilia/e234900/",
+    "whatTheySay": "When I was in high school my best friend's mom was an integral part of me wanting to pursue cooking. I would go over to their house for barbeques; while everyone else was outside in the yard, I would be in the kitchen with her. This pizza was inspired by one of the dishes she used to make."
   },
   {
     "id": 234901,
@@ -401,7 +418,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Alliuminati features a rich roasted garlic cream base topped with caramelized onions, sautéed mushrooms, crispy bacon, tender potato, and a generous dusting of parmesan, finished with fresh chives",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDk1MTEwMTc1My1GaW5vLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/alliuminati/e234906/"
+    "url": "https://everout.com/portland/events/alliuminati/e234906/",
+    "whatTheySay": "This pizza was born from a love of all things allium; garlic, onion, and chive working in harmony to create something deeply savory and satisfying. Drawing inspiration from the classic French Alpine dish tartiflette, with its indulgent combination of potato, bacon, and melted cheese, the roasted garlic cream base ties everything together, making each bite rich, earthy, and completely irresistible."
   },
   {
     "id": 234907,
@@ -420,7 +438,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Potatoes, smoked bacon, mozzarella and cheddar cheese, green onion, sour cream.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDk3OTAxOTIyNi1PYWtzaGlyZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/lets-get-baked-potato-pizza/e234907/"
+    "url": "https://everout.com/portland/events/lets-get-baked-potato-pizza/e234907/",
+    "whatTheySay": "Po-ta-toes! Boil 'em, mash 'em, stick 'em on a pizza."
   },
   {
     "id": 234994,
@@ -439,7 +458,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Homemade arugula pesto, feta and sliced red onions",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTAwNjYxNzYxMy1WaWEtQ2hpY2Fnby5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/athena-dion/e234994/"
+    "url": "https://everout.com/portland/events/athena-dion/e234994/",
+    "whatTheySay": "Delicious Greek-inspired pie, Chicago Style!"
   },
   {
     "id": 234995,
@@ -477,7 +497,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Seasoned whipped ricotta, basil, and homemade red pepper aioli over red sauce.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTA1NDUzMTkxNy1Qb3J0bGFuZC1DaWRlci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/you-gotta-ricotta/e234996/"
+    "url": "https://everout.com/portland/events/you-gotta-ricotta/e234996/",
+    "whatTheySay": "Bursting with bold flavor, this vegetarian pie is like your favorite pasta on a pizza crust. Pair it with our Kinda Dry or McIntosh ciders!"
   },
   {
     "id": 234997,
@@ -496,7 +517,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Garlic butter brushed crust, minestrone sauce, mozzarella, romaine lettuce, sliced Roma tomatoes, red onion, black olives, pepperoncini, grated Romano cheese, Italian dressing.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTA5MDY3MjcyOC1QaXp6YS1NYWNoaW5lLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/say-when/e234997/"
+    "url": "https://everout.com/portland/events/say-when/e234997/",
+    "whatTheySay": "A soup, salad, and breadstick combo on a single slice. Garlic-butter crust topped with minestrone, melted mozzarella, and a cold Italian-dressed salad with tomatoes, olives, pepperoncini, onion, and Romano grated to order (“say when”). Inspired by the classic unlimited soup-salad-breadstick meal at a certain Italian-American chain restaurant, reimagined as pizza."
   },
   {
     "id": 234998,
@@ -515,7 +537,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Whipped lemony cream cheese, mozzarella, smoked salmon, capers, fresh red onion, dill, dressed arugula, and everything bagel seasoning",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTEyMDA3NzYxNy1Wb24tRWJlcnQtR2xlbmRvdmVlci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/everything-but-the-bagel/e234998/"
+    "url": "https://everout.com/portland/events/everything-but-the-bagel/e234998/",
+    "whatTheySay": "Your favorite bagel order—on a pizza! Smoked salmon, lemony whipped cream cheese, capers, dill, everything bagel seasoning, fresh red onion, and dressed arugula bring big brunch energy to every slice."
   },
   {
     "id": 234999,
@@ -534,7 +557,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tomato sauce, Pecorino, garlic bread crumbs, oregano & chile flakes, topped with our kale caesar salad",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTE0OTc5NTYwMS1QaXp6YS1UaGllZi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/rossa-pizza-caesar/e234999/"
+    "url": "https://everout.com/portland/events/rossa-pizza-caesar/e234999/",
+    "whatTheySay": "Combining two of our favorite things: a traditional Italian pizza and our popular caesar salad!"
   },
   {
     "id": 235000,
@@ -553,7 +577,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tomato sauce, Pecorino, garlic bread crumbs, oregano & chile flakes, topped with our kale caesar salad.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTE4NjE0MTY4LVBpenphLVRoZWlmX0dyZWF0LU5vdGlvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/rossa-pizza-caesar/e235000/"
+    "url": "https://everout.com/portland/events/rossa-pizza-caesar/e235000/",
+    "whatTheySay": "Combining two of our favorite things: a traditional Italian pizza and our popular caesar salad!"
   },
   {
     "id": 235001,
@@ -572,7 +597,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Cilantro pesto, mozzarella, southwest marinated pork belly lardons, oven roasted corn and onions, sliced roasted red peppers, finished with cotija cheese.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTE2MDQ4MzI3NC1Eb3VibGUtTW91bnRhaW4tT3Zlcmxvb2suanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/taos/e235001/"
+    "url": "https://everout.com/portland/events/taos/e235001/",
+    "whatTheySay": "A little heat, a little brightness, a lot of soul. Taos brings it all together with smoky pork, sweet corn, and a lift of cilantro that cuts through in the best way. It’s bold without trying too hard, layered without feeling heavy, and somehow tastes like sunshine, fire, and good company in every bite."
   },
   {
     "id": 235002,
@@ -591,7 +617,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Olive oil, mozzarella, thinly sliced apples and pears, braised brown sugar pork belly slices, pulled burrata, hard cheese, finished and topped with candied walnuts, hot honey, and light arugula.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTI3NzAzMDE3My1Eb3VibGUtTW91bnRhaW4tV29vZHN0b2NrLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/belly-up-to-the-orchard/e235002/"
+    "url": "https://everout.com/portland/events/belly-up-to-the-orchard/e235002/",
+    "whatTheySay": "Sweet meets savory in a way that feels effortless. Juicy apples and pears melt into rich pork belly, while burrata softens every edge. Candied walnuts bring crunch, hot honey adds a gentle heat, and arugula lifts it all. It’s indulgent, balanced, and just a little unexpected, with each bite unfolding like a perfect autumn afternoon."
   },
   {
     "id": 235003,
@@ -610,7 +637,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Bacon jam, pickled jalapeños, calabrian chili pimento cheese, and garlic chili Cheez-It crumble. All house-made.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTIzNDUwMjU4LVBhbGFkaW4tUGllLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-pauper-prince/e235003/"
+    "url": "https://everout.com/portland/events/the-pauper-prince/e235003/",
+    "whatTheySay": "We know you remember our prior Pizza Week specials because you keep asking us to bring them back. Well, prepare to have your memory wiped because this one blows all of those out of the water. This year we are answering the stoney call of 4/20 week with a jalapeño popper inspired pizza that, quite frankly, is flavor-blasted beyond your wildest imaginings. Come and get it, freakazoids."
   },
   {
     "id": 235004,
@@ -629,7 +657,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Apple butter, apple compote, mint, shiso, miso vinaigrette, whipped lemon ricotta, house taro chips",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTI1OTk4NjMxNi1IYXBhLVBpenphLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/miso-apple-pizza/e235004/"
+    "url": "https://everout.com/portland/events/miso-apple-pizza/e235004/",
+    "whatTheySay": "Miso Apple Pizza was inspired by a Portland pizza competition where we set out to create something truly unique, combining bright Asian flavors and subtle sweetness. Now it’s a staff favorite we’re excited to share, featuring an apple butter base, apple compote, shiso and mint, miso vinaigrette, whipped lemon ricotta, and crispy house-made taro chips."
   },
   {
     "id": 235005,
@@ -648,7 +677,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Sweet, salty, and just a little bit seductive. Creamy brie melts into a golden base, layered with jammy figs, roasted red grapes, and ribbons of delicate prosciutto. Finished with a balsamic reduction crema, a drizzle of honey, fresh rosemary, and a crack of b",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTI5MjQ2OTgxNS1OYXNvLVdpbmUtQmFyLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/fig-me-up-before-you-prosciutto/e235005/"
+    "url": "https://everout.com/portland/events/fig-me-up-before-you-prosciutto/e235005/",
+    "whatTheySay": "I’ve always loved the balance of sweet and savory, so this pizza brings together my favorite flavors—figs, grapes, prosciutto, and brie. Our dough is made in-house, and we finish the pizza with Chili Munch, a house made topping my husband creates through Hood’s Projects, for a subtle, craveable kick."
   },
   {
     "id": 235006,
@@ -667,7 +697,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fennel sausage, garlic confit, fresh tomato, smoked peppers, smoked mozzarella, hot honey. Vegetarian sausage available.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTg0MzUxMDMxMy1FZGFuLVBpenphLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/smoky-4-2026/e235006/"
+    "url": "https://everout.com/portland/events/smoky-4-2026/e235006/",
+    "whatTheySay": "Munchie-crushing flavor bomb, the Smoky 4/2026, celebrates the season with Aidan's house-made fennel sausage, smoky cheese, smoky peppers, garlic confit, and our hot honey."
   },
   {
     "id": 235007,
@@ -686,7 +717,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Housemade focaccia, red sauce, mortadella, pineapple, jalapeño, fontina, parmesan, Italian chile crisp",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTMzMzc3OTkyLUdhYnlzLU5leHQtRG9vci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/haters-gonna-hate/e235007/"
+    "url": "https://everout.com/portland/events/haters-gonna-hate/e235007/",
+    "whatTheySay": "Hawaiian pizza has always been polarizing, but we are doubling down on the deliciousness of our version. Our Hawaiian-raised Italian chef Liz, with the help of chef Keith, have made the ultimate fresh focaccia version of this pizza classic. For those who can get on board, you won't want to miss the 'Haters Gonna Hate.'"
   },
   {
     "id": 235008,
@@ -705,7 +737,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Whipped mascarpone, smoked salmon, broccoli raab, shaved fennel, arugula, sweet vermouth reduction.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDU2MTU1Njk5My1NZXRyb3BvbGl0YW4tVGF2ZXJuLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/whipped-mascarpone-smoked-salmon-pizza/e235008/"
+    "url": "https://everout.com/portland/events/whipped-mascarpone-smoked-salmon-pizza/e235008/",
+    "whatTheySay": "Our pizza is a balanced play of smoke, bitterness, and brightness."
   },
   {
     "id": 235009,
@@ -724,7 +757,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Hand-stretched crust with savory peanut sauce, mozzarella, marinated chicken, and roasted peppers.\nTopped with fresh bean sprouts, Sriracha, cilantro, and a crunchy crushed peanut finish.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NjMxODQ2MjI4NC1Ccml4LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/thai-chicken-pizza/e235009/"
+    "url": "https://everout.com/portland/events/thai-chicken-pizza/e235009/",
+    "whatTheySay": "Trust us, just get it."
   },
   {
     "id": 235010,
@@ -743,7 +777,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Creamy garlic sauce, house cheese blend, cheddar cheese, tater tots, bacon & green onions",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTM4MjkyMzk0Mi1GYXN0LVRpbWVzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/tater-tot-hot-dish-pizza/e235010/"
+    "url": "https://everout.com/portland/events/tater-tot-hot-dish-pizza/e235010/",
+    "whatTheySay": "Inspired by grandma's classic midwestern TATER TOT HOT DISH!"
   },
   {
     "id": 235011,
@@ -762,7 +797,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Roasted chicken breast, garlic oil, mozzarella cheese, artichoke hearts, pickled peppers, and pesto sauce.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTczMzEzODI5NC1UYXlsb3ItU3RyZWV0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/chicken-breast-and-artichoke-pizza/e235011/"
+    "url": "https://everout.com/portland/events/chicken-breast-and-artichoke-pizza/e235011/",
+    "whatTheySay": "Simple, but it hits every note."
   },
   {
     "id": 235012,
@@ -800,7 +836,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beer cheese & stone ground mustard, mozzarella, caramelized onion, sauerkraut, and beer sausage.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDI2MDIyNDc0Ni1Ib3B3b3Jrcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-wurst-pizza-ever/e235013/"
+    "url": "https://everout.com/portland/events/the-wurst-pizza-ever/e235013/",
+    "whatTheySay": "Direct from our German beer heritage, we're bringing the spirit of Oktoberfest to your pizza.  This bold, unexpected combination is the wurst idea we've ever had."
   },
   {
     "id": 235014,
@@ -819,7 +856,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Homemade thousand island dressing, classic mozzarella, corned beef, sauerkraut, red onions, and Swiss cheese.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTQ3NTczMTUwNC1TdGFyLVBpenphLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/country-reuben-pizza/e235014/"
+    "url": "https://everout.com/portland/events/country-reuben-pizza/e235014/",
+    "whatTheySay": "In the fast-paced world of trending cuisine, we decided to go back to a humble classic. Our Country Reuben pizza brings back savory memories of any small town diner, or just your local favorite corner sandwich shop."
   },
   {
     "id": 235015,
@@ -838,7 +876,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Spinach, sun-dried tomatoes, chicken, topped with Italian seasoning. Made with house marinara red sauce.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTA2MTc2OTAyNC0yMXN0LUNlbnR1cnkuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-farm-feast/e235015/"
+    "url": "https://everout.com/portland/events/the-farm-feast/e235015/",
+    "whatTheySay": "Back to our Italian roots, this Tuscany-inspired slice packs a simple punch! Chicken raised exclusively on our local Oregon city farm! Looking forward sharing with everyone!"
   },
   {
     "id": 235016,
@@ -857,7 +896,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pesto, mozzarella, roasted cherry tomatoes, burrata, basil",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTUyMzcxNjYxMS1NdWNjYS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/primavera/e235016/"
+    "url": "https://everout.com/portland/events/primavera/e235016/",
+    "whatTheySay": "Primavera is all about balance—fresh basil, creamy burrata, and Parmigiano pesto at their peak. The real star is our slow-fermented dough—light, airy, and full of flavor, designed to let the crust shine."
   },
   {
     "id": 235017,
@@ -876,7 +916,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Prosciutto di Parma, broccoli rabe, house white sauce, our three cheese blend, mushroom confit,  Calabrian chilies",
     "emoji": "🍄",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTU1ODMwODIyOC1Qb3AtUGl6emEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/prosciutto-broccoli-rabe/e235017/"
+    "url": "https://everout.com/portland/events/prosciutto-broccoli-rabe/e235017/",
+    "whatTheySay": "This pizza is a twist on a classic Italian pasta dish with broccoli rabe (cime di rapa), traditionally paired with orecchiette from Puglia. It features blanched, slightly bitter broccoli rabe sautéed in olive oil with garlic, red pepper flakes, and sometimes anchovies, tossed with pasta and finished with Pecorino Romano cheese."
   },
   {
     "id": 235018,
@@ -895,7 +936,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "3 cheese blend, cream cheese, house-pickled jalapeño, fresh jalepeño, berry hot honey drizzle, Frito crumbs.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NjcwNzIzODM0MjEwNy1FYXN0X0dsaXNhbl9QaXp6YV9Mb3VuZ2UucG5nIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/heated-rivalry/e235018/"
+    "url": "https://everout.com/portland/events/heated-rivalry/e235018/",
+    "whatTheySay": "We know...another Pizza Week, another jalapeño popper riff—that's so Shane—but we're inviting Ilya to this game with haaaaaaaawt honey & berry situation. Plus Frito crumbs because fun. It might just make you looney."
   },
   {
     "id": 235019,
@@ -914,7 +956,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tomato, harissa, lamb, onions, feta, pomegranate molasses, mint, dough, olive oil.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTYyNzk4MDk5LVlhLUhhbGEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/baa-baa-boom/e235019/"
+    "url": "https://everout.com/portland/events/baa-baa-boom/e235019/",
+    "whatTheySay": "Bold and deeply satisfying. Roasted tomato, harissa, and whipped feta set the stage for spiced lamb, onions, and a drizzle of pomegranate molasses. Finished with garlicky sheep’s milk feta and mint."
   },
   {
     "id": 235020,
@@ -933,7 +976,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Monterey Jack, cheddar, cream cheese, chiles, cream, poblano, dough, butter, flour, milk.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTY1ODI4NjIxMy1CYXJidXItV29ybGQtRm9vZHMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/triple-mac-cheese-pizza/e235020/"
+    "url": "https://everout.com/portland/events/triple-mac-cheese-pizza/e235020/",
+    "whatTheySay": "A slice that eats like your favorite late-night comfort ritual. Monterey Jack, cheddar, and cream cheese melt into a velvety base with smoky Hatch chiles and cream. Finished with fire-roasted poblano for a charred edge and just enough heat."
   },
   {
     "id": 235021,
@@ -952,7 +996,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Red pepper, feta, eggplant, artichokes, sausage, mint, dough, olive oil.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTY4ODA0MDM2Mi1Xb3JsZC1Gb29kcy1FdmVyZXR0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-garden-father/e235021/"
+    "url": "https://everout.com/portland/events/the-garden-father/e235021/",
+    "whatTheySay": "Savory, smoky, and just a touch wild. A roasted red pepper–feta sauce anchors roasted eggplant, marinated artichokes, and spicy sausage. Sheep’s milk feta and fresh mint brighten every bite."
   },
   {
     "id": 235022,
@@ -971,7 +1016,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tomato sauce, fresh basil, pickled asparagus, diced cherry peppers, cauliflower, nutritional yeast.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTUwMTIyNzQzNjYyOC1NaXNzaXNzaXBwaS1QaXp6YS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/zingo-starr-it-dont-come-cheesy/e235022/"
+    "url": "https://everout.com/portland/events/zingo-starr-it-dont-come-cheesy/e235022/",
+    "whatTheySay": "Inspired by our love of hosting live music and making great pizza. The fresh basil and cauliflower are elevated with a little help from the cherry pepper zing. Our house-pickled asparagus brings a flavor you'll be thinking about eight days a week. The nutritional yeast makes it all come together. We know it don't come easy, but pizza helps!"
   },
   {
     "id": 235162,
@@ -990,7 +1036,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Detroit-style pizza base, refried beans, brick cheese, slow simmered spiced beef, lettuce, tomato, lime crema, tortilla chips, oven roasted salsa and lime on side. Can be ordered without beef to be vegetarian.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NjAzMjcwOTg2Ni1MYXp5LURheXMtQmVhdmVydG9uLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/taco-the-town/e235162/"
+    "url": "https://everout.com/portland/events/taco-the-town/e235162/",
+    "whatTheySay": "A crispy-edged Detroit slab stacked with creamy refried beans, molten brick cheese, and bold taco-spiced beef. Baked to golden perfection, then topped with cool lettuce, juicy tomatoes, zesty lime crema, and crunchy tortilla chips. Served with smoky oven-roasted salsa and a lime on the side for good measure. Messy, loud, and absolutely loaded."
   },
   {
     "id": 235164,
@@ -1009,7 +1056,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "It's a burger. On a pizza. We took a Detroit-style pizza and built a burger on top. A miniature beef slider patty on every slice, topped with American cheese, shredded lettuce, our burger sauce and dill pickles, and a tiny little bun.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTk2Njk0MzMzOS1MYXp5LURheXMtUG9ydGxhbmQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/you-asked-for-it/e235164/"
+    "url": "https://everout.com/portland/events/you-asked-for-it/e235164/",
+    "whatTheySay": "We really loved the pizza burger we made for Burger Week last year, so it was pretty clear what we had to do."
   },
   {
     "id": 235165,
@@ -1047,7 +1095,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Kim(chi)-possible pie: garlic base, spicy pork belly bulgogi, onion, baechu-kimchi, gochujang aioli drizzle, and scallions",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTc4NDEwNjgwOS1BdGxhcy1QaXp6YS1LaWxsaW5nc3dvcnRoLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-kim-chi-possible/e235167/"
+    "url": "https://everout.com/portland/events/the-kim-chi-possible/e235167/",
+    "whatTheySay": "A Korean styled pie featuring our special sweet & spicy pork belly bulgogi, locally sourced baechu-kimchi, and finished up with a gochujang aioli drizzle! Decadent Korean flavors combined with our pizza prowess to make for a delicious pizza experience!!"
   },
   {
     "id": 235171,
@@ -1085,7 +1134,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Sausage, pickled hot peppers, red bell peppers, onion, garlic and parsley.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTg0MzU4ODQzMy1EaWNrcy1QaXp6YS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/pizza-scarp-no-chicken/e235174/"
+    "url": "https://everout.com/portland/events/pizza-scarp-no-chicken/e235174/",
+    "whatTheySay": "Named after the classic Italian American dish, Chicken Scarpariello, with all the components, excluding the chicken. Bright flavors and herbs along side deep rich savory elements. It’s a great example of our style of cooking and pizzas."
   },
   {
     "id": 235272,
@@ -1104,7 +1154,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mozzarella, brick cheddar, sweet corn, green chili, crema Mexicana, Flaming Hot Cheetos, lime pickled onion, cilantro",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTg3NDk0MjE0OS1SdXNlLUJyZXdpbmcuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/one-hit-wonder/e235272/"
+    "url": "https://everout.com/portland/events/one-hit-wonder/e235272/",
+    "whatTheySay": "Chef Dino got a little too baked this time."
   },
   {
     "id": 235273,
@@ -1142,7 +1193,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A tender, flaky crust covered with fermented red chili paste and topped with a blend of imported Lebanese cheeses. Can be made vegan by omitting the cheese.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NjE2OTQ1MzMzNy1OaWNob2xhcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/shatta-pizza/e235392/"
+    "url": "https://everout.com/portland/events/shatta-pizza/e235392/",
+    "whatTheySay": "Our inspiration is the flavors and spices of Mediterranean foods, family recipes, and not to mention our delicious pita."
   },
   {
     "id": 235393,
@@ -1161,7 +1213,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House marinara, provolone, capocollo, salami, vinegar peppers.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDA5MjQ1Mzg4Ni1TRk5ZLUJlbG1vbnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-pork-store/e235393/"
+    "url": "https://everout.com/portland/events/the-pork-store/e235393/",
+    "whatTheySay": "You know what they say: \"Revenge is like serving cold cuts.\""
   },
   {
     "id": 235394,
@@ -1180,7 +1233,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tzatziki, ground lamb, red onion, pickled turnip, diced tomato, feta.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDIwNjU5NDE5My1TRk5ZLUhhd3Rob3JuZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/happiness-is-a-shawarm-gun/e235394/"
+    "url": "https://everout.com/portland/events/happiness-is-a-shawarm-gun/e235394/",
+    "whatTheySay": "Mother Ewe-perior jumped the gun."
   },
   {
     "id": 235633,
@@ -1199,7 +1253,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Artichoke, spinach, garlic, tomato, onion, parsley, and parmesan.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDQ4ODkyMzk4Ny1TZWNyZXQtUGl6emEtU29jaWV0eS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/taumoeba/e235633/"
+    "url": "https://everout.com/portland/events/taumoeba/e235633/",
+    "whatTheySay": "Taumoeba exists in many environments, but is generally hunger-resistant. The adventurers at Secret Pizza Society have bred a hunger-susceptible strain, synthesized from elements of artichoke bruschetta, almond parm, and Erisian dough, which—when combined—is sure to save our home world from the scourge of this nonsense."
   },
   {
     "id": 235634,
@@ -1237,7 +1292,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Cherry pizza with brie, lemon zesty pistachio pesto, and balsamic drizzle.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDc5NDQxNTU1My1TY290dGllcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/bada-bing/e235636/"
+    "url": "https://everout.com/portland/events/bada-bing/e235636/",
+    "whatTheySay": "An Italian-inspired cherry pie, Bada Bing! blends the flavors of savory baked brie, sweet and tart cherries, and pistachio pesto into a rich, balanced bite that’s both nostalgic and unexpected. Big flavor, no apologies. Come and get it!"
   },
   {
     "id": 235637,
@@ -1256,7 +1312,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Cherry pizza with brie, lemon zesty pistachio pesto, and balsamic drizzle.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDczNjY2NzIwMy1TY290dGllcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/bada-bing/e235637/"
+    "url": "https://everout.com/portland/events/bada-bing/e235637/",
+    "whatTheySay": "An Italian-inspired cherry pie, Bada Bing! blends the flavors of savory baked brie, sweet and tart cherries, and pistachio pesto into a rich, balanced bite that’s both nostalgic and unexpected. Big flavor, no apologies. Come and get it!"
   },
   {
     "id": 235792,
@@ -1275,7 +1332,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Slow-roasted pork belly, caramelized onions, arugula tossed in lemon vinaigrette, topped with herb aioli.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE3MjI3Mzc1MDUzMy1CYWJ5ZG9sbC1NTEsuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/belly-of-the-beast/e235792/"
+    "url": "https://everout.com/portland/events/belly-of-the-beast/e235792/",
+    "whatTheySay": "We find only the most evil pigs and steal their bellies to bring you the most delicious slice of pie you've ever had."
   },
   {
     "id": 235793,
@@ -1294,7 +1352,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Corned beef, sauerkraut, provolone & mozzarella cheese, green onion on a pepperoncini aioli base. (Allergy alert for Paprika)",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE3MjMyMjY3MzAwNi1CYWJ5ZG9sbC1Tb3V0aGVhc3QuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/a-reuben-jamaica-ooh-i-wanna-take-ya-to-baby-doll-pizza/e235793/"
+    "url": "https://everout.com/portland/events/a-reuben-jamaica-ooh-i-wanna-take-ya-to-baby-doll-pizza/e235793/",
+    "whatTheySay": "The rueben, your favorite deli sandwich, has reached its final form. Shaved slices of corned beef, sauerkraut for a slight kick, melded with provolone and mozzarella cheese on a base of pepperoncini aioli. Topped with diced green onions for those fresh high notes. Close your eyes and relive your favorite bodega memories."
   },
   {
     "id": 235928,
@@ -1313,7 +1372,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Red sauce base, pepperoni, pulled pork, crushed red pepper flakes and jalapeños, finished with a honey drizzle and fresh lemon zest.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NjI0NTM5OTc1NS1Hb29kLU5laWdoYm9yLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/hot-honey-hog/e235928/"
+    "url": "https://everout.com/portland/events/hot-honey-hog/e235928/",
+    "whatTheySay": "The combination of pepperoni and pulled pork gives you a nice mix of salty crunch and tender richness, while the jalapeños and red pepper flakes provide a solid kick. The honey drizzle is the game-changer here—it creates that \"hot honey\" effect that balances the spice perfectly."
   },
   {
     "id": 236080,
@@ -1332,7 +1392,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Carolina Gold BBQ base, slow-cooked pulled pork, perfectly pickled red onions, fresh jalapeños, whole milk mozzarella, finished with a lime-cilantro crema drizzle.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE3MjIxNjMxODI1OS00OC1Ob3J0aC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/crema-my-pork/e236080/"
+    "url": "https://everout.com/portland/events/crema-my-pork/e236080/",
+    "whatTheySay": "A combination of sweetness from the south and spiciness from the Pacific Northwest, this pizza has flavors that will explode in your mouth and leave your tastebuds wanting more after every bite. Pair this pie with a Jim Beam neat or on the rocks and your night... well, find out for yourself."
   },
   {
     "id": 236082,
@@ -1351,7 +1412,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Creamy pesto base, house made sausage on a garlic herb crust, topped with fresh basil, mushrooms, and parmesean.",
     "emoji": "🍄",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTUwMTM0NTMwNDMzLVNhdGVsbGl0ZS1UYXZlcm4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/sausage-pesto/e236082/"
+    "url": "https://everout.com/portland/events/sausage-pesto/e236082/",
+    "whatTheySay": "We love our house made Italian sausage and want to share that love with the world. Pesto, sausage, mushroom and fresh basil = perfection."
   }
 ];
   newItems.forEach(item => {

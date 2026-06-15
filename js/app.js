@@ -63,11 +63,7 @@ const App = (() => {
       { id: 'vegan', label: 'Vegan' },
       { id: 'gf', label: 'Gluten-free' },
       { id: 'pie', label: 'Whole Pie' },
-      { id: 'minors', label: 'Family OK' }
-    ],
-    'highball-2026': [
       { id: 'minors', label: 'Minors OK' },
-      { id: '21plus', label: '21+ Only' },
       { id: 'takeout', label: 'Takeout OK' }
     ],
     'taco-2026': [
@@ -75,13 +71,22 @@ const App = (() => {
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
       { id: 'gf', label: 'Gluten-free' },
-      { id: 'spicy', label: 'Spicy' }
+      { id: 'spicy', label: 'Spicy' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout OK' }
     ],
     'nacho-2026': [
       { id: 'meat', label: 'Meat' },
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
-      { id: 'gf', label: 'Gluten-free' }
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout OK' }
+    ],
+    'highball-2026': [
+      { id: 'minors', label: 'Minors OK' },
+      { id: '21plus', label: '21+ Only' },
+      { id: 'takeout', label: 'Takeout OK' }
     ]
   };
 
@@ -439,6 +444,11 @@ const App = (() => {
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
     }
+    
+    if (currentWeekId !== 'highball-2026') {
+      if (r.minors) t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
+      if (r.takeout) t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
+    }
     return t.join('');
   }
 
@@ -672,7 +682,9 @@ const App = (() => {
           </span>
         </a>
       </div>
-      <div class="sheet-desc">${esc(r.desc)}</div>
+      ${r.whatsOnIt ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What's on it...</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>` : ''}
+      ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc">${esc(r.whatTheySay)}</div>` : ''}
+      ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc">${esc(r.desc)}</div>` : ''}
       <div class="sheet-tags">${buildTags(r)}</div>
       <div class="sheet-actions">
 

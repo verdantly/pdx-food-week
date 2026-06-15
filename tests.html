@@ -671,6 +671,82 @@
       }
     },
     {
+      id: "filter-minors",
+      name: "Minors OK / Takeout OK Filtering",
+      fn: async (iframe, log) => {
+        log("Loading Pizza Week 2026...");
+        await reloadSandbox("week=pizza-2026");
+        iframe.contentWindow.App.init();
+        await wait(200);
+
+        const doc = iframe.contentDocument;
+        const initialCount = doc.querySelectorAll('#cards-browse .dish-card').length;
+        
+        log("Finding the 'Minors OK' filter chip...");
+        const filterChips = Array.from(doc.querySelectorAll('#browse-filters .filter-chip'));
+        const minorsChip = filterChips.find(chip => chip.textContent.trim() === 'Minors OK');
+        assert(minorsChip, "A filter chip with label 'Minors OK' should exist");
+        
+        log("Clicking 'Minors OK' filter chip...");
+        minorsChip.click();
+        await wait(200);
+
+        const filteredCount = doc.querySelectorAll('#cards-browse .dish-card').length;
+        log(`Filtered Minors OK card count: ${filteredCount} (initial was ${initialCount})`);
+        assert(filteredCount < initialCount, "Minors OK filter should narrow the list");
+
+        // Verify the tag exists on remaining cards
+        let allHaveTag = true;
+        doc.querySelectorAll('#cards-browse .dish-card').forEach(card => {
+          if (!card.querySelector('.tag-minors')) allHaveTag = false;
+        });
+        assert(allHaveTag, "Every matched card should have the Minors OK tag");
+
+        log("Toggling 'Minors OK' filter off...");
+        minorsChip.click();
+        await wait(200);
+
+        assertEqual(doc.querySelectorAll('#cards-browse .dish-card').length, initialCount, "Toggling filter off should restore list");
+        log("Filter verification complete.", "pass");
+      }
+    },
+    {
+      id: "detail-sheet",
+      name: "Detail Sheet Description Parsing",
+      fn: async (iframe, log) => {
+        log("Loading Nacho Week 2026...");
+        await reloadSandbox("week=nacho-2026");
+        iframe.contentWindow.App.init();
+        await wait(200);
+
+        const doc = iframe.contentDocument;
+        
+        // Mock a dish with all description fields
+        const mockDish = {
+          id: 999999,
+          weekId: 'nacho-2026',
+          dish: 'Test Nacho',
+          restaurant: 'Test Place',
+          desc: 'Base generic description',
+          whatsOnIt: 'Cheese, Beans, Jalapenos',
+          whatTheySay: 'The best nachos in town',
+          lat: 45, lng: -122, type: 'meat'
+        };
+        
+        log("Opening detail sheet with mock parsed data...");
+        iframe.contentWindow.App.openDetail(mockDish);
+        await wait(200);
+        
+        const whatsOnIt = doc.querySelector('.sheet-whats-on') || Array.from(doc.querySelectorAll('.sheet-desc')).find(el => el.textContent.includes('Cheese, Beans'));
+        const whatTheySay = doc.querySelector('.sheet-what-they-say') || Array.from(doc.querySelectorAll('.sheet-desc')).find(el => el.textContent.includes('The best nachos in town'));
+        
+        assert(whatsOnIt, "Detail sheet should render whatsOnIt content");
+        assert(whatTheySay, "Detail sheet should render whatTheySay content");
+        
+        log("Detail sheet description verification complete.", "pass");
+      }
+    },
+    {
       id: "swipe",
       name: "Swipe Tinder Deck Layout Transforms & Responsive Modes",
       fn: async (iframe, log) => {
