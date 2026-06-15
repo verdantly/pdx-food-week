@@ -1079,7 +1079,7 @@
         await wait(100);
 
         log("Verifying banner text updated to show 2 remaining...");
-        assertContains(banner.textContent, "There are 2 new nacho listings for Nacho Week!", "Banner text should update when count decreases");
+        assertContains(banner.textContent, `There are ${expectedNewCount - 2} new nacho listings for Nacho Week!`, "Banner text should update when count decreases");
 
         log("Verifying Browse tab badge dot is still showing (since other items are not viewed yet)...");
         assert(badge.classList.contains('show'), "Badge dot should still show on tab");
