@@ -2616,6 +2616,10 @@ select:focus-visible {
     border-bottom-color: transparent;
   }
 
+  .view {
+    padding-bottom: 96px !important;
+  }
+  
   /* Compact App Bar Styling */
   .compact-app-bar {
     display: none;
@@ -2758,7 +2762,7 @@ select:focus-visible {
 /* ── Mobile Filter FAB ── */
 .mobile-filter-fab {
   position: fixed;
-  bottom: 80px; /* Float above navigation bar */
+  bottom: 32px; /* Float above screen bottom */
   left: 50%;
   transform: translateX(-50%) translateY(0);
   z-index: 1500;
