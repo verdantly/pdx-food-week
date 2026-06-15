@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+button, input, textarea, select {
+  font-family: inherit;
+}
+
 :root {
   --pizza: #C94B2C;
   --pizza-dark: #9E3318;
@@ -509,6 +513,7 @@ body.is-landing .bottom-nav {
 }
 
 .filter-chip {
+  font-family: inherit;
   flex-shrink: 0;
   font-size: 13.5px;
   /* Increased from 12px */
