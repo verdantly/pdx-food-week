@@ -2594,31 +2594,31 @@ select:focus-visible {
     display: none;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    padding: 18px 20px;
+    background: transparent;
+    border-bottom: none;
   }
 
   .compact-brand {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
+    font-size: 13px;
     font-weight: 700;
-    font-size: 20px;
-    color: var(--pizza-dark);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
     cursor: pointer;
   }
 
   .compact-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
 
   .compact-icon-btn {
     background: transparent;
     border: none;
-    color: var(--ink);
+    color: var(--cream);
     padding: 8px;
     border-radius: 50%;
     cursor: pointer;
@@ -2630,7 +2630,7 @@ select:focus-visible {
 
   .compact-icon-btn:hover,
   .compact-icon-btn:active {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   /* Dropdowns */
@@ -2639,15 +2639,19 @@ select:focus-visible {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 16px;
-    box-shadow: var(--shadow-md);
+    background: rgba(26, 18, 8, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px 20px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     z-index: 1000;
     transform-origin: top;
     animation: slideDownFade 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .compact-dropdown .search-input-wrapper {
+    margin-bottom: 0;
   }
 
   @keyframes slideDownFade {
@@ -2674,7 +2678,7 @@ select:focus-visible {
     font-family: var(--font-body);
     font-size: 18px;
     font-weight: 600;
-    color: var(--ink);
+    color: var(--cream);
     padding: 12px 16px;
     border-radius: 8px;
     cursor: pointer;
@@ -2682,7 +2686,7 @@ select:focus-visible {
   }
 
   .compact-menu-item:active {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.1);
   }
 }
 
