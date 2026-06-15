@@ -849,7 +849,7 @@ const App = (() => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
     if (name === 'swipe' || name === 'share') {
-      closeDetail();
+      closeDetail(true);
     }
     if (name === 'map') {
       renderMap();
@@ -883,8 +883,16 @@ const App = (() => {
       } else {
         url.searchParams.set('tab', name);
       }
+      
+      const newState = { ...history.state, tab: name };
+      const appContainer = document.getElementById('app');
+      if (appContainer && !appContainer.classList.contains('detail-open')) {
+        url.searchParams.delete('dish');
+        delete newState.detailDishId;
+      }
+      
       try {
-        history.pushState({ ...history.state, tab: name }, '', url);
+        history.pushState(newState, '', url);
       } catch (e) {
         // Ignore SecurityError
       }
