@@ -844,6 +844,9 @@ const App = (() => {
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
+    if (name === 'swipe' || name === 'share') {
+      closeDetail();
+    }
     if (name === 'map') {
       renderMap();
       // The container's real dimensions are only known once the tab is
@@ -1326,8 +1329,8 @@ const App = (() => {
     const container = document.getElementById('cards-saved');
     if (!container) return;
     if (items.length === 0) {
-      container.innerHTML = `<div class="no-results">
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
+      container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px;">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
         </svg>
         <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No saved spots yet</p>
@@ -1739,10 +1742,9 @@ const App = (() => {
       // Leaflet failed to load (CDN blocked, offline, restrictive CSP).
       // Render a user-visible message so the tab isn't silently empty.
       host.innerHTML = `
-        <div style="padding:24px;text-align:center;color:var(--ink-60);font-size:13px;line-height:1.5">
-          <div style="font-size:28px;margin-bottom:8px">🗺️</div>
-          Map couldn't load — check your connection or a blocker extension.<br>
-          The list and swipe tabs still work offline-cached.
+        <div class="empty-state">
+          <div style="font-size:48px;margin-bottom:16px">🗺️</div>
+          Map couldn't load — check your connection or a blocker extension.
         </div>`;
       return;
     }
@@ -1777,8 +1779,7 @@ const App = (() => {
         });
         m.bindPopup(
           `<div class="popup-dish">${esc(r.dish)}</div>
-           <div class="popup-restaurant">${esc(r.restaurant)}</div>
-           <div style="margin-top:4px"><a href="#" data-popup-id="${r.id}">Details →</a></div>`
+           <div class="popup-restaurant">${esc(r.restaurant)}</div>`
         );
         m.on('click', () => showMapSelected(r));
         leafletMarkers.set(r.id, m);
@@ -1823,18 +1824,17 @@ const App = (() => {
 
   function showMapSelected(r) {
     selectedMapId = r.id;
-    const el = document.getElementById('map-selected-card');
-    el.innerHTML = `
-      <div class="section-header">Selected location</div>
-      <div class="cards-list" style="padding:0 0 8px">
-        ${cardHTML(r)}
-      </div>`;
     // Highlight the selected pin; reset the rest.
     if (leafletMarkers) {
       for (const [id, m] of leafletMarkers) {
         m.setIcon(pinIcon(saved.has(id), id === r.id));
       }
     }
+    
+    openDetail(r.id);
+    
+    // Pan slightly down so the marker isn't covered by the popup
+    leafletMap.panTo([r.lat, r.lng], { animate: true });
   }
 
   // ── Swipe ──────────────────────────────────────────────────
