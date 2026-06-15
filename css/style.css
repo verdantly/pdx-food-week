@@ -2089,7 +2089,7 @@ input[type="search"]::-webkit-search-cancel-button {
     padding-top: 0;
   }
   .filter-chips-wrapper {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   .sort-section {
@@ -2935,9 +2935,7 @@ select:focus-visible {
   margin-right: 0;
 }
 
-#filter-drawer-body .sort-distance-group {
-  margin-top: 4px;
-}
+  /* Removed margin-top on distance group to prevent vertical misalignment with other sort chips */
 
 .drawer-footer {
   flex-shrink: 0;
