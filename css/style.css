@@ -634,6 +634,7 @@ body.is-landing .bottom-nav {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 2px;
+  padding-right: 64px;
 }
 
 .card-neighborhood {
