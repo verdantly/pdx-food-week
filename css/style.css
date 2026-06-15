@@ -2656,11 +2656,21 @@ select:focus-visible {
   }
 
   .compact-dropdown .search-input-wrapper input {
+    width: 100%;
+    padding: 12px 38px 12px 40px;
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--cream);
+    font-family: var(--font-body);
+    font-size: 16px;
   }
   
+  .compact-dropdown .search-input-wrapper input:focus {
+    outline: none;
+    border-color: var(--pizza);
+  }
+
   .compact-dropdown .search-input-wrapper input::placeholder {
     color: rgba(255, 255, 255, 0.5);
   }

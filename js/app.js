@@ -2080,9 +2080,10 @@ const App = (() => {
     const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
     if (!week) return;
 
-    // Update select switcher value
-    const select = document.getElementById('week-switcher');
-    if (select) select.value = '';
+    // Update select switcher values
+    document.querySelectorAll('.week-switcher-select').forEach(select => {
+      select.value = week.id;
+    });
 
     // Update all footer elements (sidebar on desktop, view footers on mobile/tablet)
     let dataSrcHtml = '';
