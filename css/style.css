@@ -47,7 +47,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: #E8E0D5;
+  background: #FFFFFF;
   color: var(--ink);
   min-height: 100vh;
   line-height: 1.6;
@@ -65,7 +65,7 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh;
-  background: var(--cream);
+  background: #FFFFFF;
   display: flex;
   flex-direction: column;
 }
@@ -545,24 +545,20 @@ body.is-landing .bottom-nav {
 }
 
 .dish-card {
-  background: var(--card-bg);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 24px 16px;
   display: flex;
   gap: 12px;
   align-items: flex-start;
   cursor: pointer;
-  transition: box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-              border-color 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background-color var(--transition);
   position: relative;
 }
 
 .dish-card:hover {
-  box-shadow: 0 12px 30px rgba(26, 18, 8, 0.12);
-  border-color: rgba(201, 75, 44, 0.4);
-  transform: translateY(-4px) scale(1.015);
+  background: var(--cream);
 }
 
 .dish-card.bookmarked {
@@ -1887,6 +1883,7 @@ input[type="search"]::-webkit-search-cancel-button {
   padding: 0;
   overflow: hidden;
   background: var(--pizza-pale);
+  border-radius: 0;
 }
 
 .card-emoji.card-thumb img {
@@ -1916,7 +1913,7 @@ input[type="search"]::-webkit-search-cancel-button {
   #app {
     max-width: 100%;
     min-height: 100vh;
-    background: var(--cream);
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
   }
@@ -2257,7 +2254,7 @@ input[type="search"]::-webkit-search-cancel-button {
     flex: 1;
     min-width: 0;
     display: block;
-    background: var(--cream);
+    background: #FFFFFF;
     min-height: 100vh;
   }
 
