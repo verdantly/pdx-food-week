@@ -2650,6 +2650,16 @@ select:focus-visible {
     animation: slideDownFade 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
+  #compact-menu-dropdown {
+    left: auto;
+    right: 16px;
+    min-width: 240px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    margin-top: 8px;
+    transform-origin: top right;
+  }
+
   .compact-dropdown .search-input-wrapper {
     margin-bottom: 0;
   }
