@@ -2752,6 +2752,7 @@ select:focus-visible {
   }
 
   .compact-menu-item {
+    position: relative;
     background: transparent;
     border: none;
     text-align: right;
@@ -2770,6 +2771,19 @@ select:focus-visible {
     background: rgba(255, 255, 255, 0.05);
   }
 
+  .compact-menu-item.active::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 3px;
+    background: var(--pizza);
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
   .compact-menu-item:active {
     background: rgba(255, 255, 255, 0.1);
   }
@@ -2780,7 +2794,7 @@ select:focus-visible {
   position: fixed;
   bottom: 32px; /* Float above screen bottom */
   left: 50%;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(100px);
   z-index: 1500;
   display: flex;
   align-items: center;
@@ -2797,12 +2811,18 @@ select:focus-visible {
   border-radius: 30px;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(26, 18, 8, 0.35);
-  opacity: 1;
-  pointer-events: all;
+  opacity: 0;
+  pointer-events: none;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
               opacity 0.3s ease,
               background-color 0.2s ease,
               border-color 0.2s ease;
+}
+
+.mobile-filter-fab.show-fab {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: all;
 }
 
 .mobile-filter-fab:active {
