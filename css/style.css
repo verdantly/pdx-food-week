@@ -597,7 +597,6 @@ body.is-landing .bottom-nav {
 .card-body {
   flex: 1;
   min-width: 0;
-  padding-right: 44px;
 }
 
 .card-dish {
@@ -608,8 +607,7 @@ body.is-landing .bottom-nav {
   color: var(--ink);
   line-height: 1.25;
   margin-bottom: 3px;
-  /* leave room for bookmark btn on mobile */
-  padding-right: 6px;
+  padding-right: 44px;
 }
 
 .new-badge {
