@@ -805,12 +805,16 @@ const App = (() => {
     }
 
     if (!fromPopState) {
-      if (history.state && history.state.detailDishId !== undefined) {
-        history.back();
-      } else {
-        const url = new URL(window.location);
-        url.searchParams.delete('dish');
-        history.pushState(null, '', url);
+      try {
+        if (history.state && history.state.detailDishId !== undefined) {
+          history.back();
+        } else {
+          const url = new URL(window.location);
+          url.searchParams.delete('dish');
+          history.pushState(null, '', url);
+        }
+      } catch (e) {
+        // Ignore SecurityError on file:///
       }
     }
   }
@@ -879,7 +883,11 @@ const App = (() => {
       } else {
         url.searchParams.set('tab', name);
       }
-      history.pushState({ ...history.state, tab: name }, '', url);
+      try {
+        history.pushState({ ...history.state, tab: name }, '', url);
+      } catch (e) {
+        // Ignore SecurityError
+      }
     }
   }
 

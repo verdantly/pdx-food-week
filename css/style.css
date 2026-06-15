@@ -1575,6 +1575,9 @@ body.is-landing .bottom-nav {
 #view-swipe.active {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  height: 100%;
+  min-height: 0;
 }
 
 .swipe-header {
@@ -3189,4 +3192,23 @@ select:focus-visible {
   #view-saved > .sort-section {
     display: none;
   }
-}
+}
+/* Make map take full height */
+#view-map.active {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+}
+.map-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  margin-bottom: 20px;
+}
+#map-canvas {
+  flex: 1;
+  height: auto !important;
+  min-height: 200px;
+}
+
