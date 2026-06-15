@@ -786,10 +786,12 @@ const App = (() => {
       App.hideCompactDropdowns();
     }
     activeTab = name;
-    document.querySelectorAll('.nav-tab').forEach(el => {
+    document.querySelectorAll('.nav-tab, .compact-menu-item').forEach(el => {
       const isActive = el.dataset.tab === name;
       el.classList.toggle('active', isActive);
-      el.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (el.classList.contains('nav-tab')) {
+        el.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      }
     });
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
