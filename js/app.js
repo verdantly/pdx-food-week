@@ -782,6 +782,9 @@ const App = (() => {
     if (typeof filterDrawerOpen !== 'undefined' && filterDrawerOpen) {
       closeFilterDrawer();
     }
+    if (window.App && App.hideCompactDropdowns) {
+      App.hideCompactDropdowns();
+    }
     activeTab = name;
     document.querySelectorAll('.nav-tab').forEach(el => {
       const isActive = el.dataset.tab === name;
@@ -2495,6 +2498,97 @@ const App = (() => {
         renderSaved();
       });
     }
+
+    // Wire up compact app bar search and menu
+    const compactSearchBtn = document.getElementById('compact-search-btn');
+    const compactMenuBtn = document.getElementById('compact-menu-btn');
+    const compactSearchDropdown = document.getElementById('compact-search-dropdown');
+    const compactMenuDropdown = document.getElementById('compact-menu-dropdown');
+    const compactSearchInput = document.getElementById('compact-search-input');
+    const compactSearchClearBtn = document.getElementById('compact-search-clear-btn');
+
+    if (compactSearchBtn) {
+      compactSearchBtn.addEventListener('click', () => {
+        const isHidden = compactSearchDropdown.style.display === 'none';
+        compactSearchDropdown.style.display = isHidden ? 'block' : 'none';
+        compactMenuDropdown.style.display = 'none';
+        if (isHidden && compactSearchInput) {
+          compactSearchInput.value = (activeTab === 'saved') ? savedSearchQuery : searchQuery;
+          if (compactSearchClearBtn) {
+            compactSearchClearBtn.style.display = compactSearchInput.value ? 'flex' : 'none';
+          }
+          compactSearchInput.focus();
+        }
+      });
+    }
+
+    if (compactMenuBtn) {
+      compactMenuBtn.addEventListener('click', () => {
+        const isHidden = compactMenuDropdown.style.display === 'none';
+        compactMenuDropdown.style.display = isHidden ? 'block' : 'none';
+        compactSearchDropdown.style.display = 'none';
+      });
+    }
+
+    if (compactSearchInput && compactSearchClearBtn) {
+      compactSearchInput.addEventListener('input', e => {
+        const val = e.target.value;
+        compactSearchClearBtn.style.display = val ? 'flex' : 'none';
+        
+        if (activeTab === 'browse') {
+          searchQuery = val;
+          const mainSearchInput = document.getElementById('search-input');
+          if (mainSearchInput) mainSearchInput.value = val;
+          renderBrowse();
+        } else if (activeTab === 'saved') {
+          savedSearchQuery = val;
+          const mainSavedSearchInput = document.getElementById('saved-search-input');
+          if (mainSavedSearchInput) mainSavedSearchInput.value = val;
+          renderSaved();
+        }
+      });
+
+      compactSearchClearBtn.addEventListener('click', () => {
+        compactSearchInput.value = '';
+        compactSearchClearBtn.style.display = 'none';
+        if (activeTab === 'browse') {
+          searchQuery = '';
+          const mainSearchInput = document.getElementById('search-input');
+          if (mainSearchInput) mainSearchInput.value = '';
+          renderBrowse();
+        } else if (activeTab === 'saved') {
+          savedSearchQuery = '';
+          const mainSavedSearchInput = document.getElementById('saved-search-input');
+          if (mainSavedSearchInput) mainSavedSearchInput.value = '';
+          renderSaved();
+        }
+        compactSearchInput.focus();
+      });
+    }
+
+    // Hide dropdowns when clicking outside
+    document.addEventListener('click', e => {
+      const isCompactClick = e.target.closest('.compact-app-bar') || e.target.closest('.compact-dropdown');
+      if (!isCompactClick && compactSearchDropdown && compactMenuDropdown) {
+        compactSearchDropdown.style.display = 'none';
+        compactMenuDropdown.style.display = 'none';
+      }
+    });
+
+    // Hide dropdowns when compact header is removed (e.g. scrolling back up)
+    window.addEventListener('scroll', () => {
+      const appContainer = document.getElementById('app');
+      if (appContainer && !appContainer.classList.contains('compact-header')) {
+        if (compactSearchDropdown) compactSearchDropdown.style.display = 'none';
+        if (compactMenuDropdown) compactMenuDropdown.style.display = 'none';
+      }
+    });
+
+    // Attach to App globally so we can hide dropdowns in switchTab if needed
+    window.App.hideCompactDropdowns = () => {
+      if (compactSearchDropdown) compactSearchDropdown.style.display = 'none';
+      if (compactMenuDropdown) compactMenuDropdown.style.display = 'none';
+    };
 
     // Handle auto-import from URL Magic Link
     const shareListId = urlParams.get('list');
