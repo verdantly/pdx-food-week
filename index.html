@@ -79,8 +79,8 @@
         <button class="compact-menu-item" data-tab="saved" onclick="App.switchTab('saved')">Saved</button>
         <button class="compact-menu-item" data-tab="share" onclick="App.switchTab('share')">Share</button>
         <button class="compact-menu-item" data-tab="map" onclick="App.switchTab('map')">Map</button>
-        <div style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px;">
-          <select class="week-switcher-select" id="compact-week-switcher" onchange="App.switchWeek(this.value)" aria-label="Switch food week" style="margin-top: 12px; background-color: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 16px; padding: 12px 32px 12px 16px; text-align: right; text-align-last: right;">
+        <div style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px; display: flex; justify-content: flex-end;">
+          <select class="week-switcher-select" id="compact-week-switcher" onchange="App.switchWeek(this.value)" aria-label="Switch food week" style="margin-top: 12px; background-color: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 16px; padding: 12px 32px 12px 16px; width: auto;">
             <option value="" disabled style="color: #1a1816; background: #fff;">Select food week</option>
             <option value="nacho-2026" style="color: #1a1816; background: #fff;">🧀 Nacho Week</option>
             <option value="pizza-2026" style="color: #1a1816; background: #fff;">🍕 Pizza Week</option>
