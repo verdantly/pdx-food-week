@@ -34,7 +34,7 @@ jobs:
             START_DATE="2026-06-22"
             echo "Current Date (Portland): $CURRENT_DATE"
             echo "Start Date: $START_DATE"
-            if [[ "$CURRENT_DATE" >= "$START_DATE" ]]; then
+            if [[ ! "$CURRENT_DATE" < "$START_DATE" ]]; then
               echo "Nacho Week has already started or is in the past ($CURRENT_DATE >= $START_DATE)."
               echo "Stopping future automated runs."
               echo "should_skip=true" >> "$GITHUB_OUTPUT"
