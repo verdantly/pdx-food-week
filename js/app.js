@@ -1310,10 +1310,11 @@ const App = (() => {
     document.getElementById('stat-hoods').textContent = hoods;
     document.getElementById('stat-types').textContent = types;
 
+    const totalSavedForWeek = getRestaurants().filter(r => saved.has(r.id)).length;
     const tabs = document.querySelectorAll('[data-tab="saved"]');
     tabs.forEach(tab => {
-      tab.classList.toggle('has-items', items.length > 0);
-      tab.setAttribute('data-count', items.length);
+      tab.classList.toggle('has-items', totalSavedForWeek > 0);
+      tab.setAttribute('data-count', totalSavedForWeek);
     });
 
     const hasSavedItems = saved.size > 0;
