@@ -174,7 +174,7 @@ const App = (() => {
   }
 
   function updateBrowseBadge() {
-    const browseTab = document.querySelector('[data-tab="browse"]');
+    const browseTab = document.querySelector('.nav-tab[data-tab="browse"]');
     if (!browseTab) return;
     const badge = browseTab.querySelector('.badge-dot');
     if (!badge) return;

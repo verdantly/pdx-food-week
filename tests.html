@@ -716,11 +716,10 @@
       fn: async (iframe, log) => {
         log("Loading Nacho Week 2026...");
         await reloadSandbox("week=nacho-2026");
-        iframe.contentWindow.App.init();
-        await wait(200);
-
-        const doc = iframe.contentDocument;
         
+        const win = iframe.contentWindow;
+        const doc = iframe.contentDocument;
+
         // Mock a dish with all description fields
         const mockDish = {
           id: 999999,
@@ -732,9 +731,13 @@
           whatTheySay: 'The best nachos in town',
           lat: 45, lng: -122, type: 'meat'
         };
+        win.RESTAURANTS.push(mockDish);
+        
+        win.App.init();
+        await wait(200);
         
         log("Opening detail sheet with mock parsed data...");
-        iframe.contentWindow.App.openDetail(mockDish);
+        win.App.openDetail(999999);
         await wait(200);
         
         const whatsOnIt = doc.querySelector('.sheet-whats-on') || Array.from(doc.querySelectorAll('.sheet-desc')).find(el => el.textContent.includes('Cheese, Beans'));
@@ -988,7 +991,7 @@
         const doc = iframe.contentDocument;
 
         log("Verifying Browse tab has the badge-dot with 'show' class...");
-        const browseTab = doc.querySelector('[data-tab="browse"]');
+        const browseTab = doc.querySelector('.nav-tab[data-tab="browse"]');
         assert(browseTab, "Browse tab button should exist");
         const badge = browseTab.querySelector('.badge-dot');
         assert(badge, "Browse tab badge dot should exist");
