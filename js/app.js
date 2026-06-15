@@ -483,7 +483,7 @@ const App = (() => {
         <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
           onclick="event.stopPropagation(); App.toggleSave(${r.id})"
           aria-label="${isSaved ? 'Remove bookmark' : 'Bookmark this dish'}">
-          <svg class="save-icon" viewBox="0 0 24 24">
+          <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
           </svg>
           <span class="save-text">${isSaved ? 'Saved' : 'Save'}</span>
@@ -647,7 +647,7 @@ const App = (() => {
       <div class="sheet-actions">
         <button class="btn btn-save ${isSaved ? 'saved' : ''}" id="sheet-save-btn"
           onclick="App.toggleSave(${r.id})">
-          <svg class="save-icon" viewBox="0 0 24 24">
+          <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
           </svg>
           ${isSaved ? 'Saved' : 'Save'}
