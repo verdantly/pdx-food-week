@@ -270,7 +270,8 @@ body.is-landing .bottom-nav {
   white-space: nowrap;
 }
 
-.nav-tab.has-items::after {
+.nav-tab.has-items::after,
+.compact-menu-item.has-items::after {
   content: attr(data-count);
   position: relative;
   display: inline-block;
@@ -278,10 +279,10 @@ body.is-landing .bottom-nav {
   margin-left: 6px;
   background: var(--pizza-light);
   color: var(--pizza);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   padding: 2px 6px;
-  border-radius: 10px;
+  border-radius: 12px;
   min-width: 14px;
   text-align: center;
   border: none;

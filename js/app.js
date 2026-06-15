@@ -1256,9 +1256,11 @@ const App = (() => {
     document.getElementById('stat-hoods').textContent = hoods;
     document.getElementById('stat-types').textContent = types;
 
-    const tab = document.querySelector('[data-tab="saved"]');
-    tab.classList.toggle('has-items', items.length > 0);
-    tab.setAttribute('data-count', items.length);
+    const tabs = document.querySelectorAll('[data-tab="saved"]');
+    tabs.forEach(tab => {
+      tab.classList.toggle('has-items', items.length > 0);
+      tab.setAttribute('data-count', items.length);
+    });
 
     const hasSavedItems = saved.size > 0;
     const savedHeader = document.querySelector('#view-saved .saved-header');
