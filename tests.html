@@ -1001,7 +1001,8 @@
         const banner = doc.getElementById('new-listings-banner');
         assert(banner, "Notification banner element should exist");
         assertEqual(banner.style.display || getComputedStyle(banner).display, 'flex', "Banner should have display: flex");
-        assertContains(banner.textContent, "There are 4 new nacho listings for Nacho Week!", "Banner should have correct custom copy");
+        const expectedNewCount = win.RESTAURANTS.filter(r => r.weekId === 'nacho-2026' && r.isNew).length;
+        assertContains(banner.textContent, `There are ${expectedNewCount} new nacho listings for Nacho Week!`, "Banner should have correct custom copy");
 
         log("Verifying 'New' filter chip is rendered in the filter section...");
         const filterChips = Array.from(doc.querySelectorAll('#browse-filters .filter-chip'));
@@ -1012,12 +1013,12 @@
         newFilterChip.click();
         await wait(200);
 
-        log("Verifying Browse view displays exactly 4 listings (since all 4 are new & unviewed)...");
+        log(`Verifying Browse view displays exactly ${expectedNewCount} listings (since all are new & unviewed)...`);
         let activeCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
           return card.style.display !== 'none';
         });
         log(`Found ${activeCards.length} visible cards under 'New' filter`);
-        assertEqual(activeCards.length, 4, "Should display exactly 4 cards under 'New' filter");
+        assertEqual(activeCards.length, expectedNewCount, `Should display exactly ${expectedNewCount} cards under 'New' filter`);
 
         const firstCard = activeCards[0];
         const firstId = parseInt(firstCard.dataset.id, 10);
@@ -1037,7 +1038,7 @@
         activeCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
           return card.style.display !== 'none';
         });
-        assertEqual(activeCards.length, 4, "Should still show 4 cards immediately after closing details");
+        assertEqual(activeCards.length, expectedNewCount, `Should still show ${expectedNewCount} cards immediately after closing details`);
 
         log("Toggling 'New' filter off and on to trigger list refresh...");
         newFilterChip.click();
@@ -1045,12 +1046,12 @@
         newFilterChip.click();
         await wait(200);
 
-        log("Verifying the viewed card is now filtered out (leaving 3 cards)...");
+        log(`Verifying the viewed card is now filtered out (leaving ${expectedNewCount - 1} cards)...`);
         activeCards = Array.from(doc.querySelectorAll('#cards-browse .dish-card')).filter(card => {
           return card.style.display !== 'none';
         });
         log(`Found ${activeCards.length} visible cards after toggling 'New' filter`);
-        assertEqual(activeCards.length, 3, "Viewed card should be filtered out, leaving exactly 3 cards");
+        assertEqual(activeCards.length, expectedNewCount - 1, `Viewed card should be filtered out, leaving exactly ${expectedNewCount - 1} cards`);
 
         log("Toggling 'New' filter off to restore full menu browse list...");
         newFilterChip.click();
