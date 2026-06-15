@@ -860,7 +860,13 @@ const App = (() => {
     const appContainer = document.getElementById('app');
     const fabButton = document.getElementById('mobile-filter-fab');
     if (appContainer) appContainer.classList.remove('compact-header');
-    if (fabButton) fabButton.classList.remove('show-fab');
+    if (fabButton) {
+      if (name === 'browse' || (name === 'saved' && saved.size > 0)) {
+        fabButton.classList.add('show-fab');
+      } else {
+        fabButton.classList.remove('show-fab');
+      }
+    }
     lastScrollTop = 0;
 
     if (!fromPopState) {
@@ -1345,6 +1351,14 @@ const App = (() => {
       const elToFocus = document.querySelector(focusSelector);
       if (elToFocus) {
         elToFocus.focus();
+      }
+    }
+
+    if (activeTab === 'saved') {
+      const fabButton = document.getElementById('mobile-filter-fab');
+      if (fabButton) {
+        if (hasSavedItems) fabButton.classList.add('show-fab');
+        else fabButton.classList.remove('show-fab');
       }
     }
   }
@@ -2399,13 +2413,11 @@ const App = (() => {
       const delta = st - lastScrollTop;
 
       if (st <= 60) {
-        // Near the top: always show full header and hide FAB
+        // Near the top: always show full header
         appContainer.classList.remove('compact-header');
-        if (fabButton) fabButton.classList.remove('show-fab');
       } else if (delta > 20 && st > 150) {
-        // Significant scroll down: hide header and show FAB
+        // Significant scroll down: hide header
         appContainer.classList.add('compact-header');
-        if (fabButton) fabButton.classList.add('show-fab');
       } else if (delta < -30) {
         // Significant scroll up: show header
         appContainer.classList.remove('compact-header');
