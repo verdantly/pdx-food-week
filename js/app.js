@@ -628,8 +628,11 @@ const App = (() => {
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
 
     const contentHtml = `
-      <button class="sheet-close" onclick="App.closeDetail()" aria-label="Close">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      <button class="bookmark-btn ${isSaved ? 'saved' : ''}" style="top: 16px; right: 16px;" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
+        <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="save-text" style="display: inline-block;">${isSaved ? 'Saved' : 'Save'}</span>
       </button>
       <div class="sheet-handle"></div>
       ${hero}
@@ -645,20 +648,20 @@ const App = (() => {
       <div class="sheet-desc">${esc(r.desc)}</div>
       <div class="sheet-tags">${buildTags(r)}</div>
       <div class="sheet-actions">
-        <button class="btn btn-save ${isSaved ? 'saved' : ''}" id="sheet-save-btn"
-          onclick="App.toggleSave(${r.id})">
-          <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-          </svg>
-          ${isSaved ? 'Saved' : 'Save'}
-        </button>
+
         <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
           ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
         </a>
       </div>
       <div class="sheet-nav" style="display: flex; justify-content: space-between; margin-top: 16px; gap: 12px;">
-        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink);" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>&larr; Previous</button>
-        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink);" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>Next &rarr;</button>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          Previous
+        </button>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>
+          Next
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
       ${isSaved ? `
       <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">

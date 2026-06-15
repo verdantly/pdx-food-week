@@ -1400,9 +1400,11 @@ body.is-landing .bottom-nav {
 }
 
 .sheet-restaurant {
-  font-size: 17px;
+  font-size: 14px;
   color: var(--pizza-dark);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   text-align: center;
   margin-bottom: 4px;
 }
