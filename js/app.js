@@ -1213,14 +1213,7 @@ const App = (() => {
     if (!container) return;
     if (filtered.length === 0) {
       container.innerHTML = `<div class="no-results">
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
-          <circle cx="12" cy="12" r="10" />
-          <circle cx="12" cy="12" r="6" stroke-opacity="0.3" />
-          <path d="M12 2v2" />
-          <path d="M12 20v2" />
-          <path d="M2 12h2" />
-          <path d="M20 12h2" />
-        </svg>
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Empty plate" width="48" height="48" style="margin-bottom: 16px; opacity: 0.8;" />
         <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">Nothing on the menu</p>
         <p style="color: var(--ink-60);">Try a different filter!</p>
       </div>`;
