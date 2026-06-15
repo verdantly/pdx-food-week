@@ -704,33 +704,53 @@ body.is-landing .bottom-nav {
   position: absolute;
   top: 24px;
   right: 16px;
-  width: 36px;
   height: 36px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border);
-  background: var(--card-bg);
+  min-width: 36px;
+  padding: 0;
+  border-radius: 18px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  line-height: 1;
-  padding-bottom: 2px;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
   transition: all var(--transition);
-  color: var(--ink-30);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
 
+.bookmark-btn .save-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill var(--transition), stroke var(--transition), transform var(--transition);
+}
+
+.bookmark-btn .save-text {
+  display: none; /* Hidden on mobile */
+}
+
 .bookmark-btn:hover {
-  border-color: var(--pizza);
-  color: var(--pizza);
   transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .bookmark-btn.saved {
   background: var(--pizza);
-  border-color: var(--pizza);
   color: #fff;
+}
+
+.bookmark-btn.saved .save-icon {
+  fill: currentColor;
 }
 
 .no-results {
@@ -2025,7 +2045,11 @@ input[type="search"]::-webkit-search-cancel-button {
     margin-top: 0;
     align-self: auto;
     z-index: 10;
-    /* Ensure it floats on top of the image */
+    padding: 0 16px 0 12px;
+  }
+  
+  .bookmark-btn .save-text {
+    display: inline;
   }
 
   .search-bar {

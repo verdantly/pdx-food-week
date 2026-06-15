@@ -483,7 +483,10 @@ const App = (() => {
         <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
           onclick="event.stopPropagation(); App.toggleSave(${r.id})"
           aria-label="${isSaved ? 'Remove bookmark' : 'Bookmark this dish'}">
-          ${isSaved ? '★' : '☆'}
+          <svg class="save-icon" viewBox="0 0 24 24">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="save-text">${isSaved ? 'Saved' : 'Save'}</span>
         </button>
       </div>`;
   }
@@ -644,7 +647,10 @@ const App = (() => {
       <div class="sheet-actions">
         <button class="btn btn-save ${isSaved ? 'saved' : ''}" id="sheet-save-btn"
           onclick="App.toggleSave(${r.id})">
-          ${isSaved ? '★ Saved' : '☆ Save'}
+          <svg class="save-icon" viewBox="0 0 24 24">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          ${isSaved ? 'Saved' : 'Save'}
         </button>
         <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
           ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
