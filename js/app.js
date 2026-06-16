@@ -2104,12 +2104,38 @@ const App = (() => {
       } else if (hasVibrated && Math.abs(dx) <= threshold) {
         hasVibrated = false;
       }
+
+      const btnLike = document.querySelector('.swipe-like');
+      const btnPass = document.querySelector('.swipe-pass');
+      if (btnLike && btnPass) {
+        const intensity = Math.min(1, Math.abs(dx) / 120);
+        if (dx > 0) {
+          btnLike.style.transform = `scale(${1 + intensity * 0.2})`;
+          btnLike.style.borderColor = `rgba(40, 106, 95, ${0.2 + intensity * 0.8})`;
+          btnLike.style.background = `rgba(40, 106, 95, ${intensity * 0.1})`;
+          
+          btnPass.style.transform = `scale(${1 - intensity * 0.1})`;
+          btnPass.style.opacity = 1 - intensity * 0.5;
+        } else {
+          btnPass.style.transform = `scale(${1 + intensity * 0.2})`;
+          btnPass.style.borderColor = `rgba(140, 52, 32, ${0.2 + intensity * 0.8})`;
+          btnPass.style.background = `rgba(140, 52, 32, ${intensity * 0.1})`;
+
+          btnLike.style.transform = `scale(${1 - intensity * 0.1})`;
+          btnLike.style.opacity = 1 - intensity * 0.5;
+        }
+      }
     });
 
     const snapBack = () => {
       cardEl.style.transition = 'transform 0.2s ease';
       cardEl.style.transform = '';
-
+      const btnLike = document.querySelector('.swipe-like');
+      const btnPass = document.querySelector('.swipe-pass');
+      if (btnLike && btnPass) {
+        btnLike.style.transform = ''; btnLike.style.borderColor = ''; btnLike.style.background = ''; btnLike.style.opacity = '';
+        btnPass.style.transform = ''; btnPass.style.borderColor = ''; btnPass.style.background = ''; btnPass.style.opacity = '';
+      }
     };
 
     cardEl.addEventListener('pointerup', e => {

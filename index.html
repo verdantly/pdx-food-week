@@ -226,28 +226,36 @@
       </div>
     </div>
     <div class="swipe-controls" id="swipe-controls">
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-undo" id="swipe-btn-undo" onclick="App.undoSwipe()" aria-label="Undo" disabled>↶</button>
-        <span class="swipe-btn-label">Undo</span>
-      </div>
+        <div class="swipe-btn-wrapper">
+          <button class="swipe-btn swipe-undo" id="swipe-btn-undo" onclick="App.undoSwipe()" aria-label="Undo" disabled>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+          </button>
+          <span class="swipe-btn-label">Undo</span>
+        </div>
       <div class="swipe-btn-wrapper">
         <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Dislike">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
         <span class="swipe-btn-label">Dislike</span>
       </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now" style="font-size: 24px;">↓</button>
-        <span class="swipe-btn-label">Skip</span>
-      </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">ⓘ</button>
-        <span class="swipe-btn-label">Info</span>
-      </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Like">★</button>
-        <span class="swipe-btn-label">Like</span>
-      </div>
+        <div class="swipe-btn-wrapper">
+          <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 19 22 12 13 5 13 19"/><polygon points="2 19 11 12 2 5 2 19"/></svg>
+          </button>
+          <span class="swipe-btn-label">Skip</span>
+        </div>
+        <div class="swipe-btn-wrapper">
+          <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </button>
+          <span class="swipe-btn-label">Info</span>
+        </div>
+        <div class="swipe-btn-wrapper">
+          <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Like">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </button>
+          <span class="swipe-btn-label">Like</span>
+        </div>
     </div>
   </section>
 
