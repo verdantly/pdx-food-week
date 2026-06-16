@@ -1,4 +1,4 @@
-// Portland Mercury's Nacho Week 2026
+﻿// Portland Mercury's Nacho Week 2026
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
 window.FOOD_WEEKS.push({
   id: "nacho-2026",
@@ -153,8 +153,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "vegOption": false,
     "veganOption": false,
     "glutenFree": false,
-    "takeout": true,
-      "minors": true,
+    "takeout": false,
+      "minors": false,
       "desc": "Winner of Best Chili and Beer Pairing at the 2026 Chili Con with Binary Brewing, our Spamzilla Chili blends Spam, ground beef, pinto and kidney beans, and our house-made teriyaki sauce for the perfect balance of savory, sweet, and umami-packed flavor.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjM5ODAxNDc5Ni1CaW5hcnktQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
@@ -1282,3 +1282,4 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   });
 })();
+

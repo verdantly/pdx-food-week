@@ -128,8 +128,8 @@ function parseDishPage(html, url) {
   const veganOption = hasVegan && (hasMeat || hasVeg);
   
   const glutenFree = /^yes\b/i.test((qa['Gluten Free?'] || '').trim());
-  const takeout = /^yes\b/i.test((qa['Takeout?'] || '').trim());
-  const minors = /^yes\b/i.test((qa['Minors Allowed?'] || qa['Family Friendly?'] || '').trim());
+  const takeout = /^yes\b/i.test((qa['Takeout?'] || qa['Takeout available?'] || qa['Takeout Available?'] || qa['Takeout available'] || qa['Takeout Available'] || '').trim());
+  const minors = /^yes\b/i.test((qa['Minors Allowed?'] || qa['Family Friendly?'] || qa['Minors allowed?'] || qa['Minors allowed'] || qa['Minors Allowed'] || '').trim());
 
   if (!dish || !restaurant) return null;
 
