@@ -2,3 +2,5 @@ node_modules/
 .DS_Store
 .vercel
 *.log
+scratch/scrape_venue_urls.cjs
+scratch/temp.js
