@@ -2285,7 +2285,7 @@ input[type="search"]::-webkit-search-cancel-button {
     /* Increased from 14px */
     font-weight: 400;
     border-bottom: none;
-    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
     border-radius: 2px;
     letter-spacing: 0;
     color: rgba(255, 255, 255, 0.65);
@@ -2298,8 +2298,8 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .nav-tab.active {
-    background: rgba(201, 75, 44, 0.15);
-    border-left-color: var(--pizza);
+    background: transparent;
+    border-right-color: var(--pizza);
     color: #fff;
     font-weight: 500;
     border-radius: 2px;
