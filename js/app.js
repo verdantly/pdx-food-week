@@ -1946,10 +1946,7 @@ const App = (() => {
           <div class="swipe-card-desc">${esc(item.desc)}</div>
           <div class="swipe-card-tags">${buildTags(item)}</div>
         </div>
-        ${isTop ? `
-          <div class="swipe-stamp swipe-stamp-like">Like</div>
-          <div class="swipe-stamp swipe-stamp-pass">Dislike</div>
-        ` : ''}
+
       `;
 
       deckEl.insertBefore(cardEl, deckEl.firstChild);
@@ -2092,19 +2089,13 @@ const App = (() => {
       const dy = e.clientY - startY;
       const rot = dx * 0.06;
       cardEl.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-      const like = cardEl.querySelector('.swipe-stamp-like');
-      const pass = cardEl.querySelector('.swipe-stamp-pass');
-      if (like) like.style.opacity = Math.max(0, Math.min(1, dx / 120));
-      if (pass) pass.style.opacity = Math.max(0, Math.min(1, -dx / 120));
+
     });
 
     const snapBack = () => {
       cardEl.style.transition = 'transform 0.2s ease';
       cardEl.style.transform = '';
-      const like = cardEl.querySelector('.swipe-stamp-like');
-      const pass = cardEl.querySelector('.swipe-stamp-pass');
-      if (like) like.style.opacity = 0;
-      if (pass) pass.style.opacity = 0;
+
     };
 
     cardEl.addEventListener('pointerup', e => {
