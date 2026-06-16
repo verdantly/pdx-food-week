@@ -2794,21 +2794,18 @@ select:focus-visible {
   }
 
   .compact-menu-item.active {
-    color: #fff;
-    background: rgba(201, 75, 44, 0.15);
+    color: var(--pizza);
+    background: transparent;
   }
 
   .compact-menu-item.active::before {
     content: '';
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 60%;
+    top: 0;
+    height: 100%;
     width: 3px;
     background: var(--pizza);
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
   }
 
   .compact-menu-item:active {
