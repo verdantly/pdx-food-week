@@ -180,8 +180,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjI3OTkyNDI4MS1Cb2tlLUJvd2wuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/boke-smoked-pork-wonton-nachos/e243672/",
-    "lat": 45.5152161,
-    "lng": -122.66543
+    "lat": 45.5153617,
+    "lng": -122.6655131
   },
   {
     "id": 243670,
@@ -934,10 +934,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": false,
     "desc": "Inspired by summertime vibes, endless shrimp, and that perfect first sip of fresh verdita on a sunny day.",
     "emoji": "🦐",
-    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTMwMDExNTM4MjkxOS1sMTAwOTExM183MjAuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTU1MjIyNTU0OTcyMi1QYWNpZmljLVN0YW5kYXJkLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/shrimply-irresistable/e245105/",
-    "lat": 45.5238125,
-    "lng": -122.6614094
+    "lat": 45.5237742,
+    "lng": -122.661537
   },
   {
     "id": 243805,
