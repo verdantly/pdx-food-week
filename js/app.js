@@ -1959,8 +1959,13 @@ const App = (() => {
     counterEl.textContent = `${remaining} to go · ${swipeIdx + 1}/${swipeQueue.length}`;
   }
 
-  function swipe(dir) {
+  function swipe(dir, fromGesture = false) {
     if (swipeAnimating) return; // prevent spam-click / held-key double-advance
+    
+    if (!fromGesture && navigator.vibrate) {
+      navigator.vibrate(dir === 'right' ? 50 : [30, 50, 30]);
+    }
+
     const cardEl = document.getElementById('swipe-card');
     const r = currentSwipeCard();
     if (!r) return;
@@ -2072,10 +2077,12 @@ const App = (() => {
     const cardEl = document.getElementById('swipe-card');
     if (!cardEl) return;
     let startX = 0, startY = 0, isDown = false, pointerId = null;
+    let hasVibrated = false;
 
     cardEl.addEventListener('pointerdown', e => {
       if (!currentSwipeCard()) return;
       isDown = true;
+      hasVibrated = false;
       pointerId = e.pointerId;
       startX = e.clientX;
       startY = e.clientY;
@@ -2090,6 +2097,13 @@ const App = (() => {
       const rot = dx * 0.06;
       cardEl.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
 
+      const threshold = 100;
+      if (!hasVibrated && Math.abs(dx) > threshold) {
+        hasVibrated = true;
+        if (navigator.vibrate) navigator.vibrate(dx > 0 ? 50 : [30, 50, 30]);
+      } else if (hasVibrated && Math.abs(dx) <= threshold) {
+        hasVibrated = false;
+      }
     });
 
     const snapBack = () => {
@@ -2103,8 +2117,8 @@ const App = (() => {
       isDown = false;
       const dx = e.clientX - startX;
       const threshold = 100;
-      if (dx > threshold) swipe('right');
-      else if (dx < -threshold) swipe('left');
+      if (dx > threshold) swipe('right', true);
+      else if (dx < -threshold) swipe('left', true);
       else snapBack();
     });
 
