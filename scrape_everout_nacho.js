@@ -9,7 +9,7 @@
  * Output: data/pizzaweek2026.js (overwritten)
  */
 
-import fetch from 'node-fetch';
+
 import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
@@ -156,7 +156,7 @@ function parseDishPage(html, url) {
 
   const whatsOnIt = qa["What's On It..."] || qa['What’s On It...'] || '';
   const whatTheySay = qa['What They Say...'] || '';
-  const desc = (whatsOnIt || whatTheySay).slice(0, 260);
+  desc = ((whatsOnIt || whatTheySay).slice(0, 260)) || desc;
 
   // EverOut's "Meat or Vegetarian?" is multi-select: e.g. "Meat, Vegetarian"
   // means a meat pizza with a veg version available. Primary type prefers
@@ -175,6 +175,8 @@ function parseDishPage(html, url) {
   const wholePie = sliceOrPie.includes('whole') || sliceOrPie.includes('pie');
 
   const yesno = v => /^yes\b/i.test((v || '').trim());
+  const minors = yesno(qa['Minors allowed?'] || qa['Minors Allowed?'] || qa['Minors allowed'] || qa['Minors Allowed']);
+  const takeout = yesno(qa['Takeout available?'] || qa['Takeout Available?'] || qa['Takeout available'] || qa['Takeout Available']);
 
   if (!dish || !restaurant) return null;
 

@@ -465,9 +465,7 @@ const App = (() => {
       ? ` <span style="font-size: 13px; font-weight: normal; color: var(--ink-60);">(${haversineDistance(userLat, userLng, r.lat, r.lng).toFixed(1)} mi)</span>`
       : '';
 
-    const restaurantHtml = r.restaurantUrl
-      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" style="display: inline-flex; align-items: center; gap: 4px;" onclick="event.stopPropagation()">${esc(r.restaurant)} <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink-30);"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>`
-      : esc(r.restaurant);
+    const restaurantHtml = esc(r.restaurant);
 
     const isNew = r.isNew && !viewedNew.has(r.id);
 
