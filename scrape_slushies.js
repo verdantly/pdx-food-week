@@ -71,7 +71,10 @@ async function scrapeDish(url, cacheMap, existingMap) {
   const description = qa["What They Say..."] || qa["What They Say"] || qa["Description"] || "";
   const ingredients = qa["What's In It?"] || qa["What's In It"] || qa["Ingredients"] || "";
 
-  const id = url.match(/\/e(\d+)\/?/)[1];
+  const imgMatch = html.match(/<meta property="og:image" content="([^"]+)"/i);
+  const image = imgMatch ? imgMatch[1] : '';
+
+  const id = parseInt(url.match(/\/e(\d+)\/?/)[1], 10);
   
   let isNew = false;
   if (existingMap.has(id)) {
@@ -92,6 +95,7 @@ async function scrapeDish(url, cacheMap, existingMap) {
     alcoholFree: isAlcoholFree,
     minors: minors,
     takeout: takeout,
+    image,
     url
   };
 

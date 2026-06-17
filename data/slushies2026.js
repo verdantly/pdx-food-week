@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": "245475",
+    "id": 245475,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Bandit Bar",
@@ -27,10 +27,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDc5OTUzMzgxLUJhbmRpdC1CYXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/frozoni-tony-frozen-negroni/e245475/"
   },
   {
-    "id": "245469",
+    "id": 245469,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Clarklewis",
@@ -41,10 +42,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDIzOTY3OTg4LUNsYXJrbGV3aXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/oregon-marionberry-mojito/e245469/"
   },
   {
-    "id": "245470",
+    "id": 245470,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Deschutes Brewery & Public House",
@@ -55,10 +57,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDMwMDM3MzAzMi1EZXNjaHV0ZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/party-on-daiq/e245470/"
   },
   {
-    "id": "245476",
+    "id": 245476,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Fracture Brewing Midtown",
@@ -69,10 +72,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDkxNzE4NjIwNC1GcmFjdHVyZS1CcmV3aW5nLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/watermelon-candy/e245476/"
   },
   {
-    "id": "245463",
+    "id": 245463,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Grays Restaurant and Bar",
@@ -83,10 +87,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxMzMxMjAyMzA1MS1HcmF5cy1SZXN0YXVyYW50LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/mango-slushie/e245463/"
   },
   {
-    "id": "245471",
+    "id": 245471,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Leisure Public House",
@@ -97,10 +102,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDM3OTA1MjI5Mi1MZWlzdXJlLVB1YmxpYy1Ib3VzZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/st-johns-sling/e245471/"
   },
   {
-    "id": "245468",
+    "id": 245468,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Mississippi Pizza Pub & Atlantis Lounge",
@@ -111,10 +117,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDA5OTk5MzU0MS1NaXNzaXNzaXBwaS1QaXp6YS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/purple-rain/e245468/"
   },
   {
-    "id": "245467",
+    "id": 245467,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Moreland Ale House",
@@ -125,10 +132,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxMzgwMjU0OTQ3NS1Nb3JlbGFuZC1BbGUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/pina-colada/e245467/"
   },
   {
-    "id": "245464",
+    "id": 245464,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Sad Valley",
@@ -139,10 +147,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxMzQ1NjYwNzkyNS1TYWQtVmFsbGV5LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/odolores/e245464/"
   },
   {
-    "id": "245473",
+    "id": 245473,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "The Heist",
@@ -153,10 +162,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDUxOTE5MzcyMS1UaGUtSGVpc3QuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/passionate-smash/e245473/"
   },
   {
-    "id": "245465",
+    "id": 245465,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "The Sandy Jug",
@@ -167,10 +177,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxMzUxMDM5NDkyOC1TYW5keS1KdWcuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/orange-giulia/e245465/"
   },
   {
-    "id": "245474",
+    "id": 245474,
     "weekId": "slushie-2026",
     "isNew": false,
     "restaurant": "Walker Stadium",
@@ -181,6 +192,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "alcoholFree": false,
     "minors": false,
     "takeout": false,
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTcxNDU4MTQ2MTY3OC1Qb3J0bGFuZC1QaWNrbGVzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/peach-bourbon-mule/e245474/"
   }
 ];
