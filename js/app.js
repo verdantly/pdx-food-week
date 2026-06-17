@@ -948,11 +948,9 @@ const App = (() => {
       }
       if (el) el.classList.add('active');
 
+      if (zipContainer) zipContainer.style.display = 'flex';
       if (userLat !== null && userLng !== null) {
-        if (zipContainer) zipContainer.style.display = 'none';
         renderBrowse();
-      } else {
-        if (zipContainer) zipContainer.style.display = 'flex';
       }
     }
   }
@@ -1127,12 +1125,10 @@ const App = (() => {
       }
       if (el) el.classList.add('active');
 
+      if (zipContainer) zipContainer.style.display = 'flex';
       if (userLat !== null && userLng !== null) {
-        if (zipContainer) zipContainer.style.display = 'none';
         saveState();
         renderSaved();
-      } else {
-        if (zipContainer) zipContainer.style.display = 'flex';
       }
     }
   }

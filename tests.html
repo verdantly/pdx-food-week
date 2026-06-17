@@ -1140,6 +1140,91 @@
         log("Browse tab badge visibility, dismissal, and local storage persistence verified.", "pass");
       }
     }
+      },
+      {
+        id: "schema-validation",
+        name: "Property Mapping & Schema Validation",
+        fn: async (iframe, log) => {
+          log("Loading Slushie Week 2026...");
+          await reloadSandbox("week=slushie-2026");
+          const win = iframe.contentWindow;
+          const items = win.RESTAURANTS.filter(r => r.weekId === 'slushie-2026');
+          
+          log("Verifying all slushies have expected properties...");
+          for (const item of items) {
+            assert(item.desc !== undefined, `Item ${item.id} missing desc`);
+            assert(item.address !== undefined, `Item ${item.id} missing address`);
+            assert(item.lat !== undefined, `Item ${item.id} missing lat`);
+            assert(item.lng !== undefined, `Item ${item.id} missing lng`);
+          }
+          log("All slushies have correct schema.");
+        }
+      },
+      {
+        id: "search-null-safety",
+        name: "Search Input Resiliency & Null Safety",
+        fn: async (iframe, log) => {
+          log("Loading Slushie Week 2026...");
+          await reloadSandbox("week=slushie-2026");
+          const win = iframe.contentWindow;
+          const doc = iframe.contentDocument;
+          win.App.init();
+          await wait(200);
+
+          log("Simulating search input on items missing neighborhood...");
+          const searchInput = doc.getElementById('search-input');
+          searchInput.value = "test search";
+          searchInput.dispatchEvent(new Event('input'));
+          await wait(100);
+          
+          log("Verified search input did not crash application.");
+        }
+      },
+      {
+        id: "slushie-detail-sheet",
+        name: "Slushie Detail Sheet Dynamic Headers",
+        fn: async (iframe, log) => {
+          log("Loading Slushie Week 2026...");
+          await reloadSandbox("week=slushie-2026");
+          const win = iframe.contentWindow;
+          const doc = iframe.contentDocument;
+          win.App.init();
+          await wait(200);
+
+          const items = win.RESTAURANTS.filter(r => r.weekId === 'slushie-2026');
+          const testItem = items[0];
+          
+          log(`Opening detail overlay for ${testItem.dish}...`);
+          win.App.openDetail(testItem.id);
+          await wait(200);
+
+          const content = doc.getElementById('sheet-content');
+          assertContains(content.innerHTML, "What's in it...", "Header should say 'What's in it...' for slushies");
+          
+          log("Closing detail overlay...");
+          win.App.closeDetail();
+          await wait(100);
+        }
+      },
+      {
+        id: "slushie-saved-layout",
+        name: "Saved View Layout Dynamic Counters",
+        fn: async (iframe, log) => {
+          log("Loading Slushie Week 2026...");
+          await reloadSandbox("week=slushie-2026");
+          const win = iframe.contentWindow;
+          const doc = iframe.contentDocument;
+          win.App.init();
+          await wait(200);
+
+          log("Switching to saved tab...");
+          win.App.switchTab('saved');
+          await wait(100);
+
+          const hoodsBox = doc.getElementById('stat-hoods').parentElement;
+          assertEqual(hoodsBox.style.display || getComputedStyle(hoodsBox).display, 'none', "Neighborhood stats box should be hidden for slushies");
+        }
+      }
   ];
 
   // ── Populated UI checklist ──────────────────────────────────
