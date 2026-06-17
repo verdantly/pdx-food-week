@@ -2225,13 +2225,17 @@ const App = (() => {
     // Update header title
     const titleEl = document.getElementById('header-title');
     if (titleEl) {
-      const parts = week.name.split(' ');
-      if (parts.length > 0) {
-        const first = parts[0];
-        const rest = parts.slice(1).join(' ');
-        titleEl.innerHTML = `<em>${esc(first)}</em> ${esc(rest)}`;
+      if (currentWeekId === 'slushie-2026') {
+        titleEl.innerHTML = `Summer of <em>Slushies</em> 2026`;
       } else {
-        titleEl.textContent = week.name;
+        const parts = week.name.split(' ');
+        if (parts.length > 0) {
+          const first = parts[0];
+          const rest = parts.slice(1).join(' ');
+          titleEl.innerHTML = `<em>${esc(first)}</em> ${esc(rest)}`;
+        } else {
+          titleEl.textContent = week.name;
+        }
       }
     }
 

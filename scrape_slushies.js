@@ -102,6 +102,7 @@ async function scrapeDish(url, cacheMap, existingMap) {
     address: finalAddress,
     desc: description,
     whatsOnIt: ingredients,
+    whatTheySay: description,
     alcoholFree: isAlcoholFree,
     minors: minors,
     takeout: takeout,
