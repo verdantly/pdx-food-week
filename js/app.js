@@ -279,7 +279,8 @@ const App = (() => {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
           !r.restaurant.toLowerCase().includes(q) &&
-          !r.neighborhood.toLowerCase().includes(q)) return false;
+          !(r.neighborhood || '').toLowerCase().includes(q) &&
+          !(r.address || '').toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -320,7 +321,8 @@ const App = (() => {
         const q = savedSearchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
           !r.restaurant.toLowerCase().includes(q) &&
-          !r.neighborhood.toLowerCase().includes(q)) return false;
+          !(r.neighborhood || '').toLowerCase().includes(q) &&
+          !(r.address || '').toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -516,7 +518,7 @@ const App = (() => {
         <div class="card-body">
           <div class="card-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="card-restaurant">${restaurantHtml}${dist}</div>
-          <div class="card-neighborhood">📍 ${esc(r.neighborhood)}</div>
+          <div class="card-neighborhood">📍 ${esc(currentWeekId === 'slushie-2026' ? r.address : (r.neighborhood || r.address))}</div>
           <div class="card-desc">${esc(r.desc)}</div>
           <div class="card-tags">${buildTags(r)}</div>
         </div>
@@ -1333,7 +1335,7 @@ const App = (() => {
     }
 
     const items = getSaved();
-    const hoods = new Set(items.map(r => r.neighborhood)).size;
+    const hoods = new Set(items.map(r => r.neighborhood || r.address)).size;
     const types = new Set(items.map(r => r.type)).size;
     document.getElementById('stat-count').textContent = items.length;
     document.getElementById('stat-hoods').textContent = hoods;
@@ -1952,7 +1954,7 @@ const App = (() => {
         <div class="swipe-card-body">
           <div class="swipe-card-dish">${esc(item.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
-          <div class="swipe-card-neighborhood">📍 ${esc(item.neighborhood)}</div>
+          <div class="swipe-card-neighborhood">📍 ${esc(currentWeekId === 'slushie-2026' ? item.address : (item.neighborhood || item.address))}</div>
           <div class="swipe-card-desc">${esc(item.desc)}</div>
           <div class="swipe-card-tags">${buildTags(item)}</div>
         </div>
