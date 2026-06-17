@@ -1265,7 +1265,7 @@ const App = (() => {
     if (!container) return;
     if (filtered.length === 0) {
       container.innerHTML = `<div class="no-results">
-        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png" alt="Empty plate" width="48" height="48" style="margin-bottom: 16px; opacity: 0.8;" />
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48" fill="#e3e3e3" style="margin-bottom: 16px; opacity: 0.8;"><path d="M280-80v-366q-51-14-85.5-56T160-596v-284h80v280h40v-280h80v280h40v-280h80v284q0 52-34.5 94T360-446v366h-80Zm400 0v-320H560v-480q66 0 113 47t47 113v640h-40Z"/></svg>
         <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">Nothing on the menu</p>
         <p style="color: var(--ink-60);">Try a different filter!</p>
       </div>`;
