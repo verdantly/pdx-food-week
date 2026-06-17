@@ -57,6 +57,11 @@ const App = (() => {
   const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
 
   const WEEK_FILTERS = {
+    'slushie-2026': [
+      { id: 'alcoholFree', label: 'Alcohol-Free' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout OK' }
+    ],
     'pizza-2026': [
       { id: 'meat', label: 'Meat' },
       { id: 'vegetarian', label: 'Vegetarian' },
@@ -263,6 +268,7 @@ const App = (() => {
       if (activeFilters.has('vegetarian') && !isVegetarianFriendly(r)) return false;
       if (activeFilters.has('vegan') && !isVeganFriendly(r)) return false;
       if (activeFilters.has('gf') && !r.glutenFree) return false;
+      if (activeFilters.has('alcoholFree') && !r.alcoholFree) return false;
       if (activeFilters.has('pie') && !r.wholePie) return false;
       if (activeFilters.has('minors') && !r.minors) return false;
       if (activeFilters.has('21plus') && r.minors) return false;
@@ -303,6 +309,7 @@ const App = (() => {
       if (activeSavedFilters.has('vegetarian') && !isVegetarianFriendly(r)) return false;
       if (activeSavedFilters.has('vegan') && !isVeganFriendly(r)) return false;
       if (activeSavedFilters.has('gf') && !r.glutenFree) return false;
+      if (activeSavedFilters.has('alcoholFree') && !r.alcoholFree) return false;
       if (activeSavedFilters.has('pie') && !r.wholePie) return false;
       if (activeSavedFilters.has('minors') && !r.minors) return false;
       if (activeSavedFilters.has('21plus') && r.minors) return false;
@@ -373,7 +380,12 @@ const App = (() => {
   // ── Tag builder ────────────────────────────────────────────
   function buildTags(r) {
     const t = [];
-    if (currentWeekId === 'pizza-2026') {
+    if (currentWeekId === 'slushie-2026') {
+      if (r.alcoholFree) t.push('<span class="tag tag-gf">Alcohol-Free</span>');
+      if (r.minors) t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
+      else t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
+      if (r.takeout) t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
+    } else if (currentWeekId === 'pizza-2026') {
       if (r.type === 'meat') {
         t.push('<span class="tag tag-meat">Meat</span>');
         if (isVeganFriendly(r)) {
@@ -445,7 +457,7 @@ const App = (() => {
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
     }
     
-    if (currentWeekId !== 'highball-2026') {
+    if (currentWeekId !== 'highball-2026' && currentWeekId !== 'slushie-2026') {
       if (r.minors) t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
       if (r.takeout) t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
     }
