@@ -4,3 +4,4 @@ node_modules/
 *.log
 scratch/scrape_venue_urls.cjs
 scratch/temp.js
+tests.html
