@@ -2294,7 +2294,7 @@ const App = (() => {
     `;
   }
 
-  function switchWeek(weekId) {
+  function switchWeek(weekId, fromPopState = false) {
     if (!window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
     currentWeekId = weekId;
@@ -2360,10 +2360,12 @@ const App = (() => {
     updateFilterDisplay();
     renderSavedFilters();
 
-    const url = new URL(window.location);
-    url.searchParams.set('week', weekId);
-    url.searchParams.delete('tab');
-    history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    if (!fromPopState) {
+      const url = new URL(window.location);
+      url.searchParams.set('week', weekId);
+      url.searchParams.delete('tab');
+      history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    }
     document.body.classList.remove('is-landing');
 
     switchTab('browse');
@@ -2552,7 +2554,18 @@ const App = (() => {
         closeDetail(true);
       }
 
-      let tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
+      const urlParams = new URLSearchParams(window.location.search);
+      const stateWeekId = (e.state && e.state.week) || urlParams.get('week');
+
+      if (!stateWeekId) {
+        document.body.classList.add('is-landing');
+        currentWeekId = null;
+        renderLanding();
+      } else if (stateWeekId !== currentWeekId) {
+        switchWeek(stateWeekId, true);
+      }
+
+      let tab = (e.state && e.state.tab) || urlParams.get('tab') || 'browse';
       if (tab === 'friends') tab = 'share';
       if (activeTab !== tab && currentWeekId) {
         switchTab(tab, true);
