@@ -25,6 +25,36 @@ function extractText(html, regex) {
   return m ? m[1].replace(/<[^>]+>/g, '').trim() : null;
 }
 
+const GEO_UA = 'pdx-food-week-app/1.0';
+const GEO_DELAY = 1100;
+const geoCache = new Map();
+let lastGeoAt = 0;
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function geocode(address) {
+  if (!address) return null;
+  if (geoCache.has(address)) return geoCache.get(address);
+
+  const wait = Math.max(0, GEO_DELAY - (Date.now() - lastGeoAt));
+  if (wait > 0) await sleep(wait);
+
+  try {
+    const q = encodeURIComponent(address);
+    const url = `https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1&countrycodes=us`;
+    const res = await fetch(url, { headers: { 'User-Agent': GEO_UA } });
+    lastGeoAt = Date.now();
+    if (!res.ok) throw new Error(`Nominatim HTTP ${res.status}`);
+    const data = await res.json();
+    const hit = data && data[0] ? { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) } : null;
+    geoCache.set(address, hit);
+    return hit;
+  } catch (e) {
+    console.error(`Geocode error for ${address}:`, e.message);
+    return null;
+  }
+}
+
 function decodeHtml(html) {
   return html.replace(/&#x27;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"');
 }
@@ -93,6 +123,8 @@ async function scrapeDish(url, cacheMap, existingMap) {
     isNew = true;
   }
 
+  const coords = await geocode(finalAddress);
+
   const parsed = {
     id,
     weekId: 'slushie-2026',
@@ -100,6 +132,8 @@ async function scrapeDish(url, cacheMap, existingMap) {
     restaurant: decodeHtml(restaurant),
     dish: decodeHtml(dish),
     address: finalAddress,
+    lat: coords ? coords.lat : undefined,
+    lng: coords ? coords.lng : undefined,
     desc: description,
     whatsOnIt: ingredients,
     whatTheySay: description,

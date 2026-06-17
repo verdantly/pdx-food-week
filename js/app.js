@@ -1338,8 +1338,18 @@ const App = (() => {
     const hoods = new Set(items.map(r => r.neighborhood || r.address)).size;
     const types = new Set(items.map(r => r.type)).size;
     document.getElementById('stat-count').textContent = items.length;
-    document.getElementById('stat-hoods').textContent = hoods;
-    document.getElementById('stat-types').textContent = types;
+    
+    const hoodsBox = document.getElementById('stat-hoods').parentElement;
+    const typesBox = document.getElementById('stat-types').parentElement;
+    if (currentWeekId === 'slushie-2026') {
+      hoodsBox.style.display = 'none';
+      typesBox.style.display = 'none';
+    } else {
+      hoodsBox.style.display = '';
+      typesBox.style.display = '';
+      document.getElementById('stat-hoods').textContent = hoods;
+      document.getElementById('stat-types').textContent = types;
+    }
 
     const totalSavedForWeek = getRestaurants().filter(r => saved.has(r.id)).length;
     const tabs = document.querySelectorAll('[data-tab="saved"]');
