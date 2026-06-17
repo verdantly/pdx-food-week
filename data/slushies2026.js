@@ -6,7 +6,7 @@ window.FOOD_WEEKS.push({
   organizer: "Portland Mercury",
   startDate: "2026-07-01",
   dates: "July 2026",
-  pricePills: ["$8 Slushies"],
+  pricePills: ["$10 Slushies"],
   color: "#E25A97",
   emoji: "🥤",
   totalLocations: 12,
