@@ -74,6 +74,16 @@ async function scrapeDish(url, cacheMap, existingMap) {
   const imgMatch = html.match(/<meta property="og:image" content="([^"]+)"/i);
   const image = imgMatch ? imgMatch[1] : '';
 
+  let restaurantUrl = '';
+  const locMatch = html.match(/<a href="([^"]+\/locations\/[^"]+)">/);
+  if (locMatch) {
+    try {
+      const locHtml = await httpGet(locMatch[1]);
+      const webMatch = locHtml.match(/<div class="row website">[\s\S]*?<a href="([^"]+)"[^>]*>website<\/a>/i);
+      if (webMatch) restaurantUrl = webMatch[1];
+    } catch (e) {}
+  }
+
   const id = parseInt(url.match(/\/e(\d+)\/?/)[1], 10);
   
   let isNew = false;
@@ -90,12 +100,13 @@ async function scrapeDish(url, cacheMap, existingMap) {
     restaurant: decodeHtml(restaurant),
     dish: decodeHtml(dish),
     address: finalAddress,
-    description: description,
-    ingredients: ingredients,
+    desc: description,
+    whatsOnIt: ingredients,
     alcoholFree: isAlcoholFree,
     minors: minors,
     takeout: takeout,
     image,
+    restaurantUrl,
     url
   };
 
