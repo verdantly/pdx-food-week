@@ -13,7 +13,7 @@ const PARENT_EID = 'e222747';
 const PAGE_DELAY = 600;
 const GEO_DELAY = 1100;
 
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36';
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const GEO_UA = 'pdx-food-week-app/1.0';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -33,7 +33,16 @@ function getExistingRestaurants(filePath) {
 }
 
 async function httpGet(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html,*/*' } });
+  const res = await fetch(url, {
+    headers: {
+      'User-Agent': UA,
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+      'Accept-Language': 'en-US,en;q=0.5',
+      'Sec-Fetch-Dest': 'document',
+      'Sec-Fetch-Mode': 'navigate',
+      'Sec-Fetch-Site': 'none'
+    }
+  });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   return await res.text();
 }
@@ -128,8 +137,8 @@ function parseDishPage(html, url) {
   const veganOption = hasVegan && (hasMeat || hasVeg);
   
   const glutenFree = /^yes\b/i.test((qa['Gluten Free?'] || '').trim());
-  const takeout = /^yes\b/i.test((qa['Takeout?'] || qa['Takeout available?'] || qa['Takeout Available?'] || qa['Takeout available'] || qa['Takeout Available'] || '').trim());
-  const minors = /^yes\b/i.test((qa['Minors Allowed?'] || qa['Family Friendly?'] || qa['Minors allowed?'] || qa['Minors allowed'] || qa['Minors Allowed'] || '').trim());
+  const takeout = /^yes\b/i.test((qa['Takeout?'] || qa['Takeout available?'] || qa['Takeout Available?'] || qa['Takeout available'] || qa['Takeout Available'] || qa['Allow Takeout?'] || '').trim());
+  const minors = /^yes\b/i.test((qa['Minors Allowed?'] || qa['Family Friendly?'] || qa['Minors allowed?'] || qa['Minors allowed'] || qa['Minors Allowed'] || qa['Allow Minors?'] || '').trim());
 
   if (!dish || !restaurant) return null;
 

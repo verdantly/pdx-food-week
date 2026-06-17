@@ -62,23 +62,31 @@ const App = (() => {
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
       { id: 'gf', label: 'Gluten-free' },
-      { id: 'pie', label: 'Whole Pie' }
+      { id: 'pie', label: 'Whole Pie' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout OK' }
     ],
     'taco-2026': [
       { id: 'meat', label: 'Meat' },
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
       { id: 'gf', label: 'Gluten-free' },
-      { id: 'spicy', label: 'Spicy' }
+      { id: 'spicy', label: 'Spicy' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout OK' }
     ],
     'nacho-2026': [
       { id: 'meat', label: 'Meat' },
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
-      { id: 'gf', label: 'Gluten-free' }
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout OK' }
     ],
     'highball-2026': [
-      { id: '21plus', label: '21+ Only' }
+      { id: 'minors', label: 'Minors OK' },
+      { id: '21plus', label: '21+ Only' },
+      { id: 'takeout', label: 'Takeout OK' }
     ]
   };
 
