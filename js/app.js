@@ -2368,7 +2368,7 @@ const App = (() => {
     }
     document.body.classList.remove('is-landing');
 
-    switchTab('browse');
+    switchTab('browse', true);
     renderShimmer();
     setTimeout(() => {
       renderAll();
@@ -2561,6 +2561,7 @@ const App = (() => {
         document.body.classList.add('is-landing');
         currentWeekId = null;
         renderLanding();
+        switchTab('landing', true);
       } else if (stateWeekId !== currentWeekId) {
         switchWeek(stateWeekId, true);
       }
