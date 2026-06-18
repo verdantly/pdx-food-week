@@ -55,6 +55,7 @@ const App = (() => {
   const STORAGE_KEY_VIEWED_NEW = 'pdxfw_viewed_new_v1';
   const STORAGE_KEY_SAVED_SORT = 'pdxfw_saved_sort_v1';
   const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
+  const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
 
   const WEEK_FILTERS = {
     'slushie-2026': [],
@@ -111,6 +112,13 @@ const App = (() => {
         }
       }
       customSavedOrder = customSavedOrder.filter(id => saved.has(id));
+
+      const visited = localStorage.getItem(STORAGE_KEY_VISITED);
+      if (!visited) {
+        getRestaurants().filter(r => r.isNew).forEach(r => viewedNew.add(r.id));
+        localStorage.setItem(STORAGE_KEY_VISITED, 'true');
+        localStorage.setItem(STORAGE_KEY_VIEWED_NEW, JSON.stringify([...viewedNew]));
+      }
     } catch (e) { }
   }
 
