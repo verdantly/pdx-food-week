@@ -2806,14 +2806,7 @@ const App = (() => {
       });
     }
 
-    // Hide dropdowns when compact header is removed (e.g. scrolling back up)
-    window.addEventListener('scroll', () => {
-      const appContainer = document.getElementById('app');
-      if (appContainer && !appContainer.classList.contains('compact-header')) {
-        if (compactSearchDropdown) compactSearchDropdown.style.display = 'none';
-        if (compactMenuDropdown) compactMenuDropdown.style.display = 'none';
-      }
-    });
+
 
     // Attach to App globally so we can hide dropdowns in switchTab if needed
     window.App.hideCompactDropdowns = () => {

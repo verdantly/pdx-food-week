@@ -2606,8 +2606,18 @@ select:focus-visible {
    ════════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* Scroll-to-Hide Transitions */
+  /* Always show compact app bar as top bar on mobile */
+  .compact-app-bar {
+    display: flex !important;
+  }
+
+  /* Hide the desktop specific components on mobile */
   .header-top,
+  .header-switcher {
+    display: none !important;
+  }
+
+  /* Scroll-to-Hide Transitions */
   .header-title,
   .header-meta,
   .nav-tabs {
@@ -2618,14 +2628,6 @@ select:focus-visible {
     max-height: 120px;
     opacity: 1;
     overflow: hidden;
-  }
-
-  .compact-header .header-top {
-    max-height: 0;
-    opacity: 0;
-    margin-bottom: 0 !important;
-    padding: 0 !important;
-    pointer-events: none;
   }
 
   .compact-header .header-title {
@@ -2656,10 +2658,6 @@ select:focus-visible {
   .compact-header .app-header {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-  }
-
-  .compact-header .compact-app-bar {
-    display: flex !important;
   }
 
   /* Make browse search and filter bar scroll away naturally instead of sticking, preventing layout shifts */
@@ -2724,7 +2722,7 @@ select:focus-visible {
   /* Dropdowns */
   .compact-dropdown {
     position: absolute;
-    top: 100%;
+    top: 56px;
     left: 0;
     right: 0;
     background: rgba(26, 18, 8, 0.95);
