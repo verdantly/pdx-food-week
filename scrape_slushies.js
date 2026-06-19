@@ -154,7 +154,7 @@ async function main() {
   let existingListings = [];
   try {
     const raw = fs.readFileSync(OUT_FILE, 'utf8');
-    const m = raw.match(/window\.SLUSHIES_2026\s*=\s*(\[.*\]);/s);
+    const m = raw.match(/const newItems = (\[.*\]);\s*window\.RESTAURANTS\.push/s);
     if (m) {
       existingListings = JSON.parse(m[1]);
     }
