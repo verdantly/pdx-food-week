@@ -2732,7 +2732,7 @@ select:focus-visible {
   /* Dropdowns */
   .compact-dropdown {
     position: absolute;
-    top: 56px;
+    top: 100%;
     left: 0;
     right: 0;
     background: rgba(26, 18, 8, 0.95);
