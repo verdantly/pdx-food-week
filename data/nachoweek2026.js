@@ -9,7 +9,7 @@ window.FOOD_WEEKS.push({
     pricePills: ["$10 Nachos"],
     color: "#D97B29",
     emoji: "🧀",
-    totalLocations: 60,
+    totalLocations: 59,
     url: "https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/",
 });
 window.RESTAURANTS = window.RESTAURANTS || [];
@@ -180,8 +180,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjI3OTkyNDI4MS1Cb2tlLUJvd2wuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/boke-smoked-pork-wonton-nachos/e243672/",
-    "lat": 45.5153617,
-    "lng": -122.6655131
+    "lat": 45.5152161,
+    "lng": -122.66543
   },
   {
     "id": 243670,
@@ -604,27 +604,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6348432
   },
   {
-    "id": 243644,
-    "weekId": "nacho-2026",
-    "isNew": false,
-    "dish": "Three Chilies Nachos",
-    "restaurant": "Hungry Tiger",
-    "neighborhood": "Buckman - Southeast Portland",
-    "address": "213 SE 12th Ave., Portland, OR 97214",
-    "type": "meat",
-    "vegOption": true,
-    "veganOption": true,
-    "glutenFree": false,
-    "takeout": false,
-    "minors": false,
-    "desc": "Smokey, savory, and sweet with a hit of heat.",
-    "emoji": "🌮",
-    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDUwMTkzNDc2My1IdW5ncnktVGlnZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/three-chilies-nachos/e243644/",
-    "lat": 45.5212875,
-    "lng": -122.653828
-  },
-  {
     "id": 244197,
     "weekId": "nacho-2026",
     "isNew": false,
@@ -796,7 +775,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "id": 243683,
     "weekId": "nacho-2026",
     "isNew": false,
-    "dish": "Andrea's Huevos",
+    "dish": "Nachos Rancheros",
     "restaurant": "Migration Brewing Co.",
     "neighborhood": "Kerns - Southeast Portland",
     "address": "2828 NE Glisan, Portland, OR 97232",
@@ -806,10 +785,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "glutenFree": true,
     "takeout": false,
     "minors": false,
-    "desc": "We wanted to take a very traditional Mexican dish that definitely weren't nacho and make them NACHOS! We took huevos rancheros and reassembled them into Andrea's Huevos",
+    "desc": "We wanted to take a very traditional Mexican dish that definitely weren't nacho and make them NACHOS! We took huevos rancheros and reassembled them into Nachos Rancheros.",
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMzIxOTU5OTg1LU1pZ3JhdGlvbl9HbGlzYW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/andreas-huevos/e243683/",
+    "url": "https://everout.com/portland/events/nachos-rancheros/e243683/",
     "lat": 45.5261871,
     "lng": -122.6363567
   },
@@ -873,8 +852,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTYzMDgxNzg4Mi1OYWNoby1Ib3VzZV85Mm5kLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/al-pastor/e243631/",
-    "lat": 45.4811343,
-    "lng": -122.5684662
+    "lat": 45.4811293,
+    "lng": -122.5684644
   },
   {
     "id": 244202,
