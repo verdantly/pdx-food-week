@@ -1200,7 +1200,7 @@ body.is-landing .bottom-nav {
 }
 
 .lightbox-nav:disabled {
-  opacity: 0;
+  opacity: 0.3;
   pointer-events: none;
 }
 

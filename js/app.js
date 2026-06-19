@@ -627,13 +627,16 @@ const App = (() => {
 
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
+    const hideNav = activeTab === 'map' || activeTab === 'swipe';
     if (prevBtn) {
       prevBtn.onclick = prevId ? (e) => { e.stopPropagation(); App.openDetail(prevId); } : null;
       prevBtn.disabled = !prevId;
+      prevBtn.style.display = hideNav ? 'none' : '';
     }
     if (nextBtn) {
       nextBtn.onclick = nextId ? (e) => { e.stopPropagation(); App.openDetail(nextId); } : null;
       nextBtn.disabled = !nextId;
+      nextBtn.style.display = hideNav ? 'none' : '';
     }
 
     selectedDish = r;
@@ -678,16 +681,17 @@ const App = (() => {
           ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
         </a>
       </div>
+      ${!hideNav ? `
       <div class="sheet-nav" style="display: flex; justify-content: space-between; margin-top: 16px; gap: 12px;">
-        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px; ${!prevId ? 'opacity: 0.4; pointer-events: none;' : ''}" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           Previous
         </button>
-        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px; ${!nextId ? 'opacity: 0.4; pointer-events: none;' : ''}" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>
           Next
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
-      </div>
+      </div>` : ''}
       ${isSaved ? `
       <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
