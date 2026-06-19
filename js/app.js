@@ -2207,7 +2207,7 @@ const App = (() => {
 
     // Update select switcher values
     document.querySelectorAll('.week-switcher-select').forEach(select => {
-      select.value = week.id;
+      
     });
 
     // Update all footer elements (sidebar on desktop, view footers on mobile/tablet)

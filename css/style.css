@@ -144,7 +144,7 @@ body.is-landing .bottom-nav {
   background-repeat: no-repeat;
   background-position: right 6px center;
   background-size: 10px;
-  max-width: 55%;
+  width: 100%;
   min-width: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2005,7 +2005,7 @@ input[type="search"]::-webkit-search-cancel-button {
     padding: 6px 26px 6px 12px;
     background-size: 11px;
     background-position: right 8px center;
-    max-width: 60%;
+    width: 100%;
   }
 
   .app-header {
