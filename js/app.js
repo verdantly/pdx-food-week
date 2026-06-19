@@ -2514,8 +2514,9 @@ const App = (() => {
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     } else {
+      const browseFilters = document.getElementById('browse-filters');
+      const sortSection = document.getElementById('sort-section');
       if (browseFilters && sortSection) {
-
         drawerBody.appendChild(browseFilters);
         drawerBody.appendChild(sortSection);
 
