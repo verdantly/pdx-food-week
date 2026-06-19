@@ -1952,7 +1952,7 @@ const App = (() => {
     attachSwipeGestures();
 
     const remaining = swipeQueue.length - swipeIdx;
-    counterEl.textContent = `${remaining} to go · ${swipeIdx + 1}/${swipeQueue.length}`;
+    counterEl.textContent = `${remaining} to go`;
   }
 
   function swipe(dir, fromGesture = false) {
