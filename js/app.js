@@ -2753,40 +2753,6 @@ const App = (() => {
       
     });
 
-    const searchInput = document.getElementById('search-input');
-    const searchClearBtn = document.getElementById('search-clear-btn');
-    if (searchInput && searchClearBtn) {
-      searchInput.addEventListener('input', e => {
-        searchQuery = e.target.value;
-        searchClearBtn.style.display = searchQuery ? 'flex' : 'none';
-        renderBrowse();
-      });
-      searchClearBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        searchQuery = '';
-        searchClearBtn.style.display = 'none';
-        searchInput.focus();
-        renderBrowse();
-      });
-    }
-
-    const savedSearchInput = document.getElementById('saved-search-input');
-    const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
-    if (savedSearchInput && savedSearchClearBtn) {
-      savedSearchInput.addEventListener('input', e => {
-        savedSearchQuery = e.target.value;
-        savedSearchClearBtn.style.display = savedSearchQuery ? 'flex' : 'none';
-        renderSaved();
-      });
-      savedSearchClearBtn.addEventListener('click', () => {
-        savedSearchInput.value = '';
-        savedSearchQuery = '';
-        savedSearchClearBtn.style.display = 'none';
-        savedSearchInput.focus();
-        renderSaved();
-      });
-    }
-
 
 
     // Attach to App globally so we can hide dropdowns in switchTab if needed
