@@ -2751,58 +2751,39 @@ const App = (() => {
         compactMenuDropdown.style.display = 'none';
       }
       
-      const desktopSearchDropdown = document.getElementById('desktop-search-dropdown');
-      const isDesktopClick = e.target.closest('.header-top') || e.target.closest('#desktop-search-dropdown');
-      if (!isDesktopClick && desktopSearchDropdown) {
-        desktopSearchDropdown.style.display = 'none';
-      }
     });
 
-    // Wire up desktop app bar search
-    const desktopSearchBtn = document.getElementById('desktop-search-btn');
-    const desktopSearchDropdown = document.getElementById('desktop-search-dropdown');
-    const desktopSearchInput = document.getElementById('desktop-search-input');
-    const desktopSearchClearBtn = document.getElementById('desktop-search-clear-btn');
-
-    if (desktopSearchBtn) {
-      desktopSearchBtn.addEventListener('click', () => {
-        const isHidden = desktopSearchDropdown.style.display === 'none';
-        desktopSearchDropdown.style.display = isHidden ? 'block' : 'none';
-        if (isHidden && desktopSearchInput) {
-          desktopSearchInput.value = (activeTab === 'saved') ? savedSearchQuery : searchQuery;
-          if (desktopSearchClearBtn) {
-            desktopSearchClearBtn.style.display = desktopSearchInput.value ? 'flex' : 'none';
-          }
-          desktopSearchInput.focus();
-        }
+    const searchInput = document.getElementById('search-input');
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    if (searchInput && searchClearBtn) {
+      searchInput.addEventListener('input', e => {
+        searchQuery = e.target.value;
+        searchClearBtn.style.display = searchQuery ? 'flex' : 'none';
+        renderBrowse();
+      });
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        searchClearBtn.style.display = 'none';
+        searchInput.focus();
+        renderBrowse();
       });
     }
 
-    if (desktopSearchInput && desktopSearchClearBtn) {
-      desktopSearchInput.addEventListener('input', e => {
-        const val = e.target.value;
-        desktopSearchClearBtn.style.display = val ? 'flex' : 'none';
-        
-        if (activeTab === 'browse') {
-          searchQuery = val;
-          renderBrowse();
-        } else if (activeTab === 'saved') {
-          savedSearchQuery = val;
-          renderSaved();
-        }
+    const savedSearchInput = document.getElementById('saved-search-input');
+    const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
+    if (savedSearchInput && savedSearchClearBtn) {
+      savedSearchInput.addEventListener('input', e => {
+        savedSearchQuery = e.target.value;
+        savedSearchClearBtn.style.display = savedSearchQuery ? 'flex' : 'none';
+        renderSaved();
       });
-
-      desktopSearchClearBtn.addEventListener('click', () => {
-        desktopSearchInput.value = '';
-        desktopSearchClearBtn.style.display = 'none';
-        if (activeTab === 'browse') {
-          searchQuery = '';
-          renderBrowse();
-        } else if (activeTab === 'saved') {
-          savedSearchQuery = '';
-          renderSaved();
-        }
-        desktopSearchInput.focus();
+      savedSearchClearBtn.addEventListener('click', () => {
+        savedSearchInput.value = '';
+        savedSearchQuery = '';
+        savedSearchClearBtn.style.display = 'none';
+        savedSearchInput.focus();
+        renderSaved();
       });
     }
 

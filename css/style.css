@@ -2613,8 +2613,13 @@ select:focus-visible {
 
   /* Hide the desktop specific components on mobile */
   .header-top,
-  .header-switcher {
+  .header-switcher,
+  .nav-tabs {
     display: none !important;
+  }
+
+  .app-header {
+    padding-top: 0 !important;
   }
 
   /* Scroll-to-Hide Transitions */
