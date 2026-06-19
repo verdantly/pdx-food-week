@@ -2074,11 +2074,13 @@ const App = (() => {
     if (!cardEl) return;
     let startX = 0, startY = 0, isDown = false, pointerId = null;
     let hasVibrated = false;
+    let isHorizontalSwipe = false;
 
     cardEl.addEventListener('pointerdown', e => {
       if (!currentSwipeCard()) return;
       isDown = true;
       hasVibrated = false;
+      isHorizontalSwipe = false;
       pointerId = e.pointerId;
       startX = e.clientX;
       startY = e.clientY;
@@ -2090,6 +2092,17 @@ const App = (() => {
       if (!isDown || e.pointerId !== pointerId) return;
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
+      
+      if (!isHorizontalSwipe) {
+        if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+          isHorizontalSwipe = true;
+        } else if (Math.abs(dy) > 10) {
+          return;
+        } else {
+          return;
+        }
+      }
+
       const rot = dx * 0.06;
       cardEl.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
 
@@ -2137,6 +2150,7 @@ const App = (() => {
     cardEl.addEventListener('pointerup', e => {
       if (!isDown || e.pointerId !== pointerId) return;
       isDown = false;
+      isHorizontalSwipe = false;
       const dx = e.clientX - startX;
       const threshold = 100;
       if (dx > threshold) swipe('right', true);
@@ -2149,6 +2163,7 @@ const App = (() => {
     cardEl.addEventListener('pointercancel', () => {
       if (!isDown) return;
       isDown = false;
+      isHorizontalSwipe = false;
       snapBack();
     });
   }

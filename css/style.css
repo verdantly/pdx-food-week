@@ -1639,7 +1639,7 @@ body.is-landing .bottom-nav {
   flex: 1;
   min-height: 340px;
   margin-bottom: 14px;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .swipe-card {
