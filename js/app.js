@@ -2503,11 +2503,9 @@ const App = (() => {
     if (!overlay || !drawerBody) return;
 
     if (activeTab === 'saved') {
-      const searchBar = document.querySelector('#view-saved .search-bar');
       const savedFilters = document.getElementById('saved-filters');
       const sortSection = document.getElementById('saved-sort-section');
-      if (searchBar && savedFilters && sortSection) {
-        drawerBody.appendChild(searchBar);
+      if (savedFilters && sortSection) {
         drawerBody.appendChild(savedFilters);
         drawerBody.appendChild(sortSection);
 
@@ -2516,11 +2514,8 @@ const App = (() => {
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     } else {
-      const searchBar = document.querySelector('#view-browse .search-bar');
-      const browseFilters = document.getElementById('browse-filters');
-      const sortSection = document.getElementById('sort-section');
-      if (searchBar && browseFilters && sortSection) {
-        drawerBody.appendChild(searchBar);
+      if (browseFilters && sortSection) {
+
         drawerBody.appendChild(browseFilters);
         drawerBody.appendChild(sortSection);
 
@@ -2538,24 +2533,24 @@ const App = (() => {
     if (!overlay) return;
 
     if (activeTab === 'saved') {
-      const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+      
       const savedFilters = document.getElementById('saved-filters');
       const sortSection = document.getElementById('saved-sort-section');
       const savedHeader = document.querySelector('#view-saved .saved-header');
       const cardsSaved = document.getElementById('cards-saved');
-      if (searchBar && savedFilters && sortSection && savedHeader && cardsSaved) {
-        savedHeader.appendChild(searchBar);
+      if (savedFilters && sortSection && savedHeader && cardsSaved) {
+
         savedHeader.appendChild(savedFilters);
         document.getElementById('view-saved').insertBefore(sortSection, document.querySelector('#view-saved .section-header') || cardsSaved);
       }
     } else {
-      const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+      
       const browseFilters = document.getElementById('browse-filters');
       const sortSection = document.getElementById('sort-section');
       const browseHeader = document.querySelector('#view-browse .browse-header');
       const cardsBrowse = document.getElementById('cards-browse');
-      if (searchBar && browseFilters && sortSection && browseHeader && cardsBrowse) {
-        browseHeader.appendChild(searchBar);
+      if (browseFilters && sortSection && browseHeader && cardsBrowse) {
+
         browseHeader.appendChild(browseFilters);
         document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
       }
@@ -2755,7 +2750,61 @@ const App = (() => {
         compactSearchDropdown.style.display = 'none';
         compactMenuDropdown.style.display = 'none';
       }
+      
+      const desktopSearchDropdown = document.getElementById('desktop-search-dropdown');
+      const isDesktopClick = e.target.closest('.header-top') || e.target.closest('#desktop-search-dropdown');
+      if (!isDesktopClick && desktopSearchDropdown) {
+        desktopSearchDropdown.style.display = 'none';
+      }
     });
+
+    // Wire up desktop app bar search
+    const desktopSearchBtn = document.getElementById('desktop-search-btn');
+    const desktopSearchDropdown = document.getElementById('desktop-search-dropdown');
+    const desktopSearchInput = document.getElementById('desktop-search-input');
+    const desktopSearchClearBtn = document.getElementById('desktop-search-clear-btn');
+
+    if (desktopSearchBtn) {
+      desktopSearchBtn.addEventListener('click', () => {
+        const isHidden = desktopSearchDropdown.style.display === 'none';
+        desktopSearchDropdown.style.display = isHidden ? 'block' : 'none';
+        if (isHidden && desktopSearchInput) {
+          desktopSearchInput.value = (activeTab === 'saved') ? savedSearchQuery : searchQuery;
+          if (desktopSearchClearBtn) {
+            desktopSearchClearBtn.style.display = desktopSearchInput.value ? 'flex' : 'none';
+          }
+          desktopSearchInput.focus();
+        }
+      });
+    }
+
+    if (desktopSearchInput && desktopSearchClearBtn) {
+      desktopSearchInput.addEventListener('input', e => {
+        const val = e.target.value;
+        desktopSearchClearBtn.style.display = val ? 'flex' : 'none';
+        
+        if (activeTab === 'browse') {
+          searchQuery = val;
+          renderBrowse();
+        } else if (activeTab === 'saved') {
+          savedSearchQuery = val;
+          renderSaved();
+        }
+      });
+
+      desktopSearchClearBtn.addEventListener('click', () => {
+        desktopSearchInput.value = '';
+        desktopSearchClearBtn.style.display = 'none';
+        if (activeTab === 'browse') {
+          searchQuery = '';
+          renderBrowse();
+        } else if (activeTab === 'saved') {
+          savedSearchQuery = '';
+          renderSaved();
+        }
+        desktopSearchInput.focus();
+      });
+    }
 
     // Hide dropdowns when compact header is removed (e.g. scrolling back up)
     window.addEventListener('scroll', () => {
