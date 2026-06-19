@@ -2586,6 +2586,46 @@ const App = (() => {
       if (e.target === e.currentTarget) closeDetail();
     });
 
+    // Wire up swipe-to-close for detail sheet (mobile only)
+    const detailSheet = document.getElementById('detail-sheet-content');
+    if (detailSheet) {
+      let sheetStartY = 0;
+      let sheetCurrentY = 0;
+      let sheetIsDragging = false;
+      let sheetAtTop = false;
+
+      detailSheet.addEventListener('touchstart', e => {
+        if (window.innerWidth > 768) return;
+        sheetStartY = e.touches[0].clientY;
+        sheetAtTop = detailSheet.scrollTop <= 0;
+        sheetIsDragging = true;
+        detailSheet.style.transition = 'none';
+      }, { passive: true });
+
+      detailSheet.addEventListener('touchmove', e => {
+        if (!sheetIsDragging || !sheetAtTop || window.innerWidth > 768) return;
+        sheetCurrentY = e.touches[0].clientY;
+        const deltaY = sheetCurrentY - sheetStartY;
+        if (deltaY > 0) {
+          if (e.cancelable) e.preventDefault();
+          detailSheet.style.transform = `translateY(${deltaY}px)`;
+        }
+      }, { passive: false });
+
+      detailSheet.addEventListener('touchend', e => {
+        if (!sheetIsDragging || window.innerWidth > 768) return;
+        sheetIsDragging = false;
+        detailSheet.style.transition = '';
+        const deltaY = sheetCurrentY - sheetStartY;
+        if (sheetAtTop && deltaY > 80) {
+          closeDetail();
+          setTimeout(() => { detailSheet.style.transform = ''; }, 300);
+        } else {
+          detailSheet.style.transform = '';
+        }
+      });
+    }
+
     // Wire up search
     const searchInput = document.getElementById('search-input');
     const searchClearBtn = document.getElementById('search-clear-btn');
