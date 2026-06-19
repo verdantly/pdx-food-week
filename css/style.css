@@ -1912,6 +1912,14 @@ input[type="search"]::-webkit-search-cancel-button {
   align-self: center;
 }
 
+.swipe-skip {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+  color: var(--ink-60);
+  align-self: center;
+}
+
 .swipe-undo {
   width: 44px;
   height: 44px;
