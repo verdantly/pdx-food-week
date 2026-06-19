@@ -2682,9 +2682,14 @@ select:focus-visible {
     display: none;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 0;
+    padding: 18px 0 0 0;
+    transition: padding-bottom 0.3s ease;
     background: transparent;
     border-bottom: none;
+  }
+  
+  .compact-header .compact-app-bar {
+    padding-bottom: 18px;
   }
 
   .compact-brand {
