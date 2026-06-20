@@ -548,6 +548,24 @@
     </div>
   </div>
 
+  <!-- ── Metric Modal Overlay ── -->
+  <div id="metric-modal-overlay" class="filter-drawer-overlay" onclick="App.closeMetricModal()">
+    <div class="filter-drawer" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title" id="metric-modal-title">Details</h3>
+        <button class="drawer-close" onclick="App.closeMetricModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div id="metric-modal-body" style="padding: 0 24px 24px; max-height: 50vh; overflow-y: auto; color: var(--ink);">
+        <!-- Dynamically populated list -->
+      </div>
+    </div>
+  </div>
+
   <!-- ── Toast ── -->
   <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
 
