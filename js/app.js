@@ -113,13 +113,21 @@ const App = (() => {
       }
       customSavedOrder = customSavedOrder.filter(id => saved.has(id));
 
-      const visited = localStorage.getItem(STORAGE_KEY_VISITED);
-      if (!visited) {
-        getRestaurants().filter(r => r.isNew).forEach(r => viewedNew.add(r.id));
-        localStorage.setItem(STORAGE_KEY_VISITED, 'true');
-        localStorage.setItem(STORAGE_KEY_VIEWED_NEW, JSON.stringify([...viewedNew]));
-      }
+      localStorage.removeItem(STORAGE_KEY_VISITED); // Clean up legacy global visited key
     } catch (e) { }
+  }
+
+  function checkWeekVisited(weekId) {
+    if (!weekId) return;
+    const visitedKey = 'pdxfw_visited_v1_' + weekId;
+    if (!localStorage.getItem(visitedKey)) {
+      const week = window.FOOD_WEEKS.find(w => w.id === weekId);
+      if (week && week.restaurants) {
+        week.restaurants.filter(r => r.isNew).forEach(r => viewedNew.add(r.id));
+        localStorage.setItem(visitedKey, 'true');
+        saveState();
+      }
+    }
   }
 
   function saveState() {
@@ -2325,6 +2333,7 @@ const App = (() => {
     if (!window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
     currentWeekId = weekId;
+    checkWeekVisited(currentWeekId);
     saveState();
 
     // Reset filters and search
@@ -2612,10 +2621,10 @@ const App = (() => {
       detailSheet.addEventListener('touchstart', e => {
         if (window.innerWidth > 768) return;
         sheetStartY = e.touches[0].clientY;
-        sheetAtTop = detailSheet.scrollTop <= 0;
+        sheetAtTop = detailSheet.scrollTop <= 2;
         sheetIsDragging = true;
         detailSheet.style.transition = 'none';
-      }, { passive: true });
+      }, { passive: false });
 
       detailSheet.addEventListener('touchmove', e => {
         if (!sheetIsDragging || !sheetAtTop || window.innerWidth > 768) return;
@@ -2840,6 +2849,7 @@ const App = (() => {
       return; // Stop app initialization
     } else if (window.FOOD_WEEKS.some(w => w.id === urlWeekId)) {
       currentWeekId = urlWeekId;
+      checkWeekVisited(currentWeekId);
       document.body.classList.remove('is-landing');
     }
 
