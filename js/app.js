@@ -1433,7 +1433,7 @@ const App = (() => {
     }
 
     body.innerHTML = `<ul style="list-style: none; padding: 0; margin: 0;">` +
-      list.map(item => `<li style="padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px;">${item}</li>`).join('') +
+      list.map(item => `<li style="padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; text-transform: capitalize;">${item}</li>`).join('') +
       `</ul>`;
 
     overlay.classList.add('open');
