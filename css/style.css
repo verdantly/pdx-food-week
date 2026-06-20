@@ -228,10 +228,7 @@ body.is-landing .bottom-nav {
   padding-bottom: 0 !important;
 }
 
-#view-share .view-footer,
-#view-map .view-footer {
-  margin-bottom: 0 !important;
-}
+
 #view-share .view-footer {
   margin-top: auto !important;
 }
