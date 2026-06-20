@@ -264,7 +264,7 @@ const App = (() => {
       if (activeFilters.has('gf') && !r.glutenFree) return false;
       if (activeFilters.has('pie') && !r.wholePie) return false;
       if (activeFilters.has('spicy') && !r.spicy) return false;
-      if (activeFilters.has('new') && !(r.isNew && !viewedNew.has(r.id))) return false;
+      if (activeFilters.has('new') && !r.isNew) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
@@ -302,7 +302,7 @@ const App = (() => {
       if (activeSavedFilters.has('gf') && !r.glutenFree) return false;
       if (activeSavedFilters.has('pie') && !r.wholePie) return false;
       if (activeSavedFilters.has('spicy') && !r.spicy) return false;
-      if (activeSavedFilters.has('new') && !(r.isNew && !viewedNew.has(r.id))) return false;
+      if (activeSavedFilters.has('new') && !r.isNew) return false;
       if (savedSearchQuery) {
         const q = savedSearchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
@@ -1058,7 +1058,7 @@ const App = (() => {
     const activeWeekRestaurants = getRestaurants();
     const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
     if (hasAnyNew) {
-      filters.push({ id: 'new', label: 'New' });
+      filters.push({ id: 'new', label: 'Recently Added' });
     }
     const container = document.getElementById('saved-filters');
     if (!container) return;
@@ -2264,7 +2264,7 @@ const App = (() => {
     const activeWeekRestaurants = getRestaurants();
     const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
     if (hasAnyNew) {
-      filters.push({ id: 'new', label: 'New' });
+      filters.push({ id: 'new', label: 'Recently Added' });
     }
     const container = document.getElementById('browse-filters');
     if (!container) return;
