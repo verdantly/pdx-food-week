@@ -224,6 +224,12 @@ body.is-landing .bottom-nav {
   letter-spacing: 0.015em;
 }
 
+/* Remove extra bottom spacing on views without a FAB */
+#view-share,
+#view-map {
+  padding-bottom: 0 !important;
+}
+
 /* Footer links styling */
 .sidebar-footer a,
 .view-footer a {
