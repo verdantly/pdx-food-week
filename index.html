@@ -311,11 +311,11 @@
             <div class="stat-num" id="stat-count">0</div>
             <div class="stat-label">Saved</div>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" onclick="App.showMetricDetails('hoods')" style="cursor: pointer;" title="Click to view neighborhoods">
             <div class="stat-num" id="stat-hoods">0</div>
             <div class="stat-label">Neighborhoods</div>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" onclick="App.showMetricDetails('types')" style="cursor: pointer;" title="Click to view dish types">
             <div class="stat-num" id="stat-types">0</div>
             <div class="stat-label">Dish types</div>
           </div>
@@ -361,10 +361,10 @@
             </div>
           </div>
         </div>
-        <div class="section-header" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px;">
-          <span>Your bookmarks</span>
+        <div class="section-header" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+          <span>Your Saved Spots</span>
           <button class="btn btn-primary" onclick="App.exportSavedToClipboard()"
-            style="padding: 4px 12px; font-size: 12px; width: 100%; margin-bottom: 0;">Export List</button>
+            style="padding: 4px 12px; font-size: 12px; margin-bottom: 0;">Copy List</button>
         </div>
         <div class="cards-list" id="cards-saved"></div>
         <div class="view-footer">

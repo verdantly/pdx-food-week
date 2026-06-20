@@ -1411,6 +1411,21 @@ const App = (() => {
     });
   }
 
+  function showMetricDetails(type) {
+    const items = getSaved();
+    if (items.length === 0) return;
+
+    if (type === 'hoods') {
+      const hoods = new Set(items.map(r => r.neighborhood || r.address).filter(Boolean));
+      if (hoods.size === 0) return;
+      alert(`Neighborhoods:\n\n• ${Array.from(hoods).sort().join('\n• ')}`);
+    } else if (type === 'types') {
+      const types = new Set(items.map(r => r.type).filter(Boolean));
+      if (types.size === 0) return;
+      alert(`Dish types:\n\n• ${Array.from(types).sort().join('\n• ')}`);
+    }
+  }
+
   // ── Render: Friends ────────────────────────────────────────
   function renderFriends() {
     const copyBtn = document.getElementById('copy-btn');
@@ -2921,7 +2936,7 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding };
 })();
 
 window.App = App;
