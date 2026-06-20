@@ -2353,6 +2353,7 @@ input[type="search"]::-webkit-search-cancel-button {
   /* Vertical nav */
   .nav-tabs {
     flex-direction: column;
+    justify-content: flex-start;
     border-top: none;
     margin: 0;
     padding: 0;
