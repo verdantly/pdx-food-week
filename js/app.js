@@ -2533,6 +2533,26 @@ const App = (() => {
         return;
       }
 
+      let scrollHeight, clientHeight;
+      if (currentView.scrollHeight > currentView.clientHeight) {
+        scrollHeight = currentView.scrollHeight;
+        clientHeight = currentView.clientHeight;
+      } else {
+        scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        clientHeight = window.innerHeight;
+      }
+      
+      const isScrollable = scrollHeight > clientHeight + 10;
+      const isNearBottom = isScrollable && (st + clientHeight >= scrollHeight - 40);
+
+      if (fabButton) {
+        if (isNearBottom) {
+          fabButton.classList.add('hide-fab-scroll');
+        } else {
+          fabButton.classList.remove('hide-fab-scroll');
+        }
+      }
+
       const delta = st - lastScrollTop;
 
       if (st <= 60) {
