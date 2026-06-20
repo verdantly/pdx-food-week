@@ -1237,24 +1237,44 @@ body.is-landing .bottom-nav {
   }
 }
 
-/* ── Landing Page ── */
+#view-landing {
+  background-color: var(--cream);
+  min-height: 100vh;
+}
+
 .landing-header {
-  padding: 40px 20px 20px;
+  background-color: var(--ink);
+  color: var(--cream);
+  padding: 56px 24px 40px;
   text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .landing-title {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 900;
-  margin-bottom: 12px;
+  font-family: var(--font-body);
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  font-style: normal;
+  margin-bottom: 20px;
+}
+
+.landing-subtitle-box {
+  background-color: rgba(255, 255, 255, 0.08); /* Lighter ink colored section */
+  border-radius: 14px;
+  padding: 14px 20px;
+  max-width: 440px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .landing-subtitle {
-  font-size: 16px;
-  color: var(--ink-60);
-  max-width: 400px;
-  margin: 0 auto;
+  font-size: 14px;
+  color: rgba(251, 246, 239, 0.95);
+  margin: 0;
+  line-height: 1.5;
 }
 
 .landing-grid {
