@@ -92,9 +92,7 @@ body.is-landing .bottom-nav {
 }
 
 .app-header {
-  background: rgba(26, 18, 8, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--ink);
   color: var(--cream);
   padding: 18px 20px 0;
   position: sticky;
@@ -2749,9 +2747,7 @@ select:focus-visible {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(26, 18, 8, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: var(--ink);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding: 16px 20px;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
@@ -2859,9 +2855,7 @@ select:focus-visible {
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: rgba(26, 18, 8, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--ink);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #ffffff;
   font-family: var(--font-body);
