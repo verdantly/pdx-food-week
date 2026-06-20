@@ -121,12 +121,10 @@ const App = (() => {
     if (!weekId) return;
     const visitedKey = 'pdxfw_visited_v1_' + weekId;
     if (!localStorage.getItem(visitedKey)) {
-      const week = window.FOOD_WEEKS.find(w => w.id === weekId);
-      if (week && week.restaurants) {
-        week.restaurants.filter(r => r.isNew).forEach(r => viewedNew.add(r.id));
-        localStorage.setItem(visitedKey, 'true');
-        saveState();
-      }
+      const activeRestaurants = window.RESTAURANTS.filter(r => r.weekId === weekId);
+      activeRestaurants.filter(r => r.isNew).forEach(r => viewedNew.add(r.id));
+      localStorage.setItem(visitedKey, 'true');
+      saveState();
     }
   }
 
