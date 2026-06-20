@@ -504,7 +504,7 @@ const App = (() => {
         </div>
         <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
           onclick="event.stopPropagation(); App.toggleSave(${r.id})"
-          aria-label="${isSaved ? 'Remove bookmark' : 'Bookmark this dish'}">
+          aria-label="${isSaved ? 'Remove from saved' : 'Save this dish'}">
           <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
           </svg>
@@ -1362,7 +1362,7 @@ const App = (() => {
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
         </svg>
         <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No saved spots yet</p>
-        <p style="color: var(--ink-60);">Bookmark spots from Browse to build your list!</p>
+        <p style="color: var(--ink-60);">Save spots from Browse to build your list!</p>
       </div>`;
     } else {
       container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');

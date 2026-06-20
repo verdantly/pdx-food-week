@@ -13,7 +13,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="PDX Food Week" />
-  <meta property="og:description" content="Bookmark, plan, and share your Portland food week favorites." />
+  <meta property="og:description" content="Save, plan, and share your Portland food week favorites." />
   <meta property="og:type" content="website" />
 
   <title>PDX Food Week</title>
@@ -370,10 +370,10 @@
             </div>
           </div>
         </div>
-        <div class="section-header" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
+        <div class="section-header" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px;">
           <span>Your Saved Spots</span>
           <button class="btn btn-primary" onclick="App.exportSavedToClipboard()"
-            style="padding: 4px 12px; font-size: 12px; margin-bottom: 0;">Copy List</button>
+            style="width: auto; margin-bottom: 0;">Copy List</button>
         </div>
         <div class="cards-list" id="cards-saved"></div>
         <div class="view-footer">
@@ -455,7 +455,7 @@
         <div class="overlap-section" id="overlap-section" style="display:none">
           <div class="overlap-header">
             <h3>🎉 Places you all want</h3>
-            <p>Spots that everyone in your group has bookmarked</p>
+            <p>Spots that everyone in your group has saved</p>
           </div>
           <div id="overlap-container"></div>
         </div>
