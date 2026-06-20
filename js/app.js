@@ -600,11 +600,21 @@ const App = (() => {
     }, 500);
   }
 
+  function getActiveFriends() {
+    const activeWeekRestaurants = getRestaurants();
+    const currentWeekRestaurantIds = new Set(activeWeekRestaurants.map(r => r.id));
+    return friends.map((f, index) => {
+      const weekIds = f.ids.filter(id => currentWeekRestaurantIds.has(id));
+      return { ...f, weekIds, originalIndex: index };
+    }).filter(f => f.weekIds.length > 0);
+  }
+
   function getCurrentContextList() {
     if (activeTab === 'saved') return getSaved();
     if (activeTab === 'share') {
       const myIds = [...saved];
-      const allSets = [myIds, ...friends.map(f => f.ids)];
+      const activeFriends = getActiveFriends();
+      const allSets = [myIds, ...activeFriends.map(f => f.weekIds)];
       const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
       if (overlap.length > 0) return overlap;
       return [];
@@ -1415,9 +1425,16 @@ const App = (() => {
       }
     }
 
+    const activeFriends = getActiveFriends();
+
+    let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No friends added yet.</p>`;
+    if (friends.length > 0 && activeFriends.length === 0) {
+      emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No shared lists for this week.</p>`;
+    }
+
     // Friends list
     const fl = document.getElementById('friends-list');
-    fl.innerHTML = friends.length === 0
+    fl.innerHTML = activeFriends.length === 0
       ? `<div class="no-results" style="padding:24px 0">
           <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -1425,29 +1442,29 @@ const App = (() => {
             <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
-          <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No friends added yet.</p>
+          ${emptyMessage}
         </div>`
-      : friends.map((f, i) => `
+      : activeFriends.map((f) => `
           <div class="friend-item">
             <div class="friend-avatar">${f.name.charAt(0).toUpperCase()}</div>
             <div class="friend-info">
-              <div class="friend-name">${f.name}</div>
-              <div class="friend-count">${f.ids.length} dish${f.ids.length === 1 ? '' : 'es'} saved</div>
+              <div class="friend-name">${esc(f.name)}</div>
+              <div class="friend-count">${f.weekIds.length} location${f.weekIds.length === 1 ? '' : 's'} saved</div>
             </div>
-            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${i})">✏️ Edit</button>
-            <button class="friend-remove" onclick="App.removeFriend(${i})">Remove</button>
+            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${f.originalIndex})">✏️ Edit</button>
+            <button class="friend-remove" onclick="App.removeFriend(${f.originalIndex})">Remove</button>
           </div>`).join('');
 
     // Overlap
     const overlapSection = document.getElementById('overlap-section');
-    if (friends.length === 0) {
+    if (activeFriends.length === 0) {
       overlapSection.style.display = 'none';
       return;
     }
     overlapSection.style.display = 'block';
 
     const myIds = [...saved];
-    const allSets = [myIds, ...friends.map(f => f.ids)];
+    const allSets = [myIds, ...activeFriends.map(f => f.weekIds)];
     const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
     const overlapContainer = document.getElementById('overlap-container');
 
