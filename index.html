@@ -40,7 +40,8 @@
     <!-- ── Header ── -->
     <header class="app-header">
       <div class="compact-app-bar" style="display: none;">
-        <a href="?" class="compact-brand" onclick="App.goToLanding(event)" style="text-decoration: none; color: inherit;">PDX Food Week</a>
+        <a href="?" class="compact-brand" onclick="App.goToLanding(event)"
+          style="text-decoration: none; color: inherit;">PDX Food Week</a>
         <div class="compact-actions">
           <button id="compact-search-btn" class="compact-icon-btn" aria-label="Toggle Search">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -88,10 +89,11 @@
           <button class="compact-menu-item" data-tab="map" onclick="App.switchTab('map')">Map</button>
           <div
             style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px; display: flex; justify-content: flex-end;">
-            <select class="week-switcher-select" id="compact-week-switcher" onchange="App.switchWeek(this.value); this.value='';"
-              aria-label="Switch food week"
+            <select class="week-switcher-select" id="compact-week-switcher"
+              onchange="App.switchWeek(this.value); this.value='';" aria-label="Switch food week"
               style="margin-top: 12px; background-color: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 16px; padding: 12px 32px 12px 16px; width: 100%;">
-              <option value="" disabled selected hidden style="color: #1a1816; background: #fff;">Select food week</option>
+              <option value="" disabled selected hidden style="color: #1a1816; background: #fff;">Select food week
+              </option>
               <option value="slushie-2026" style="color: #1a1816; background: #fff;">🥤 Summer of Slushies</option>
               <option value="nacho-2026" style="color: #1a1816; background: #fff;">🧀 Nacho Week</option>
               <option value="pizza-2026" style="color: #1a1816; background: #fff;">🍕 Pizza Week</option>
@@ -103,7 +105,8 @@
       </div>
 
       <div class="header-top">
-        <a href="?" class="app-wordmark" onclick="App.goToLanding(event)" style="text-decoration: none; color: inherit;">PDX Food Week</a>
+        <a href="?" class="app-wordmark" onclick="App.goToLanding(event)"
+          style="text-decoration: none; color: inherit;">PDX Food Week</a>
       </div>
 
       <h1 class="header-title" id="header-title"><em>Taco</em> Week 2026</h1>
@@ -167,8 +170,10 @@
         <div class="landing-header">
           <h1 class="landing-title">PDX Food Week</h1>
           <div class="landing-subtitle-box">
-            <p class="landing-subtitle">Explore Portland's best food weeks, save your favorites, and share them with
-              friends.</p>
+            <p class="landing-subtitle">Portland's food weeks are better with friends! <br> Start by picking a week and
+              browsing through all the options, save the dishes you want to try, and
+              share your lists with others!
+            </p>
           </div>
         </div>
         <div class="landing-grid" id="landing-grid">
@@ -313,11 +318,13 @@
             <div class="stat-num" id="stat-count">0</div>
             <div class="stat-label">Saved</div>
           </div>
-          <div class="stat-box" onclick="App.showMetricDetails('hoods')" style="cursor: pointer;" title="Click to view neighborhoods">
+          <div class="stat-box" onclick="App.showMetricDetails('hoods')" style="cursor: pointer;"
+            title="Click to view neighborhoods">
             <div class="stat-num" id="stat-hoods">0</div>
             <div class="stat-label">Neighborhoods</div>
           </div>
-          <div class="stat-box" onclick="App.showMetricDetails('types')" style="cursor: pointer;" title="Click to view dish types">
+          <div class="stat-box" onclick="App.showMetricDetails('types')" style="cursor: pointer;"
+            title="Click to view dish types">
             <div class="stat-num" id="stat-types">0</div>
             <div class="stat-label">Dish types</div>
           </div>
