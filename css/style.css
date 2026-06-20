@@ -230,6 +230,14 @@ body.is-landing .bottom-nav {
   padding-bottom: 0 !important;
 }
 
+#view-share .view-footer,
+#view-map .view-footer {
+  margin-bottom: 0 !important;
+}
+#view-share .view-footer {
+  margin-top: auto !important;
+}
+
 /* Footer links styling */
 .sidebar-footer a,
 .view-footer a {
@@ -3243,6 +3251,7 @@ select:focus-visible {
 }
 
 /* Make map take full height */
+#view-share.active,
 #view-map.active {
   display: flex !important;
   flex-direction: column;
