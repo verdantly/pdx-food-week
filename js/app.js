@@ -1387,14 +1387,19 @@ const App = (() => {
     if (!container) return;
 
     let bannerHtml = '';
+    const headerTitle = document.getElementById('saved-header-title');
+    const copyBtn = document.getElementById('saved-copy-btn');
+    
     if (viewingFriendIndex !== null && friends[viewingFriendIndex]) {
       bannerHtml = `<div class="friend-view-banner" style="background: var(--pizza-light); padding: 12px 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <span style="font-family: var(--font-display); font-weight: 700; color: var(--pizza-dark); font-size: 16px;">Viewing ${esc(friends[viewingFriendIndex].name)}'s List</span>
         <button class="btn" style="background: transparent; color: var(--pizza-dark); border: 1.5px solid var(--pizza-dark); padding: 4px 12px; font-size: 14px;" onclick="App.exitFriendView()">Exit</button>
       </div>`;
-      if (sectionHeader) sectionHeader.style.display = 'none';
+      if (headerTitle) headerTitle.textContent = `${esc(friends[viewingFriendIndex].name)}'s Spots`;
+      if (copyBtn) copyBtn.style.display = 'none';
     } else {
-      if (sectionHeader) sectionHeader.style.display = 'flex';
+      if (headerTitle) headerTitle.textContent = 'Your Saved Spots';
+      if (copyBtn) copyBtn.style.display = '';
     }
     
     if (bannerContainer) {

@@ -331,21 +331,16 @@
       <section class="view" id="view-saved" role="tabpanel" aria-label="Saved dishes">
         <div class="mobile-tab-heading">Saved</div>
         <div id="friend-view-banner-container"></div>
-        <div class="stats-bar">
-          <div class="stat-box">
-            <div class="stat-num" id="stat-count">0</div>
-            <div class="stat-label">Saved</div>
+        <div class="saved-header-integrated" id="saved-section-header">
+          <div class="header-left">
+            <h2 class="header-title" id="saved-header-title">Your Saved Spots</h2>
+            <div class="stats-pills">
+              <div class="stat-pill primary"><span id="stat-count">0</span> Total</div>
+              <div class="stat-pill clickable" onclick="App.showMetricDetails('hoods')" title="Click to view neighborhoods"><span id="stat-hoods">0</span> Neighborhoods</div>
+              <div class="stat-pill clickable" onclick="App.showMetricDetails('types')" title="Click to view dish types"><span id="stat-types">0</span> Dish Types</div>
+            </div>
           </div>
-          <div class="stat-box" onclick="App.showMetricDetails('hoods')" style="cursor: pointer;"
-            title="Click to view neighborhoods">
-            <div class="stat-num" id="stat-hoods">0</div>
-            <div class="stat-label">Neighborhoods</div>
-          </div>
-          <div class="stat-box" onclick="App.showMetricDetails('types')" style="cursor: pointer;"
-            title="Click to view dish types">
-            <div class="stat-num" id="stat-types">0</div>
-            <div class="stat-label">Dish types</div>
-          </div>
+          <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()" style="width: auto; margin-bottom: 0;">Copy List</button>
         </div>
         <div class="saved-header">
           <div class="search-bar">
@@ -388,11 +383,7 @@
             </div>
           </div>
         </div>
-        <div class="section-header" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px;" id="saved-section-header">
-          <span>Your Saved Spots</span>
-          <button class="btn btn-primary" onclick="App.exportSavedToClipboard()"
-            style="width: auto; margin-bottom: 0;">Copy List</button>
-        </div>
+
         <div class="cards-list" id="cards-saved"></div>
         <div class="view-footer">
           PDX Food Week<br>
