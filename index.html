@@ -377,12 +377,12 @@
           <div class="header-left">
             <h2 class="tab-header-title" id="saved-header-title">Your Saved Spots</h2>
             <div class="stats-pills">
-              <div class="stat-pill primary"><span id="stat-count">0</span> Total</div>
+              <div class="stat-pill"><span id="stat-count">0</span> Total</div>
               <div class="stat-pill clickable" onclick="App.showMetricDetails('hoods')" title="Click to view neighborhoods"><span id="stat-hoods">0</span> Neighborhoods</div>
               <div class="stat-pill clickable" onclick="App.showMetricDetails('types')" title="Click to view dish types"><span id="stat-types">0</span> Dish Types</div>
             </div>
           </div>
-          <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()" style="width: auto; margin-bottom: 0;">Copy List</button>
+          <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()" style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0;">Copy List</button>
         </div>
         <div class="cards-list" id="cards-saved"></div>
         <div class="view-footer">
