@@ -1410,6 +1410,10 @@ body.is-landing .bottom-nav {
   width: 120px;
 }
 
+.badge-upcoming.current {
+  padding-left: 6px;
+}
+
 @media (max-width: 768px) {
   .lightbox-nav {
     display: none;
