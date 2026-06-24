@@ -815,12 +815,12 @@ body.is-landing .bottom-nav {
   width: 100%;
 }
 
-.header-title {
+.tab-header-title {
   font-size: 18px;
   font-weight: 700;
   font-family: var(--font-display);
   margin: 0;
-  color: var(--ink);
+  color: var(--pizza);
 }
 
 .stats-pills {
@@ -860,7 +860,7 @@ body.is-landing .bottom-nav {
 
 .stat-pill span {
   font-weight: 800;
-  color: var(--ink);
+  color: var(--pizza);
 }
 .stat-pill.primary span {
   color: var(--pizza-dark);
