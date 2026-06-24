@@ -812,6 +812,7 @@ body.is-landing .bottom-nav {
   border-radius: var(--radius-sm);
   padding: 12px;
   text-align: center;
+  max-width: 200px;
 }
 
 .stat-num {
