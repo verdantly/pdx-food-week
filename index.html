@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Track and share your favorites across Portland food weeks — Pizza Week, Burger Week, and more." />
+  <meta name="description"
+    content="Track and share your favorites across Portland food weeks — Pizza Week, Burger Week, and more." />
   <meta name="theme-color" content="#1A1208" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -11,7 +13,7 @@
 
   <!-- Open Graph -->
   <meta property="og:title" content="PDX Food Week" />
-  <meta property="og:description" content="Bookmark, plan, and share your Portland food week favorites." />
+  <meta property="og:description" content="Save, plan, and share your Portland food week favorites." />
   <meta property="og:type" content="website" />
 
   <title>PDX Food Week</title>
@@ -21,391 +23,585 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
-  <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <script defer
-          src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-          crossorigin=""></script>
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script defer src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
+
 <body>
 
-<div id="app">
+  <div id="app">
 
-  <!-- ── Header ── -->
-  <header class="app-header">
-    <div class="header-top">
-      <a href="?" class="app-wordmark" style="text-decoration: none; color: inherit;">PDX Food Week</a>
-      <select class="week-switcher-select" id="week-switcher" onchange="App.switchWeek(this.value)" aria-label="Switch food week">
-        <option value="" disabled>Select food week</option>
-        <option value="nacho-2026" selected>🧀 Nacho Week</option>
-        <option value="pizza-2026">🍕 Pizza Week</option>
-        <option value="highball-2026">🥃 Highball Week</option>
-        <option value="taco-2026">🌮 Taco Week</option>
-      </select>
-    </div>
-    <h1 class="header-title" id="header-title"><em>Taco</em> Week 2026</h1>
-    <div class="header-meta" id="header-meta">
-      <span>June 1–7</span>
-      <span class="pill">$5 taco</span>
-      <span class="pill">2 for $5</span>
-      <span>42 locations</span>
-    </div>
-    <nav class="nav-tabs" role="tablist" aria-label="App sections">
-      <button class="nav-tab active" data-tab="browse" role="tab"
-        onclick="App.switchTab('browse')" aria-selected="true">
-        Browse
-        <span class="badge-dot"></span>
-      </button>
-      <button class="nav-tab" data-tab="swipe" role="tab"
-        onclick="App.switchTab('swipe')" aria-selected="false">
-        Swipe
-        <span class="badge-dot"></span>
-      </button>
-      <button class="nav-tab" data-tab="saved" role="tab"
-        onclick="App.switchTab('saved')" aria-selected="false">
-        Saved
-      </button>
-      <button class="nav-tab" data-tab="share" role="tab"
-        onclick="App.switchTab('share')" aria-selected="false">
-        Share
-        <span class="badge-dot"></span>
-      </button>
-      <button class="nav-tab" data-tab="map" role="tab"
-        onclick="App.switchTab('map')" aria-selected="false">
-        Map
-        <span class="badge-dot"></span>
-      </button>
-    </nav>
-
-    <!-- Sidebar footer — only visible on desktop -->
-    <div class="sidebar-footer">
-      PDX Food Week<br>
-      <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
-      Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
-      Not affiliated with either.<br>
-      Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-    </div>
-  </header>
-
-  <!-- ── Main content wrapper (tablet/desktop) ── -->
-  <div class="app-main">
-
-  <!-- ── Landing View ── -->
-  <section class="view" id="view-landing" role="tabpanel" aria-label="Select a Food Week">
-    <div class="landing-header">
-      <h1 class="landing-title">PDX Food Weeks</h1>
-      <p class="landing-subtitle">Choose an event to start exploring menus, saving your favorites, and sharing with friends.</p>
-    </div>
-    <div class="landing-grid" id="landing-grid">
-      <!-- Populated dynamically -->
-    </div>
-    <div class="view-footer">
-      PDX Food Week<br>
-      <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
-      Not affiliated with event organizers.<br>
-      Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-    </div>
-  </section>
-
-  <!-- ── Browse View ── -->
-  <section class="view" id="view-browse" role="tabpanel" aria-label="Browse dishes">
-    <div class="browse-header">
-      <div id="new-listings-banner" class="new-listings-banner" style="display: none;"></div>
-      <div class="search-bar">
-        <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-            <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…" autocomplete="off" />
-          <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">×</button>
-        </div>
-      </div>
-      <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
-    </div>
-    <div class="sort-section" role="group" aria-label="Sort dishes" id="sort-section">
-      <span class="sort-label">Sort:</span>
-      <div class="sort-main-group">
-        <button class="filter-chip active" onclick="App.setSort('restaurant', this)">Restaurant (A-Z)</button>
-        <button class="filter-chip" onclick="App.setSort('dish', this)">Name (A-Z)</button>
-      </div>
-      <span class="sort-label-empty"></span>
-      <div class="sort-distance-group">
-        <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
-        <div id="zip-code-container" style="display: none; align-items: center; gap: 8px;">
-          <input type="text" id="zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
-            style="width: 80px; padding: 4px 8px; border-radius: 12px; border: 1px solid var(--border); font-size: 13px;"
-            aria-label="Enter Zip Code for distance sorting">
-          <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applyZipCode()">Go</button>
-        </div>
-      </div>
-    </div>
-    <div class="cards-list" id="cards-browse"></div>
-    <div class="view-footer">
-      PDX Food Week<br>
-      <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
-      Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
-      Not affiliated with either.<br>
-      Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-    </div>
-  </section>
-
-  <!-- ── Swipe View ── -->
-  <section class="view" id="view-swipe" role="tabpanel" aria-label="Swipe through dishes">
-    <div class="swipe-header">
-      <div class="swipe-counter" id="swipe-counter">Loading…</div>
-      <button class="swipe-reset" onclick="App.resetSwipe()" title="Start over — clear passed">↺ Reset</button>
-    </div>
-    <div class="swipe-deck">
-      <!-- Cards dynamically generated in JS -->
-      <div class="swipe-empty" id="swipe-empty" style="display:none">
-        <div class="nr-emoji fun-bounce">🥳</div>
-        <h3 class="fun-title">You did it!</h3>
-        <p>You've seen every single dish.</p>
-        <button class="btn btn-primary" onclick="App.resetSwipe()" style="margin-top: 10px;">Shuffle &amp; Start Over</button>
-      </div>
-    </div>
-    <div class="swipe-controls" id="swipe-controls">
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-undo" id="swipe-btn-undo" onclick="App.undoSwipe()" aria-label="Undo" disabled>↶</button>
-        <span class="swipe-btn-label">Undo</span>
-      </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Dislike">×</button>
-        <span class="swipe-btn-label">Dislike</span>
-      </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now" style="font-size: 24px;">↓</button>
-        <span class="swipe-btn-label">Skip</span>
-      </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">ⓘ</button>
-        <span class="swipe-btn-label">Info</span>
-      </div>
-      <div class="swipe-btn-wrapper">
-        <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Like">★</button>
-        <span class="swipe-btn-label">Like</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Saved View ── -->
-  <section class="view" id="view-saved" role="tabpanel" aria-label="Saved dishes">
-    <div class="stats-bar">
-      <div class="stat-box">
-        <div class="stat-num" id="stat-count">0</div>
-        <div class="stat-label">Saved</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="stat-hoods">0</div>
-        <div class="stat-label">Neighborhoods</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="stat-types">0</div>
-        <div class="stat-label">Dish types</div>
-      </div>
-    </div>
-    <div class="saved-header">
-      <div class="search-bar">
-        <div class="search-input-wrapper">
-          <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
-            <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <input id="saved-search-input" type="search" placeholder="Search saved dish, restaurant, neighborhood…" autocomplete="off" />
-          <button id="saved-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">×</button>
-        </div>
-      </div>
-      <div class="filter-section" role="group" aria-label="Filter saved dishes" id="saved-filters"></div>
-    </div>
-    <div class="sort-section" role="group" aria-label="Sort saved dishes" id="saved-sort-section">
-      <span class="sort-label">Sort:</span>
-      <div class="sort-main-group">
-        <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant (A-Z)</button>
-        <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
-        <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
-      </div>
-      <span class="sort-label-empty"></span>
-      <div class="sort-distance-group">
-        <button class="filter-chip" id="saved-sort-distance-btn" onclick="App.toggleSavedDistanceSort(this)">Distance</button>
-        <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px;">
-          <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
-            style="width: 80px; padding: 4px 8px; border-radius: 12px; border: 1px solid var(--border); font-size: 13px;"
-            aria-label="Enter Zip Code for distance sorting">
-          <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applySavedZipCode()">Go</button>
-        </div>
-      </div>
-    </div>
-    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
-      <span>Your bookmarks</span>
-      <button class="btn btn-primary" onclick="App.exportSavedToClipboard()" style="padding: 4px 12px; font-size: 12px;">Export List</button>
-    </div>
-    <div class="cards-list" id="cards-saved"></div>
-    <div class="view-footer">
-      PDX Food Week<br>
-      <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
-      Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
-      Not affiliated with either.<br>
-      Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-    </div>
-  </section>
-
-  <!-- ── Share View ── -->
-  <section class="view" id="view-share" role="tabpanel" aria-label="Friends and sharing">
-    <div class="share-panel">
-      <div class="share-section">
-        <h3 style="margin-bottom: 6px;">Share your list</h3>
-        <p style="margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.8);">Generate a magic link to send to friends so they can easily import your saved spots.</p>
-        <p style="margin-bottom: 16px; font-size: 12px; color: var(--ink-60);">
-          <em>Privacy Note: Your shared list is anonymous and contains no personal information. Providing a name is entirely optional.</em>
-        </p>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <input id="my-name-input" type="text" placeholder="Your Name (Optional)" autocomplete="off" spellcheck="false" style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
-          <button class="btn btn-primary" id="copy-btn" onclick="App.generateShareLink()" style="margin-bottom: 0;">
-            Generate Magic Link
+    <!-- ── Header ── -->
+    <header class="app-header">
+      <div class="compact-app-bar" style="display: none;">
+        <a href="?" class="compact-brand" onclick="App.goToLanding(event)"
+          style="text-decoration: none; color: inherit;">PDX Food Week</a>
+        <div class="compact-actions">
+          <button id="compact-search-btn" class="compact-icon-btn" aria-label="Toggle Search">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              width="20" height="20">
+              <circle cx="6.5" cy="6.5" r="4.5" />
+              <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" />
+            </svg>
           </button>
-          
-          <div id="share-results" style="display: none; margin-top: 16px; flex-direction: column; gap: 14px;">
-            <div>
-              <div class="paste-label">Magic Link</div>
-              <div class="paste-row">
-                <input id="magic-link-display" type="text" readonly onclick="this.select()" style="font-family: var(--font-body); font-size: 13px;" />
-                <button id="copy-magic-btn" class="btn" onclick="App.copyTextFromElement('magic-link-display', 'copy-magic-btn')">Copy</button>
-                <button id="share-native-btn" class="btn" style="display: none; background: var(--pizza); color: #fff;" onclick="App.shareNative()">Share</button>
-              </div>
-              <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">Tap to copy. Friends open this to automatically import your list.</p>
-            </div>
-            
-            <div>
-              <div class="paste-label">Backup Code (Bypasses Cloud)</div>
-              <div class="paste-row">
-                <input id="manual-code-display" type="text" readonly onclick="this.select()" />
-                <button id="copy-manual-btn" class="btn" onclick="App.copyTextFromElement('manual-code-display', 'copy-manual-btn')">Copy</button>
-              </div>
-              <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">A static copy of your list. Friends can paste this in the field below.</p>
-            </div>
+          <button id="compact-menu-btn" class="compact-icon-btn" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              width="24" height="24">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="compact-search-dropdown" class="compact-dropdown" style="display: none;">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round">
+            <circle cx="6.5" cy="6.5" r="4.5" />
+            <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" />
+          </svg>
+          <input id="compact-search-input" type="search" placeholder="Search dishes, spots..."
+            aria-label="Search dishes and spots" autocomplete="off" />
+          <button id="compact-search-clear-btn" class="search-clear-btn" aria-label="Clear search"
+            style="display: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="compact-menu-dropdown" class="compact-dropdown" style="display: none;">
+        <div class="compact-menu-list">
+          <button class="compact-menu-item" data-tab="browse" onclick="App.switchTab('browse')">Browse</button>
+          <button class="compact-menu-item" data-tab="swipe" onclick="App.switchTab('swipe')">Swipe</button>
+          <button class="compact-menu-item" data-tab="saved" onclick="App.switchTab('saved')">Saved</button>
+          <button class="compact-menu-item" data-tab="share" onclick="App.switchTab('share')">Share</button>
+          <button class="compact-menu-item" data-tab="map" onclick="App.switchTab('map')">Map</button>
+          <div
+            style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px; display: flex; justify-content: flex-end;">
+            <select class="week-switcher-select" id="compact-week-switcher"
+              onchange="App.switchWeek(this.value); this.value='';" aria-label="Switch food week"
+              style="margin-top: 12px; background-color: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 16px; padding: 12px 32px 12px 16px; width: 100%;">
+              <option value="" disabled selected hidden style="color: #1a1816; background: #fff;">Select food week
+              </option>
+              <option value="slushie-2026" style="color: #1a1816; background: #fff;">🥤 Summer of Slushies</option>
+              <option value="nacho-2026" style="color: #1a1816; background: #fff;">🧀 Nacho Week</option>
+              <option value="pizza-2026" style="color: #1a1816; background: #fff;">🍕 Pizza Week</option>
+              <option value="highball-2026" style="color: #1a1816; background: #fff;">🥃 Highball Week</option>
+              <option value="taco-2026" style="color: #1a1816; background: #fff;">🌮 Taco Week</option>
+            </select>
           </div>
         </div>
       </div>
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 24px 0;">
-      <div class="share-section">
-        <h3 style="margin-bottom: 6px;">Add your friends' lists</h3>
-        <p style="margin-bottom: 16px; font-size: 14px; color: rgba(255,255,255,0.8);">If your friend sends you a Magic Link, just tap it to import! Or, paste the link here.</p>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div class="paste-row">
-            <input id="friend-code-input" type="text" placeholder="Paste Magic Link or Code" autocomplete="off" spellcheck="false" />
-            <button class="btn" onclick="App.addFriend()">Add</button>
+
+      <div class="header-top">
+        <a href="?" class="app-wordmark" onclick="App.goToLanding(event)"
+          style="text-decoration: none; color: inherit;">PDX Food Week</a>
+      </div>
+
+      <h1 class="header-title" id="header-title"><em>Taco</em> Week 2026</h1>
+      <div class="header-meta" id="header-meta" style="margin-bottom: 12px;">
+        <span>June 1–7</span>
+        <span class="pill">$5 taco</span>
+        <span class="pill">2 for $5</span>
+        <span>42 locations</span>
+      </div>
+      <div class="header-switcher" style="margin-bottom: 24px; text-align: left;">
+        <select class="week-switcher-select" id="week-switcher" onchange="App.switchWeek(this.value); this.value='';"
+          aria-label="Switch food week">
+          <option value="" disabled selected hidden>Select food week</option>
+          <option value="slushie-2026">🥤 Summer of Slushies</option>
+          <option value="nacho-2026">🧀 Nacho Week</option>
+          <option value="pizza-2026">🍕 Pizza Week</option>
+          <option value="highball-2026">🥃 Highball Week</option>
+          <option value="taco-2026">🌮 Taco Week</option>
+        </select>
+      </div>
+      <nav class="nav-tabs" role="tablist" aria-label="App sections">
+        <button class="nav-tab active" data-tab="browse" role="tab" onclick="App.switchTab('browse')"
+          aria-selected="true">
+          Browse
+          <span class="badge-dot"></span>
+        </button>
+        <button class="nav-tab" data-tab="swipe" role="tab" onclick="App.switchTab('swipe')" aria-selected="false">
+          Swipe
+          <span class="badge-dot"></span>
+        </button>
+        <button class="nav-tab" data-tab="saved" role="tab" onclick="App.switchTab('saved')" aria-selected="false">
+          Saved
+        </button>
+        <button class="nav-tab" data-tab="share" role="tab" onclick="App.switchTab('share')" aria-selected="false">
+          Share
+          <span class="badge-dot"></span>
+        </button>
+        <button class="nav-tab" data-tab="map" role="tab" onclick="App.switchTab('map')" aria-selected="false">
+          Map
+          <span class="badge-dot"></span>
+        </button>
+      </nav>
+
+      <!-- Sidebar footer — only visible on desktop -->
+      <div class="sidebar-footer">
+        PDX Food Week<br>
+        <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
+        Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual
+          Portland</a>.<br>
+        Not affiliated with either.<br>
+        Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
+          href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+      </div>
+    </header>
+
+    <!-- ── Main content wrapper (tablet/desktop) ── -->
+    <div class="app-main">
+
+      <!-- ── Landing View ── -->
+      <section class="view" id="view-landing" role="tabpanel" aria-label="Select a Food Week">
+        <div class="landing-header">
+          <h1 class="landing-title">PDX Food Week</h1>
+          <div class="landing-subtitle-box">
+            <p class="landing-subtitle">Portland's food weeks are better with friends! <br> Start by picking a week and
+              browsing through all the options, save the dishes you want to try, and
+              share your lists with others! <br> <br><i>Not affiliated with event organizers.</i>
+            </p>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="friends-list" id="friends-list"></div>
-
-    <div class="overlap-section" id="overlap-section" style="display:none">
-      <div class="overlap-header">
-        <h3>🎉 Places you all want</h3>
-        <p>Spots that everyone in your group has bookmarked</p>
-      </div>
-      <div id="overlap-container"></div>
-    </div>
-    <div class="view-footer">
-      PDX Food Week<br>
-      <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
-      Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
-      Not affiliated with either.<br>
-      Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-    </div>
-  </section>
-
-  <!-- ── Map View ── -->
-  <section class="view" id="view-map" role="tabpanel" aria-label="Map of locations">
-    <div class="map-container">
-      <div id="map-canvas" role="application" aria-label="Map of Portland pizza week locations"></div>
-      <div class="map-legend">
-        <div class="legend-item">
-          <div class="legend-dot saved"></div> Saved
+        <div class="landing-grid" id="landing-grid">
+          <!-- Populated dynamically -->
         </div>
-        <div class="legend-item">
-          <div class="legend-dot unsaved"></div> Not saved
+        <div class="view-footer">
+          PDX Food Week<br>
+          <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
+          Not affiliated with event organizers.<br>
+          Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
+            href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
         </div>
-        <div class="legend-item" style="margin-left:auto;color:var(--ink-30);font-size:10px">
-          Tap a pin for details
+      </section>
+
+      <!-- ── Browse View ── -->
+      <section class="view" id="view-browse" role="tabpanel" aria-label="Browse dishes">
+        <div class="mobile-tab-heading">Browse</div>
+        <div id="new-listings-banner" class="new-listings-banner" style="display: none; margin-top: 16px;"></div>
+        <div class="browse-header">
+          <div class="search-bar">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5" />
+                <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" />
+              </svg>
+              <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…"
+                aria-label="Search dishes and restaurants" autocomplete="off" />
+              <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
         </div>
+        <div class="sort-section" role="group" aria-label="Sort dishes" id="sort-section">
+          <span class="sort-label">Sort:</span>
+          <div class="sort-main-group">
+            <button class="filter-chip active" onclick="App.setSort('restaurant', this)">Restaurant (A-Z)</button>
+            <button class="filter-chip" onclick="App.setSort('dish', this)">Name (A-Z)</button>
+          </div>
+          <span class="sort-label-empty"></span>
+          <div class="sort-distance-group">
+            <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
+            <div id="zip-code-container" style="display: none; align-items: center; gap: 8px;">
+              <input type="text" id="zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
+                style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 100px;"
+                aria-label="Enter Zip Code for distance sorting">
+              <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applyZipCode()">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="cards-list" id="cards-browse"></div>
+        <div class="view-footer">
+          PDX Food Week<br>
+          <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
+          Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual
+            Portland</a>.<br>
+          Not affiliated with either.<br>
+          Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
+            href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+        </div>
+      </section>
+
+      <!-- ── Swipe View ── -->
+      <section class="view" id="view-swipe" role="tabpanel" aria-label="Swipe through dishes">
+        <div class="mobile-tab-heading">Swipe</div>
+        <div class="swipe-container">
+        <div class="swipe-header">
+          <div class="swipe-counter" id="swipe-counter">Loading…</div>
+          <button class="swipe-reset" onclick="App.resetSwipe()" title="Start over — clear passed">↺ Reset</button>
+        </div>
+        <div class="swipe-deck">
+          <!-- Cards dynamically generated in JS -->
+          <div class="swipe-empty" id="swipe-empty" style="display:none">
+            <div class="nr-emoji fun-bounce">🥳</div>
+            <h3 class="fun-title">You did it!</h3>
+            <p>You've seen every single dish.</p>
+            <button class="btn btn-primary" onclick="App.resetSwipe()" style="margin-top: 10px;">Shuffle &amp; Start
+              Over</button>
+          </div>
+        </div>
+        <div class="swipe-controls" id="swipe-controls">
+          <div class="swipe-btn-wrapper">
+            <button class="swipe-btn swipe-undo" id="swipe-btn-undo" onclick="App.undoSwipe()" aria-label="Undo"
+              disabled>
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7v6h6" />
+                <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" />
+              </svg>
+            </button>
+            <span class="swipe-btn-label">Undo</span>
+          </div>
+          <div class="swipe-btn-wrapper">
+            <button class="swipe-btn swipe-pass" onclick="App.swipe('left')" aria-label="Dislike">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+            <span class="swipe-btn-label">Dislike</span>
+          </div>
+          <div class="swipe-btn-wrapper">
+            <button class="swipe-btn swipe-info" onclick="App.swipeOpenDetail()" aria-label="More info">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </button>
+            <span class="swipe-btn-label">Info</span>
+          </div>
+          <div class="swipe-btn-wrapper">
+            <button class="swipe-btn swipe-like" onclick="App.swipe('right')" aria-label="Like">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </button>
+            <span class="swipe-btn-label">Like</span>
+          </div>
+          <div class="swipe-btn-wrapper">
+            <button class="swipe-btn swipe-skip" onclick="App.skipSwipe()" aria-label="Skip for now">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 19 22 12 13 5 13 19" />
+                <polygon points="2 19 11 12 2 5 2 19" />
+              </svg>
+            </button>
+            <span class="swipe-btn-label">Skip</span>
+          </div>
+        </div>
+        <div class="view-footer">
+          PDX Food Week<br>
+          <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
+          Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
+          Not affiliated with either.<br>
+          Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+        </div>
+      </section>
+
+      <!-- ── Saved View ── -->
+      <section class="view" id="view-saved" role="tabpanel" aria-label="Saved dishes">
+        <div class="mobile-tab-heading">Saved</div>
+        <div class="stats-bar">
+          <div class="stat-box">
+            <div class="stat-num" id="stat-count">0</div>
+            <div class="stat-label">Saved</div>
+          </div>
+          <div class="stat-box" onclick="App.showMetricDetails('hoods')" style="cursor: pointer;"
+            title="Click to view neighborhoods">
+            <div class="stat-num" id="stat-hoods">0</div>
+            <div class="stat-label">Neighborhoods</div>
+          </div>
+          <div class="stat-box" onclick="App.showMetricDetails('types')" style="cursor: pointer;"
+            title="Click to view dish types">
+            <div class="stat-num" id="stat-types">0</div>
+            <div class="stat-label">Dish types</div>
+          </div>
+        </div>
+        <div class="saved-header">
+          <div class="search-bar">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5" />
+                <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" />
+              </svg>
+              <input id="saved-search-input" type="search" placeholder="Search saved dish, restaurant, neighborhood…"
+                aria-label="Search saved dishes and restaurants" autocomplete="off" />
+              <button id="saved-search-clear-btn" class="search-clear-btn" aria-label="Clear search"
+                style="display: none;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="filter-section" role="group" aria-label="Filter saved dishes" id="saved-filters"></div>
+        </div>
+        <div class="sort-section" role="group" aria-label="Sort saved dishes" id="saved-sort-section">
+          <span class="sort-label">Sort:</span>
+          <div class="sort-main-group">
+            <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant (A-Z)</button>
+            <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
+            <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
+          </div>
+          <span class="sort-label-empty"></span>
+          <div class="sort-distance-group">
+            <button class="filter-chip" id="saved-sort-distance-btn"
+              onclick="App.toggleSavedDistanceSort(this)">Distance</button>
+            <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px;">
+              <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
+                style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 100px;"
+                aria-label="Enter Zip Code for distance sorting">
+              <button class="filter-chip active" style="padding: 4px 10px;"
+                onclick="App.applySavedZipCode()">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="section-header" style="display: flex; justify-content: flex-start; align-items: center; gap: 12px;">
+          <span>Your Saved Spots</span>
+          <button class="btn btn-primary" onclick="App.exportSavedToClipboard()"
+            style="width: auto; margin-bottom: 0;">Copy List</button>
+        </div>
+        <div class="cards-list" id="cards-saved"></div>
+        <div class="view-footer">
+          PDX Food Week<br>
+          <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
+          Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual
+            Portland</a>.<br>
+          Not affiliated with either.<br>
+          Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
+            href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+        </div>
+      </section>
+
+      <!-- ── Share View ── -->
+      <section class="view" id="view-share" role="tabpanel" aria-label="Friends and sharing">
+        <div class="mobile-tab-heading">Share</div>
+        <div class="share-panel">
+          <div class="share-section">
+            <h3 style="margin-bottom: 6px;">Share your list</h3>
+            <p style="margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.8);">Generate a magic link to send
+              to friends so they can easily import your saved spots.</p>
+            <p style="margin-bottom: 16px; font-size: 12px; color: var(--ink-60);">
+              <em>Privacy Note: Your shared list is anonymous and contains no personal information. Providing a name is
+                entirely optional.</em>
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <input id="my-name-input" type="text" placeholder="Your Name (Optional)" autocomplete="off"
+                spellcheck="false"
+                style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
+              <button class="btn btn-primary" id="copy-btn" onclick="App.generateShareLink()" style="margin-bottom: 0;">
+                Generate Magic Link
+              </button>
+
+              <div id="share-results" style="display: none; margin-top: 16px; flex-direction: column; gap: 14px;">
+                <div>
+                  <div class="paste-label">Magic Link</div>
+                  <div class="paste-row">
+                    <input id="magic-link-display" type="text" readonly onclick="this.select()"
+                      style="font-family: var(--font-body); font-size: 13px;" />
+                    <button id="copy-magic-btn" class="btn"
+                      onclick="App.copyTextFromElement('magic-link-display', 'copy-magic-btn')">Copy</button>
+                    <button id="share-native-btn" class="btn"
+                      style="display: none; background: var(--pizza); color: #fff;"
+                      onclick="App.shareNative()">Share</button>
+                  </div>
+                  <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">Tap to copy. Friends open
+                    this to automatically import your list.</p>
+                </div>
+
+                <div>
+                  <div class="paste-label">Backup Code (Bypasses Cloud)</div>
+                  <div class="paste-row">
+                    <input id="manual-code-display" type="text" readonly onclick="this.select()" />
+                    <button id="copy-manual-btn" class="btn"
+                      onclick="App.copyTextFromElement('manual-code-display', 'copy-manual-btn')">Copy</button>
+                  </div>
+                  <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">A static copy of your list.
+                    Friends can paste this in the field below.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 24px 0;">
+          <div class="share-section">
+            <h3 style="margin-bottom: 6px;">Add your friends' lists</h3>
+            <p style="margin-bottom: 16px; font-size: 14px; color: rgba(255,255,255,0.8);">If your friend sends you a
+              Magic Link, just tap it to import! Or, paste the link here.</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div class="paste-row">
+                <input id="friend-code-input" type="text" placeholder="Paste Magic Link or Code" autocomplete="off"
+                  spellcheck="false" />
+                <button class="btn" onclick="App.addFriend()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="friends-list" id="friends-list"></div>
+
+        <div class="overlap-section" id="overlap-section" style="display:none">
+          <div class="overlap-header">
+            <h3>🎉 Places you all want</h3>
+            <p>Spots that everyone in your group has saved</p>
+          </div>
+          <div id="overlap-container"></div>
+        </div>
+        <div class="view-footer">
+          PDX Food Week<br>
+          <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
+          Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual
+            Portland</a>.<br>
+          Not affiliated with either.<br>
+          Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
+            href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+        </div>
+      </section>
+
+      <!-- ── Map View ── -->
+      <section class="view" id="view-map" role="tabpanel" aria-label="Map of locations">
+        <div class="mobile-tab-heading">Map</div>
+        <div class="map-container">
+          <div id="map-canvas" role="application" aria-label="Map of Portland pizza week locations"></div>
+          <div class="map-legend">
+            <div class="legend-item">
+              <div class="legend-dot saved"></div> Saved
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot unsaved"></div> Not saved
+            </div>
+            <div class="legend-item" style="margin-left:auto;color:var(--ink-30);font-size:10px">
+              Tap a pin for details
+            </div>
+          </div>
+        </div>
+
+        <div class="view-footer"></div>
+      </section>
+
+    </div><!-- .app-main -->
+
+    <!-- Floating Action Button (FAB) for Mobile Filter Drawer -->
+    <button id="mobile-filter-fab" class="mobile-filter-fab" onclick="App.openFilterDrawer()"
+      aria-label="Open search and filter drawer">
+      <svg viewBox="0 0 24 24" class="fab-icon" width="16" height="16" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" y1="21" x2="4" y2="14"></line>
+        <line x1="4" y1="10" x2="4" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="12"></line>
+        <line x1="12" y1="8" x2="12" y2="3"></line>
+        <line x1="20" y1="21" x2="20" y2="16"></line>
+        <line x1="20" y1="12" x2="20" y2="3"></line>
+        <line x1="1" y1="14" x2="7" y2="14"></line>
+        <line x1="9" y1="8" x2="15" y2="8"></line>
+        <line x1="17" y1="16" x2="23" y2="16"></line>
+      </svg>
+      <span>Filter &amp; Sort</span>
+    </button>
+
+  </div><!-- #app -->
+
+  <!-- ── Detail Bottom Sheet ── -->
+  <div id="detail-overlay" class="detail-overlay" role="dialog" aria-modal="true" aria-label="Dish details">
+    <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+    <button class="lightbox-nav close-desktop" aria-label="Close" onclick="App.closeDetail()">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="detail-sheet" id="detail-sheet-content"></div>
+    <button class="lightbox-nav next" id="lightbox-next" aria-label="Next">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- ── Mobile Filter Drawer ── -->
+  <div id="filter-drawer-overlay" class="filter-drawer-overlay" onclick="App.closeFilterDrawer()">
+    <div class="filter-drawer" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title">Filter & Sort</h3>
+        <button class="drawer-close" onclick="App.closeFilterDrawer()" aria-label="Close filters">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
       </div>
-    </div>
-    <div class="map-selected" id="map-selected-card"></div>
-  </section>
-
-  </div><!-- .app-main -->
-
-  <!-- Floating Action Button (FAB) for Mobile Filter Drawer -->
-  <button id="mobile-filter-fab" class="mobile-filter-fab" onclick="App.openFilterDrawer()" aria-label="Open filter and sort drawer">
-    <svg viewBox="0 0 24 24" class="fab-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="4" y1="21" x2="4" y2="14"></line>
-      <line x1="4" y1="10" x2="4" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="12"></line>
-      <line x1="12" y1="8" x2="12" y2="3"></line>
-      <line x1="20" y1="21" x2="20" y2="16"></line>
-      <line x1="20" y1="12" x2="20" y2="3"></line>
-      <line x1="1" y1="14" x2="7" y2="14"></line>
-      <line x1="9" y1="8" x2="15" y2="8"></line>
-      <line x1="17" y1="16" x2="23" y2="16"></line>
-    </svg>
-    <span>Filter & Sort</span>
-  </button>
-
-</div><!-- #app -->
-
-<!-- ── Detail Bottom Sheet ── -->
-<div id="detail-overlay" class="detail-overlay" role="dialog" aria-modal="true" aria-label="Dish details">
-  <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-  </button>
-  <button class="lightbox-nav close-desktop" aria-label="Close" onclick="App.closeDetail()">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-  </button>
-  <div class="detail-sheet" id="detail-sheet-content"></div>
-  <button class="lightbox-nav next" id="lightbox-next" aria-label="Next">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-  </button>
-</div>
-
-<!-- ── Mobile Filter Drawer ── -->
-<div id="filter-drawer-overlay" class="filter-drawer-overlay" onclick="App.closeFilterDrawer()">
-  <div class="filter-drawer" onclick="event.stopPropagation()">
-    <div class="drawer-header">
-      <h3 class="drawer-title">Filter & Sort</h3>
-      <button class="drawer-close" onclick="App.closeFilterDrawer()" aria-label="Close filters">×</button>
-    </div>
-    <div id="filter-drawer-body">
-      <!-- Dynamically reparented elements -->
-    </div>
-    <div class="drawer-footer">
-      <button class="btn btn-primary btn-apply" onclick="App.closeFilterDrawer()" style="width: 100%; margin: 0;">Apply & Close</button>
+      <div id="filter-drawer-body">
+        <!-- Dynamically reparented elements -->
+      </div>
+      <div class="drawer-footer">
+        <button class="btn btn-primary btn-apply" onclick="App.closeFilterDrawer()"
+          style="width: 100%; margin: 0;">Apply & Close</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ── Toast ── -->
-<div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+  <!-- ── Metric Modal Overlay ── -->
+  <div id="metric-modal-overlay" class="filter-drawer-overlay" onclick="App.closeMetricModal()">
+    <div class="filter-drawer" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title" id="metric-modal-title">Details</h3>
+        <button class="drawer-close" onclick="App.closeMetricModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div id="metric-modal-body" style="padding: 0 24px 24px; max-height: 50vh; overflow-y: auto; color: var(--ink);">
+        <!-- Dynamically populated list -->
+      </div>
+    </div>
+  </div>
 
-<!-- ── Scripts ── -->
-<script src="data/nachoweek2026.js"></script>
-<script src="data/pizzaweek2026.js"></script>
-<script src="data/highballweek2026.js"></script>
-<script src="data/tacoweek2026.js"></script>
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-<script src="js/app.js?v=20260611"></script>
+  <!-- ── Toast ── -->
+  <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ── Scripts ── -->
+  <script src="data/slushies2026.js"></script>
+  <script src="data/nachoweek2026.js"></script>
+  <script src="data/pizzaweek2026.js"></script>
+  <script src="data/highballweek2026.js"></script>
+  <script src="data/tacoweek2026.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+  <script src="js/app.js?v=20260611"></script>
 
 </body>
+
 </html>

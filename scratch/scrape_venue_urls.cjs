@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const dataFile = path.join(__dirname, '../data/nachoweek2026.js');
+const dataFile = path.join(__dirname, '../data/tacoweek2026.js');
 let dataContent = fs.readFileSync(dataFile, 'utf8');
 
-const urlRegex = /"url":\s*"([^"]+)",/g;
+const urlRegex = /"url":\s*"([^"]+)"/g;
 const matches = [...dataContent.matchAll(urlRegex)];
 
 async function scrape() {
@@ -14,29 +14,22 @@ async function scrape() {
   for (let i = 0; i < matches.length; i++) {
     const fullMatch = matches[i][0];
     const url = matches[i][1];
-    
-    // Check if we already scraped it
-    const index = dataContent.indexOf(fullMatch);
-    const textAfter = dataContent.substring(index, index + 100);
-    if (textAfter.includes('"restaurantUrl"')) {
+
+    if (updatedContent.includes(`"restaurantUrl":`) && updatedContent.substring(updatedContent.indexOf(fullMatch) - 150, updatedContent.indexOf(fullMatch)).includes('"restaurantUrl"')) {
       console.log(`[${i+1}/${matches.length}] Already scraped: ${url}`);
       continue;
     }
 
     try {
       console.log(`[${i+1}/${matches.length}] Fetching ${url}...`);
-      const res = await fetch(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
-        }
-      });
-      const html = await res.text();
-      
+      const response = await fetch(url);
+      const html = await response.text();
+
       const venueMatch = html.match(/<a href="([^"]+)"[^>]*>Venue website<\/a>/i);
       if (venueMatch) {
         const venueUrl = venueMatch[1];
         console.log(`  -> Found: ${venueUrl}`);
-        const replacement = `${fullMatch}\n    "restaurantUrl": "${venueUrl}",`;
+        const replacement = `"restaurantUrl": "${venueUrl}",\n    ${fullMatch}`;
         updatedContent = updatedContent.replace(fullMatch, replacement);
       } else {
         console.log(`  -> No venue website found`);
@@ -50,7 +43,7 @@ async function scrape() {
   }
 
   fs.writeFileSync(dataFile, updatedContent, 'utf8');
-  console.log('Done modifying nachoweek2026.js');
+  console.log('Done modifying tacoweek2026.js');
 }
 
 scrape();

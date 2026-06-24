@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDX Food Week - Landing Page Mockups</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --border: rgba(26, 18, 8, 0.12);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: #f3ece3;
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header.meta-header {
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .meta-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .meta-desc {
+      font-size: 16px;
+      color: rgba(26, 18, 8, 0.7);
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    /* Option Toggles */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .btn-toggle {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(26, 18, 8, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 18, 8, 0.08);
+      border-color: var(--ink);
+    }
+
+    .btn-toggle.active {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+
+    .viewport-controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .btn-viewport {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      color: rgba(26, 18, 8, 0.6);
+      transition: all 0.2s ease;
+    }
+
+    .btn-viewport.active, .btn-viewport:hover {
+      background: rgba(26, 18, 8, 0.06);
+      color: var(--ink);
+    }
+
+    /* Demo Sandbox Workspace */
+    .sandbox-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* Outer Device Shell */
+    .device-frame {
+      background: var(--ink);
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 24px 64px rgba(26, 18, 8, 0.15);
+      transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .device-frame.mobile {
+      width: 375px;
+      height: 720px;
+      border-radius: 40px;
+    }
+
+    .device-frame.tablet {
+      width: 768px;
+      height: 900px;
+      border-radius: 24px;
+    }
+
+    .device-frame.desktop {
+      width: 1200px;
+      height: 750px;
+      border-radius: 16px;
+    }
+
+    /* Webpage content container */
+    .webpage-screen {
+      background-color: var(--cream);
+      width: 100%;
+      height: 100%;
+      border-radius: 28px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: background-color 0.4s ease;
+    }
+
+    .device-frame.desktop .webpage-screen {
+      border-radius: 8px;
+    }
+
+    /* Header Nav simulated */
+    .sim-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid rgba(26, 18, 8, 0.08);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    /* Common landing content styles */
+    .landing-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .hero-section {
+      padding: 48px 24px 32px;
+      text-align: center;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 16px 24px 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .device-frame.tablet .cards-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .device-frame.desktop .cards-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: 1000px;
+    }
+
+    .card {
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 12px rgba(26, 18, 8, 0.03);
+      border: 1px solid var(--border);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .card-emoji {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .card-dates {
+      font-size: 13px;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    .card-action-btn {
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 13px;
+      border: none;
+      transition: transform 0.2s ease;
+    }
+
+    .footer {
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      border-top: 1px solid rgba(26, 18, 8, 0.06);
+      opacity: 0.6;
+    }
+
+    /* ----------------------------------------------------
+       THEME OVERRIDES
+    ---------------------------------------------------- */
+
+    /* OPTION 1: DARK MODE */
+    .theme-dark .webpage-screen {
+      background-color: var(--ink);
+      color: var(--cream);
+    }
+    .theme-dark .sim-nav {
+      border-bottom-color: rgba(251, 246, 239, 0.1);
+    }
+    .theme-dark .card {
+      background: rgba(251, 246, 239, 0.03);
+      border-color: rgba(251, 246, 239, 0.12);
+      color: var(--cream);
+    }
+    .theme-dark .card:hover {
+      background: rgba(251, 246, 239, 0.07);
+      border-color: rgba(251, 246, 239, 0.25);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+    .theme-dark .card-badge {
+      background: var(--cream);
+      color: var(--ink);
+    }
+    .theme-dark .card-action-btn {
+      background: var(--cream);
+      color: var(--ink);
+    }
+    .theme-dark .footer {
+      border-top-color: rgba(251, 246, 239, 0.08);
+    }
+
+    /* OPTION 2: INK HERO */
+    .theme-hero .webpage-screen {
+      background-color: var(--cream);
+    }
+    .theme-hero .hero-section {
+      background-color: var(--ink);
+      color: var(--cream);
+      padding-bottom: 48px;
+    }
+    .theme-hero .sim-nav {
+      background-color: var(--ink);
+      color: var(--cream);
+      border-bottom-color: rgba(251, 246, 239, 0.08);
+    }
+    .theme-hero .card {
+      background: #FFFFFF;
+      border-color: var(--border);
+      color: var(--ink);
+    }
+    .theme-hero .card:hover {
+      box-shadow: 0 12px 32px rgba(26, 18, 8, 0.08);
+    }
+    .theme-hero .card-badge {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .theme-hero .card-action-btn {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    /* OPTION 3: BOLD INK CARDS */
+    .theme-cards .webpage-screen {
+      background-color: var(--cream);
+      color: var(--ink);
+    }
+    .theme-cards .card {
+      background: var(--ink);
+      border-color: transparent;
+      color: var(--cream);
+    }
+    .theme-cards .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 36px rgba(26, 18, 8, 0.25);
+    }
+    .theme-cards .card-badge {
+      background: var(--cream);
+      color: var(--ink);
+    }
+    .theme-cards .card-action-btn {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    /* Feedback block */
+    .explanation-panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 800px;
+      width: 100%;
+      margin-top: 16px;
+      box-shadow: 0 4px 12px rgba(26, 18, 8, 0.02);
+    }
+
+    .explanation-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .explanation-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(26, 18, 8, 0.8);
+      margin-bottom: 12px;
+    }
+
+    .explanation-bullets {
+      padding-left: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(26, 18, 8, 0.8);
+    }
+  </style>
+</head>
+<body class="theme-dark">
+
+  <header class="meta-header">
+    <h1 class="meta-title">Landing Page Styling Prototypes</h1>
+    <p class="meta-desc">Compare three approaches to integrating the brand <strong>Ink</strong> color into the landing page for stronger branding consistency.</p>
+    
+    <div class="controls">
+      <button class="btn-toggle active" onclick="switchTheme('dark', this)">Option 1: Dark Mode</button>
+      <button class="btn-toggle" onclick="switchTheme('hero', this)">Option 2: Ink Hero</button>
+      <button class="btn-toggle" onclick="switchTheme('cards', this)">Option 3: Bold Ink Cards</button>
+    </div>
+
+    <div class="viewport-controls">
+      <span style="font-size: 13px; font-weight: 600; align-self: center; margin-right: 8px;">Viewport:</span>
+      <button class="btn-viewport active" onclick="setViewport('mobile', this)">Mobile</button>
+      <button class="btn-viewport" onclick="setViewport('tablet', this)">Tablet</button>
+      <button class="btn-viewport" onclick="setViewport('desktop', this)">Desktop</button>
+    </div>
+  </header>
+
+  <div class="sandbox-container">
+    <div class="device-frame mobile" id="device-frame">
+      <div class="webpage-screen">
+        <div class="sim-nav">
+          PDX Food Week
+        </div>
+        <div class="landing-content">
+          <div>
+            <div class="hero-section">
+              <h2 class="hero-title">PDX Food Week</h2>
+              <p class="hero-subtitle">Explore Portland's best food weeks, save your favorites, and share them with friends.</p>
+            </div>
+            
+            <div class="cards-grid">
+              <!-- Taco Week -->
+              <div class="card" style="--week-accent: #D48C2C">
+                <div class="card-emoji">🌮</div>
+                <h3 class="card-name">Taco Week</h3>
+                <p class="card-dates">June 1–7, 2026</p>
+                <button class="card-action-btn" style="background-color: var(--week-accent); color: #fff;">Explore</button>
+              </div>
+
+              <!-- Slushie Week (Upcoming) -->
+              <div class="card" style="--week-accent: #286A5F">
+                <div class="card-badge">Next</div>
+                <div class="card-emoji">🥤</div>
+                <h3 class="card-name">Slushie Week</h3>
+                <p class="card-dates">July 10–16, 2026</p>
+                <button class="card-action-btn" style="background-color: var(--week-accent); color: #fff;">Explore</button>
+              </div>
+
+              <!-- Pizza Week -->
+              <div class="card" style="--week-accent: #B5472E">
+                <div class="card-emoji">🍕</div>
+                <h3 class="card-name">Pizza Week</h3>
+                <p class="card-dates">August 17–23, 2026</p>
+                <button class="card-action-btn" style="background-color: var(--week-accent); color: #fff;">Explore</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            PDX Food Week<br>
+            Privacy Policy &nbsp;•&nbsp; Terms of Use<br>
+            Created by @verdantly &amp; @oberonix
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explanation-panel">
+      <h3 class="explanation-title" id="opt-title">Option 1: Dark Mode</h3>
+      <p class="explanation-text" id="opt-desc">This option makes the entire landing page use the brand's primary Ink color (#1A1208) as its background. The text is rendered in Cream (#FBF6EF). Cards use subtle translucent boundaries that light up on hover, creating a premium dark mode dashboard feel.</p>
+      <ul class="explanation-bullets" id="opt-bullets">
+        <li><strong>Strongest brand presence:</strong> Establishes the Ink tone immediately.</li>
+        <li><strong>Polished dark aesthetic:</strong> Subtle card borders avoid harsh lines.</li>
+        <li><strong>Color Pop:</strong> The individual colorful explore buttons draw eyes instantly.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const descriptions = {
+      dark: {
+        title: "Option 1: Dark Mode",
+        desc: "This option makes the entire landing page use the brand's primary Ink color (#1A1208) as its background. The text is rendered in Cream (#FBF6EF). Cards use subtle translucent boundaries that light up on hover, creating a premium dark mode dashboard feel.",
+        bullets: [
+          "<strong>Strongest brand presence:</strong> Establishes the Ink tone immediately.",
+          "<strong>Polished dark aesthetic:</strong> Subtle card borders avoid harsh lines.",
+          "<strong>Color Pop:</strong> The individual colorful explore buttons draw eyes instantly."
+        ]
+      },
+      hero: {
+        title: "Option 2: Ink Hero",
+        desc: "This option divides the page: an Ink (#1A1208) header and hero section transitions into a clean Cream (#FBF6EF) list view below. The cards are solid white and cleanly sit on the cream background.",
+        bullets: [
+          "<strong>High contrast:</strong> The header feels bold and intentional while the lower grid remains bright.",
+          "<strong>Balanced layout:</strong> Retains a clean, readable listing space while still asserting the brand tone.",
+          "<strong>Dynamic flow:</strong> Guides the user's attention from the dark brand title down to the white cards."
+        ]
+      },
+      cards: {
+        title: "Option 3: Bold Ink Cards",
+        desc: "This option keeps the overall page background clean Cream (#FBF6EF) but converts the food week cards themselves to have solid Ink (#1A1208) backgrounds with Cream text.",
+        bullets: [
+          "<strong>High emphasis on actions:</strong> The dark cards stand out dramatically against the light background.",
+          "<strong>Consistent card weights:</strong> Every option feels robust and heavy, anchoring the interactive grid.",
+          "<strong>Chic editorial style:</strong> Creates a modern, high-contrast newsletter look."
+        ]
+      }
+    };
+
+    function switchTheme(theme, btn) {
+      // Set active button
+      document.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Set class on body to update styling
+      document.body.className = `theme-${theme}`;
+
+      // Update text details
+      document.getElementById('opt-title').innerText = descriptions[theme].title;
+      document.getElementById('opt-desc').innerHTML = descriptions[theme].desc;
+      
+      const bulletsList = document.getElementById('opt-bullets');
+      bulletsList.innerHTML = '';
+      descriptions[theme].bullets.forEach(bullet => {
+        const li = document.createElement('li');
+        li.innerHTML = bullet;
+        bulletsList.appendChild(li);
+      });
+    }
+
+    function setViewport(size, btn) {
+      document.querySelectorAll('.btn-viewport').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const frame = document.getElementById('device-frame');
+      frame.className = `device-frame ${size}`;
+    }
+  </script>
+</body>
+</html>

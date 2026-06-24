@@ -55,20 +55,16 @@ const App = (() => {
   const STORAGE_KEY_VIEWED_NEW = 'pdxfw_viewed_new_v1';
   const STORAGE_KEY_SAVED_SORT = 'pdxfw_saved_sort_v1';
   const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
+  const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
 
   const WEEK_FILTERS = {
+    'slushie-2026': [],
     'pizza-2026': [
       { id: 'meat', label: 'Meat' },
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
       { id: 'gf', label: 'Gluten-free' },
-      { id: 'pie', label: 'Whole Pie' },
-      { id: 'minors', label: 'Family OK' }
-    ],
-    'highball-2026': [
-      { id: 'minors', label: 'Minors OK' },
-      { id: '21plus', label: '21+ Only' },
-      { id: 'takeout', label: 'Takeout OK' }
+      { id: 'pie', label: 'Whole Pie' }
     ],
     'taco-2026': [
       { id: 'meat', label: 'Meat' },
@@ -82,7 +78,8 @@ const App = (() => {
       { id: 'vegetarian', label: 'Vegetarian' },
       { id: 'vegan', label: 'Vegan' },
       { id: 'gf', label: 'Gluten-free' }
-    ]
+    ],
+    'highball-2026': []
   };
 
   // ── Persistence ────────────────────────────────────────────
@@ -115,7 +112,20 @@ const App = (() => {
         }
       }
       customSavedOrder = customSavedOrder.filter(id => saved.has(id));
+
+      localStorage.removeItem(STORAGE_KEY_VISITED); // Clean up legacy global visited key
     } catch (e) { }
+  }
+
+  function checkWeekVisited(weekId) {
+    if (!weekId) return;
+    const visitedKey = 'pdxfw_visited_v1_' + weekId;
+    if (!localStorage.getItem(visitedKey)) {
+      const activeRestaurants = window.RESTAURANTS.filter(r => r.weekId === weekId);
+      activeRestaurants.filter(r => r.isNew).forEach(r => viewedNew.add(r.id));
+      localStorage.setItem(visitedKey, 'true');
+      saveState();
+    }
   }
 
   function saveState() {
@@ -169,7 +179,7 @@ const App = (() => {
   }
 
   function updateBrowseBadge() {
-    const browseTab = document.querySelector('[data-tab="browse"]');
+    const browseTab = document.querySelector('.nav-tab[data-tab="browse"]');
     if (!browseTab) return;
     const badge = browseTab.querySelector('.badge-dot');
     if (!badge) return;
@@ -207,7 +217,9 @@ const App = (() => {
         banner.innerHTML = `
           <span class="banner-icon">✨</span>
           <span class="banner-text">${message}</span>
-          <button class="banner-close" aria-label="Dismiss notification" onclick="App.dismissNewBanner()">×</button>
+          <button class="banner-close" aria-label="Dismiss notification" onclick="App.dismissNewBanner()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
         `;
       } else {
         banner.style.display = 'none';
@@ -257,16 +269,14 @@ const App = (() => {
       if (activeFilters.has('vegan') && !isVeganFriendly(r)) return false;
       if (activeFilters.has('gf') && !r.glutenFree) return false;
       if (activeFilters.has('pie') && !r.wholePie) return false;
-      if (activeFilters.has('minors') && !r.minors) return false;
-      if (activeFilters.has('21plus') && r.minors) return false;
-      if (activeFilters.has('takeout') && !r.takeout) return false;
       if (activeFilters.has('spicy') && !r.spicy) return false;
-      if (activeFilters.has('new') && !(r.isNew && !viewedNew.has(r.id))) return false;
+      if (activeFilters.has('new') && !r.isNew) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
           !r.restaurant.toLowerCase().includes(q) &&
-          !r.neighborhood.toLowerCase().includes(q)) return false;
+          !(r.neighborhood || '').toLowerCase().includes(q) &&
+          !(r.address || '').toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -297,16 +307,14 @@ const App = (() => {
       if (activeSavedFilters.has('vegan') && !isVeganFriendly(r)) return false;
       if (activeSavedFilters.has('gf') && !r.glutenFree) return false;
       if (activeSavedFilters.has('pie') && !r.wholePie) return false;
-      if (activeSavedFilters.has('minors') && !r.minors) return false;
-      if (activeSavedFilters.has('21plus') && r.minors) return false;
-      if (activeSavedFilters.has('takeout') && !r.takeout) return false;
       if (activeSavedFilters.has('spicy') && !r.spicy) return false;
-      if (activeSavedFilters.has('new') && !(r.isNew && !viewedNew.has(r.id))) return false;
+      if (activeSavedFilters.has('new') && !r.isNew) return false;
       if (savedSearchQuery) {
         const q = savedSearchQuery.toLowerCase();
         if (!r.dish.toLowerCase().includes(q) &&
           !r.restaurant.toLowerCase().includes(q) &&
-          !r.neighborhood.toLowerCase().includes(q)) return false;
+          !(r.neighborhood || '').toLowerCase().includes(q) &&
+          !(r.address || '').toLowerCase().includes(q)) return false;
       }
       return true;
     });
@@ -355,10 +363,19 @@ const App = (() => {
     }
   }
 
+  function hasVeganOptionInDesc(r) {
+    if (r.veganOption) return true;
+    const txt = `${r.dish} ${r.desc}`.toLowerCase();
+    return txt.includes('vegan option') ||
+      txt.includes('can be made vegan') ||
+      txt.includes('vegan available');
+  }
+
   // ── Tag builder ────────────────────────────────────────────
   function buildTags(r) {
     const t = [];
-    if (currentWeekId === 'pizza-2026') {
+    if (currentWeekId === 'slushie-2026') {
+    } else if (currentWeekId === 'pizza-2026') {
       if (r.type === 'meat') {
         t.push('<span class="tag tag-meat">Meat</span>');
         if (isVeganFriendly(r)) {
@@ -367,20 +384,21 @@ const App = (() => {
           t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
         }
       } else if (r.type === 'vegetarian') {
-        t.push('<span class="tag tag-veg">Vegetarian only</span>');
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
         if (isVeganFriendly(r)) {
           t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
         }
       } else if (r.type === 'vegan') {
-        t.push('<span class="tag tag-vegan">Vegan only</span>');
+        if (hasVeganOptionInDesc(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else {
+          t.push('<span class="tag tag-vegan">Vegan</span>');
+        }
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
       if (r.wholePie) t.push('<span class="tag tag-pie">Whole pie $25</span>');
       else t.push('<span class="tag tag-slice">By the slice</span>');
     } else if (currentWeekId === 'highball-2026') {
-      if (r.minors) t.push('<span class="tag tag-minors" style="background:#E3EFDB;color:#2F6316;">Minors OK</span>');
-      else t.push('<span class="tag tag-21plus" style="background:#FAE8E0;color:#8B3015;">21+ Only</span>');
-      if (r.takeout) t.push('<span class="tag tag-takeout" style="background:#E3EEF8;color:#185FA5;">Takeout OK</span>');
     } else if (currentWeekId === 'taco-2026') {
       if (r.type === 'meat') {
         t.push('<span class="tag tag-meat">Meat</span>');
@@ -390,12 +408,16 @@ const App = (() => {
           t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
         }
       } else if (r.type === 'vegetarian') {
-        t.push('<span class="tag tag-veg">Vegetarian only</span>');
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
         if (isVeganFriendly(r)) {
           t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
         }
       } else if (r.type === 'vegan') {
-        t.push('<span class="tag tag-vegan">Vegan only</span>');
+        if (hasVeganOptionInDesc(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else {
+          t.push('<span class="tag tag-vegan">Vegan</span>');
+        }
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
       if (r.spicy) t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
@@ -408,12 +430,16 @@ const App = (() => {
           t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
         }
       } else if (r.type === 'vegetarian') {
-        t.push('<span class="tag tag-veg">Vegetarian only</span>');
+        t.push('<span class="tag tag-veg">Vegetarian</span>');
         if (isVeganFriendly(r)) {
           t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
         }
       } else if (r.type === 'vegan') {
-        t.push('<span class="tag tag-vegan">Vegan only</span>');
+        if (hasVeganOptionInDesc(r)) {
+          t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+        } else {
+          t.push('<span class="tag tag-vegan">Vegan</span>');
+        }
       }
       if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
     }
@@ -433,9 +459,7 @@ const App = (() => {
       ? ` <span style="font-size: 13px; font-weight: normal; color: var(--ink-60);">(${haversineDistance(userLat, userLng, r.lat, r.lng).toFixed(1)} mi)</span>`
       : '';
 
-    const restaurantHtml = r.restaurantUrl
-      ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link" onclick="event.stopPropagation()">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>`
-      : esc(r.restaurant);
+    const restaurantHtml = esc(r.restaurant);
 
     const isNew = r.isNew && !viewedNew.has(r.id);
 
@@ -474,14 +498,17 @@ const App = (() => {
         <div class="card-body">
           <div class="card-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="card-restaurant">${restaurantHtml}${dist}</div>
-          <div class="card-neighborhood">📍 ${esc(r.neighborhood)}</div>
+          <div class="card-neighborhood">📍 ${esc(currentWeekId === 'slushie-2026' ? r.address : (r.neighborhood || r.address))}</div>
           <div class="card-desc">${esc(r.desc)}</div>
           <div class="card-tags">${buildTags(r)}</div>
         </div>
         <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
           onclick="event.stopPropagation(); App.toggleSave(${r.id})"
-          aria-label="${isSaved ? 'Remove bookmark' : 'Bookmark this dish'}">
-          ${isSaved ? '★' : '☆'}
+          aria-label="${isSaved ? 'Remove from saved' : 'Save this dish'}">
+          <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="save-text">${isSaved ? 'Saved' : 'Save'}</span>
         </button>
       </div>`;
   }
@@ -573,11 +600,21 @@ const App = (() => {
     }, 500);
   }
 
+  function getActiveFriends() {
+    const activeWeekRestaurants = getRestaurants();
+    const currentWeekRestaurantIds = new Set(activeWeekRestaurants.map(r => r.id));
+    return friends.map((f, index) => {
+      const weekIds = f.ids.filter(id => currentWeekRestaurantIds.has(id));
+      return { ...f, weekIds, originalIndex: index };
+    }).filter(f => f.weekIds.length > 0);
+  }
+
   function getCurrentContextList() {
     if (activeTab === 'saved') return getSaved();
     if (activeTab === 'share') {
       const myIds = [...saved];
-      const allSets = [myIds, ...friends.map(f => f.ids)];
+      const activeFriends = getActiveFriends();
+      const allSets = [myIds, ...activeFriends.map(f => f.weekIds)];
       const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
       if (overlap.length > 0) return overlap;
       return [];
@@ -606,13 +643,16 @@ const App = (() => {
 
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
+    const hideNav = activeTab === 'map' || activeTab === 'swipe';
     if (prevBtn) {
       prevBtn.onclick = prevId ? (e) => { e.stopPropagation(); App.openDetail(prevId); } : null;
       prevBtn.disabled = !prevId;
+      prevBtn.style.display = hideNav ? 'none' : '';
     }
     if (nextBtn) {
       nextBtn.onclick = nextId ? (e) => { e.stopPropagation(); App.openDetail(nextId); } : null;
       nextBtn.disabled = !nextId;
+      nextBtn.style.display = hideNav ? 'none' : '';
     }
 
     selectedDish = r;
@@ -623,35 +663,51 @@ const App = (() => {
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
 
     const contentHtml = `
-      <button class="sheet-close" onclick="App.closeDetail()" aria-label="Close">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      <button class="bookmark-btn ${isSaved ? 'saved' : ''}" style="top: 48px; right: 16px; padding: 0 16px 0 12px; width: auto;" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
+        <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="save-text" style="display: inline-block;">${isSaved ? 'Saved' : 'Save'}</span>
       </button>
       <div class="sheet-handle"></div>
       ${hero}
       <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
       <div class="sheet-restaurant">
-        ${r.restaurantUrl ? `<a href="${esc(r.restaurantUrl)}" target="_blank" rel="noopener" class="venue-link">${esc(r.restaurant)} <span class="mobile-arrow">↗</span></a>` : esc(r.restaurant)}
+        ${r.restaurantUrl ? `<a href="${esc(safeUrl(r.restaurantUrl))}" target="_blank" rel="noopener" class="venue-link sheet-link-grid" style="color: inherit;"><span class="link-text">${esc(r.restaurant)}</span><span class="link-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></span></a>` : esc(r.restaurant)}
       </div>
       <div class="sheet-address">
-        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link">
-          📍 ${esc(r.address)} <span class="mobile-arrow">↗</span>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.restaurant + ' ' + r.address)}" target="_blank" rel="noopener" title="Open in Google Maps" class="venue-link sheet-link-grid">
+          <span class="link-text">📍 ${esc(r.address)}</span>
+          <span class="link-icon">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </span>
         </a>
       </div>
-      <div class="sheet-desc">${esc(r.desc)}</div>
+      ${r.whatsOnIt ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${currentWeekId === 'slushie-2026' ? "What's in it..." : "What's on it..."}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>` : ''}
+      ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc">${esc(r.whatTheySay)}</div>` : ''}
+      ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc">${esc(r.desc)}</div>` : ''}
       <div class="sheet-tags">${buildTags(r)}</div>
       <div class="sheet-actions">
-        <button class="btn btn-save ${isSaved ? 'saved' : ''}" id="sheet-save-btn"
-          onclick="App.toggleSave(${r.id})">
-          ${isSaved ? '★ Saved' : '☆ Save'}
-        </button>
+
         <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
           ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
         </a>
       </div>
+      ${!hideNav ? `
       <div class="sheet-nav" style="display: flex; justify-content: space-between; margin-top: 16px; gap: 12px;">
-        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink);" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>&larr; Previous</button>
-        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink);" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>Next &rarr;</button>
-      </div>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px; ${!prevId ? 'opacity: 0.4; pointer-events: none;' : ''}" onclick="App.openDetail(${prevId})" ${!prevId ? 'disabled' : ''}>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          Previous
+        </button>
+        <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px; ${!nextId ? 'opacity: 0.4; pointer-events: none;' : ''}" onclick="App.openDetail(${nextId})" ${!nextId ? 'disabled' : ''}>
+          Next
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>` : ''}
       ${isSaved ? `
       <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
@@ -755,12 +811,16 @@ const App = (() => {
     }
 
     if (!fromPopState) {
-      if (history.state && history.state.detailDishId !== undefined) {
-        history.back();
-      } else {
-        const url = new URL(window.location);
-        url.searchParams.delete('dish');
-        history.pushState(null, '', url);
+      try {
+        if (history.state && history.state.detailDishId !== undefined) {
+          history.back();
+        } else {
+          const url = new URL(window.location);
+          url.searchParams.delete('dish');
+          history.pushState(null, '', url);
+        }
+      } catch (e) {
+        // Ignore SecurityError on file:///
       }
     }
   }
@@ -780,15 +840,23 @@ const App = (() => {
     if (typeof filterDrawerOpen !== 'undefined' && filterDrawerOpen) {
       closeFilterDrawer();
     }
+    if (window.App && App.hideCompactDropdowns) {
+      App.hideCompactDropdowns();
+    }
     activeTab = name;
-    document.querySelectorAll('.nav-tab').forEach(el => {
+    document.querySelectorAll('.nav-tab, .compact-menu-item').forEach(el => {
       const isActive = el.dataset.tab === name;
       el.classList.toggle('active', isActive);
-      el.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      if (el.classList.contains('nav-tab')) {
+        el.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      }
     });
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
+    if (name === 'swipe' || name === 'share') {
+      closeDetail(true);
+    }
     if (name === 'map') {
       renderMap();
       // The container's real dimensions are only known once the tab is
@@ -805,7 +873,13 @@ const App = (() => {
     const appContainer = document.getElementById('app');
     const fabButton = document.getElementById('mobile-filter-fab');
     if (appContainer) appContainer.classList.remove('compact-header');
-    if (fabButton) fabButton.classList.remove('show-fab');
+    if (fabButton) {
+      if (name === 'browse' || (name === 'saved' && saved.size > 0)) {
+        fabButton.classList.add('show-fab');
+      } else {
+        fabButton.classList.remove('show-fab');
+      }
+    }
     lastScrollTop = 0;
 
     if (!fromPopState) {
@@ -815,7 +889,19 @@ const App = (() => {
       } else {
         url.searchParams.set('tab', name);
       }
-      history.pushState({ ...history.state, tab: name }, '', url);
+      
+      const newState = { ...history.state, tab: name };
+      const appContainer = document.getElementById('app');
+      if (appContainer && !appContainer.classList.contains('detail-open')) {
+        url.searchParams.delete('dish');
+        delete newState.detailDishId;
+      }
+      
+      try {
+        history.pushState(newState, '', url);
+      } catch (e) {
+        // Ignore SecurityError
+      }
     }
   }
 
@@ -856,11 +942,9 @@ const App = (() => {
       }
       if (el) el.classList.add('active');
 
+      if (zipContainer) zipContainer.style.display = 'flex';
       if (userLat !== null && userLng !== null) {
-        if (zipContainer) zipContainer.style.display = 'none';
         renderBrowse();
-      } else {
-        if (zipContainer) zipContainer.style.display = 'flex';
       }
     }
   }
@@ -990,7 +1074,7 @@ const App = (() => {
     const activeWeekRestaurants = getRestaurants();
     const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
     if (hasAnyNew) {
-      filters.push({ id: 'new', label: 'New' });
+      filters.push({ id: 'new', label: 'Recently Added' });
     }
     const container = document.getElementById('saved-filters');
     if (!container) return;
@@ -1035,12 +1119,10 @@ const App = (() => {
       }
       if (el) el.classList.add('active');
 
+      if (zipContainer) zipContainer.style.display = 'flex';
       if (userLat !== null && userLng !== null) {
-        if (zipContainer) zipContainer.style.display = 'none';
         saveState();
         renderSaved();
-      } else {
-        if (zipContainer) zipContainer.style.display = 'flex';
       }
     }
   }
@@ -1210,7 +1292,11 @@ const App = (() => {
     const container = document.getElementById('cards-browse');
     if (!container) return;
     if (filtered.length === 0) {
-      container.innerHTML = `<div class="no-results"><div class="nr-emoji">🤷</div><p>No results. Try a different filter!</p></div>`;
+      container.innerHTML = `<div class="no-results">
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48" fill="#e3e3e3" style="margin-bottom: 16px; opacity: 0.8;"><path d="M280-80v-366q-51-14-85.5-56T160-596v-284h80v280h40v-280h80v280h40v-280h80v284q0 52-34.5 94T360-446v366h-80Zm400 0v-320H560v-480q66 0 113 47t47 113v640h-40Z"/></svg>
+        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">Nothing on the menu</p>
+        <p style="color: var(--ink-60);">Try a different filter!</p>
+      </div>`;
     } else {
       container.innerHTML = filtered.map(r => cardHTML(r)).join('');
     }
@@ -1239,15 +1325,28 @@ const App = (() => {
     }
 
     const items = getSaved();
-    const hoods = new Set(items.map(r => r.neighborhood)).size;
+    const hoods = new Set(items.map(r => r.neighborhood || r.address)).size;
     const types = new Set(items.map(r => r.type)).size;
     document.getElementById('stat-count').textContent = items.length;
-    document.getElementById('stat-hoods').textContent = hoods;
-    document.getElementById('stat-types').textContent = types;
+    
+    const hoodsBox = document.getElementById('stat-hoods').parentElement;
+    const typesBox = document.getElementById('stat-types').parentElement;
+    if (currentWeekId === 'slushie-2026') {
+      hoodsBox.style.display = 'none';
+      typesBox.style.display = 'none';
+    } else {
+      hoodsBox.style.display = '';
+      typesBox.style.display = '';
+      document.getElementById('stat-hoods').textContent = hoods;
+      document.getElementById('stat-types').textContent = types;
+    }
 
-    const tab = document.querySelector('[data-tab="saved"]');
-    tab.classList.toggle('has-items', items.length > 0);
-    tab.setAttribute('data-count', items.length);
+    const totalSavedForWeek = getRestaurants().filter(r => saved.has(r.id)).length;
+    const tabs = document.querySelectorAll('[data-tab="saved"]');
+    tabs.forEach(tab => {
+      tab.classList.toggle('has-items', totalSavedForWeek > 0);
+      tab.setAttribute('data-count', totalSavedForWeek);
+    });
 
     const hasSavedItems = saved.size > 0;
     const savedHeader = document.querySelector('#view-saved .saved-header');
@@ -1258,7 +1357,13 @@ const App = (() => {
     const container = document.getElementById('cards-saved');
     if (!container) return;
     if (items.length === 0) {
-      container.innerHTML = `<div class="no-results"><div class="nr-emoji">☆</div><p>Bookmark spots from Browse to build your list!</p></div>`;
+      container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px;">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+        </svg>
+        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No saved spots yet</p>
+        <p style="color: var(--ink-60);">Save spots from Browse to build your list!</p>
+      </div>`;
     } else {
       container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
     }
@@ -1280,6 +1385,14 @@ const App = (() => {
         elToFocus.focus();
       }
     }
+
+    if (activeTab === 'saved') {
+      const fabButton = document.getElementById('mobile-filter-fab');
+      if (fabButton) {
+        if (hasSavedItems) fabButton.classList.add('show-fab');
+        else fabButton.classList.remove('show-fab');
+      }
+    }
   }
 
   // ── Export Saved ───────────────────────────────────────────
@@ -1298,6 +1411,40 @@ const App = (() => {
     });
   }
 
+  function showMetricDetails(type) {
+    const items = getSaved();
+    if (items.length === 0) return;
+
+    const overlay = document.getElementById('metric-modal-overlay');
+    const title = document.getElementById('metric-modal-title');
+    const body = document.getElementById('metric-modal-body');
+
+    let list = [];
+    if (type === 'hoods') {
+      const hoods = new Set(items.map(r => r.neighborhood || r.address).filter(Boolean));
+      if (hoods.size === 0) return;
+      title.textContent = 'Neighborhoods';
+      list = Array.from(hoods).sort();
+    } else if (type === 'types') {
+      const types = new Set(items.map(r => r.type).filter(Boolean));
+      if (types.size === 0) return;
+      title.textContent = 'Dish Types';
+      list = Array.from(types).sort();
+    }
+
+    body.innerHTML = `<ul style="list-style: none; padding: 0; margin: 0;">` +
+      list.map(item => `<li style="padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; text-transform: capitalize;">${item}</li>`).join('') +
+      `</ul>`;
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMetricModal() {
+    document.getElementById('metric-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   // ── Render: Friends ────────────────────────────────────────
   function renderFriends() {
     const copyBtn = document.getElementById('copy-btn');
@@ -1312,37 +1459,58 @@ const App = (() => {
       }
     }
 
+    const activeFriends = getActiveFriends();
+
+    let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No friends added yet.</p>`;
+    if (friends.length > 0 && activeFriends.length === 0) {
+      emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No shared lists for this week.</p>`;
+    }
+
     // Friends list
     const fl = document.getElementById('friends-list');
-    fl.innerHTML = friends.length === 0
-      ? `<div class="no-results" style="padding:24px 0"><div class="nr-emoji" style="font-size:28px">👥</div><p>No friends added yet.</p></div>`
-      : friends.map((f, i) => `
+    fl.innerHTML = activeFriends.length === 0
+      ? `<div class="no-results" style="padding:24px 0">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          ${emptyMessage}
+        </div>`
+      : activeFriends.map((f) => `
           <div class="friend-item">
             <div class="friend-avatar">${f.name.charAt(0).toUpperCase()}</div>
             <div class="friend-info">
-              <div class="friend-name">${f.name}</div>
-              <div class="friend-count">${f.ids.length} dish${f.ids.length === 1 ? '' : 'es'} saved</div>
+              <div class="friend-name">${esc(f.name)}</div>
+              <div class="friend-count">${f.weekIds.length} location${f.weekIds.length === 1 ? '' : 's'} saved</div>
             </div>
-            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${i})">✏️ Edit</button>
-            <button class="friend-remove" onclick="App.removeFriend(${i})">Remove</button>
+            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${f.originalIndex})">✏️ Edit</button>
+            <button class="friend-remove" onclick="App.removeFriend(${f.originalIndex})">Remove</button>
           </div>`).join('');
 
     // Overlap
     const overlapSection = document.getElementById('overlap-section');
-    if (friends.length === 0) {
+    if (activeFriends.length === 0) {
       overlapSection.style.display = 'none';
       return;
     }
     overlapSection.style.display = 'block';
 
     const myIds = [...saved];
-    const allSets = [myIds, ...friends.map(f => f.ids)];
+    const allSets = [myIds, ...activeFriends.map(f => f.weekIds)];
     const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
     const overlapContainer = document.getElementById('overlap-container');
 
     overlapContainer.className = 'cards-list';
     if (overlap.length === 0) {
-      overlapContainer.innerHTML = `<div class="no-results" style="padding:20px 0"><p>No overlap yet — save more spots and add more friends!</p></div>`;
+      overlapContainer.innerHTML = `<div class="no-results" style="padding:20px 0">
+        <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; opacity: 0.8">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        <p style="font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No overlap yet</p>
+        <p style="color: var(--ink-60);">Save more spots and add more friends!</p>
+      </div>`;
     } else {
       overlapContainer.innerHTML = overlap.map(r => cardHTML(r, true)).join('');
     }
@@ -1643,10 +1811,9 @@ const App = (() => {
       // Leaflet failed to load (CDN blocked, offline, restrictive CSP).
       // Render a user-visible message so the tab isn't silently empty.
       host.innerHTML = `
-        <div style="padding:24px;text-align:center;color:var(--ink-60);font-size:13px;line-height:1.5">
-          <div style="font-size:28px;margin-bottom:8px">🗺️</div>
-          Map couldn't load — check your connection or a blocker extension.<br>
-          The list and swipe tabs still work offline-cached.
+        <div class="empty-state">
+          <div style="font-size:48px;margin-bottom:16px">🗺️</div>
+          Map couldn't load — check your connection or a blocker extension.
         </div>`;
       return;
     }
@@ -1681,8 +1848,7 @@ const App = (() => {
         });
         m.bindPopup(
           `<div class="popup-dish">${esc(r.dish)}</div>
-           <div class="popup-restaurant">${esc(r.restaurant)}</div>
-           <div style="margin-top:4px"><a href="#" data-popup-id="${r.id}">Details →</a></div>`
+           <div class="popup-restaurant">${esc(r.restaurant)}</div>`
         );
         m.on('click', () => showMapSelected(r));
         leafletMarkers.set(r.id, m);
@@ -1727,18 +1893,17 @@ const App = (() => {
 
   function showMapSelected(r) {
     selectedMapId = r.id;
-    const el = document.getElementById('map-selected-card');
-    el.innerHTML = `
-      <div class="section-header">Selected location</div>
-      <div class="cards-list" style="padding:0 0 8px">
-        ${cardHTML(r)}
-      </div>`;
     // Highlight the selected pin; reset the rest.
     if (leafletMarkers) {
       for (const [id, m] of leafletMarkers) {
         m.setIcon(pinIcon(saved.has(id), id === r.id));
       }
     }
+    
+    openDetail(r.id);
+    
+    // Pan slightly down so the marker isn't covered by the popup
+    leafletMap.panTo([r.lat, r.lng], { animate: true });
   }
 
   // ── Swipe ──────────────────────────────────────────────────
@@ -1830,14 +1995,11 @@ const App = (() => {
         <div class="swipe-card-body">
           <div class="swipe-card-dish">${esc(item.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
           <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
-          <div class="swipe-card-neighborhood">📍 ${esc(item.neighborhood)}</div>
+          <div class="swipe-card-neighborhood">📍 ${esc(currentWeekId === 'slushie-2026' ? item.address : (item.neighborhood || item.address))}</div>
           <div class="swipe-card-desc">${esc(item.desc)}</div>
           <div class="swipe-card-tags">${buildTags(item)}</div>
         </div>
-        ${isTop ? `
-          <div class="swipe-stamp swipe-stamp-like">Like</div>
-          <div class="swipe-stamp swipe-stamp-pass">Dislike</div>
-        ` : ''}
+
       `;
 
       deckEl.insertBefore(cardEl, deckEl.firstChild);
@@ -1847,11 +2009,16 @@ const App = (() => {
     attachSwipeGestures();
 
     const remaining = swipeQueue.length - swipeIdx;
-    counterEl.textContent = `${remaining} to go · ${swipeIdx + 1}/${swipeQueue.length}`;
+    counterEl.textContent = `${remaining} to go`;
   }
 
-  function swipe(dir) {
+  function swipe(dir, fromGesture = false) {
     if (swipeAnimating) return; // prevent spam-click / held-key double-advance
+    
+    if (!fromGesture && navigator.vibrate) {
+      navigator.vibrate(dir === 'right' ? 50 : [30, 50, 30]);
+    }
+
     const cardEl = document.getElementById('swipe-card');
     const r = currentSwipeCard();
     if (!r) return;
@@ -1963,10 +2130,14 @@ const App = (() => {
     const cardEl = document.getElementById('swipe-card');
     if (!cardEl) return;
     let startX = 0, startY = 0, isDown = false, pointerId = null;
+    let hasVibrated = false;
+    let isHorizontalSwipe = false;
 
     cardEl.addEventListener('pointerdown', e => {
       if (!currentSwipeCard()) return;
       isDown = true;
+      hasVibrated = false;
+      isHorizontalSwipe = false;
       pointerId = e.pointerId;
       startX = e.clientX;
       startY = e.clientY;
@@ -1978,30 +2149,69 @@ const App = (() => {
       if (!isDown || e.pointerId !== pointerId) return;
       const dx = e.clientX - startX;
       const dy = e.clientY - startY;
+      
+      if (!isHorizontalSwipe) {
+        if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+          isHorizontalSwipe = true;
+        } else if (Math.abs(dy) > 10) {
+          return;
+        } else {
+          return;
+        }
+      }
+
       const rot = dx * 0.06;
       cardEl.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
-      const like = cardEl.querySelector('.swipe-stamp-like');
-      const pass = cardEl.querySelector('.swipe-stamp-pass');
-      if (like) like.style.opacity = Math.max(0, Math.min(1, dx / 120));
-      if (pass) pass.style.opacity = Math.max(0, Math.min(1, -dx / 120));
+
+      const threshold = 100;
+      if (!hasVibrated && Math.abs(dx) > threshold) {
+        hasVibrated = true;
+        if (navigator.vibrate) navigator.vibrate(dx > 0 ? 50 : [30, 50, 30]);
+      } else if (hasVibrated && Math.abs(dx) <= threshold) {
+        hasVibrated = false;
+      }
+
+      const btnLike = document.querySelector('.swipe-like');
+      const btnPass = document.querySelector('.swipe-pass');
+      if (btnLike && btnPass) {
+        const intensity = Math.min(1, Math.abs(dx) / 120);
+        if (dx > 0) {
+          btnLike.style.transform = `scale(${1 + intensity * 0.2})`;
+          btnLike.style.borderColor = `rgba(40, 106, 95, ${0.2 + intensity * 0.8})`;
+          btnLike.style.background = `rgba(40, 106, 95, ${intensity * 0.1})`;
+          
+          btnPass.style.transform = `scale(${1 - intensity * 0.1})`;
+          btnPass.style.opacity = 1 - intensity * 0.5;
+        } else {
+          btnPass.style.transform = `scale(${1 + intensity * 0.2})`;
+          btnPass.style.borderColor = `rgba(140, 52, 32, ${0.2 + intensity * 0.8})`;
+          btnPass.style.background = `rgba(140, 52, 32, ${intensity * 0.1})`;
+
+          btnLike.style.transform = `scale(${1 - intensity * 0.1})`;
+          btnLike.style.opacity = 1 - intensity * 0.5;
+        }
+      }
     });
 
     const snapBack = () => {
       cardEl.style.transition = 'transform 0.2s ease';
       cardEl.style.transform = '';
-      const like = cardEl.querySelector('.swipe-stamp-like');
-      const pass = cardEl.querySelector('.swipe-stamp-pass');
-      if (like) like.style.opacity = 0;
-      if (pass) pass.style.opacity = 0;
+      const btnLike = document.querySelector('.swipe-like');
+      const btnPass = document.querySelector('.swipe-pass');
+      if (btnLike && btnPass) {
+        btnLike.style.transform = ''; btnLike.style.borderColor = ''; btnLike.style.background = ''; btnLike.style.opacity = '';
+        btnPass.style.transform = ''; btnPass.style.borderColor = ''; btnPass.style.background = ''; btnPass.style.opacity = '';
+      }
     };
 
     cardEl.addEventListener('pointerup', e => {
       if (!isDown || e.pointerId !== pointerId) return;
       isDown = false;
+      isHorizontalSwipe = false;
       const dx = e.clientX - startX;
       const threshold = 100;
-      if (dx > threshold) swipe('right');
-      else if (dx < -threshold) swipe('left');
+      if (dx > threshold) swipe('right', true);
+      else if (dx < -threshold) swipe('left', true);
       else snapBack();
     });
 
@@ -2010,6 +2220,7 @@ const App = (() => {
     cardEl.addEventListener('pointercancel', () => {
       if (!isDown) return;
       isDown = false;
+      isHorizontalSwipe = false;
       snapBack();
     });
   }
@@ -2051,9 +2262,10 @@ const App = (() => {
     const week = window.FOOD_WEEKS.find(w => w.id === currentWeekId);
     if (!week) return;
 
-    // Update select switcher value
-    const select = document.getElementById('week-switcher');
-    if (select) select.value = '';
+    // Update select switcher values
+    document.querySelectorAll('.week-switcher-select').forEach(select => {
+      
+    });
 
     // Update all footer elements (sidebar on desktop, view footers on mobile/tablet)
     let dataSrcHtml = '';
@@ -2071,13 +2283,17 @@ const App = (() => {
     // Update header title
     const titleEl = document.getElementById('header-title');
     if (titleEl) {
-      const parts = week.name.split(' ');
-      if (parts.length > 0) {
-        const first = parts[0];
-        const rest = parts.slice(1).join(' ');
-        titleEl.innerHTML = `<em>${esc(first)}</em> ${esc(rest)}`;
+      if (currentWeekId === 'slushie-2026') {
+        titleEl.innerHTML = `Summer of <em>Slushies</em> 2026`;
       } else {
-        titleEl.textContent = week.name;
+        const parts = week.name.split(' ');
+        if (parts.length > 0) {
+          const first = parts[0];
+          const rest = parts.slice(1).join(' ');
+          titleEl.innerHTML = `<em>${esc(first)}</em> ${esc(rest)}`;
+        } else {
+          titleEl.textContent = week.name;
+        }
       }
     }
 
@@ -2105,7 +2321,7 @@ const App = (() => {
     const activeWeekRestaurants = getRestaurants();
     const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
     if (hasAnyNew) {
-      filters.push({ id: 'new', label: 'New' });
+      filters.push({ id: 'new', label: 'Recently Added' });
     }
     const container = document.getElementById('browse-filters');
     if (!container) return;
@@ -2162,10 +2378,11 @@ const App = (() => {
     `;
   }
 
-  function switchWeek(weekId) {
+  function switchWeek(weekId, fromPopState = false) {
     if (!window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
     currentWeekId = weekId;
+    checkWeekVisited(currentWeekId);
     saveState();
 
     // Reset filters and search
@@ -2228,13 +2445,15 @@ const App = (() => {
     updateFilterDisplay();
     renderSavedFilters();
 
-    const url = new URL(window.location);
-    url.searchParams.set('week', weekId);
-    url.searchParams.delete('tab');
-    history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    if (!fromPopState) {
+      const url = new URL(window.location);
+      url.searchParams.set('week', weekId);
+      url.searchParams.delete('tab');
+      history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    }
     document.body.classList.remove('is-landing');
 
-    switchTab('browse');
+    switchTab('browse', true);
     renderShimmer();
     setTimeout(() => {
       renderAll();
@@ -2314,16 +2533,34 @@ const App = (() => {
         return;
       }
 
+      let scrollHeight, clientHeight;
+      if (currentView.scrollHeight > currentView.clientHeight) {
+        scrollHeight = currentView.scrollHeight;
+        clientHeight = currentView.clientHeight;
+      } else {
+        scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        clientHeight = window.innerHeight;
+      }
+      
+      const isScrollable = scrollHeight > clientHeight + 10;
+      const isNearBottom = isScrollable && (st + clientHeight >= scrollHeight - 40);
+
+      if (fabButton) {
+        if (isNearBottom) {
+          fabButton.classList.add('hide-fab-scroll');
+        } else {
+          fabButton.classList.remove('hide-fab-scroll');
+        }
+      }
+
       const delta = st - lastScrollTop;
 
       if (st <= 60) {
-        // Near the top: always show full header and hide FAB
+        // Near the top: always show full header
         appContainer.classList.remove('compact-header');
-        if (fabButton) fabButton.classList.remove('show-fab');
       } else if (delta > 20 && st > 150) {
-        // Significant scroll down: hide header and show FAB
+        // Significant scroll down: hide header
         appContainer.classList.add('compact-header');
-        if (fabButton) fabButton.classList.add('show-fab');
       } else if (delta < -30) {
         // Significant scroll up: show header
         appContainer.classList.remove('compact-header');
@@ -2344,11 +2581,9 @@ const App = (() => {
     if (!overlay || !drawerBody) return;
 
     if (activeTab === 'saved') {
-      const searchBar = document.querySelector('#view-saved .search-bar');
       const savedFilters = document.getElementById('saved-filters');
       const sortSection = document.getElementById('saved-sort-section');
-      if (searchBar && savedFilters && sortSection) {
-        drawerBody.appendChild(searchBar);
+      if (savedFilters && sortSection) {
         drawerBody.appendChild(savedFilters);
         drawerBody.appendChild(sortSection);
 
@@ -2357,11 +2592,9 @@ const App = (() => {
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     } else {
-      const searchBar = document.querySelector('#view-browse .search-bar');
       const browseFilters = document.getElementById('browse-filters');
       const sortSection = document.getElementById('sort-section');
-      if (searchBar && browseFilters && sortSection) {
-        drawerBody.appendChild(searchBar);
+      if (browseFilters && sortSection) {
         drawerBody.appendChild(browseFilters);
         drawerBody.appendChild(sortSection);
 
@@ -2379,24 +2612,24 @@ const App = (() => {
     if (!overlay) return;
 
     if (activeTab === 'saved') {
-      const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+      
       const savedFilters = document.getElementById('saved-filters');
       const sortSection = document.getElementById('saved-sort-section');
       const savedHeader = document.querySelector('#view-saved .saved-header');
       const cardsSaved = document.getElementById('cards-saved');
-      if (searchBar && savedFilters && sortSection && savedHeader && cardsSaved) {
-        savedHeader.appendChild(searchBar);
+      if (savedFilters && sortSection && savedHeader && cardsSaved) {
+
         savedHeader.appendChild(savedFilters);
         document.getElementById('view-saved').insertBefore(sortSection, document.querySelector('#view-saved .section-header') || cardsSaved);
       }
     } else {
-      const searchBar = document.querySelector('#filter-drawer-body .search-bar');
+      
       const browseFilters = document.getElementById('browse-filters');
       const sortSection = document.getElementById('sort-section');
       const browseHeader = document.querySelector('#view-browse .browse-header');
       const cardsBrowse = document.getElementById('cards-browse');
-      if (searchBar && browseFilters && sortSection && browseHeader && cardsBrowse) {
-        browseHeader.appendChild(searchBar);
+      if (browseFilters && sortSection && browseHeader && cardsBrowse) {
+
         browseHeader.appendChild(browseFilters);
         document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
       }
@@ -2422,7 +2655,19 @@ const App = (() => {
         closeDetail(true);
       }
 
-      let tab = (e.state && e.state.tab) || new URLSearchParams(window.location.search).get('tab') || 'browse';
+      const urlParams = new URLSearchParams(window.location.search);
+      const stateWeekId = (e.state && e.state.week) || urlParams.get('week');
+
+      if (!stateWeekId) {
+        document.body.classList.add('is-landing');
+        currentWeekId = null;
+        renderLanding();
+        switchTab('landing', true);
+      } else if (stateWeekId !== currentWeekId) {
+        switchWeek(stateWeekId, true);
+      }
+
+      let tab = (e.state && e.state.tab) || urlParams.get('tab') || 'browse';
       if (tab === 'friends') tab = 'share';
       if (activeTab !== tab && currentWeekId) {
         switchTab(tab, true);
@@ -2433,6 +2678,46 @@ const App = (() => {
     document.getElementById('detail-overlay').addEventListener('click', e => {
       if (e.target === e.currentTarget) closeDetail();
     });
+
+    // Wire up swipe-to-close for detail sheet (mobile only)
+    const detailSheet = document.getElementById('detail-sheet-content');
+    if (detailSheet) {
+      let sheetStartY = 0;
+      let sheetCurrentY = 0;
+      let sheetIsDragging = false;
+      let sheetAtTop = false;
+
+      detailSheet.addEventListener('touchstart', e => {
+        if (window.innerWidth > 768) return;
+        sheetStartY = e.touches[0].clientY;
+        sheetAtTop = detailSheet.scrollTop <= 2;
+        sheetIsDragging = true;
+        detailSheet.style.transition = 'none';
+      }, { passive: false });
+
+      detailSheet.addEventListener('touchmove', e => {
+        if (!sheetIsDragging || !sheetAtTop || window.innerWidth > 768) return;
+        sheetCurrentY = e.touches[0].clientY;
+        const deltaY = sheetCurrentY - sheetStartY;
+        if (deltaY > 0) {
+          if (e.cancelable) e.preventDefault();
+          detailSheet.style.transform = `translateY(${deltaY}px)`;
+        }
+      }, { passive: false });
+
+      detailSheet.addEventListener('touchend', e => {
+        if (!sheetIsDragging || window.innerWidth > 768) return;
+        sheetIsDragging = false;
+        detailSheet.style.transition = '';
+        const deltaY = sheetCurrentY - sheetStartY;
+        if (sheetAtTop && deltaY > 80) {
+          closeDetail();
+          setTimeout(() => { detailSheet.style.transform = ''; }, 300);
+        } else {
+          detailSheet.style.transform = '';
+        }
+      });
+    }
 
     // Wire up search
     const searchInput = document.getElementById('search-input');
@@ -2469,6 +2754,91 @@ const App = (() => {
         renderSaved();
       });
     }
+
+    // Wire up compact app bar search and menu
+    const compactSearchBtn = document.getElementById('compact-search-btn');
+    const compactMenuBtn = document.getElementById('compact-menu-btn');
+    const compactSearchDropdown = document.getElementById('compact-search-dropdown');
+    const compactMenuDropdown = document.getElementById('compact-menu-dropdown');
+    const compactSearchInput = document.getElementById('compact-search-input');
+    const compactSearchClearBtn = document.getElementById('compact-search-clear-btn');
+
+    if (compactSearchBtn) {
+      compactSearchBtn.addEventListener('click', () => {
+        const isHidden = compactSearchDropdown.style.display === 'none';
+        compactSearchDropdown.style.display = isHidden ? 'block' : 'none';
+        compactMenuDropdown.style.display = 'none';
+        if (isHidden && compactSearchInput) {
+          compactSearchInput.value = (activeTab === 'saved') ? savedSearchQuery : searchQuery;
+          if (compactSearchClearBtn) {
+            compactSearchClearBtn.style.display = compactSearchInput.value ? 'flex' : 'none';
+          }
+          compactSearchInput.focus();
+        }
+      });
+    }
+
+    if (compactMenuBtn) {
+      compactMenuBtn.addEventListener('click', () => {
+        const isHidden = compactMenuDropdown.style.display === 'none';
+        compactMenuDropdown.style.display = isHidden ? 'block' : 'none';
+        compactSearchDropdown.style.display = 'none';
+      });
+    }
+
+    if (compactSearchInput && compactSearchClearBtn) {
+      compactSearchInput.addEventListener('input', e => {
+        const val = e.target.value;
+        compactSearchClearBtn.style.display = val ? 'flex' : 'none';
+        
+        if (activeTab === 'browse') {
+          searchQuery = val;
+          const mainSearchInput = document.getElementById('search-input');
+          if (mainSearchInput) mainSearchInput.value = val;
+          renderBrowse();
+        } else if (activeTab === 'saved') {
+          savedSearchQuery = val;
+          const mainSavedSearchInput = document.getElementById('saved-search-input');
+          if (mainSavedSearchInput) mainSavedSearchInput.value = val;
+          renderSaved();
+        }
+      });
+
+      compactSearchClearBtn.addEventListener('click', () => {
+        compactSearchInput.value = '';
+        compactSearchClearBtn.style.display = 'none';
+        if (activeTab === 'browse') {
+          searchQuery = '';
+          const mainSearchInput = document.getElementById('search-input');
+          if (mainSearchInput) mainSearchInput.value = '';
+          renderBrowse();
+        } else if (activeTab === 'saved') {
+          savedSearchQuery = '';
+          const mainSavedSearchInput = document.getElementById('saved-search-input');
+          if (mainSavedSearchInput) mainSavedSearchInput.value = '';
+          renderSaved();
+        }
+        compactSearchInput.focus();
+      });
+    }
+
+    // Hide dropdowns when clicking outside
+    document.addEventListener('click', e => {
+      const isCompactClick = e.target.closest('.compact-app-bar') || e.target.closest('.compact-dropdown');
+      if (!isCompactClick && compactSearchDropdown && compactMenuDropdown) {
+        compactSearchDropdown.style.display = 'none';
+        compactMenuDropdown.style.display = 'none';
+      }
+      
+    });
+
+
+
+    // Attach to App globally so we can hide dropdowns in switchTab if needed
+    window.App.hideCompactDropdowns = () => {
+      if (compactSearchDropdown) compactSearchDropdown.style.display = 'none';
+      if (compactMenuDropdown) compactMenuDropdown.style.display = 'none';
+    };
 
     // Handle auto-import from URL Magic Link
     const shareListId = urlParams.get('list');
@@ -2548,6 +2918,7 @@ const App = (() => {
       return; // Stop app initialization
     } else if (window.FOOD_WEEKS.some(w => w.id === urlWeekId)) {
       currentWeekId = urlWeekId;
+      checkWeekVisited(currentWeekId);
       document.body.classList.remove('is-landing');
     }
 
@@ -2577,12 +2948,34 @@ const App = (() => {
     // Re-render swipe deck on window resize to ensure correct responsive fanning transforms
     window.addEventListener('resize', () => {
       if (activeTab === 'swipe') renderSwipe();
+      if (window.innerWidth > 768 && filterDrawerOpen) {
+        closeFilterDrawer();
+      }
     });
 
     setupMobileScrollListener();
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem };
+  function goToLanding(e) {
+    if (e) e.preventDefault();
+    if (!currentWeekId) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    currentWeekId = null;
+    saveState();
+
+    const url = new URL(window.location);
+    url.search = '';
+    history.pushState(null, '', url);
+
+    document.body.classList.add('is-landing');
+    renderLanding();
+    switchTab('landing', true);
+  }
+
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding };
 })();
 
 window.App = App;
