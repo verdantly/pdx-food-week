@@ -301,7 +301,7 @@ const App = (() => {
 
   function getSaved() {
     const targetSet = viewingFriendIndex !== null && friends[viewingFriendIndex] 
-      ? new Set(friends[viewingFriendIndex].weekIds) 
+      ? new Set(friends[viewingFriendIndex].ids) 
       : saved;
     let savedItems = getRestaurants().filter(r => targetSet.has(r.id));
 
