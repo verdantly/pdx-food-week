@@ -854,7 +854,7 @@ const App = (() => {
     document.querySelectorAll('.view').forEach(el => {
       el.classList.toggle('active', el.id === `view-${name}`);
     });
-    if (name === 'swipe' || name === 'share') {
+    if (name === 'swipe' || name === 'share' || name === 'landing') {
       closeDetail(true);
     }
     if (name === 'map') {
