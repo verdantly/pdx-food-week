@@ -1381,6 +1381,9 @@ const App = (() => {
     if (savedSort) savedSort.style.display = hasSavedItems ? '' : 'none';
 
     const container = document.getElementById('cards-saved');
+    const bannerContainer = document.getElementById('friend-view-banner-container');
+    const sectionHeader = document.getElementById('saved-section-header');
+    
     if (!container) return;
 
     let bannerHtml = '';
@@ -1389,10 +1392,17 @@ const App = (() => {
         <span style="font-family: var(--font-display); font-weight: 700; color: var(--pizza-dark); font-size: 16px;">Viewing ${esc(friends[viewingFriendIndex].name)}'s List</span>
         <button class="btn" style="background: transparent; color: var(--pizza-dark); border: 1.5px solid var(--pizza-dark); padding: 4px 12px; font-size: 14px;" onclick="App.exitFriendView()">Exit</button>
       </div>`;
+      if (sectionHeader) sectionHeader.style.display = 'none';
+    } else {
+      if (sectionHeader) sectionHeader.style.display = 'flex';
+    }
+    
+    if (bannerContainer) {
+      bannerContainer.innerHTML = bannerHtml;
     }
 
     if (items.length === 0) {
-      container.innerHTML = bannerHtml + `<div class="no-results" style="text-align: center; margin-top: 40px;">
+      container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px; grid-column: 1 / -1;">
         <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
         </svg>
@@ -1400,7 +1410,7 @@ const App = (() => {
         <p style="color: var(--ink-60);">${viewingFriendIndex !== null ? "Check back later!" : "Save spots from Browse to build your list!"}</p>
       </div>`;
     } else {
-      container.innerHTML = bannerHtml + items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
+      container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
     }
     container.classList.remove('fade-in');
     void container.offsetWidth; // trigger reflow
