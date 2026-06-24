@@ -1413,17 +1413,17 @@ body.is-landing .bottom-nav {
 .badge-upcoming {
   position: absolute;
   top: 16px;
-  right: -24px;
+  right: -30px;
   background: #C94B2C;
   color: #fff;
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
-  padding: 4px 32px;
+  padding: 4px 0;
   transform: rotate(45deg);
   letter-spacing: 1px;
   text-align: center;
-  width: 100px;
+  width: 120px;
 }
 
 @media (max-width: 768px) {
