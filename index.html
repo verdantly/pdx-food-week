@@ -190,7 +190,6 @@
 
       <!-- ── Browse View ── -->
       <section class="view" id="view-browse" role="tabpanel" aria-label="Browse dishes">
-        <div class="mobile-tab-heading">Browse</div>
         <div id="new-listings-banner" class="new-listings-banner" style="display: none; margin-top: 16px;"></div>
         <div class="browse-header">
           <div class="search-bar">
@@ -229,6 +228,7 @@
             </div>
           </div>
         </div>
+        <h2 class="tab-section-header">Browse</h2>
         <div class="cards-list" id="cards-browse"></div>
         <div class="view-footer">
           PDX Food Week<br>
@@ -243,7 +243,7 @@
 
       <!-- ── Swipe View ── -->
       <section class="view" id="view-swipe" role="tabpanel" aria-label="Swipe through dishes">
-        <div class="mobile-tab-heading">Swipe</div>
+        <h2 class="tab-section-header">Swipe</h2>
         <div class="swipe-container">
         <div class="swipe-header">
           <div class="swipe-counter" id="swipe-counter">Loading…</div>
@@ -329,19 +329,7 @@
 
       <!-- ── Saved View ── -->
       <section class="view" id="view-saved" role="tabpanel" aria-label="Saved dishes">
-        <div class="mobile-tab-heading">Saved</div>
-        <div id="friend-view-banner-container"></div>
-        <div class="saved-header-integrated" id="saved-section-header">
-          <div class="header-left">
-            <h2 class="tab-header-title" id="saved-header-title">Your Saved Spots</h2>
-            <div class="stats-pills">
-              <div class="stat-pill primary"><span id="stat-count">0</span> Total</div>
-              <div class="stat-pill clickable" onclick="App.showMetricDetails('hoods')" title="Click to view neighborhoods"><span id="stat-hoods">0</span> Neighborhoods</div>
-              <div class="stat-pill clickable" onclick="App.showMetricDetails('types')" title="Click to view dish types"><span id="stat-types">0</span> Dish Types</div>
-            </div>
-          </div>
-          <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()" style="width: auto; margin-bottom: 0;">Copy List</button>
-        </div>
+
         <div class="saved-header">
           <div class="search-bar">
             <div class="search-input-wrapper">
@@ -384,6 +372,18 @@
           </div>
         </div>
 
+        <div id="friend-view-banner-container"></div>
+        <div class="saved-header-integrated" id="saved-section-header">
+          <div class="header-left">
+            <h2 class="tab-header-title" id="saved-header-title">Your Saved Spots</h2>
+            <div class="stats-pills">
+              <div class="stat-pill primary"><span id="stat-count">0</span> Total</div>
+              <div class="stat-pill clickable" onclick="App.showMetricDetails('hoods')" title="Click to view neighborhoods"><span id="stat-hoods">0</span> Neighborhoods</div>
+              <div class="stat-pill clickable" onclick="App.showMetricDetails('types')" title="Click to view dish types"><span id="stat-types">0</span> Dish Types</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()" style="width: auto; margin-bottom: 0;">Copy List</button>
+        </div>
         <div class="cards-list" id="cards-saved"></div>
         <div class="view-footer">
           PDX Food Week<br>
@@ -398,7 +398,7 @@
 
       <!-- ── Share View ── -->
       <section class="view" id="view-share" role="tabpanel" aria-label="Friends and sharing">
-        <div class="mobile-tab-heading">Share</div>
+        <h2 class="tab-section-header">Share</h2>
         <div class="share-panel">
           <div class="share-section">
             <h3 style="margin-bottom: 6px;">Share your list</h3>
@@ -482,7 +482,7 @@
 
       <!-- ── Map View ── -->
       <section class="view" id="view-map" role="tabpanel" aria-label="Map of locations">
-        <div class="mobile-tab-heading">Map</div>
+        <h2 class="tab-section-header">Map</h2>
         <div class="map-container">
           <div id="map-canvas" role="application" aria-label="Map of Portland pizza week locations"></div>
           <div class="map-legend">
