@@ -255,8 +255,14 @@
             <div class="nr-emoji fun-bounce">🥳</div>
             <h3 class="fun-title">You did it!</h3>
             <p>You've seen every single dish.</p>
-            <button class="btn btn-primary" onclick="App.resetSwipe()" style="margin-top: 10px;">Shuffle &amp; Start
-              Over</button>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%; max-width: 200px; margin-left: auto; margin-right: auto;">
+              <button class="btn btn-primary" onclick="App.switchTab('saved')">Review Saved Dishes</button>
+              <button class="btn" style="background: transparent; color: var(--ink-60); border: 1.5px solid var(--border);" onclick="App.resetSwipe()">Shuffle &amp; Start Over</button>
+            </div>
+          </div>
+          <div class="swipe-desktop-hints">
+            <div class="swipe-desktop-hint">[← Pass]</div>
+            <div class="swipe-desktop-hint">[Save →]</div>
           </div>
         </div>
         <div class="swipe-controls" id="swipe-controls">

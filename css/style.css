@@ -669,13 +669,17 @@ body.is-landing .bottom-nav {
   font-weight: 300;
 }
 
-/* Description — always visible, no line-clamp */
+/* Description */
 .card-desc {
   font-size: 14.5px;
   /* Increased from 12.5px */
   color: var(--ink-60);
   line-height: 1.6;
   margin-bottom: 9px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-tags {
@@ -1824,6 +1828,10 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 1.45;
   color: var(--ink);
   margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .swipe-card-tags {
@@ -2574,6 +2582,26 @@ input[type="search"]::-webkit-search-cancel-button {
   #app.detail-open .cards-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .swipe-desktop-hints {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: -1;
+    padding: 0 40px;
+  }
+
+  .swipe-desktop-hint {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink-20);
+    opacity: 0.5;
+  }
 }
 
 
@@ -3039,7 +3067,9 @@ select:focus-visible {
 }
 
 #filter-drawer-body {
+  padding: 0 20px;
   overflow-y: auto;
+  max-height: 60vh;
   flex-grow: 1;
   margin-bottom: 24px;
 }

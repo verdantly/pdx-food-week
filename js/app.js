@@ -451,7 +451,7 @@ const App = (() => {
     const isSaved = saved.has(r.id);
     const cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
     const thumb = r.image
-      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy"></div>`
+      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
       : `<div class="card-emoji">${esc(r.emoji)}</div>`;
 
     const sortType = isSavedTab ? activeSavedSort : activeSort;
@@ -659,7 +659,7 @@ const App = (() => {
     const isSaved = saved.has(r.id);
     const overlay = document.getElementById('detail-overlay');
     const hero = r.image
-      ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" alt=""></div>`
+      ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" alt="" onerror="this.parentElement.style.display='none'"></div>`
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
 
     const contentHtml = `
@@ -1085,12 +1085,27 @@ const App = (() => {
     }
 
     const labelHTML = `<span class="filter-label">Filter:</span>`;
-    const chipsHTML = `<div class="filter-chips-wrapper">` + filters.map(f => {
+    const clearHTML = (activeSavedFilters.size > 0 || savedSearchQuery !== '' || sortSavedByDistance) ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllSavedFilters()">✕ Clear</button>` : '';
+    const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
       const activeCls = activeSavedFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleSavedFilter('${f.id}')">${esc(f.label)}</button>`;
     }).join('') + `</div>`;
 
     container.innerHTML = labelHTML + chipsHTML;
+  }
+
+  function clearAllSavedFilters() {
+    activeSavedFilters.clear();
+    savedSearchQuery = '';
+    const searchInput = document.getElementById('saved-search-input');
+    if (searchInput) searchInput.value = '';
+    
+    if (sortSavedByDistance) {
+      toggleSavedDistanceSort();
+    } else {
+      renderSavedFilters();
+      renderSaved();
+    }
   }
 
   function setSavedSort(s, el) {
@@ -1985,7 +2000,7 @@ const App = (() => {
       }
 
       const imageBlock = item.image
-        ? `<img src="${esc(item.image)}" alt="" loading="eager">`
+        ? `<img src="${esc(item.image)}" alt="" loading="eager" onerror="this.parentElement.style.display='none'">`
         : `<div class="swipe-card-emoji">${esc(item.emoji)}</div>`;
 
       const isNew = item.isNew && !viewedNew.has(item.id);
@@ -2332,12 +2347,28 @@ const App = (() => {
     }
 
     const labelHTML = `<span class="filter-label">Filter:</span>`;
-    const chipsHTML = `<div class="filter-chips-wrapper">` + filters.map(f => {
+    const clearHTML = (activeFilters.size > 0 || searchQuery !== '' || sortByDistance) ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
+    const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
       const activeCls = activeFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
     }).join('') + `</div>`;
 
     container.innerHTML = labelHTML + chipsHTML;
+  }
+
+  function clearAllFilters() {
+    activeFilters.clear();
+    searchQuery = '';
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.value = '';
+    
+    // Clear distance sort if active
+    if (sortByDistance) {
+      toggleDistanceSort(); // This will disable it and re-render
+    } else {
+      updateFilterDisplay();
+      applyFilters();
+    }
   }
 
   function updateFilterDisplay() {
@@ -2975,7 +3006,7 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters };
 })();
 
 window.App = App;
