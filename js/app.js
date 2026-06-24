@@ -46,6 +46,7 @@ const App = (() => {
   let userLat = null;
   let userLng = null;
   let lastActiveElement = null;
+  let viewingFriendIndex = null;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
@@ -299,7 +300,10 @@ const App = (() => {
   }
 
   function getSaved() {
-    let savedItems = getRestaurants().filter(r => saved.has(r.id));
+    const targetSet = viewingFriendIndex !== null && friends[viewingFriendIndex] 
+      ? new Set(friends[viewingFriendIndex].ids) 
+      : saved;
+    let savedItems = getRestaurants().filter(r => targetSet.has(r.id));
 
     savedItems = savedItems.filter(r => {
       if (activeSavedFilters.has('meat') && r.type !== 'meat') return false;
@@ -1356,14 +1360,21 @@ const App = (() => {
       document.getElementById('stat-types').textContent = types;
     }
 
-    const totalSavedForWeek = getRestaurants().filter(r => saved.has(r.id)).length;
+    const targetSet = viewingFriendIndex !== null && friends[viewingFriendIndex] 
+      ? new Set(friends[viewingFriendIndex].ids) 
+      : saved;
+    const totalSavedForWeek = getRestaurants().filter(r => targetSet.has(r.id)).length;
+    
     const tabs = document.querySelectorAll('[data-tab="saved"]');
     tabs.forEach(tab => {
-      tab.classList.toggle('has-items', totalSavedForWeek > 0);
-      tab.setAttribute('data-count', totalSavedForWeek);
+      // Don't modify tab counts when viewing a friend's list to avoid confusion
+      if (viewingFriendIndex === null) {
+        tab.classList.toggle('has-items', totalSavedForWeek > 0);
+        tab.setAttribute('data-count', totalSavedForWeek);
+      }
     });
 
-    const hasSavedItems = saved.size > 0;
+    const hasSavedItems = totalSavedForWeek > 0;
     const savedHeader = document.querySelector('#view-saved .saved-header');
     const savedSort = document.getElementById('saved-sort-section');
     if (savedHeader) savedHeader.style.display = hasSavedItems ? '' : 'none';
@@ -1371,13 +1382,27 @@ const App = (() => {
 
     const container = document.getElementById('cards-saved');
     if (!container) return;
+    const headerTitle = document.getElementById('saved-header-title');
+    const copyBtn = document.getElementById('saved-copy-btn');
+    const exitBtn = document.getElementById('saved-exit-friend-btn');
+    
+    if (viewingFriendIndex !== null && friends[viewingFriendIndex]) {
+      if (headerTitle) headerTitle.textContent = `${esc(friends[viewingFriendIndex].name)}'s Spots`;
+      if (copyBtn) copyBtn.style.display = 'none';
+      if (exitBtn) exitBtn.style.display = '';
+    } else {
+      if (headerTitle) headerTitle.textContent = 'Your Saved Spots';
+      if (copyBtn) copyBtn.style.display = '';
+      if (exitBtn) exitBtn.style.display = 'none';
+    }
+
     if (items.length === 0) {
-      container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px;">
+      container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px; grid-column: 1 / -1;">
         <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
         </svg>
-        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No saved spots yet</p>
-        <p style="color: var(--ink-60);">Save spots from Browse to build your list!</p>
+        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">${viewingFriendIndex !== null ? "Friend hasn't saved spots yet" : "No saved spots yet"}</p>
+        <p style="color: var(--ink-60);">${viewingFriendIndex !== null ? "Check back later!" : "Save spots from Browse to build your list!"}</p>
       </div>`;
     } else {
       container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
@@ -1500,8 +1525,11 @@ const App = (() => {
               <div class="friend-name">${esc(f.name)}</div>
               <div class="friend-count">${f.weekIds.length} location${f.weekIds.length === 1 ? '' : 's'} saved</div>
             </div>
-            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${f.originalIndex})">✏️ Edit</button>
-            <button class="friend-remove" onclick="App.removeFriend(${f.originalIndex})">Remove</button>
+            <div style="display: flex; gap: 4px;">
+              <button class="friend-remove" onclick="App.viewFriendList(${f.originalIndex})" style="background: var(--pizza-light); color: var(--pizza-dark); border-color: var(--pizza-dark);">View</button>
+              <button class="friend-remove" onclick="App.renameFriend(${f.originalIndex})">✏️ Edit</button>
+              <button class="friend-remove" onclick="App.removeFriend(${f.originalIndex})">Remove</button>
+            </div>
           </div>`).join('');
 
     // Overlap
@@ -1797,6 +1825,21 @@ const App = (() => {
     saveState();
     renderFriends();
     showToast('Friend removed');
+  }
+
+  // ── Friends: View friend's list ─────────────────────────────
+  function viewFriendList(i) {
+    viewingFriendIndex = i;
+    renderSavedFilters();
+    renderSaved();
+    switchTab('saved');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function exitFriendView() {
+    viewingFriendIndex = null;
+    renderSavedFilters();
+    renderSaved();
   }
 
   // ── Map (Leaflet + OpenStreetMap tiles) ────────────────────
@@ -2497,18 +2540,46 @@ const App = (() => {
     const grid = document.getElementById('landing-grid');
     if (!grid) return;
 
-    // Determine the next upcoming event
-    const now = new Date('2026-06-08T00:00:00Z'); // Using today's date context
+    // Determine the current or next upcoming event
+    const now = new Date();
+    let currentWeek = null;
     let nextWeek = null;
     let minDiff = Infinity;
 
     window.FOOD_WEEKS.forEach(w => {
       if (w.startDate) {
-        const start = new Date(w.startDate);
-        const diff = start - now;
-        if (diff > 0 && diff < minDiff) {
-          minDiff = diff;
-          nextWeek = w;
+        // Assume local timezone for PDX
+        const [sy, sm, sd] = w.startDate.split('-');
+        const start = new Date(sy, sm - 1, sd, 0, 0, 0);
+        let end = new Date(sy, sm - 1, sd, 23, 59, 59);
+
+        if (w.endDate) {
+          const [ey, em, ed] = w.endDate.split('-');
+          end = new Date(ey, em - 1, ed, 23, 59, 59);
+        } else if (w.dates) {
+          const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+[-–](\d+),\s+(\d{4})/);
+          const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
+          if (weekMatch) {
+            end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
+          } else if (monthMatch) {
+            end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
+            end.setMonth(end.getMonth() + 1);
+            end.setDate(0); // last day of month
+          } else {
+            end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+          }
+        } else {
+          end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+        }
+
+        if (now >= start && now <= end) {
+          currentWeek = w;
+        } else if (now < start) {
+          const diff = start - now;
+          if (diff < minDiff) {
+            minDiff = diff;
+            nextWeek = w;
+          }
         }
       }
     });
@@ -2520,8 +2591,14 @@ const App = (() => {
     });
 
     grid.innerHTML = sortedWeeks.map(w => {
-      const isNext = nextWeek && w.id === nextWeek.id;
-      const badgeHTML = isNext ? '<div class="badge-upcoming">Next</div>' : '';
+      let badgeHTML = '';
+      if (currentWeek && w.id === currentWeek.id) {
+        badgeHTML = '<div class="badge-upcoming current" style="background: #34A853;">Current</div>';
+      } else if (nextWeek && w.id === nextWeek.id && !currentWeek) {
+        badgeHTML = '<div class="badge-upcoming">Next</div>';
+      } else if (nextWeek && w.id === nextWeek.id) {
+        badgeHTML = '<div class="badge-upcoming">Next</div>';
+      }
       return `
         <a href="?week=${w.id}" class="landing-card" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
           ${badgeHTML}
@@ -3006,7 +3083,7 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters };
 })();
 
 window.App = App;
