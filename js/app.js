@@ -1835,6 +1835,8 @@ const App = (() => {
   // ── Friends: View friend's list ─────────────────────────────
   function viewFriendList(i) {
     viewingFriendIndex = i;
+    renderSavedFilters();
+    renderSaved();
     switchTab('saved');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
