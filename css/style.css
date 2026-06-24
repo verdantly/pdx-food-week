@@ -816,6 +816,11 @@ body.is-landing .bottom-nav {
   max-width: 200px;
 }
 
+.stat-box:only-child {
+  flex: 0 1 auto;
+  min-width: 120px;
+}
+
 .stat-num {
   font-family: var(--font-body);
   font-size: 28px;
