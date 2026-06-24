@@ -46,6 +46,7 @@ const App = (() => {
   let userLat = null;
   let userLng = null;
   let lastActiveElement = null;
+  let viewingFriendIndex = null;
 
   const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
   const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
@@ -299,7 +300,10 @@ const App = (() => {
   }
 
   function getSaved() {
-    let savedItems = getRestaurants().filter(r => saved.has(r.id));
+    const targetSet = viewingFriendIndex !== null && friends[viewingFriendIndex] 
+      ? new Set(friends[viewingFriendIndex].weekIds) 
+      : saved;
+    let savedItems = getRestaurants().filter(r => targetSet.has(r.id));
 
     savedItems = savedItems.filter(r => {
       if (activeSavedFilters.has('meat') && r.type !== 'meat') return false;
@@ -1356,14 +1360,21 @@ const App = (() => {
       document.getElementById('stat-types').textContent = types;
     }
 
-    const totalSavedForWeek = getRestaurants().filter(r => saved.has(r.id)).length;
+    const targetSet = viewingFriendIndex !== null && friends[viewingFriendIndex] 
+      ? new Set(friends[viewingFriendIndex].ids) 
+      : saved;
+    const totalSavedForWeek = getRestaurants().filter(r => targetSet.has(r.id)).length;
+    
     const tabs = document.querySelectorAll('[data-tab="saved"]');
     tabs.forEach(tab => {
-      tab.classList.toggle('has-items', totalSavedForWeek > 0);
-      tab.setAttribute('data-count', totalSavedForWeek);
+      // Don't modify tab counts when viewing a friend's list to avoid confusion
+      if (viewingFriendIndex === null) {
+        tab.classList.toggle('has-items', totalSavedForWeek > 0);
+        tab.setAttribute('data-count', totalSavedForWeek);
+      }
     });
 
-    const hasSavedItems = saved.size > 0;
+    const hasSavedItems = totalSavedForWeek > 0;
     const savedHeader = document.querySelector('#view-saved .saved-header');
     const savedSort = document.getElementById('saved-sort-section');
     if (savedHeader) savedHeader.style.display = hasSavedItems ? '' : 'none';
@@ -1371,16 +1382,25 @@ const App = (() => {
 
     const container = document.getElementById('cards-saved');
     if (!container) return;
+
+    let bannerHtml = '';
+    if (viewingFriendIndex !== null && friends[viewingFriendIndex]) {
+      bannerHtml = `<div class="friend-view-banner" style="background: var(--pizza-light); padding: 12px 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <span style="font-family: var(--font-display); font-weight: 700; color: var(--pizza-dark); font-size: 16px;">Viewing ${esc(friends[viewingFriendIndex].name)}'s List</span>
+        <button class="btn" style="background: transparent; color: var(--pizza-dark); border: 1.5px solid var(--pizza-dark); padding: 4px 12px; font-size: 14px;" onclick="App.exitFriendView()">Exit</button>
+      </div>`;
+    }
+
     if (items.length === 0) {
-      container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px;">
+      container.innerHTML = bannerHtml + `<div class="no-results" style="text-align: center; margin-top: 40px;">
         <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
         </svg>
-        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No saved spots yet</p>
-        <p style="color: var(--ink-60);">Save spots from Browse to build your list!</p>
+        <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">${viewingFriendIndex !== null ? "Friend hasn't saved spots yet" : "No saved spots yet"}</p>
+        <p style="color: var(--ink-60);">${viewingFriendIndex !== null ? "Check back later!" : "Save spots from Browse to build your list!"}</p>
       </div>`;
     } else {
-      container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
+      container.innerHTML = bannerHtml + items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');
     }
     container.classList.remove('fade-in');
     void container.offsetWidth; // trigger reflow
@@ -1500,8 +1520,11 @@ const App = (() => {
               <div class="friend-name">${esc(f.name)}</div>
               <div class="friend-count">${f.weekIds.length} location${f.weekIds.length === 1 ? '' : 's'} saved</div>
             </div>
-            <button class="friend-remove" style="margin-right: 4px;" onclick="App.renameFriend(${f.originalIndex})">✏️ Edit</button>
-            <button class="friend-remove" onclick="App.removeFriend(${f.originalIndex})">Remove</button>
+            <div style="display: flex; gap: 4px;">
+              <button class="friend-remove" onclick="App.viewFriendList(${f.originalIndex})" style="background: var(--pizza-light); color: var(--pizza-dark); border-color: var(--pizza-dark);">View</button>
+              <button class="friend-remove" onclick="App.renameFriend(${f.originalIndex})">✏️ Edit</button>
+              <button class="friend-remove" onclick="App.removeFriend(${f.originalIndex})">Remove</button>
+            </div>
           </div>`).join('');
 
     // Overlap
@@ -1797,6 +1820,19 @@ const App = (() => {
     saveState();
     renderFriends();
     showToast('Friend removed');
+  }
+
+  // ── Friends: View friend's list ─────────────────────────────
+  function viewFriendList(i) {
+    viewingFriendIndex = i;
+    switchTab('saved');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function exitFriendView() {
+    viewingFriendIndex = null;
+    renderSavedFilters();
+    renderSaved();
   }
 
   // ── Map (Leaflet + OpenStreetMap tiles) ────────────────────
@@ -3006,7 +3042,7 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters };
 })();
 
 window.App = App;
