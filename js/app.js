@@ -2550,18 +2550,46 @@ const App = (() => {
     const grid = document.getElementById('landing-grid');
     if (!grid) return;
 
-    // Determine the next upcoming event
-    const now = new Date('2026-06-08T00:00:00Z'); // Using today's date context
+    // Determine the current or next upcoming event
+    const now = new Date();
+    let currentWeek = null;
     let nextWeek = null;
     let minDiff = Infinity;
 
     window.FOOD_WEEKS.forEach(w => {
       if (w.startDate) {
-        const start = new Date(w.startDate);
-        const diff = start - now;
-        if (diff > 0 && diff < minDiff) {
-          minDiff = diff;
-          nextWeek = w;
+        // Assume local timezone for PDX
+        const [sy, sm, sd] = w.startDate.split('-');
+        const start = new Date(sy, sm - 1, sd, 0, 0, 0);
+        let end = new Date(sy, sm - 1, sd, 23, 59, 59);
+
+        if (w.endDate) {
+          const [ey, em, ed] = w.endDate.split('-');
+          end = new Date(ey, em - 1, ed, 23, 59, 59);
+        } else if (w.dates) {
+          const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+[-–](\d+),\s+(\d{4})/);
+          const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
+          if (weekMatch) {
+            end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
+          } else if (monthMatch) {
+            end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
+            end.setMonth(end.getMonth() + 1);
+            end.setDate(0); // last day of month
+          } else {
+            end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+          }
+        } else {
+          end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+        }
+
+        if (now >= start && now <= end) {
+          currentWeek = w;
+        } else if (now < start) {
+          const diff = start - now;
+          if (diff < minDiff) {
+            minDiff = diff;
+            nextWeek = w;
+          }
         }
       }
     });
@@ -2573,8 +2601,14 @@ const App = (() => {
     });
 
     grid.innerHTML = sortedWeeks.map(w => {
-      const isNext = nextWeek && w.id === nextWeek.id;
-      const badgeHTML = isNext ? '<div class="badge-upcoming">Next</div>' : '';
+      let badgeHTML = '';
+      if (currentWeek && w.id === currentWeek.id) {
+        badgeHTML = '<div class="badge-upcoming current" style="background: #34A853;">Current</div>';
+      } else if (nextWeek && w.id === nextWeek.id && !currentWeek) {
+        badgeHTML = '<div class="badge-upcoming">Next</div>';
+      } else if (nextWeek && w.id === nextWeek.id) {
+        badgeHTML = '<div class="badge-upcoming">Next</div>';
+      }
       return `
         <a href="?week=${w.id}" class="landing-card" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
           ${badgeHTML}
