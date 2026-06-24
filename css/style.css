@@ -2601,8 +2601,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .overlap-section {
     padding: 20px 32px 0;
-    max-width: 800px;
-    margin: 0 auto;
   }
 
   #overlap-container {
