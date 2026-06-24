@@ -2151,6 +2151,10 @@ input[type="search"]::-webkit-search-cancel-button {
     overflow-y: auto;
     padding-bottom: 48px;
   }
+  
+  #view-swipe {
+    padding-bottom: 0;
+  }
 
   /* Two-column grid */
   .cards-list {
