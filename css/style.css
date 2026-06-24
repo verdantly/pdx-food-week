@@ -3357,3 +3357,19 @@ select:focus-visible {
   height: auto !important;
   min-height: 200px;
 }
+
+#friend-view-banner-container {
+  padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  #friend-view-banner-container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #friend-view-banner-container {
+    padding: 0 32px;
+  }
+}
