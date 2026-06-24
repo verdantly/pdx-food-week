@@ -1085,7 +1085,7 @@ const App = (() => {
     }
 
     const labelHTML = `<span class="filter-label">Filter:</span>`;
-    const clearHTML = (activeSavedFilters.size > 0 || savedSearchQuery !== '' || sortSavedByDistance) ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllSavedFilters()">✕ Clear</button>` : '';
+    const clearHTML = (activeSavedFilters.size > 0 || savedSearchQuery !== '' || activeSavedSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllSavedFilters()">✕ Clear</button>` : '';
     const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
       const activeCls = activeSavedFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleSavedFilter('${f.id}')">${esc(f.label)}</button>`;
@@ -1100,7 +1100,7 @@ const App = (() => {
     const searchInput = document.getElementById('saved-search-input');
     if (searchInput) searchInput.value = '';
     
-    if (sortSavedByDistance) {
+    if (activeSavedSort === 'distance') {
       toggleSavedDistanceSort();
     } else {
       renderSavedFilters();
@@ -2347,7 +2347,7 @@ const App = (() => {
     }
 
     const labelHTML = `<span class="filter-label">Filter:</span>`;
-    const clearHTML = (activeFilters.size > 0 || searchQuery !== '' || sortByDistance) ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
+    const clearHTML = (activeFilters.size > 0 || searchQuery !== '' || activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
     const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
       const activeCls = activeFilters.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
@@ -2363,7 +2363,7 @@ const App = (() => {
     if (searchInput) searchInput.value = '';
     
     // Clear distance sort if active
-    if (sortByDistance) {
+    if (activeSort === 'distance') {
       toggleDistanceSort(); // This will disable it and re-render
     } else {
       updateFilterDisplay();
