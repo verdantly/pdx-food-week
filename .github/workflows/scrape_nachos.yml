@@ -48,7 +48,9 @@ jobs:
 
       - name: Run Scraper
         if: steps.check-date.outputs.should_skip != 'true'
-        run: npm run scrape:nacho
+        run: |
+          npm run scrape:nacho
+          node scratch/scrape_desc.cjs
 
       - name: Commit and Push changes
         if: steps.check-date.outputs.should_skip != 'true'
