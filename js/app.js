@@ -668,7 +668,7 @@ const App = (() => {
 
     const contentHtml = `
       <button class="sheet-close-btn" onclick="App.closeDetail()" aria-label="Close detail view">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
       <button class="bookmark-btn ${isSaved ? 'saved' : ''}" style="top: 48px; right: 16px; padding: 0 16px 0 12px; width: auto;" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
         <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
