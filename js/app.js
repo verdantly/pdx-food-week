@@ -790,10 +790,12 @@ const App = (() => {
     if (!fromPopState) {
       const url = new URL(window.location);
       url.searchParams.set('dish', id);
+      const newState = { ...history.state, detailDishId: id };
       if (wasAlreadyOpen) {
-        history.replaceState({ detailDishId: id }, '', url);
+        history.replaceState(newState, '', url);
       } else {
-        history.pushState({ detailDishId: id }, '', url);
+        newState.dishOpenedHere = true;
+        history.pushState(newState, '', url);
       }
     }
   }
@@ -819,12 +821,15 @@ const App = (() => {
 
     if (!fromPopState) {
       try {
-        if (history.state && history.state.detailDishId !== undefined) {
+        if (history.state && history.state.dishOpenedHere) {
           history.back();
         } else {
           const url = new URL(window.location);
           url.searchParams.delete('dish');
-          history.pushState(null, '', url);
+          const newState = { ...history.state };
+          delete newState.detailDishId;
+          delete newState.dishOpenedHere;
+          history.pushState(newState, '', url);
         }
       } catch (e) {
         // Ignore SecurityError on file:///
@@ -898,6 +903,7 @@ const App = (() => {
       }
       
       const newState = { ...history.state, tab: name };
+      delete newState.dishOpenedHere;
       const appContainer = document.getElementById('app');
       if (appContainer && !appContainer.classList.contains('detail-open')) {
         url.searchParams.delete('dish');
