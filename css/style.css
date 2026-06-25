@@ -3475,3 +3475,68 @@ select:focus-visible {
     padding: 0 32px;
   }
 }
+
+/* ── Detail Sheet Close Button ── */
+.sheet-close-btn {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .sheet-close-btn {
+    display: flex;
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 20;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+  .sheet-close-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* ── Photo Zoom Overlay ── */
+.photo-zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-zoom-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+#photo-zoom-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 769px) {
+  .sheet-hero-image img.enlargeable {
+    cursor: zoom-in;
+  }
+}

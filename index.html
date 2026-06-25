@@ -594,6 +594,16 @@
   </div>
 
   <!-- ── Toast ── -->
+  <!-- ── Photo Zoom Modal ── -->
+  <div id="photo-zoom-overlay" class="photo-zoom-overlay" onclick="App.closePhotoZoom()">
+    <button class="lightbox-nav close-desktop" aria-label="Close photo" onclick="App.closePhotoZoom()" style="display: flex;">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6L6 18M6 6l12 12" />
+      </svg>
+    </button>
+    <img id="photo-zoom-img" src="" alt="Enlarged dish photo" onclick="event.stopPropagation()">
+  </div>
+
   <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
 
   <!-- ── Scripts ── -->
