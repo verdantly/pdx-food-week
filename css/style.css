@@ -2038,6 +2038,13 @@ input[type="search"]::-webkit-search-cancel-button {
   pointer-events: none;
 }
 
+/* Bookmark in Detail Sheet */
+.detail-sheet .bookmark-btn {
+  top: 48px;
+  padding: 0 16px 0 12px;
+  width: auto;
+}
+
 /* Detail sheet hero image */
 .sheet-hero-image {
   width: calc(100% + 40px);
@@ -2361,6 +2368,11 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .sheet-handle {
     display: none;
+  }
+
+  .detail-sheet .bookmark-btn {
+    top: 24px;
+    right: 24px;
   }
 }
 
