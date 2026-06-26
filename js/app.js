@@ -455,7 +455,7 @@ const App = (() => {
     const isSaved = saved.has(r.id);
     const cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
     const thumb = r.image
-      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
       : `<div class="card-emoji">${esc(r.emoji)}</div>`;
 
     const sortType = isSavedTab ? activeSavedSort : activeSort;
@@ -663,7 +663,7 @@ const App = (() => {
     const isSaved = saved.has(r.id);
     const overlay = document.getElementById('detail-overlay');
     const hero = r.image
-      ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" class="enlargeable" alt="" onclick="if(window.innerWidth >= 769) App.openPhotoZoom('${esc(r.image)}')" onerror="this.parentElement.style.display='none'"></div>`
+      ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" class="enlargeable" alt="Photo of ${esc(r.dish)}" onclick="if(window.innerWidth >= 769) App.openPhotoZoom('${esc(r.image)}')" onerror="this.parentElement.style.display='none'"></div>`
       : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
 
     const contentHtml = `
@@ -2052,7 +2052,7 @@ const App = (() => {
       }
 
       const imageBlock = item.image
-        ? `<img src="${esc(item.image)}" alt="" loading="eager" onerror="this.parentElement.style.display='none'">`
+        ? `<img src="${esc(item.image)}" alt="Photo of ${esc(item.dish)}" loading="eager" onerror="this.parentElement.style.display='none'">`
         : `<div class="swipe-card-emoji">${esc(item.emoji)}</div>`;
 
       const isNew = item.isNew && !viewedNew.has(item.id);
