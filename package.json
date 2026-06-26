@@ -8,10 +8,16 @@
     "scrape": "node scrape_everout.js",
     "scrape:everout": "node scrape_everout.js",
     "scrape:tacos": "node scrape_tacos.js",
-    "scrape:nacho": "node scrape_nacho.js"
+    "scrape:nacho": "node scrape_nacho.js",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "cheerio": "^1.0.0",
     "node-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "vitest": "^4.1.9"
   }
 }
