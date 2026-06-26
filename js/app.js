@@ -2766,6 +2766,11 @@ const App = (() => {
 
     // Wire up popstate to handle browser back button closing detail sheet and tab navigation
     window.addEventListener('popstate', e => {
+      // Safety catch: ensure UI overlays are closed on back navigation so they don't get stuck
+      closePhotoZoom();
+      closeFilterDrawer();
+      closeMetricModal();
+
       if (e.state && e.state.detailDishId !== undefined) {
         openDetail(e.state.detailDishId, true);
       } else if (selectedDish) {
