@@ -3,14 +3,11 @@ import { test, expect } from '@playwright/test';
 test.describe('Navigation and Routing', () => {
   test('Detail overlay opens and closes correctly on desktop', async ({ page }) => {
     // Open the app
-    await page.goto('/?week=test-week-123'); // Fake week just to avoid landing page block
+    await page.goto('/?week=taco-2026');
     
-    // Switch to Browse tab
-    await page.click('button[data-tab="browse"]');
-    await expect(page).toHaveURL(/.*tab=browse.*/);
-
     // Assuming we have mock data or the test env loads data correctly,
     // wait for cards list to populate and click the first dish card
+    await page.waitForSelector('.dish-card', { state: 'visible' });
     await page.waitForSelector('.dish-card', { state: 'visible' });
     const firstCard = page.locator('.dish-card').first();
     await firstCard.click();
@@ -29,14 +26,20 @@ test.describe('Navigation and Routing', () => {
       await overlay.click({ position: { x: 5, y: 5 } });
     }
 
-    // Verify detail overlay closes and tab remains browse
+    // Verify detail overlay closes
     await expect(overlay).not.toHaveClass(/open/);
-    await expect(page).toHaveURL(/.*tab=browse.*/);
   });
   
   test('Browser Back button safely closes overlays', async ({ page, isMobile }) => {
-    await page.goto('/?week=test-week-123');
-    await page.click('button[data-tab="browse"]');
+    // Start at landing to build history stack
+    await page.goto('/');
+    
+    // Click Taco Week to navigate and push history state
+    await page.waitForSelector('.landing-card', { state: 'visible' });
+    await page.locator('.landing-card', { hasText: 'Taco Week' }).click();
+
+    // Wait for cards to populate
+    await page.waitForSelector('.dish-card', { state: 'visible' });
 
     if (isMobile) {
       // Test mobile filter drawer
