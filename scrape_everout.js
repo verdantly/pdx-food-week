@@ -13,6 +13,7 @@ import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
+import { decodeHTML } from './scraper_utils.js';
 
 const BASE_URL    = 'https://everout.com';
 const WEEK_URL    = 'https://everout.com/portland/events/the-portland-mercurys-pizza-week-2026/e222744/';
@@ -118,23 +119,25 @@ async function geocodeWithFallbacks(fullAddr, streetAddr) {
   return null;
 }
 
-// ── Parse a single dish page ──────────────────────────────────────────────────
-function decodeHTML(str) {
-  if (!str) return '';
-  return str
-    .replace(/&#x27;/ig, "'")
-    .replace(/&#39;/ig, "'")
-    .replace(/&amp;/ig, '&')
-    .replace(/&quot;/ig, '"')
-    .replace(/&lt;/ig, '<')
-    .replace(/&gt;/ig, '>')
-    .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
-}
 
 function parseDishPage(html, url) {
   const $ = cheerio.load(html);
   const answerList = $('.answer-list').first();
   if (answerList.length === 0) return null; // not a dish event
+
+  // QA extraction
+  const qa = {};
+  const sectionMatch = html.match(/class="answer-list[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/);
+  if (sectionMatch) {
+    const section = sectionMatch[1];
+    const regex = /<div class="question-text[^>]*>([\s\S]*?)<\/div>\s*<div class="answer-text[^>]*>([\s\S]*?)<\/div>/g;
+    let m;
+    while ((m = regex.exec(section)) !== null) {
+      const key = decodeHTML(m[1].replace(/<[^>]+>/g, '').trim());
+      const val = decodeHTML(m[2].replace(/<[^>]+>/g, '').trim());
+      if (key && val) qa[key] = val;
+    }
+  }
 
   const dish = decodeHTML(answerList.find('.fs-2').first().text().trim());
   const restaurant = decodeHTML(answerList.find('.fs-4').first().text().trim());
@@ -189,6 +192,9 @@ function parseDishPage(html, url) {
   const wholePie = sliceOrPie.includes('whole') || sliceOrPie.includes('pie');
 
   const yesno = v => /^yes\b/i.test((v || '').trim());
+
+  const minors = /(yes|allowed|ok|pizzeria)/i.test((qa['Allow Minors?'] || qa['Minors Allowed?'] || '').trim());
+  const takeout = /(yes|allowed|ok)/i.test((qa['Allow Takeout?'] || qa['Takeout?'] || '').trim());
 
   if (!dish || !restaurant) return null;
 

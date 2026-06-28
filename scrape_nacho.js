@@ -5,6 +5,7 @@
  */
 import fs from 'fs';
 import path from 'path';
+import { decodeHTML } from './scraper_utils.js';
 import vm from 'vm';
 
 const BASE_URL = 'https://everout.com';
@@ -80,17 +81,6 @@ async function geocode(address) {
   }
 }
 
-function decodeHTML(str) {
-  if (!str) return '';
-  return str
-    .replace(/&#x27;/ig, "'")
-    .replace(/&#39;/ig, "'")
-    .replace(/&amp;/ig, '&')
-    .replace(/&quot;/ig, '"')
-    .replace(/&lt;/ig, '<')
-    .replace(/&gt;/ig, '>')
-    .replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
-}
 
 function parseDishPage(html, url) {
   const qa = {};

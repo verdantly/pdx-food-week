@@ -1,3 +1,15 @@
+import * as cheerio from 'cheerio';
+
+/**
+ * Robustly decodes HTML entities (e.g. &amp;, &#39;, &rsquo;)
+ * using cheerio's built-in parser.
+ */
+export function decodeHTML(str) {
+  if (!str) return '';
+  // Load the string into a div so cheerio parses entities, then extract text
+  return cheerio.load(`<div>${str}</div>`)('div').text();
+}
+
 export function isAllCaps(str) {
   const letters = str.replace(/[^A-Za-z]/g, '');
   if (!letters) return false;

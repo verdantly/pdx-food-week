@@ -1,5 +1,19 @@
 import { expect, test, describe } from 'vitest';
-import { isAllCaps, toTitleCase, toSentenceCase, cleanName, parseCoordinates } from '../scraper_utils.js';
+import { isAllCaps, toTitleCase, toSentenceCase, cleanName, parseCoordinates, decodeHTML } from '../scraper_utils.js';
+
+describe('HTML Entity Decoding', () => {
+  test('decodeHTML handles common entities', () => {
+    expect(decodeHTML('Mac &amp; Cheese')).toBe('Mac & Cheese');
+    expect(decodeHTML('Don&#39;t do it')).toBe("Don't do it");
+    expect(decodeHTML('O&rsquo;Brien')).toBe('O’Brien');
+    expect(decodeHTML('&quot;Hello&quot;')).toBe('"Hello"');
+    expect(decodeHTML('Hello&nbsp;World')).toBe('Hello\u00A0World');
+  });
+
+  test('decodeHTML handles double encoding', () => {
+    expect(decodeHTML('Mac &amp;amp; Cheese')).toBe('Mac &amp; Cheese'); // Wait, double encoding means it requires two passes, but usually it's just standard decode.
+  });
+});
 
 describe('Scraper Text Utilities', () => {
   test('isAllCaps', () => {

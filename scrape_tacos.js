@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, cleanName } from './scraper_utils.js';
 
 const KML_PATH = './taco_map.kml';
 const JSON_PATH = './context_2.json';
@@ -12,34 +13,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// 1. Text normalization utilities
-function isAllCaps(str) {
-  const letters = str.replace(/[^A-Za-z]/g, '');
-  if (!letters) return false;
-  const upper = letters.replace(/[^A-Z]/g, '').length;
-  return (upper / letters.length) > 0.75;
-}
-
-function toTitleCase(str) {
-  if (!str) return '';
-  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())
-    .replace(/\bBbq\b/g, 'BBQ')
-    .replace(/\bGf\b/g, 'GF');
-}
-
-function toSentenceCase(str) {
-  if (!str) return '';
-  if (!isAllCaps(str)) return str;
-  return str.toLowerCase().split('. ').map(s => {
-    if (!s) return '';
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  }).join('. ');
-}
-
-function cleanName(str) {
-  if (!str) return '';
-  return str.toLowerCase().replace(/[^a-z0-9]/g, '');
-}
+// Utilities now imported from scraper_utils.js
 
 // 2. Load cache
 let geocodeCache = {};
@@ -113,7 +87,7 @@ while ((match = placemarkRegex.exec(kmlContent)) !== null) {
   // Extract name
   const nameMatch = pmContent.match(/<name>(?:<!\[CDATA\[([\s\S]*?)\]\]>|([\s\S]*?))<\/name>/);
   if (!nameMatch) continue;
-  const name = (nameMatch[1] || nameMatch[2] || '').trim();
+  const name = decodeHTML((nameMatch[1] || nameMatch[2] || '').trim());
 
   // Skip placeholders or empty names
   if (name.includes('Coming Soon') || !name) {
@@ -171,6 +145,8 @@ while ((match = placemarkRegex.exec(kmlContent)) !== null) {
       .replace(/\s+/g, ' ')
       .trim();
   }
+  
+  textOnly = decodeHTML(textOnly);
 
   // Split description into dish and description text
   let dish = 'Special Taco';

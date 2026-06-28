@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { decodeHTML } from './scraper_utils.js';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -55,9 +56,7 @@ async function geocode(address) {
   }
 }
 
-function decodeHtml(html) {
-  return html.replace(/&#x27;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"');
-}
+
 
 async function scrapeDish(url, cacheMap, existingMap) {
   if (cacheMap.has(url)) return cacheMap.get(url);
@@ -81,8 +80,8 @@ async function scrapeDish(url, cacheMap, existingMap) {
     const regex = /<div class=\"question-text[^>]*>([\s\S]*?)<\/div>\s*<div class=\"answer-text[^>]*>([\s\S]*?)<\/div>/g;
     let m;
     while ((m = regex.exec(section)) !== null) {
-      const key = decodeHtml(m[1].replace(/<[^>]+>/g, '').trim());
-      const val = decodeHtml(m[2].replace(/<[^>]+>/g, '').trim());
+      const key = decodeHTML(m[1].replace(/<[^>]+>/g, '').trim());
+      const val = decodeHTML(m[2].replace(/<[^>]+>/g, '').trim());
       if (key && val) qa[key] = val;
     }
   }
@@ -129,8 +128,8 @@ async function scrapeDish(url, cacheMap, existingMap) {
     id,
     weekId: 'slushie-2026',
     isNew,
-    restaurant: decodeHtml(restaurant),
-    dish: decodeHtml(dish),
+    restaurant: decodeHTML(restaurant),
+    dish: decodeHTML(dish),
     address: finalAddress,
     lat: coords ? coords.lat : undefined,
     lng: coords ? coords.lng : undefined,
