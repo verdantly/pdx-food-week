@@ -540,6 +540,7 @@ body.is-landing .bottom-nav {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .filter-chip {

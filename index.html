@@ -222,7 +222,7 @@
           <span class="sort-label-empty"></span>
           <div class="sort-distance-group">
             <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
-            <div id="zip-code-container" style="display: none; align-items: center; gap: 8px;">
+            <div id="zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
               <button class="filter-chip" style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick="App.useMyLocation(false)" aria-label="Use My Location" title="Use location">
                 <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
               </button>
@@ -372,7 +372,7 @@
           <div class="sort-distance-group">
             <button class="filter-chip" id="saved-sort-distance-btn"
               onclick="App.toggleSavedDistanceSort(this)">Distance</button>
-            <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px;">
+            <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
               <button class="filter-chip" style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick="App.useMyLocation(true)" aria-label="Use My Location" title="Use location">
                 <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
               </button>
