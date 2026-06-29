@@ -1018,6 +1018,42 @@ const App = (() => {
     "97267": { lat: 45.4021, lng: -122.6144 }
   };
 
+  function useMyLocation(isSavedTab) {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser. Please enter a zip code manually.");
+      return;
+    }
+    
+    const inputId = isSavedTab ? 'saved-zip-code-input' : 'zip-code-input';
+    const inputEl = document.getElementById(inputId);
+    if (inputEl) inputEl.value = 'Locating...';
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        userLat = position.coords.latitude;
+        userLng = position.coords.longitude;
+        if (inputEl) inputEl.value = 'Location Set';
+        
+        const otherInputId = isSavedTab ? 'zip-code-input' : 'saved-zip-code-input';
+        const otherInputEl = document.getElementById(otherInputId);
+        if (otherInputEl) otherInputEl.value = 'Location Set';
+
+        if (isSavedTab) {
+          saveState();
+          renderSaved();
+        } else {
+          renderBrowse();
+        }
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        alert("Unable to retrieve your location. Please enter a zip code manually.");
+        if (inputEl) inputEl.value = '';
+      },
+      { timeout: 10000 }
+    );
+  }
+
   async function applyZipCode() {
     const zipInput = document.getElementById('zip-code-input');
     const zip = zipInput.value.trim();
@@ -3106,7 +3142,7 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom };
 })();
 
 window.App = App;
