@@ -5,7 +5,7 @@
  */
 import fs from 'fs';
 import path from 'path';
-import { decodeHTML } from './scraper_utils.js';
+import { decodeHTML, fetchHtml } from './scraper_utils.js';
 import vm from 'vm';
 
 const BASE_URL = 'https://everout.com';
@@ -14,7 +14,6 @@ const PARENT_EID = 'e222747';
 const PAGE_DELAY = 600;
 const GEO_DELAY = 1100;
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36';
 const GEO_UA = 'pdx-food-week-app/1.0';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -33,26 +32,7 @@ function getExistingRestaurants(filePath) {
   return [];
 }
 
-async function httpGet(url) {
-  const res = await fetch(url, {
-    headers: {
-      'User-Agent': UA,
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-      'Accept-Language': 'en-US,en;q=0.9',
-      'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
-      'sec-ch-ua-mobile': '?0',
-      'sec-ch-ua-platform': '"Windows"',
-      'Sec-Fetch-Dest': 'document',
-      'Sec-Fetch-Mode': 'navigate',
-      'Sec-Fetch-Site': 'none',
-      'Sec-Fetch-User': '?1',
-      'Upgrade-Insecure-Requests': '1',
-      'Priority': 'u=0, i'
-    }
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return await res.text();
-}
+
 
 const geoCache = new Map();
 let lastGeoAt = 0;
@@ -165,7 +145,7 @@ async function main() {
   console.log(`Loaded ${existingMap.size} existing listings from cache.`);
 
   console.log('Fetching index…');
-  const html = await httpGet(WEEK_URL);
+  const html = await fetchHtml(WEEK_URL);
   const re = /\/portland\/events\/[a-z0-9-]+\/e\d+\//gi;
   const links = [...new Set([...html.matchAll(re)].map(m => BASE_URL + m[0]).filter(url => !url.includes(PARENT_EID)))];
   console.log(`Found ${links.length} links.`);
@@ -177,7 +157,7 @@ async function main() {
     const url = links[i];
     console.log(`[${i + 1}/${links.length}] ${url}`);
     try {
-      const pageHtml = await httpGet(url);
+      const pageHtml = await fetchHtml(url);
       const parsed = parseDishPage(pageHtml, url);
       if (parsed) {
         console.log(` -> ${parsed.dish} @ ${parsed.restaurant}`);

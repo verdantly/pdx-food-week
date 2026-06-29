@@ -1,25 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { decodeHTML } from './scraper_utils.js';
+import { decodeHTML, fetchHtml } from './scraper_utils.js';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
-async function httpGet(url) {
-  const res = await fetch(url, {
-    headers: {
-      'User-Agent': UA,
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-      'Accept-Language': 'en-US,en;q=0.5',
-      'Sec-Fetch-Dest': 'document',
-      'Sec-Fetch-Mode': 'navigate',
-      'Sec-Fetch-Site': 'none'
-    }
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return await res.text();
-}
+
 
 function extractText(html, regex) {
   const m = html.match(regex);
@@ -60,7 +46,7 @@ async function geocode(address) {
 
 async function scrapeDish(url, cacheMap, existingMap) {
   if (cacheMap.has(url)) return cacheMap.get(url);
-  const html = await httpGet(url);
+  const html = await fetchHtml(url);
 
   // Name and Location
   let dish = extractText(html, /<div class="text-center fs-2 fw-bold m-0 p-0">([\s\S]*?)<\/div>/);
@@ -107,7 +93,7 @@ async function scrapeDish(url, cacheMap, existingMap) {
   const locMatch = html.match(/<a href="([^"]+\/locations\/[^"]+)">/);
   if (locMatch) {
     try {
-      const locHtml = await httpGet(locMatch[1]);
+      const locHtml = await fetchHtml(locMatch[1]);
       const webMatch = locHtml.match(/<div class="row website">[\s\S]*?<a href="([^"]+)"[^>]*>website<\/a>/i);
       if (webMatch) restaurantUrl = webMatch[1];
     } catch (e) {}
@@ -162,7 +148,7 @@ async function main() {
   const existingMap = new Map();
   for (const l of existingListings) existingMap.set(l.id, l);
 
-  const indexHtml = await httpGet('https://everout.com/portland/events/the-portland-mercurys-summer-of-slushies-2026/e222749/');
+  const indexHtml = await fetchHtml('https://everout.com/portland/events/the-portland-mercurys-summer-of-slushies-2026/e222749/');
   const re = /\/portland\/events\/[a-z0-9-]+\/e\d+\//gi;
   let links = [...new Set([...indexHtml.matchAll(re)].map(m => 'https://everout.com' + m[0]))];
   links = links.filter(l => !l.includes('summer-of-slushies-2026'));

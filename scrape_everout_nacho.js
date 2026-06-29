@@ -20,16 +20,11 @@ const PARENT_EID  = 'e222747'; // exclude the nacho-week event itself from sub-e
 const PAGE_DELAY  = 600;       // ms between dish pages
 const GEO_DELAY   = 1100;      // Nominatim policy: <= 1 req/sec
 
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36';
 const GEO_UA = 'pdx-food-week-app/1.0 (https://github.com/oberonix/pdx-food-week)';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function httpGet(url, ua = UA) {
-  const res = await fetch(url, { headers: { 'User-Agent': ua, 'Accept': 'text/html,*/*' } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return await res.text();
-}
+
 
 // ── Geocoding via Nominatim, with in-process cache + rate-limiter ─────────────
 // Rate limit enforced inside geocode() so cache hits don't pay the delay.
@@ -216,7 +211,7 @@ function parseDishPage(html, url) {
 // ── Find all dish sub-event URLs on the week index page ───────────────────────
 async function getDishLinks() {
   console.log('Fetching Pizza Week index…');
-  const html = await httpGet(WEEK_URL);
+  const html = await fetchHtml(WEEK_URL);
   const re = /\/portland\/events\/[a-z0-9-]+\/e\d+\//gi;
   const set = new Set();
   for (const m of html.matchAll(re)) {
@@ -246,7 +241,7 @@ async function main() {
     console.log(`\n[${i + 1}/${dishLinks.length}] ${url}`);
     let parsed;
     try {
-      const html = await httpGet(url);
+      const html = await fetchHtml(url);
       parsed = parseDishPage(html, url);
     } catch (e) {
       console.warn(`  ⚠ Fetch/parse failed: ${e.message}`);

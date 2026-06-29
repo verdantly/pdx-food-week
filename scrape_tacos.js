@@ -240,7 +240,7 @@ while ((match = placemarkRegex.exec(kmlContent)) !== null) {
   if (!hasRealMeat) {
     if (bothText.includes('vegan') || isSoyCurlAsada) {
       type = 'vegan';
-    } else if (bothText.includes('vegetarian') || bothText.includes('veggie') || bothText.includes('vegetariano') || bothText.includes('tofu') || isMushroomBirria || bothText.includes('avocado') || bothText.includes('s’more') || bothText.includes('s'more') || bothText.includes('tres leches') || name.includes('Bring! Treats for Dogs')) {
+    } else if (bothText.includes('vegetarian') || bothText.includes('veggie') || bothText.includes('vegetariano') || bothText.includes('tofu') || isMushroomBirria || bothText.includes('avocado') || bothText.includes('s’more') || bothText.includes("s'more") || bothText.includes('tres leches') || name.includes('Bring! Treats for Dogs')) {
       type = 'vegetarian';
     }
   }
