@@ -9,7 +9,7 @@ window.FOOD_WEEKS.push({
     pricePills: ["$10 Nachos"],
     color: "#D97B29",
     emoji: "🧀",
-    totalLocations: 50,
+    totalLocations: 59,
     url: "https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/",
 });
 window.RESTAURANTS = window.RESTAURANTS || [];
@@ -33,8 +33,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwOTM1Mzk1MDk5Ni1NYWxwcmFjdGljZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/deconstructed-lasagna-nachos/e244643/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5159718,
+    "lng": -122.6652225,
+    "whatsOnIt": "Crispy fresh lasagna sheet chips layered with Ota tofu ragù, silky béchamel, and finished with hazelnut parm.",
+    "whatTheySay": "All the delicious goodness of a lasagna in nacho form. We swap tortilla chips for deep fried fresh lasagna sheets, then layer them with rich Ota tofu ragù, creamy béchamel, and a finishing touch of hazelnut parm. Familiar, comforting, and just a little unexpected."
   },
   {
     "id": 243678,
@@ -54,8 +56,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjY1MjA0MTk3Mi1BamktVHJhbS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/big-kahuna-nacho/e243678/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4046371,
+    "lng": -122.7231779,
+    "whatsOnIt": "Sweet kalua pork, corn tortilla chips, wasabi queso, serrano pineapple pico, salsa verde, cilantro.",
+    "whatTheySay": "That is a tasty nacho!"
   },
   {
     "id": 243845,
@@ -75,8 +79,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDE2MDQwMDUwMi04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243845/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.523177,
+    "lng": -122.6405278,
+    "whatsOnIt": "Nuoc cham marinated ground pork on shrimp chips with avocado crema and soft herbs.",
+    "whatTheySay": "If Poke on Wonton chips can be Nachos, then these can too! Inspired by Vietnamese cuisine, our nachos combine big, bold flavors in a refreshing spin on the classic."
   },
   {
     "id": 243843,
@@ -96,8 +102,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDEzMjY5NDczNy04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243843/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4790178,
+    "lng": -122.6085256,
+    "whatsOnIt": "Nuoc cham marinated ground pork on shrimp chips with avocado crema and soft herbs.",
+    "whatTheySay": "If Poke on Wonton chips can be nachos, then these can too! Inspired by Vietnamese cuisine, our nachos combine big, bold flavors in a refreshing spin on the classic."
   },
   {
     "id": 243842,
@@ -117,8 +125,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5NDA1MzI1MzQ1Ni04MDguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/trans-pacific-flight/e243842/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4866472,
+    "lng": -122.8058927,
+    "whatsOnIt": "Nuoc cham marinated ground pork on shrimp chips with avocado crema and soft herbs.",
+    "whatTheySay": "If Poke on Wonton chips can be Nachos, then these can too! Inspired by Vietnamese cuisine, our nachos combine big, bold flavors in a refreshing spin on the classic."
   },
   {
     "id": 243675,
@@ -138,8 +148,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🍗",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjQ4NjU0NTE1Ny1CYWNrd29vZHMtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/dirty-chicken-nachos/e243675/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5249571,
+    "lng": -122.6824607,
+    "whatsOnIt": "Smoked chicken with a house-made dry rub made with our house chili soup. Mix blended cheese, pico-de-gallo, pickled jalapeño, cilantro, green onions, topped with a house lime crema.",
+    "whatTheySay": "We get a lot of praise for our chili soup and now with added smoked chicken, it's a whole new level!"
   },
   {
     "id": 243673,
@@ -159,8 +171,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjM5ODAxNDc5Ni1CaW5hcnktQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/teriyakimotos-spamzilla/e243673/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4877651,
+    "lng": -122.803378,
+    "whatsOnIt": "Your choice of crispy tater tots or tortilla chips loaded with our award-winning Spamzilla chili, then topped with shredded cheddar cheese, a drizzle of Kewpie mayo, fresh green onions, and a sprinkle of furikake.",
+    "whatTheySay": "Winner of Best Chili and Beer Pairing at the 2026 Chili Con with Binary Brewing, our Spamzilla Chili blends Spam, ground beef, pinto and kidney beans, and our house-made teriyaki sauce for the perfect balance of savory, sweet, and umami-packed flavor."
   },
   {
     "id": 243672,
@@ -180,8 +194,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjI3OTkyNDI4MS1Cb2tlLUJvd2wuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/boke-smoked-pork-wonton-nachos/e243672/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5153617,
+    "lng": -122.6655131,
+    "whatsOnIt": "Smoked pulled pork shoulder, serrano & Tillamook cheese queso, sweet and sour pickled serranos, onions, and cilantro on house-made wonton chips. (Vegetarian substitution allowed with our smoked Tofu!).",
+    "whatTheySay": "These nachos are a nod to our Boke Bowl menu. We are proud to serve house-made, Asian influenced comfort food that is chef driven and always fun."
   },
   {
     "id": 243670,
@@ -201,8 +217,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjE5MDE1ODM0NC1CcmVha3NpZGVfU2xhYnRvd24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/verde-af/e243670/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5339814,
+    "lng": -122.6965163,
+    "whatsOnIt": "Crispy tortilla chips loaded with molten green chile queso, juicy chorizo verde, and fire-roasted Hatch chiles. Finished with bright pico de gallo, tangy pickled red onions, and a generous drizzle of spicy avocado crema. Rich, roasty, a little spicy, and dangerously easy to crush with a cold pint. Can be ordered vegetarian without chorizo."
   },
   {
     "id": 243669,
@@ -222,8 +239,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMjA5MDY3NjUwNi1Ccml4LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/braised-pork-nachos/e243669/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5270778,
+    "lng": -122.6848826,
+    "whatsOnIt": "Crispy tortilla chips, refried black beans, tender braised pork, cheese fondue, fresh tomatoes, pickled jalapeños, cilantro cream.",
+    "whatTheySay": "Crispy tortilla chips topped with warm refried black beans, tender braised pork, and rich cheese fondue, finished with melted Swiss. Fresh tomatoes, pickled jalapeños, and a smooth drizzle of cilantro cream add brightness and heat, with fresh cilantro on top."
   },
   {
     "id": 243665,
@@ -243,8 +262,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTg3NTc1MzUxMi1CdW5rLUJhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/cochon-de-lait-nachos/e243665/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5153287,
+    "lng": -122.66553,
+    "whatsOnIt": "Cajun pulled pork, green chili nacho cheese sauce, chipotle salsa, cilantro-lime slaw, pickled jalapeño, scallions, cotija and Cajun spiced tortilla chips.",
+    "whatTheySay": "Inspired by the New Orleans Jazz Fest classic Cochon de Lait Po-boy these nachos combine our love of Cajun and Mexican flavors."
   },
   {
     "id": 243663,
@@ -264,8 +285,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTc1NzIwMzAzLUNhcmxpdGFzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/dulce-picante-birria-nachos/e243663/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5316354,
+    "lng": -122.6826333,
+    "whatsOnIt": "Birria beef, habanero infused white cheddar queso, black beans, tomatoes, pickled onions, elote, cotija, cilantro, and a drizzle of our house jalapeño aioli. Can be ordered vegetarian by omitting the beef.",
+    "whatTheySay": "We combined all your Carlitas favorites into a glorious pile of nachos."
   },
   {
     "id": 243661,
@@ -285,8 +308,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTY1NzE1MjEwOS1DaGV6LUpvc2UuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/tinga-chicken-nachos/e243661/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4635878,
+    "lng": -122.6837494,
+    "whatsOnIt": "Tortilla chips, black beans, tinga chicken, melted cheese, fresh pico de Gallo, lime cream, and cilantro.",
+    "whatTheySay": "Crispy tortilla chips topped with warm black beans, tender tinga chicken, and a melted blend of cheddar and jack cheese. Finished with fresh pico de gallo, a bright drizzle of lime cream, and a touch of fresh cilantro."
   },
   {
     "id": 243660,
@@ -306,8 +331,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTM4Mjc3Mjc5MS1EYWlseS1QbGFuZXQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/al-fiery-pastor-nachos/e243660/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4964225,
+    "lng": -122.546644,
+    "whatsOnIt": "House-made shredded al pastor pork topped with melted cheddar & jack, creamy house beans, and a spicy Serrano–pineapple pico de gallo.",
+    "whatTheySay": "The Daily Planet has been on SE Portland for over 50 years. A neighborhood spot known for its welcoming atmosphere, solid pours, and scratch-made menu items. Nacho week is a chance for people to stop in and see what they've been missing when driving by."
   },
   {
     "id": 244638,
@@ -327,8 +354,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwODk5NDc2NDk4Ni1EZXNjaHV0ZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/verano-oscuro-chorizo-nachos/e244638/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.52468,
+    "lng": -122.6818808,
+    "whatsOnIt": "House mixed chorizo rojo, white cheddar beer cheese sauce made with our Mexican Lager \"Verano Oscuro\", fresh pico de gallo, and lime crema.",
+    "whatTheySay": "We are kicking off the summer with these delicious, spiced chorizo nachos and a new brew: Verano Oscuro Mexican Lager."
   },
   {
     "id": 243968,
@@ -348,8 +377,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDY3MzgxOTM3MzI1Ny1EdWtlcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/tropic-thunder-nachos/e243968/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4197283,
+    "lng": -122.6695379,
+    "whatsOnIt": "Plantain and tortilla chips, jerk chicken, grilled pineapple salsa, pepper jack queso, black bean mango relish, lime crema, and toasted coconut.",
+    "whatTheySay": "We wanted nachos that felt like a Caribbean cookout colliding with comfort food, so we layered crispy tortilla and sweet plantain chips with smoky jerk chicken, grilled pineapple salsa, pepper jack queso, black bean mango relish, lime crema, and toasted coconut. Every bite balances heat, sweetness, crunch, creaminess, and island-inspired flavor"
   },
   {
     "id": 243656,
@@ -369,8 +400,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTE1NjE0Nzg4Ny1GT1RNX0ZyZW1vbnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/esquites-nacho/e243656/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5480432,
+    "lng": -122.6049402,
+    "whatsOnIt": "House-made tortilla chips loaded with cumin- and chipotle-spiced ground beef, black beans, and street-corn-style elote. Finished with cotija cheese, a generous pour of queso, and fresh cilantro. Can be made vegetarian by omitting meat.",
+    "whatTheySay": "Inspired by a staff request that combined two or her favorites: fresh esquites and creamy queso. Built on house-made chips and loaded with bright summer flavors, it’s a fresher take on a fully loaded nacho."
   },
   {
     "id": 244198,
@@ -390,8 +423,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzY1NDE2OTAzLUZPVE1fQnVybnNpZGUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/texas-transplant/e244198/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5227164,
+    "lng": -122.6483079,
+    "whatsOnIt": "House-made tortilla chips dusted in a smoky chipotle-lime BBQ dry rub and layered with shredded cheddar, split and griddled Texas-style smoked sausage, and queso. Topped with tangy pepper relish and fresh green onion. Can be made vegetarian by omitting meat.",
+    "whatTheySay": "This nacho blends smoky BBQ flavor with Tejas-style queso for a bold, savory combo that would make the Lone Star State proud."
   },
   {
     "id": 243655,
@@ -411,8 +446,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzQ3OTAxMzA3LUZPVE1fSW50ZXJzdGF0ZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/the-randy-arozarena/e243655/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5541013,
+    "lng": -122.6819048,
+    "whatsOnIt": "House-made tortilla chips piled high with crispy chicken tenders, chopped and tossed in taco dry rub, then smothered in queso. Finished with pickled jalapeños, fresh pico de gallo, crumbled queso fresco, and a drizzle of lime-cilantro crema. Can be made vegetarian by omitting meat.",
+    "whatTheySay": "Inspired by the swagger of it's namesake, this nacho brings bold flavor and a winner's attitude. Crispy tenders, taco spice, and tangy lime crema come together for a flavor-packed dish."
   },
   {
     "id": 243653,
@@ -432,8 +469,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🍗",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDcwMjE1MTA2Mi1HaW4tVGhhaS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/the-bangkok-mala-nachos/e243653/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5430611,
+    "lng": -122.8663362,
+    "whatsOnIt": "Based on an iconic Thai stir-fry dish featuring minced chicken stir-fried with basil, garlic, and Ma Khwaen chilies on street tortillas chips. Nachos are best when they’re a fun fusion Asian Northern-Thai style! 🌶️🔥",
+    "whatTheySay": "A fusion twist dish that transports the taqueria to southeast Asia with this take on the well-known famous dish called Ma-khwaen, a Northern Thai secret's weapon Sichuan pepper type aka Pad Kaprao Mala  — an iconic Thai stir-fry dish featuring minced chicken stir-fried with basil, garlic, and Ma Khwaen chilies making the dish a unique, intense citrus-woody aroma on street tortillas chips— it’s basically Nachos layering in disguise."
   },
   {
     "id": 243817,
@@ -453,8 +492,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzA0OTE0MDE2My1HcmFuZC1GaXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/cheese-burger-nachos/e243817/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5194405,
+    "lng": -122.6514243,
+    "whatsOnIt": "Green chile queso, ground beef, GFB burger sauce, beef tallow caramelized onions, crunchy iceberg lettuce, house pickle burger relish, piled high on fresh fried tortilla chips. Can be made vegetarian with Beyond Burger and omitting the onions.",
+    "whatTheySay": "We are mixing things up this year and throwing down the most stoner fuel nachos of all time. Think Big Mac nachos... we can't stop eating them. Come and try."
   },
   {
     "id": 243809,
@@ -474,8 +515,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MjExMzI5NTIyOS1HcmFzc2EuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/nacho-ordinary-mac-and-cheese/e243809/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5123539,
+    "lng": -122.6518456,
+    "whatsOnIt": "Smoked pork, black beans, salsa verde, pepperjack, tortillas, mac and cheese. Can be ordered vegetarian by omitting the meat.",
+    "whatTheySay": "Puff Puff Mac......................................... and cheese"
   },
   {
     "id": 243649,
@@ -496,7 +539,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDYzMTM5NDIzOC1HcmF5cy1SZXN0YXVyYW50LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/grays-verde-loaded-nachos/e243649/",
     "lat": 45.5231,
-    "lng": -122.6765
+    "lng": -122.6765,
+    "whatsOnIt": "Crisp house-fried tortilla chips topped with slow-simmered pork chile verde, ranchero black beans, and a rich red chile cheese fonduta. Garnished with fresh cilantro and green onion for a vibrant finish.",
+    "whatTheySay": "Inspired by Chef Troy Lucio's passion for bold, layered flavors, these nachos brings together the rustic soul of Mexican cuisine with subtle Italian influence. Rich, slow-braised pork chile verde meets creamy red chile cheese fonduta, echoing the indulgence of classic Italian sauces, while ranchero black beans and house-fried spiced tortilla chips ground the dish in tradition."
   },
   {
     "id": 244641,
@@ -516,8 +561,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwODc4NTQ1ODc4Ni1IYWJhbmVyb3MuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/fuego-nacho-crunch/e244641/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5345296,
+    "lng": -122.658361,
+    "whatsOnIt": "Tortilla chips, white cheese, black beans, onion, cilantro, pickled onions w/habanero, sour cream, birria meat, and flaming Cheetos.",
+    "whatTheySay": "Trending birria meat has always been a part of our traditional dishes making this part of our culture in small towns."
   },
   {
     "id": 243836,
@@ -537,8 +584,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🍗",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzIzNDgxMTUyNi1IYXdrZXItU3RhdGlvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/loaded-orange-chicken-nachos/e243836/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5049622,
+    "lng": -122.6236178,
+    "whatsOnIt": "Orange chicken, fries, spicy mayo, green onion, sesame seeds.",
+    "whatTheySay": "Loaded Orange Chicken Nachos are the ultimate fusion comfort food. They feature crispy chips generously topped with sticky-sweet orange chicken, green onions, and a spicy mayo drizzle, toasted sesame seeds and garnish with green onion Every bite delivers a mouthwatering contrast of savory, sweet, and tangy flavors."
   },
   {
     "id": 244642,
@@ -558,8 +607,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTEwOTIwMjYxNTQ2NC1IaWdoLUhvcnNlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/spam-huli-huli-nachos/e244642/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5203616,
+    "lng": -122.6787178,
+    "whatsOnIt": "Crispy glazed Spam, Huli-Huli sauce, Tillamook cheddar, pickled onion, scallion.",
+    "whatTheySay": "This is our ode to the most misunderstood ingredient of American Cuisine, SPAM, and no culture does it better than the Hawaiians. Balanced sweet, salty, savory notes all on the greatest vessel, a tortilla chip."
   },
   {
     "id": 244200,
@@ -579,8 +630,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzc4MjUwNjQ1Ni1Ib25vcmFibGUtTWVudGlvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/chili-braised-beef-nachos/e244200/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.521693,
+    "lng": -122.678749,
+    "whatTheySay": "An elevated sports lounge calls for elevated nachos. Come watch your favorite team while enjoying your favorite nachos."
   },
   {
     "id": 243647,
@@ -600,8 +652,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDU2MjE4Njg2OC1Ib3B3b3Jrcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/pizza-nachos/e243647/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4968753,
+    "lng": -122.6348432,
+    "whatsOnIt": "Mozzarella cheese, crispy pepperoni, black olives, red sauce, pesto, and fresh basil.",
+    "whatTheySay": "Why choose when you can have both?  All your favorite pizza flavors, reimagined in the most craveable, snackable way possible."
   },
   {
     "id": 244197,
@@ -621,8 +675,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🦐",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzQ3MTM3OTQwMS1IdW5ueS1CZWV6LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/longanisa-shrimp-chip-nacho/e244197/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5144928,
+    "lng": -122.6832057,
+    "whatsOnIt": "Ground longanisa sausage, shrimp chips, shredded cheese, tomatoes, jalapeños, onions, cilantro, spicy adobo sauce.",
+    "whatTheySay": "A little sweet, a little savory, a little spicy, perfectly balanced to have you craving a second plate of these yummy Filipino–inspired nachos."
   },
   {
     "id": 243642,
@@ -642,8 +698,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDQzNTE2OTEyOC1Lb29rcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/sweet-heat-street-nachos/e243642/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.551338,
+    "lng": -122.6752962,
+    "whatsOnIt": "White queso, ground pork al pastor, queso Oaxaca, charred pineapple, pickled red onion, cotija, avocado crema, cilantro, tajin. Can be made vegetarian by omitting meat, same price.",
+    "whatTheySay": "Chef Eduardo brings the flavors of Mexican street food to Kooks with our smoky al pastor and pineapple nachos. Featuring slow-roasted pork in our wood-fire and oven and grilled pineapple, these nachos are the perfect balance of savory with a touch of spicy sweetness."
   },
   {
     "id": 243641,
@@ -663,8 +721,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDM1OTYzNDQwMy1MYXJkby5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/k-town-nachos/e243641/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5120735,
+    "lng": -122.6529865,
+    "whatsOnIt": "Smoked gochujang pork, grilled corn, kimcheese, scallion, lime, cilantro. Can be ordered vegetarian by omitting the meat.",
+    "whatTheySay": "Up late one night watching K-Pop Demon Hunters and suddenly..."
   },
   {
     "id": 243639,
@@ -684,8 +744,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDE0NzI3MjU4NS1MYXVnaGluZy1QbGFuZXRfQmVsbW9udC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/notchorizo/e243639/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5163481,
+    "lng": -122.630481,
+    "whatsOnIt": "Non-GMO corn chips, mushroom \"chorizo\", house made queso, Smart™️ black beans, pickled jalapeños, Don Froylan cotija, corn, lime wedge.",
+    "whatTheySay": "All the spice, tang, and deep umami of chorizo — turns out mushrooms can do that too. House-made and piled onto non-GMO corn chips with queso, pickled jalapeños, and Don Froylan cotija. Plant-based never tasted this unapologetic. A Laughing Planet Lager doesn't hurt either."
   },
   {
     "id": 244063,
@@ -705,8 +767,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDY5MDIwNjU2ODcwNy1MYXp5LURheXNfRmxpbnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/cant-stop-wont-stop/e244063/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5400205,
+    "lng": -122.6684146,
+    "whatTheySay": "We're taking the our favorite pizzas and turning them into nachos. Come and pick your pie to see it nachoi-zed (it's a real word - we swear)!"
   },
   {
     "id": 243636,
@@ -726,8 +789,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDA1ODY4MTkxMS1MYXp5LURheXNfQmVhdmVydG9uLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/bbq-in-beaverton/e243636/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4869553,
+    "lng": -122.8062589,
+    "whatsOnIt": "In house BBQ sauce tossed with shredded chicken, beer cheese, black beans, red onions, pineapple mango salsa, and lime on the side. Can be prepared vegetarian with soy curls.",
+    "whatTheySay": "It seemed too yummy to not try so we did, and low and behold it's next level!!! Come try it out!"
   },
   {
     "id": 243634,
@@ -747,8 +812,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTkzMTM5MzgxMS1Mb3lhbC1MZWdpb24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/bavarian-brat-chos/e243634/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5177924,
+    "lng": -122.6594942,
+    "whatsOnIt": "Tortilla chips, Olympia Provisions bratwurst, sautéed onions and jalapeños, house cheese sauce, Chingona's salsa macha, fresh cilantro.",
+    "whatTheySay": "Our OP sausages are a cornerstone of our menu, so we thought it was only fitting that we feature them on this year's Nacho Week special. Expect chips smothered with our house-made beer cheese sauce, and a little spice in every bite thanks to sautéed jalapeños and Chingona's salsa macha (contains nuts)."
   },
   {
     "id": 243632,
@@ -768,8 +835,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDY3Mzc0MzgxNDk1MS1NaWdyYXRpb25fV2lsbGlhbXNfMS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/wonton-a-mia/e243632/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5513609,
+    "lng": -122.6669369,
+    "whatsOnIt": "Wonton chips, topped with chopped house meatballs, mozzarella, parmesan, spicy marinara, lemon ranch, topped with green onion and dried cilantro. Can be ordered vegetarian by omitting the meat.",
+    "whatTheySay": "The fusion nacho you never knew you needed. Even your Italian Grandmother would come back for seconds."
   },
   {
     "id": 243683,
@@ -789,8 +858,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMzIxOTU5OTg1LU1pZ3JhdGlvbl9HbGlzYW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/nachos-rancheros/e243683/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5261871,
+    "lng": -122.6363567,
+    "whatsOnIt": "Corn tortilla chips topped with refried beans, pork chorizo, cilantro, pico de gallo, pickled jalapeños, queso fresco, lime cilantro creama, and a sunny side up egg. Can be made vegetarian by omitting the meat.",
+    "whatTheySay": "We wanted to take a very traditional Mexican dish that definitely weren't nacho and make them NACHOS! We took huevos rancheros and reassembled them into Nachos Rancheros."
   },
   {
     "id": 243832,
@@ -810,8 +881,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzcyOTI5ODIyOC1Nb3JlbGFuZC1BbGUtSG91c2UuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/spicy-succotash-nacho/e243832/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4659168,
+    "lng": -122.6476838,
+    "whatsOnIt": "House-made chips smothered in queso and topped with our jalapeño corn succotash with a big dollop of our house mad guacamole. You can add Guajillo chili braised pork if you like!",
+    "whatTheySay": "We wanted to feature something fresh and zesty. The spicy succotash and creamy guacamole is an amazing combo. And for the meat eaters add our braised Guajillo pork."
   },
   {
     "id": 243629,
@@ -831,8 +904,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🐖",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTUzMDI2NjczMS1OYWNoby1Ib3VzZV9TYW5keS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/crispy-carnitas/e243629/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5241772,
+    "lng": -122.6507871,
+    "whatsOnIt": "Tortilla chips and refried beans topped with a crowd favorite—crispy carnitas—and accompanied by Mexican crema, queso fresco, and jalapeños.",
+    "whatTheySay": "Discover one of the flavors that best defines us—carnitas—with a unique taste that will keep you coming back for more."
   },
   {
     "id": 243631,
@@ -852,8 +927,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTYzMDgxNzg4Mi1OYWNoby1Ib3VzZV85Mm5kLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/al-pastor/e243631/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.4811343,
+    "lng": -122.5684662,
+    "whatsOnIt": "Tortilla chips, refried beans, our favorite *al pastor* meat with pineapple, melted cheese, our chipotle sauce, *queso fresco*, and a little cilantro.",
+    "whatTheySay": "With these nachos, we are offering all our customers one of our favorite meats, paired with our smoked chipotle sauce. Come and discover the flavors!"
   },
   {
     "id": 244202,
@@ -873,8 +950,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzkyODM3NTYyNS1Ob20tTm9tLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/nepalese-inspired-chilaquiles/e244202/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5268924,
+    "lng": -122.6851349,
+    "whatTheySay": "Nepal meets Latin"
   },
   {
     "id": 243545,
@@ -894,8 +972,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMzI5NzYwMjItT3Zlbi1TaGFrZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/nacho-nonnas-caprese/e243545/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5249598,
+    "lng": -122.6827897,
+    "whatsOnIt": "White corn tortilla chips, fresh tomatoes, sherry vinaigrette, fresh basil, Pecorino Romano, saba.",
+    "whatTheySay": "Nacho average Italian dish. Why choose between a Tuscan villa and a Mexican fiesta when you can have both on one glorious plate? We’ve taken the soul of a classic caprese and given it a crispy, Oven and Shake-over."
   },
   {
     "id": 245105,
@@ -915,8 +995,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🦐",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MTU1MjIyNTU0OTcyMi1QYWNpZmljLVN0YW5kYXJkLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/shrimply-irresistable/e245105/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5238125,
+    "lng": -122.6614094,
+    "whatsOnIt": "Corn tortillas with citrus roasted shrimp and fried bay shrimp. Smothered in mornay sauce and topped with fresh radish and cotija cheese. Add on a $10 Southwestern Shandy made with Amaras mezcal, Rosenstadt Helles lager, house-made verdita, and fresh lime.",
+    "whatTheySay": "Inspired by summertime vibes, endless shrimp, and that perfect first sip of fresh verdita on a sunny day."
   },
   {
     "id": 243805,
@@ -936,8 +1018,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTc1MjMxNDM2OS1QYW1iaWNoZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/nacho-cuban-papi/e243805/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.526559,
+    "lng": -122.6369298,
+    "whatsOnIt": "Tortilla and plantain chips; pickled red onions and jalapeños; slow-roasted, hand-pulled Cuban lechón (adobo pork); cheesey garlic/avocado mojo and cotija cheese sprinkles; Cuban love.",
+    "whatTheySay": "Tortilla and plantain chips hook up with slow roasted, hand pulled Cuban lechón (adobo pork), pickled red onions and pickled jalapeños, and then get busy under a blanket of cheesey garlic avocado mojo and cotija cheese sprinkles. Use a fork to load each pairing of chips with the right blend of Cuban goodness for perfecto bite combinations!"
   },
   {
     "id": 243806,
@@ -957,8 +1041,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTg4ODQyNzEwNi1QZXBpbm9zLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/nachos-vulcan/e243806/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5118913,
+    "lng": -122.6236954,
+    "whatsOnIt": "Fresh made chips, Monterey Jack cheese, spicy salsa suzy, salsa fresca, guacamole, sour cream and roasted jalapeños.",
+    "whatTheySay": "A delicious, spicy nachos with fresh made chips, hand-made salsas, and signature guacamole."
   },
   {
     "id": 243819,
@@ -978,8 +1064,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MzEzOTU1MjIxOC1QaXp6YS1NYWNoaW5lLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/knot-nachos-knotchos/e243819/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5070789,
+    "lng": -122.6109609,
+    "whatsOnIt": "Our knots, cut into quarters, topped with mozzarella, vodka sauce, cup & char pepperoni, ricotta, calabrian chili, hot honey.",
+    "whatTheySay": "We love knots, so we cut them up and top them like nachos/pizza. This is a knotcho version of our most popular slice: The Drunken Grandma."
   },
   {
     "id": 244083,
@@ -999,8 +1087,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDY5NzY1Mzc3OTYwNi1RdWUtUGFzYS1DYW50aW5hLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/al-pastor-nachos/e244083/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5127637,
+    "lng": -122.653558,
+    "whatsOnIt": "Al pastor, our house queso, fresh pineapple, cilantro, pickled red onions + jalapeños.",
+    "whatTheySay": "... our traditional al pastor is marinated daily + cooked to order with pineapple + onions for the perfect sweet + spicy bite. A big, heartfelt thank you to our Yucatan cooks. xoxo"
   },
   {
     "id": 243800,
@@ -1020,8 +1110,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌮",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTQzNTU3MDM1Ny1TdGVlcGxlamFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/reubenachos/e243800/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5349227,
+    "lng": -122.6408032,
+    "whatsOnIt": "House fried potato chips, sauerkraut, corned beef, Swiss cheese, house special sauce, and chives. Can be ordered vegetarian by omitting the meat.",
+    "whatTheySay": "Inspired by the classic sandwich of the same name, our Reubenachos! are gooey, cheesy, and packed with flavor and salty goodness. Pair them with a crisp pint of beer for the full experience."
   },
   {
     "id": 243543,
@@ -1041,8 +1133,10 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMzE0MjEwNTcxNi1TdGlja3ktV2lja2V0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/cilantro-pulled-pork/e243543/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5891601,
+    "lng": -122.7534583,
+    "whatsOnIt": "Seasoned, shredded, slow braised pork shoulder, mornay cheese sauce, lime cilantro crema, and house pickled peppers on corn tortilla chips. Can be made vegetarian by omitting meat.",
+    "whatTheySay": "Our sweet house pickled peppers lend brightness to this dish while mixing perfectly with our savory four cheese house mornay, and our seasoned slow braised pork shoulder is balanced by the bright cilantro lime crema."
   },
   {
     "id": 243542,
@@ -1062,8 +1156,216 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMjk3MDA2MjI5OC1UYWtlLVR3by5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/twice-baked-nachos/e243542/",
-    "lat": 45.5231,
-    "lng": -122.6765
+    "lat": 45.5625854,
+    "lng": -122.634678,
+    "whatsOnIt": "Waffle fries, cheese sauce, sour cream, bacon crumbles, chives, fresh ground pepper.",
+    "whatTheySay": "We love a waffle fry around here and we have made special fry dishes with bolognese and chili in the past. This time we wanted to lean into nachos, but have the cheese delivery component a fry instead of a chip. What Chef Maria came up with is better than we could have hoped for!"
+  },
+  {
+    "id": 243668,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Balkan Kebab Nachos",
+    "restaurant": "The Bulgarian Job",
+    "neighborhood": "Rose City Park - Northeast Portland",
+    "address": "6035 NE Halsey St, Portland, OR 97213",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "takeout": true,
+    "minors": true,
+    "desc": "We took our grilled Kebapche and made it into a soft, braised taco meat to showcase our traditional and most signature menu item along with a salsa version of our signature Shopska salad.",
+    "emoji": "🌮",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMTk1NTkwOTE4Mi1CdWxnYXJpYW4tSm9iLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
+    "url": "https://everout.com/portland/events/balkan-kebab-nachos/e243668/",
+    "lat": 45.5339195,
+    "lng": -122.601318,
+    "whatsOnIt": "Ground pork kebab, grilled and braised slowly atop corn tortilla chips, topped with finely diced shopska salsa (tomatoes, cucumbers, red onion, peppers, Sirene (Bulgarian white brined cheese similar to feta), Bulgarian fire roasted peppers, crema.",
+    "whatTheySay": "We took our grilled Kebapche and made it into a soft, braised taco meat to showcase our traditional and most signature menu item along with a salsa version of our signature Shopska salad."
+  },
+  {
+    "id": 243633,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Cadillac Nachos",
+    "restaurant": "The Matador North Portland",
+    "neighborhood": "North Portland",
+    "address": "4111 N Williams Ave, Portland, OR 97217",
+    "type": "vegetarian",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": false,
+    "minors": false,
+    "desc": "Meet the Cadillac Nacho! It’s everything you love about our Matador Famous Nachos turned all the way up for Nacho Week. Built on a generous bed of crispy chips, we pile on melted Cheddar and Monterey Jack, hearty refried beans, and a rich layer of warm queso. It’s finished with fresh pico de gallo, house-made guacamole, pickled red onions, a drizzle of garlic crema, and a sprinkle of green onions for the perfect balance in every bite.",
+    "emoji": "🌿",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxOTc4NTM3MDc0My1NYXRhZG9yLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
+    "url": "https://everout.com/portland/events/cadillac-nachos/e243633/",
+    "lat": 45.5534761,
+    "lng": -122.6669555,
+    "whatsOnIt": "Chedder, Monteray Jack cheese, refried beans, queso, pico de gallo, guacamole, garlic crema, and green onions.",
+    "whatTheySay": "Meet the Cadillac Nacho! It’s everything you love about our Matador Famous Nachos turned all the way up for Nacho Week. Built on a generous bed of crispy chips, we pile on melted Cheddar and Monterey Jack, hearty refried beans, and a rich layer of warm queso. It’s finished with fresh pico de gallo, house-made guacamole, pickled red onions, a drizzle of garlic crema, and a sprinkle of green onions for the perfect balance in every bite."
+  },
+  {
+    "id": 243801,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Pastrami Reuben Nachos",
+    "restaurant": "The Oaks Pub",
+    "neighborhood": "Southeast Portland",
+    "address": "1621 SE Bybee Blvd., Portland, OR 97202",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": false,
+    "minors": true,
+    "desc": "Our pastrami at The Oaks Pub is an eight day labor of love before it makes its way to our beloved reuben. We also make our own tortilla chips to order. We figured, what if we took everything we love and crave about our Reuben and our ooey-gooey nachos- and combine them...behold the Pastrami Reuben Nachos!",
+    "emoji": "🌮",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MTU1OTM1OS1UaGUtT2Frcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
+    "url": "https://everout.com/portland/events/pastrami-reuben-nachos/e243801/",
+    "lat": 45.4738685,
+    "lng": -122.649401,
+    "whatsOnIt": "House-made pastrami, swiss cheese fondue, sauerkraut, Russian dressing, and a pickle on scratch-made tortilla chips.",
+    "whatTheySay": "Our pastrami at The Oaks Pub is an eight day labor of love before it makes its way to our beloved reuben. We also make our own tortilla chips to order. We figured, what if we took everything we love and crave about our Reuben and our ooey-gooey nachos- and combine them...behold the Pastrami Reuben Nachos!"
+  },
+  {
+    "id": 243544,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Smokey and The Bandit",
+    "restaurant": "The Pharmacy",
+    "neighborhood": "Northwest Portland",
+    "address": "2100 NW Glisan, Portland, OR 97210",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": true,
+    "minors": false,
+    "desc": "Take the lid off the T-top, crank up the CB radio, and enjoy nachos worth making a run across state lines for.",
+    "emoji": "🌮",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMzIxNzQ2NzM3MS1QaGFybWFjeS1CYXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/smokey-and-the-bandit/e243544/",
+    "lat": 45.5261453,
+    "lng": -122.6946229,
+    "whatsOnIt": "Smoked cheddar cheese sauce over house-made tortilla chips, with shredded smoked brisket, Carolina gold BBQ sauce, candied jalapeños, red onions, tomatoes, and cilantro.",
+    "whatTheySay": "Take the lid off the T-top, crank up the CB radio, and enjoy nachos worth making a run across state lines for."
+  },
+  {
+    "id": 243813,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Porklandia Nachos",
+    "restaurant": "Three Mermaids Public House",
+    "neighborhood": "Tigard",
+    "address": "18041 SW Lower Boones Ferry Road #1B, Tigard, OR 97224",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": false,
+    "minors": false,
+    "desc": "We started with fork-tender pork, cooked in salsa Verde and built from there. Layered with queso, refried beans, salsa, fresh pico, crema, and just enough jalapeño kick, these nachos will hit all the right notes-savory, creamy, tangy and crunch from the first bite to last.",
+    "emoji": "🧀",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MjM4OTE2Nzg5MS1UaHJlZS1NZXJtYWlkcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
+    "url": "https://everout.com/portland/events/porklandia-nachos/e243813/",
+    "lat": 45.391522,
+    "lng": -122.7516204,
+    "whatsOnIt": "House-made tortilla chips, tender pork slow cooked in salsa verde, refried beans, queso, pico de gallo, house salsa, crema, and pickled jalapeños.",
+    "whatTheySay": "We started with fork-tender pork, cooked in salsa Verde and built from there. Layered with queso, refried beans, salsa, fresh pico, crema, and just enough jalapeño kick, these nachos will hit all the right notes-savory, creamy, tangy and crunch from the first bite to last."
+  },
+  {
+    "id": 243812,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Street Corn Nachos",
+    "restaurant": "Vanguard Brewing Company",
+    "neighborhood": "",
+    "address": "27501 SW 95th Ave #945, Wilsonville, OR 97070",
+    "type": "vegetarian",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": true,
+    "minors": false,
+    "desc": "Your favorite summer street food piled high on tortilla chips! Inspired by Mexican street corn, these nachos are topped with Monterey Jack cheese, a house-made elote-seasoned fire-roasted corn mix, jalapeño lime crema, cotija, and fresh jalapeños.",
+    "emoji": "🌿",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDU5MjI0MTU0NjQ4OS1WYW5ndWFyZC1CcmV3aW5nLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
+    "url": "https://everout.com/portland/events/street-corn-nachos/e243812/",
+    "lat": 45.3211582,
+    "lng": -122.7733742,
+    "whatsOnIt": "Tri-color tortilla chips, shredded Monterey Jack cheese, fire-roasted corn mixture topped with cotija, fresh jalapeños, cilantro, jalapeño lime crema, and an elote seasoning blend.",
+    "whatTheySay": "Your favorite summer street food piled high on tortilla chips! Inspired by Mexican street corn, these nachos are topped with Monterey Jack cheese, a house-made elote-seasoned fire-roasted corn mix, jalapeño lime crema, cotija, and fresh jalapeños."
+  },
+  {
+    "id": 243541,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "NACHFERATU!",
+    "restaurant": "Wayfinder Beer",
+    "neighborhood": "Buckman - Southeast Portland",
+    "address": "304 SE 2nd, Portland, Oregon 97214",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": true,
+    "minors": true,
+    "desc": "NACHFERATU has risen from the crypt. A horrifying pile of mozzarella & cheddar, molten nacho cheese, black bean puree, pico, jalapeños, smoky ancho chili sauce, crema, and enough juicy smoked pork to make a priest nervous. Warm. Sinister. Covered in sauce. Best consumed after sunset with poor decisions.",
+    "emoji": "🧀",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMjg3MzM0NDczNS1XYXlmaW5kZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/nachferatu/e243541/",
+    "lat": 45.5208914,
+    "lng": -122.6634881,
+    "whatsOnIt": "Mozzarella & cheddar, molten nacho cheese, black bean puree, pico, jalapeños, smoky ancho chili sauce, crema, and juicy smoked pork."
+  },
+  {
+    "id": 244201,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "PORKLAND TROUGH-CHOS",
+    "restaurant": "Wonderboy's Smokestack",
+    "neighborhood": "King - Northeast Portland",
+    "address": "1027 NE Alberta Street, Portland, OR 97211",
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "takeout": true,
+    "minors": true,
+    "desc": "THE TROUGH IS READY AND WAITING, MY SWEET LITTLE PIGGIES! HAPPY NACHO WEEK!",
+    "emoji": "🐖",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDkzMzgzMjk3NTg4NC1Xb25kZXJib3ktU21va2VzdGFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
+    "url": "https://everout.com/portland/events/porkland-trough-chos/e244201/",
+    "lat": 45.5592283,
+    "lng": -122.6549426,
+    "whatsOnIt": "Tallow fried tortilla chips and chicharrones slathered in our sharp cheddar queso, smoky pit beans, and avocado crema, topped with sticky glazed pork belly, pickled peppers, and green onions.",
+    "whatTheySay": "THE TROUGH IS READY AND WAITING, MY SWEET LITTLE PIGGIES! HAPPY NACHO WEEK!"
+  },
+  {
+    "id": 243540,
+    "weekId": "nacho-2026",
+    "isNew": false,
+    "dish": "Holy-cow-cho’s",
+    "restaurant": "Wow Cow",
+    "neighborhood": "Tigard",
+    "address": "9100 SW Burnham st, Tigard, OR 97223",
+    "type": "meat",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "takeout": true,
+    "minors": true,
+    "desc": "Savor the innovative mix of Korean and American flavors, where traditional Korean bulgogi beef meets American comfort food choices. Our dishes are crafted with a blend of house-made sauces and a secret Korean marinade, passed down through generations and perfected over 100 years. Indulge in a culinary journey where the heart of Korea and the soul of American cuisine merge, only here, where tradition meets comfort.",
+    "emoji": "🥩",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUxMjczMzU4OTIwMi1Xb3ctQ293LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
+    "url": "https://everout.com/portland/events/holy-cow-chos/e243540/",
+    "lat": 45.4286191,
+    "lng": -122.7704684,
+    "whatsOnIt": "Corn tortilla chips topped with Korean braised beef using a 100-yr-old family recipe. Sweet and tangy sauce, nacho cheese, garlic aïoli, gochujang aïoli, sesame seeds, fried onions, and panko flakes. Meat and sauce lovers with a crunch finish. Can add kimchi for additional 1.50. Can be made vegetarian by omitting the beef.",
+    "whatTheySay": "Savor the innovative mix of Korean and American flavors, where traditional Korean bulgogi beef meets American comfort food choices. Our dishes are crafted with a blend of house-made sauces and a secret Korean marinade, passed down through generations and perfected over 100 years. Indulge in a culinary journey where the heart of Korea and the soul of American cuisine merge, only here, where tradition meets comfort."
   }
 ];
   newItems.forEach(item => {
