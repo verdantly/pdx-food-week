@@ -2,349 +2,349 @@
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
 window.FOOD_WEEKS.push({
   id: "salad-2026",
-  name: "Portland Salad Week 2026",
+  name: "Salad Week 2026",
   organizer: "Bridgetown Bites",
   startDate: "2026-07-22",
   dates: "July 22 - 31, 2026",
-  pricePills: ["$15-$29"],
+  pricePills: ["$10-$29"],
   color: "#4CAF50",
   emoji: "🥗",
   totalLocations: 15,
   url: "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
 });
 window.RESTAURANTS = window.RESTAURANTS || [];
-(function() {
+(function () {
   const newItems = [
-  {
-    "id": 1784600289458,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Bethany’s Table",
-    "dish": "Scallop Salad",
-    "desc": "Bethany’s Table is serving up a decadent scallop salad, their creative take on the classic Mexican Cobb. Featuring seared sea scallops, fresh tomatoes, avocado, red onion, crispy bacon, and crunchy tortilla strips, it’s hearty, flavorful, and a perfect example of a truly satisfying “big salad” (but more on that soon)! The scallop salad will be available starting this week all the way through August for $29.",
-    "address": "15325 NW Central Dr, Portland, OR 97229",
-    "price": "$29",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Bethanys-Table-Scallop-Salad.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600289458,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Bethany’s Table",
+      "dish": "Scallop Salad",
+      "desc": "Bethany’s Table is serving up a decadent scallop salad, their creative take on the classic Mexican Cobb. Featuring seared sea scallops, fresh tomatoes, avocado, red onion, crispy bacon, and crunchy tortilla strips, it’s hearty, flavorful, and a perfect example of a truly satisfying “big salad” (but more on that soon)! The scallop salad will be available starting this week all the way through August for $29.",
+      "address": "15325 NW Central Dr, Portland, OR 97229",
+      "price": "$29",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Bethanys-Table-Scallop-Salad.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5547432,
+      "lng": -122.834522
     },
-    "lat": 45.5547432,
-    "lng": -122.834522
-  },
-  {
-    "id": 1784600297325,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Burmese Corner",
-    "dish": "Fermented Tea Leaves Salad",
-    "desc": "This vibrant Fermented Tea Leaves Salad comes from Burmese Corner, the new food cart from the team behind Burmese Delight, which has several locations throughout Portland. We’re thrilled to see them bring their fresh, vegan-friendly fare to a mobile format.\n\nPacked with fermented tea leaves, freshly prepared vegetables, roasted beans, and crunchy sunflower seeds, this colorful salad delivers plenty of texture and bold flavor. Choose the vegan version for $15 or add chicken for $17. It’s available from July 22 through the end of the month.",
-    "address": "3829 SE Division Street, Portland",
-    "price": "$15",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Burmese-Corner-Fermented-Tea-Leaf-Salad.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600297325,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Burmese Corner",
+      "dish": "Fermented Tea Leaves Salad",
+      "desc": "This vibrant Fermented Tea Leaves Salad comes from Burmese Corner, the new food cart from the team behind Burmese Delight, which has several locations throughout Portland. We’re thrilled to see them bring their fresh, vegan-friendly fare to a mobile format.\n\nPacked with fermented tea leaves, freshly prepared vegetables, roasted beans, and crunchy sunflower seeds, this colorful salad delivers plenty of texture and bold flavor. Choose the vegan version for $15 or add chicken for $17. It’s available from July 22 through the end of the month.",
+      "address": "3829 SE Division Street, Portland",
+      "price": "$15",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Burmese-Corner-Fermented-Tea-Leaf-Salad.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5049622,
+      "lng": -122.6236178
     },
-    "lat": 45.5049622,
-    "lng": -122.6236178
-  },
-  {
-    "id": 1784600370506,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Cibo",
-    "dish": "Farro Salad",
-    "desc": "Cibo’s rustic, fresh approach shines in this vibrant farro salad. Built around this nutty ancient grain, it’s tossed with finely chopped cucumbers, peppers, red onion, fresh herbs, and dressed with Seka Hills Arbequina olive oil for a simple, flavorful finish. Extra bonus: This salad is vegan, and is available in the restaurant now for $14.",
-    "address": "3539 SE Division St, Portland, OR 97202",
-    "price": "$14",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Cibo-Farro-Salad.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600370506,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Cibo",
+      "dish": "Farro Salad",
+      "desc": "Cibo’s rustic, fresh approach shines in this vibrant farro salad. Built around this nutty ancient grain, it’s tossed with finely chopped cucumbers, peppers, red onion, fresh herbs, and dressed with Seka Hills Arbequina olive oil for a simple, flavorful finish. Extra bonus: This salad is vegan, and is available in the restaurant now for $14.",
+      "address": "3539 SE Division St, Portland, OR 97202",
+      "price": "$14",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Cibo-Farro-Salad.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5049499,
+      "lng": -122.6278405
     },
-    "lat": 45.5049499,
-    "lng": -122.6278405
-  },
-  {
-    "id": 1784600322538,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Crisp Salads",
-    "dish": "NoPo Salad",
-    "desc": "In honor of Salad Week, Crisp is bringing back one of their original salads called the NoPo. Featuring arugula, field greens, Oregon hazelnuts, feta cheese, cranberries, and wild smoked salmon, it comes with their marionberry dressing, adding an extra helping of local flavor. The NoPo returns exactly on July 20th to kick off Salad Week.",
-    "address": "3901 N Williams Ave, Portland, OR 97227",
-    "price": "",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/NoPo-Crisp.jpeg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600322538,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Crisp Salads",
+      "dish": "NoPo Salad",
+      "desc": "In honor of Salad Week, Crisp is bringing back one of their original salads called the NoPo. Featuring arugula, field greens, Oregon hazelnuts, feta cheese, cranberries, and wild smoked salmon, it comes with their marionberry dressing, adding an extra helping of local flavor. The NoPo returns exactly on July 20th to kick off Salad Week.",
+      "address": "3901 N Williams Ave, Portland, OR 97227",
+      "price": "",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/NoPo-Crisp.jpeg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5510093,
+      "lng": -122.6670618
     },
-    "lat": 45.5510093,
-    "lng": -122.6670618
-  },
-  {
-    "id": 1784600379295,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Elephants Deli",
-    "dish": "The Ranchero Salad",
-    "desc": "Elephants Deli packs lots of bold flavor into this colorful salad. Fresh spinach and romaine are topped with Bang Bang chicken, black beans, corn, Monterey Jack cheese, pepitas, and one of our favorite local ingredients, Mama Lil’s peppers, for that extra kick. Finished with roasted garlic ranch dressing and served with a slice of focaccia, it’s a satisfying meal for $15.95, available at the Corbett Avenue location.",
-    "address": "5221 S Corbett Avenue, Portland",
-    "price": "$15",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Elephants-Deli-Ranchero_Salad_Corbett.png",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600379295,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Elephants Deli",
+      "dish": "The Ranchero Salad",
+      "desc": "Elephants Deli packs lots of bold flavor into this colorful salad. Fresh spinach and romaine are topped with Bang Bang chicken, black beans, corn, Monterey Jack cheese, pepitas, and one of our favorite local ingredients, Mama Lil’s peppers, for that extra kick. Finished with roasted garlic ranch dressing and served with a slice of focaccia, it’s a satisfying meal for $15.95, available at the Corbett Avenue location.",
+      "address": "5221 S Corbett Avenue, Portland",
+      "price": "$15",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Elephants-Deli-Ranchero_Salad_Corbett.png",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.4853717,
+      "lng": -122.6771031
     },
-    "lat": 45.4853717,
-    "lng": -122.6771031
-  },
-  {
-    "id": 1784600291661,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Fresh Love",
-    "dish": "Peach Burrata Salad",
-    "desc": "Fresh Love is celebrating the season’s bounty with this stunning Peach Burrata Salad that’s bursting with local flavor. Another great example of a “big salad,” it features juicy freestone peaches, heirloom tomatoes, toasted pepitas, pickled red onions, creamy burrata, and a house-made balsamic vinaigrette. Available now for $14.50, while the peaches last.\n\nNote from Meg: I ate this on Saturday, July 18 and it was freaking delicious!",
-    "address": "7434 NE Fremont Street, Portland",
-    "price": "$14",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Fresh-love-peach-burrata-salad-1-2000x1635.jpeg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600291661,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Fresh Love",
+      "dish": "Peach Burrata Salad",
+      "desc": "Fresh Love is celebrating the season’s bounty with this stunning Peach Burrata Salad that’s bursting with local flavor. Another great example of a “big salad,” it features juicy freestone peaches, heirloom tomatoes, toasted pepitas, pickled red onions, creamy burrata, and a house-made balsamic vinaigrette. Available now for $14.50, while the peaches last.\n\nNote from Meg: I ate this on Saturday, July 18 and it was freaking delicious!",
+      "address": "7434 NE Fremont Street, Portland",
+      "price": "$14",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Fresh-love-peach-burrata-salad-1-2000x1635.jpeg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5480386,
+      "lng": -122.5861221
     },
-    "lat": 45.5480386,
-    "lng": -122.5861221
-  },
-  {
-    "id": 1784600290668,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Gin Thai Brasserie",
-    "dish": "Yum Mama Salad",
-    "desc": "Inspired by a classic Thai street food favorite, this nostalgic noodle salad is a fun pick for anyone who loves bold flavors and a bit of texture. It combines minced chicken, onions, carrots, tomatoes, cilantro, peanuts, and those curly instant noodles, all tossed in a tangy lime dressing with chili jam. Available during Portland Salad Week for $12.",
-    "address": "3176 NW 185th Avenue, Portland",
-    "price": "$12",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Gin_Thai_Brasserie_Yummama.png",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600290668,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Gin Thai Brasserie",
+      "dish": "Yum Mama Salad",
+      "desc": "Inspired by a classic Thai street food favorite, this nostalgic noodle salad is a fun pick for anyone who loves bold flavors and a bit of texture. It combines minced chicken, onions, carrots, tomatoes, cilantro, peanuts, and those curly instant noodles, all tossed in a tangy lime dressing with chili jam. Available during Portland Salad Week for $12.",
+      "address": "3176 NW 185th Avenue, Portland",
+      "price": "$12",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Gin_Thai_Brasserie_Yummama.png",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5430611,
+      "lng": -122.8663362
     },
-    "lat": 45.5430611,
-    "lng": -122.8663362
-  },
-  {
-    "id": 1784600374801,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Harlow",
-    "dish": "Chilled Rice Noodle Salad",
-    "desc": "Harlow’s Chilled Rice Noodle Salad is a refreshing choice for warm summer days. It features chilled rice noodles, tofu, a crisp cucumber kimchi salad, and a rich peanut sauce. Available during Portland Salad Week for $15.75.",
-    "address": "3715 SE Division St, Portland, OR 97202",
-    "price": "$15",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Harlow-Chilled_Rice_Noodle_Salad.jpeg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600374801,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Harlow",
+      "dish": "Chilled Rice Noodle Salad",
+      "desc": "Harlow’s Chilled Rice Noodle Salad is a refreshing choice for warm summer days. It features chilled rice noodles, tofu, a crisp cucumber kimchi salad, and a rich peanut sauce. Available during Portland Salad Week for $15.75.",
+      "address": "3715 SE Division St, Portland, OR 97202",
+      "price": "$15",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Harlow-Chilled_Rice_Noodle_Salad.jpeg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5049518,
+      "lng": -122.6252199
     },
-    "lat": 45.5049518,
-    "lng": -122.6252199
-  },
-  {
-    "id": 1784600291291,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Kachka",
-    "dish": "Heirloom Tomato Salat",
-    "desc": "Kachka’s gorgeous heirloom tomato salad is summer on a plate. Bursting with vibrant heirloom tomatoes, it’s complemented by sunflower seed tahina, adjika sunflower seeds, Jimmy Nardello peppers, opal basil, and edible marigolds for a beautiful pop of color. Available during dinner service during Portland Salad Week for $15.",
-    "address": "960 SE 11th Avenue, Portland",
-    "price": "$15",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Heirloom_Tomato_Salat-1.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600291291,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Kachka",
+      "dish": "Heirloom Tomato Salat",
+      "desc": "Kachka’s gorgeous heirloom tomato salad is summer on a plate. Bursting with vibrant heirloom tomatoes, it’s complemented by sunflower seed tahina, adjika sunflower seeds, Jimmy Nardello peppers, opal basil, and edible marigolds for a beautiful pop of color. Available during dinner service during Portland Salad Week for $15.",
+      "address": "960 SE 11th Avenue, Portland",
+      "price": "$15",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Heirloom_Tomato_Salat-1.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5157763,
+      "lng": -122.6544964
     },
-    "lat": 45.5157763,
-    "lng": -122.6544964
-  },
-  {
-    "id": 1784600347421,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Kachka Fabrika",
-    "dish": "Marinated Mussels Salad",
-    "desc": "Another excellent summer dish, this marinated mussels salad is light yet packed with high-quality protein. It features generously sized mussels, pickled carrots, cilantro, garlic, and a fragrant paprika-coriander oil. Pair it with one of Kachka’s signature vodka infusions for the full experience. Available during Portland Salad Week for $10. What a great value!",
-    "address": "2117 NE Oregon St, Portland, OR 97232",
-    "price": "$10",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Fabrika_Marinated_Mussels_Salad-scaled.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600347421,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Kachka Fabrika",
+      "dish": "Marinated Mussels Salad",
+      "desc": "Another excellent summer dish, this marinated mussels salad is light yet packed with high-quality protein. It features generously sized mussels, pickled carrots, cilantro, garlic, and a fragrant paprika-coriander oil. Pair it with one of Kachka’s signature vodka infusions for the full experience. Available during Portland Salad Week for $10. What a great value!",
+      "address": "2117 NE Oregon St, Portland, OR 97232",
+      "price": "$10",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Fabrika_Marinated_Mussels_Salad-scaled.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5290183,
+      "lng": -122.6439228
     },
-    "lat": 45.5290183,
-    "lng": -122.6439228
-  },
-  {
-    "id": 1784600353499,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Mother’s Bistro",
-    "dish": "Grilled Peach & Manchego Salad",
-    "desc": "A true Portland classic, Mother’s Bistro is rolling out the red carpet for Portland Salad Week with their Grilled Peach and Manchego Salad. Each bite offers peppery arugula, grilled local peaches, crunchy almonds, Manchego cheese, and a drizzle of roasted shallot vinaigrette. Available for $16.",
-    "address": "121 SW 3rd Avenue, Portland",
-    "price": "$16",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Grilled_Peach_Manhego_Mothers-1736x2000.jpeg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600353499,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Mother’s Bistro",
+      "dish": "Grilled Peach & Manchego Salad",
+      "desc": "A true Portland classic, Mother’s Bistro is rolling out the red carpet for Portland Salad Week with their Grilled Peach and Manchego Salad. Each bite offers peppery arugula, grilled local peaches, crunchy almonds, Manchego cheese, and a drizzle of roasted shallot vinaigrette. Available for $16.",
+      "address": "121 SW 3rd Avenue, Portland",
+      "price": "$16",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Grilled_Peach_Manhego_Mothers-1736x2000.jpeg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5219512,
+      "lng": -122.6737719
     },
-    "lat": 45.5219512,
-    "lng": -122.6737719
-  },
-  {
-    "id": 1784600342872,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Nostrana",
-    "dish": "Insalata Mista",
-    "desc": "Leave it to Nostrana to create something seasonal, beautiful, and healthy with this insalata mista. What we love most is that this salad is built around produce grown at their nearby garden/farm, L’Orto Nostrano. A true celebration of summer, it features their own lettuces, crisp summer vegetables, Arbequina olive oil, and red wine vinegar. It doesn’t get more local or fresh than this!",
-    "address": "1401 SE Morrison St, Portland, OR 97214",
-    "price": "",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Nostrana_Insalata_Mista-1500x2000.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600342872,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Nostrana",
+      "dish": "Insalata Mista",
+      "desc": "Leave it to Nostrana to create something seasonal, beautiful, and healthy with this insalata mista. What we love most is that this salad is built around produce grown at their nearby garden/farm, L’Orto Nostrano. A true celebration of summer, it features their own lettuces, crisp summer vegetables, Arbequina olive oil, and red wine vinegar. It doesn’t get more local or fresh than this!",
+      "address": "1401 SE Morrison St, Portland, OR 97214",
+      "price": "",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Nostrana_Insalata_Mista-1500x2000.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5177104,
+      "lng": -122.6514274
     },
-    "lat": 45.5177104,
-    "lng": -122.6514274
-  },
-  {
-    "id": 1784600356732,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "The Paladins League",
-    "dish": "Archfeys Summer Feast Salad",
-    "desc": "We couldn’t pass up sharing the restaurant’s description of this beautiful summer salad, so here goes! “A scrumptious salad straight from the Summer Court! A fresh, leafy bed of mixed greens topped with sliced tomato and cucumber, diced mango and pineapple, red cabbage and rings of pickled red onion, topped with our house-made Summer Nectar Vinaigrette with hints of honey and lime. This blissful salad is as fleeting as the Summer Queen herself!” Available all week for $12.",
-    "address": "4765 NE Fremont Street, Portland",
-    "price": "$12",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Paladins_League_Archfeys-Feast-2000x1951.jpg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600356732,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "The Paladins League",
+      "dish": "Archfeys Summer Feast Salad",
+      "desc": "We couldn’t pass up sharing the restaurant’s description of this beautiful summer salad, so here goes! “A scrumptious salad straight from the Summer Court! A fresh, leafy bed of mixed greens topped with sliced tomato and cucumber, diced mango and pineapple, red cabbage and rings of pickled red onion, topped with our house-made Summer Nectar Vinaigrette with hints of honey and lime. This blissful salad is as fleeting as the Summer Queen herself!” Available all week for $12.",
+      "address": "4765 NE Fremont Street, Portland",
+      "price": "$12",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Paladins_League_Archfeys-Feast-2000x1951.jpg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5484957,
+      "lng": -122.6136209
     },
-    "lat": 45.5484957,
-    "lng": -122.6136209
-  },
-  {
-    "id": 1784600291369,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Sebastiano’s",
-    "dish": "Green Goddess Salad",
-    "desc": "They’ve we’ve been offering a delicious side salad the last few weeks, which they’ve adapted for Salad Week. It’s a fresh mix of Gathering Together Farms organic salad greens with cucumbers, pickled fennel, Seb Salt almonds and Green Goddess dressing. Available all week (they’re open 10:30am to 3pm daily) for $10.",
-    "address": "8235 SE 13th Avenue, #7, Portland",
-    "price": "$10",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/side-salad-sebastianos-2026-portland-salad-week.jpeg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600291369,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Sebastiano’s",
+      "dish": "Green Goddess Salad",
+      "desc": "They’ve we’ve been offering a delicious side salad the last few weeks, which they’ve adapted for Salad Week. It’s a fresh mix of Gathering Together Farms organic salad greens with cucumbers, pickled fennel, Seb Salt almonds and Green Goddess dressing. Available all week (they’re open 10:30am to 3pm daily) for $10.",
+      "address": "8235 SE 13th Avenue, #7, Portland",
+      "price": "$10",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/side-salad-sebastianos-2026-portland-salad-week.jpeg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.4631794,
+      "lng": -122.6534633
     },
-    "lat": 45.4631794,
-    "lng": -122.6534633
-  },
-  {
-    "id": 1784600357162,
-    "weekId": "salad-2026",
-    "isNew": true,
-    "restaurant": "Spoons PDX",
-    "dish": "Garden Salad with Chicken or Tofu",
-    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nWe hope you’ll enjoy exploring these 2026 Portland Salad Week restaurant specials—so many scrumptious salads to choose from! While this is not an exhaustive list, it offers a taste of the incredible salad variety available around town.\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!\n\nThe following two tabs change content below.BioLatest Posts\n\t\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\tJudith Rich\n\t\t\tJudith Rich is a writer and co-contributor to Bridgetown Bites. She’s been a proud Portlander since 2014 and is now raising two Portland natives who are budding foodies. Judith loves cooking at home and experimenting with new recipes, as well as checking out new and tried and true Portland restaurants. She loves a good food adventure (together with Meg Cotner!)\n\t\t\n\t\n\t\n\t\t\n\t\t\n\t\t\n\t\t\t\n\t\t\t\tLatest posts by Judith Rich (see all)\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t2026 Portland Salad Week Restaurant Specials Are Here - July 20, 2026 \n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tFather’s Day 2026 in Portland: Brews, BBQ, Carts & More! - June 18, 2026 \n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tA Delicious Deep Dive Into FIKA Desserts in Portland - May 7, 2026\n\nRelated Posts\n\n\nGet Ready for Portland Salad Week 2026Salad Week 2026, a week where we share our love of salad in the Portland…\n\n\nThe Inaugural Portland Salad Week Arrives June 2022Get ready for the inaugural Salad Week on Bridgetown Bites. In June 2022, the blog…\n\n\nPortland Salad Week Restaurant SpecialsWelcome to this year's Salad Week restaurant specials! These salads are available all week, and…",
-    "address": "1734 NW Northrup St, Portland, OR 97209",
-    "price": "$14",
-    "hours": "",
-    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Spoons_PDX_Garden_Salad-1970x2000.jpeg",
-    "vegan": false,
-    "vegetarian": false,
-    "gf": false,
-    "dietary": {
+    {
+      "id": 1784600357162,
+      "weekId": "salad-2026",
+      "isNew": true,
+      "restaurant": "Spoons PDX",
+      "dish": "Garden Salad with Chicken or Tofu",
+      "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.",
+      "address": "1734 NW Northrup St, Portland, OR 97209",
+      "price": "$14",
+      "hours": "",
+      "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Spoons_PDX_Garden_Salad-1970x2000.jpeg",
       "vegan": false,
       "vegetarian": false,
-      "gf": false
-    },
-    "lat": 45.5313062,
-    "lng": -122.6889217
-  }
-];
+      "gf": false,
+      "dietary": {
+        "vegan": false,
+        "vegetarian": false,
+        "gf": false
+      },
+      "lat": 45.5313062,
+      "lng": -122.6889217
+    }
+  ];
   newItems.forEach(i => window.RESTAURANTS.push(i));
 })();
