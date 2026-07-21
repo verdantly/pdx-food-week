@@ -21,12 +21,22 @@ function parseSalads(html) {
     let address = '';
     let price = '';
     let hours = '';
+    let image = '';
 
     let next = $(el).next();
     while (next.length && next[0].name !== 'h2') {
       const text = next.text().trim();
       const htmlContent = next.html() || '';
       
+      // Look for an image in the block
+      if (!image && next.find('img').length > 0) {
+        image = next.find('img').first().attr('src') || '';
+      } else if (!image && next[0].name === 'figure') {
+         // sometimes the figure itself is the wrapper
+         const img = next.find('img').first();
+         if (img.length) image = img.attr('src') || '';
+      }
+
       // Heuristic for address: looks for "Portland" or state/zip code
       if (text.includes('Portland') && (htmlContent.includes('<em>') || text.match(/NW|SW|NE|SE|Ste|Suite/i))) {
         address = text;
@@ -79,6 +89,7 @@ function parseSalads(html) {
       address: decodeHTML(address),
       price: price,
       hours: hours,
+      image: image,
       vegan: false,
       vegetarian: false,
       gf: false,

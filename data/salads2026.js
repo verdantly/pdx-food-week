@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": 1784597258629,
+    "id": 1784597904839,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Bethany’s Table",
@@ -25,6 +25,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "15325 NW Central Dr, Portland, OR 97229",
     "price": "$29",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Bethanys-Table-Scallop-Salad.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -37,7 +38,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.834522
   },
   {
-    "id": 1784597241403,
+    "id": 1784597866097,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Burmese Corner",
@@ -46,6 +47,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "3829 SE Division Street, Portland",
     "price": "$15",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Burmese-Corner-Fermented-Tea-Leaf-Salad.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -58,7 +60,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6236178
   },
   {
-    "id": 1784597253129,
+    "id": 1784597942985,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Cibo",
@@ -67,6 +69,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "3539 SE Division St, Portland, OR 97202",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Cibo-Farro-Salad.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -79,7 +82,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6278405
   },
   {
-    "id": 1784597300841,
+    "id": 1784597895544,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Crisp Salads",
@@ -88,6 +91,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "3901 N Williams Ave, Portland, OR 97227",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/NoPo-Crisp.jpeg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -100,7 +104,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6670618
   },
   {
-    "id": 1784597243286,
+    "id": 1784597879940,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Elephants Deli",
@@ -109,6 +113,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "5221 S Corbett Avenue, Portland",
     "price": "$15",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Elephants-Deli-Ranchero_Salad_Corbett.png",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -121,7 +126,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6771031
   },
   {
-    "id": 1784597257094,
+    "id": 1784597953125,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Fresh Love",
@@ -130,6 +135,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "7434 NE Fremont Street, Portland",
     "price": "$14",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Fresh-love-peach-burrata-salad-1-2000x1635.jpeg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -142,7 +148,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.5861221
   },
   {
-    "id": 1784597259016,
+    "id": 1784597943601,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Gin Thai Brasserie",
@@ -151,6 +157,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "3176 NW 185th Avenue, Portland",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Gin_Thai_Brasserie_Yummama.png",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -163,7 +170,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8663362
   },
   {
-    "id": 1784597281951,
+    "id": 1784597950916,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Harlow",
@@ -172,6 +179,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "3715 SE Division St, Portland, OR 97202",
     "price": "$15",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Harlow-Chilled_Rice_Noodle_Salad.jpeg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -184,7 +192,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6252199
   },
   {
-    "id": 1784597210776,
+    "id": 1784597873038,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka",
@@ -193,6 +201,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "960 SE 11th Avenue, Portland",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Heirloom_Tomato_Salat-1.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -205,7 +214,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6544964
   },
   {
-    "id": 1784597234953,
+    "id": 1784597897747,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka Fabrika",
@@ -214,6 +223,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "2117 NE Oregon St, Portland, OR 97232",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Fabrika_Marinated_Mussels_Salad-scaled.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -226,7 +236,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6439228
   },
   {
-    "id": 1784597278652,
+    "id": 1784597951327,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Mother’s Bistro",
@@ -235,6 +245,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "121 SW 3rd Avenue, Portland",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Grilled_Peach_Manhego_Mothers-1736x2000.jpeg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -247,7 +258,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6737719
   },
   {
-    "id": 1784597300042,
+    "id": 1784597944967,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Nostrana",
@@ -256,6 +267,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "1401 SE Morrison St, Portland, OR 97214",
     "price": "",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Nostrana_Insalata_Mista-1500x2000.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -268,7 +280,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6514274
   },
   {
-    "id": 1784597274463,
+    "id": 1784597868449,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "The Paladins League",
@@ -277,6 +289,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "4765 NE Fremont Street, Portland",
     "price": "$12",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Paladins_League_Archfeys-Feast-2000x1951.jpg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -289,7 +302,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6136209
   },
   {
-    "id": 1784597266852,
+    "id": 1784597893320,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Sebastiano’s",
@@ -298,6 +311,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "8235 SE 13th Avenue, #7, Portland",
     "price": "$10",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/side-salad-sebastianos-2026-portland-salad-week.jpeg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -310,7 +324,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6534633
   },
   {
-    "id": 1784597250577,
+    "id": 1784597898625,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Spoons PDX",
@@ -319,6 +333,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "address": "1734 NW Northrup St, Portland, OR 97209",
     "price": "$14",
     "hours": "",
+    "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Spoons_PDX_Garden_Salad-1970x2000.jpeg",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
