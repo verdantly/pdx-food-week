@@ -38,11 +38,11 @@ function parseSalads(html) {
       }
 
       // Heuristic for address: looks for "Portland" or state/zip code
-      if (text.includes('Portland') && (htmlContent.includes('<em>') || text.match(/NW|SW|NE|SE|Ste|Suite/i))) {
+      if (text.includes('Portland') && (htmlContent.includes('<em>') || text.match(/\b(NW|SW|NE|SE|N|S|E|W|Ste|Suite)\b/i))) {
         address = text;
         
         // Rescue merged descriptions (like Cibo) where address and description share a paragraph
-        const mergedMatch = text.match(/(.*?)(?=\d{2,}\s+(?:NW|SW|NE|SE|N|S|E|W|[\w]+))/i);
+        const mergedMatch = text.match(/(.*?)(?=\d{2,}\s+\b(NW|SW|NE|SE|N|S|E|W|[\w]+)\b)/i);
         if (mergedMatch && mergedMatch[1].trim().length > 20) {
           const rescued = mergedMatch[1].trim();
           if (!description) description = rescued;

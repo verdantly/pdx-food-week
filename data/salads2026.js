@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": 1784598046963,
+    "id": 1784600149702,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Bethany’s Table",
@@ -38,12 +38,12 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.834522
   },
   {
-    "id": 1784597987053,
+    "id": 1784600117043,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Burmese Corner",
     "dish": "Fermented Tea Leaves Salad",
-    "desc": "Packed with fermented tea leaves, freshly prepared vegetables, roasted beans, and crunchy sunflower seeds, this colorful salad delivers plenty of texture and bold flavor. Choose the vegan version for $15 or add chicken for $17. It’s available from July 22 through the end of the month.",
+    "desc": "This vibrant Fermented Tea Leaves Salad comes from Burmese Corner, the new food cart from the team behind Burmese Delight, which has several locations throughout Portland. We’re thrilled to see them bring their fresh, vegan-friendly fare to a mobile format.\n\nPacked with fermented tea leaves, freshly prepared vegetables, roasted beans, and crunchy sunflower seeds, this colorful salad delivers plenty of texture and bold flavor. Choose the vegan version for $15 or add chicken for $17. It’s available from July 22 through the end of the month.",
     "address": "3829 SE Division Street, Portland",
     "price": "$15",
     "hours": "",
@@ -60,7 +60,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6236178
   },
   {
-    "id": 1784598003805,
+    "id": 1784600196311,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Cibo",
@@ -82,7 +82,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6278405
   },
   {
-    "id": 1784598018600,
+    "id": 1784600197624,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Crisp Salads",
@@ -104,7 +104,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6670618
   },
   {
-    "id": 1784598038093,
+    "id": 1784600133464,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Elephants Deli",
@@ -126,7 +126,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6771031
   },
   {
-    "id": 1784598025165,
+    "id": 1784600134448,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Fresh Love",
@@ -148,14 +148,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.5861221
   },
   {
-    "id": 1784597983696,
+    "id": 1784600179419,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Gin Thai Brasserie",
     "dish": "Yum Mama Salad",
-    "desc": "",
+    "desc": "Inspired by a classic Thai street food favorite, this nostalgic noodle salad is a fun pick for anyone who loves bold flavors and a bit of texture. It combines minced chicken, onions, carrots, tomatoes, cilantro, peanuts, and those curly instant noodles, all tossed in a tangy lime dressing with chili jam. Available during Portland Salad Week for $12.",
     "address": "3176 NW 185th Avenue, Portland",
-    "price": "",
+    "price": "$12",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Gin_Thai_Brasserie_Yummama.png",
     "vegan": false,
@@ -170,14 +170,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8663362
   },
   {
-    "id": 1784598007015,
+    "id": 1784600158179,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Harlow",
     "dish": "Chilled Rice Noodle Salad",
-    "desc": "Harlow’s Chilled Rice Noodle Salad is a refreshing choice for warm summer days. It features chilled rice noodles, tofu, a crisp cucumber kimchi salad, and a rich peanut sauce. Available during Portland Salad Week for $15.75.",
+    "desc": "",
     "address": "3715 SE Division St, Portland, OR 97202",
-    "price": "$15",
+    "price": "",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Harlow-Chilled_Rice_Noodle_Salad.jpeg",
     "vegan": false,
@@ -192,7 +192,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6252199
   },
   {
-    "id": 1784598049688,
+    "id": 1784600191456,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka",
@@ -214,7 +214,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6544964
   },
   {
-    "id": 1784598003996,
+    "id": 1784600115052,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka Fabrika",
@@ -236,7 +236,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6439228
   },
   {
-    "id": 1784598006488,
+    "id": 1784600179490,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Mother’s Bistro",
@@ -258,7 +258,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6737719
   },
   {
-    "id": 1784598073428,
+    "id": 1784600150410,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Nostrana",
@@ -280,7 +280,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6514274
   },
   {
-    "id": 1784598034338,
+    "id": 1784600199242,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "The Paladins League",
@@ -302,7 +302,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6136209
   },
   {
-    "id": 1784598040822,
+    "id": 1784600106543,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Sebastiano’s",
@@ -324,12 +324,12 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6534633
   },
   {
-    "id": 1784598052974,
+    "id": 1784600153558,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Spoons PDX",
     "dish": "Garden Salad with Chicken or Tofu",
-    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nWe hope you’ll enjoy exploring these\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!\n\nJudith Rich is a writer and co-contributor to Bridgetown Bites. She’s been a proud Portlander since",
+    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nWe hope you’ll enjoy exploring these 2026 Portland Salad Week restaurant specials—so many scrumptious salads to choose from! While this is not an exhaustive list, it offers a taste of the incredible salad variety available around town.\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!\n\nJudith Rich is a writer and co-contributor to Bridgetown Bites. She’s been a proud Portlander since",
     "address": "1734 NW Northrup St, Portland, OR 97209",
     "price": "$14",
     "hours": "",
