@@ -59,6 +59,7 @@ const App = (() => {
   const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
 
   const WEEK_FILTERS = {
+    'salad-2026': [],
     'slushie-2026': [],
     'pizza-2026': [
       { id: 'meat', label: 'Meat' },
