@@ -40,6 +40,14 @@ function parseSalads(html) {
       // Heuristic for address: looks for "Portland" or state/zip code
       if (text.includes('Portland') && (htmlContent.includes('<em>') || text.match(/NW|SW|NE|SE|Ste|Suite/i))) {
         address = text;
+        
+        // Rescue merged descriptions (like Cibo) where address and description share a paragraph
+        const mergedMatch = text.match(/(.*?)(?=\d{2,}\s+(?:NW|SW|NE|SE|N|S|E|W|[\w]+))/i);
+        if (mergedMatch && mergedMatch[1].trim().length > 20) {
+          const rescued = mergedMatch[1].trim();
+          if (!description) description = rescued;
+          else description += '\n\n' + rescued;
+        }
       } else if (text.length > 20) {
         // Assume it's the description if it's a long paragraph and not the address block
         if (!description) description = text;

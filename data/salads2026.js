@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": 1784597904839,
+    "id": 1784598046963,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Bethany’s Table",
@@ -38,7 +38,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.834522
   },
   {
-    "id": 1784597866097,
+    "id": 1784597987053,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Burmese Corner",
@@ -60,14 +60,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6236178
   },
   {
-    "id": 1784597942985,
+    "id": 1784598003805,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Cibo",
     "dish": "Farro Salad",
-    "desc": "",
+    "desc": "Cibo’s rustic, fresh approach shines in this vibrant farro salad. Built around this nutty ancient grain, it’s tossed with finely chopped cucumbers, peppers, red onion, fresh herbs, and dressed with Seka Hills Arbequina olive oil for a simple, flavorful finish. Extra bonus: This salad is vegan, and is available in the restaurant now for $14.",
     "address": "3539 SE Division St, Portland, OR 97202",
-    "price": "",
+    "price": "$14",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Cibo-Farro-Salad.jpg",
     "vegan": false,
@@ -82,7 +82,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6278405
   },
   {
-    "id": 1784597895544,
+    "id": 1784598018600,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Crisp Salads",
@@ -104,7 +104,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6670618
   },
   {
-    "id": 1784597879940,
+    "id": 1784598038093,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Elephants Deli",
@@ -126,7 +126,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6771031
   },
   {
-    "id": 1784597953125,
+    "id": 1784598025165,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Fresh Love",
@@ -148,7 +148,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.5861221
   },
   {
-    "id": 1784597943601,
+    "id": 1784597983696,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Gin Thai Brasserie",
@@ -170,7 +170,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8663362
   },
   {
-    "id": 1784597950916,
+    "id": 1784598007015,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Harlow",
@@ -192,7 +192,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6252199
   },
   {
-    "id": 1784597873038,
+    "id": 1784598049688,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka",
@@ -214,7 +214,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6544964
   },
   {
-    "id": 1784597897747,
+    "id": 1784598003996,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka Fabrika",
@@ -236,7 +236,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6439228
   },
   {
-    "id": 1784597951327,
+    "id": 1784598006488,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Mother’s Bistro",
@@ -258,7 +258,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6737719
   },
   {
-    "id": 1784597944967,
+    "id": 1784598073428,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Nostrana",
@@ -280,7 +280,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6514274
   },
   {
-    "id": 1784597868449,
+    "id": 1784598034338,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "The Paladins League",
@@ -302,7 +302,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6136209
   },
   {
-    "id": 1784597893320,
+    "id": 1784598040822,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Sebastiano’s",
@@ -324,12 +324,12 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6534633
   },
   {
-    "id": 1784597898625,
+    "id": 1784598052974,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Spoons PDX",
     "dish": "Garden Salad with Chicken or Tofu",
-    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!",
+    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nWe hope you’ll enjoy exploring these\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!\n\nJudith Rich is a writer and co-contributor to Bridgetown Bites. She’s been a proud Portlander since",
     "address": "1734 NW Northrup St, Portland, OR 97209",
     "price": "$14",
     "hours": "",
