@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": 1784601673118,
+    "id": 1784601770311,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Bethany’s Table",
@@ -27,6 +27,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Bethanys-Table-Scallop-Salad.jpg",
     "restaurantUrl": "https://www.bethanystable.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -39,7 +40,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8350119
   },
   {
-    "id": 1784601690050,
+    "id": 1784601766107,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Burmese Corner",
@@ -50,6 +51,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Burmese-Corner-Fermented-Tea-Leaf-Salad.jpg",
     "restaurantUrl": "https://www.instagram.com/burmesecorner/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -62,7 +64,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6236178
   },
   {
-    "id": 1784601669524,
+    "id": 1784601813094,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Cibo",
@@ -73,6 +75,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Cibo-Farro-Salad.jpg",
     "restaurantUrl": "https://www.cibopdx.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -85,7 +88,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6278405
   },
   {
-    "id": 1784601637314,
+    "id": 1784601785171,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Crisp Salads",
@@ -96,6 +99,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/NoPo-Crisp.jpeg",
     "restaurantUrl": "https://www.crispsaladsnw.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -108,7 +112,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6670618
   },
   {
-    "id": 1784601678296,
+    "id": 1784601793782,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Elephants Deli",
@@ -119,6 +123,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Elephants-Deli-Ranchero_Salad_Corbett.png",
     "restaurantUrl": "https://elephantsdeli.com/locations/corbett/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -131,7 +136,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6771031
   },
   {
-    "id": 1784601652112,
+    "id": 1784601761931,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Fresh Love",
@@ -142,6 +147,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Fresh-love-peach-burrata-salad-1-2000x1635.jpeg",
     "restaurantUrl": "https://freshlovepdx.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -154,7 +160,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.5861221
   },
   {
-    "id": 1784601639788,
+    "id": 1784601774181,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Gin Thai Brasserie",
@@ -165,6 +171,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Gin_Thai_Brasserie_Yummama.png",
     "restaurantUrl": "https://www.ginthaipdx.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -177,7 +184,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8663362
   },
   {
-    "id": 1784601628284,
+    "id": 1784601768845,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Harlow",
@@ -188,6 +195,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Harlow-Chilled_Rice_Noodle_Salad.jpeg",
     "restaurantUrl": "https://www.harlowpdx.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -200,7 +208,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6252199
   },
   {
-    "id": 1784601649688,
+    "id": 1784601744766,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka",
@@ -211,6 +219,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Heirloom_Tomato_Salat-1.jpg",
     "restaurantUrl": "https://www.kachkapdx.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -223,7 +232,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6544964
   },
   {
-    "id": 1784601631581,
+    "id": 1784601781346,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka Fabrika",
@@ -234,6 +243,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Fabrika_Marinated_Mussels_Salad-scaled.jpg",
     "restaurantUrl": "https://www.kachkafabrika.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -246,7 +256,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6439228
   },
   {
-    "id": 1784601636676,
+    "id": 1784601792792,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Mother’s Bistro",
@@ -257,6 +267,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Grilled_Peach_Manhego_Mothers-1736x2000.jpeg",
     "restaurantUrl": "https://www.mothersbistro.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -269,7 +280,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6737719
   },
   {
-    "id": 1784601651245,
+    "id": 1784601776668,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Nostrana",
@@ -280,6 +291,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Nostrana_Insalata_Mista-1500x2000.jpg",
     "restaurantUrl": "https://nostrana.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -292,7 +304,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6514274
   },
   {
-    "id": 1784601603336,
+    "id": 1784601760633,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "The Paladins League",
@@ -303,6 +315,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Paladins_League_Archfeys-Feast-2000x1951.jpg",
     "restaurantUrl": "https://www.thepaladinsleague.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -315,7 +328,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6136209
   },
   {
-    "id": 1784601615414,
+    "id": 1784601766015,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Sebastiano’s",
@@ -326,6 +339,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/side-salad-sebastianos-2026-portland-salad-week.jpeg",
     "restaurantUrl": "https://www.eatsebs.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,
@@ -338,7 +352,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6534633
   },
   {
-    "id": 1784601689584,
+    "id": 1784601787674,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Spoons PDX",
@@ -349,6 +363,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Spoons_PDX_Garden_Salad-1970x2000.jpeg",
     "restaurantUrl": "https://www.spoonspdx.com/",
+    "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "vegan": false,
     "vegetarian": false,
     "gf": false,

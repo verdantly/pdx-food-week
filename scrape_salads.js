@@ -108,6 +108,7 @@ function parseSalads(html) {
       hours: hours,
       image: image,
       restaurantUrl: restaurantUrl,
+      url: BASE_URL,
       vegan: false,
       vegetarian: false,
       gf: false,

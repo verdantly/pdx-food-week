@@ -702,7 +702,7 @@ const App = (() => {
       <div class="sheet-actions">
 
         <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
-          ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website'))} ↗
+          ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('bridgetownbites.com') ? 'Bridgetown Bites' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website')))} ↗
         </a>
       </div>
       ${!hideNav ? `
