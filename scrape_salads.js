@@ -22,11 +22,20 @@ function parseSalads(html) {
     let price = '';
     let hours = '';
     let image = '';
+    let restaurantUrl = '';
 
     let next = $(el).next();
     while (next.length && next[0].name !== 'h2') {
       const text = next.text().trim();
       const htmlContent = next.html() || '';
+      
+      // Look for restaurantUrl
+      if (!restaurantUrl && next.find('a').length > 0) {
+        const href = next.find('a').first().attr('href') || '';
+        if (href && !href.includes('wp-content/uploads')) {
+          restaurantUrl = href;
+        }
+      }
       
       // Look for an image in the block
       if (!image && next.find('img').length > 0) {
@@ -98,6 +107,7 @@ function parseSalads(html) {
       price: price,
       hours: hours,
       image: image,
+      restaurantUrl: restaurantUrl,
       vegan: false,
       vegetarian: false,
       gf: false,
