@@ -167,11 +167,11 @@ async function main() {
   code += `window.FOOD_WEEKS = window.FOOD_WEEKS || [];\n`;
   code += `window.FOOD_WEEKS.push({\n`;
   code += `  id: "salad-2026",\n`;
-  code += `  name: "Portland Salad Week 2026",\n`;
+  code += `  name: "Salad Week 2026",\n`;
   code += `  organizer: "Bridgetown Bites",\n`;
-  code += `  startDate: "2026-07-22",\n`;
-  code += `  dates: "July 22 - 31, 2026",\n`;
-  code += `  pricePills: ["$15-$29"],\n`;
+  code += `  startDate: "2026-07-20",\n`;
+  code += `  dates: "July 20 - 31, 2026",\n`;
+  code += `  pricePills: ["$10-29"],\n`;
   code += `  color: "#4CAF50",\n`;
   code += `  emoji: "🥗",\n`;
   code += `  totalLocations: ${items.length},\n`;

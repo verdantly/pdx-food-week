@@ -2,11 +2,11 @@
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
 window.FOOD_WEEKS.push({
   id: "salad-2026",
-  name: "Portland Salad Week 2026",
+  name: "Salad Week 2026",
   organizer: "Bridgetown Bites",
-  startDate: "2026-07-22",
-  dates: "July 22 - 31, 2026",
-  pricePills: ["$15-$29"],
+  startDate: "2026-07-20",
+  dates: "July 20 - 31, 2026",
+  pricePills: ["$10-29"],
   color: "#4CAF50",
   emoji: "🥗",
   totalLocations: 15,
@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": 1784601164520,
+    "id": 1784601673118,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Bethany’s Table",
@@ -39,7 +39,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8350119
   },
   {
-    "id": 1784601167076,
+    "id": 1784601690050,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Burmese Corner",
@@ -62,7 +62,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6236178
   },
   {
-    "id": 1784601166885,
+    "id": 1784601669524,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Cibo",
@@ -85,7 +85,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6278405
   },
   {
-    "id": 1784601250453,
+    "id": 1784601637314,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Crisp Salads",
@@ -108,7 +108,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6670618
   },
   {
-    "id": 1784601212397,
+    "id": 1784601678296,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Elephants Deli",
@@ -131,7 +131,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6771031
   },
   {
-    "id": 1784601244350,
+    "id": 1784601652112,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Fresh Love",
@@ -154,7 +154,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.5861221
   },
   {
-    "id": 1784601235842,
+    "id": 1784601639788,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Gin Thai Brasserie",
@@ -177,7 +177,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8663362
   },
   {
-    "id": 1784601171949,
+    "id": 1784601628284,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Harlow",
@@ -200,7 +200,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6252199
   },
   {
-    "id": 1784601238325,
+    "id": 1784601649688,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka",
@@ -223,7 +223,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6544964
   },
   {
-    "id": 1784601190808,
+    "id": 1784601631581,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka Fabrika",
@@ -246,7 +246,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6439228
   },
   {
-    "id": 1784601198296,
+    "id": 1784601636676,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Mother’s Bistro",
@@ -269,7 +269,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6737719
   },
   {
-    "id": 1784601217817,
+    "id": 1784601651245,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Nostrana",
@@ -292,7 +292,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6514274
   },
   {
-    "id": 1784601182234,
+    "id": 1784601603336,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "The Paladins League",
@@ -315,7 +315,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6136209
   },
   {
-    "id": 1784601189039,
+    "id": 1784601615414,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Sebastiano’s",
@@ -338,7 +338,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6534633
   },
   {
-    "id": 1784601223928,
+    "id": 1784601689584,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Spoons PDX",
