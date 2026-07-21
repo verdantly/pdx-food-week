@@ -16,7 +16,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = [
   {
-    "id": 1784600149702,
+    "id": 1784600289458,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Bethany’s Table",
@@ -38,7 +38,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.834522
   },
   {
-    "id": 1784600117043,
+    "id": 1784600297325,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Burmese Corner",
@@ -60,7 +60,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6236178
   },
   {
-    "id": 1784600196311,
+    "id": 1784600370506,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Cibo",
@@ -82,7 +82,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6278405
   },
   {
-    "id": 1784600197624,
+    "id": 1784600322538,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Crisp Salads",
@@ -104,7 +104,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6670618
   },
   {
-    "id": 1784600133464,
+    "id": 1784600379295,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Elephants Deli",
@@ -126,7 +126,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6771031
   },
   {
-    "id": 1784600134448,
+    "id": 1784600291661,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Fresh Love",
@@ -148,7 +148,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.5861221
   },
   {
-    "id": 1784600179419,
+    "id": 1784600290668,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Gin Thai Brasserie",
@@ -170,14 +170,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.8663362
   },
   {
-    "id": 1784600158179,
+    "id": 1784600374801,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Harlow",
     "dish": "Chilled Rice Noodle Salad",
-    "desc": "",
+    "desc": "Harlow’s Chilled Rice Noodle Salad is a refreshing choice for warm summer days. It features chilled rice noodles, tofu, a crisp cucumber kimchi salad, and a rich peanut sauce. Available during Portland Salad Week for $15.75.",
     "address": "3715 SE Division St, Portland, OR 97202",
-    "price": "",
+    "price": "$15",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Harlow-Chilled_Rice_Noodle_Salad.jpeg",
     "vegan": false,
@@ -192,14 +192,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6252199
   },
   {
-    "id": 1784600191456,
+    "id": 1784600291291,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka",
     "dish": "Heirloom Tomato Salat",
-    "desc": "",
+    "desc": "Kachka’s gorgeous heirloom tomato salad is summer on a plate. Bursting with vibrant heirloom tomatoes, it’s complemented by sunflower seed tahina, adjika sunflower seeds, Jimmy Nardello peppers, opal basil, and edible marigolds for a beautiful pop of color. Available during dinner service during Portland Salad Week for $15.",
     "address": "960 SE 11th Avenue, Portland",
-    "price": "",
+    "price": "$15",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Heirloom_Tomato_Salat-1.jpg",
     "vegan": false,
@@ -214,14 +214,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6544964
   },
   {
-    "id": 1784600115052,
+    "id": 1784600347421,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Kachka Fabrika",
     "dish": "Marinated Mussels Salad",
-    "desc": "",
+    "desc": "Another excellent summer dish, this marinated mussels salad is light yet packed with high-quality protein. It features generously sized mussels, pickled carrots, cilantro, garlic, and a fragrant paprika-coriander oil. Pair it with one of Kachka’s signature vodka infusions for the full experience. Available during Portland Salad Week for $10. What a great value!",
     "address": "2117 NE Oregon St, Portland, OR 97232",
-    "price": "",
+    "price": "$10",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Kachka_Fabrika_Marinated_Mussels_Salad-scaled.jpg",
     "vegan": false,
@@ -236,14 +236,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6439228
   },
   {
-    "id": 1784600179490,
+    "id": 1784600353499,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Mother’s Bistro",
     "dish": "Grilled Peach & Manchego Salad",
-    "desc": "",
+    "desc": "A true Portland classic, Mother’s Bistro is rolling out the red carpet for Portland Salad Week with their Grilled Peach and Manchego Salad. Each bite offers peppery arugula, grilled local peaches, crunchy almonds, Manchego cheese, and a drizzle of roasted shallot vinaigrette. Available for $16.",
     "address": "121 SW 3rd Avenue, Portland",
-    "price": "",
+    "price": "$16",
     "hours": "",
     "image": "https://bridgetownbites.com/wp-content/uploads/2026/07/Grilled_Peach_Manhego_Mothers-1736x2000.jpeg",
     "vegan": false,
@@ -258,7 +258,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6737719
   },
   {
-    "id": 1784600150410,
+    "id": 1784600342872,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Nostrana",
@@ -280,7 +280,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6514274
   },
   {
-    "id": 1784600199242,
+    "id": 1784600356732,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "The Paladins League",
@@ -302,7 +302,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6136209
   },
   {
-    "id": 1784600106543,
+    "id": 1784600291369,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Sebastiano’s",
@@ -324,12 +324,12 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "lng": -122.6534633
   },
   {
-    "id": 1784600153558,
+    "id": 1784600357162,
     "weekId": "salad-2026",
     "isNew": true,
     "restaurant": "Spoons PDX",
     "dish": "Garden Salad with Chicken or Tofu",
-    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nWe hope you’ll enjoy exploring these 2026 Portland Salad Week restaurant specials—so many scrumptious salads to choose from! While this is not an exhaustive list, it offers a taste of the incredible salad variety available around town.\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!\n\nJudith Rich is a writer and co-contributor to Bridgetown Bites. She’s been a proud Portlander since",
+    "desc": "Spoons PDX is serving up a gluten-free Garden Salad available with your choice of chicken or tofu. Packed with delicious ingredients like sautéed mushrooms, tomatoes, cucumbers, red onions, olives, and crunchy roasted chickpeas over romaine and spring mix, it’s finished with a flavorful curried mango dressing for a bright summer twist. Available all week for $14.\n\nHere is the map view:\n\nWe hope you’ll enjoy exploring these 2026 Portland Salad Week restaurant specials—so many scrumptious salads to choose from! While this is not an exhaustive list, it offers a taste of the incredible salad variety available around town.\n\nNow we want to hear from you! Share your favorite local salad with us by filling out our Salad Week Readers’ Choice form, and we’ll publish your picks at the end of the week.\n\nHappy Salad Week, Portland!\n\nThe following two tabs change content below.BioLatest Posts\n\t\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\tJudith Rich\n\t\t\tJudith Rich is a writer and co-contributor to Bridgetown Bites. She’s been a proud Portlander since 2014 and is now raising two Portland natives who are budding foodies. Judith loves cooking at home and experimenting with new recipes, as well as checking out new and tried and true Portland restaurants. She loves a good food adventure (together with Meg Cotner!)\n\t\t\n\t\n\t\n\t\t\n\t\t\n\t\t\n\t\t\t\n\t\t\t\tLatest posts by Judith Rich (see all)\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t2026 Portland Salad Week Restaurant Specials Are Here - July 20, 2026 \n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tFather’s Day 2026 in Portland: Brews, BBQ, Carts & More! - June 18, 2026 \n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tA Delicious Deep Dive Into FIKA Desserts in Portland - May 7, 2026\n\nRelated Posts\n\n\nGet Ready for Portland Salad Week 2026Salad Week 2026, a week where we share our love of salad in the Portland…\n\n\nThe Inaugural Portland Salad Week Arrives June 2022Get ready for the inaugural Salad Week on Bridgetown Bites. In June 2022, the blog…\n\n\nPortland Salad Week Restaurant SpecialsWelcome to this year's Salad Week restaurant specials! These salads are available all week, and…",
     "address": "1734 NW Northrup St, Portland, OR 97209",
     "price": "$14",
     "hours": "",
