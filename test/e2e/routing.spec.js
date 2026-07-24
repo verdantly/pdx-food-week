@@ -41,8 +41,9 @@ test.describe('Navigation and Routing', () => {
     }
   });
 
-  test('Filter drawer Apply and Clear buttons work correctly', async ({ page }) => {
-    await page.goto('/?week=burger-2026', { waitUntil: 'domcontentloaded' });
+  test('Filter drawer Apply and Clear buttons work correctly', async ({ page, isMobile }) => {
+    if (!isMobile) return;
+    await page.goto('/?week=burger-2026');
     await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
 
     await page.click('#mobile-filter-fab');
