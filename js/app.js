@@ -59,6 +59,12 @@ const App = (() => {
   const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
 
   const WEEK_FILTERS = {
+    'burger-2026': [
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' }
+    ],
     'salad-2026': [],
     'slushie-2026': [],
     'pizza-2026': [
