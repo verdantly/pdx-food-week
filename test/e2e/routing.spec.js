@@ -2,56 +2,56 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Navigation and Routing', () => {
   test('Detail overlay opens and closes correctly on desktop', async ({ page }) => {
-    // Open the app
-    await page.goto('/?week=taco-2026');
+    await page.goto('/?week=taco-2026', { waitUntil: 'domcontentloaded' });
     
-    // Assuming we have mock data or the test env loads data correctly,
-    // wait for cards list to populate and click the first dish card
-    await page.waitForSelector('.dish-card', { state: 'visible' });
-    await page.waitForSelector('.dish-card', { state: 'visible' });
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
     const firstCard = page.locator('.dish-card').first();
     await firstCard.click();
 
-    // Verify detail overlay opens
     const overlay = page.locator('#detail-overlay');
     await expect(overlay).toHaveClass(/open/);
     await expect(page).toHaveURL(/.*dish=.*/);
 
-    // Click close button inside detail sheet
     const closeBtn = overlay.locator('.sheet-close-btn');
     if (await closeBtn.isVisible()) {
       await closeBtn.click();
     } else {
-      // Mobile close button or overlay click
       await overlay.click({ position: { x: 5, y: 5 } });
     }
 
-    // Verify detail overlay closes
     await expect(overlay).not.toHaveClass(/open/);
   });
   
   test('Browser Back button safely closes overlays', async ({ page, isMobile }) => {
-    // Start at landing to build history stack
-    await page.goto('/');
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     
-    // Click Taco Week to navigate and push history state
-    await page.waitForSelector('.landing-card', { state: 'visible' });
+    await page.waitForSelector('.landing-card', { state: 'visible', timeout: 10000 });
     await page.locator('.landing-card', { hasText: 'Taco Week' }).click();
 
-    // Wait for cards to populate
-    await page.waitForSelector('.dish-card', { state: 'visible' });
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
 
     if (isMobile) {
-      // Test mobile filter drawer
       await page.click('#mobile-filter-fab');
       const drawer = page.locator('#filter-drawer-overlay');
       await expect(drawer).toHaveClass(/open/);
 
-      // Trigger back button
       await page.goBack();
       
-      // Verify drawer is closed without navigating away from the page
       await expect(drawer).not.toHaveClass(/open/);
     }
+  });
+
+  test('Filter drawer Apply and Clear buttons work correctly', async ({ page }) => {
+    await page.goto('/?week=burger-2026', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    await page.click('#mobile-filter-fab');
+    const drawer = page.locator('#filter-drawer-overlay');
+    await expect(drawer).toHaveClass(/open/);
+
+    const applyBtn = drawer.locator('.btn-apply');
+    await expect(applyBtn).toBeVisible();
+    await applyBtn.click();
+    await expect(drawer).not.toHaveClass(/open/);
   });
 });
