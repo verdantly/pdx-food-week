@@ -27,12 +27,15 @@ const App = (() => {
   // ── State ──────────────────────────────────────────────────
   let activeTab = 'browse';
   let activeFilters = new Set();
+  let draftFilters = new Set();
   let activeSort = 'restaurant';
   let searchQuery = '';
   let activeSavedFilters = new Set();
+  let draftSavedFilters = new Set();
   let savedSearchQuery = '';
   let activeSavedSort = 'restaurant';
   let customSavedOrder = [];
+  let filterDrawerOpen = false;
   let saved = new Set();
   let passed = new Set();
   let friends = [];
@@ -927,13 +930,16 @@ const App = (() => {
 
   // ── Filter ────────────────────────────────────────────────
   function toggleFilter(f) {
-    if (activeFilters.has(f)) {
-      activeFilters.delete(f);
+    const targetSet = filterDrawerOpen ? draftFilters : activeFilters;
+    if (targetSet.has(f)) {
+      targetSet.delete(f);
     } else {
-      activeFilters.add(f);
+      targetSet.add(f);
     }
     renderFilters();
-    renderBrowse();
+    if (!filterDrawerOpen) {
+      renderBrowse();
+    }
   }
 
   // ── Sort ──────────────────────────────────────────────────
@@ -1116,13 +1122,16 @@ const App = (() => {
 
   // ── Saved Tab Filter & Sort & Reorder ───────────────────────
   function toggleSavedFilter(f) {
-    if (activeSavedFilters.has(f)) {
-      activeSavedFilters.delete(f);
+    const targetSet = filterDrawerOpen ? draftSavedFilters : activeSavedFilters;
+    if (targetSet.has(f)) {
+      targetSet.delete(f);
     } else {
-      activeSavedFilters.add(f);
+      targetSet.add(f);
     }
     renderSavedFilters();
-    renderSaved();
+    if (!filterDrawerOpen) {
+      renderSaved();
+    }
   }
 
   function renderSavedFilters() {
@@ -1140,10 +1149,11 @@ const App = (() => {
       return;
     }
 
+    const currentSet = filterDrawerOpen ? draftSavedFilters : activeSavedFilters;
     const labelHTML = `<span class="filter-label">Filter:</span>`;
-    const clearHTML = (activeSavedFilters.size > 0 || savedSearchQuery !== '' || activeSavedSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllSavedFilters()">✕ Clear</button>` : '';
+    const clearHTML = (currentSet.size > 0 || savedSearchQuery !== '' || activeSavedSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllSavedFilters()">✕ Clear</button>` : '';
     const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
-      const activeCls = activeSavedFilters.has(f.id) ? 'active' : '';
+      const activeCls = currentSet.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleSavedFilter('${f.id}')">${esc(f.label)}</button>`;
     }).join('') + `</div>`;
 
@@ -2441,10 +2451,11 @@ const App = (() => {
       return;
     }
 
+    const currentSet = filterDrawerOpen ? draftFilters : activeFilters;
     const labelHTML = `<span class="filter-label">Filter:</span>`;
-    const clearHTML = (activeFilters.size > 0 || searchQuery !== '' || activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
+    const clearHTML = (currentSet.size > 0 || searchQuery !== '' || activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
     const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
-      const activeCls = activeFilters.has(f.id) ? 'active' : '';
+      const activeCls = currentSet.has(f.id) ? 'active' : '';
       return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
     }).join('') + `</div>`;
 
@@ -2453,17 +2464,26 @@ const App = (() => {
 
   function clearAllFilters() {
     activeFilters.clear();
+    draftFilters.clear();
     searchQuery = '';
     const searchInput = document.getElementById('search-input');
-    if (searchInput) searchInput.value = '';
+    if (searchInput) {
+      searchInput.value = '';
+      const searchClearBtn = document.getElementById('search-clear-btn');
+      if (searchClearBtn) searchClearBtn.style.display = 'none';
+      const compactClearBtn = document.getElementById('compact-search-clear-btn');
+      if (compactClearBtn) compactClearBtn.style.display = 'none';
+    }
     
     // Clear distance sort if active
     if (activeSort === 'distance') {
-      toggleDistanceSort(); // This will disable it and re-render
-    } else {
-      updateFilterDisplay();
-      applyFilters();
+      activeSort = 'restaurant';
+      const zipContainer = document.getElementById('zip-code-container');
+      if (zipContainer) zipContainer.style.display = 'none';
     }
+
+    updateFilterDisplay();
+    renderBrowse();
   }
 
   function updateFilterDisplay() {
@@ -2740,29 +2760,46 @@ const App = (() => {
     const drawerBody = document.getElementById('filter-drawer-body');
     if (!overlay || !drawerBody) return;
 
+    filterDrawerOpen = true;
+
     if (activeTab === 'saved') {
+      draftSavedFilters = new Set(activeSavedFilters);
       const savedFilters = document.getElementById('saved-filters');
       const sortSection = document.getElementById('saved-sort-section');
       if (savedFilters && sortSection) {
         drawerBody.appendChild(savedFilters);
         drawerBody.appendChild(sortSection);
 
+        renderSavedFilters();
         overlay.classList.add('open');
-        filterDrawerOpen = true;
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     } else {
+      draftFilters = new Set(activeFilters);
       const browseFilters = document.getElementById('browse-filters');
       const sortSection = document.getElementById('sort-section');
       if (browseFilters && sortSection) {
         drawerBody.appendChild(browseFilters);
         drawerBody.appendChild(sortSection);
 
+        renderFilters();
         overlay.classList.add('open');
-        filterDrawerOpen = true;
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     }
+  }
+
+  function applyFilterDrawer() {
+    if (activeTab === 'saved') {
+      activeSavedFilters = new Set(draftSavedFilters);
+      renderSavedFilters();
+      renderSaved();
+    } else {
+      activeFilters = new Set(draftFilters);
+      renderFilters();
+      renderBrowse();
+    }
+    closeFilterDrawer();
   }
 
   function closeFilterDrawer() {
@@ -2772,26 +2809,26 @@ const App = (() => {
     if (!overlay) return;
 
     if (activeTab === 'saved') {
-      
+      draftSavedFilters = new Set(activeSavedFilters);
       const savedFilters = document.getElementById('saved-filters');
       const sortSection = document.getElementById('saved-sort-section');
       const savedHeader = document.querySelector('#view-saved .saved-header');
       const cardsSaved = document.getElementById('cards-saved');
       if (savedFilters && sortSection && savedHeader && cardsSaved) {
-
         savedHeader.appendChild(savedFilters);
         document.getElementById('view-saved').insertBefore(sortSection, document.querySelector('#view-saved .section-header') || cardsSaved);
+        renderSavedFilters();
       }
     } else {
-      
+      draftFilters = new Set(activeFilters);
       const browseFilters = document.getElementById('browse-filters');
       const sortSection = document.getElementById('sort-section');
       const browseHeader = document.querySelector('#view-browse .browse-header');
       const cardsBrowse = document.getElementById('cards-browse');
       if (browseFilters && sortSection && browseHeader && cardsBrowse) {
-
         browseHeader.appendChild(browseFilters);
         document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
+        renderFilters();
       }
     }
 
@@ -3149,7 +3186,7 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, applyFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom };
 })();
 
 window.App = App;

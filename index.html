@@ -580,9 +580,11 @@
       <div id="filter-drawer-body">
         <!-- Dynamically reparented elements -->
       </div>
-      <div class="drawer-footer">
-        <button class="btn btn-primary btn-apply" onclick="App.closeFilterDrawer()"
-          style="width: 100%; margin: 0;">Apply & Close</button>
+      <div class="drawer-footer" style="display: flex; gap: 12px; align-items: center;">
+        <button class="btn btn-secondary btn-clear-all" onclick="App.clearAllFilters()"
+          style="flex: 1; margin: 0; background: var(--card-bg); color: var(--ink); border: 1px solid var(--border);">✕ Clear All</button>
+        <button class="btn btn-primary btn-apply" onclick="App.applyFilterDrawer()"
+          style="flex: 1.5; margin: 0;">Apply Filters</button>
       </div>
     </div>
   </div>
