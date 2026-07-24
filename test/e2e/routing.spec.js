@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Navigation and Routing', () => {
   test('Detail overlay opens and closes correctly on desktop', async ({ page }) => {
-    await page.goto('/?week=taco-2026', { waitUntil: 'domcontentloaded' });
+    await page.goto('/?week=taco-2026');
     
     await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
     const firstCard = page.locator('.dish-card').first();
