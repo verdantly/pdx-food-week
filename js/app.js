@@ -2685,7 +2685,6 @@ const App = (() => {
 
   // ── Mobile Scroll-to-Hide & Filter Drawer Logic ────────────
   let lastScrollTop = 0;
-  let filterDrawerOpen = false;
 
   function setupMobileScrollListener() {
     const viewBrowse = document.getElementById('view-browse');
