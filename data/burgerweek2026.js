@@ -887,8 +887,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "2NW5",
     "neighborhood": "Old Town-Chinatown - Northwest Portland",
     "address": "Two NW Fifth Ave, Portland, OR 97209",
-    "lat": 45.5231,
-    "lng": -122.6765,
+    "lat": 45.523612,
+    "lng": -122.675682,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -1019,8 +1019,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Amaros Table Downtown",
     "neighborhood": "Vancouver",
     "address": "1220 Main St. Ste. 100, Vancouver, WA 98660",
-    "lat": 45.5231,
-    "lng": -122.6765,
+    "lat": 45.631853,
+    "lng": -122.671391,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -2075,8 +2075,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Cecilia",
     "neighborhood": "Vancouver",
     "address": "2520 Columbia House Blvd #108, Vancouver, WA 98661",
-    "lat": 45.5231,
-    "lng": -122.6765,
+    "lat": 45.620021,
+    "lng": -122.645063,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -2361,8 +2361,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Veggie Grill - Cedar Hills Crossing",
     "neighborhood": "Beaverton",
     "address": "3435 SW Cedar Hills Blvd D, Beaverton, OR 97005",
-    "lat": 45.5231,
-    "lng": -122.6765,
+    "lat": 45.495021,
+    "lng": -122.805214,
     "type": "vegan",
     "vegOption": false,
     "veganOption": true,
@@ -2598,7 +2598,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   }
 ];
   newItems.forEach(item => {
-    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+    if (!window.RESTAURANTS.some(r => r.id === item.id && r.weekId === item.weekId)) {
       window.RESTAURANTS.push(item);
     }
   });

@@ -163,6 +163,25 @@ const App = (() => {
       .replace(/'/g, '&#39;');
   }
 
+  function debounce(fn, delay) {
+    let timeoutId = null;
+    return function (...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
+  function highlightMatch(text, query) {
+    if (!text) return '';
+    if (!query || !query.trim()) return esc(text);
+
+    const escapedText = esc(text);
+    const q = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${q})`, 'gi');
+
+    return escapedText.replace(regex, '<mark class="search-highlight">$1</mark>');
+  }
+
   // Only allow http/https URLs to be interpolated into href. Drop anything
   // else (javascript:, data:, etc.) to a safe fallback.
   function safeUrl(u) {
@@ -464,6 +483,7 @@ const App = (() => {
   function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount = -1) {
     const isSaved = saved.has(r.id);
     const cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
+    const q = isSavedTab ? savedSearchQuery : searchQuery;
     const thumb = r.image
       ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
       : `<div class="card-emoji">${esc(r.emoji)}</div>`;
@@ -482,25 +502,13 @@ const App = (() => {
       const isFirst = index === 0;
       const isLast = index === totalCount - 1;
       dragHandleHtml = `
-        <div class="drag-handle-container" onclick="event.stopPropagation()">
-          <div class="drag-grip" title="Drag to reorder">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="9" cy="5" r="1" fill="currentColor"></circle>
-              <circle cx="9" cy="12" r="1" fill="currentColor"></circle>
-              <circle cx="9" cy="19" r="1" fill="currentColor"></circle>
-              <circle cx="15" cy="5" r="1" fill="currentColor"></circle>
-              <circle cx="15" cy="12" r="1" fill="currentColor"></circle>
-              <circle cx="15" cy="19" r="1" fill="currentColor"></circle>
-            </svg>
-          </div>
-          <div class="reorder-btns">
-            <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
-              ▲
-            </button>
-            <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
-              ▼
-            </button>
-          </div>
+        <div class="drag-reorder-buttons" style="display: flex; flex-direction: column; gap: 2px; margin-right: 8px;" onclick="event.stopPropagation();">
+          <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
+            ▲
+          </button>
+          <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
+            ▼
+          </button>
         </div>
       `;
     }
@@ -510,9 +518,9 @@ const App = (() => {
         ${dragHandleHtml}
         ${thumb}
         <div class="card-body">
-          <div class="card-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
-          <div class="card-restaurant">${restaurantHtml}${dist}</div>
-          <div class="card-neighborhood">📍 ${esc(currentWeekId === 'slushie-2026' ? r.address : (r.neighborhood || r.address))}</div>
+          <div class="card-dish">${highlightMatch(r.dish, q)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+          <div class="card-restaurant">${highlightMatch(r.restaurant, q)}${dist}</div>
+          <div class="card-neighborhood">📍 ${highlightMatch(currentWeekId === 'slushie-2026' ? r.address : (r.neighborhood || r.address), q)}</div>
           <div class="card-desc">${esc(r.desc)}</div>
           <div class="card-tags">${buildTags(r)}</div>
         </div>
@@ -1952,17 +1960,34 @@ const App = (() => {
         attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
       }).addTo(leafletMap);
 
-      const bounds = L.latLngBounds(points.map(r => [r.lat, r.lng])).pad(0.12);
-      leafletMap.fitBounds(bounds);
-
       leafletMarkers = new Map();
       markerClusterGroup = L.markerClusterGroup({
         disableClusteringAtZoom: 16,
         maxClusterRadius: 40
       });
+      leafletMap.addLayer(markerClusterGroup);
+
+      leafletMap.on('popupopen', e => {
+        const link = e.popup.getElement().querySelector('a[data-popup-id]');
+        if (link) link.addEventListener('click', ev => {
+          ev.preventDefault();
+          openDetail(parseInt(link.dataset.popupId, 10));
+        });
+      });
+    }
+
+    if (markerClusterGroup) {
+      markerClusterGroup.clearLayers();
+    }
+    leafletMarkers = new Map();
+
+    if (points.length > 0) {
+      const bounds = L.latLngBounds(points.map(r => [r.lat, r.lng])).pad(0.12);
+      leafletMap.fitBounds(bounds);
+
       for (const r of points) {
         const m = L.marker([r.lat, r.lng], {
-          icon: pinIcon(saved.has(r.id), false),
+          icon: pinIcon(saved.has(r.id), r.id === selectedMapId),
           title: `${r.dish} — ${r.restaurant}`,
           riseOnHover: true,
         });
@@ -1973,35 +1998,6 @@ const App = (() => {
         m.on('click', () => showMapSelected(r));
         leafletMarkers.set(r.id, m);
         markerClusterGroup.addLayer(m);
-      }
-      leafletMap.addLayer(markerClusterGroup);
-
-      // Delegate popup "Details" link clicks to openDetail.
-      leafletMap.on('popupopen', e => {
-        const link = e.popup.getElement().querySelector('a[data-popup-id]');
-        if (link) link.addEventListener('click', ev => {
-          ev.preventDefault();
-          openDetail(parseInt(link.dataset.popupId, 10));
-        });
-      });
-    } else {
-      // Refresh pin styling for current saved set, preserving selection.
-      for (const [id, m] of leafletMarkers) {
-        m.setIcon(pinIcon(saved.has(id), id === selectedMapId));
-      }
-      // Keep the "Selected location" card in sync with the saved set so
-      // its star/styling reflects changes made elsewhere (e.g. saving
-      // from the detail sheet while a pin is selected).
-      if (selectedMapId != null) {
-        const r = getRestaurants().find(x => x.id === selectedMapId);
-        if (r) {
-          const el = document.getElementById('map-selected-card');
-          el.innerHTML = `
-            <div class="section-header">Selected location</div>
-            <div class="cards-list" style="padding:0 0 8px">
-              ${cardHTML(r)}
-            </div>`;
-        }
       }
     }
   }
@@ -2924,17 +2920,20 @@ const App = (() => {
     const searchInput = document.getElementById('search-input');
     const searchClearBtn = document.getElementById('search-clear-btn');
     if (searchInput && searchClearBtn) {
-      searchInput.addEventListener('input', e => {
+      const debouncedSearch = debounce(e => {
         searchQuery = e.target.value;
         searchClearBtn.style.display = searchQuery ? 'flex' : 'none';
         renderBrowse();
-      });
+        updateFilterDisplay();
+      }, 150);
+      searchInput.addEventListener('input', debouncedSearch);
       searchClearBtn.addEventListener('click', () => {
         searchInput.value = '';
         searchQuery = '';
         searchClearBtn.style.display = 'none';
         searchInput.focus();
         renderBrowse();
+        updateFilterDisplay();
       });
     }
 
@@ -2942,11 +2941,12 @@ const App = (() => {
     const savedSearchInput = document.getElementById('saved-search-input');
     const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
     if (savedSearchInput && savedSearchClearBtn) {
-      savedSearchInput.addEventListener('input', e => {
+      const debouncedSavedSearch = debounce(e => {
         savedSearchQuery = e.target.value;
         savedSearchClearBtn.style.display = savedSearchQuery ? 'flex' : 'none';
         renderSaved();
-      });
+      }, 150);
+      savedSearchInput.addEventListener('input', debouncedSavedSearch);
       savedSearchClearBtn.addEventListener('click', () => {
         savedSearchInput.value = '';
         savedSearchQuery = '';

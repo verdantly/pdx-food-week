@@ -538,8 +538,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4MDUyMDYzMTM5NDIzOC1HcmF5cy1SZXN0YXVyYW50LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/grays-verde-loaded-nachos/e243649/",
-    "lat": 45.5231,
-    "lng": -122.6765,
+    "lat": 45.625521,
+    "lng": -122.674747,
     "whatsOnIt": "Crisp house-fried tortilla chips topped with slow-simmered pork chile verde, ranchero black beans, and a rich red chile cheese fonduta. Garnished with fresh cilantro and green onion for a vibrant finish.",
     "whatTheySay": "Inspired by Chef Troy Lucio's passion for bold, layered flavors, these nachos brings together the rustic soul of Mexican cuisine with subtle Italian influence. Rich, slow-braised pork chile verde meets creamy red chile cheese fonduta, echoing the indulgence of classic Italian sauces, while ranchero black beans and house-fried spiced tortilla chips ground the dish in tradition."
   },
@@ -1369,7 +1369,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   }
 ];
   newItems.forEach(item => {
-    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+    if (!window.RESTAURANTS.some(r => r.id === item.id && r.weekId === item.weekId)) {
       window.RESTAURANTS.push(item);
     }
   });
