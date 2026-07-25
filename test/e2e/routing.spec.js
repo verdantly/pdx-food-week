@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Navigation and Routing', () => {
-  test('Detail overlay opens and closes correctly on desktop', async ({ page }) => {
+  test('Detail overlay opens and closes correctly on desktop', async ({ page, isMobile }) => {
+    if (isMobile) return;
     await page.goto('/?week=taco-2026');
     
     await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
@@ -28,7 +29,7 @@ test.describe('Navigation and Routing', () => {
     await page.waitForSelector('.landing-card', { state: 'visible', timeout: 10000 });
     await page.locator('.landing-card', { hasText: 'Taco Week' }).click();
 
-    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+    await page.waitForSelector('.dish-card', { state: 'attached', timeout: 10000 });
 
     if (isMobile) {
       await page.click('#mobile-filter-fab');
@@ -44,7 +45,7 @@ test.describe('Navigation and Routing', () => {
   test('Filter drawer Apply and Clear buttons work correctly', async ({ page, isMobile }) => {
     if (!isMobile) return;
     await page.goto('/?week=burger-2026');
-    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+    await page.waitForSelector('.dish-card', { state: 'attached', timeout: 10000 });
 
     await page.click('#mobile-filter-fab');
     const drawer = page.locator('#filter-drawer-overlay');

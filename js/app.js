@@ -2767,6 +2767,7 @@ const App = (() => {
 
         renderSavedFilters();
         overlay.classList.add('open');
+        filterDrawerOpen = true;
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     } else {
@@ -2779,6 +2780,7 @@ const App = (() => {
 
         renderFilters();
         overlay.classList.add('open');
+        filterDrawerOpen = true;
         document.body.style.overflow = 'hidden'; // prevent underlying body scroll
       }
     }
@@ -2798,10 +2800,12 @@ const App = (() => {
   }
 
   function closeFilterDrawer() {
-    if (!filterDrawerOpen) return;
-
     const overlay = document.getElementById('filter-drawer-overlay');
-    if (!overlay) return;
+    if (overlay) {
+      overlay.classList.remove('open');
+    }
+    filterDrawerOpen = false;
+    document.body.style.overflow = ''; // restore body scroll
 
     if (activeTab === 'saved') {
       draftSavedFilters = new Set(activeSavedFilters);
@@ -2822,14 +2826,11 @@ const App = (() => {
       const cardsBrowse = document.getElementById('cards-browse');
       if (browseFilters && sortSection && browseHeader && cardsBrowse) {
         browseHeader.appendChild(browseFilters);
-        document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
+        const targetNode = document.querySelector('#view-browse .tab-section-header') || cardsBrowse;
+        document.getElementById('view-browse').insertBefore(sortSection, targetNode);
         renderFilters();
       }
     }
-
-    overlay.classList.remove('open');
-    filterDrawerOpen = false;
-    document.body.style.overflow = ''; // restore body scroll
   }
 
   // ── Init ───────────────────────────────────────────────────
