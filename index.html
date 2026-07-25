@@ -370,7 +370,7 @@
             <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px;">
               <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
                 style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 100px;"
-                aria-label="Enter Zip Code for distance sorting">
+                aria-label="Enter Zip Code for saved distance sorting">
               <button class="filter-chip active" style="padding: 4px 10px;"
                 onclick="App.applySavedZipCode()">Apply</button>
             </div>
@@ -420,7 +420,7 @@
             </p>
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <input id="my-name-input" type="text" placeholder="Your Name (Optional)" autocomplete="off"
-                spellcheck="false"
+                spellcheck="false" aria-label="Your Name"
                 style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
               <button class="btn btn-primary" id="copy-btn" onclick="App.generateShareLink()" style="margin-bottom: 0;">
                 Generate Magic Link
@@ -431,10 +431,10 @@
                   <div class="paste-label">Magic Link</div>
                   <div class="paste-row">
                     <input id="magic-link-display" type="text" readonly onclick="this.select()"
-                      style="font-family: var(--font-body); font-size: 13px;" />
-                    <button id="copy-magic-btn" class="btn"
+                      aria-label="Your generated Magic Link" style="font-family: var(--font-body); font-size: 13px;" />
+                    <button id="copy-magic-btn" class="btn" aria-label="Copy Magic Link"
                       onclick="App.copyTextFromElement('magic-link-display', 'copy-magic-btn')">Copy</button>
-                    <button id="share-native-btn" class="btn"
+                    <button id="share-native-btn" class="btn" aria-label="Share Magic Link natively"
                       style="display: none; background: var(--pizza); color: #fff;"
                       onclick="App.shareNative()">Share</button>
                   </div>
@@ -445,8 +445,8 @@
                 <div>
                   <div class="paste-label">Backup Code (Bypasses Cloud)</div>
                   <div class="paste-row">
-                    <input id="manual-code-display" type="text" readonly onclick="this.select()" />
-                    <button id="copy-manual-btn" class="btn"
+                    <input id="manual-code-display" type="text" readonly onclick="this.select()" aria-label="Your generated Backup Code" />
+                    <button id="copy-manual-btn" class="btn" aria-label="Copy Backup Code"
                       onclick="App.copyTextFromElement('manual-code-display', 'copy-manual-btn')">Copy</button>
                   </div>
                   <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">A static copy of your list.
@@ -463,7 +463,7 @@
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <div class="paste-row">
                 <input id="friend-code-input" type="text" placeholder="Paste Magic Link or Code" autocomplete="off"
-                  spellcheck="false" />
+                  spellcheck="false" aria-label="Paste friend's Magic Link or Backup Code" />
                 <button class="btn" onclick="App.addFriend()">Add</button>
               </div>
             </div>
