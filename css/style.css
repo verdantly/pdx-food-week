@@ -540,7 +540,6 @@ body.is-landing .bottom-nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 .filter-chip {
@@ -837,26 +836,20 @@ body.is-landing .bottom-nav {
 }
 
 .stat-pill {
-  background: var(--card-bg);
   color: var(--ink-60);
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 4px 16px 4px 0;
   font-size: 13px;
   font-weight: 600;
-  border: 1px solid var(--border);
   cursor: default;
 }
 
 .stat-pill.clickable {
   cursor: pointer;
-  background: var(--card-bg);
   transition: all 0.2s ease;
 }
 
 .stat-pill.clickable:hover {
-  background: var(--pizza-light);
   color: var(--pizza-dark);
-  border-color: var(--pizza-dark);
 }
 
 .stat-pill span {
@@ -2619,7 +2612,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   #app.detail-open #overlap-container.cards-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .map-container {
@@ -2634,7 +2627,8 @@ input[type="search"]::-webkit-search-cancel-button {
     padding: 16px 32px 0;
   }
 
-  .map-selected .cards-list {
+  .map-selected .cards-list,
+  #app.detail-open .map-selected .cards-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2740,6 +2734,10 @@ input[type="search"]::-webkit-search-cancel-button {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  #app.detail-open #overlap-container.cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .landing-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 1200px;
@@ -2762,6 +2760,10 @@ input[type="search"]::-webkit-search-cancel-button {
   #overlap-container.cards-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  #app.detail-open #overlap-container.cards-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 2200px) {
@@ -2774,6 +2776,10 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   #overlap-container.cards-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  #app.detail-open #overlap-container.cards-list {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
