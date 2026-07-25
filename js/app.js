@@ -1899,8 +1899,8 @@ const App = (() => {
         attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
       }).addTo(leafletMap);
 
-      const bounds = L.latLngBounds(points.map(r => [r.lat, r.lng])).pad(0.12);
-      leafletMap.fitBounds(bounds);
+      // Set default view to Portland, preventing bounds glitch on 0x0 containers
+      leafletMap.setView([45.523064, -122.676483], 12);
 
       leafletMarkers = new Map();
       markerClusterGroup = L.markerClusterGroup({
