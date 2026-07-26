@@ -38,6 +38,10 @@ const App = (() => {
   let filterDrawerOpen = false;
   let saved = new Set();
   let passed = new Set();
+  
+  // Crawl Builder State
+  let crawlModeActive = false;
+  let crawlSelection = [];
   let friends = [];
   let viewedNew = new Set();
   let notes = {};
@@ -482,7 +486,9 @@ const App = (() => {
   // ── Card HTML ──────────────────────────────────────────────
   function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount = -1) {
     const isSaved = saved.has(r.id);
-    const cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
+    const isSelected = crawlSelection.includes(r.id);
+    let cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
+    if (crawlModeActive && isSavedTab && isSelected) cls += ' crawl-selected';
     const q = isSavedTab ? savedSearchQuery : searchQuery;
     const thumb = r.image
       ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
@@ -647,6 +653,23 @@ const App = (() => {
 
   // ── Detail sheet ───────────────────────────────────────────
   function openDetail(id, fromPopState = false) {
+    if (crawlModeActive && activeTab === 'saved') {
+      const idx = crawlSelection.indexOf(id);
+      if (idx > -1) {
+        crawlSelection.splice(idx, 1);
+      } else {
+        if (crawlSelection.length < 8) {
+          crawlSelection.push(id);
+        } else {
+          showToast('Maximum 8 spots allowed per crawl');
+          return;
+        }
+      }
+      updateCrawlFab();
+      renderSaved();
+      return;
+    }
+
     const r = getRestaurants().find(x => x.id === id);
     if (!r) return;
 
@@ -1378,6 +1401,27 @@ const App = (() => {
   // ── Render: Browse ─────────────────────────────────────────
   function renderBrowse() {
     const filtered = getFiltered();
+    
+    // Update browse stats
+    const hoods = new Set(filtered.map(r => r.neighborhood || r.address)).size;
+    const types = new Set(filtered.map(r => r.type)).size;
+    const browseCountEl = document.getElementById('browse-stat-count');
+    if (browseCountEl) browseCountEl.textContent = filtered.length;
+    
+    const browseHoodsEl = document.getElementById('browse-stat-hoods');
+    const browseTypesEl = document.getElementById('browse-stat-types');
+    if (browseHoodsEl && browseTypesEl) {
+      if (currentWeekId === 'slushie-2026') {
+        browseHoodsEl.parentElement.style.display = 'none';
+        browseTypesEl.parentElement.style.display = 'none';
+      } else {
+        browseHoodsEl.parentElement.style.display = '';
+        browseTypesEl.parentElement.style.display = '';
+        browseHoodsEl.textContent = hoods;
+        browseTypesEl.textContent = types;
+      }
+    }
+
     const container = document.getElementById('cards-browse');
     if (!container) return;
     if (filtered.length === 0) {
@@ -1430,6 +1474,26 @@ const App = (() => {
       document.getElementById('stat-types').textContent = types;
     }
 
+    if (activeTab === 'saved') {
+      const h = document.getElementById('saved-header-title');
+      const eBtn = document.getElementById('saved-exit-friend-btn');
+      const cBtn = document.getElementById('saved-copy-btn');
+      const mBtn = document.getElementById('saved-merge-friend-btn');
+      
+      if (viewingFriendIndex !== null) {
+        const fn = friends[viewingFriendIndex].name || 'Friend';
+        if (h) h.textContent = `${fn}'s List`;
+        if (eBtn) eBtn.style.display = 'inline-block';
+        if (mBtn) mBtn.style.display = 'inline-block';
+        if (cBtn) cBtn.style.display = 'none';
+      } else {
+        if (h) h.textContent = 'Your Saved Spots';
+        if (eBtn) eBtn.style.display = 'none';
+        if (mBtn) mBtn.style.display = 'none';
+        if (cBtn) cBtn.style.display = 'inline-block';
+      }
+    }
+
     const targetSet = viewingFriendIndex !== null && friends[viewingFriendIndex] 
       ? new Set(friends[viewingFriendIndex].ids) 
       : saved;
@@ -1455,15 +1519,18 @@ const App = (() => {
     const headerTitle = document.getElementById('saved-header-title');
     const copyBtn = document.getElementById('saved-copy-btn');
     const exitBtn = document.getElementById('saved-exit-friend-btn');
+    const mergeBtn = document.getElementById('saved-merge-friend-btn');
     
     if (viewingFriendIndex !== null && friends[viewingFriendIndex]) {
       if (headerTitle) headerTitle.textContent = `${esc(friends[viewingFriendIndex].name)}'s Spots`;
       if (copyBtn) copyBtn.style.display = 'none';
-      if (exitBtn) exitBtn.style.display = '';
+      if (exitBtn) exitBtn.style.display = 'inline-block';
+      if (mergeBtn) mergeBtn.style.display = 'inline-block';
     } else {
       if (headerTitle) headerTitle.textContent = 'Your Saved Spots';
-      if (copyBtn) copyBtn.style.display = '';
+      if (copyBtn) copyBtn.style.display = 'inline-block';
       if (exitBtn) exitBtn.style.display = 'none';
+      if (mergeBtn) mergeBtn.style.display = 'none';
     }
 
     if (items.length === 0) {
@@ -1522,7 +1589,7 @@ const App = (() => {
   }
 
   function showMetricDetails(type) {
-    const items = getSaved();
+    const items = activeTab === 'browse' ? getFiltered() : getSaved();
     if (items.length === 0) return;
 
     const overlay = document.getElementById('metric-modal-overlay');
@@ -1912,6 +1979,33 @@ const App = (() => {
     renderSaved();
   }
 
+  function mergeFriendList() {
+    if (viewingFriendIndex === null || !friends[viewingFriendIndex]) return;
+    const friend = friends[viewingFriendIndex];
+    let addedCount = 0;
+    
+    friend.ids.forEach(id => {
+      if (!saved.has(id)) {
+        saved.add(id);
+        
+        // Remove from passed if it was there
+        if (passed.has(id)) {
+          passed.delete(id);
+        }
+        
+        addedCount++;
+      }
+    });
+    
+    if (addedCount > 0) {
+      saveState();
+      renderSaved();
+      showToast(`✅ Merged ${addedCount} new spots into your list!`);
+    } else {
+      showToast('No new spots to merge.');
+    }
+  }
+
   // ── Map (Leaflet + OpenStreetMap tiles) ────────────────────
   // `leafletMap` and the marker index are lazily created on first entry into
   // the Map tab. renderMap() refreshes marker styling against the current
@@ -1921,13 +2015,15 @@ const App = (() => {
   let markerClusterGroup = null; // Map<id, L.CircleMarker>
   let selectedMapId = null;
 
-  function pinIcon(isSaved, isSelected) {
-    const cls = ['pdx-pin', isSaved ? 'saved' : '', isSelected ? 'selected' : '']
+  function pinIcon(isSaved, isSelected, isCrawlSelected = false, isCrawlActive = false) {
+    const cls = ['pdx-pin', isSaved ? 'saved' : '', isSelected ? 'selected' : '', isCrawlSelected ? 'crawl-selected' : '', (isCrawlActive && !isCrawlSelected) ? 'crawl-unselected' : '']
       .filter(Boolean).join(' ');
-    const size = isSaved ? 22 : 18;
+    const size = (isSaved || isCrawlSelected) ? 22 : 18;
     return L.divIcon({
       className: '',
-      html: `<div class="${cls}"></div>`,
+      html: `<div class="${cls}">
+               ${isCrawlSelected ? '<span class="material-symbols-outlined" style="color:white; font-size:14px; line-height:22px; display:block; text-align:center;">check</span>' : ''}
+             </div>`,
       iconSize: [size, size],
       iconAnchor: [size / 2, size / 2],
     });
@@ -1974,6 +2070,9 @@ const App = (() => {
           openDetail(parseInt(link.dataset.popupId, 10));
         });
       });
+      
+      // Set default view to Portland, preventing bounds glitch on 0x0 containers
+      leafletMap.setView([45.523064, -122.676483], 12);
     }
 
     if (markerClusterGroup) {
@@ -1982,23 +2081,54 @@ const App = (() => {
     leafletMarkers = new Map();
 
     if (points.length > 0) {
-      // Set default view to Portland, preventing bounds glitch on 0x0 containers
-      leafletMap.setView([45.523064, -122.676483], 12);
 
       for (const r of points) {
+        const isCrawlSelected = crawlSelection.includes(r.id);
         const m = L.marker([r.lat, r.lng], {
-          icon: pinIcon(saved.has(r.id), r.id === selectedMapId),
+          icon: pinIcon(saved.has(r.id), r.id === selectedMapId, isCrawlSelected, crawlModeActive),
           title: `${r.dish} — ${r.restaurant}`,
           riseOnHover: true,
         });
-        m.bindPopup(
-          `<div class="popup-dish">${esc(r.dish)}</div>
-           <div class="popup-restaurant">${esc(r.restaurant)}</div>`
-        );
-        m.on('click', () => showMapSelected(r));
+        
+        let popupHtml = `<div class="popup-dish">${esc(r.dish)}</div><div class="popup-restaurant">${esc(r.restaurant)}</div>`;
+        
+        if (crawlModeActive) {
+          popupHtml += `<div style="margin-top: 10px; text-align: center;">
+            <button class="btn btn-primary" onclick="App.handleCrawlPinClick(${r.id})" style="padding: 6px 12px; font-size: 13px; margin-bottom: 0; width: 100%;">
+              ${isCrawlSelected ? 'Remove from Crawl' : 'Add to Crawl'}
+            </button>
+          </div>`;
+        }
+        
+        m.bindPopup(popupHtml);
+        
+        m.on('click', () => {
+          if (!crawlModeActive) {
+            showMapSelected(r);
+          }
+        });
         leafletMarkers.set(r.id, m);
         markerClusterGroup.addLayer(m);
       }
+    }
+  }
+
+  function handleCrawlPinClick(id) {
+    const idx = crawlSelection.indexOf(id);
+    if (idx > -1) {
+      crawlSelection.splice(idx, 1);
+    } else {
+      if (crawlSelection.length >= 8) {
+        showToast('Max 8 spots for an itinerary');
+        return;
+      }
+      crawlSelection.push(id);
+    }
+    updateCrawlFab();
+    renderMap(); // Re-render to update pin icons
+    
+    if (window.innerWidth >= 1100 || document.getElementById('detail-overlay').classList.contains('open')) {
+      generateCrawlItinerary();
     }
   }
 
@@ -3185,7 +3315,190 @@ const App = (() => {
     switchTab('landing', true);
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, applyFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom };
+  function toggleCrawlMode() {
+    crawlModeActive = !crawlModeActive;
+    if (!crawlModeActive) {
+      closeDetail();
+    }
+    const fab = document.getElementById('crawl-fab');
+    if (fab) fab.style.display = crawlModeActive ? 'block' : 'none';
+    
+    const btn = document.getElementById('map-plan-crawl-btn');
+    if (btn) {
+      if (crawlModeActive) {
+        btn.style.background = 'white';
+        btn.style.color = 'var(--teal)';
+        btn.style.border = '2px solid var(--teal)';
+        btn.textContent = 'Cancel Crawl';
+      } else {
+        btn.style.background = 'var(--teal)';
+        btn.style.color = 'white';
+        btn.style.border = '2px solid var(--teal)';
+        btn.textContent = 'Plan Crawl';
+      }
+    }
+    
+    updateCrawlFab();
+    renderMap();
+    if (crawlModeActive && window.innerWidth >= 1100) {
+      generateCrawlItinerary();
+    }
+  }
+
+  function clearCrawl() {
+    crawlSelection = [];
+    updateCrawlFab();
+    renderMap();
+    if (crawlModeActive && window.innerWidth >= 1100) {
+      generateCrawlItinerary();
+    }
+  }
+
+  function updateCrawlFab() {
+    const textEl = document.getElementById('crawl-fab-text');
+    const routeBtn = document.getElementById('crawl-generate-btn');
+    if (textEl) textEl.textContent = `Select up to 8 spots (${crawlSelection.length}/8)`;
+    if (routeBtn) routeBtn.disabled = crawlSelection.length < 2;
+  }
+
+  let currentItinerary = [];
+
+  function generateCrawlItinerary() {
+    const spots = crawlSelection.map(id => getRestaurants().find(r => r.id === id)).filter(Boolean);
+    
+    if (spots.length < 2) {
+      currentItinerary = spots;
+      renderItinerarySheet();
+      document.getElementById('detail-overlay').classList.add('open');
+      document.getElementById('app').classList.add('detail-open');
+      return;
+    }
+
+    let bestOrder = null;
+    let minDistance = Infinity;
+
+    const permute = (arr, m = []) => {
+      if (arr.length === 0) {
+        let dist = 0;
+        for (let i = 0; i < m.length - 1; i++) {
+          dist += haversineDistance(m[i].lat, m[i].lng, m[i+1].lat, m[i+1].lng);
+        }
+        if (dist < minDistance) {
+          minDistance = dist;
+          bestOrder = [...m];
+        }
+      } else {
+        for (let i = 0; i < arr.length; i++) {
+          let curr = arr.slice();
+          let next = curr.splice(i, 1);
+          permute(curr.slice(), m.concat(next));
+        }
+      }
+    };
+
+    permute(spots);
+    currentItinerary = bestOrder;
+    
+    renderItinerarySheet();
+    document.getElementById('detail-overlay').classList.add('open');
+    document.getElementById('app').classList.add('detail-open');
+  }
+
+  function renderItinerarySheet() {
+    const sheetEl = document.getElementById('detail-sheet-content');
+    if (!sheetEl) return;
+    
+    let totalMiles = 0;
+    for (let i = 0; i < currentItinerary.length - 1; i++) {
+      totalMiles += haversineDistance(currentItinerary[i].lat, currentItinerary[i].lng, currentItinerary[i+1].lat, currentItinerary[i+1].lng);
+    }
+    totalMiles *= 1.3;
+    let walkMins = Math.round((totalMiles / 3.0) * 60);
+    let driveMins = Math.round((totalMiles / 15.0) * 60);
+
+    let html = `
+      <button class="sheet-close-btn" onclick="App.closeDetail()" aria-label="Close detail view" style="top: 24px;">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="sheet-handle"></div>
+      <div class="sheet-dish" style="margin-top: 32px; margin-bottom: 4px;">Your Food Crawl</div>
+    `;
+    
+    if (currentItinerary.length === 0) {
+      html += `<div style="font-size: 14px; color: var(--ink-80); margin-bottom: 16px;">
+        Tap on map pins to start building your itinerary.
+      </div>`;
+    } else {
+      html += `<div style="font-size: 14px; color: var(--ink-80); margin-bottom: 16px;">
+        <strong>Distance:</strong> ~${totalMiles.toFixed(1)} miles<br>
+        <strong>Walk:</strong> ${walkMins} mins • <strong>Drive:</strong> ${driveMins} mins
+      </div>
+      <div id="itinerary-sortable-list" class="crawl-steps" style="margin-bottom: 24px;">`;
+
+      currentItinerary.forEach((r, idx) => {
+        html += `<div class="crawl-step" data-id="${r.id}" style="cursor: grab; display: flex; align-items: center; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: var(--shadow);">
+          <div style="margin-right: 12px; color: var(--ink-30);">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line>
+              <line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </div>
+          <div class="crawl-step-num" style="margin-right: 12px;">${idx + 1}</div>
+          <div class="crawl-step-details" style="flex: 1;">
+            <div class="crawl-step-title" style="font-weight: 700; font-family: var(--font-display);">${esc(r.dish)}</div>
+            <div class="crawl-step-meta" style="font-size: 12px; color: var(--ink-60);">${esc(r.restaurant)}</div>
+          </div>
+        </div>`;
+      });
+
+      html += `</div>
+        <button class="btn btn-primary" onclick="App.openCrawlMapsUrl()" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 24px; padding: 12px; border-radius: 24px;" ${currentItinerary.length < 2 ? 'disabled' : ''}>
+          <span style="font-size:18px;">Open in Google Maps</span>
+        </button>
+      `;
+    }
+
+    sheetEl.innerHTML = html;
+
+    const listEl = document.getElementById('itinerary-sortable-list');
+    if (listEl && window.Sortable) {
+      Sortable.create(listEl, {
+        animation: 150,
+        handle: '.crawl-step',
+        onEnd: function(evt) {
+          const item = currentItinerary.splice(evt.oldIndex, 1)[0];
+          currentItinerary.splice(evt.newIndex, 0, item);
+          renderItinerarySheet();
+        }
+      });
+    }
+  }
+
+  function openCrawlMapsUrl() {
+    if (currentItinerary.length < 2) return;
+    const origin = currentItinerary[0];
+    const dest = currentItinerary[currentItinerary.length - 1];
+    let waypoints = '';
+    if (currentItinerary.length > 2) {
+      waypoints = '&waypoints=' + currentItinerary.slice(1, -1).map(r => `${r.lat},${r.lng}`).join('|');
+    }
+    const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${dest.lat},${dest.lng}${waypoints}&travelmode=walking`;
+    window.open(mapsUrl, '_blank');
+  }
+
+  function closeCrawlModal(e) {
+    if (e && e.target && e.target.id !== 'crawl-modal-overlay' && !e.target.classList.contains('close-btn')) {
+      return;
+    }
+    document.getElementById('crawl-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, mergeFriendList, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, applyFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom, toggleCrawlMode, generateCrawlItinerary, closeCrawlModal, renderItinerarySheet, openCrawlMapsUrl, handleCrawlPinClick, clearCrawl };
 })();
 
 window.App = App;

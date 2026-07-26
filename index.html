@@ -237,7 +237,18 @@
             </div>
           </div>
         </div>
-        <h2 class="tab-section-header">Browse</h2>
+        <div class="saved-header-integrated" id="browse-section-header">
+          <div class="header-left">
+            <h2 class="tab-header-title">Browse</h2>
+            <div class="stats-pills">
+              <div class="stat-pill"><span id="browse-stat-count">0</span> Total</div>
+              <div class="stat-pill clickable" onclick="App.showMetricDetails('hoods')"
+                title="Click to view neighborhoods"><span id="browse-stat-hoods">0</span> Neighborhoods</div>
+              <div class="stat-pill clickable" onclick="App.showMetricDetails('types')"
+                title="Click to view dish types"><span id="browse-stat-types">0</span> Dish Types</div>
+            </div>
+          </div>
+        </div>
         <div class="cards-list" id="cards-browse"></div>
         <div class="view-footer">
           PDX Food Week<br>
@@ -401,10 +412,14 @@
                 title="Click to view dish types"><span id="stat-types">0</span> Dish Types</div>
             </div>
           </div>
-          <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()"
-            style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0;">Copy List</button>
-          <button class="btn btn-secondary" id="saved-exit-friend-btn" onclick="App.exitFriendView()"
-            style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: transparent; color: var(--pizza); border: 2px solid var(--pizza);">Exit Friend View</button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()"
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0;">Copy List</button>
+            <button class="btn btn-secondary" id="saved-merge-friend-btn" onclick="App.mergeFriendList()"
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: var(--teal); color: white; border: 2px solid var(--teal);">Merge All</button>
+            <button class="btn btn-secondary" id="saved-exit-friend-btn" onclick="App.exitFriendView()"
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: transparent; color: var(--pizza); border: 2px solid var(--pizza);">Exit Friend View</button>
+          </div>
         </div>
         <div class="cards-list" id="cards-saved"></div>
         <div class="view-footer">
@@ -503,6 +518,8 @@
       <section class="view" id="view-map" role="tabpanel" aria-label="Map of locations">
         <h2 class="tab-section-header">Map</h2>
         <div class="map-container">
+          <button class="btn btn-primary" id="map-plan-crawl-btn" onclick="App.toggleCrawlMode()"
+            style="position: absolute; top: 12px; right: 12px; z-index: 1000; width: auto; margin: 0; background: var(--teal); border-color: var(--teal); box-shadow: var(--shadow-lg);">Plan Crawl</button>
           <div id="map-canvas" role="application" aria-label="Map of Portland pizza week locations"></div>
           <div class="map-legend">
             <div class="legend-item">
@@ -620,6 +637,18 @@
 
   <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
 
+  <!-- Crawl Builder FAB -->
+  <div id="crawl-fab" class="crawl-fab" style="display: none;">
+    <div class="crawl-fab-content">
+      <span id="crawl-fab-text">Select up to 8 spots (0/8)</span>
+      <div class="crawl-fab-actions">
+        <button class="btn btn-secondary" onclick="App.clearCrawl()" style="margin: 0; padding: 6px 12px; background: transparent; color: white;">Clear</button>
+        <button class="btn btn-secondary" onclick="App.toggleCrawlMode()" style="margin: 0; padding: 6px 12px; background: transparent; color: white;">Close</button>
+        <button class="btn btn-primary" id="crawl-generate-btn" onclick="App.generateCrawlItinerary()" style="margin: 0; padding: 6px 12px; border-radius: 16px;" disabled>Route</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Scripts ── -->
   <script src="data/burgerweek2026.js?v=1"></script>
   <script src="data/salads2026.js?v=1"></script>
@@ -631,7 +660,9 @@
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-  <script src="js/app.js?v=20260611"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js?v=3"></script>
 
 </body>
 
