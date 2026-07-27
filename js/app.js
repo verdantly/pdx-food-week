@@ -46,13 +46,18 @@ if (window.firebase) {
   }
 }
 
+function hideCompactDropdowns() {
+  const compactMenuDropdown = document.getElementById('compact-menu-dropdown');
+  const compactSearchDropdown = document.getElementById('compact-search-dropdown');
+  if (compactMenuDropdown) compactMenuDropdown.style.display = 'none';
+  if (compactSearchDropdown) compactSearchDropdown.style.display = 'none';
+}
+
 function switchTab(name, fromPopState = false) {
   if (State.filterDrawerOpen) {
     closeFilterDrawer();
   }
-  if (window.App && window.App.hideCompactDropdowns) {
-    window.App.hideCompactDropdowns();
-  }
+  hideCompactDropdowns();
   State.activeTab = name;
   document.querySelectorAll('.nav-tab, .compact-menu-item').forEach(el => {
     const isActive = el.dataset.tab === name;
@@ -314,20 +319,35 @@ function renderLanding() {
 
   grid.innerHTML = sortedWeeks.map(w => {
     let badgeHTML = '';
-    if (currentWeeks.some(cw => cw.id === w.id)) {
-      badgeHTML = '<div class="badge-upcoming current" style="background: #34A853;">Current</div>';
-    } else if (nextWeek && w.id === nextWeek.id && currentWeeks.length === 0) {
-      badgeHTML = '<div class="badge-upcoming">Next</div>';
-    } else if (nextWeek && w.id === nextWeek.id) {
-      badgeHTML = '<div class="badge-upcoming">Next</div>';
+    const isActive = currentWeeks.some(cw => cw.id === w.id);
+    const isNext = nextWeek && w.id === nextWeek.id;
+
+    if (isActive) {
+      badgeHTML = '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>';
+    } else if (isNext) {
+      badgeHTML = '<div class="landing-status-badge next">Up Next</div>';
     }
+
+    const priceText = (w.pricePills && w.pricePills.length > 0)
+      ? esc(w.pricePills[0])
+      : (w.priceSlice ? `${esc(w.priceSlice)} slice` : '');
+
+    const countText = w.totalLocations
+      ? `${w.totalLocations} spots`
+      : '';
+
+    const metaParts = [priceText, countText].filter(Boolean).join(' • ');
+    const metaHTML = metaParts ? `<p class="landing-card-subinfo">${metaParts}</p>` : '';
+
+    const themeColor = w.color || 'var(--pizza)';
+
     return `
-      <a href="?week=${w.id}" class="landing-card" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
+      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
         ${badgeHTML}
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
         <h3>${esc(w.name)}</h3>
-        <p>${esc(w.dates)}</p>
-        <button class="landing-btn" style="background: ${w.color || 'var(--ink)'}">Explore</button>
+        <p class="landing-card-dates">${esc(w.dates)}</p>
+        ${metaHTML}
       </a>
     `;
   }).join('');
@@ -445,21 +465,22 @@ function init() {
     }
 
     const currentUrlParams = new URLSearchParams(window.location.search);
-    const stateWeekId = (e.state && e.state.week) || currentUrlParams.get('week');
+    const targetWeekId = currentUrlParams.get('week');
 
-    if (!stateWeekId) {
+    if (!targetWeekId) {
       document.body.classList.add('is-landing');
       State.currentWeekId = null;
       renderLanding();
       switchTab('landing', true);
-    } else if (stateWeekId !== State.currentWeekId) {
-      switchWeek(stateWeekId, true);
-    }
-
-    let tab = (e.state && e.state.tab) || currentUrlParams.get('tab') || 'browse';
-    if (tab === 'friends') tab = 'share';
-    if (State.activeTab !== tab && State.currentWeekId) {
-      switchTab(tab, true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (targetWeekId !== State.currentWeekId) {
+      switchWeek(targetWeekId, true);
+    } else {
+      let tab = (e.state && e.state.tab) || currentUrlParams.get('tab') || 'browse';
+      if (tab === 'friends') tab = 'share';
+      if (State.activeTab !== tab) {
+        switchTab(tab, true);
+      }
     }
   });
 
@@ -689,6 +710,7 @@ function init() {
 
   if (!urlWeekId) {
     State.currentWeekId = null;
+    history.replaceState({ week: null, tab: 'landing' }, '', window.location);
     switchTab('landing', true);
     renderLanding();
     return;
@@ -810,7 +832,8 @@ const App = {
   renderFriends,
   renderAll,
   setupSavedDragEvents,
-  getActiveFriends
+  getActiveFriends,
+  hideCompactDropdowns
 };
 
 window.App = App;

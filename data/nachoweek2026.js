@@ -6,7 +6,7 @@ window.FOOD_WEEKS.push({
   organizer: "Portland Mercury",
     startDate: "2026-06-22",
     dates: "June 22–28, 2026",
-    pricePills: ["$10 Nachos"],
+    pricePills: ["$10 nachos"],
     color: "#D97B29",
     emoji: "🧀",
     totalLocations: 59,

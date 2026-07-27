@@ -9,6 +9,7 @@ window.FOOD_WEEKS.push(
     name: "Pizza Week 2026",
     organizer: "Portland Mercury",
     dates: "April 20–26, 2026",
+    pricePills: ["$4 slices"],
     priceSlice: "$4",
     pricePie: "$25",
     color: "#C94B2C",

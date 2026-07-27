@@ -11,7 +11,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="apple-mobile-web-app-title" content="PDX Food Week" />
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="PDX Food Week" />
@@ -175,17 +176,49 @@
 
       <!-- ── Landing View ── -->
       <section class="view" id="view-landing" role="tabpanel" aria-label="Select a Food Week">
-        <div class="landing-header">
+        <div class="landing-hero">
           <h1 class="landing-title">PDX Food Week</h1>
-          <div class="landing-subtitle-box">
-            <p class="landing-subtitle">Portland's food weeks are better with friends! <br> Start by picking a week and
-              browsing through all the options, save the dishes you want to try, and
-              share your lists with others! <br> <br><i>Not affiliated with event organizers.</i>
-            </p>
-          </div>
+          <p class="landing-tagline">
+            Portland's food weeks are better with friends! <br>
+            Start by picking a week and browsing through all the options, save the dishes you want to try, and share
+            your lists with others!<br>
+            <i>Not affiliated with any food week event organizers.</i>
+          </p>
         </div>
+
+        <div class="landing-festivals-header">
+          <h2 class="landing-section-title">Explore Food Weeks</h2>
+          <p class="landing-section-sub">Select a food week below to start browsing locations and dishes.</p>
+        </div>
+
         <div class="landing-grid" id="landing-grid">
           <!-- Populated dynamically -->
+        </div>
+
+        <!-- ── How It Works ── -->
+        <div class="landing-features">
+          <h2 class="landing-section-title">How It Works</h2>
+          <div class="landing-steps-grid">
+            <div class="landing-step-item">
+              <div class="step-num">01</div>
+              <h3 class="step-title">Explore specials</h3>
+              <p class="step-desc">Browse all the food week specials and filter by location, dietary options, then save
+                your favorites. Use our fun Tinder-style swipe feature to help you choose!</p>
+            </div>
+            <div class="landing-step-item">
+              <div class="step-num">02</div>
+              <h3 class="step-title">Share with friends</h3>
+              <p class="step-desc">Share your must-try dishes with friends and family and see what places everyone has
+                in common.</p>
+            </div>
+            <div class="landing-step-item">
+              <div class="step-num">03</div>
+              <h3 class="step-title">Plan your visits</h3>
+              <p class="step-desc">Build walking or driving itineraries to make it easy to get to all the places you
+                want to try.
+              </p>
+            </div>
+          </div>
         </div>
         <div class="view-footer">
           PDX Food Week<br>
@@ -229,7 +262,9 @@
           <div class="sort-distance-group">
             <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
             <div id="zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <button class="filter-chip" style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick="App.useMyLocation(false)" aria-label="Use My Location" title="Use location">
+              <button class="filter-chip"
+                style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
+                onclick="App.useMyLocation(false)" aria-label="Use My Location" title="Use location">
                 <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
               </button>
               <input type="text" id="zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
@@ -390,7 +425,9 @@
             <button class="filter-chip" id="saved-sort-distance-btn"
               onclick="App.toggleSavedDistanceSort(this)">Distance</button>
             <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <button class="filter-chip" style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" onclick="App.useMyLocation(true)" aria-label="Use My Location" title="Use location">
+              <button class="filter-chip"
+                style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
+                onclick="App.useMyLocation(true)" aria-label="Use My Location" title="Use location">
                 <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
               </button>
               <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
@@ -418,11 +455,14 @@
             <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()"
               style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0;">Copy List</button>
             <button class="btn btn-primary" id="saved-kml-btn" onclick="App.exportSavedKML()"
-              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; background: var(--teal); border-color: var(--teal);">Export Map</button>
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; background: var(--teal); border-color: var(--teal);">Export
+              Map</button>
             <button class="btn btn-secondary" id="saved-merge-friend-btn" onclick="App.mergeFriendList()"
-              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: var(--teal); color: white; border: 2px solid var(--teal);">Merge All</button>
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: var(--teal); color: white; border: 2px solid var(--teal);">Merge
+              All</button>
             <button class="btn btn-secondary" id="saved-exit-friend-btn" onclick="App.exitFriendView()"
-              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: transparent; color: var(--pizza); border: 2px solid var(--pizza);">Exit Friend View</button>
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; display: none; background: transparent; color: var(--pizza); border: 2px solid var(--pizza);">Exit
+              Friend View</button>
           </div>
         </div>
         <div class="cards-list" id="cards-saved"></div>
@@ -476,7 +516,8 @@
                 <div>
                   <div class="paste-label">Backup Code (Bypasses Cloud)</div>
                   <div class="paste-row">
-                    <input id="manual-code-display" type="text" readonly onclick="this.select()" aria-label="Your generated Backup Code" />
+                    <input id="manual-code-display" type="text" readonly onclick="this.select()"
+                      aria-label="Your generated Backup Code" />
                     <button id="copy-manual-btn" class="btn" aria-label="Copy Backup Code"
                       onclick="App.copyTextFromElement('manual-code-display', 'copy-manual-btn')">Copy</button>
                   </div>
@@ -523,7 +564,8 @@
         <h2 class="tab-section-header">Map</h2>
         <div class="map-container">
           <button class="btn btn-primary" id="map-plan-crawl-btn" onclick="App.toggleCrawlMode()"
-            style="position: absolute; top: 12px; right: 12px; z-index: 1000; width: auto; margin: 0; background: var(--teal); border-color: var(--teal); box-shadow: var(--shadow-lg);">Plan Crawl</button>
+            style="position: absolute; top: 12px; right: 12px; z-index: 1000; width: auto; margin: 0; background: var(--teal); border-color: var(--teal); box-shadow: var(--shadow-lg);">Plan
+            Crawl</button>
           <div id="map-canvas" role="application" aria-label="Map of Portland pizza week locations"></div>
           <div class="map-legend">
             <div class="legend-item">
@@ -604,9 +646,10 @@
       </div>
       <div class="drawer-footer" style="display: flex; gap: 12px; align-items: center;">
         <button class="btn btn-secondary btn-clear-all" onclick="App.clearAllFilters()"
-          style="flex: 1; margin: 0; background: var(--card-bg); color: var(--ink); border: 1px solid var(--border);">✕ Clear All</button>
-        <button class="btn btn-primary btn-apply" onclick="App.applyFilterDrawer()"
-          style="flex: 1.5; margin: 0;">Apply Filters</button>
+          style="flex: 1; margin: 0; background: var(--card-bg); color: var(--ink); border: 1px solid var(--border);">✕
+          Clear All</button>
+        <button class="btn btn-primary btn-apply" onclick="App.applyFilterDrawer()" style="flex: 1.5; margin: 0;">Apply
+          Filters</button>
       </div>
     </div>
   </div>
@@ -632,8 +675,10 @@
   <!-- ── Toast ── -->
   <!-- ── Photo Zoom Modal ── -->
   <div id="photo-zoom-overlay" class="photo-zoom-overlay" onclick="App.closePhotoZoom()">
-    <button class="lightbox-nav close-desktop" aria-label="Close photo" onclick="App.closePhotoZoom()" style="display: flex;">
-      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <button class="lightbox-nav close-desktop" aria-label="Close photo" onclick="App.closePhotoZoom()"
+      style="display: flex;">
+      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 6L6 18M6 6l12 12" />
       </svg>
     </button>
@@ -647,9 +692,12 @@
     <div class="crawl-fab-content">
       <span id="crawl-fab-text">Select up to 8 spots (0/8)</span>
       <div class="crawl-fab-actions">
-        <button class="btn btn-secondary" onclick="App.clearCrawl()" style="margin: 0; padding: 6px 12px; background: transparent; color: var(--ink);">Clear</button>
-        <button class="btn btn-secondary" onclick="App.toggleCrawlMode()" style="margin: 0; padding: 6px 12px; background: transparent; color: var(--ink);">Close</button>
-        <button class="btn btn-primary" id="crawl-generate-btn" onclick="App.generateCrawlItinerary()" style="margin: 0; padding: 6px 12px; border-radius: 16px;" disabled>Route</button>
+        <button class="btn btn-secondary" onclick="App.clearCrawl()"
+          style="margin: 0; padding: 6px 12px; background: transparent; color: var(--ink);">Clear</button>
+        <button class="btn btn-secondary" onclick="App.toggleCrawlMode()"
+          style="margin: 0; padding: 6px 12px; background: transparent; color: var(--ink);">Close</button>
+        <button class="btn btn-primary" id="crawl-generate-btn" onclick="App.generateCrawlItinerary()"
+          style="margin: 0; padding: 6px 12px; border-radius: 16px;" disabled>Route</button>
       </div>
     </div>
   </div>

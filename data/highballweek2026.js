@@ -10,7 +10,7 @@ window.FOOD_WEEKS.push({
   dates: "May 25–31, 2026",
   startDate: "2026-05-25",
   endDate: "2026-05-31",
-  pricePills: ["$10 drink"],
+  pricePills: ["$10 drinks"],
   color: "#2C69C9",
   colorDark: "#1B478C",
   colorLight: "#DFEAF9",

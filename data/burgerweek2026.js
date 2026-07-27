@@ -11,7 +11,7 @@ window.FOOD_WEEKS.push(
     dates: "August 10–16, 2026",
     startDate: "2026-08-10",
     endDate: "2026-08-16",
-    pricePills: ["$10 burger"],
+    pricePills: ["$10 burgers"],
     color: "#E65100",
     emoji: "🍔",
     totalLocations: 117,

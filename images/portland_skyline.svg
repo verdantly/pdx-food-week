@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" width="100%" height="100%">
+  <g fill="none" stroke="rgba(255, 255, 255, 0.18)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Baseline -->
+    <line x1="80" y1="210" x2="1120" y2="210" />
+
+    <!-- 1. Oregon Convention Center Glass Dome (Far Left) -->
+    <path d="M 100 210 L 100 195 L 110 185 L 150 185 L 160 195 L 160 210" />
+    <path d="M 105 195 C 115 170 145 170 155 195" />
+    <line x1="118" y1="180" x2="142" y2="180" />
+    <line x1="124" y1="172" x2="136" y2="172" />
+    <line x1="100" y1="202" x2="160" y2="202" />
+
+    <!-- Building 2: Mid-rise facade with arch -->
+    <path d="M 170 210 L 170 160 L 235 160 L 235 210" />
+    <path d="M 180 210 L 180 170 L 225 170 L 225 210" />
+    <path d="M 190 200 Q 202.5 180 215 200 L 215 210 L 190 210 Z" />
+    <line x1="180" y1="178" x2="225" y2="178" />
+    <line x1="180" y1="186" x2="225" y2="186" />
+
+    <!-- Building 3: Low-rise connector -->
+    <path d="M 235 210 L 235 180 L 260 180 L 260 210" />
+
+    <!-- 4. KOIN Center (Pyramid Roof & Spire) -->
+    <path d="M 265 210 L 265 160 L 280 160 L 280 120 L 305 75 L 330 120 L 330 160 L 345 160 L 345 210" />
+    <line x1="305" y1="75" x2="305" y2="55" />
+    <path d="M 285 160 L 285 125 L 325 125 L 325 160" />
+    <line x1="280" y1="140" x2="330" y2="140" />
+
+    <!-- Building 5: Hotel / Office Facade -->
+    <path d="M 345 210 L 345 140 L 415 140 L 415 210" />
+    <rect x="355" y="150" width="50" height="45" />
+    <line x1="355" y1="161" x2="405" y2="161" />
+    <line x1="355" y1="172" x2="405" y2="172" />
+    <line x1="355" y1="183" x2="405" y2="183" />
+
+    <!-- 6. Wells Fargo Center (Tallest Skyscraper with Vertical Lines) -->
+    <path d="M 425 210 L 425 60 L 475 60 L 475 210" />
+    <path d="M 435 210 L 435 130 L 505 130 L 505 210" />
+    <!-- Vertical facade lines -->
+    <line x1="435" y1="65" x2="435" y2="125" />
+    <line x1="445" y1="65" x2="445" y2="125" />
+    <line x1="455" y1="65" x2="455" y2="125" />
+    <line x1="465" y1="65" x2="465" y2="125" />
+    <!-- Horizontal lines lower section -->
+    <line x1="440" y1="142" x2="500" y2="142" />
+    <line x1="440" y1="154" x2="500" y2="154" />
+    <line x1="440" y1="166" x2="500" y2="166" />
+    <line x1="440" y1="178" x2="500" y2="178" />
+    <line x1="440" y1="190" x2="500" y2="190" />
+
+    <!-- 7. Church Twin Spires (St. Mary's / St. James) -->
+    <path d="M 515 210 L 515 185 L 530 185 L 530 135 L 540 100 L 550 135 L 550 185 L 570 185 L 570 135 L 580 100 L 590 135 L 590 185 L 605 185 L 605 210" />
+    <path d="M 550 210 L 550 170 L 570 170 L 570 210" />
+    <path d="M 553 210 L 553 185 Q 560 175 567 185 L 567 210 Z" />
+    <line x1="540" y1="100" x2="540" y2="90" />
+    <line x1="580" y1="100" x2="580" y2="90" />
+
+    <!-- 8. Mid-rise background block -->
+    <path d="M 610 210 L 610 145 L 665 145 L 665 210" />
+
+    <!-- 9. Hawthorne / Steel Bridge Lift Towers & Truss Bridge Spanning Right -->
+    <!-- Tower 1 -->
+    <path d="M 675 210 L 675 140 L 690 140 L 690 210" />
+    <line x1="675" y1="150" x2="690" y2="160" />
+    <line x1="675" y1="170" x2="690" y2="180" />
+    <line x1="675" y1="190" x2="690" y2="200" />
+
+    <!-- Building behind bridge -->
+    <path d="M 695 210 L 695 135 L 755 135 L 755 210" />
+    <line x1="700" y1="145" x2="750" y2="145" />
+    <line x1="700" y1="155" x2="750" y2="155" />
+    <line x1="700" y1="165" x2="750" y2="165" />
+
+    <!-- Tower 2 -->
+    <path d="M 760 210 L 760 135 L 775 135 L 775 210" />
+    <line x1="760" y1="145" x2="775" y2="155" />
+    <line x1="760" y1="165" x2="775" y2="175" />
+    <line x1="760" y1="185" x2="775" y2="195" />
+
+    <!-- Bridge Deck Line across Willamette River -->
+    <path d="M 660 195 L 1020 195" stroke-width="2" />
+    <path d="M 660 205 L 1020 205" />
+
+    <!-- Bridge Truss Arches -->
+    <path d="M 660 195 Q 710 170 760 195" />
+    <path d="M 775 195 Q 860 165 945 195" />
+    <path d="M 945 195 Q 980 175 1020 195" />
+
+    <!-- Truss diagonal webbing lines -->
+    <line x1="675" y1="195" x2="685" y2="184" />
+    <line x1="695" y1="195" x2="710" y2="178" />
+    <line x1="725" y1="195" x2="735" y2="182" />
+    <line x1="800" y1="195" x2="820" y2="178" />
+    <line x1="840" y1="195" x2="860" y2="172" />
+    <line x1="880" y1="195" x2="900" y2="178" />
+
+    <!-- Bridge Piers -->
+    <line x1="730" y1="205" x2="730" y2="210" />
+    <line x1="860" y1="205" x2="860" y2="210" />
+    <line x1="980" y1="205" x2="980" y2="210" />
+
+    <!-- Building 10 (Far Right) -->
+    <path d="M 785 180 L 785 145 L 835 145 L 835 180" />
+    <path d="M 945 195 L 945 170 L 980 170 L 980 195" />
+    <path d="M 1020 210 L 1020 155 L 1070 155 L 1070 210" />
+    <path d="M 1045 155 L 1045 145 L 1065 145 L 1065 155" />
+  </g>
+</svg>

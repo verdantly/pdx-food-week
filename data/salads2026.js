@@ -6,7 +6,7 @@ window.FOOD_WEEKS.push({
   organizer: "Bridgetown Bites",
   startDate: "2026-07-20",
   dates: "July 20 - 31, 2026",
-  pricePills: ["$10-29"],
+  pricePills: ["$10–$29 salads"],
   color: "#4CAF50",
   emoji: "🥗",
   totalLocations: 15,
