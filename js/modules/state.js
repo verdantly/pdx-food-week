@@ -22,6 +22,7 @@ export const State = {
   notes: {},
   selectedDish: null,
   currentWeekId: 'nacho-2026',
+  weekFilters: {},
   swipeQueue: null,
   swipeIdx: 0,
   swipeAnimating: false,
@@ -82,6 +83,7 @@ const STORAGE_KEY_NOTES = 'pdxfw_notes_v1';
 const STORAGE_KEY_VIEWED_NEW = 'pdxfw_viewed_new_v1';
 const STORAGE_KEY_SAVED_SORT = 'pdxfw_saved_sort_v1';
 const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
+const STORAGE_KEY_WEEK_FILTERS = 'pdxfw_week_filters_v1';
 const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
 
 export function loadState() {
@@ -100,6 +102,8 @@ export function loadState() {
     if (vn) State.viewedNew = new Set(JSON.parse(vn));
     const ss = localStorage.getItem(STORAGE_KEY_SAVED_SORT);
     if (ss) State.activeSavedSort = ss;
+    const wf = localStorage.getItem(STORAGE_KEY_WEEK_FILTERS);
+    if (wf) State.weekFilters = JSON.parse(wf);
     const co = localStorage.getItem(STORAGE_KEY_CUSTOM_ORDER);
     if (co) {
       State.customSavedOrder = JSON.parse(co);
@@ -128,6 +132,7 @@ export function saveState() {
     localStorage.setItem(STORAGE_KEY_VIEWED_NEW, JSON.stringify([...State.viewedNew]));
     localStorage.setItem(STORAGE_KEY_SAVED_SORT, State.activeSavedSort);
     localStorage.setItem(STORAGE_KEY_CUSTOM_ORDER, JSON.stringify(State.customSavedOrder));
+    localStorage.setItem(STORAGE_KEY_WEEK_FILTERS, JSON.stringify(State.weekFilters));
   } catch (e) { }
 }
 

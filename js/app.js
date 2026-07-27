@@ -192,14 +192,32 @@ function loadWeekData(weekId, callback) {
 function switchWeek(weekId, fromPopState = false) {
   if (!window.FOOD_WEEKS || !window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
+  if (State.currentWeekId) {
+    State.weekFilters[State.currentWeekId] = {
+      activeFilters: Array.from(State.activeFilters),
+      searchQuery: State.searchQuery,
+      activeSort: State.activeSort
+    };
+  }
+
   State.currentWeekId = weekId;
   checkWeekVisited(State.currentWeekId);
+
+  const savedWeekState = State.weekFilters[weekId];
+  if (savedWeekState) {
+    State.activeFilters = new Set(savedWeekState.activeFilters);
+    State.searchQuery = savedWeekState.searchQuery || '';
+    State.activeSort = savedWeekState.activeSort || 'restaurant';
+  } else {
+    State.activeFilters.clear();
+    State.searchQuery = '';
+    State.activeSort = 'restaurant';
+  }
+
   saveState();
 
-  State.activeFilters.clear();
-  State.searchQuery = '';
   const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.value = '';
+  if (searchInput) searchInput.value = State.searchQuery;
 
   State.activeSavedFilters.clear();
   State.savedSearchQuery = '';
