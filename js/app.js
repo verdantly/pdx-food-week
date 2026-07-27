@@ -38,6 +38,17 @@ const App = (() => {
   let filterDrawerOpen = false;
   let saved = new Set();
   let passed = new Set();
+  let loadedWeeks = new Set();
+  
+  const WEEK_FILE_MAP = {
+    'burger-2026': 'burgerweek2026.js',
+    'highball-2026': 'highballweek2026.js',
+    'nacho-2026': 'nachoweek2026.js',
+    'pizza-2026': 'pizzaweek2026.js',
+    'salad-2026': 'salads2026.js',
+    'slushie-2026': 'slushies2026.js',
+    'taco-2026': 'tacoweek2026.js'
+  };
   
   // Crawl Builder State
   let crawlModeActive = false;
@@ -933,6 +944,7 @@ const App = (() => {
         fabButton.classList.remove('show-fab');
       }
     }
+    updateMobileFabBadge();
     lastScrollTop = 0;
 
     if (!fromPopState) {
@@ -1189,10 +1201,31 @@ const App = (() => {
     }).join('') + `</div>`;
 
     container.innerHTML = labelHTML + chipsHTML;
+    updateMobileFabBadge();
+  }
+
+  function updateMobileFabBadge() {
+    const badge = document.getElementById('mobile-fab-badge');
+    if (!badge) return;
+    
+    let count = 0;
+    if (activeTab === 'browse') {
+      count = activeFilters.size + (searchQuery !== '' ? 1 : 0) + (activeSort === 'distance' ? 1 : 0);
+    } else if (activeTab === 'saved') {
+      count = activeSavedFilters.size + (savedSearchQuery !== '' ? 1 : 0) + (activeSavedSort === 'distance' ? 1 : 0);
+    }
+    
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
   }
 
   function clearAllSavedFilters() {
     activeSavedFilters.clear();
+    draftSavedFilters.clear();
     savedSearchQuery = '';
     const searchInput = document.getElementById('saved-search-input');
     if (searchInput) searchInput.value = '';
@@ -1586,6 +1619,50 @@ const App = (() => {
       console.error('Failed to copy text: ', err);
       showToast('Failed to copy text');
     });
+  }
+
+  function exportSavedKML() {
+    const items = getSaved();
+    if (items.length === 0) {
+      showToast('Nothing to export!');
+      return;
+    }
+
+    let kml = `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>PDX Food Week - Saved Spots</name>`;
+
+    items.forEach(r => {
+      if (r.lat && r.lng) {
+        kml += `
+    <Placemark>
+      <name>${esc(r.restaurant)}</name>
+      <description><![CDATA[
+        <h3>${esc(r.dish)}</h3>
+        <p>${esc(r.desc || r.address)}</p>
+      ]]></description>
+      <Point>
+        <coordinates>${r.lng},${r.lat},0</coordinates>
+      </Point>
+    </Placemark>`;
+      }
+    });
+
+    kml += `
+  </Document>
+</kml>`;
+
+    const blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'pdx_food_week_saved.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Exported KML file!');
   }
 
   function showMetricDetails(type) {
@@ -2127,7 +2204,7 @@ const App = (() => {
     updateCrawlFab();
     renderMap(); // Re-render to update pin icons
     
-    if (window.innerWidth >= 1100 || document.getElementById('detail-overlay').classList.contains('open')) {
+    if (window.innerWidth >= 1024 || document.getElementById('detail-overlay').classList.contains('open')) {
       generateCrawlItinerary();
     }
   }
@@ -2586,9 +2663,15 @@ const App = (() => {
     }).join('') + `</div>`;
 
     container.innerHTML = labelHTML + chipsHTML;
+    updateMobileFabBadge();
   }
 
   function clearAllFilters() {
+    if (activeTab === 'saved') {
+      clearAllSavedFilters();
+      return;
+    }
+    
     activeFilters.clear();
     draftFilters.clear();
     searchQuery = '';
@@ -2648,6 +2731,36 @@ const App = (() => {
         </div>
       </div>
     `;
+  }
+
+  function loadWeekData(weekId, callback) {
+    if (loadedWeeks.has(weekId)) {
+      if (callback) callback();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `data/${WEEK_FILE_MAP[weekId]}?v=1`;
+    script.onload = () => {
+      loadedWeeks.add(weekId);
+      
+      const uniqueWeeks = [];
+      const seen = new Set();
+      for (const w of window.FOOD_WEEKS) {
+        if (!seen.has(w.id)) {
+          seen.add(w.id);
+          uniqueWeeks.push(w);
+        }
+      }
+      window.FOOD_WEEKS = uniqueWeeks;
+      
+      if (callback) callback();
+    };
+    script.onerror = () => {
+      showToast('Error loading data for this week');
+      if (callback) callback();
+    };
+    document.body.appendChild(script);
   }
 
   function switchWeek(weekId, fromPopState = false) {
@@ -2727,11 +2840,16 @@ const App = (() => {
 
     switchTab('browse', true);
     renderShimmer();
-    setTimeout(() => {
+    
+    const loadDataAndRender = () => {
       renderAll();
       updateBrowseBadge();
       showToast(`Switched to ${week.name}!`);
-    }, 450);
+    };
+
+    loadWeekData(weekId, () => {
+      setTimeout(loadDataAndRender, 450);
+    });
   }
 
   function renderLanding() {
@@ -2740,7 +2858,7 @@ const App = (() => {
 
     // Determine the current or next upcoming event
     const now = new Date();
-    let currentWeek = null;
+    let currentWeeks = [];
     let nextWeek = null;
     let minDiff = Infinity;
 
@@ -2755,7 +2873,7 @@ const App = (() => {
           const [ey, em, ed] = w.endDate.split('-');
           end = new Date(ey, em - 1, ed, 23, 59, 59);
         } else if (w.dates) {
-          const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+[-–](\d+),\s+(\d{4})/);
+          const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
           const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
           if (weekMatch) {
             end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
@@ -2771,7 +2889,7 @@ const App = (() => {
         }
 
         if (now >= start && now <= end) {
-          currentWeek = w;
+          currentWeeks.push(w);
         } else if (now < start) {
           const diff = start - now;
           if (diff < minDiff) {
@@ -2790,9 +2908,9 @@ const App = (() => {
 
     grid.innerHTML = sortedWeeks.map(w => {
       let badgeHTML = '';
-      if (currentWeek && w.id === currentWeek.id) {
+      if (currentWeeks.some(cw => cw.id === w.id)) {
         badgeHTML = '<div class="badge-upcoming current" style="background: #34A853;">Current</div>';
-      } else if (nextWeek && w.id === nextWeek.id && !currentWeek) {
+      } else if (nextWeek && w.id === nextWeek.id && currentWeeks.length === 0) {
         badgeHTML = '<div class="badge-upcoming">Next</div>';
       } else if (nextWeek && w.id === nextWeek.id) {
         badgeHTML = '<div class="badge-upcoming">Next</div>';
@@ -3267,8 +3385,11 @@ const App = (() => {
     } else {
       switchTab('browse', true);
     }
-    renderAll();
-    updateBrowseBadge();
+    
+    loadWeekData(currentWeekId, () => {
+      renderAll();
+      updateBrowseBadge();
+    });
 
     // Deep linking: Open detail sheet if dish ID in URL
     const initialDishId = urlParams.get('dish');
@@ -3340,7 +3461,7 @@ const App = (() => {
     
     updateCrawlFab();
     renderMap();
-    if (crawlModeActive && window.innerWidth >= 1100) {
+    if (crawlModeActive && window.innerWidth >= 1024) {
       generateCrawlItinerary();
     }
   }
@@ -3349,7 +3470,7 @@ const App = (() => {
     crawlSelection = [];
     updateCrawlFab();
     renderMap();
-    if (crawlModeActive && window.innerWidth >= 1100) {
+    if (crawlModeActive && window.innerWidth >= 1024) {
       generateCrawlItinerary();
     }
   }
@@ -3498,10 +3619,21 @@ const App = (() => {
     document.body.style.overflow = '';
   }
 
-  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, mergeFriendList, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, applyFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom, toggleCrawlMode, generateCrawlItinerary, closeCrawlModal, renderItinerarySheet, openCrawlMapsUrl, handleCrawlPinClick, clearCrawl };
+  return { init, switchTab, toggleFilter, setSort, toggleSave, openDetail, closeDetail, addFriend, renameFriend, removeFriend, viewFriendList, exitFriendView, mergeFriendList, swipe, undoSwipe, resetSwipe, swipeOpenDetail, skipSwipe, switchWeek, exportSavedToClipboard, exportSavedKML, showMetricDetails, closeMetricModal, setRating, setNote, toggleDistanceSort, applyZipCode, useMyLocation, generateShareLink, copyTextFromElement, shareNative, dismissNewBanner, openFilterDrawer, applyFilterDrawer, closeFilterDrawer, handleNoteInput, toggleSavedFilter, setSavedSort, toggleSavedDistanceSort, applySavedZipCode, moveSavedItem, goToLanding, clearAllFilters, clearAllSavedFilters, openPhotoZoom, closePhotoZoom, toggleCrawlMode, generateCrawlItinerary, closeCrawlModal, renderItinerarySheet, openCrawlMapsUrl, handleCrawlPinClick, clearCrawl };
 })();
 
 window.App = App;
+
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
 
 const isTestMode = window.location.search.includes('test=true');
 if (!isTestMode) {

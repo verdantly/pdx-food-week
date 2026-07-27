@@ -1091,7 +1091,7 @@ body.is-landing .bottom-nav {
 }
 
 .overlap-section {
-  padding: 14px 16px 0;
+  padding: 14px 16px 48px;
 }
 
 .overlap-title {
@@ -2380,7 +2380,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .overlap-section {
-    padding: 16px 24px 0;
+    padding: 16px 24px 48px;
   }
 
   .map-container {
@@ -2430,11 +2430,11 @@ input[type="search"]::-webkit-search-cancel-button {
 
 
 /* ════════════════════════════════════════════
-   DESKTOP  (≥ 1100px)
+   DESKTOP  (≥ 1024px)
    Fixed sidebar + scrollable main content
 ════════════════════════════════════════════ */
 
-@media (min-width: 1100px) {
+@media (min-width: 1024px) {
 
   .view-footer {
     display: none;
@@ -2583,10 +2583,10 @@ input[type="search"]::-webkit-search-cancel-button {
     padding-bottom: 60px;
   }
 
-  /* Three-column grid */
+  /* Two-column grid */
   .cards-list {
     padding: 20px 32px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
   }
 
@@ -2658,7 +2658,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .overlap-section {
-    padding: 20px 32px 0;
+    padding: 20px 32px 48px;
   }
 
   #overlap-container {
@@ -2687,6 +2687,44 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .map-selected .cards-list,
   #app.detail-open .map-selected .cards-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+
+  .swipe-desktop-hints {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: -1;
+    padding: 0 40px;
+  }
+
+  .swipe-desktop-hint {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink-20);
+    opacity: 0.5;
+  }
+}
+
+
+/* ════════════════════════════════════════════
+   LARGE DESKTOP (≥ 1200px)
+   Three-column cards
+════════════════════════════════════════════ */
+
+@media (min-width: 1200px) {
+  .cards-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #app.detail-open .cards-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2742,33 +2780,7 @@ input[type="search"]::-webkit-search-cancel-button {
   #app.detail-open .app-main {
     margin-right: 420px;
   }
-
-  /* Squeeze grid to 1 column to prevent squished cards when panel takes up space */
-  #app.detail-open .cards-list {
-    grid-template-columns: 1fr;
-  }
-
-  .swipe-desktop-hints {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: -1;
-    padding: 0 40px;
-  }
-
-  .swipe-desktop-hint {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--ink-20);
-    opacity: 0.5;
-  }
 }
-
 
 /* ════════════════════════════════════════════
    WIDE DESKTOP  (≥ 1400px)
@@ -3162,6 +3174,22 @@ select:focus-visible {
 
 .mobile-filter-fab:active .fab-icon {
   transform: scale(0.9);
+}
+
+.mobile-fab-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--pizza);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: 769px) {
@@ -3627,7 +3655,7 @@ select:focus-visible {
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--border);
   border-radius: 32px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -3637,6 +3665,7 @@ select:focus-visible {
   -webkit-backdrop-filter: blur(12px);
   width: 90%;
   max-width: 400px;
+  color: var(--ink);
 }
 .crawl-fab-content {
   display: flex;
