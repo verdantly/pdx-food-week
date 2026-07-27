@@ -920,6 +920,11 @@ const App = (() => {
     });
     if (name === 'swipe' || name === 'share' || name === 'landing') {
       closeDetail(true);
+    } else if (name !== 'map') {
+      const sheetContent = document.getElementById('detail-sheet-content');
+      if (sheetContent && sheetContent.innerHTML.includes('Your Food Crawl')) {
+        closeDetail(true);
+      }
     }
     if (name === 'map') {
       renderMap();
