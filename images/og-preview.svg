@@ -88,8 +88,8 @@
   <!-- Footer Features Bar -->
   <g transform="translate(600, 520)" text-anchor="middle">
     <text class="footer-badge">
-      <tspan fill="#E85B38">✓</tspan> 100% Free &amp; Open Source   &nbsp;•&nbsp;   
-      <tspan fill="#E85B38">✓</tspan> No Account Required   &nbsp;•&nbsp;   
+      <tspan fill="#E85B38">✓</tspan> 100% Free &amp; Open Source   &#160;•&#160;   
+      <tspan fill="#E85B38">✓</tspan> No Account Required   &#160;•&#160;   
       <tspan fill="#E85B38">✓</tspan> Custom Food Crawls
     </text>
   </g>
