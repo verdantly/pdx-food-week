@@ -944,6 +944,12 @@ const App = (() => {
         fabButton.classList.remove('show-fab');
       }
     }
+    
+    const crawlFab = document.getElementById('crawl-fab');
+    if (crawlFab) {
+      crawlFab.style.display = (name === 'map' && typeof crawlModeActive !== 'undefined' && crawlModeActive) ? 'block' : 'none';
+    }
+    
     updateMobileFabBadge();
     lastScrollTop = 0;
 
