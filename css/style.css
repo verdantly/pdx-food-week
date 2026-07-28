@@ -1338,7 +1338,19 @@ body.is-landing .bottom-nav {
   text-transform: uppercase;
   color: #E85B38;
   font-style: normal;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+}
+
+.landing-subtitle {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cream);
+  opacity: 0.92;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
 }
 
 .landing-tagline {
