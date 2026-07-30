@@ -184,6 +184,11 @@ function loadWeekData(weekId, callback) {
   };
   script.onerror = () => {
     showToast('Error loading data for this week');
+    State.currentWeekId = null;
+    applyWeekTheme(null);
+    document.body.classList.add('is-landing');
+    switchTab('landing', true);
+    renderLanding();
     if (callback) callback();
   };
   document.body.appendChild(script);
