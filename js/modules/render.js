@@ -257,10 +257,16 @@ export function renderHeader() {
 }
 
 export function applyWeekTheme(week) {
-  if (!week) return;
   const root = document.documentElement;
-  const themeColor = week.color || '#C94B2C';
-  let dark = week.colorDark || '#9E3318';
+  if (!week) {
+    root.style.setProperty('--pizza', '#E85B38');
+    root.style.setProperty('--pizza-dark', '#B5472E');
+    root.style.setProperty('--pizza-light', '#F5E6DF');
+    root.style.setProperty('--pizza-pale', '#FDF7F4');
+    return;
+  }
+  const themeColor = week.color || '#E85B38';
+  let dark = week.colorDark || '#B5472E';
   let light = week.colorLight || '#F5E6DF';
   let pale = week.colorPale || '#FDF7F4';
 

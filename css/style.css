@@ -92,6 +92,12 @@ body.is-landing .bottom-nav {
   display: none !important;
 }
 
+body.is-landing .view {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-y: visible !important;
+}
+
 .app-header {
   background: var(--ink);
   color: var(--cream);

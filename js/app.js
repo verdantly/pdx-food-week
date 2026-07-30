@@ -284,6 +284,7 @@ function switchWeek(weekId, fromPopState = false) {
 }
 
 function renderLanding() {
+  applyWeekTheme(null);
   const grid = document.getElementById('landing-grid');
   if (!grid || !window.FOOD_WEEKS) return;
 
@@ -826,6 +827,7 @@ const App = {
     url.searchParams.delete('dish');
     history.pushState({}, '', url);
     State.currentWeekId = null;
+    applyWeekTheme(null);
     document.body.classList.add('is-landing');
     switchTab('landing', true);
     renderLanding();
