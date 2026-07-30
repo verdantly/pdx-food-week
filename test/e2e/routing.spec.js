@@ -55,4 +55,29 @@ test.describe('Navigation and Routing', () => {
     await applyBtn.click();
     await expect(drawer).not.toHaveClass(/open/);
   });
+
+  test('Initial visit to root URL shows Landing Page by default', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const landingView = page.locator('#view-landing');
+    await expect(landingView).toBeVisible();
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+    const landingHero = page.locator('.landing-hero');
+    await expect(landingHero).toBeVisible();
+  });
+
+  test('Server-rendered HTML contains is-landing body class before JS execution', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto('/');
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+    await expect(page.locator('#view-landing')).toHaveClass(/active/);
+    await context.close();
+  });
+
+  test('Data script loading failure gracefully falls back to Landing Page', async ({ page }) => {
+    await page.route('**/data/*.js*', route => route.abort());
+    await page.goto('/?week=invalid-week', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#view-landing')).toBeVisible();
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+  });
 });
