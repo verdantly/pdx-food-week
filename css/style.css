@@ -2485,8 +2485,19 @@ input[type="search"]::-webkit-search-cancel-button {
     padding: 18px 24px 0;
   }
 
-  .filter-row {
-    padding: 10px 24px;
+  .header-controls-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    padding: 8px 24px 12px;
+  }
+
+  .header-controls-row .filter-section,
+  .header-controls-row .sort-section {
+    padding: 0;
   }
 
   .filter-section {
@@ -2494,7 +2505,6 @@ input[type="search"]::-webkit-search-cancel-button {
     flex-direction: row;
     align-items: center;
     gap: 12px;
-    padding: 10px 24px;
   }
 
   .filter-label {
@@ -2510,7 +2520,6 @@ input[type="search"]::-webkit-search-cancel-button {
     flex-direction: row;
     align-items: center;
     gap: 12px;
-    padding: 10px 24px;
   }
 
   .tab-section-header {

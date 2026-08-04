@@ -267,27 +267,29 @@
               </button>
             </div>
           </div>
-          <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
-        </div>
-        <div class="sort-section" role="group" aria-label="Sort dishes" id="sort-section">
-          <span class="sort-label">Sort:</span>
-          <div class="sort-main-group">
-            <button class="filter-chip active" onclick="App.setSort('restaurant', this)">Restaurant (A-Z)</button>
-            <button class="filter-chip" onclick="App.setSort('dish', this)">Name (A-Z)</button>
-          </div>
-          <span class="sort-label-empty"></span>
-          <div class="sort-distance-group">
-            <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
-            <div id="zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <button class="filter-chip"
-                style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
-                onclick="App.useMyLocation(false)" aria-label="Use My Location" title="Use location">
-                <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
-              </button>
-              <input type="text" id="zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
-                style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 120px;"
-                aria-label="Enter Zip Code for distance sorting">
-              <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applyZipCode()">Apply</button>
+          <div class="header-controls-row">
+            <div class="filter-section" role="group" aria-label="Filter dishes" id="browse-filters"></div>
+            <div class="sort-section" role="group" aria-label="Sort dishes" id="sort-section">
+              <span class="sort-label">Sort:</span>
+              <div class="sort-main-group">
+                <button class="filter-chip active" onclick="App.setSort('restaurant', this)">Restaurant (A-Z)</button>
+                <button class="filter-chip" onclick="App.setSort('dish', this)">Name (A-Z)</button>
+              </div>
+              <span class="sort-label-empty"></span>
+              <div class="sort-distance-group">
+                <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
+                <div id="zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <button class="filter-chip"
+                    style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
+                    onclick="App.useMyLocation(false)" aria-label="Use My Location" title="Use location">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
+                  </button>
+                  <input type="text" id="zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
+                    style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 120px;"
+                    aria-label="Enter Zip Code for distance sorting">
+                  <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applyZipCode()">Apply</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -428,30 +430,32 @@
               </button>
             </div>
           </div>
-          <div class="filter-section" role="group" aria-label="Filter saved dishes" id="saved-filters"></div>
-        </div>
-        <div class="sort-section" role="group" aria-label="Sort saved dishes" id="saved-sort-section">
-          <span class="sort-label">Sort:</span>
-          <div class="sort-main-group">
-            <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant (A-Z)</button>
-            <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
-            <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
-          </div>
-          <span class="sort-label-empty"></span>
-          <div class="sort-distance-group">
-            <button class="filter-chip" id="saved-sort-distance-btn"
-              onclick="App.toggleSavedDistanceSort(this)">Distance</button>
-            <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <button class="filter-chip"
-                style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
-                onclick="App.useMyLocation(true)" aria-label="Use My Location" title="Use location">
-                <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
-              </button>
-              <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
-                style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 120px;"
-                aria-label="Enter Zip Code for saved distance sorting">
-              <button class="filter-chip active" style="padding: 4px 10px;"
-                onclick="App.applySavedZipCode()">Apply</button>
+          <div class="header-controls-row">
+            <div class="filter-section" role="group" aria-label="Filter saved dishes" id="saved-filters"></div>
+            <div class="sort-section" role="group" aria-label="Sort saved dishes" id="saved-sort-section">
+              <span class="sort-label">Sort:</span>
+              <div class="sort-main-group">
+                <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant (A-Z)</button>
+                <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
+                <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
+              </div>
+              <span class="sort-label-empty"></span>
+              <div class="sort-distance-group">
+                <button class="filter-chip" id="saved-sort-distance-btn"
+                  onclick="App.toggleSavedDistanceSort(this)">Distance</button>
+                <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <button class="filter-chip"
+                    style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
+                    onclick="App.useMyLocation(true)" aria-label="Use My Location" title="Use location">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
+                  </button>
+                  <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
+                    style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 120px;"
+                    aria-label="Enter Zip Code for saved distance sorting">
+                  <button class="filter-chip active" style="padding: 4px 10px;"
+                    onclick="App.applySavedZipCode()">Apply</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

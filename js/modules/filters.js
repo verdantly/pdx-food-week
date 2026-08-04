@@ -456,9 +456,10 @@ export function closeFilterDrawer() {
     const sortSection = document.getElementById('saved-sort-section');
     const savedHeader = document.querySelector('#view-saved .saved-header');
     const cardsSaved = document.getElementById('cards-saved');
-    if (savedFilters && sortSection && savedHeader && cardsSaved) {
-      savedHeader.appendChild(savedFilters);
-      document.getElementById('view-saved').insertBefore(sortSection, document.querySelector('#view-saved .section-header') || cardsSaved);
+    if (savedFilters && sortSection && savedHeader) {
+      const controlsRow = savedHeader.querySelector('.header-controls-row') || savedHeader;
+      controlsRow.appendChild(savedFilters);
+      controlsRow.appendChild(sortSection);
       if (window.App && window.App.renderSavedFilters) window.App.renderSavedFilters();
     }
   } else {
@@ -466,10 +467,10 @@ export function closeFilterDrawer() {
     const browseFilters = document.getElementById('browse-filters');
     const sortSection = document.getElementById('sort-section');
     const browseHeader = document.querySelector('#view-browse .browse-header');
-    const cardsBrowse = document.getElementById('cards-browse');
-    if (browseFilters && sortSection && browseHeader && cardsBrowse) {
-      browseHeader.appendChild(browseFilters);
-      document.getElementById('view-browse').insertBefore(sortSection, cardsBrowse);
+    if (browseFilters && sortSection && browseHeader) {
+      const controlsRow = browseHeader.querySelector('.header-controls-row') || browseHeader;
+      controlsRow.appendChild(browseFilters);
+      controlsRow.appendChild(sortSection);
       if (window.App && window.App.renderFilters) window.App.renderFilters();
     }
   }
