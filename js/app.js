@@ -166,7 +166,7 @@ function loadWeekData(weekId, callback) {
   }
 
   const script = document.createElement('script');
-  script.src = `data/${WEEK_FILE_MAP[weekId]}?v=1`;
+  script.src = `data/${WEEK_FILE_MAP[weekId]}?v=2`;
   script.onload = () => {
     State.loadedWeeks.add(weekId);
     
