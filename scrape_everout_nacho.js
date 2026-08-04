@@ -290,6 +290,7 @@ async function main() {
       emoji: parsed.emoji,
       image: parsed.image,
       url: parsed.url,
+      isNew: true
     });
 
     await sleep(PAGE_DELAY);

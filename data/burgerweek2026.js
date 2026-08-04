@@ -1,5 +1,5 @@
 // Portland Mercury's Burger Week 2026 — scraped 2026-08-04
-// 124 locations (skipped: 1, reused: 124, new: 0, geocode fallbacks: 0)
+// 124 locations (skipped: 1, reused: 0, new: 0, geocode fallbacks: 5)
 // Source: https://everout.com/portland/events/the-portland-mercurys-burger-week-2026/e222750/
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -42,7 +42,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smash patty, Hatch green chile, cilantro lime aioli, crispy onions, American cheese, bread & butter pickles, burger bun",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NjQyMTEwMDcwOS1XaGl0ZU93bC1Tb2NpYWxDbHViLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/down-the-hatch-burger/e248616/"
+    "url": "https://everout.com/portland/events/down-the-hatch-burger/e248616/",
+    "isNew": true
   },
   {
     "id": 248622,
@@ -64,7 +65,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A quarter-pound beef patty topped with 4 oz. of house-made pastrami, grilled red onion, Swiss cheese, and garlic aioli on a brioche bun. Served with your lunch side of choice: fries, coleslaw, or a side salad.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NjY1MzM0NjI4Ni1UaGUtRGluZXJfVmFuY291dmVyLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-pastrami-burger/e248622/"
+    "url": "https://everout.com/portland/events/the-pastrami-burger/e248622/",
+    "isNew": true
   },
   {
     "id": 248627,
@@ -86,7 +88,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Chargrilled Black Angus burger with green chili pork chorizo, pepper jack cheese on a toasted pub bun with avocado mash and spicy aioli.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NzAzOTQ0NzY5OC1UYXlsb3ItU3RyZWV0LVRhdmVybi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/black-angus-burger-with-green-chili-pork-chorizo/e248627/"
+    "url": "https://everout.com/portland/events/black-angus-burger-with-green-chili-pork-chorizo/e248627/",
+    "isNew": true
   },
   {
     "id": 248634,
@@ -108,7 +111,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A perfectly seared grass-fed smash patty with melted American cheese, crunchy Napa cabbage, spicy kimchi, and black garlic aioli on a soft toasted Grand Central potato bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NzQ0OTEzODQzLVNwb2tlLWFuZC1Gb3JrLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-kimchi-smash-burger/e248634/"
+    "url": "https://everout.com/portland/events/the-kimchi-smash-burger/e248634/",
+    "isNew": true
   },
   {
     "id": 248637,
@@ -130,7 +134,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Havarti cheese, cabbage, bean sprouts, & carrots tossed in our hoisin sauce. Topped with peanut sauce and cucumbers on a brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NzU1NjAwMjI1My1Tb2xvLUNsdWIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/nutflix-and-grill-burger/e248637/"
+    "url": "https://everout.com/portland/events/nutflix-and-grill-burger/e248637/",
+    "isNew": true
   },
   {
     "id": 248642,
@@ -152,7 +157,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smash burger patty, sesame seed bun, special sauce, onion, lettuce, American cheese, pickled jalapeño, pickles.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NzY5MTQ2NTg1Mi1TaWRlLUV5ZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/el-royale-picante/e248642/"
+    "url": "https://everout.com/portland/events/el-royale-picante/e248642/",
+    "isNew": true
   },
   {
     "id": 248646,
@@ -174,7 +180,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-ground beef, melty American cheese, caramelized pickled & crispy fried onions, pickles, shredded lettuce and smoky BBQ mayo on a soft bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0NzgzOTA5MjExNS1TYW5keS1Pcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-filthy-cowboy/e248646/"
+    "url": "https://everout.com/portland/events/the-filthy-cowboy/e248646/",
+    "isNew": true
   },
   {
     "id": 248650,
@@ -183,8 +190,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Portland Burger",
     "neighborhood": "Southwest Portland",
     "address": "304 SW 2nd, Portland, Oregon 97204",
-    "lat": 45.5204932,
-    "lng": -122.6730706,
+    "lat": 45.5204882,
+    "lng": -122.6730696,
     "type": "meat",
     "vegOption": true,
     "veganOption": true,
@@ -196,7 +203,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "1/3 lb seasoned Pacific NW 100% beef patty topped with mango-citrus slaw, pepper jack cheese, crispy fried jalapeños, a mango BBQ drizzle, mango sauce, house sauce, and onion.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0ODA5MDc2MjMyNC1Qb3J0bGFuZC1CdXJnZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/mambo-5-a-little-bit-of-mango-in-my-life/e248650/"
+    "url": "https://everout.com/portland/events/mambo-5-a-little-bit-of-mango-in-my-life/e248650/",
+    "isNew": true
   },
   {
     "id": 248653,
@@ -218,7 +226,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-ground beef patty, cheddar, smoked Walla Walla onion rings, garlic aioli, and a jalapeño BBQ sauce on a brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0ODQxMDg4MjkzOS1QYXBhLUhheWRuX01pbHdhdWtpZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/onion-ring-bbq-burger/e248653/"
+    "url": "https://everout.com/portland/events/onion-ring-bbq-burger/e248653/",
+    "isNew": true
   },
   {
     "id": 248657,
@@ -227,8 +236,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Papa Haydn (West)",
     "neighborhood": "Northwest Portland",
     "address": "701 NW 23rd Ave., Portland, OR 97210",
-    "lat": 45.527772,
-    "lng": -122.698651,
+    "lat": 45.527767,
+    "lng": -122.69865,
     "type": "meat",
     "vegOption": true,
     "veganOption": false,
@@ -240,7 +249,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-ground beef patty with a soy glaze, lettuce, onion, Korean burger sauce, relish of pickled daikon, shallots, cucumber, and fresno chiles, and crispy shiitakes on a potato bun.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0ODQ5NjY2NzEzNy1QYXBhLUhheWRuXzIzcmQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/seoul-burger/e248657/"
+    "url": "https://everout.com/portland/events/seoul-burger/e248657/",
+    "isNew": true
   },
   {
     "id": 248671,
@@ -262,7 +272,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pork and bacon burger, huacatay aji verde, pork cracklings, sweet potato slaw on a potato bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0ODczOTYwOTYyMy1Ob3J0aHBvcnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/la-cusquena/e248671/"
+    "url": "https://everout.com/portland/events/la-cusquena/e248671/",
+    "isNew": true
   },
   {
     "id": 248680,
@@ -284,7 +295,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy chik’n patty topped with house-made Nashville fire seasoning, grilled jalapeños, pepper jack cheese, and crispy onion rings. Served on a butter toasted pretzel bun with Memphis sweet BBQ sauce and organic lettuce and tomato.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE0OTg2MDkxMjk5OS1OTC1WZWdnaWUtR3JpbGxfRG93bnRvd24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/smoky-mountain-bbq-chikn-burger/e248680/"
+    "url": "https://everout.com/portland/events/smoky-mountain-bbq-chikn-burger/e248680/",
+    "isNew": true
   },
   {
     "id": 248687,
@@ -306,7 +318,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A quarter-pound of hand-selected Painted Hills beef layered with melted Mexican cheese, shredded lettuce, fresh pico de gallo, cool sour cream, spicy Tapatío, cilantro, and a crisp tostada that delivers the perfect crunch in every bite.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE1MDI3MjY5MTUzLU5pY2tzLUNvbmV5LUlzbGFuZC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/hamburguesa-with-crunch/e248687/"
+    "url": "https://everout.com/portland/events/hamburguesa-with-crunch/e248687/",
+    "isNew": true
   },
   {
     "id": 248688,
@@ -328,7 +341,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Choila-marinated ground beef chuck, melted Swiss cheese, pickled Nepali cucumbers, Nepalese-style mole aioli, Martin's potato bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE1MDM2NjYyODk0OC1Ob20tTm9tLVdpbmdzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/kathmandu-midnight-special/e248688/"
+    "url": "https://everout.com/portland/events/kathmandu-midnight-special/e248688/",
+    "isNew": true
   },
   {
     "id": 248690,
@@ -350,7 +364,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Impossible patty, deviled \"pork\", tomato, red onion, pickled banana peppers, and curry leaf ranch.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDE1MDQ5MjU0MjcxNi1NaXJpc2F0YS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-deviled-burger/e248690/"
+    "url": "https://everout.com/portland/events/the-deviled-burger/e248690/",
+    "isNew": true
   },
   {
     "id": 248826,
@@ -372,7 +387,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "1/4 pound smash patty with roasted jalapeño marionberry jam, smoked cheddar, arugula, and crispy fried onions.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNjI0OTY4MDk4My1NaWdyYXRpb25fR2xpc2FuLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-hot-marion/e248826/"
+    "url": "https://everout.com/portland/events/the-hot-marion/e248826/",
+    "isNew": true
   },
   {
     "id": 248828,
@@ -394,7 +410,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "4 oz ground New York-style beef patty, pepper jack cheese, chipotle mayo, roasted poblano on a Grand Central bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNjMzMTcxMjc0OC1NZXRyb3BvbGl0YW4tVGF2ZXJuLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/roasted-poblano-burger/e248828/"
+    "url": "https://everout.com/portland/events/roasted-poblano-burger/e248828/",
+    "isNew": true
   },
   {
     "id": 248830,
@@ -416,7 +433,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smashed beef patty, toasted potato bun, garlic cream cheese spread, grilled onions, grilled jalapeños, marionberry bacon jam, crispy fried onions.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNjUyNTkzOTYyNS1Mb3ZlLUVBVFouanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/volcano-burger/e248830/"
+    "url": "https://everout.com/portland/events/volcano-burger/e248830/",
+    "isNew": true
   },
   {
     "id": 248832,
@@ -438,7 +456,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Double smashed brisket and sirloin patties, shaved smoked ham, American cheese, escabeche and chipotle aioli on a Dos Hermanos briohe bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNjcyNTg5NTUyNS1Mb25lc3Rhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/smashburgesa/e248832/"
+    "url": "https://everout.com/portland/events/smashburgesa/e248832/",
+    "isNew": true
   },
   {
     "id": 248839,
@@ -460,7 +479,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Chipotle aioli, queso, elote salad, crispy fried tostada shell topped with an elote aioli.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNzE2MTI3OTQxMy1MYXJpYXQtTG91bmdlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/elote-smash/e248839/"
+    "url": "https://everout.com/portland/events/elote-smash/e248839/",
+    "isNew": true
   },
   {
     "id": 248840,
@@ -482,7 +502,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "What’s on that burger, Watson The Burger?! The answer’s between the buns. Come on down to Watson Ave. and find out…(it’s a smash patty stacked with melty Monterey jack, avocado, cucumber, lettuce, onion, bacon aioli, and pepper chutney!) See you soon!",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNzM2MjUxMTQ3Mi1MYXp5LURheXNfQmVhdmVydG9uLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/watson-that-burger/e248840/"
+    "url": "https://everout.com/portland/events/watson-that-burger/e248840/",
+    "isNew": true
   },
   {
     "id": 248841,
@@ -504,7 +525,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Maple-glazed bacon, house-made pineapple-jalapeño jam, crispy onions, and garlic mayo on a toasted brioche bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNzYzMDExNTM4Mi1Lb29rcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/sweet-n-spicy-burger/e248841/"
+    "url": "https://everout.com/portland/events/sweet-n-spicy-burger/e248841/",
+    "isNew": true
   },
   {
     "id": 248842,
@@ -526,7 +548,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Bacon, jalapeño ranch, sautéed jalapeños, queso, pico de gallo, crispy onions. Fries not included for the $10 price.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDg0MzY5OTUwODAxMi1LaWxsZXItQnVyZ2VyLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/full-meltdown/e248842/"
+    "url": "https://everout.com/portland/events/full-meltdown/e248842/",
+    "isNew": true
   },
   {
     "id": 248843,
@@ -548,7 +571,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "1/3 lb patty topped with provolone cheese, arugula, tomato, yellow onion, lemon pickled cucumber, crisp green apple, and a lemon herb aioli.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyNzg3NTQ5NDg3OC1LZWxseXMtT2x5bXBpYW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-zesty-pomme/e248843/"
+    "url": "https://everout.com/portland/events/the-zesty-pomme/e248843/",
+    "isNew": true
   },
   {
     "id": 248845,
@@ -557,8 +581,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Iron Strike Smash Burgers at Midtown Beer Garden",
     "neighborhood": "Downtown Portland - Southwest Portland",
     "address": "431 SW Harvey Milk St., Portland, OR 97204",
-    "lat": 45.5212463,
-    "lng": -122.676039,
+    "lat": 45.5211401,
+    "lng": -122.6758137,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -570,7 +594,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Natural Pacific Northwest Country Beef smashed to perfection, topped with seared pastrami, melted American cheese, crisp shredded lettuce, fresh onions, crunchy pickles and signature Strike House Sauce on a buttery toasted brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyODAyMzIzOTk3Ny1Jcm9uLVN0cmlrZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/pastrami-thor-smash-burger/e248845/"
+    "url": "https://everout.com/portland/events/pastrami-thor-smash-burger/e248845/",
+    "isNew": true
   },
   {
     "id": 248847,
@@ -592,7 +617,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beef and pork patty, bulgogi seasoning, American cheese, teriyaki pineapple, banana ketchup, iceberg lettuce, and crispy onions with mayo on a potato bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyODI1MzM5NDQyNi1Ib3B3b3Jrcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/big-kahuna-burger/e248847/"
+    "url": "https://everout.com/portland/events/big-kahuna-burger/e248847/",
+    "isNew": true
   },
   {
     "id": 248848,
@@ -601,8 +627,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Haymaker",
     "neighborhood": "Overlook - North Portland",
     "address": "1233 N Killingsworth, Portland, Oregon 97217",
-    "lat": 45.5627398,
-    "lng": -122.6940989,
+    "lat": 45.5626895,
+    "lng": -122.6862897,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -614,7 +640,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Painted Hills beef patty, basil lemon garlic sauce, ricotta cheese, arugula, and Haymaker red chili sauce.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyODM5NDI2MzAwMy1IYXltYWtlci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-ricotta-rocket/e248848/"
+    "url": "https://everout.com/portland/events/the-ricotta-rocket/e248848/",
+    "isNew": true
   },
   {
     "id": 248849,
@@ -636,7 +663,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "¼ lb. patty, American cheese, house-crafted Walla Walla onion ring, white bean-kielbasa chili, mascarpone goop, leaf lettuce, tomato, cheddar bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyODUwMTk1MjMwMy1HcmF5cy1SZXN0YXVyYW50LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/wipe-your-mouth-burger/e248849/"
+    "url": "https://everout.com/portland/events/wipe-your-mouth-burger/e248849/",
+    "isNew": true
   },
   {
     "id": 248850,
@@ -658,7 +686,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Grilled and seasoned burger with lettuce, tomato, pickle, secret sauce, crisp bacon, and a fried egg.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyODYzMzkwOTI4NC1GdWxsZXJzLUNvZmZlZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/fullers-breakfast-burger/e248850/"
+    "url": "https://everout.com/portland/events/fullers-breakfast-burger/e248850/",
+    "isNew": true
   },
   {
     "id": 248851,
@@ -675,12 +704,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "glutenFree": false,
     "minors": true,
     "takeout": false,
-    "whatsOnIt": "Ground beef patty, lettuce, tomato, pickle, secret sauce, American cheese, crisp bacon, and fried jumbo onion ring.",
+    "whatsOnIt": "Ground beef patty, lettuce, tomato, pickle, secret sauce, Swiss cheese, crisp bacon, and fried jumbo onion ring.",
     "whatTheySay": "Everything you love about a backyard cookout stacked into one unforgettable burger. A juicy ground beef patty topped with melty American cheese, crispy bacon, fresh lettuce, tomato, pickle, our signature secret sauce, and finished with a giant crispy onion ring for the perfect crunch in every bite.",
-    "desc": "Ground beef patty, lettuce, tomato, pickle, secret sauce, American cheese, crisp bacon, and fried jumbo onion ring.",
+    "desc": "Ground beef patty, lettuce, tomato, pickle, secret sauce, Swiss cheese, crisp bacon, and fried jumbo onion ring.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyOTAxMTA4NTM3Mi1GdWxsZXJzLUJ1cmdlci1TaGFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/backyard-bbq-burger/e248851/"
+    "url": "https://everout.com/portland/events/backyard-bbq-burger/e248851/",
+    "isNew": true
   },
   {
     "id": 248852,
@@ -702,7 +732,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Candied bacon, thermal blue cheese, dressed arugula.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyOTE5NzI2OTYwMy1GcmVzaC1OLUZ1bmt5LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/my-blue-heaven/e248852/"
+    "url": "https://everout.com/portland/events/my-blue-heaven/e248852/",
+    "isNew": true
   },
   {
     "id": 248854,
@@ -724,7 +755,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "5 oz “half smash” burger, served medium with smoked cheddar cheese, red pepper jelly, bread and butter pickles, Duke’s White BBQ spread, and iceberg lettuce on a Franz bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIyOTQ3MDMxNDMyOC1GYXJtZXItYW5kdGhlLUJlYXN0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/southern-beast/e248854/"
+    "url": "https://everout.com/portland/events/southern-beast/e248854/",
+    "isNew": true
   },
   {
     "id": 248856,
@@ -746,7 +778,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "5 oz “half smash” burger, served medium with smoked cheddar cheese, red pepper jelly, bread and butter pickles, Duke’s White BBQ spread, and iceberg lettuce on a Franz bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMzYyMDA5MDIzNy1GYXJtZXItYW5kdGhlLUJlYXN0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/southern-beast/e248856/"
+    "url": "https://everout.com/portland/events/southern-beast/e248856/",
+    "isNew": true
   },
   {
     "id": 248858,
@@ -768,7 +801,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Quarter-pound ground elk patty, grilled shallot and horseradish aioli, swiss cheese, arugula, toasted bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIzMDc0NDYwNzMxMS1EZXNjaHV0ZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/what-the-elk/e248858/"
+    "url": "https://everout.com/portland/events/what-the-elk/e248858/",
+    "isNew": true
   },
   {
     "id": 248859,
@@ -790,7 +824,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Nacho cheese, cherry peppers, and all the regular burger fixin's.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIzMDkxMjQ4OTk1MS1EYWlseS1QbGFuZXQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-cherry-bomb-burger/e248859/"
+    "url": "https://everout.com/portland/events/the-cherry-bomb-burger/e248859/",
+    "isNew": true
   },
   {
     "id": 248860,
@@ -812,7 +847,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "American wagyu patty, Jim Beam & Oregon marionberry barbecue sauce, Face Rock Creamery “In Your Face” pepper cheddar, pickled onions, arugula, pretzel bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDIzMTQwMTIyMjQ2LUNsYXJrbGV3aXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-cascadian/e248860/"
+    "url": "https://everout.com/portland/events/the-cascadian/e248860/",
+    "isNew": true
   },
   {
     "id": 248981,
@@ -834,7 +870,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Ground beef patty, bacon chipotle onion jam, relish, Brie cheese, and arugula on a brioche bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMwOTYxODczMTc0OC1BYmlnYWlsLUhhbGwuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-ab-brie-burger/e248981/"
+    "url": "https://everout.com/portland/events/the-ab-brie-burger/e248981/",
+    "isNew": true
   },
   {
     "id": 248983,
@@ -856,7 +893,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Gochujang burger sauce, 7 oz chuck, brisket, short rib burger patty, American & Swiss cheese, onion jam on Texas Toast!",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMwOTk5NzE5OTE5NC0xMC1CYXJyZWwuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-patty-meltdella-effect/e248983/"
+    "url": "https://everout.com/portland/events/the-patty-meltdella-effect/e248983/",
+    "isNew": true
   },
   {
     "id": 248987,
@@ -878,7 +916,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beef patty, thai chili basil aioli, togarashi Walla Walla onion rings, pork belly, American cheese, arugula, brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMDE4NDg0NzE3LUFqaS1UcmFtLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/basil-buckaroo-burger/e248987/"
+    "url": "https://everout.com/portland/events/basil-buckaroo-burger/e248987/",
+    "isNew": true
   },
   {
     "id": 248989,
@@ -887,8 +926,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "2NW5",
     "neighborhood": "Old Town-Chinatown - Northwest Portland",
     "address": "Two NW Fifth Ave, Portland, OR 97209",
-    "lat": 45.523612,
-    "lng": -122.675682,
+    "lat": 45.5231,
+    "lng": -122.6765,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -900,7 +939,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fresh beef patty on a toasted Martin's bun topped with pickled jalapeños, grilled queso Oaxaqueño, avocado, and crunchy corn chips, plus a grilled jalapeño on top and queso for dipping on the side.",
     "emoji": "🌶️",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMDU3NTc5ODkyMi0yTlc1LVNwZWFrZWFzeS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/nacho-burger/e248989/"
+    "url": "https://everout.com/portland/events/nacho-burger/e248989/",
+    "isNew": true
   },
   {
     "id": 248990,
@@ -922,7 +962,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Two house-ground beef patties, pineapple cowboy candy, cheddar cheese, crispy buttermilk onions on a soft bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMDcxNDQ2ODcwNC1BdGUtT2gtQXRlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/paniolo-burger/e248990/"
+    "url": "https://everout.com/portland/events/paniolo-burger/e248990/",
+    "isNew": true
   },
   {
     "id": 248991,
@@ -944,7 +985,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Two house-ground beef patties, pineapple cowboy candy, cheddar cheese, crispy buttermilk onions on a soft bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMDk5ODk2MjU3Ni1BdGUtT2gtQXRlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/paniolo-burger/e248991/"
+    "url": "https://everout.com/portland/events/paniolo-burger/e248991/",
+    "isNew": true
   },
   {
     "id": 248992,
@@ -966,7 +1008,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Two house-ground beef patties, pineapple cowboy candy, cheddar cheese, crispy buttermilk onions on a soft bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMTA5ODE2NzE1Ny1BdGUtT2gtQXRlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/paniolo-burger/e248992/"
+    "url": "https://everout.com/portland/events/paniolo-burger/e248992/",
+    "isNew": true
   },
   {
     "id": 248993,
@@ -988,7 +1031,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Brioche bun, beef burger patty, guajillo pepper, toum, iceberg lettuce, pickles.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMTIwNzMzMjUwNC1CYXJidXItV29ybGQtRm9vZHMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/beirut-smokeshow/e248993/"
+    "url": "https://everout.com/portland/events/beirut-smokeshow/e248993/",
+    "isNew": true
   },
   {
     "id": 248994,
@@ -1010,7 +1054,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Maple bar, fresh burger, bacon, cheddar cheese, drizzled with hot honey and dill pickles on the side.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMTQwNDE2NzMyMy1CZXJneXMtQnVyZ2Vycy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/maple-barger/e248994/"
+    "url": "https://everout.com/portland/events/maple-barger/e248994/",
+    "isNew": true
   },
   {
     "id": 248995,
@@ -1019,8 +1064,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Amaros Table Downtown",
     "neighborhood": "Vancouver",
     "address": "1220 Main St. Ste. 100, Vancouver, WA 98660",
-    "lat": 45.631853,
-    "lng": -122.671391,
+    "lat": 45.5231,
+    "lng": -122.6765,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -1032,7 +1077,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Country Natural ground chuck, Swiss cheese, chorizo-potato hash, shredded lettuce, caramelized onion, avocado, salsa verde, and crema on a rustic bun dipped in guajillo sauce, griddled until crisp, then spread with refried pinto beans.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMTY3NDA3NjcyNi1BbWFyb3MtVGFibGVfRG93bnRvd24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-pambazo-burger/e248995/"
+    "url": "https://everout.com/portland/events/the-pambazo-burger/e248995/",
+    "isNew": true
   },
   {
     "id": 248996,
@@ -1041,8 +1087,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Arch Bridge Taphouse",
     "neighborhood": "Oregon City",
     "address": "205 7th, Oregon City, Oregon ",
-    "lat": 45.3577536,
-    "lng": -122.6082502,
+    "lat": 45.3577596,
+    "lng": -122.6082522,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -1054,7 +1100,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-ground chuck smash patty, mini tortilla chips, chorizo, queso blanco, avocado sauce, pico de gallo, and chipotle aioli (all made in-house) on an An Xuyen butter roll.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMTgyNDY1MTQzMi1BcmNoLUJyaWRnZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/nacho-man-smashy-savage/e248996/"
+    "url": "https://everout.com/portland/events/nacho-man-smashy-savage/e248996/",
+    "isNew": true
   },
   {
     "id": 248999,
@@ -1076,7 +1123,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "6 oz Waygu beef patty with iceberg lettuce, Tillamook white cheddar cheese, caramelized onions, fried pickled jalapeños, and Besaw's house sauce on a potato bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMjA4NTUwMDk2OS1CZWFzYXdzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/1903-burger/e248999/"
+    "url": "https://everout.com/portland/events/1903-burger/e248999/",
+    "isNew": true
   },
   {
     "id": 249000,
@@ -1098,7 +1146,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pepper-crusted and smoked beef patty, grilled corn & cherry pepper relish, tomato aioli, iceberg, pepper jack cheese on a soft bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMjI3ODM5NjQ5Ny1CaWdzLUNoaWNrZW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/smoked-out-smash/e249000/"
+    "url": "https://everout.com/portland/events/smoked-out-smash/e249000/",
+    "isNew": true
   },
   {
     "id": 249003,
@@ -1120,7 +1169,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Brioche bun, seven-spice chicken, crunchy toum-dressed slaw, more toum, French fries.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMjY5MTExMzIxNy1ZYS1IYWxhLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/double-toum-tawook/e249003/"
+    "url": "https://everout.com/portland/events/double-toum-tawook/e249003/",
+    "isNew": true
   },
   {
     "id": 249004,
@@ -1129,8 +1179,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Wow Cow",
     "neighborhood": "Tigard",
     "address": "9100 SW Burnham st, Tigard, OR 97223",
-    "lat": 45.4287045,
-    "lng": -122.7705986,
+    "lat": 45.4286191,
+    "lng": -122.7704684,
     "type": "meat",
     "vegOption": true,
     "veganOption": false,
@@ -1142,7 +1192,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "100-yr-old family Korean BBQ recipe. Minced ground beef marinaded with Kalbi marinaded patty. Traditional bulgogi beef, melted mozzarella, melted American, garlic aioli and red pepper aioli, on a toasted hoagie bun.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMjg3MDg5NzQyMi1Xb3ctQ293LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/tteok-kalbi-korean-philly-burger/e249004/"
+    "url": "https://everout.com/portland/events/tteok-kalbi-korean-philly-burger/e249004/",
+    "isNew": true
   },
   {
     "id": 249005,
@@ -1164,7 +1215,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Brioche bun, beef kafta patty, tahini, feta cheese, shredded iceberg lettuce, pickles, onion, parsley, sumac.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMzAzNTgyNTI4Mi1Xb3JsZC1Gb29kcy1FdmVyZXR0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-herban-legend/e249005/"
+    "url": "https://everout.com/portland/events/the-herban-legend/e249005/",
+    "isNew": true
   },
   {
     "id": 249006,
@@ -1186,7 +1238,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Deep fried pizza pocket, garlic-parmesan sauce, crushed Doritos.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMzEzNzU4MjEzNS1Xb2xmcy1IZWFkLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-sleepover-burger/e249006/"
+    "url": "https://everout.com/portland/events/the-sleepover-burger/e249006/",
+    "isNew": true
   },
   {
     "id": 249007,
@@ -1195,8 +1248,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Urban Farmer",
     "neighborhood": "Southwest Portland",
     "address": "525 SW Morrison St., Portland, OR 97204",
-    "lat": 45.5190283,
-    "lng": -122.6779119,
+    "lat": 45.5190452,
+    "lng": -122.678002,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -1208,7 +1261,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smash burger, French onions, Swiss cheese, house mustard, roasted garlic aioli.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMzIzMjEwODYzMS1VcmJhbi1GYXJtZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/french-onion-smash-burger/e249007/"
+    "url": "https://everout.com/portland/events/french-onion-smash-burger/e249007/",
+    "isNew": true
   },
   {
     "id": 249008,
@@ -1230,7 +1284,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "100% beef burger patty, topped with our beer-battered fries, Wisconsin cheese curds, and our house made brown gravy (served on side so you can pour over whenever you are ready to enjoy!)…all on a pub bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMzQyMTM0NTQ2NS1Td2VldC1Ib21lLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/poutine-burger/e249008/"
+    "url": "https://everout.com/portland/events/poutine-burger/e249008/",
+    "isNew": true
   },
   {
     "id": 249009,
@@ -1252,7 +1307,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy chik’n patty topped with house-made Nashville fire seasoning, grilled jalapeños, pepper jack cheese, and crispy onion rings. Served on a butter toasted pretzel bun with Memphis sweet BBQ sauce and organic lettuce and tomato.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMxMzY3Mzk3NTA4MS1OTC1WZWdnaWUtR3JpbGxfSGF3dGhvcm5lLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/smoky-mountain-bbq-chikn-burger/e249009/"
+    "url": "https://everout.com/portland/events/smoky-mountain-bbq-chikn-burger/e249009/",
+    "isNew": true
   },
   {
     "id": 249069,
@@ -1261,8 +1317,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "SuperDeluxe",
     "neighborhood": "Richmond - Southeast Portland",
     "address": "5000 SE Powell, Portland, Oregon 97206",
-    "lat": 45.497423,
-    "lng": -122.611179,
+    "lat": 45.497418,
+    "lng": -122.611178,
     "type": "meat",
     "vegOption": true,
     "veganOption": false,
@@ -1274,7 +1330,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Nacho cheese, crunchy tortilla chips, sliced jalapeños, salsa, sour cream, lettuce, onions, and beef patty on a warm bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMTY0ODE5NjgxLVN1cGVyLURlbHV4ZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/nacho-deluxe/e249069/"
+    "url": "https://everout.com/portland/events/nacho-deluxe/e249069/",
+    "isNew": true
   },
   {
     "id": 249070,
@@ -1296,7 +1353,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Our house ground beef patty, American cheese, cowboy candy, pickled jalapeños, fried shallots, BBQ sauce.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMjQ3ODg5MjQ0LVN0ZWVseXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/sweet-cowboy/e249070/"
+    "url": "https://everout.com/portland/events/sweet-cowboy/e249070/",
+    "isNew": true
   },
   {
     "id": 249071,
@@ -1318,7 +1376,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Peppered bacon, raspberry preserves, white American cheese, grilled jalapeños, arugula and our burger spread on a butter bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMjcxMTMwNTc0NC1TdGVha2FkZWxwaGlhLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/kyler/e249071/"
+    "url": "https://everout.com/portland/events/kyler/e249071/",
+    "isNew": true
   },
   {
     "id": 249073,
@@ -1340,7 +1399,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Our 1/3 lb burger patty topped with grilled cheese curds, caramelized onions, on a toasted potato bun with black pepper & parmesan aioli, pickles & seasoned waffle fries. Cut in half & served cut portion down in a rich beef demi-glace.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMjg0NzI2NzYyMy1TcGFjZXJvb20uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/canadian-tuxedo-burger/e249073/"
+    "url": "https://everout.com/portland/events/canadian-tuxedo-burger/e249073/",
+    "isNew": true
   },
   {
     "id": 249074,
@@ -1362,7 +1422,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "All beef patty seasoned Trinidad-style with coleslaw and garlic sauce.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMzA0MTg5NzM3NS1TYWx2YWRvci1Nb2xseXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/bele/e249074/"
+    "url": "https://everout.com/portland/events/bele/e249074/",
+    "isNew": true
   },
   {
     "id": 249075,
@@ -1384,7 +1445,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "An herbed beef hamburger patty, sharp cheddar, bacon, jalapeño escabeche relish, pickled shallot, and garlic aioli on a round grilled sourdough bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMzMxNTgxOTEzNi1TYWQtVmFsbGV5LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/lord-sourdough/e249075/"
+    "url": "https://everout.com/portland/events/lord-sourdough/e249075/",
+    "isNew": true
   },
   {
     "id": 249076,
@@ -1406,7 +1468,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beef patty, melted American cheese, house-made Thai peanut sauce, napa cabbage-carrot slaw, crispy fried shallots, cilantro, crushed peanuts, between potato buns.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyMzQ1OTM1ODAzNS1QcmltZS1UYXBIb3VzZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-bangkok-smash-thai-peanut-burger/e249076/"
+    "url": "https://everout.com/portland/events/the-bangkok-smash-thai-peanut-burger/e249076/",
+    "isNew": true
   },
   {
     "id": 249092,
@@ -1428,7 +1491,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smoked brisket and sirloin burger patty, shaved white onions, white American cheese, au poivre steak sauce, Dos Hermanos brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNjYyOTEzMTYzOS1Qb2RuYWhzLVBpdC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/paris-texas/e249092/"
+    "url": "https://everout.com/portland/events/paris-texas/e249092/",
+    "isNew": true
   },
   {
     "id": 249094,
@@ -1450,7 +1514,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-ground brisket, pepper jack cheese, tobacco onions, house-pickled jalapeños.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNjc3OTUxODEwNi1QTFMtb24tU2l4dGguanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-shaggy/e249094/"
+    "url": "https://everout.com/portland/events/the-shaggy/e249094/",
+    "isNew": true
   },
   {
     "id": 249096,
@@ -1472,7 +1537,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smashed patty, American cheese, pickle, bacon, mayo, pile of magic dust.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNjg3MjI1NDUwNy1QYXltYXN0ZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/magic-dust-burger/e249096/"
+    "url": "https://everout.com/portland/events/magic-dust-burger/e249096/",
+    "isNew": true
   },
   {
     "id": 249099,
@@ -1494,7 +1560,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-made pork & beef chorizo, hand-formed and grilled in beef tallow. Served in a toasted corn kaiser roll with sharp white cheddar cheese, green pepper corn relish, avocado cheese mojo, pimiento mayo, and diced red onion.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNjk4NTE2NDEyNi1QYW1iaWNoZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/papis-chorizo-burger/e249099/"
+    "url": "https://everout.com/portland/events/papis-chorizo-burger/e249099/",
+    "isNew": true
   },
   {
     "id": 249101,
@@ -1503,20 +1570,21 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Pacific Standard",
     "neighborhood": "Kerns - Southeast Portland",
     "address": "100 NE Martin Luther King Jr Blvd, Portland, OR 97232",
-    "lat": 45.5238125,
-    "lng": -122.6614094,
+    "lat": 45.5237742,
+    "lng": -122.661537,
     "type": "meat",
     "vegOption": true,
     "veganOption": false,
     "glutenFree": false,
     "minors": true,
     "takeout": true,
-    "whatsOnIt": "A juicy all-beef patty stuffed with caramelized French onions, layered with melty \nBrie, American cheese, crisp lettuce, pickles, fresh onions, and dijon mustard, all served on a Martin's potato bun. Sip on a $12 French 75 for the perfect pairing.",
+    "whatsOnIt": "A juicy all-beef patty stuffed with caramelized French onions, layered with American cheese, crisp lettuce, pickles, fresh onions, and dijon mustard, smothered in a melty brie sauce and served on a Martin's potato bun. Sip on a $12 French 75 for the perfect pairing",
     "whatTheySay": "Inspired by the French connection between the burger and everyone's favorite Pacific Standard dish, the fries.",
-    "desc": "A juicy all-beef patty stuffed with caramelized French onions, layered with melty Brie, American cheese, crisp lettuce, pickles, fresh onions, and dijon mustard, all served on a Martin's potato bun. Sip on a $12 French 75 for the perfect pairing.",
+    "desc": "A juicy all-beef patty stuffed with caramelized French onions, layered with American cheese, crisp lettuce, pickles, fresh onions, and dijon mustard, smothered in a melty brie sauce and served on a Martin's potato bun. Sip on a $12 French 75 for the perfect pairing",
     "emoji": "🧀",
-    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNzEyMzQ0NTMxNS1QYWNpZmljLVN0YW5kYXJkLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-french-connection/e249101/"
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTUzMjIyMDMxMTY5LVBhY2lmaWMtU3RhbmRhcmQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/the-french-connection/e249101/",
+    "isNew": true
   },
   {
     "id": 249104,
@@ -1538,7 +1606,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-made burger patty, fresh arugula, strawberry-jalapeño compote, and spreadable Brie on a brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNzIzMTQ5ODA1Ni1PZmZpY2UtQmFyLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-sweet-heat-burger/e249104/"
+    "url": "https://everout.com/portland/events/the-sweet-heat-burger/e249104/",
+    "isNew": true
   },
   {
     "id": 249106,
@@ -1560,7 +1629,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tomato-bacon-onion jam, peanut butter dijonnaise, and crispy onions.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDMyNzQ1MDEyNTkyMS1PYWtzLVB1Yi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-bomb-burger/e249106/"
+    "url": "https://everout.com/portland/events/the-bomb-burger/e249106/",
+    "isNew": true
   },
   {
     "id": 249290,
@@ -1582,7 +1652,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beef patty, garlic mayo, stone-ground mustard, and pickles. Served in a pool of peppercorn sauce and topped with house-made onion rings.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU4NzkwNTI1OTY4OC1SaXZlci1QaWctU2Fsb29uLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/notorious-p-i-g/e249290/"
+    "url": "https://everout.com/portland/events/notorious-p-i-g/e249290/",
+    "isNew": true
   },
   {
     "id": 249292,
@@ -1604,7 +1675,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "This sweet and salty burger has sungold tomato jam, two smash patties with pepper jack cheese, crispy bacon, shredded iceberg, and basil aioli nestled between a Portland French bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MDEyMTU5NTA2OS1TYW5keS1KdWcuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/summer-sungold-sandy/e249292/"
+    "url": "https://everout.com/portland/events/summer-sungold-sandy/e249292/",
+    "isNew": true
   },
   {
     "id": 249293,
@@ -1626,7 +1698,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-blended ground beef and chorizo patty with pepper jack, fresh guacamole, poblano aioli, pickled red onions, shredded lettuce, and tomato on a brioche bun.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MDQ2NjIzMTA3MS1UaHJlZS1NZXJtYWlkcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-chorizo-guac-burger/e249293/"
+    "url": "https://everout.com/portland/events/the-chorizo-guac-burger/e249293/",
+    "isNew": true
   },
   {
     "id": 249294,
@@ -1648,7 +1721,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Caramelized onions, bacon, whipped feta, guava jam, and arugula on a house pub bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MDU5NTQ2MzI2Mi1XYXlmaW5kZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-forbidden-snack/e249294/"
+    "url": "https://everout.com/portland/events/the-forbidden-snack/e249294/",
+    "isNew": true
   },
   {
     "id": 249295,
@@ -1670,7 +1744,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Hatch Green Chile Bacon Burger features an all beef patty topped with Hatch green chiles, crispy bacon, American cheese, PepperJack cheese and SmashSauce, all atop a Martin’s Potato Bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MDcxODMyNzMzNi1NaWRDaXR5LVNtYXNoQnVyZ2VyX1Byb3N0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249295/"
+    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249295/",
+    "isNew": true
   },
   {
     "id": 249296,
@@ -1692,7 +1767,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Hatch Green Chile Bacon Burger features an all beef patty topped with Hatch green chiles, crispy bacon, American cheese, PepperJack cheese and SmashSauce, all atop a Martin’s Potato Bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MDg2MTQxMDQ4NC1NaWRDaXR5LVNtYXNoQnVyZ2VyX0xldmVsMy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249296/"
+    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249296/",
+    "isNew": true
   },
   {
     "id": 249297,
@@ -1714,7 +1790,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Hatch Green Chile Bacon Burger features an all beef patty topped with Hatch green chiles, crispy bacon, American cheese, PepperJack cheese and SmashSauce, all atop a Martin’s Potato Bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MDk0MzQzOTgzOC1NaWRDaXR5LVNtYXNoQnVyZ2VyX1VwdG93bi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249297/"
+    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249297/",
+    "isNew": true
   },
   {
     "id": 249298,
@@ -1736,7 +1813,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A juicy, perfectly grilled beef burger topped with thick slices of ripe tomato, creamy fresh mozzarella, spring greens, and a drizzle of rich balsamic glaze. Finished with a bold, spicy basil pesto that adds just the right kick, this burger delivers a fresh twist on the classic Caprese salad with th",
     "emoji": "🌶️",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MTEwOTk1OTQwNS1NaWdyYXRpb25fV2lsbGlhbXNfMS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/summer-maxxing-burger/e249298/"
+    "url": "https://everout.com/portland/events/summer-maxxing-burger/e249298/",
+    "isNew": true
   },
   {
     "id": 249299,
@@ -1758,7 +1836,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-smoked bacon, crispy fried jalapeños, cheddar cheese + creamy cream cheese spread.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MTI1MDc0MjExOC1Wb24tRWJlcnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-big-popper/e249299/"
+    "url": "https://everout.com/portland/events/the-big-popper/e249299/",
+    "isNew": true
   },
   {
     "id": 249300,
@@ -1780,7 +1859,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Bacon, double sausage smash patties with cheese, hashbrown PO-TA-TOES, and a maple gochujang burger sauce between two 4 inch pancakes.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MTQyMDI3MDMwNi1MYXp5LURheXNfTkZsaW50LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/but-what-about-second-breakfast/e249300/"
+    "url": "https://everout.com/portland/events/but-what-about-second-breakfast/e249300/",
+    "isNew": true
   },
   {
     "id": 249301,
@@ -1802,7 +1882,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Bacon and cheddar stuffed patty, lettuce, tomato, pickle, onion, mustard and ketchup.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5MTUwNzA1NDAwNC1MYXktTG93XzEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/club-21-juicy-lucy/e249301/"
+    "url": "https://everout.com/portland/events/club-21-juicy-lucy/e249301/",
+    "isNew": true
   },
   {
     "id": 249308,
@@ -1824,7 +1905,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pepper jack cheese, roasted jalapeños, shredded lettuce, pico de gallo, avocado crema, tortilla strips.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5OTQ2NTE1NDA0NS1LaW5nc3Rvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/fiesta-kingston-burger/e249308/"
+    "url": "https://everout.com/portland/events/fiesta-kingston-burger/e249308/",
+    "isNew": true
   },
   {
     "id": 249309,
@@ -1846,7 +1928,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Grilled beef patty (seasoned like a classic meatball), Gricia sauce made with cream, rendered bacon fat, pecorino romano, cracked and toasted black pepper, topped with crispy bacon, sundried tomato and hot honey pesto, soft and toasted pub bun finished like a garlic knot with garlic butter, parmiggi",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5OTYzMzgzNDI3My1JdGFsaWFuLUpvYi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/garlic-knot-alla-gricia-burger/e249309/"
+    "url": "https://everout.com/portland/events/garlic-knot-alla-gricia-burger/e249309/",
+    "isNew": true
   },
   {
     "id": 249310,
@@ -1868,7 +1951,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pork burger, bacon, grilled peaches, dirty mustard, American cheese.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5OTg2NzI3MTE0Ni1MYXJkby5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/piggy-smalls/e249310/"
+    "url": "https://everout.com/portland/events/piggy-smalls/e249310/",
+    "isNew": true
   },
   {
     "id": 249311,
@@ -1890,7 +1974,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smashed and seasoned Angus burger, blackberry jalapeño bacon jam, goat cheese, and fresh arugula on a Portland French burger bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDU5OTk5Nzc0NjQ5Ni1Kb2hucy1NYXJrZXRwbGFjZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/blackberry-bramble-smash/e249311/"
+    "url": "https://everout.com/portland/events/blackberry-bramble-smash/e249311/",
+    "isNew": true
   },
   {
     "id": 249312,
@@ -1912,7 +1997,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Lamb patty, feta whipped tzatziki, spinach, caramelized onions, and red peppers, served on a brioche bun.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMDI1MTc4NzUzMy1OaWNob2xhcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/lebanese-lamb-burger/e249312/"
+    "url": "https://everout.com/portland/events/lebanese-lamb-burger/e249312/",
+    "isNew": true
   },
   {
     "id": 249313,
@@ -1934,7 +2020,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Toasted sesame seeds bun, fresh lettuce, garlic mayo, 1/4-lb Angus beef patty, famous Hong Kong-style black pepper sauce, and onion rings.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMDY2ODg0MjAxOC1IYXdrZXItU3RhdGlvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/black-pepper-burger/e249313/"
+    "url": "https://everout.com/portland/events/black-pepper-burger/e249313/",
+    "isNew": true
   },
   {
     "id": 249315,
@@ -1956,7 +2043,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smash patty, crispy house-made jalapeño popper, Tillamook cheddar, house ranch, pickled onion, and jalapeños.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMDgxNDE3Mjg1Mi1IdW5rZXItRG93bi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-last-jalapeno-burger/e249315/"
+    "url": "https://everout.com/portland/events/the-last-jalapeno-burger/e249315/",
+    "isNew": true
   },
   {
     "id": 249316,
@@ -1978,7 +2066,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Provolone cheese, Calabrian mayo, oven-dried tomatoes, arugula.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMDk2NjY3OTgzOC1HcmFzc2EuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/meatball-burger/e249316/"
+    "url": "https://everout.com/portland/events/meatball-burger/e249316/",
+    "isNew": true
   },
   {
     "id": 249317,
@@ -2000,7 +2089,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Seasoned beef/pork patty, fresh cucumber, pickled cabbage slaw, red pepper yogurt sauce, on an herbed sesame bun.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMTEyOTkzODkyLUdpZnQtQmFyLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/flamingo-thrash/e249317/"
+    "url": "https://everout.com/portland/events/flamingo-thrash/e249317/",
+    "isNew": true
   },
   {
     "id": 249318,
@@ -2022,7 +2112,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "All beef patty, grilled onion, bacon, cheddar, grilled pineapple, bbq sauce.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMTM5MDMzNDc5NS1Eb3VibGUtQmFycmVsLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-cowboy-vacation/e249318/"
+    "url": "https://everout.com/portland/events/the-cowboy-vacation/e249318/",
+    "isNew": true
   },
   {
     "id": 249319,
@@ -2044,7 +2135,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mustard-based Oklahoma onion burger, American cheese, crushed Zapp's Voodoo Chips, pickles, burger sauce, on a Franz bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMTY3NjM0NzQyNi1DcmVlcHlzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/okely-dokely/e249319/"
+    "url": "https://everout.com/portland/events/okely-dokely/e249319/",
+    "isNew": true
   },
   {
     "id": 249320,
@@ -2053,8 +2145,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Cecilia",
     "neighborhood": "Vancouver",
     "address": "2520 Columbia House Blvd #108, Vancouver, WA 98661",
-    "lat": 45.620021,
-    "lng": -122.645063,
+    "lat": 45.5231,
+    "lng": -122.6765,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -2066,7 +2158,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Country Natural ground chuck topped with crispy fried pepper jack cheese, grilled onions, arugula, house-made pineapple jam and habanero aioli. Served on a toasted buttered brioche bun for the perfect balance of sweet heat, richness, and tropical flavor.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMjE0NDgyMjk2NC1DZWNpbGlhLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/aloha-neighbor/e249320/"
+    "url": "https://everout.com/portland/events/aloha-neighbor/e249320/",
+    "isNew": true
   },
   {
     "id": 249321,
@@ -2088,7 +2181,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beef and pork burger stuffed with Swiss and Gruyere cheeses and topped with more Gruyere, caramelized onion jam, and herb mayo on a squishy bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMjQ5NzgwMjIxNy1CdW5rLVNhbmR3aWNoZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/french-onion-juicy-lucy/e249321/"
+    "url": "https://everout.com/portland/events/french-onion-juicy-lucy/e249321/",
+    "isNew": true
   },
   {
     "id": 249322,
@@ -2110,7 +2204,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Angus Beef Kefta (24 hour fermented patty) char-grilled, melted American cheese, and shredded sirene (Bulgarian feta), homemade pickled cucumbers and shaved sweet onions, shoestring fries, topped with homemade hot honey, on a toasted pub bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMjkxMzExMzcxNC1CdWxnYXJpYW4tSm9iLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/balkan-dreams-burger/e249322/"
+    "url": "https://everout.com/portland/events/balkan-dreams-burger/e249322/",
+    "isNew": true
   },
   {
     "id": 249323,
@@ -2132,7 +2227,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A charbroiled beef patty stacked with melty American cheese, crisp shredded lettuce, our house Big Dill sauce, fresh dill pickle chips, crispy pickle fries, and crunchy pickle potato chips on a toasted bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMzI5MjU5NjIyNy1CcmVha3NpZGUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-big-dill/e249323/"
+    "url": "https://everout.com/portland/events/the-big-dill/e249323/",
+    "isNew": true
   },
   {
     "id": 249324,
@@ -2154,7 +2250,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Ground beef patty, Swiss cheese, and mushroom.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMzY3MDY5Njc2NC1Ccml4LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/service-mushroom-swiss-burger/e249324/"
+    "url": "https://everout.com/portland/events/service-mushroom-swiss-burger/e249324/",
+    "isNew": true
   },
   {
     "id": 249325,
@@ -2176,7 +2273,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Half-pound ground prime brisket patty, caramelized onion, melty Gruyère cheese, French onion aioli, pickles, potato chips.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMzgwNDU5NDkzLUJvdHRvcy1CQlEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/mont-dew-burger/e249325/"
+    "url": "https://everout.com/portland/events/mont-dew-burger/e249325/",
+    "isNew": true
   },
   {
     "id": 249326,
@@ -2198,7 +2296,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Double stack fresh ground burgers, pepper jack cheese, hot and sour pickled serrano chiles, ´In & Out Style´ onions, chile crunch aioli, shredded lettuce on An Xuyen Asian brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDYwMzk5Mzg0MzY2OS1Cb2tlLUJvd2wuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/sweet-chile-of-mine-burger/e249326/"
+    "url": "https://everout.com/portland/events/sweet-chile-of-mine-burger/e249326/",
+    "isNew": true
   },
   {
     "id": 249399,
@@ -2220,7 +2319,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Brioche bun, pear slice, blue cheese crumble, arugula, fig jam, beef patty.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2ODYyMzgxMTc3Ni1CaXJkaWUtVGltZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/its-alive-pearenstein-burger/e249399/"
+    "url": "https://everout.com/portland/events/its-alive-pearenstein-burger/e249399/",
+    "isNew": true
   },
   {
     "id": 249400,
@@ -2242,7 +2342,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "100% Hereford beef patty with house made smokey guajillo chili sauce, pepper jack cheese, crispy fried shoestring onions, lettuce, and mayo on a Grand Central brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2ODkwODMwNTk3Mi1Nb3JlbGFuZC1BbGUtSG91c2UuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/yee-haw-burger/e249400/"
+    "url": "https://everout.com/portland/events/yee-haw-burger/e249400/",
+    "isNew": true
   },
   {
     "id": 249401,
@@ -2264,7 +2365,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Classic smash patty, American cheese, buffalo chicken cutlet, lettuce, garlic-bleu cheese dressing.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2OTAzMzM5NTM0OS1Mb3lhbC1MZWdpb24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-loyal-stinger/e249401/"
+    "url": "https://everout.com/portland/events/the-loyal-stinger/e249401/",
+    "isNew": true
   },
   {
     "id": 249402,
@@ -2286,7 +2388,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "All beef patty with sharp & pepper jack cheese, Black Forest bacon, grilled jalapeños, frizzled onions, sriracha mayo, and our sweet and bold barbecue sauce.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2OTU0MDIwOTAzNS1IdW5ueS1CZWV6LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/cowboybeez-burger/e249402/"
+    "url": "https://everout.com/portland/events/cowboybeez-burger/e249402/",
+    "isNew": true
   },
   {
     "id": 249403,
@@ -2308,7 +2411,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Locally sourced ground beef, smoked pastrami jam, shredded lettuce, chipotle aioli, pickled peppers, and smoked cheddar cheese.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2OTgyMTM2NTc5Mi1CbGVzcy1Zb3VyLUhlYXJ0X1ZhbmNvdXZlci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-smoke-show/e249403/"
+    "url": "https://everout.com/portland/events/the-smoke-show/e249403/",
+    "isNew": true
   },
   {
     "id": 249404,
@@ -2330,7 +2434,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Locally sourced ground beef, smoked pastrami jam, shredded lettuce, chipotle aioli, pickled peppers, and smoked cheddar cheese.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2OTk2NzY0MjEyMS1CbGVzcy1Zb3VyLUhlYXJ0X1BvcnRsYW5kLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-smoke-show/e249404/"
+    "url": "https://everout.com/portland/events/the-smoke-show/e249404/",
+    "isNew": true
   },
   {
     "id": 249405,
@@ -2339,8 +2444,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurant": "Veggie Grill - Cedar Hills Crossing",
     "neighborhood": "Beaverton",
     "address": "3435 SW Cedar Hills Blvd D, Beaverton, OR 97005",
-    "lat": 45.495021,
-    "lng": -122.805214,
+    "lat": 45.5231,
+    "lng": -122.6765,
     "type": "vegan",
     "vegOption": false,
     "veganOption": true,
@@ -2352,7 +2457,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy chik’n patty topped with house-made Nashville fire seasoning, grilled jalapeños, pepper jack cheese, and crispy onion rings. Served on a butter toasted pretzel bun with Memphis sweet BBQ sauce and organic lettuce and tomato.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY3MDEyODgxNjE2LU5MLVZlZ2dpZS1HcmlsbF9IYXd0aG9ybmUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/smoky-mountain-bbq-chikn-burger/e249405/"
+    "url": "https://everout.com/portland/events/smoky-mountain-bbq-chikn-burger/e249405/",
+    "isNew": true
   },
   {
     "id": 249406,
@@ -2374,7 +2480,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Two buttery brioche slider buns stacked with juicy beef, pork, and shrimp patties, with finely shredded cabbage, fresh green onions, creamy Kewpie mayo, crispy wonton strips, and finished with a drizzle of our signature housemade lemongrass chili oil.",
     "emoji": "🌶️",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY3MDIzODY0NjEyLUJpbmFyeS1CcmV3aW5nLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/teriyakimotos-shu-mai-sliders/e249406/"
+    "url": "https://everout.com/portland/events/teriyakimotos-shu-mai-sliders/e249406/",
+    "isNew": true
   },
   {
     "id": 249407,
@@ -2396,7 +2503,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Black bean patty, cashew nacho cheeze, pickled jalapeños, Portland Fresh salsa, shredded lettuce, Oh yeah...A HOMEMADE BUN",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY3MDQxNzE5ODExOS1TZWNyZXQtUGl6emEtU29jaWV0eS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/rhaenyras-reign/e249407/"
+    "url": "https://everout.com/portland/events/rhaenyras-reign/e249407/",
+    "isNew": true
   },
   {
     "id": 249408,
@@ -2418,7 +2526,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crunchy iceberg lettuce, gooey American cheese, local hot house tomatoes, griddled onions, Nick Grub's secret California sauce, and lots of love.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY3MDcyODAxOTkzOC1HcmFuZC1GaXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/out-and-in-burger/e249408/"
+    "url": "https://everout.com/portland/events/out-and-in-burger/e249408/",
+    "isNew": true
   },
   {
     "id": 249409,
@@ -2440,7 +2549,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy breaded chicken patty, house BBQ sauce, house-marinated tempeh bacon, a slice of cheese, pickles, crispy fried onions, and vegenaise on a sesame seed bun.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY3MDkxODg5MzMyNS1EQy1WZWdldGFyaWFuLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-bbq-chicken-bacon-cheese-burger-its-a-mouthful/e249409/"
+    "url": "https://everout.com/portland/events/the-bbq-chicken-bacon-cheese-burger-its-a-mouthful/e249409/",
+    "isNew": true
   },
   {
     "id": 249410,
@@ -2462,7 +2572,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pork burger seasoned with cilantro, lime, and garlic, topped with Napa cabbage slaw tossed in sambal aioli, Swiss cheese and a lemongrass, ginger, Thai chili peach sauce, served on a potato bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY3MTAzMzkzOTAwOS1TdGVlcGxlamFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/thai-one-on/e249410/"
+    "url": "https://everout.com/portland/events/thai-one-on/e249410/",
+    "isNew": true
   },
   {
     "id": 249636,
@@ -2484,7 +2595,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Deep-fried masa-potato patty, melted cotija, crispy fried onions, aji verde guacamole, pickled red onion-jalapeño slaw on grilled brioche.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDgyNjI1OTI5NzIxNS1Hb2xkLUR1c3QuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/tortitas-de-papa-burger/e249636/"
+    "url": "https://everout.com/portland/events/tortitas-de-papa-burger/e249636/",
+    "isNew": true
   },
   {
     "id": 249651,
@@ -2506,7 +2618,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Hatch Green Chile Bacon Burger features an all beef patty topped with Hatch green chiles, crispy bacon, American cheese, pepper jack cheese, and SmashSauce, all atop a Martin’s Potato Bun.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDgzMjQwNTYyOTQ0NS1NaWRDaXR5LVNtYXNoQnVyZ2VyX0xldmVsMS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249651/"
+    "url": "https://everout.com/portland/events/the-hatch-green-chile-bacon-burger/e249651/",
+    "isNew": true
   },
   {
     "id": 249707,
@@ -2528,7 +2641,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fresh ground brisket patty stuffed with pickled pepper cream cheese, live fire grilled on our Weber Ranch Kettle, slapped on top of crispy fried onions and slathered with sweet pepper jelly and cowboy crack. If you're feelin' wild, you can have us slap a slab of succulent, smokey brisket on top for ",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDg0MzUyMzk0NTgwNi1Xb25kZXJib3ktU21va2VzdGFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/tribute/e249707/"
+    "url": "https://everout.com/portland/events/tribute/e249707/",
+    "isNew": true
   },
   {
     "id": 249775,
@@ -2550,7 +2664,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "All-natural Angus beef, salami, pepperoni, provolone, lettuce, tomato, aioli, and pepper relish.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDkzMDE5ODc1Mjc3OS1Mb293aXQtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/calimshan-cure/e249775/"
+    "url": "https://everout.com/portland/events/calimshan-cure/e249775/",
+    "isNew": true
   },
   {
     "id": 249776,
@@ -2572,7 +2687,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Pepper-crusted burger patty, American cheese, potato bun, black pepper pecorino Fonduta, chives.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDkzMDM5NjUxMzE0NC1EaW1vcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/cacio-e-pepe-burger/e249776/"
+    "url": "https://everout.com/portland/events/cacio-e-pepe-burger/e249776/",
+    "isNew": true
   },
   {
     "id": 249916,
@@ -2594,7 +2710,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "House-made blackberry BBQ sauce, pepper jack cheese, kettle chips, and shredded lettuce.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTE4MTI1NzYyNTM1LUJhci1CYXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/heart-and-soul/e249916/"
+    "url": "https://everout.com/portland/events/heart-and-soul/e249916/",
+    "isNew": true
   },
   {
     "id": 249918,
@@ -2616,7 +2733,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Togarashi seasoned beef patties topped with crispy seared pork belly, cheddar cheese, sweet soy caramelized onions, Chinese hot mustard, Szechuan mayo and Napa cabbage slaw served on 3 hot steamed buns.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTE4MTUyNTk0ODYwNC1CcmVha2luZy1CdW5zLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-cleveland-steamer/e249918/"
+    "url": "https://everout.com/portland/events/the-cleveland-steamer/e249918/",
+    "isNew": true
   },
   {
     "id": 249919,
@@ -2638,7 +2756,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "4 oz beef patty topped with roasted Hatch green chiles, melted Monterey jack with jalapeños, crispy onions, and roasted garlic Hatch aioli on a toasted brioche bun.",
     "emoji": "🌶️",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTE4MTY0ODAyNTYzLUR1a2VzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/let-em-hatch/e249919/"
+    "url": "https://everout.com/portland/events/let-em-hatch/e249919/",
+    "isNew": true
   },
   {
     "id": 249920,
@@ -2660,7 +2779,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Habanero jam, pickled jalapeños, shaved sweet onion, all beef patty, and American cheddar on a Grand Central bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTE4MTc4OTI3Nzk4MS1SZXZlcmVuZHMtQkJRLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-dom/e249920/"
+    "url": "https://everout.com/portland/events/the-dom/e249920/",
+    "isNew": true
   },
   {
     "id": 249922,
@@ -2682,7 +2802,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Wagyu beef, onion soup crème fraîche, caramelized onion, Swiss cheese, gruyère cheese on a Ken's Artisan seeded brioche bun.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTE4MTkyODc2NzY4Mi1TYXktV2hlbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/french-onion-soup-burger/e249922/"
+    "url": "https://everout.com/portland/events/french-onion-soup-burger/e249922/",
+    "isNew": true
   },
   {
     "id": 249923,
@@ -2704,7 +2825,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Blackened 4 oz ground chuck burger with bloody Mary ketchup, celery root slaw, and a skewer loaded with our house pickled vegetables.",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTE4MjExODM0MDc0Ny1TaG93LUJhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/bloody-mary-burger/e249923/"
+    "url": "https://everout.com/portland/events/bloody-mary-burger/e249923/",
+    "isNew": true
   },
   {
     "id": 250204,
@@ -2726,7 +2848,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Built on thick slices of our café-baked meatloaf, layered with nutty, melty Gruyère, roasted summer vegetables, tangy pickled onions, and our house sauce, all pressed between buttery toasted focaccia. The roasted veggies? Let’s just call them your doctor’s alibi.… we’re just saying your body deserve",
     "emoji": "🍔",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTM2MjMyODYxMjE0NS1BU0wtQ2FmZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/jelling-meatloaf-melt/e250204/"
+    "url": "https://everout.com/portland/events/jelling-meatloaf-melt/e250204/",
+    "isNew": true
   },
   {
     "id": 250304,
@@ -2748,7 +2871,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Wagyu burger patty, Guajillo mayo, shredded lettuce, crispy tostada, braised beef, melted mozzarella cheese, pickled onions in a potato bun",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NTQ1MDQyOTM2MjA3OC1QYXBpLUNodWxvcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/burger-mulita/e250304/"
+    "url": "https://everout.com/portland/events/burger-mulita/e250304/",
+    "isNew": true
   }
 ];
   newItems.forEach(item => {
