@@ -12,7 +12,7 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { decodeHTML, fetchHtml } from './scraper_utils.js';
+import { decodeHTML, fetchHtml, loadExistingData } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -225,6 +225,17 @@ async function getDishLinks() {
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
+  const isForce = process.argv.includes('--force') || process.argv.includes('--all');
+  const outDir = path.join(__dirname, 'data');
+  const outPath = path.join(outDir, 'burgerweek2026.js');
+  const existingMap = isForce ? new Map() : loadExistingData(outPath);
+
+  if (existingMap.size > 0) {
+    console.log(`⚡ Incremental mode: Loaded ${existingMap.size} existing entries from ${outPath}`);
+  } else if (isForce) {
+    console.log(`🔄 Force mode enabled: Re-scraping all dishes from scratch.`);
+  }
+
   const dishLinks = await getDishLinks();
   if (dishLinks.length === 0) {
     console.error('No dish links found.');
@@ -234,9 +245,21 @@ async function main() {
   const entries = [];
   let fallbackCount = 0;
   let skipped = 0;
+  let reusedCount = 0;
+  let newCount = 0;
 
   for (let i = 0; i < dishLinks.length; i++) {
     const url = dishLinks[i];
+    const eidMatch = url.match(/\/e(\d+)\//);
+    const existing = existingMap.get(url);
+
+    if (existing) {
+      reusedCount++;
+      console.log(`  ✓ [Existing] ${existing.dish} @ ${existing.restaurant}`);
+      entries.push(existing);
+      continue;
+    }
+
     console.log(`\n[${i + 1}/${dishLinks.length}] ${url}`);
     let parsed;
     try {
@@ -264,7 +287,6 @@ async function main() {
       console.warn(`  ⚠ No coords: ${parsed.address}`);
     }
 
-    const eidMatch = parsed.url.match(/\/e(\d+)\//);
     const id = eidMatch ? parseInt(eidMatch[1], 10) : entries.length + 1;
 
     entries.push({
@@ -295,12 +317,10 @@ async function main() {
 
   entries.sort((a, b) => a.id - b.id);
 
-  const outDir = path.join(__dirname, 'data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, 'burgerweek2026.js');
 
   const header = `// Portland Mercury's Burger Week 2026 — scraped ${new Date().toISOString().slice(0, 10)}
-// ${entries.length} locations (skipped: ${skipped}, geocode fallbacks: ${fallbackCount})
+// ${entries.length} locations (skipped: ${skipped}, reused: ${reusedCount}, new: ${newCount}, geocode fallbacks: ${fallbackCount})
 // Source: ${WEEK_URL}
 `;
 

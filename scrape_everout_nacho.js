@@ -13,6 +13,7 @@
 import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
+import { decodeHTML, fetchHtml, loadExistingData } from './scraper_utils.js';
 
 const BASE_URL    = 'https://everout.com';
 const WEEK_URL    = 'https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/';

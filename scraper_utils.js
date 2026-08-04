@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import fs from 'fs';
 
 /**
  * Robustly decodes HTML entities (e.g. &amp;, &#39;, &rsquo;)
@@ -74,4 +75,28 @@ export async function fetchHtml(url) {
   });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
   return await res.text();
+}
+
+/**
+ * Loads existing items from a generated food week JS file (e.g. data/burgerweek2026.js).
+ * Returns a Map keyed by item URL and string ID.
+ */
+export function loadExistingData(filePath) {
+  if (!fs.existsSync(filePath)) return new Map();
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const jsonMatch = content.match(/const newItems = (\[[\s\S]*?\]);/);
+    if (jsonMatch) {
+      const items = JSON.parse(jsonMatch[1]);
+      const map = new Map();
+      items.forEach(item => {
+        if (item.url) map.set(item.url.trim(), item);
+        if (item.id !== undefined && item.id !== null) map.set(String(item.id), item);
+      });
+      return map;
+    }
+  } catch (e) {
+    console.warn(`  ⚠ Could not parse existing data from ${filePath}: ${e.message}`);
+  }
+  return new Map();
 }

@@ -13,7 +13,7 @@ import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
-import { decodeHTML, fetchHtml } from './scraper_utils.js';
+import { decodeHTML, fetchHtml, loadExistingData } from './scraper_utils.js';
 
 const BASE_URL    = 'https://everout.com';
 const WEEK_URL    = 'https://everout.com/portland/events/the-portland-mercurys-pizza-week-2026/e222744/';
@@ -59,11 +59,6 @@ async function geocode(address) {
   }
 }
 
-// Portland-metro zip → city. Used to normalize a retry variant when the
-// full address doesn't geocode, without silently relocating a suburb venue
-// into Portland.
-const ZIP_CITY = {
-  '97005': 'Beaverton', '97006': 'Beaverton', '97007': 'Beaverton', '97008': 'Beaverton',
   '97015': 'Clackamas', '97027': 'Clackamas', '97086': 'Happy Valley',
   '97034': 'Lake Oswego', '97035': 'Lake Oswego',
   '97062': 'Tualatin', '97140': 'Sherwood',
