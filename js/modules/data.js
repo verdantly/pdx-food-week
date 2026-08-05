@@ -97,7 +97,7 @@ export function getFiltered() {
     if (State.activeFilters.has('gf') && !r.glutenFree) return false;
     if (State.activeFilters.has('pie') && !r.wholePie) return false;
     if (State.activeFilters.has('spicy') && !r.spicy) return false;
-    if (State.activeFilters.has('new') && !r.isNew) return false;
+    if (State.activeFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
     if (State.searchQuery) {
       const q = State.searchQuery.toLowerCase();
       if (!r.dish.toLowerCase().includes(q) &&
@@ -138,7 +138,7 @@ export function getSaved() {
     if (State.activeSavedFilters.has('gf') && !r.glutenFree) return false;
     if (State.activeSavedFilters.has('pie') && !r.wholePie) return false;
     if (State.activeSavedFilters.has('spicy') && !r.spicy) return false;
-    if (State.activeSavedFilters.has('new') && !r.isNew) return false;
+    if (State.activeSavedFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
     if (State.savedSearchQuery) {
       const q = State.savedSearchQuery.toLowerCase();
       if (!r.dish.toLowerCase().includes(q) &&

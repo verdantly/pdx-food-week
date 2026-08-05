@@ -184,8 +184,8 @@ export function renderSaved() {
 export function renderFilters() {
   let filters = [...(WEEK_FILTERS[State.currentWeekId] || [])];
   const activeWeekRestaurants = getRestaurants();
-  const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
-  if (hasAnyNew) {
+  const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
+  if (hasUnviewedNew || State.activeFilters.has('new')) {
     filters.push({ id: 'new', label: 'Recently Added' });
   }
   const container = document.getElementById('browse-filters');

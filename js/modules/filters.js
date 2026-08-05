@@ -224,8 +224,8 @@ export function toggleSavedFilter(f) {
 export function renderSavedFilters() {
   let filters = [...(WEEK_FILTERS[State.currentWeekId] || [])];
   const activeWeekRestaurants = getRestaurants();
-  const hasAnyNew = activeWeekRestaurants.some(r => r.isNew);
-  if (hasAnyNew) {
+  const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
+  if (hasUnviewedNew || State.activeSavedFilters.has('new')) {
     filters.push({ id: 'new', label: 'Recently Added' });
   }
   const container = document.getElementById('saved-filters');
