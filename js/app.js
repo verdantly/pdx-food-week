@@ -195,7 +195,7 @@ function loadWeekData(weekId, callback) {
 }
 
 function switchWeek(weekId, fromPopState = false) {
-  if (!window.FOOD_WEEKS || !window.FOOD_WEEKS.some(w => w.id === weekId)) return;
+  if (!WEEK_FILE_MAP[weekId]) return;
 
   if (State.currentWeekId) {
     State.weekFilters[State.currentWeekId] = {
@@ -260,8 +260,10 @@ function switchWeek(weekId, fromPopState = false) {
 
   refreshMapLayout();
 
-  const week = window.FOOD_WEEKS.find(w => w.id === State.currentWeekId);
-  applyWeekTheme(week);
+  document.body.classList.remove('is-landing');
+
+  const weekBeforeLoad = (window.FOOD_WEEKS || []).find(w => w.id === State.currentWeekId);
+  if (weekBeforeLoad) applyWeekTheme(weekBeforeLoad);
   renderHeader();
   renderFilters();
   renderSavedFilters();
@@ -272,15 +274,19 @@ function switchWeek(weekId, fromPopState = false) {
     url.searchParams.delete('tab');
     history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
   }
-  document.body.classList.remove('is-landing');
 
   switchTab('browse', true);
   renderShimmer();
   
   const loadDataAndRender = () => {
+    const week = (window.FOOD_WEEKS || []).find(w => w.id === State.currentWeekId);
+    if (week) applyWeekTheme(week);
+    renderHeader();
+    renderFilters();
+    renderSavedFilters();
     renderAll();
     updateBrowseBadge();
-    showToast(`Switched to ${week.name}!`);
+    if (week) showToast(`Switched to ${week.name}!`);
   };
 
   loadWeekData(weekId, () => {
@@ -738,14 +744,14 @@ function init() {
     switchTab('landing', true);
     renderLanding();
     return;
-  } else if (window.FOOD_WEEKS && window.FOOD_WEEKS.some(w => w.id === urlWeekId)) {
+  } else if (WEEK_FILE_MAP[urlWeekId]) {
     State.currentWeekId = urlWeekId;
     checkWeekVisited(State.currentWeekId);
     document.body.classList.remove('is-landing');
   }
 
   const week = (window.FOOD_WEEKS || []).find(w => w.id === State.currentWeekId);
-  applyWeekTheme(week);
+  if (week) applyWeekTheme(week);
   renderHeader();
   renderFilters();
 
@@ -758,6 +764,10 @@ function init() {
   }
   
   loadWeekData(State.currentWeekId, () => {
+    const loadedWeek = (window.FOOD_WEEKS || []).find(w => w.id === State.currentWeekId);
+    if (loadedWeek) applyWeekTheme(loadedWeek);
+    renderHeader();
+    renderFilters();
     renderAll();
     updateBrowseBadge();
   });
