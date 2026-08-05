@@ -63,14 +63,24 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('body')).toHaveClass(/is-landing/);
     const landingHero = page.locator('.landing-hero');
     await expect(landingHero).toBeVisible();
+    await expect(page.locator('#header-title')).toHaveText(/PDX\s*Food Week/);
   });
 
-  test('Server-rendered HTML contains is-landing body class before JS execution', async ({ browser }) => {
+  test('Header title displays PDX Food Week on root landing page and updates when navigating to a week', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#header-title')).toHaveText(/PDX\s*Food Week/);
+
+    await page.goto('/?week=taco-2026');
+    await expect(page.locator('#header-title')).toHaveText(/Taco\s*Week\s*2026/);
+  });
+
+  test('Server-rendered HTML contains is-landing body class and generic header before JS execution', async ({ browser }) => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const page = await context.newPage();
     await page.goto('/');
     await expect(page.locator('body')).toHaveClass(/is-landing/);
     await expect(page.locator('#view-landing')).toHaveClass(/active/);
+    await expect(page.locator('#header-title')).toHaveText(/PDX\s*Food Week/);
     await context.close();
   });
 

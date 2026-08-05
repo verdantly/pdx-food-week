@@ -1,3 +1,6 @@
+// Centralized metadata for all PDX Food Weeks
+// This allows the landing page to render instantly without loading all restaurant data.
+
 window.FOOD_WEEKS = [
   {
     id: "burger-2026",
@@ -93,6 +96,7 @@ window.FOOD_WEEKS = [
     colorPale: "#FEF9F0",
     emoji: "🌮",
     totalLocations: 42,
+    url: "https://www.theactualportland.com/locations"
   }
 ];
 
