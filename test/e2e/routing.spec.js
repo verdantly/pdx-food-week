@@ -64,6 +64,11 @@ test.describe('Navigation and Routing', () => {
     const landingHero = page.locator('.landing-hero');
     await expect(landingHero).toBeVisible();
     await expect(page.locator('#header-title')).toHaveText(/PDX\s*Food Week/);
+    
+    // Ensure landing cards render properly with spots count
+    const landingCards = page.locator('.landing-card');
+    await expect(landingCards.first()).toBeVisible();
+    await expect(page.locator('.landing-card', { hasText: 'Burger Week' })).toContainText('124 spots');
   });
 
   test('Header title displays PDX Food Week on root landing page and updates when navigating to a week', async ({ page }) => {

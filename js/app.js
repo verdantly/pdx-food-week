@@ -356,9 +356,9 @@ function renderLanding() {
       ? esc(w.pricePills[0])
       : (w.priceSlice ? `${esc(w.priceSlice)} slice` : '');
 
-    const countText = w.totalLocations
-      ? `${w.totalLocations} spots`
-      : '';
+    const actualCount = (window.RESTAURANTS || []).filter(r => r.weekId === w.id).length;
+    const totalLocations = actualCount > 0 ? actualCount : w.totalLocations;
+    const countText = totalLocations ? `${totalLocations} spots` : '';
 
     const metaParts = [priceText, countText].filter(Boolean).join(' • ');
     const metaHTML = metaParts ? `<p class="landing-card-subinfo">${metaParts}</p>` : '';

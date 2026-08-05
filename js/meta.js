@@ -12,7 +12,7 @@ window.FOOD_WEEKS = [
     pricePills: ["$10 burgers"],
     color: "#E65100",
     emoji: "🍔",
-    totalLocations: 117,
+    totalLocations: 124,
     url: "https://everout.com/portland/events/the-portland-mercurys-burger-week-2026/e222750/",
   },
   {
