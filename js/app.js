@@ -296,15 +296,19 @@ function switchWeek(weekId, fromPopState = false) {
 
 function renderLanding() {
   applyWeekTheme(null);
+  renderHeader();
   const grid = document.getElementById('landing-grid');
-  if (!grid || !window.FOOD_WEEKS) return;
+  const allWeeks = (window.FOOD_WEEKS_META && window.FOOD_WEEKS_META.length > 0)
+    ? window.FOOD_WEEKS_META
+    : (window.FOOD_WEEKS || []);
+  if (!grid || allWeeks.length === 0) return;
 
   const now = new Date();
   let currentWeeks = [];
   let nextWeek = null;
   let minDiff = Infinity;
 
-  window.FOOD_WEEKS.forEach(w => {
+  allWeeks.forEach(w => {
     if (w.startDate) {
       const [sy, sm, sd] = w.startDate.split('-');
       const start = new Date(sy, sm - 1, sd, 0, 0, 0);
@@ -341,7 +345,7 @@ function renderLanding() {
     }
   });
 
-  const sortedWeeks = [...window.FOOD_WEEKS].sort((a, b) => {
+  const sortedWeeks = [...allWeeks].sort((a, b) => {
     const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
     const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
     return dateB - dateA;

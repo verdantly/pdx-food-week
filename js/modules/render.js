@@ -209,8 +209,15 @@ export function renderFilters() {
 }
 
 export function renderHeader() {
-  const week = (window.FOOD_WEEKS || []).find(w => w.id === State.currentWeekId);
-  if (!week) return;
+  const week = (window.FOOD_WEEKS || window.FOOD_WEEKS_META || []).find(w => w.id === State.currentWeekId);
+  const titleEl = document.getElementById('header-title');
+  const metaEl = document.getElementById('header-meta');
+
+  if (!week) {
+    if (titleEl) titleEl.innerHTML = `<em>PDX</em> Food Week`;
+    if (metaEl) metaEl.innerHTML = `<span>Portland's Unofficial Food Week Companion</span>`;
+    return;
+  }
 
   let dataSrcHtml = '';
   if (week.organizer === 'Portland Mercury') {
