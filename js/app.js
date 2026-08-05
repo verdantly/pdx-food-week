@@ -170,15 +170,15 @@ function loadWeekData(weekId, callback) {
   script.onload = () => {
     State.loadedWeeks.add(weekId);
     
-    const uniqueWeeks = [];
-    const seen = new Set();
+    const weekMap = new Map();
     for (const w of (window.FOOD_WEEKS || [])) {
-      if (!seen.has(w.id)) {
-        seen.add(w.id);
-        uniqueWeeks.push(w);
+      if (!weekMap.has(w.id)) {
+        weekMap.set(w.id, w);
+      } else {
+        weekMap.set(w.id, Object.assign({}, weekMap.get(w.id), w));
       }
     }
-    window.FOOD_WEEKS = uniqueWeeks;
+    window.FOOD_WEEKS = Array.from(weekMap.values());
     
     if (callback) callback();
   };
@@ -298,9 +298,7 @@ function renderLanding() {
   applyWeekTheme(null);
   renderHeader();
   const grid = document.getElementById('landing-grid');
-  const allWeeks = (window.FOOD_WEEKS_META && window.FOOD_WEEKS_META.length > 0)
-    ? window.FOOD_WEEKS_META
-    : (window.FOOD_WEEKS || []);
+  const allWeeks = window.FOOD_WEEKS || [];
   if (!grid || allWeeks.length === 0) return;
 
   const now = new Date();

@@ -1,7 +1,4 @@
-// Centralized metadata for all PDX Food Weeks
-// This allows the landing page to render instantly without loading all restaurant data.
-
-window.FOOD_WEEKS_META = [
+window.FOOD_WEEKS = [
   {
     id: "burger-2026",
     name: "Burger Week 2026",
@@ -99,5 +96,4 @@ window.FOOD_WEEKS_META = [
   }
 ];
 
-window.FOOD_WEEKS = window.FOOD_WEEKS_META;
 window.RESTAURANTS = window.RESTAURANTS || [];
