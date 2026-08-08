@@ -7,3 +7,9 @@ scratch/temp.js
 tests.html
 playwright-report/
 test-results/
+
+# Internal planning documents
+CLAUDE.md
+PUBLIC_LAUNCH_CHECKLIST.md
+ROADMAP.md
+UX_SUGGESTIONS.md
