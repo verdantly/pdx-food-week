@@ -94,6 +94,7 @@ function switchTab(name, fromPopState = false) {
   if (fabButton) {
     if (name === 'browse' || (name === 'saved' && State.saved.size > 0)) {
       fabButton.classList.add('show-fab');
+      fabButton.classList.remove('hide-fab-scroll');
     } else {
       fabButton.classList.remove('show-fab');
     }
@@ -393,7 +394,7 @@ function setupMobileScrollListener() {
     if (State.activeTab !== 'browse' && State.activeTab !== 'saved') return;
 
     const currentView = State.activeTab === 'browse' ? viewBrowse : viewSaved;
-    const st = currentView.scrollTop || window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+    const st = currentView ? currentView.scrollTop : (window.scrollY || 0);
     const appContainer = document.getElementById('app');
     const fabButton = document.getElementById('mobile-filter-fab');
 
@@ -412,7 +413,7 @@ function setupMobileScrollListener() {
     }
     
     const isScrollable = scrollHeight > clientHeight + 10;
-    const isNearBottom = isScrollable && (st + clientHeight >= scrollHeight - 40);
+    const isNearBottom = isScrollable && st > 50 && (st + clientHeight >= scrollHeight - 40);
 
     if (fabButton) {
       if (isNearBottom) {
@@ -732,6 +733,15 @@ function init() {
     else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
   });
 
+  window.addEventListener('resize', () => {
+    if (State.activeTab === 'swipe') renderSwipe();
+    if (window.innerWidth > 768 && State.filterDrawerOpen) {
+      closeFilterDrawer();
+    }
+  });
+
+  setupMobileScrollListener();
+
   if (!urlWeekId) {
     State.currentWeekId = null;
     history.replaceState({ week: null, tab: 'landing' }, '', window.location);
@@ -766,15 +776,6 @@ function init() {
   if (initialDishId) {
     setTimeout(() => openDetail(parseInt(initialDishId, 10), true), 100);
   }
-
-  window.addEventListener('resize', () => {
-    if (State.activeTab === 'swipe') renderSwipe();
-    if (window.innerWidth > 768 && State.filterDrawerOpen) {
-      closeFilterDrawer();
-    }
-  });
-
-  setupMobileScrollListener();
 }
 
 // Assemble the App object for window.App

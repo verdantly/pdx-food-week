@@ -3352,7 +3352,7 @@ select:focus-visible {
 /* ── Mobile Filter FAB ── */
 .mobile-filter-fab {
   position: fixed;
-  bottom: 32px;
+  bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   /* Float above screen bottom */
   left: 50%;
   transform: translateX(-50%) translateY(100px);
@@ -3457,7 +3457,7 @@ select:focus-visible {
   max-width: 480px;
   background: var(--card-bg);
   border-radius: 24px 24px 0 0;
-  padding: 24px 20px 32px;
+  padding: 24px 20px calc(32px + env(safe-area-inset-bottom, 0px));
   max-height: 80vh;
   box-shadow: 0 -8px 32px rgba(26, 18, 8, 0.15);
   display: flex;

@@ -181,17 +181,21 @@ export function undoSwipe() {
 }
 
 export function skipSwipe() {
-  if (State.swipeIdx >= State.swipeQueue.length || State.swipeAnimating) return;
+  if (!State.swipeQueue || State.swipeIdx >= State.swipeQueue.length || State.swipeAnimating) return;
   const r = State.swipeQueue[State.swipeIdx];
 
-  State.swipeQueue.push(r);
+  if (State.swipeQueue.length - State.swipeIdx > 1) {
+    State.swipeQueue.push(r);
+  }
   State.swipeIdx++;
   State.swipeAnimating = true;
 
   const cardEl = document.getElementById('swipe-card');
-  cardEl.style.transition = 'transform 0.3s ease-in, opacity 0.3s ease-in';
-  cardEl.style.transform = `translateY(${window.innerHeight}px)`;
-  cardEl.style.opacity = '0';
+  if (cardEl) {
+    cardEl.style.transition = 'transform 0.3s ease-in, opacity 0.3s ease-in';
+    cardEl.style.transform = `translateY(${window.innerHeight}px)`;
+    cardEl.style.opacity = '0';
+  }
 
   setTimeout(() => {
     State.swipeAnimating = false;
