@@ -1,12 +1,12 @@
-const CACHE_NAME = 'pdxfw-cache-v2';
+const CACHE_NAME = 'pdxfw-cache-v3';
 
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/js/meta.js',
-  '/site.webmanifest',
+  './',
+  'index.html',
+  'css/style.css?v=6',
+  'js/app.js?v=6',
+  'js/meta.js',
+  'site.webmanifest',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
   'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css',
   'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css',
@@ -18,7 +18,7 @@ const STATIC_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      return cache.addAll(STATIC_ASSETS).catch(() => {});
     })
   );
   self.skipWaiting();
@@ -63,19 +63,23 @@ self.addEventListener('fetch', (event) => {
 
   // For static assets, Cache First strategy
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(event.request, { ignoreSearch: false }).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
-      return fetch(event.request).then((response) => {
-        // Optionally cache other successful responses dynamically
-        if (response && response.status === 200 && response.type === 'basic' && event.request.method === 'GET') {
-          const resClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, resClone).catch(() => {});
-          });
+      return caches.match(event.request, { ignoreSearch: true }).then((fallbackResponse) => {
+        if (fallbackResponse) {
+          return fallbackResponse;
         }
-        return response;
+        return fetch(event.request).then((response) => {
+          if (response && response.status === 200 && response.type === 'basic' && event.request.method === 'GET') {
+            const resClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, resClone).catch(() => {});
+            });
+          }
+          return response;
+        });
       });
     })
   );
