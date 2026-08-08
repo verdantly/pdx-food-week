@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDX Food Week - Brand Style Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --pizza: #B5472E;
+      --pizza-dark: #8C3420;
+      --pizza-light: #F2DFD8;
+      --pizza-pale: #FBF4F1;
+      --ink: #1A1208;
+      --ink-70: rgba(26, 18, 8, 0.72);
+      --ink-60: rgba(26, 18, 8, 0.72);
+      --ink-30: rgba(26, 18, 8, 0.45);
+      --ink-10: rgba(26, 18, 8, 0.1);
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --teal: #286A5F;
+      --teal-light: #E5EFEA;
+      --amber: #8A5C14;
+      --amber-light: #F7EAD0;
+      --border: rgba(26, 18, 8, 0.12);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 12px rgba(26, 18, 8, 0.08);
+      --shadow-lg: 0 8px 32px rgba(26, 18, 8, 0.14);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--cream);
+      color: var(--ink);
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      border-bottom: 2px solid var(--ink-10);
+      padding-bottom: 8px;
+      margin-top: 64px;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--ink-60);
+      margin-bottom: 48px;
+    }
+
+    /* Colors */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 24px;
+    }
+
+    .color-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--ink-10);
+    }
+
+    .color-swatch {
+      height: 100px;
+      width: 100%;
+    }
+
+    .color-info {
+      padding: 12px;
+    }
+
+    .color-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .color-hex {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--ink-60);
+    }
+
+    /* Typography */
+    .type-specimen {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .type-specimen h4 {
+      margin: 0 0 8px 0;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ink-60);
+    }
+
+    .display-sample {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .body-sample {
+      font-family: var(--font-body);
+      font-size: 1rem;
+    }
+
+    .mono-sample {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+    }
+
+    /* Components */
+    .components-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    
+    @media (max-width: 600px) {
+      .components-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .component-box {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .btn {
+      font-family: var(--font-body);
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--pizza);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--pizza-dark);
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      color: var(--ink);
+      border: 1px solid var(--ink-10);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--pizza);
+      color: var(--pizza);
+    }
+
+    .tag-container {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .tag-meat { background: #FAE8E0; color: #8B3015; }
+    .tag-veg { background: #E5EFEA; color: #286A5F; }
+    .tag-vegan { background: transparent; color: #286A5F; border: 1px dashed #286A5F; }
+    .tag-gf { background: #F7EAD0; color: #8A5C14; }
+
+    .elevation-box {
+      width: 100%;
+      height: 100px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .elevation-standard { box-shadow: var(--shadow); }
+    .elevation-large { box-shadow: var(--shadow-lg); }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>PDX Food Week</h1>
+  <div class="subtitle">Brand & Visual Style Guide</div>
+
+  <h2>Colors</h2>
+  
+  <h3>Primary Brand</h3>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--pizza);"></div>
+      <div class="color-info">
+        <div class="color-name">Pizza Red</div>
+        <div class="color-hex">#B5472E</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--pizza-dark);"></div>
+      <div class="color-info">
+        <div class="color-name">Pizza Dark</div>
+        <div class="color-hex">#8C3420</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--pizza-light);"></div>
+      <div class="color-info">
+        <div class="color-name">Pizza Light</div>
+        <div class="color-hex">#F2DFD8</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--pizza-pale);"></div>
+      <div class="color-info">
+        <div class="color-name">Pizza Pale</div>
+        <div class="color-hex">#FBF4F1</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Neutrals & Backgrounds</h3>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--ink);"></div>
+      <div class="color-info">
+        <div class="color-name">Ink</div>
+        <div class="color-hex">#1A1208</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--ink-60);"></div>
+      <div class="color-info">
+        <div class="color-name">Ink 60%</div>
+        <div class="color-hex">rgba(26,18,8,0.72)</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--cream);"></div>
+      <div class="color-info">
+        <div class="color-name">Cream</div>
+        <div class="color-hex">#FBF6EF</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--card-bg); border-bottom: 1px solid var(--ink-10);"></div>
+      <div class="color-info">
+        <div class="color-name">Card White</div>
+        <div class="color-hex">#FFFFFF</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Accents</h3>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--teal);"></div>
+      <div class="color-info">
+        <div class="color-name">Teal</div>
+        <div class="color-hex">#286A5F</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--teal-light);"></div>
+      <div class="color-info">
+        <div class="color-name">Teal Light</div>
+        <div class="color-hex">#E5EFEA</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--amber);"></div>
+      <div class="color-info">
+        <div class="color-name">Amber</div>
+        <div class="color-hex">#8A5C14</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background: var(--amber-light);"></div>
+      <div class="color-info">
+        <div class="color-name">Amber Light</div>
+        <div class="color-hex">#F7EAD0</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Typography</h2>
+
+  <div class="type-specimen">
+    <h4>Display • Fraunces</h4>
+    <div class="display-sample">The quick brown fox jumps over the lazy dog.</div>
+  </div>
+
+  <div class="type-specimen">
+    <h4>Body • Plus Jakarta Sans</h4>
+    <div class="body-sample">
+      <strong>The quick brown fox jumps over the lazy dog.</strong><br>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.
+    </div>
+  </div>
+
+  <div class="type-specimen">
+    <h4>Mono • DM Mono</h4>
+    <div class="mono-sample">const hello = "world"; <br>console.log(hello);</div>
+  </div>
+
+  <h2>Components & Elevation</h2>
+  
+  <div class="components-grid">
+    <div class="component-box">
+      <h4>Buttons</h4>
+      <button class="btn btn-primary">Primary Button</button>
+      <button class="btn btn-secondary">Secondary Button</button>
+    </div>
+
+    <div class="component-box">
+      <h4>Dietary Tags</h4>
+      <div class="tag-container">
+        <span class="tag tag-meat">Meat</span>
+        <span class="tag tag-veg">Vegetarian</span>
+        <span class="tag tag-vegan">Vegan option</span>
+        <span class="tag tag-gf">GF available</span>
+      </div>
+    </div>
+
+    <div class="component-box" style="background: var(--cream); border: none; box-shadow: none;">
+      <h4>Shadows</h4>
+      <div class="elevation-box elevation-standard">Standard Card Shadow</div>
+      <div class="elevation-box elevation-large" style="margin-top:16px;">Modal / Detail Overlay Shadow</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
