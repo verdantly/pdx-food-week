@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pdxfw-cache-v1';
+const CACHE_NAME = 'pdxfw-cache-v2';
 
 const STATIC_ASSETS = [
   '/',
@@ -42,6 +42,9 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
+  // Skip non-http/https requests (e.g. chrome-extension://, moz-extension://)
+  if (!url.protocol.startsWith('http')) return;
+
   // For data files, try network first, then fallback to cache
   if (url.pathname.startsWith('/data/') && url.pathname.endsWith('.js')) {
     event.respondWith(
@@ -49,7 +52,7 @@ self.addEventListener('fetch', (event) => {
         .then((response) => {
           const resClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, resClone);
+            cache.put(event.request, resClone).catch(() => {});
           });
           return response;
         })
@@ -66,10 +69,10 @@ self.addEventListener('fetch', (event) => {
       }
       return fetch(event.request).then((response) => {
         // Optionally cache other successful responses dynamically
-        if (response && response.status === 200 && response.type === 'basic') {
+        if (response && response.status === 200 && response.type === 'basic' && event.request.method === 'GET') {
           const resClone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, resClone);
+            cache.put(event.request, resClone).catch(() => {});
           });
         }
         return response;
