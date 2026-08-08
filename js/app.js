@@ -41,6 +41,9 @@ if (window.firebase) {
       firebase.initializeApp(firebaseConfig);
     }
     window.db = firebase.firestore();
+    if (firebase.analytics) {
+      window.analytics = firebase.analytics();
+    }
   } catch (e) {
     console.error("Firebase initialization failed:", e);
   }
