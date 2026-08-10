@@ -70,9 +70,9 @@ for (const dish of restaurants) {
   const dishTitle = `${dish.dish || 'Special Dish'} @ ${dish.restaurant || 'Restaurant'}`;
   const rawDesc = dish.desc || (dish.neighborhood ? `Featured for ${weekName} in ${dish.neighborhood}, Portland!` : `Featured for ${weekName} in Portland, OR!`);
   const description = rawDesc.length > 200 ? rawDesc.substring(0, 197) + '...' : rawDesc;
-  const image = dish.image || 'https://pdxfoodweek.com/og_preview_card.jpg';
+  const image = dish.image || 'https://www.pdxfoodweek.com/og_preview_card.jpg';
   const redirectUrl = `/?week=${encodeURIComponent(dish.weekId)}&dish=${encodeURIComponent(dish.id)}`;
-  const canonicalUrl = `https://pdxfoodweek.com/d/${dish.weekId}-${dish.id}.html`;
+  const canonicalUrl = `https://www.pdxfoodweek.com/d/${dish.weekId}-${dish.id}.html`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
