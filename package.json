@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "start": "npx -y serve .",
-    "scrape": "node scrape_everout.js",
-    "scrape:everout": "node scrape_everout.js",
-    "scrape:tacos": "node scrape_tacos.js",
-    "scrape:nacho": "node scrape_nacho.js",
+    "build:og": "node scripts/generate_og_pages.js",
+    "scrape": "node scrapers/scrape_everout.js",
+    "scrape:everout": "node scrapers/scrape_everout.js",
+    "scrape:tacos": "node scrapers/scrape_tacos.js",
+    "scrape:nacho": "node scrapers/scrape_nacho.js",
     "test:unit": "node -c js/app.js && vitest run",
     "test:e2e": "playwright test"
   },

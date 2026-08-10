@@ -195,10 +195,14 @@ export function openDetail(id, fromPopState = false) {
     ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc">${esc(r.whatTheySay)}</div>` : ''}
     ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc">${esc(r.desc)}</div>` : ''}
     <div class="sheet-tags">${buildTags(r)}</div>
-    <div class="sheet-actions">
-      <a class="btn btn-link" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
+    <div class="sheet-actions" style="display: flex; gap: 8px;">
+      <a class="btn btn-link" style="flex: 1;" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
         ${esc(r.url && r.url.includes('theactualportland.com') ? 'The Actual Portland' : (r.url && r.url.includes('bridgetownbites.com') ? 'Bridgetown Bites' : (r.url && r.url.includes('everout.com') ? 'EverOut' : 'Website')))} ↗
       </a>
+      <button class="btn" style="flex: 1; background: var(--card-bg); border: 1.5px solid var(--border); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600;" onclick="App.shareDish(${r.id})">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
     </div>
     ${!hideNav ? `
     <div class="sheet-nav" style="display: flex; justify-content: space-between; margin-top: 16px; gap: 12px;">
@@ -366,6 +370,28 @@ export function showMetricDetails(type) {
 }
 
 export function closeMetricModal() {
-  document.getElementById('metric-modal-overlay').classList.remove('open');
+  const overlay = document.getElementById('metric-modal-overlay');
+  if (overlay) overlay.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+export function shareDish(id) {
+  const r = getRestaurants().find(x => x.id === id);
+  if (!r) return;
+
+  const shareUrl = `${window.location.origin}${window.location.pathname.replace(/\/+$/, '')}/d/${r.weekId}-${r.id}.html`;
+  const title = `${r.dish} @ ${r.restaurant}`;
+  const text = `Check out ${r.dish} at ${r.restaurant} for ${r.weekId || 'PDX Food Week'}!`;
+
+  if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+    navigator.share({ title, text, url: shareUrl }).catch(() => {});
+  } else if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast('Share link copied to clipboard!');
+    }).catch(() => {
+      showToast('Share link: ' + shareUrl);
+    });
+  } else {
+    showToast('Share link: ' + shareUrl);
+  }
 }

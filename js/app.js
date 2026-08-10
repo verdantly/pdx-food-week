@@ -3,7 +3,7 @@ import { State, loadState, saveState, checkWeekVisited, WEEK_FILE_MAP } from './
 import { esc, debounce, showToast } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
-  openDetail, closeDetail, toggleSave, setRating, setNote, handleNoteInput,
+  openDetail, closeDetail, shareDish, toggleSave, setRating, setNote, handleNoteInput,
   openPhotoZoom, closePhotoZoom, showMetricDetails, closeMetricModal, getActiveFriends, getCurrentContextList
 } from './modules/ui.js';
 import {
@@ -794,6 +794,7 @@ const App = {
   toggleSave,
   openDetail,
   closeDetail,
+  shareDish,
   addFriend,
   renameFriend,
   removeFriend,
