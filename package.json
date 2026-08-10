@@ -6,10 +6,12 @@
   "scripts": {
     "start": "npx -y serve .",
     "build:og": "node scripts/generate_og_pages.js",
-    "scrape": "node scrapers/scrape_everout.js",
-    "scrape:everout": "node scrapers/scrape_everout.js",
+    "scrape:burgers": "node scrapers/scrape_burgers.js",
+    "scrape:pizza": "node scrapers/scrape_everout.js",
     "scrape:tacos": "node scrapers/scrape_tacos.js",
-    "scrape:nacho": "node scrapers/scrape_nacho.js",
+    "scrape:nacho": "node scrapers/scrape_everout_nacho.js",
+    "scrape:salads": "node scrapers/scrape_salads.js",
+    "scrape:slushies": "node scrapers/scrape_slushies.js",
     "test:unit": "node -c js/app.js && vitest run",
     "test:e2e": "playwright test"
   },

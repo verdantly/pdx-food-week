@@ -6,14 +6,17 @@
  *   npm install
  *   npm run scrape
  *
- * Output: data/pizzaweek2026.js (overwritten)
+ * Output: data/nachoweek2026.js (overwritten)
  */
 
 
 import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { decodeHTML, fetchHtml, loadExistingData } from './scraper_utils.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const BASE_URL    = 'https://everout.com';
 const WEEK_URL    = 'https://everout.com/portland/events/the-portland-mercurys-nacho-week-2026/e222747/';
@@ -301,7 +304,7 @@ async function main() {
   // ── Write output ────────────────────────────────────────────────────────────
   const outDir = path.resolve(__dirname, '../data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, 'nachoweek2026_cheerio.js');
+  const outPath = path.join(outDir, 'nachoweek2026.js');
 
   const header = `// Portland Mercury's Nacho Week 2026 — scraped ${new Date().toISOString().slice(0, 10)}
 // ${entries.length} locations (skipped: ${skipped}, geocode fallbacks: ${fallbackCount})
