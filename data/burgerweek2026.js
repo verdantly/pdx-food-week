@@ -1,5 +1,5 @@
-// Portland Mercury's Burger Week 2026 — scraped 2026-08-04
-// 124 locations (skipped: 1, reused: 0, new: 0, geocode fallbacks: 5)
+// Portland Mercury's Burger Week 2026 — scraped 2026-08-10
+// 124 locations (skipped: 1, reused: 123, new: 0, geocode fallbacks: 0)
 // Source: https://everout.com/portland/events/the-portland-mercurys-burger-week-2026/e222750/
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -2302,7 +2302,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 249399,
     "weekId": "burger-2026",
-    "dish": "*It's alive!* Pearenstein Burger",
+    "dish": "It’s Alive! Pearenstein’s Burger",
     "restaurant": "Birdie Time Pub",
     "neighborhood": "Buckman - Southeast Portland",
     "address": "925 SE Main St., Portland, Oregon 97214",
@@ -2319,7 +2319,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Brioche bun, pear slice, blue cheese crumble, arugula, fig jam, beef patty.",
     "emoji": "🧀",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4NDY2ODYyMzgxMTc3Ni1CaXJkaWUtVGltZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/its-alive-pearenstein-burger/e249399/",
+    "url": "https://everout.com/portland/events/its-alive-pearensteins-burger/e249399/",
     "isNew": true
   },
   {

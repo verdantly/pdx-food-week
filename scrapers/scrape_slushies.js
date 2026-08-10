@@ -135,7 +135,7 @@ async function scrapeDish(url, cacheMap, existingMap) {
 }
 
 async function main() {
-  const OUT_FILE = path.join(__dirname, 'data', 'slushies2026.js');
+  const OUT_FILE = path.resolve(__dirname, '../data/slushies2026.js');
   let existingListings = [];
   try {
     const raw = fs.readFileSync(OUT_FILE, 'utf8');

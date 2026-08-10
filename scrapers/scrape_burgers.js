@@ -226,7 +226,7 @@ async function getDishLinks() {
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   const isForce = process.argv.includes('--force') || process.argv.includes('--all');
-  const outDir = path.join(__dirname, 'data');
+  const outDir = path.resolve(__dirname, '../data');
   const outPath = path.join(outDir, 'burgerweek2026.js');
   const existingMap = isForce ? new Map() : loadExistingData(outPath);
 
