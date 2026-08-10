@@ -36,10 +36,19 @@ for (const file of dataFiles) {
   }
 }
 
-const foodWeeks = context.window.FOOD_WEEKS || [];
-const restaurants = context.window.RESTAURANTS || [];
+const targetFilter = process.argv[2] ? process.argv[2].toLowerCase() : null;
 
-console.log(`Loaded ${foodWeeks.length} food weeks and ${restaurants.length} dishes.`);
+const foodWeeks = context.window.FOOD_WEEKS || [];
+let restaurants = context.window.RESTAURANTS || [];
+
+if (targetFilter) {
+  restaurants = restaurants.filter(d => 
+    (d.weekId && d.weekId.toLowerCase().includes(targetFilter))
+  );
+  console.log(`Filtering dishes matching week: "${targetFilter}"...`);
+}
+
+console.log(`Loaded ${foodWeeks.length} food weeks and ${restaurants.length} dishes to generate.`);
 
 const weekMap = new Map(foodWeeks.map(w => [w.id, w]));
 
