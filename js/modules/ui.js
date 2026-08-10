@@ -23,7 +23,7 @@ export function setRating(id, rating) {
   State.notes[id].rating = rating;
   saveState();
   
-  const starsContainer = document.querySelector('.rating-stars');
+  const starsContainer = document.querySelector('#detail-sheet-content .rating-stars') || document.querySelector('.rating-stars');
   if (starsContainer) {
     const stars = starsContainer.querySelectorAll('span');
     stars.forEach((star, index) => {
@@ -67,7 +67,7 @@ export function getActiveFriends() {
   const activeWeekRestaurants = getRestaurants();
   const currentWeekRestaurantIds = new Set(activeWeekRestaurants.map(r => r.id));
   return State.friends.map((f, index) => {
-    const weekIds = f.ids.filter(id => currentWeekRestaurantIds.has(id));
+    const weekIds = (f.ids || []).filter(id => currentWeekRestaurantIds.has(id));
     return { ...f, weekIds, originalIndex: index };
   }).filter(f => f.weekIds.length > 0);
 }
@@ -90,33 +90,18 @@ export function toggleSave(id) {
   if (State.saved.has(id)) {
     State.saved.delete(id);
     State.customSavedOrder = State.customSavedOrder.filter(x => x !== id);
-    showToast('Removed from saved');
   } else {
     State.saved.add(id);
-    State.passed.delete(id);
     if (!State.customSavedOrder.includes(id)) {
       State.customSavedOrder.push(id);
     }
-    showToast('🍕 Saved!');
   }
   saveState();
-  State.swipeQueue = null;
-  if (window.App && window.App.renderAll) {
-    window.App.renderAll();
-  }
-  if (State.selectedDish && State.selectedDish.id === id) {
-    openDetail(id, true);
-  }
-}
 
-export function openDetail(id, fromPopState = false) {
-  if (State.crawlModeActive && State.activeTab === 'saved') {
-    const idx = State.crawlSelection.indexOf(id);
-    if (idx > -1) {
-      State.crawlSelection.splice(idx, 1);
-    } else {
-      if (State.crawlSelection.length < 8) {
-        State.crawlSelection.push(id);
+  if (State.crawlMode) {
+    if (State.saved.has(id)) {
+      if (State.crawlSelected.size < 8) {
+        State.crawlSelected.add(id);
       } else {
         showToast('Maximum 8 spots allowed per crawl');
         return;
@@ -127,8 +112,29 @@ export function openDetail(id, fromPopState = false) {
     return;
   }
 
+  const btn = document.getElementById('sheet-save-btn');
+  if (btn) {
+    const isSaved = State.saved.has(id);
+    btn.classList.toggle('saved', isSaved);
+    btn.textContent = isSaved ? 'Saved ✓' : 'Save Spot';
+  }
+
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function openDetail(id, fromPopState = false) {
   const r = getRestaurants().find(x => x.id === id);
-  if (!r) return;
+  if (!r) {
+    try {
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('dish')) {
+        url.searchParams.delete('dish');
+        window.history.replaceState({}, document.title, url.pathname + url.search);
+      }
+    } catch (e) {}
+    return;
+  }
 
   const wasAlreadyOpen = document.getElementById('detail-overlay').classList.contains('open');
   const isNew = r.isNew && !State.viewedNew.has(r.id);

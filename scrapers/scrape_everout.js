@@ -154,10 +154,19 @@ function parseDishPage(html, url) {
   if (!descText) {
     descText = $('[itemprop="description"], [class*="description"], .event-body').first().text().trim();
   }
-  descText = descText 
-    || $('meta[property="og:description"]').attr('content')?.trim()
-    || $('meta[name="description"]').attr('content')?.trim()
-    || '';
+  // QA extraction
+  const qa = {};
+  const sectionMatch = html.match(/class="answer-list[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/);
+  if (sectionMatch) {
+    const section = sectionMatch[1];
+    const regex = /<div class="question-text[^>]*>([\s\S]*?)<\/div>\s*<div class="answer-text[^>]*>([\s\S]*?)<\/div>/g;
+    let m;
+    while ((m = regex.exec(section)) !== null) {
+      const key = decodeHTML(m[1].replace(/<[^>]+>/g, '').trim());
+      const val = decodeHTML(m[2].replace(/<[^>]+>/g, '').trim());
+      if (key && val) qa[key] = val;
+    }
+  }
 
   const whatsOnIt = qa["What's On It..."] || qa['What’s On It...'] || '';
   const whatTheySay = qa['What They Say...'] || '';

@@ -3966,3 +3966,14 @@ select:focus-visible {
   align-items: center;
   gap: 8px;
 }
+
+/* Hide Mobile FAB when Detail sheet is open to prevent layering overlap */
+#app.detail-open #mobile-filter-fab {
+  display: none !important;
+}
+
+/* Prevent long text/URL word overflows */
+.card-dish, .card-restaurant, .sheet-dish, .sheet-restaurant {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
