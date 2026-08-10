@@ -149,7 +149,7 @@ function parseDishPage(html, url) {
 }
 
 async function main() {
-  const outPath = path.join(process.cwd(), 'data', 'nachoweek2026.js');
+  const outPath = path.resolve(__dirname, '../data/slushies2026.js');
   const existingRestaurants = getExistingRestaurants(outPath);
   const existingMap = new Map(existingRestaurants.map(r => [r.id, r]));
   console.log(`Loaded ${existingMap.size} existing listings from cache.`);

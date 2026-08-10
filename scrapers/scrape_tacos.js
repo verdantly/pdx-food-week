@@ -4,8 +4,11 @@ import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, cleanName } from '.
 
 const KML_PATH = './taco_map.kml';
 const JSON_PATH = './context_2.json';
-const CACHE_PATH = './data/geocode_cache.json';
-const OUTPUT_PATH = './data/tacoweek2026.js';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const CACHE_PATH = path.resolve(__dirname, '../data/geocode_cache.json');
+const OUTPUT_PATH = path.resolve(__dirname, '../data/tacoweek2026.js');
 
 const GEO_UA = 'pdx-food-week-app/1.0 (https://github.com/oberonix/pdx-food-week)';
 

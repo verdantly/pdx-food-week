@@ -299,7 +299,7 @@ async function main() {
   entries.sort((a, b) => a.id - b.id);
 
   // ── Write output ────────────────────────────────────────────────────────────
-  const outDir = path.join(process.cwd(), 'data');
+  const outDir = path.resolve(__dirname, '../data');
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
   const outPath = path.join(outDir, 'nachoweek2026_cheerio.js');
 

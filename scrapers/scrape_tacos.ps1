@@ -1,10 +1,10 @@
 # scrape_tacos.ps1
 # Scraping, parsing, reverse-geocoding, caching, and generating data/tacoweek2026.js
 
-$kmlPath = "q:\My Drive\GitHub\pdx-food-week\pdx-food-week\taco_map.kml"
-$jsonPath = "q:\My Drive\GitHub\pdx-food-week\pdx-food-week\context_2.json"
-$cachePath = "q:\My Drive\GitHub\pdx-food-week\pdx-food-week\data\geocode_cache.json"
-$outputPath = "q:\My Drive\GitHub\pdx-food-week\pdx-food-week\data\tacoweek2026.js"
+$scriptDir = $PSScriptRoot
+$projectRoot = Resolve-Path "$scriptDir\.."
+$cachePath = Join-Path $projectRoot "data\geocode_cache.json"
+$outputPath = Join-Path $projectRoot "data\tacoweek2026.js"
 
 # Ensure output data directory exists
 $dataDir = Split-Path -Path $outputPath
