@@ -745,17 +745,21 @@ function init() {
 
   setupMobileScrollListener();
 
-  if (!urlWeekId) {
+  const isValidWeek = urlWeekId && window.FOOD_WEEKS && window.FOOD_WEEKS.some(w => w.id === urlWeekId);
+
+  if (!isValidWeek) {
     State.currentWeekId = null;
-    history.replaceState({ week: null, tab: 'landing' }, '', window.location);
+    applyWeekTheme(null);
+    document.body.classList.add('is-landing');
+    history.replaceState({ week: null, tab: 'landing' }, '', window.location.pathname);
     switchTab('landing', true);
     renderLanding();
     return;
-  } else if (window.FOOD_WEEKS && window.FOOD_WEEKS.some(w => w.id === urlWeekId)) {
-    State.currentWeekId = urlWeekId;
-    checkWeekVisited(State.currentWeekId);
-    document.body.classList.remove('is-landing');
   }
+
+  State.currentWeekId = urlWeekId;
+  checkWeekVisited(State.currentWeekId);
+  document.body.classList.remove('is-landing');
 
   const week = (window.FOOD_WEEKS || []).find(w => w.id === State.currentWeekId);
   applyWeekTheme(week);

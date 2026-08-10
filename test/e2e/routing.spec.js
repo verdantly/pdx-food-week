@@ -95,4 +95,47 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('#view-landing')).toBeVisible();
     await expect(page.locator('body')).toHaveClass(/is-landing/);
   });
+
+  test('Visiting root URL overrides any prior week saved in localStorage', async ({ page }) => {
+    await page.goto('/?week=taco-2026', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => {
+      localStorage.setItem('pdx_food_week_state', JSON.stringify({ currentWeekId: 'taco-2026' }));
+    });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#view-landing')).toBeVisible();
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+    await expect(page.locator('#header-title')).toHaveText(/PDX\s*Food Week/);
+  });
+
+  test('Clicking brand logo in header from a week view navigates back to Landing Page', async ({ page, isMobile }) => {
+    await page.goto('/?week=taco-2026', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+    
+    const logo = isMobile ? page.locator('.compact-brand') : page.locator('.app-wordmark').first();
+    await logo.click();
+
+    await expect(page.locator('#view-landing')).toBeVisible();
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+    await expect(page).not.toHaveURL(/.*week=.*/);
+  });
+
+  test('URL query parameter variations (?week=, ?tab=, index.html) fall back to Landing Page', async ({ page }) => {
+    await page.goto('/index.html', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#view-landing')).toBeVisible();
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+
+    await page.goto('/?week=', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#view-landing')).toBeVisible();
+
+    await page.goto('/?week=invalid-week', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('#view-landing')).toBeVisible();
+  });
+
+  test('Service worker offline load serves Landing Page on root URL', async ({ context, page }) => {
+    await page.goto('/', { waitUntil: 'networkidle' });
+    await context.setOffline(true);
+    await page.reload({ waitUntil: 'domcontentloaded' }).catch(() => {});
+    await expect(page.locator('#view-landing')).toBeVisible();
+    await expect(page.locator('body')).toHaveClass(/is-landing/);
+  });
 });
