@@ -423,9 +423,9 @@ body.is-landing .view {
 .search-bar input {
   width: 100%;
   font-family: var(--font-body);
-  font-size: 16px;
-  /* Spaced right padding to make room for clear button */
-  padding: 10px 38px 10px 40px;
+  font-size: 15px;
+  /* Spaced right padding to make room for clear button and left for search icon */
+  padding: 10px 38px 10px 38px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   background: var(--card-bg);
@@ -440,12 +440,15 @@ body.is-landing .view {
 
 .search-bar input::placeholder {
   color: var(--ink-30);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* Clear Search button */
 .search-clear-btn {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   width: 20px;
@@ -456,16 +459,12 @@ body.is-landing .view {
   color: var(--ink-60);
   font-size: 11px;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-  padding: 0 0 1px 0;
-  /* slight bottom offset to perfectly center standard multiplication character */
+  padding: 0;
   transition: background var(--transition), color var(--transition);
 }
 
@@ -481,7 +480,7 @@ body.is-landing .view {
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  opacity: 0.4;
+  opacity: 0.45;
   pointer-events: none;
 }
 
@@ -1120,10 +1119,14 @@ body.is-landing .view {
 
 /* ── Map ── */
 .map-header {
-  padding: 14px 16px 0;
+  padding: 10px 16px 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.map-header .search-bar {
+  padding: 0;
 }
 
 @media (min-width: 768px) {

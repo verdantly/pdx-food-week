@@ -254,7 +254,7 @@
                 <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5"
                   stroke-linecap="round" />
               </svg>
-              <input id="search-input" type="search" placeholder="Search dish, restaurant, neighborhood…"
+              <input id="search-input" type="search" placeholder="Search dishes, spots, hoods…"
                 aria-label="Search dishes and restaurants" autocomplete="off" />
               <button id="search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -416,7 +416,7 @@
                 <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5"
                   stroke-linecap="round" />
               </svg>
-              <input id="saved-search-input" type="search" placeholder="Search saved dish, restaurant, neighborhood…"
+              <input id="saved-search-input" type="search" placeholder="Search saved spots…"
                 aria-label="Search saved dishes and restaurants" autocomplete="off" />
               <button id="saved-search-clear-btn" class="search-clear-btn" aria-label="Clear search"
                 style="display: none;">
@@ -582,19 +582,21 @@
         <h2 class="tab-section-header">Map</h2>
         <div class="map-header">
           <div class="search-bar">
-            <svg viewBox="0 0 24 24" class="search-icon" width="20" height="20" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input id="map-search-input" type="search" placeholder="Search map by dish, restaurant, neighborhood..."
-              aria-label="Search map locations" autocomplete="off" />
-            <button id="map-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6L6 18M6 6l12 12" />
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5" />
+                <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" />
               </svg>
-            </button>
+              <input id="map-search-input" type="search" placeholder="Search map spots, dishes…"
+                aria-label="Search map locations" autocomplete="off" />
+              <button id="map-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
           <div class="map-stats-row" id="map-stats-row" style="display: none;">
             <div class="stat-pill"><span id="map-stat-count">0</span> <span id="map-stat-label">matching locations</span></div>
