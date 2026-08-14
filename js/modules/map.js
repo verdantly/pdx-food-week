@@ -33,9 +33,27 @@ export function renderMap() {
       </div>`;
     return;
   }
-  const restaurants = getRestaurants();
-  const points = restaurants.filter(r => isFinite(r.lat) && isFinite(r.lng));
-  if (points.length === 0) return;
+  const allRestaurants = getRestaurants();
+  const query = (State.mapSearchQuery || '').trim().toLowerCase();
+  const matchedRestaurants = query ? allRestaurants.filter(r => {
+    return (r.dish || '').toLowerCase().includes(query) ||
+           (r.restaurant || '').toLowerCase().includes(query) ||
+           (r.neighborhood || '').toLowerCase().includes(query) ||
+           (r.address || '').toLowerCase().includes(query) ||
+           (r.desc || '').toLowerCase().includes(query);
+  }) : allRestaurants;
+  const points = matchedRestaurants.filter(r => isFinite(r.lat) && isFinite(r.lng));
+
+  const statsRow = document.getElementById('map-stats-row');
+  const statCount = document.getElementById('map-stat-count');
+  if (statsRow && statCount) {
+    if (query) {
+      statsRow.style.display = 'flex';
+      statCount.textContent = points.length;
+    } else {
+      statsRow.style.display = 'none';
+    }
+  }
 
   if (!leafletMap) {
     leafletMap = L.map(host, {
@@ -99,6 +117,15 @@ export function renderMap() {
       });
       leafletMarkers.set(r.id, m);
       markerClusterGroup.addLayer(m);
+    }
+
+    if (query) {
+      try {
+        const bounds = L.latLngBounds(points.map(p => [p.lat, p.lng]));
+        if (bounds.isValid()) {
+          leafletMap.fitBounds(bounds, { padding: [50, 50], maxZoom: 15 });
+        }
+      } catch (e) {}
     }
   }
 }

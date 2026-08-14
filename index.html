@@ -580,6 +580,26 @@
       <!-- ── Map View ── -->
       <section class="view" id="view-map" role="tabpanel" aria-label="Map of locations">
         <h2 class="tab-section-header">Map</h2>
+        <div class="map-header">
+          <div class="search-bar">
+            <svg viewBox="0 0 24 24" class="search-icon" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input id="map-search-input" type="search" placeholder="Search map by dish, restaurant, neighborhood..."
+              aria-label="Search map locations" autocomplete="off" />
+            <button id="map-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="map-stats-row" id="map-stats-row" style="display: none;">
+            <div class="stat-pill"><span id="map-stat-count">0</span> matching locations</div>
+          </div>
+        </div>
         <div class="map-container">
           <button class="btn btn-primary" id="map-plan-crawl-btn" onclick="App.toggleCrawlMode()"
             style="position: absolute; top: 12px; right: 12px; z-index: 1000; width: auto; margin: 0; background: var(--teal); border-color: var(--teal); box-shadow: var(--shadow-lg);">Plan

@@ -9,6 +9,7 @@ export const State = {
   activeSavedFilters: new Set(),
   draftSavedFilters: new Set(),
   savedSearchQuery: '',
+  mapSearchQuery: '',
   activeSavedSort: 'restaurant',
   customSavedOrder: [],
   filterDrawerOpen: false,

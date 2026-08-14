@@ -237,6 +237,16 @@ function switchWeek(weekId, fromPopState = false) {
     if (savedSearchClearBtn) savedSearchClearBtn.style.display = 'none';
   }
 
+  State.mapSearchQuery = '';
+  const mapSearchInput = document.getElementById('map-search-input');
+  if (mapSearchInput) {
+    mapSearchInput.value = '';
+    const mapSearchClearBtn = document.getElementById('map-search-clear-btn');
+    if (mapSearchClearBtn) mapSearchClearBtn.style.display = 'none';
+  }
+  const mapStatsRow = document.getElementById('map-stats-row');
+  if (mapStatsRow) mapStatsRow.style.display = 'none';
+
   State.activeSort = 'restaurant';
   document.querySelectorAll('#sort-row button.filter-chip, #sort-section button.filter-chip').forEach(btn => {
     if (btn.textContent.includes('Restaurant')) {
@@ -596,6 +606,24 @@ function init() {
     });
   }
 
+  const mapSearchInput = document.getElementById('map-search-input');
+  const mapSearchClearBtn = document.getElementById('map-search-clear-btn');
+  if (mapSearchInput && mapSearchClearBtn) {
+    const debouncedMapSearch = debounce(e => {
+      State.mapSearchQuery = e.target.value;
+      mapSearchClearBtn.style.display = State.mapSearchQuery ? 'flex' : 'none';
+      renderMap();
+    }, 150);
+    mapSearchInput.addEventListener('input', debouncedMapSearch);
+    mapSearchClearBtn.addEventListener('click', () => {
+      mapSearchInput.value = '';
+      State.mapSearchQuery = '';
+      mapSearchClearBtn.style.display = 'none';
+      mapSearchInput.focus();
+      renderMap();
+    });
+  }
+
   const compactSearchBtn = document.getElementById('compact-search-btn');
   const compactMenuBtn = document.getElementById('compact-menu-btn');
   const compactSearchDropdown = document.getElementById('compact-search-dropdown');
@@ -609,7 +637,7 @@ function init() {
       compactSearchDropdown.style.display = isHidden ? 'block' : 'none';
       compactMenuDropdown.style.display = 'none';
       if (isHidden && compactSearchInput) {
-        compactSearchInput.value = (State.activeTab === 'saved') ? State.savedSearchQuery : State.searchQuery;
+        compactSearchInput.value = (State.activeTab === 'saved') ? State.savedSearchQuery : (State.activeTab === 'map' ? State.mapSearchQuery : State.searchQuery);
         if (compactSearchClearBtn) {
           compactSearchClearBtn.style.display = compactSearchInput.value ? 'flex' : 'none';
         }
@@ -641,6 +669,11 @@ function init() {
         const mainSavedSearchInput = document.getElementById('saved-search-input');
         if (mainSavedSearchInput) mainSavedSearchInput.value = val;
         renderSaved();
+      } else if (State.activeTab === 'map') {
+        State.mapSearchQuery = val;
+        const mainMapSearchInput = document.getElementById('map-search-input');
+        if (mainMapSearchInput) mainMapSearchInput.value = val;
+        renderMap();
       }
     });
 
@@ -657,6 +690,11 @@ function init() {
         const mainSavedSearchInput = document.getElementById('saved-search-input');
         if (mainSavedSearchInput) mainSavedSearchInput.value = '';
         renderSaved();
+      } else if (State.activeTab === 'map') {
+        State.mapSearchQuery = '';
+        const mainMapSearchInput = document.getElementById('map-search-input');
+        if (mainMapSearchInput) mainMapSearchInput.value = '';
+        renderMap();
       }
       compactSearchInput.focus();
     });

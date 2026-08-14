@@ -138,4 +138,30 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('#view-landing')).toBeVisible();
     await expect(page.locator('body')).toHaveClass(/is-landing/);
   });
+
+  test('Map tab search bar filters locations and clear button resets query', async ({ page }) => {
+    await page.goto('/?week=taco-2026&tab=map', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('#map-search-input', { state: 'visible', timeout: 10000 });
+
+    const mapSearchInput = page.locator('#map-search-input');
+    const mapSearchClearBtn = page.locator('#map-search-clear-btn');
+    const mapStatsRow = page.locator('#map-stats-row');
+
+    await expect(mapSearchInput).toBeVisible();
+    await expect(mapSearchClearBtn).toBeHidden();
+    await expect(mapStatsRow).toBeHidden();
+
+    // Type query
+    await mapSearchInput.fill('taco');
+    await expect(mapSearchClearBtn).toBeVisible();
+    await expect(mapStatsRow).toBeVisible();
+    await expect(page.locator('#map-stat-count')).not.toHaveText('0');
+
+    // Click clear button
+    await mapSearchClearBtn.click();
+    await expect(mapSearchInput).toHaveValue('');
+    await expect(mapSearchClearBtn).toBeHidden();
+    await expect(mapStatsRow).toBeHidden();
+  });
 });
+
