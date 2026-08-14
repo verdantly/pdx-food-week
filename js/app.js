@@ -774,12 +774,33 @@ function init() {
     else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
   });
 
+function updateSearchPlaceholders() {
+  const isDesktop = window.innerWidth >= 768;
+  const placeholder = isDesktop
+    ? 'Search restaurants, dishes, neighborhoods...'
+    : 'Search restaurants, dishes, areas...';
+
+  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = placeholder;
+  });
+}
+
   window.addEventListener('resize', () => {
     if (State.activeTab === 'swipe') renderSwipe();
     if (window.innerWidth > 768 && State.filterDrawerOpen) {
       closeFilterDrawer();
     }
+    updateSearchPlaceholders();
   });
+
+  const mql = window.matchMedia('(min-width: 768px)');
+  if (mql.addEventListener) {
+    mql.addEventListener('change', updateSearchPlaceholders);
+  } else if (mql.addListener) {
+    mql.addListener(updateSearchPlaceholders);
+  }
+  updateSearchPlaceholders();
 
   setupMobileScrollListener();
 
