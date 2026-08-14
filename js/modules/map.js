@@ -39,17 +39,20 @@ export function renderMap() {
     return (r.dish || '').toLowerCase().includes(query) ||
            (r.restaurant || '').toLowerCase().includes(query) ||
            (r.neighborhood || '').toLowerCase().includes(query) ||
-           (r.address || '').toLowerCase().includes(query) ||
-           (r.desc || '').toLowerCase().includes(query);
+           (r.address || '').toLowerCase().includes(query);
   }) : allRestaurants;
   const points = matchedRestaurants.filter(r => isFinite(r.lat) && isFinite(r.lng));
 
   const statsRow = document.getElementById('map-stats-row');
   const statCount = document.getElementById('map-stat-count');
+  const statLabel = document.getElementById('map-stat-label');
   if (statsRow && statCount) {
     if (query) {
       statsRow.style.display = 'flex';
       statCount.textContent = points.length;
+      if (statLabel) {
+        statLabel.textContent = points.length === 1 ? 'matching location' : 'matching locations';
+      }
     } else {
       statsRow.style.display = 'none';
     }

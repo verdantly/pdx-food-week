@@ -163,5 +163,18 @@ test.describe('Navigation and Routing', () => {
     await expect(mapSearchClearBtn).toBeHidden();
     await expect(mapStatsRow).toBeHidden();
   });
+
+  test('Map tab searching "brie" matches exactly 1 location on Burger Week', async ({ page }) => {
+    await page.goto('/?week=burger-2026&tab=map', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('#map-search-input', { state: 'visible', timeout: 10000 });
+
+    const mapSearchInput = page.locator('#map-search-input');
+    await mapSearchInput.fill('brie');
+
+    await expect(page.locator('#map-stats-row')).toBeVisible();
+    await expect(page.locator('#map-stat-count')).toHaveText('1');
+    await expect(page.locator('#map-stat-label')).toHaveText('matching location');
+  });
 });
+
 
