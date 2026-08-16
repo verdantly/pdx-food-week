@@ -385,7 +385,8 @@ export function shareDish(id) {
   const r = getRestaurants().find(x => x.id === id);
   if (!r) return;
 
-  const shareUrl = `${window.location.origin}${window.location.pathname.replace(/\/+$/, '')}/d/${r.weekId}-${r.id}.html`;
+  const basePath = window.location.pathname.replace(/\/index\.html$/i, '').replace(/\/+$/, '');
+  const shareUrl = `${window.location.origin}${basePath}/d/${r.weekId}-${r.id}.html`;
   const title = `${r.dish} @ ${r.restaurant}`;
   const text = `Check out ${r.dish} at ${r.restaurant} for ${r.weekId || 'PDX Food Week'}!`;
 

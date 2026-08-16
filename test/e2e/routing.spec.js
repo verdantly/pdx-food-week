@@ -175,6 +175,20 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('#map-stat-count')).toHaveText('1');
     await expect(page.locator('#map-stat-label')).toHaveText('matching location');
   });
+
+  test('Direct dish link with ?week= and ?dish= opens dish detail modal', async ({ page }) => {
+    await page.goto('/?week=burger-2026&dish=248616', { waitUntil: 'domcontentloaded' });
+    const detailOverlay = page.locator('#detail-overlay');
+    await expect(detailOverlay).toHaveClass(/open/, { timeout: 10000 });
+    await expect(page.locator('.sheet-dish')).toContainText('Down the Hatch Burger');
+  });
+
+  test('Shared static page /d/... redirects and opens dish detail modal', async ({ page }) => {
+    await page.goto('/d/burger-2026-248616.html', { waitUntil: 'domcontentloaded' });
+    const detailOverlay = page.locator('#detail-overlay');
+    await expect(detailOverlay).toHaveClass(/open/, { timeout: 10000 });
+    await expect(page.locator('.sheet-dish')).toContainText('Down the Hatch Burger');
+  });
 });
 
 

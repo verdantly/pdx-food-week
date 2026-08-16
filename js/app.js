@@ -836,12 +836,11 @@ function updateSearchPlaceholders() {
   loadWeekData(State.currentWeekId, () => {
     renderAll();
     updateBrowseBadge();
+    const initialDishId = urlParams.get('dish');
+    if (initialDishId) {
+      openDetail(parseInt(initialDishId, 10), true);
+    }
   });
-
-  const initialDishId = urlParams.get('dish');
-  if (initialDishId) {
-    setTimeout(() => openDetail(parseInt(initialDishId, 10), true), 100);
-  }
 }
 
 // Assemble the App object for window.App
