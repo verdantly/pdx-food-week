@@ -55,6 +55,33 @@ const NAME_MAP = {
   'wajan': 'wajan'
 };
 
+const ADDRESS_OVERRIDES = {
+  'Gin Thai Brasserie': {
+    address: '3176 NW 185th Ave, Portland, OR 97229',
+    neighborhood: 'Bethany / Tanasbourne',
+    lat: 45.5430611,
+    lng: -122.8663362
+  },
+  'Exotic Eggrollz': {
+    address: '9100 SW Burnham St, Tigard, OR 97223',
+    neighborhood: 'Downtown Tigard',
+    lat: 45.4287045,
+    lng: -122.7705986
+  },
+  'Happy Valley Wok': {
+    address: '13551 SE 145th Ave, Happy Valley, OR 97015',
+    neighborhood: 'Happy Valley',
+    lat: 45.4244673,
+    lng: -122.5152310
+  },
+  "Big's Chicken | Alabama Fried Chicken": {
+    address: '4606 NE Glisan St, Portland, OR 97213',
+    neighborhood: 'North Tabor',
+    lat: 45.5261828,
+    lng: -122.6155435
+  }
+};
+
 const DISH_OVERRIDES = {
   'Meesen Thai Eatery': { dish: 'Zabb Wings', spicy: true },
   'Boke Bowl': { dish: 'Boke Hot Chicken Sando', spicy: true },
@@ -147,8 +174,8 @@ async function scrape() {
     }
 
     const [lngStr, latStr] = coordsText.split(',');
-    const lng = parseFloat(lngStr);
-    const lat = parseFloat(latStr);
+    let lng = parseFloat(lngStr);
+    let lat = parseFloat(latStr);
     if (isNaN(lat) || isNaN(lng)) continue;
 
     const cleanKey = normalizeName(name);
@@ -201,59 +228,66 @@ async function scrape() {
     dish = toTitleCase(dish);
     desc = toSentenceCase(desc);
 
-    // Reverse Geocoding
-    const cacheKey = `${lat},${lng}`;
+    // Reverse Geocoding / Address resolution
     let address = '';
     let streetAddress = '';
     let neighborhood = '';
 
-    if (geocodeCache[cacheKey]) {
-      const cached = geocodeCache[cacheKey];
-      address = cached.address;
-      streetAddress = cached.streetAddress;
-      neighborhood = cached.neighborhood;
+    if (ADDRESS_OVERRIDES[name]) {
+      address = ADDRESS_OVERRIDES[name].address;
+      neighborhood = ADDRESS_OVERRIDES[name].neighborhood;
+      lat = ADDRESS_OVERRIDES[name].lat;
+      lng = ADDRESS_OVERRIDES[name].lng;
     } else {
-      console.log(`[${counter}] Reverse geocoding ${name} (${cacheKey})...`);
-      const geoUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
+      const cacheKey = `${lat},${lng}`;
+      if (geocodeCache[cacheKey]) {
+        const cached = geocodeCache[cacheKey];
+        address = cached.address;
+        streetAddress = cached.streetAddress;
+        neighborhood = cached.neighborhood;
+      } else {
+        console.log(`[${counter}] Reverse geocoding ${name} (${cacheKey})...`);
+        const geoUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
 
-      try {
-        const res = await fetch(geoUrl, { headers: { 'User-Agent': GEO_UA } });
-        await sleep(1200);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        try {
+          const res = await fetch(geoUrl, { headers: { 'User-Agent': GEO_UA } });
+          await sleep(1200);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const data = await res.json();
-        const addr = data.address || {};
+          const data = await res.json();
+          const addr = data.address || {};
 
-        const houseNum = addr.house_number || '';
-        const road = addr.road || '';
-        neighborhood = addr.suburb || addr.neighbourhood || addr.quarter || addr.city_district || addr.village || addr.town || '';
-        let city = addr.city || addr.town || addr.village || 'Portland';
-        const postcode = addr.postcode || '';
+          const houseNum = addr.house_number || '';
+          const road = addr.road || '';
+          neighborhood = addr.suburb || addr.neighbourhood || addr.quarter || addr.city_district || addr.village || addr.town || '';
+          let city = addr.city || addr.town || addr.village || 'Portland';
+          const postcode = addr.postcode || '';
 
-        if (houseNum && road) {
-          streetAddress = `${houseNum} ${road}`;
-        } else if (road) {
-          streetAddress = road;
-        } else {
-          streetAddress = data.display_name.split(',')[0].trim();
+          if (houseNum && road) {
+            streetAddress = `${houseNum} ${road}`;
+          } else if (road) {
+            streetAddress = road;
+          } else {
+            streetAddress = data.display_name.split(',')[0].trim();
+          }
+
+          streetAddress = streetAddress
+            .replace(/\bStreet\b/g, 'St')
+            .replace(/\bAvenue\b/g, 'Ave')
+            .replace(/\bBoulevard\b/g, 'Blvd')
+            .replace(/\bRoad\b/g, 'Rd');
+
+          address = `${streetAddress}, ${city}, OR`;
+          if (postcode) address += ` ${postcode}`;
+
+          geocodeCache[cacheKey] = { address, streetAddress, neighborhood };
+          saveGeocodeCache();
+        } catch (e) {
+          console.warn(`  ⚠ Geocoding failed for ${name}:`, e.message);
+          address = 'Portland, OR';
+          streetAddress = '';
+          neighborhood = '';
         }
-
-        streetAddress = streetAddress
-          .replace(/\bStreet\b/g, 'St')
-          .replace(/\bAvenue\b/g, 'Ave')
-          .replace(/\bBoulevard\b/g, 'Blvd')
-          .replace(/\bRoad\b/g, 'Rd');
-
-        address = `${streetAddress}, ${city}, OR`;
-        if (postcode) address += ` ${postcode}`;
-
-        geocodeCache[cacheKey] = { address, streetAddress, neighborhood };
-        saveGeocodeCache();
-      } catch (e) {
-        console.warn(`  ⚠ Geocoding failed for ${name}:`, e.message);
-        address = 'Portland, OR';
-        streetAddress = '';
-        neighborhood = '';
       }
     }
 
