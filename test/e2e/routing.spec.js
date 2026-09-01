@@ -189,6 +189,15 @@ test.describe('Navigation and Routing', () => {
     await expect(detailOverlay).toHaveClass(/open/, { timeout: 10000 });
     await expect(page.locator('.sheet-dish')).toContainText('Down the Hatch Burger');
   });
+
+  test('Fried Chicken Week loads and displays dishes correctly', async ({ page }) => {
+    await page.goto('/?week=fried-chicken-2026', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+    const cards = page.locator('.dish-card');
+    const count = await cards.count();
+    expect(count).toBeGreaterThanOrEqual(20);
+    await expect(page.locator('#header-title')).toContainText('Fried Chicken Week');
+  });
 });
 
 

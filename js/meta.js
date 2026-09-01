@@ -97,6 +97,22 @@ window.FOOD_WEEKS = [
     emoji: "🌮",
     totalLocations: 42,
     url: "https://www.theactualportland.com/locations"
+  },
+  {
+    id: "fried-chicken-2026",
+    name: "Fried Chicken Week 2026",
+    organizer: "The Actual Portland",
+    dates: "September 14-20, 2026",
+    startDate: "2026-09-14",
+    endDate: "2026-09-20",
+    pricePills: ["$10 special"],
+    color: "#D97706",
+    colorDark: "#92400E",
+    colorLight: "#FEF3C7",
+    colorPale: "#FFFBEB",
+    emoji: "🍗",
+    totalLocations: 28,
+    url: "https://www.theactualportland.com/friedchickenlocations"
   }
 ];
 

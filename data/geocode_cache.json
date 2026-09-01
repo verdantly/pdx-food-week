@@ -208,5 +208,100 @@
     "address": "Southwest 2nd Ave, Portland, OR 97204",
     "streetAddress": "Southwest 2nd Ave",
     "neighborhood": "Downtown"
+  },
+  "45.551243,-122.675204": {
+    "address": "3924 North Mississippi Ave, Portland, OR 97227",
+    "streetAddress": "3924 North Mississippi Ave",
+    "neighborhood": "Boise"
+  },
+  "45.5589503,-122.6442587": {
+    "address": "2026 Northeast Alberta St, Portland, OR 97211",
+    "streetAddress": "2026 Northeast Alberta St",
+    "neighborhood": "Vernon"
+  },
+  "45.5401429,-122.6649977": {
+    "address": "60 Northeast Sacramento St, Portland, OR 97212",
+    "streetAddress": "60 Northeast Sacramento St",
+    "neighborhood": "Eliot"
+  },
+  "45.5144978,-122.6831449": {
+    "address": "1436 Southwest Park Ave, Portland, OR 97201",
+    "streetAddress": "1436 Southwest Park Ave",
+    "neighborhood": "Downtown"
+  },
+  "45.4677238,-122.8625314": {
+    "address": "7164 Southwest 181st Place, Beaverton, OR 97007",
+    "streetAddress": "7164 Southwest 181st Place",
+    "neighborhood": "Cooper Mountain"
+  },
+  "45.4856537,-122.8007577": {
+    "address": "4725 Southwest Lombard Ave, Beaverton, OR 97005",
+    "streetAddress": "4725 Southwest Lombard Ave",
+    "neighborhood": "Central Beaverton"
+  },
+  "45.5589313,-122.6548335": {
+    "address": "1036 Northeast Alberta St, Portland, OR 97211",
+    "streetAddress": "1036 Northeast Alberta St",
+    "neighborhood": "King"
+  },
+  "45.5174424,-122.8426688": {
+    "address": "16025 Southwest Regatta Lane, Beaverton, OR 97006",
+    "streetAddress": "16025 Southwest Regatta Lane",
+    "neighborhood": "Five Oaks/Triple Creek"
+  },
+  "45.5290401,-122.6382331": {
+    "address": "2705 Northeast Sandy Blvd, Portland, OR 97232",
+    "streetAddress": "2705 Northeast Sandy Blvd",
+    "neighborhood": "Kerns"
+  },
+  "45.4245982,-122.5153649": {
+    "address": "Southeast Sunnyside Rd, Happy Valley, OR 97015",
+    "streetAddress": "Southeast Sunnyside Rd",
+    "neighborhood": "Happy Valley"
+  },
+  "45.4503296,-122.7230568": {
+    "address": "4436 Southwest Alfred St, Portland, OR 97219",
+    "streetAddress": "4436 Southwest Alfred St",
+    "neighborhood": "West Portland Park"
+  },
+  "45.5278526,-122.6942522": {
+    "address": "704 Northwest 21st Ave, Portland, OR 97209",
+    "streetAddress": "704 Northwest 21st Ave",
+    "neighborhood": "Northwest District"
+  },
+  "45.5593602,-122.6548161": {
+    "address": "5009 Northeast 11th Ave, Portland, OR 97211",
+    "streetAddress": "5009 Northeast 11th Ave",
+    "neighborhood": "King"
+  },
+  "45.5262796,-122.6154381": {
+    "address": "Northeast Glisan St, Portland, OR 97215",
+    "streetAddress": "Northeast Glisan St",
+    "neighborhood": "North Tabor"
+  },
+  "45.5251544,-122.6945039": {
+    "address": "305 Northwest 21st Ave, Portland, OR 97209",
+    "streetAddress": "305 Northwest 21st Ave",
+    "neighborhood": "Northwest District"
+  },
+  "45.4959609,-122.5782451": {
+    "address": "3612 Southeast 82nd Ave, Portland, OR 97266",
+    "streetAddress": "3612 Southeast 82nd Ave",
+    "neighborhood": "Foster-Powell"
+  },
+  "45.5259028,-122.6854889": {
+    "address": "1411 Northwest Flanders St, Portland, OR 97209",
+    "streetAddress": "1411 Northwest Flanders St",
+    "neighborhood": "Pearl District"
+  },
+  "45.5311715,-122.6327877": {
+    "address": "1132 Northeast 31st Ave, Portland, OR 97232",
+    "streetAddress": "1132 Northeast 31st Ave",
+    "neighborhood": "Kerns"
+  },
+  "45.486706,-122.806917": {
+    "address": "12675 Southwest 1st St, Beaverton, OR 97005",
+    "streetAddress": "12675 Southwest 1st St",
+    "neighborhood": "Central Beaverton"
   }
 }

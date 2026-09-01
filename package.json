@@ -12,6 +12,7 @@
     "scrape:nacho": "node scrapers/scrape_everout_nacho.js",
     "scrape:salads": "node scrapers/scrape_salads.js",
     "scrape:slushies": "node scrapers/scrape_slushies.js",
+    "scrape:chicken": "node scrapers/scrape_fried_chicken.js",
     "test:unit": "node -c js/app.js && vitest run",
     "test:e2e": "playwright test"
   },
