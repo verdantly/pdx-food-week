@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import { fileURLToPath } from 'url';
-import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, cleanName } from './scraper_utils.js';
+import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.resolve(__dirname, '../data/geocode_cache.json');
@@ -14,6 +14,14 @@ const GEO_UA = 'pdx-food-week-app/1.0 (https://github.com/verdantly/pdx-food-wee
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function normalizeName(name) {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .replace(/\(.*?\)/g, '')
+    .replace(/[^a-z0-9]/g, '');
 }
 
 let geocodeCache = {};
@@ -33,8 +41,23 @@ function saveGeocodeCache() {
   fs.writeFileSync(CACHE_PATH, JSON.stringify(geocodeCache, null, 2), 'utf8');
 }
 
+const NAME_MAP = {
+  'meesenthaieatery': 'meesenthai',
+  '10barrelbrewingportland': '10barrelbrewing',
+  'bigschickenalabamafriedchicken': 'bigschicken',
+  'fabostacoscart': 'fabostacos',
+  'bhunaindianrestaurant': 'bhuna',
+  'migrationbrewingglisan': 'migrationbrewingglisan',
+  'migrationbrewingwilliamsx5star': 'migrationbrewingwilliamsx5star',
+  'lorrellschickenshake': 'lorellschickenshack',
+  'lorellschickenshack': 'lorellschickenshack',
+  'esanthaiwoodstock': 'esanthaiwoodstock',
+  'wajan': 'wajan'
+};
+
 const DISH_OVERRIDES = {
   'Meesen Thai Eatery': { dish: 'Zabb Wings', spicy: true },
+  'Boke Bowl': { dish: 'Boke Hot Chicken Sando', spicy: true },
   'Kau Kau PDX': { dish: 'Crispy Ginger Chicken' },
   'Curbside Cravings': { dish: 'Sweet Chili & BBQ Wings', spicy: true },
   'Hunny Beez': { dish: 'Crispy Patis-Glazed Chicken' },
@@ -45,7 +68,18 @@ const DISH_OVERRIDES = {
   "Uncle Earl's BBQ Bistro": { dish: 'Southern Fried Chicken Wings' },
   'Fabos Tacos Cart': { dish: 'Crispy Fried Chicken Tacos' },
   'Parallel': { dish: 'Fried Chicken Wings & Biscuit' },
-  'Tacos Fita Co': { dish: 'Gluten-Free Tenderloin Taco', glutenFree: true }
+  'Tacos Fita Co': { dish: 'Gluten-Free Tenderloin Taco', glutenFree: true },
+  'Chubby Bunny': { dish: 'Vegan Buffalo Fried Chicken Caesar Hoagie', type: 'vegan', veganOption: true, vegOption: true, spicy: true },
+  'The Dusted Cup': { dish: 'Garlic Parm Chickn’ Sandwich', type: 'vegan', veganOption: true, vegOption: true },
+  'Migration Brewing - Glisan': { dish: 'Über Chicken Sandwich' },
+  'Migration Brewing Williams x 5 Star': { dish: 'Crispy Hot Honey Chicken Sandwich', spicy: true },
+  'Yin Yang Burger': { dish: 'The Hainan Baddie' },
+  '10 Barrel Brewing Portland': { dish: 'Sambal Hot Honey Chicken Tenders', spicy: true },
+  'Lorrells Chicken Shake': { dish: 'Chicago Style 4-Piece Party Wings' },
+  'Wajan': { dish: 'Ayam Geprek' },
+  'Say When': { dish: 'Buttermilk Brined Fried Chicken Sandwich' },
+  "Big's Chicken | Alabama Fried Chicken": { dish: 'Fried Chicken Tenders & Huli-Huli Sauce' },
+  'E-San Thai Woodstock': { dish: 'Crispy Garlic Chicken Wings' }
 };
 
 async function scrape() {
@@ -69,8 +103,9 @@ async function scrape() {
     if (!rawTitle || rawTitle.includes('Coming Soon') || rawTitle.includes('Locations.')) return;
 
     const desc = $html(el).find('.list-item-content__description').text().trim();
-    const img = $html(el).find('img').attr('data-src') || $html(el).find('img').attr('src') || '';
-    const key = cleanName(rawTitle);
+    let img = $html(el).find('img').attr('data-src') || $html(el).find('img').attr('src') || '';
+    if (img.startsWith('//')) img = 'https:' + img;
+    const key = normalizeName(rawTitle);
     
     if (key) {
       squarespaceMap[key] = {
@@ -85,17 +120,8 @@ async function scrape() {
 
   const $kml = cheerio.load(kmlText, { xmlMode: true });
   const entries = [];
+  const processedKeys = new Set();
   let counter = 1;
-
-  const NAME_MAP = {
-    '10barrelbrewingportland': '10barrelbrewing',
-    'bigschickenalabamafriedchicken': 'bigschicken',
-    'fabostacoscart': 'fabostacos',
-    'bhunaindianrestaurant': 'bhuna',
-    'salvipdxatlevel2': 'salvipdxatlevel2',
-    'migrationbrewingwilliamsx5star': 'migrationbrewingwilliamsx5star',
-    'migrationbrewingglisan': 'migrationbrewingglisan'
-  };
 
   const placemarks = $kml('Placemark').toArray();
   console.log(`Found ${placemarks.length} Placemarks in KML map.`);
@@ -108,15 +134,33 @@ async function scrape() {
     const coordsText = $kml(pm).find('coordinates').text().trim();
     if (!coordsText) continue;
 
+    // Filter out duplicate or empty placemarks with no description
+    let rawText = descHtml
+      .replace(/<img[^>]*>/gi, '')
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!rawText || rawText.length < 5) {
+      console.log(`Skipping duplicate or empty placemark: "${name}"`);
+      continue;
+    }
+
     const [lngStr, latStr] = coordsText.split(',');
     const lng = parseFloat(lngStr);
     const lat = parseFloat(latStr);
     if (isNaN(lat) || isNaN(lng)) continue;
 
-    const cleanKey = cleanName(name);
-    let sqItem = squarespaceMap[cleanKey] || (NAME_MAP[cleanKey] && squarespaceMap[NAME_MAP[cleanKey]]);
+    const cleanKey = normalizeName(name);
+    const sqKey = squarespaceMap[cleanKey] ? cleanKey : (NAME_MAP[cleanKey] && squarespaceMap[NAME_MAP[cleanKey]] ? NAME_MAP[cleanKey] : null);
+    let sqItem = sqKey ? squarespaceMap[sqKey] : null;
 
-    // Image resolution
+    if (sqKey) {
+      processedKeys.add(sqKey);
+      processedKeys.add(cleanKey);
+    }
+
+    // Image resolution: ALWAYS prioritize Squarespace CDN image
     let image = (sqItem && sqItem.image) || '';
     if (!image) {
       const imgMatch = descHtml.match(/src="([^"]+)"/);
@@ -124,16 +168,6 @@ async function scrape() {
     }
     if (image.startsWith('//')) image = 'https:' + image;
 
-    // Clean description
-    let rawText = descHtml
-      .replace(/<img[^>]*>/gi, '')
-      .replace(/<br\s*\/?>/gi, ' ')
-      .replace(/\s+/g, ' ')
-      .trim();
-
-    if (!rawText && sqItem && sqItem.description) {
-      rawText = sqItem.description.replace(/<[^>]*>/gi, ' ').replace(/\s+/g, ' ').trim();
-    }
     rawText = decodeHTML(rawText);
 
     // Split into Dish title and Description
@@ -225,21 +259,24 @@ async function scrape() {
 
     // Dietary parsing
     const combined = `${name} ${dish} ${desc} ${rawText}`.toLowerCase();
-    const isVegan = combined.includes('(vegan)') || combined.includes('chickn') || combined.includes('vegan buffalo') || (combined.includes('vegan') && !combined.includes('non-vegan'));
-    const isVegetarian = isVegan || combined.includes('tofu') || combined.includes('vegetarian');
+    let isVegan = combined.includes('(vegan)') || combined.includes('chickn') || combined.includes('vegan buffalo') || (combined.includes('vegan') && !combined.includes('non-vegan'));
+    let isVegetarian = isVegan || combined.includes('tofu') || combined.includes('vegetarian');
     let isGlutenFree = combined.includes('gluten free') || combined.includes('gluten-free') || combined.includes('100% gluten-free');
     let isSpicy = /spicy|hot|chile|chili|gochujang|buffalo|serrano|sambal|habanero|cajun|pepper/i.test(combined);
-
-    if (DISH_OVERRIDES[name]) {
-      if (DISH_OVERRIDES[name].glutenFree !== undefined) isGlutenFree = DISH_OVERRIDES[name].glutenFree;
-      if (DISH_OVERRIDES[name].spicy !== undefined) isSpicy = DISH_OVERRIDES[name].spicy;
-    }
 
     let type = 'meat';
     if (isVegan) {
       type = 'vegan';
     } else if (isVegetarian) {
       type = 'vegetarian';
+    }
+
+    if (DISH_OVERRIDES[name]) {
+      if (DISH_OVERRIDES[name].type) type = DISH_OVERRIDES[name].type;
+      if (DISH_OVERRIDES[name].veganOption !== undefined) isVegan = DISH_OVERRIDES[name].veganOption;
+      if (DISH_OVERRIDES[name].vegOption !== undefined) isVegetarian = DISH_OVERRIDES[name].vegOption;
+      if (DISH_OVERRIDES[name].glutenFree !== undefined) isGlutenFree = DISH_OVERRIDES[name].glutenFree;
+      if (DISH_OVERRIDES[name].spicy !== undefined) isSpicy = DISH_OVERRIDES[name].spicy;
     }
 
     let emoji = '🍗';
@@ -270,10 +307,51 @@ async function scrape() {
       desc,
       emoji,
       image,
-      url: 'https://www.theactualportland.com/friedchickenlocations'
+      url: LOCATIONS_URL
     });
 
     counter++;
+  }
+
+  // Check if any Squarespace items were missing from KML (e.g. E-San Thai Woodstock)
+  for (const [sqKey, sqItem] of Object.entries(squarespaceMap)) {
+    if (!processedKeys.has(sqKey)) {
+      console.log(`Adding Squarespace-only listing: "${sqItem.title}"`);
+      let address = '4818 Southeast Woodstock Blvd, Portland, OR 97206';
+      let streetAddress = '4818 SE Woodstock Blvd';
+      let neighborhood = 'Woodstock';
+      let lat = 45.479532;
+      let lng = -122.612845;
+
+      let dish = 'Crispy Garlic Chicken Wings';
+      let desc = sqItem.description ? toSentenceCase(sqItem.description) : 'Crispy fried chicken special';
+      if (DISH_OVERRIDES[sqItem.title] && DISH_OVERRIDES[sqItem.title].dish) {
+        dish = DISH_OVERRIDES[sqItem.title].dish;
+      }
+
+      entries.push({
+        id: counter,
+        weekId: 'fried-chicken-2026',
+        dish,
+        restaurant: sqItem.title,
+        neighborhood,
+        address,
+        lat,
+        lng,
+        type: 'meat',
+        vegOption: false,
+        veganOption: false,
+        glutenFree: false,
+        spicy: true,
+        minors: true,
+        takeout: true,
+        desc,
+        emoji: '🍗',
+        image: sqItem.image,
+        url: LOCATIONS_URL
+      });
+      counter++;
+    }
   }
 
   const fileContent = `// The Actual Portland's Fried Chicken Week 2026
@@ -291,6 +369,9 @@ window.FOOD_WEEKS.push(
     endDate: "2026-09-20",
     pricePills: ["$10 special"],
     color: "#D97706",
+    colorDark: "#92400E",
+    colorLight: "#FEF3C7",
+    colorPale: "#FFFBEB",
     emoji: "🍗",
     totalLocations: ${entries.length},
     url: "${LOCATIONS_URL}",

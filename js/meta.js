@@ -111,7 +111,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🍗",
-    totalLocations: 28,
+    totalLocations: 30,
     url: "https://www.theactualportland.com/friedchickenlocations"
   }
 ];

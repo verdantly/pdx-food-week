@@ -303,5 +303,15 @@
     "address": "12675 Southwest 1st St, Beaverton, OR 97005",
     "streetAddress": "12675 Southwest 1st St",
     "neighborhood": "Central Beaverton"
+  },
+  "45.540802,-122.6731219": {
+    "address": "668 North Russell St, Portland, OR 97227",
+    "streetAddress": "668 North Russell St",
+    "neighborhood": "Eliot"
+  },
+  "45.5232324,-122.6152914": {
+    "address": "4611 East Burnside St, Portland, OR 97215",
+    "streetAddress": "4611 East Burnside St",
+    "neighborhood": "North Tabor"
   }
 }

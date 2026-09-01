@@ -1,5 +1,5 @@
 // The Actual Portland's Fried Chicken Week 2026
-// 28 locations
+// 30 locations
 // Source: https://www.theactualportland.com/friedchickenlocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -13,8 +13,11 @@ window.FOOD_WEEKS.push(
     endDate: "2026-09-20",
     pricePills: ["$10 special"],
     color: "#D97706",
+    colorDark: "#92400E",
+    colorLight: "#FEF3C7",
+    colorPale: "#FFFBEB",
     emoji: "🍗",
-    totalLocations: 28,
+    totalLocations: 30,
     url: "https://www.theactualportland.com/friedchickenlocations",
   }
 );
@@ -40,7 +43,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "takeout": true,
     "desc": "Zabb wings crispy fried chicken wings tossed in thai tom yum seasoning",
     "emoji": "🍗",
-    "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR7DbKg8qOBrrva6nR5SgI_OVx1lKWBKxR4TF1C2kaw2uv41UCMxEIHriqSO6Pgq0tiaMFSdCjTSKK1s6v-TElXCp370MZPmLLTOhhAyVuXe82eR4T3ERvtahvRRyY069utKJDRvFxcdqU7EqP4WkSdiCAYphjtreC4-BTVhAL9s-1DOk3VmEmWipG2iFkn2apIzzRn3Q4aFyqHBUkZOCeit7yiTHnI24UlgSfFeaCKFDxa_xloIJx_oQ2s?fife=s16383",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/7c286be2-e560-45dc-95bb-413f4e60e6c1/IMG_6135.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
@@ -172,7 +175,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 8,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Boke Hot Chicken Sando",
     "restaurant": "Boke Bowl",
     "neighborhood": "Buckman",
     "address": "1028 Southeast Water Ave, Portland, OR 97214",
@@ -186,14 +189,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "desc": "Boke Hot Chicken Sando Boke fried chicken dipped in hot and sour gochujang/pickled Serrano sauce, Chinese mustard slaw, and pickles, on a toasted An Xuyen brioche bun.",
-    "emoji": "🍗",
+    "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/584f1916-ada5-43b6-a912-3fd76b3392f4/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTczOTQ3NDY2NDkxNjcxNy1Cb2tlX0Jvd2...pb24iOiAiY2VudHJlIiwgIndpZHRoIjogOTYwLCAiaGVpZ2h0IjogNjAwLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm9.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
     "id": 9,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Crispy Hot Honey Chicken Sandwich",
     "restaurant": "Migration Brewing Williams x 5 Star",
     "neighborhood": "Boise",
     "address": "3947 North Williams Ave, Portland, OR 97217",
@@ -207,14 +210,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "desc": "Crispy fried chicken piled high on a toasted brioche bun with pickles and a crunchy cabbage slaw tossed in a sweet and spicy hot honey mustard. Finished with a bold red pepper sauce, served with golden crispy waffle fries.",
-    "emoji": "🍗",
+    "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/9f323ca5-4825-4208-ad07-d04e70ea674f/Screenshot+2026-08-20+at+12.55.13%E2%80%AFPM.png",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
     "id": 10,
     "weekId": "fried-chicken-2026",
-    "dish": "üBer Chicken",
+    "dish": "üBer Chicken Sandwich",
     "restaurant": "Migration Brewing - Glisan",
     "neighborhood": "Kerns",
     "address": "2828 Northeast Glisan St, Portland, OR 97232",
@@ -228,7 +231,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "desc": "Braised red cabbage, chicken schnitzel, straight outta portland infused curry mustard, pickles.",
-    "emoji": "🍗",
+    "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/1473f271-3a87-46d2-9573-157610910846/IMG_6146.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
@@ -361,27 +364,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 17,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
-    "restaurant": "The Dusted Cup",
-    "neighborhood": "West Portland Park",
-    "address": "4436 Southwest Alfred St, Portland, OR 97219",
-    "lat": 45.4503296,
-    "lng": -122.7230568,
-    "type": "meat",
-    "vegOption": false,
-    "veganOption": false,
-    "glutenFree": false,
-    "spicy": false,
-    "minors": true,
-    "takeout": true,
-    "desc": "",
-    "emoji": "🍗",
-    "image": "",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
-  },
-  {
-    "id": 18,
-    "weekId": "fried-chicken-2026",
     "dish": "Garlic Parm Chickn’ Sandwich",
     "restaurant": "The Dusted Cup",
     "neighborhood": "Downtown",
@@ -397,11 +379,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "takeout": true,
     "desc": "A crispy fried vegan chicken patty piled onto a soft pub bun with fresh lettuce and tomato, then smothered in our rich, creamy garlic shiitake parmesan sauce. Savory, saucy, crispy, and just messy enough—in all the right ways.",
     "emoji": "🌱",
-    "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5HTdxcHwH93p18NBUlGc17cRAeFnK0ATKJseK-JakRbC8Xa7lBoN8C4SO4F6tsXddvPR9wylmtdUHihgsif1h88vcqr9J90qhfPXzfN91cs2pHBCHpyWLYXrTZIWGRlytBtNDpvLH0kVC5DMbxFC_KPzBFY5dsHXtLf6AQKMvqIoavQDyLMtllbdcx1_b6A_L_GWbTA6n97O4j9LhlhI86NvQ2zss8Uz0l_8CL0W3jsz8f6DWxW6OvR-A?fife=s16383",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/064575c7-60bd-46b0-892b-b7d2ddb8c3ff/IMG_6249.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 19,
+    "id": 18,
     "weekId": "fried-chicken-2026",
     "dish": "Indian Spiced Fried Chicken Sandwich",
     "restaurant": "Bhuna Indian Restaurant",
@@ -422,9 +404,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 20,
+    "id": 19,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Vegan Buffalo Fried Chicken Caesar Hoagie",
     "restaurant": "Chubby Bunny",
     "neighborhood": "King",
     "address": "5009 Northeast 11th Ave, Portland, OR 97211",
@@ -439,13 +421,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "takeout": true,
     "desc": "Vegan buffalo fried chicken caesar hoagie. Made with fried chicken tossed in buffalo sauce, fresh chopped lettuce, house made caesar dressing, shredded parmesan on a toasted dos hermanos semolina roll.",
     "emoji": "🌱",
-    "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR7tzRYHdd3Nr4dVW2P9iKCPQefCULzFU0_MJJetAnZoJ8U06fMm5eobN981Q9U0K8nJvB7RZQpOR0Ch8fjT_MAgyc3gEWVWTdyAlOoU9JwRWqRItLs1ssyFFmsn1sXy3GnOHjiNGltdaa0BuilzFLBuW1o4AGfuFKPvhUQLv3n225ze_VNHy-M1UIkwB0NTL4So1pzis596FKUf5Eh6JLQFgjao3-Ypmo3uKf-NyrhpRWb87apIXoJtDoE?fife=s16383",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/1c26d26e-a279-42d1-8c4f-41707c52a5d0/IMG_6284.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 21,
+    "id": 20,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Tenders",
+    "dish": "Fried Chicken Tenders & Huli-Huli Sauce",
     "restaurant": "Big's Chicken | Alabama Fried Chicken",
     "neighborhood": "North Tabor",
     "address": "Northeast Glisan St, Portland, OR 97215",
@@ -464,9 +446,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 22,
+    "id": 21,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Buttermilk Brined Fried Chicken Sandwich",
     "restaurant": "Say When",
     "neighborhood": "Northwest District",
     "address": "305 Northwest 21st Ave, Portland, OR 97209",
@@ -480,14 +462,14 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "desc": "Buttermilk brined fried chicken, ham, swiss, dijonnaise, mornay sauce on seeded brioche.",
-    "emoji": "🍗",
+    "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/663a763f-3493-4165-a66e-5d15b12065d5/IMG_6289.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 23,
+    "id": 22,
     "weekId": "fried-chicken-2026",
-    "dish": "A Crispy, Golden Fried Chicken Sandwich With An Asian",
+    "dish": "The Hainan Baddie",
     "restaurant": "Yin Yang Burger",
     "neighborhood": "Foster-Powell",
     "address": "3612 Southeast 82nd Ave, Portland, OR 97266",
@@ -497,16 +479,16 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "vegOption": false,
     "veganOption": false,
     "glutenFree": false,
-    "spicy": false,
+    "spicy": true,
     "minors": true,
     "takeout": true,
-    "desc": "Inspired twist. Our signature salt-baked seasoned batter brings the crunch, while our house-made ginger, garlic & scallion aioli adds a savory, aromatic kick. Finished with fresh asian-style cucumbers, juicy tomatoes, and shredded lettuce for the perfect balance of crunch, freshness, and flavor.",
-    "emoji": "🥪",
+    "desc": "Our crispy take on the classic hainan chicken. Buttermilk-marinated fried chicken, infused with ginger, pandan, and our special seasoning, fried to golden, crunchy perfection. Topped with our house-made ginger scallion sauce, sweet chili, and sweet dark.",
+    "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/8282682d-a846-4b64-99c8-7765a3052bfc/IMG_6324.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 24,
+    "id": 23,
     "weekId": "fried-chicken-2026",
     "dish": "Cajun Spiced Buttermilk Fried Chicken Sandwich",
     "restaurant": "The Rambler",
@@ -527,9 +509,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 25,
+    "id": 24,
     "weekId": "fried-chicken-2026",
-    "dish": "Buttermilk",
+    "dish": "Sambal Hot Honey Chicken Tenders",
     "restaurant": "10 Barrel Brewing Portland",
     "neighborhood": "Pearl District",
     "address": "1411 Northwest Flanders St, Portland, OR 97209",
@@ -548,7 +530,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 26,
+    "id": 25,
     "weekId": "fried-chicken-2026",
     "dish": "Fried Chicken Wings & Biscuit",
     "restaurant": "Parallel",
@@ -569,7 +551,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 27,
+    "id": 26,
     "weekId": "fried-chicken-2026",
     "dish": "Crispy Fried Chicken Tacos",
     "restaurant": "Fabos Tacos Cart",
@@ -590,7 +572,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
-    "id": 28,
+    "id": 27,
     "weekId": "fried-chicken-2026",
     "dish": "Southern Fried Chicken Wings",
     "restaurant": "Uncle Earl's BBQ Bistro",
@@ -608,6 +590,69 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fried chicken wings",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/fe335557-2ac0-45c7-b679-6b36f4e1cd04/IMG_6322.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations"
+  },
+  {
+    "id": 28,
+    "weekId": "fried-chicken-2026",
+    "dish": "Chicago Style 4-Piece Party Wings",
+    "restaurant": "Lorrells Chicken Shake",
+    "neighborhood": "Eliot",
+    "address": "668 North Russell St, Portland, OR 97227",
+    "lat": 45.540802,
+    "lng": -122.6731219,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Chicago style four piece party wings to get my lemon peppers, dust and hot honey or chicago style mild sauce.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a32e1368-d568-4070-a2f7-5e141dbb44d2/IMG_6334.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations"
+  },
+  {
+    "id": 29,
+    "weekId": "fried-chicken-2026",
+    "dish": "Ayam Geprek",
+    "restaurant": "Wajan",
+    "neighborhood": "North Tabor",
+    "address": "4611 East Burnside St, Portland, OR 97215",
+    "lat": 45.5232324,
+    "lng": -122.6152914,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Ayam geprek is a dish that originates from indonesia, consisting of battered fried chicken.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a6c3e080-b4b8-4630-bbd6-c64b72882b4a/Ayam+Geprek+-+Warung+Jajan.jpg",
+    "url": "https://www.theactualportland.com/friedchickenlocations"
+  },
+  {
+    "id": 30,
+    "weekId": "fried-chicken-2026",
+    "dish": "Crispy Garlic Chicken Wings",
+    "restaurant": "E-San Thai Woodstock",
+    "neighborhood": "Woodstock",
+    "address": "4818 Southeast Woodstock Blvd, Portland, OR 97206",
+    "lat": 45.479532,
+    "lng": -122.612845,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Crispy thai wings.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/3f980f48-8352-4cf9-926b-d90bdd62a2ed/IMG_5299+-+Huyen+Tram+Huynh.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   }
 ];
