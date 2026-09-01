@@ -18,7 +18,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PDX Food Week" />
   <meta property="og:title" content="PDX Food Week — Portland's unofficial food week companion" />
-  <meta property="og:description" content="Browse, save, and route your way through Portland's annual food weeks!" />
+  <meta property="og:description" content="Browse, save, and plan your way through Portland's food weeks!" />
   <meta property="og:url" content="https://www.pdxfoodweek.com/" />
   <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png" />
   <meta property="og:image:secure_url" content="https://www.pdxfoodweek.com/images/og-preview.png" />
@@ -30,7 +30,7 @@
   <!-- Twitter / Discord -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="PDX Food Week — Portland's unofficial food week companion" />
-  <meta name="twitter:description" content="Browse, save, and route your way through Portland's annual food weeks!" />
+  <meta name="twitter:description" content="Browse, save, and plan your way through Portland's food weeks!" />
   <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png" />
 
   <title>PDX Food Week</title>
@@ -120,7 +120,8 @@
               <option value="pizza-2026" style="color: #1a1816; background: #fff;">🍕 Pizza Week</option>
               <option value="highball-2026" style="color: #1a1816; background: #fff;">🥃 Highball Week</option>
               <option value="taco-2026" style="color: #1a1816; background: #fff;">🌮 Taco Week</option>
-              <option value="fried-chicken-2026" style="color: #1a1816; background: #fff;">🍗 Fried Chicken Week</option>
+              <option value="fried-chicken-2026" style="color: #1a1816; background: #fff;">🍗 Fried Chicken Week
+              </option>
             </select>
           </div>
           <div class="compact-menu-footer">
@@ -129,9 +130,11 @@
             </div>
             <div class="compact-footer-meta">
               PDX Food Week<br>
-              Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
+              Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual
+                Portland</a>.<br>
               Not affiliated with event organizers.<br>
-              Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+              Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
+                href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
             </div>
           </div>
         </div>
@@ -287,17 +290,20 @@
               </div>
               <span class="sort-label-empty"></span>
               <div class="sort-distance-group">
-                <button class="filter-chip" id="sort-distance-btn" onclick="App.toggleDistanceSort(this)">Distance</button>
+                <button class="filter-chip" id="sort-distance-btn"
+                  onclick="App.toggleDistanceSort(this)">Distance</button>
                 <div id="zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <button class="filter-chip"
                     style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
                     onclick="App.useMyLocation(false)" aria-label="Use My Location" title="Use location">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
+                    <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use
+                    location
                   </button>
                   <input type="text" id="zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
                     style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 120px;"
                     aria-label="Enter Zip Code for distance sorting">
-                  <button class="filter-chip active" style="padding: 4px 10px;" onclick="App.applyZipCode()">Apply</button>
+                  <button class="filter-chip active" style="padding: 4px 10px;"
+                    onclick="App.applyZipCode()">Apply</button>
                 </div>
               </div>
             </div>
@@ -445,7 +451,8 @@
             <div class="sort-section" role="group" aria-label="Sort saved dishes" id="saved-sort-section">
               <span class="sort-label">Sort:</span>
               <div class="sort-main-group">
-                <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant (A-Z)</button>
+                <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant
+                  (A-Z)</button>
                 <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
                 <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
               </div>
@@ -453,11 +460,13 @@
               <div class="sort-distance-group">
                 <button class="filter-chip" id="saved-sort-distance-btn"
                   onclick="App.toggleSavedDistanceSort(this)">Distance</button>
-                <div id="saved-zip-code-container" style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <div id="saved-zip-code-container"
+                  style="display: none; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <button class="filter-chip"
                     style="padding: 4px 8px; display: flex; align-items: center; justify-content: center; gap: 4px;"
                     onclick="App.useMyLocation(true)" aria-label="Use My Location" title="Use location">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use location
+                    <span class="material-symbols-outlined" style="font-size: 18px;">location_searching</span> Use
+                    location
                   </button>
                   <input type="text" id="saved-zip-code-input" placeholder="Zip code..." maxlength="5" pattern="[0-9]*"
                     style="padding: 4px 8px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 16px; width: 120px;"
@@ -603,7 +612,8 @@
               </svg>
               <input id="map-search-input" type="search" placeholder="Search restaurants, dishes, neighborhoods..."
                 aria-label="Search map locations" autocomplete="off" />
-              <button id="map-search-clear-btn" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+              <button id="map-search-clear-btn" class="search-clear-btn" aria-label="Clear search"
+                style="display: none;">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
                   stroke-linecap="round" stroke-linejoin="round">
                   <path d="M18 6L6 18M6 6l12 12" />
@@ -612,7 +622,8 @@
             </div>
           </div>
           <div class="map-stats-row" id="map-stats-row" style="display: none;">
-            <div class="stat-pill"><span id="map-stat-count">0</span> <span id="map-stat-label">matching locations</span></div>
+            <div class="stat-pill"><span id="map-stat-count">0</span> <span id="map-stat-label">matching
+                locations</span></div>
           </div>
         </div>
         <div class="map-container">
@@ -766,7 +777,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js').catch(() => { });
       });
     }
   </script>
