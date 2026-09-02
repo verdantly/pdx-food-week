@@ -59,7 +59,12 @@ export const WEEK_FILTERS = {
     { id: 'gf', label: 'Gluten-free' },
     { id: 'spicy', label: 'Spicy' }
   ],
-  'salad-2026': [],
+  'salad-2026': [
+    { id: 'meat', label: 'Meat' },
+    { id: 'vegetarian', label: 'Vegetarian' },
+    { id: 'vegan', label: 'Vegan' },
+    { id: 'gf', label: 'Gluten-free' }
+  ],
   'slushie-2026': [],
   'pizza-2026': [
     { id: 'meat', label: 'Meat' },

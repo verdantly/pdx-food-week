@@ -63,8 +63,9 @@ export function dismissNewBanner() {
 }
 
 export function isVeganFriendly(r) {
+  if (!r) return false;
   if (r.type === 'vegan' || r.veganOption) return true;
-  const txt = `${r.dish} ${r.desc}`.toLowerCase();
+  const txt = `${r.dish || ''} ${r.desc || ''} ${r.whatsOnIt || ''} ${r.whatTheySay || ''}`.toLowerCase();
   return txt.includes('vegan option') ||
     txt.includes('can be made vegan') ||
     txt.includes('vegan available') ||
@@ -74,8 +75,9 @@ export function isVeganFriendly(r) {
 }
 
 export function isVegetarianFriendly(r) {
+  if (!r) return false;
   if (r.type === 'vegan' || r.type === 'vegetarian' || r.vegOption) return true;
-  const txt = `${r.dish} ${r.desc}`.toLowerCase();
+  const txt = `${r.dish || ''} ${r.desc || ''} ${r.whatsOnIt || ''} ${r.whatTheySay || ''}`.toLowerCase();
   return txt.includes('vegetarian option') ||
     txt.includes('vegetarian available') ||
     txt.includes('veggie option') ||
@@ -100,8 +102,8 @@ export function getFiltered() {
     if (State.activeFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
     if (State.searchQuery) {
       const q = State.searchQuery.toLowerCase();
-      if (!r.dish.toLowerCase().includes(q) &&
-        !r.restaurant.toLowerCase().includes(q) &&
+      if (!(r.dish || '').toLowerCase().includes(q) &&
+        !(r.restaurant || '').toLowerCase().includes(q) &&
         !(r.neighborhood || '').toLowerCase().includes(q) &&
         !(r.address || '').toLowerCase().includes(q)) return false;
     }
@@ -109,13 +111,13 @@ export function getFiltered() {
   });
 
   if (State.activeSort === 'dish') {
-    filtered.sort((a, b) => a.dish.localeCompare(b.dish));
+    filtered.sort((a, b) => (a.dish || '').localeCompare(b.dish || ''));
   } else if (State.activeSort === 'restaurant') {
-    filtered.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    filtered.sort((a, b) => (a.restaurant || '').localeCompare(b.restaurant || ''));
   } else if (State.activeSort === 'distance' && State.userLat !== null && State.userLng !== null) {
     filtered.sort((a, b) => {
-      const d1 = haversineDistance(State.userLat, State.userLng, a.lat, a.lng);
-      const d2 = haversineDistance(State.userLat, State.userLng, b.lat, b.lng);
+      const d1 = isFinite(a.lat) && isFinite(a.lng) ? haversineDistance(State.userLat, State.userLng, a.lat, a.lng) : Infinity;
+      const d2 = isFinite(b.lat) && isFinite(b.lng) ? haversineDistance(State.userLat, State.userLng, b.lat, b.lng) : Infinity;
       return d1 - d2;
     });
   } else {
@@ -141,8 +143,8 @@ export function getSaved() {
     if (State.activeSavedFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
     if (State.savedSearchQuery) {
       const q = State.savedSearchQuery.toLowerCase();
-      if (!r.dish.toLowerCase().includes(q) &&
-        !r.restaurant.toLowerCase().includes(q) &&
+      if (!(r.dish || '').toLowerCase().includes(q) &&
+        !(r.restaurant || '').toLowerCase().includes(q) &&
         !(r.neighborhood || '').toLowerCase().includes(q) &&
         !(r.address || '').toLowerCase().includes(q)) return false;
     }
@@ -150,13 +152,13 @@ export function getSaved() {
   });
 
   if (State.activeSavedSort === 'dish') {
-    savedItems.sort((a, b) => a.dish.localeCompare(b.dish));
+    savedItems.sort((a, b) => (a.dish || '').localeCompare(b.dish || ''));
   } else if (State.activeSavedSort === 'restaurant') {
-    savedItems.sort((a, b) => a.restaurant.localeCompare(b.restaurant));
+    savedItems.sort((a, b) => (a.restaurant || '').localeCompare(b.restaurant || ''));
   } else if (State.activeSavedSort === 'distance' && State.userLat !== null && State.userLng !== null) {
     savedItems.sort((a, b) => {
-      const d1 = haversineDistance(State.userLat, State.userLng, a.lat, a.lng);
-      const d2 = haversineDistance(State.userLat, State.userLng, b.lat, b.lng);
+      const d1 = isFinite(a.lat) && isFinite(a.lng) ? haversineDistance(State.userLat, State.userLng, a.lat, a.lng) : Infinity;
+      const d2 = isFinite(b.lat) && isFinite(b.lng) ? haversineDistance(State.userLat, State.userLng, b.lat, b.lng) : Infinity;
       return d1 - d2;
     });
   } else if (State.activeSavedSort === 'custom') {
