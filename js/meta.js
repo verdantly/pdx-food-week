@@ -200,6 +200,30 @@ window.FOOD_WEEKS = [
       { id: 'gf', label: 'Gluten-free' },
       { id: 'spicy', label: 'Spicy' }
     ]
+  },
+  {
+    id: "test-week-2026",
+    name: "Test Week 2026",
+    organizer: "PDX Food Week Team",
+    dataFile: "testweek2026.js",
+    dates: "October 1–7, 2026",
+    startDate: "2026-10-01",
+    endDate: "2026-10-07",
+    pricePills: ["$8 special"],
+    color: "#8B5CF6",
+    colorDark: "#6D28D9",
+    colorLight: "#EDE9FE",
+    colorPale: "#F5F3FF",
+    emoji: "🧪",
+    totalLocations: 2,
+    url: "https://www.pdxfoodweek.com/",
+    filters: [
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'spicy', label: 'Spicy' }
+    ]
   }
 ];
 
