@@ -164,6 +164,18 @@ function renderShimmer() {
 }
 
 function loadWeekData(weekId, callback) {
+  if (!weekId || !WEEK_FILE_MAP[weekId]) {
+    console.warn(`[loadWeekData] Unknown or missing weekId: "${weekId}"`);
+    showToast('Error loading data for this week');
+    State.currentWeekId = null;
+    applyWeekTheme(null);
+    document.body.classList.add('is-landing');
+    switchTab('landing', true);
+    renderLanding();
+    if (callback) callback();
+    return;
+  }
+
   if (State.loadedWeeks.has(weekId)) {
     if (callback) callback();
     return;

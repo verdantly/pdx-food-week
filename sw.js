@@ -58,12 +58,12 @@ self.addEventListener('fetch', (event) => {
   // Skip non-http/https requests (e.g. chrome-extension://, moz-extension://)
   if (!url.protocol.startsWith('http')) return;
 
-  // 1. Network-First strategy for HTML navigation, metadata, and dynamic week datasets
+  // 1. Network-First strategy for HTML navigation, metadata, app code, and dynamic week datasets
   const isNavigation = event.request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
-  const isMetadata = url.pathname.includes('/meta.js');
+  const isAppCode = url.pathname.includes('/meta.js') || url.pathname.includes('/app.js') || url.pathname.includes('/modules/');
   const isDataFile = url.pathname.includes('/data/') && url.pathname.endsWith('.js');
 
-  if (isNavigation || isMetadata || isDataFile) {
+  if (isNavigation || isAppCode || isDataFile) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
