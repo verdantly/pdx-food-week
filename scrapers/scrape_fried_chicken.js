@@ -406,7 +406,7 @@ window.FOOD_WEEKS.push(
     colorDark: "#92400E",
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
-    emoji: "🍗",
+    emoji: "🐔",
     totalLocations: ${entries.length},
     url: "${LOCATIONS_URL}",
   }
