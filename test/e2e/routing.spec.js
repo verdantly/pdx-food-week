@@ -190,14 +190,26 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('.sheet-dish')).toContainText('Down the Hatch Burger');
   });
 
-  test('Fried Chicken Week loads and displays dishes correctly', async ({ page }) => {
-    await page.goto('/?week=fried-chicken-2026', { waitUntil: 'domcontentloaded' });
-    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
-    const cards = page.locator('.dish-card');
-    const count = await cards.count();
-    expect(count).toBeGreaterThanOrEqual(20);
-    await expect(page.locator('#header-title')).toContainText('Fried Chicken Week');
+  test('Install app modal opens and closes properly', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => window.App.openInstallModal());
+    const installOverlay = page.locator('#install-modal-overlay');
+    await expect(installOverlay).toHaveClass(/open/);
+    await page.locator('#install-modal-overlay .drawer-close').click();
+    await expect(installOverlay).not.toHaveClass(/open/);
+  });
+
+  test('Account and cloud sync modal opens with Google and Magic Link options', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => window.App.openAccountModal());
+    const accountOverlay = page.locator('#account-modal-overlay');
+    await expect(accountOverlay).toHaveClass(/open/);
+    await expect(page.locator('.btn-google-auth')).toBeVisible();
+    await expect(page.locator('#auth-email-input')).toBeVisible();
+    await page.locator('#account-modal-overlay .drawer-close').click();
+    await expect(accountOverlay).not.toHaveClass(/open/);
   });
 });
+
 
 

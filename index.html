@@ -39,7 +39,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="css/style.css?v=7" />
+  <link rel="stylesheet" href="css/style.css?v=8" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -67,6 +67,11 @@
               width="20" height="20">
               <circle cx="6.5" cy="6.5" r="4.5" />
               <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" />
+            </svg>
+          </button>
+          <button id="compact-account-btn" class="compact-icon-btn user-avatar-btn" aria-label="Sign In" onclick="App.openAccountModal()">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
             </svg>
           </button>
           <button id="compact-menu-btn" class="compact-icon-btn" aria-label="Toggle Menu">
@@ -106,6 +111,8 @@
           <button class="compact-menu-item" data-tab="saved" onclick="App.switchTab('saved')">Saved</button>
           <button class="compact-menu-item" data-tab="share" onclick="App.switchTab('share')">Share</button>
           <button class="compact-menu-item" data-tab="map" onclick="App.switchTab('map')">Map</button>
+          <button class="compact-menu-item install-app-btn" onclick="App.triggerInstall(); App.hideCompactDropdowns();">📲 Install App</button>
+          <button class="compact-menu-item" onclick="App.openAccountModal(); App.hideCompactDropdowns();">👤 <span class="auth-logged-out">Sign In / Sync</span><span class="auth-logged-in" style="display:none;">My Account</span></button>
           <div
             style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px; display: flex; justify-content: flex-end;">
             <select class="week-switcher-select" id="compact-week-switcher"
@@ -140,9 +147,19 @@
         </div>
       </div>
 
-      <div class="header-top">
+      <div class="header-top" style="display: flex; justify-content: space-between; align-items: center;">
         <a href="?" class="app-wordmark" onclick="App.goToLanding(event)"
           style="text-decoration: none; color: inherit;">PDX Food Week</a>
+        <div class="header-top-actions" style="display: flex; gap: 8px; align-items: center;">
+          <button class="header-action-btn install-app-btn" onclick="App.triggerInstall()" title="Install App on your device" style="display: none; background: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+            <span>📲</span> Install
+          </button>
+          <button class="header-action-btn user-avatar-btn" onclick="App.openAccountModal()" title="Account & Sync" style="background: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </button>
+        </div>
       </div>
 
       <h1 class="header-title" id="header-title">PDX <em>Food Week</em></h1>
@@ -766,14 +783,182 @@
     </div>
   </div>
 
+  <!-- ── PWA Install Modal ── -->
+  <div id="install-modal-overlay" class="filter-drawer-overlay" onclick="App.closeInstallModal()" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="filter-drawer modal-sheet-card" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title">Install PDX Food Week</h3>
+        <button class="drawer-close" onclick="App.closeInstallModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body-scroll" style="padding: 0 24px 24px; color: var(--ink);">
+        <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 20px;">
+          Install the app on your home screen for quick offline access, full-screen map browsing, and faster load times.
+        </p>
+
+        <!-- iOS Guide -->
+        <div id="install-guide-ios" style="display: none;">
+          <div class="install-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Tap the Share button</strong> in Safari’s navigation bar.
+              <div class="step-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                  <polyline points="16 6 12 2 8 6"/>
+                  <line x1="12" y1="2" x2="12" y2="15"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              Scroll down and tap <strong>Add to Home Screen</strong>.
+              <div class="step-icon">➕</div>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              Tap <strong>Add</strong> in the top-right corner.
+            </div>
+          </div>
+        </div>
+
+        <!-- Android / Chrome Guide -->
+        <div id="install-guide-android">
+          <div class="install-benefits">
+            <div class="benefit-row">⚡ Instant launch from home screen</div>
+            <div class="benefit-row">🗺️ Full-screen food maps</div>
+            <div class="benefit-row">📡 Works offline with saved specials</div>
+          </div>
+          <button id="install-native-action-btn" class="btn btn-primary" onclick="App.triggerInstall()" style="width: 100%; margin-top: 16px; padding: 14px; font-size: 15px;">
+            📲 Add to Home Screen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Account & Cloud Sync Modal ── -->
+  <div id="account-modal-overlay" class="filter-drawer-overlay" onclick="App.closeAccountModal()" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="filter-drawer modal-sheet-card" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title">
+          <span class="auth-logged-out">Account & Cloud Sync</span>
+          <span class="auth-logged-in" style="display:none;">Your Account</span>
+        </h3>
+        <button class="drawer-close" onclick="App.closeAccountModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Logged-in View -->
+      <div class="auth-logged-in" style="display: none; padding: 0 24px 24px;">
+        <div class="user-profile-header" style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+          <div class="user-avatar-btn" style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; background: var(--pizza); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700;">
+            👤
+          </div>
+          <div>
+            <div class="auth-user-name" style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink);">Food Explorer</div>
+            <div class="auth-user-email" style="font-size: 13px; color: var(--ink-60);"></div>
+            <div class="cloud-sync-status" style="font-size: 12px; font-weight: 600; color: #2e7d32; margin-top: 2px;">Cloud Synced ✓</div>
+          </div>
+        </div>
+
+        <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 20px;">
+          <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--ink-50); margin-bottom: 8px;">Sync Details</div>
+          <div style="font-size: 13px; color: var(--ink-80); line-height: 1.6;">
+            Your saved spots, ratings, personal notes, and crawl plans automatically sync across all your devices.
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-secondary" onclick="App.pushLocalToCloud(); App.showToast('Synced with cloud! ✓');" style="flex: 1; margin: 0; padding: 12px;">Sync Now</button>
+          <button class="btn btn-secondary" onclick="App.handleSignOut()" style="flex: 1; margin: 0; padding: 12px; color: #c62828; border-color: rgba(198, 40, 40, 0.3);">Sign Out</button>
+        </div>
+      </div>
+
+      <!-- Logged-out View -->
+      <div class="auth-logged-out" style="padding: 0 24px 24px;">
+        <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 20px;">
+          Sign in to automatically sync your saved dishes, star ratings, notes, and crawl itineraries across all your devices.
+        </p>
+
+        <!-- 1-Click Google Sign In -->
+        <button class="btn-google-auth" onclick="App.signInWithGoogle()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1.5px solid var(--border); background: #fff; color: #3c4043; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div style="display: flex; align-items: center; text-align: center; margin: 16px 0; color: var(--ink-40); font-size: 12px;">
+          <div style="flex: 1; border-bottom: 1px solid var(--border);"></div>
+          <span style="padding: 0 10px; text-transform: uppercase; letter-spacing: 0.05em;">or email</span>
+          <div style="flex: 1; border-bottom: 1px solid var(--border);"></div>
+        </div>
+
+        <!-- Magic Link View -->
+        <div id="magic-link-form-view">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">Email address</label>
+          <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <input type="email" id="auth-email-input" placeholder="you@example.com" style="flex: 1; padding: 12px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px;" />
+            <button class="btn btn-primary" onclick="App.sendMagicLink(document.getElementById('auth-email-input').value)" style="margin: 0; padding: 12px 18px; border-radius: 10px; white-space: nowrap;">
+              Send Link ✉️
+            </button>
+          </div>
+          <p style="font-size: 12px; color: var(--ink-50); line-height: 1.4; margin-bottom: 16px;">
+            We’ll email you a passwordless sign-in link. No password required!
+          </p>
+
+          <!-- Expandable Password Option -->
+          <details style="margin-top: 14px; font-size: 13px; color: var(--ink-60);">
+            <summary style="cursor: pointer; padding: 6px 0; font-weight: 500;">Prefer using a password?</summary>
+            <div style="padding-top: 12px;">
+              <input type="password" id="auth-password-input" placeholder="Password (min 6 chars)" style="width: 100%; padding: 10px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; margin-bottom: 10px;" />
+              <div style="display: flex; gap: 8px;">
+                <button class="btn btn-secondary" onclick="App.signInWithPassword(document.getElementById('auth-email-input').value, document.getElementById('auth-password-input').value)" style="flex: 1; margin: 0; padding: 8px;">Log In</button>
+                <button class="btn btn-secondary" onclick="App.registerWithPassword(document.getElementById('auth-email-input').value, document.getElementById('auth-password-input').value)" style="flex: 1; margin: 0; padding: 8px;">Sign Up</button>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div id="magic-link-sent-view" style="display: none; text-align: center; padding: 16px 0;">
+          <div style="font-size: 38px; margin-bottom: 10px;">✉️</div>
+          <div style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">Check your email</div>
+          <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 16px;">
+            We sent a sign-in link to <strong id="magic-link-sent-email"></strong>. Tap the link in your email to sign in.
+          </p>
+          <button class="btn btn-secondary" onclick="document.getElementById('magic-link-sent-view').style.display='none'; document.getElementById('magic-link-form-view').style.display='block';" style="padding: 8px 16px;">Back</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-50);">
+          No account needed to browse. You can always use the app as a guest.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Scripts ── -->
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=7"></script>
-  <script type="module" src="js/app.js?v=7"></script>
+  <script src="js/meta.js?v=8"></script>
+  <script type="module" src="js/app.js?v=8"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

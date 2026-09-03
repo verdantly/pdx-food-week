@@ -24,6 +24,16 @@ import {
   renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal
 } from './modules/crawl.js';
 import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll } from './modules/render.js';
+import {
+  initInstallPrompt, triggerInstall, openInstallModal, closeInstallModal,
+  dismissInstallBanner, updateInstallUI
+} from './modules/install.js';
+import {
+  initAuth, openAccountModal, closeAccountModal, signInWithGoogle,
+  sendMagicLink, signInWithPassword, registerWithPassword, sendPasswordReset,
+  handleSignOut, updateAuthUI
+} from './modules/auth.js';
+import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 
 // Firebase init reference
 if (window.firebase) {
@@ -487,6 +497,8 @@ function setupSavedDragEvents() {
 
 function init() {
   loadState();
+  initInstallPrompt();
+  initAuth();
 
   const urlParams = new URLSearchParams(window.location.search);
   const urlWeekId = urlParams.get('week');
@@ -925,7 +937,23 @@ const App = {
   renderAll,
   setupSavedDragEvents,
   getActiveFriends,
-  hideCompactDropdowns
+  hideCompactDropdowns,
+  triggerInstall,
+  openInstallModal,
+  closeInstallModal,
+  dismissInstallBanner,
+  updateInstallUI,
+  openAccountModal,
+  closeAccountModal,
+  signInWithGoogle,
+  sendMagicLink,
+  signInWithPassword,
+  registerWithPassword,
+  sendPasswordReset,
+  handleSignOut,
+  updateAuthUI,
+  pushLocalToCloud,
+  queueCloudSync
 };
 
 window.App = App;

@@ -31,7 +31,10 @@ export const State = {
   userLng: null,
   lastActiveElement: null,
   viewingFriendIndex: null,
-  lastScrollTop: 0
+  lastScrollTop: 0,
+  user: null,
+  syncStatus: 'idle',
+  deferredInstallPrompt: null
 };
 
 export const WEEK_FILE_MAP = {
@@ -148,6 +151,10 @@ export function saveState() {
     localStorage.setItem(STORAGE_KEY_CUSTOM_ORDER, JSON.stringify(State.customSavedOrder));
     localStorage.setItem(STORAGE_KEY_WEEK_FILTERS, JSON.stringify(State.weekFilters));
   } catch (e) { }
+
+  if (window.App && window.App.queueCloudSync) {
+    window.App.queueCloudSync();
+  }
 }
 
 export function checkWeekVisited(weekId) {
