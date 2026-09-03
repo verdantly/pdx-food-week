@@ -120,4 +120,35 @@ describe("Food Weeks Registry & Data Integrity", () => {
       ).toBe(week.totalLocations);
     }
   });
+
+  test("A new synthetic food week added dynamically resolves seamlessly across getters and proxies", () => {
+    const syntheticWeek = {
+      id: "dumpling-week-2027",
+      name: "Dumpling Week 2027",
+      dataFile: "dumplingweek2027.js",
+      emoji: "🥟",
+      filters: [
+        { id: "pork", label: "Pork" },
+        { id: "vegan", label: "Vegan" }
+      ]
+    };
+
+    // Dynamically push to window.FOOD_WEEKS
+    global.window.FOOD_WEEKS.push(syntheticWeek);
+
+    try {
+      // 1. Check helper functions
+      expect(global.window.getWeekMeta("dumpling-week-2027")).toEqual(syntheticWeek);
+      expect(global.window.getWeekFile("dumpling-week-2027")).toBe("dumplingweek2027.js");
+      expect(global.window.getWeekFilters("dumpling-week-2027")).toEqual(syntheticWeek.filters);
+
+      // 2. Check dynamic state Proxies
+      expect(WEEK_FILE_MAP["dumpling-week-2027"]).toBe("dumplingweek2027.js");
+      expect(WEEK_FILTERS["dumpling-week-2027"]).toEqual(syntheticWeek.filters);
+    } finally {
+      // Clean up synthetic week
+      const idx = global.window.FOOD_WEEKS.findIndex(w => w.id === "dumpling-week-2027");
+      if (idx !== -1) global.window.FOOD_WEEKS.splice(idx, 1);
+    }
+  });
 });

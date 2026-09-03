@@ -1002,6 +1002,7 @@ const App = {
   renderSavedFilters,
   renderFriends,
   renderAll,
+  renderWeekSwitchers,
   setupSavedDragEvents,
   getActiveFriends,
   hideCompactDropdowns,
