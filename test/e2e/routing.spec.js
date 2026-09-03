@@ -198,6 +198,27 @@ test.describe('Navigation and Routing', () => {
     expect(count).toBeGreaterThanOrEqual(20);
     await expect(page.locator('#header-title')).toContainText('Fried Chicken Week');
   });
+
+  test('Every registered food week loads successfully without console errors or failed scripts', async ({ page }) => {
+    const consoleErrors = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error') consoleErrors.push(msg.text());
+    });
+
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const weekIds = await page.evaluate(() => (window.FOOD_WEEKS || []).map(w => w.id));
+    expect(weekIds.length).toBeGreaterThan(0);
+
+    for (const weekId of weekIds) {
+      await page.goto(`/?week=${weekId}`, { waitUntil: 'domcontentloaded' });
+      await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+      const cards = page.locator('.dish-card');
+      expect(await cards.count()).toBeGreaterThan(0);
+    }
+
+    const fatalErrors = consoleErrors.filter(err => err.includes('undefined') || err.includes('Error loading data'));
+    expect(fatalErrors).toEqual([]);
+  });
 });
 
 
