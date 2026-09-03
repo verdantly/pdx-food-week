@@ -111,8 +111,8 @@
           <button class="compact-menu-item" data-tab="saved" onclick="App.switchTab('saved')">Saved</button>
           <button class="compact-menu-item" data-tab="share" onclick="App.switchTab('share')">Share</button>
           <button class="compact-menu-item" data-tab="map" onclick="App.switchTab('map')">Map</button>
-          <button class="compact-menu-item install-app-btn" onclick="App.triggerInstall(); App.hideCompactDropdowns();">📲 Install App</button>
-          <button class="compact-menu-item" onclick="App.openAccountModal(); App.hideCompactDropdowns();">👤 <span class="auth-logged-out">Sign In / Sync</span><span class="auth-logged-in" style="display:none;">My Account</span></button>
+          <button class="compact-menu-item install-app-btn" onclick="App.triggerInstall(); App.hideCompactDropdowns();">Install App</button>
+          <button class="compact-menu-item" onclick="App.openAccountModal(); App.hideCompactDropdowns();"><span class="auth-logged-out">Sign In / Sync</span><span class="auth-logged-in" style="display:none;">My Account</span></button>
           <div
             style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px; display: flex; justify-content: flex-end;">
             <select class="week-switcher-select" id="compact-week-switcher"
@@ -151,8 +151,8 @@
         <a href="?" class="app-wordmark" onclick="App.goToLanding(event)"
           style="text-decoration: none; color: inherit;">PDX Food Week</a>
         <div class="header-top-actions" style="display: flex; gap: 8px; align-items: center;">
-          <button class="header-action-btn install-app-btn" onclick="App.triggerInstall()" title="Install App on your device" style="display: none; background: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px;">
-            <span>📲</span> Install
+          <button class="header-action-btn install-app-btn" onclick="App.triggerInstall()" title="Install App on your device" style="display: none; background: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; cursor: pointer;">
+            Install App
           </button>
           <button class="header-action-btn user-avatar-btn" onclick="App.openAccountModal()" title="Account & Sync" style="background: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50%; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
