@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { isAllCaps, toTitleCase, toSentenceCase, cleanName, parseCoordinates, decodeHTML } from '../scraper_utils.js';
+import { isAllCaps, toTitleCase, toSentenceCase, cleanName, parseCoordinates, decodeHTML } from '../scrapers/scraper_utils.js';
 
 describe('HTML Entity Decoding', () => {
   test('decodeHTML handles common entities', () => {

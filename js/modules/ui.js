@@ -1,5 +1,5 @@
 /* ── UI Components & Detail Overlays ── */
-import { State, saveState } from './state.js';
+import { State, saveState, isDishSaved, toggleDishSaved, getDishKey } from './state.js';
 import { esc, safeUrl, showToast } from './utils.js';
 import { getRestaurants, getFiltered, getSaved, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
@@ -19,8 +19,9 @@ export function showSaveIndicator() {
 }
 
 export function setRating(id, rating) {
-  if (!State.notes[id]) State.notes[id] = { rating: 0, note: '' };
-  State.notes[id].rating = rating;
+  const key = getDishKey(id, State.currentWeekId);
+  if (!State.notes[key]) State.notes[key] = { rating: 0, note: '' };
+  State.notes[key].rating = rating;
   saveState();
   
   const starsContainer = document.querySelector('#detail-sheet-content .rating-stars') || document.querySelector('.rating-stars');
@@ -34,8 +35,9 @@ export function setRating(id, rating) {
 }
 
 export function setNote(id, note) {
-  if (!State.notes[id]) State.notes[id] = { rating: 0, note: '' };
-  State.notes[id].note = note;
+  const key = getDishKey(id, State.currentWeekId);
+  if (!State.notes[key]) State.notes[key] = { rating: 0, note: '' };
+  State.notes[key].note = note;
   saveState();
   showSaveIndicator();
 }
@@ -49,8 +51,9 @@ export function handleNoteInput(id, text) {
   }
   clearTimeout(noteSaveTimeout);
   noteSaveTimeout = setTimeout(() => {
-    if (!State.notes[id]) State.notes[id] = { rating: 0, note: '' };
-    State.notes[id].note = text;
+    const key = getDishKey(id, State.currentWeekId);
+    if (!State.notes[key]) State.notes[key] = { rating: 0, note: '' };
+    State.notes[key].note = text;
     saveState();
     if (ind) {
       ind.textContent = 'Saved to device ✓';
@@ -86,26 +89,21 @@ export function getCurrentContextList() {
   return getFiltered();
 }
 
-export function toggleSave(id) {
-  if (State.saved.has(id)) {
-    State.saved.delete(id);
-    State.customSavedOrder = State.customSavedOrder.filter(x => x !== id);
-  } else {
-    State.saved.add(id);
-    if (!State.customSavedOrder.includes(id)) {
-      State.customSavedOrder.push(id);
-    }
-  }
-  saveState();
+export function toggleSave(id, weekId = State.currentWeekId) {
+  const isSaved = toggleDishSaved(id, weekId);
 
-  if (State.crawlMode) {
-    if (State.saved.has(id)) {
-      if (State.crawlSelected.size < 8) {
-        State.crawlSelected.add(id);
-      } else {
-        showToast('Maximum 8 spots allowed per crawl');
-        return;
+  if (State.crawlModeActive) {
+    if (isSaved) {
+      if (!State.crawlSelection.includes(id)) {
+        if (State.crawlSelection.length < 8) {
+          State.crawlSelection.push(id);
+        } else {
+          showToast('Maximum 8 spots allowed per crawl');
+          return;
+        }
       }
+    } else {
+      State.crawlSelection = State.crawlSelection.filter(x => x !== id);
     }
     if (window.App && window.App.updateCrawlFab) window.App.updateCrawlFab();
     if (window.App && window.App.renderSaved) window.App.renderSaved();
@@ -114,7 +112,6 @@ export function toggleSave(id) {
 
   const btn = document.getElementById('sheet-save-btn');
   if (btn) {
-    const isSaved = State.saved.has(id);
     btn.classList.toggle('saved', isSaved);
     btn.textContent = isSaved ? 'Saved ✓' : 'Save Spot';
   }
@@ -124,7 +121,7 @@ export function toggleSave(id) {
 }
 
 export function openDetail(id, fromPopState = false) {
-  const r = getRestaurants().find(x => x.id === id);
+  const r = getRestaurants().find(x => String(x.id) === String(id));
   if (!r) {
     try {
       const url = new URL(window.location.href);
@@ -163,11 +160,14 @@ export function openDetail(id, fromPopState = false) {
   }
 
   State.selectedDish = r;
-  const isSaved = State.saved.has(r.id);
+  const isSaved = isDishSaved(r.id, r.weekId);
   const overlay = document.getElementById('detail-overlay');
   const hero = r.image
     ? `<div class="sheet-hero-image"><img src="${esc(r.image)}" class="enlargeable" alt="Photo of ${esc(r.dish)}" onclick="if(window.innerWidth >= 769) App.openPhotoZoom('${esc(r.image)}')" onerror="this.parentElement.style.display='none'"></div>`
     : `<span class="sheet-emoji-hero">${esc(r.emoji)}</span>`;
+
+  const noteKey = getDishKey(r.id, r.weekId);
+  const noteData = (State.notes && (State.notes[noteKey] || State.notes[r.id])) || { rating: 0, note: '' };
 
   const contentHtml = `
     <button class="sheet-close-btn" onclick="App.closeDetail()" aria-label="Close detail view">
@@ -232,9 +232,9 @@ export function openDetail(id, fromPopState = false) {
         <span id="note-save-indicator" style="font-size: 11px; color: var(--pizza); opacity: 0; transition: opacity 0.3s ease; font-weight: 500;">Saved to device ✓</span>
       </div>
       <div class="rating-stars" style="font-size: 24px; color: var(--ink-30); cursor: pointer; margin-bottom: 8px;">
-        ${[1, 2, 3, 4, 5].map(star => `<span style="${State.notes[r.id] && State.notes[r.id].rating >= star ? 'color: #FFB800;' : ''}" onclick="App.setRating(${r.id}, ${star})">★</span>`).join('')}
+        ${[1, 2, 3, 4, 5].map(star => `<span style="${noteData.rating >= star ? 'color: #FFB800;' : ''}" onclick="App.setRating(${r.id}, ${star})">★</span>`).join('')}
       </div>
-      <textarea class="note-input" placeholder="Add your personal notes..." oninput="App.handleNoteInput(${r.id}, this.value)" style="width: 100%; border: 1px solid var(--ink-20); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; min-height: 80px;">${State.notes[r.id] && State.notes[r.id].note ? esc(State.notes[r.id].note) : ''}</textarea>
+      <textarea class="note-input" placeholder="Add your personal notes..." oninput="App.handleNoteInput(${r.id}, this.value)" style="width: 100%; border: 1px solid var(--ink-20); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; min-height: 80px;">${noteData.note ? esc(noteData.note) : ''}</textarea>
     </div>` : ''}
   `;
 

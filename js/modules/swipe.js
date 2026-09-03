@@ -1,12 +1,12 @@
 /* ── Swipe Deck Module ── */
-import { State, saveState } from './state.js';
+import { State, saveState, isDishSaved, isDishPassed, passDish, getDishKey } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
 import { openDetail } from './ui.js';
 
 export function buildSwipeQueue() {
-  const pool = getRestaurants().filter(r => !State.saved.has(r.id) && !State.passed.has(r.id));
+  const pool = getRestaurants().filter(r => !isDishSaved(r.id, r.weekId) && !isDishPassed(r.id, r.weekId));
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -119,12 +119,17 @@ export function swipe(dir, fromGesture = false) {
   if (!r) return;
 
   if (dir === 'right') {
-    State.saved.add(r.id);
+    const key = getDishKey(r.id, r.weekId);
+    State.saved.add(key);
+    State.passed.delete(key);
     State.passed.delete(r.id);
+    State.passed.delete(Number(r.id));
+    if (!State.customSavedOrder.includes(key)) {
+      State.customSavedOrder.push(key);
+    }
     showToast('★ Saved!');
   } else {
-    State.passed.add(r.id);
-    State.saved.delete(r.id);
+    passDish(r.id, r.weekId);
   }
 
   if (r.isNew && !State.viewedNew.has(r.id)) {
@@ -162,8 +167,14 @@ export function undoSwipe() {
   if (State.swipeIdx <= 0 || !State.swipeQueue || State.swipeAnimating) return;
   State.swipeIdx--;
   const r = State.swipeQueue[State.swipeIdx];
+  const key = getDishKey(r.id, r.weekId);
+  State.saved.delete(key);
   State.saved.delete(r.id);
+  State.saved.delete(Number(r.id));
+  State.passed.delete(key);
   State.passed.delete(r.id);
+  State.passed.delete(Number(r.id));
+  State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== r.id && x !== Number(r.id));
   saveState();
 
   renderSwipe();
@@ -209,7 +220,17 @@ export function skipSwipe() {
 }
 
 export function resetSwipe() {
-  State.passed.clear();
+  const currentWeek = State.currentWeekId;
+  for (const item of Array.from(State.passed)) {
+    if (String(item).startsWith(`${currentWeek}_`)) {
+      State.passed.delete(item);
+    }
+  }
+  const currentRestaurants = getRestaurants();
+  for (const r of currentRestaurants) {
+    State.passed.delete(r.id);
+    State.passed.delete(Number(r.id));
+  }
   saveState();
   buildSwipeQueue();
   renderSwipe();

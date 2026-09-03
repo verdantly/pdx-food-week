@@ -3,7 +3,9 @@ import fs from "fs";
 import path from "path";
 import vm from "vm";
 import { fileURLToPath } from "url";
-import { WEEK_FILE_MAP, WEEK_FILTERS } from "../js/modules/state.js";
+import { State, WEEK_FILE_MAP, WEEK_FILTERS, isDishSaved, toggleDishSaved, migrateWeekSavedState } from "../js/modules/state.js";
+import { highlightMatch } from "../js/modules/utils.js";
+import { PORTLAND_ZIP_CACHE } from "../js/modules/filters.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -150,5 +152,56 @@ describe("Food Weeks Registry & Data Integrity", () => {
       const idx = global.window.FOOD_WEEKS.findIndex(w => w.id === "dumpling-week-2027");
       if (idx !== -1) global.window.FOOD_WEEKS.splice(idx, 1);
     }
+  });
+
+  test("Cross-week saved state isolation prevents ID collisions between Taco and Fried Chicken weeks", () => {
+    State.saved.clear();
+    State.customSavedOrder = [];
+
+    // Save dish 1 on Taco Week
+    toggleDishSaved(1, "taco-2026");
+
+    // Taco dish 1 is saved
+    expect(isDishSaved(1, "taco-2026")).toBe(true);
+
+    // Fried Chicken dish 1 must NOT be saved
+    expect(isDishSaved(1, "fried-chicken-2026")).toBe(false);
+
+    // Legacy migration migrates raw 1 on Taco Week without polluting Fried Chicken Week
+    State.saved.clear();
+    State.saved.add(1); // simulate legacy stored ID
+    global.window.RESTAURANTS = [
+      { id: 1, weekId: "taco-2026", dish: "Taco Dish" },
+      { id: 1, weekId: "fried-chicken-2026", dish: "Chicken Dish" }
+    ];
+
+    migrateWeekSavedState("taco-2026");
+    expect(isDishSaved(1, "taco-2026")).toBe(true);
+    expect(isDishSaved(1, "fried-chicken-2026")).toBe(false);
+  });
+
+  test("highlightMatch escapes HTML safely without corrupting entities like &amp; or &#39;", () => {
+    // 1. Searching for "amp" when text has "&" must NOT match inside "&amp;"
+    const textWithAmp = "Rock & Roll";
+    const resultAmp = highlightMatch(textWithAmp, "amp");
+    expect(resultAmp).toBe("Rock &amp; Roll");
+    expect(resultAmp).not.toContain("&<mark");
+
+    // 2. Searching for "39" when text has apostrophe must NOT match inside "&#39;"
+    const textWithApos = "Tom's Diner";
+    const resultApos = highlightMatch(textWithApos, "39");
+    expect(resultApos).toBe("Tom&#39;s Diner");
+    expect(resultApos).not.toContain("&#<mark");
+
+    // 3. Searching for "&" must properly highlight with safe entity escaping
+    const resultQueryAmp = highlightMatch("Salt & Straw", "&");
+    expect(resultQueryAmp).toBe('Salt <mark class="search-highlight">&amp;</mark> Straw');
+  });
+
+  test("PORTLAND_ZIP_CACHE includes Vancouver / Clark County zip codes", () => {
+    expect(PORTLAND_ZIP_CACHE["98660"]).toBeDefined();
+    expect(PORTLAND_ZIP_CACHE["98661"]).toBeDefined();
+    expect(PORTLAND_ZIP_CACHE["98684"]).toBeDefined();
+    expect(PORTLAND_ZIP_CACHE["97045"]).toBeDefined();
   });
 });

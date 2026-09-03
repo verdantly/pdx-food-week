@@ -1,5 +1,5 @@
 /* ── Rendering Loops & Week Switcher UI ── */
-import { State, saveState, getWeekFilters } from './state.js';
+import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
 import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
@@ -112,10 +112,15 @@ export function renderSaved(focusSelector = null) {
     }
   }
 
-  const targetSet = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex] 
+  const friendIds = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex] 
     ? new Set(State.friends[State.viewingFriendIndex].ids) 
-    : State.saved;
-  const totalSavedForWeek = getRestaurants().filter(r => targetSet.has(r.id)).length;
+    : null;
+  const totalSavedForWeek = getRestaurants().filter(r => {
+    if (friendIds) {
+      return friendIds.has(r.id) || friendIds.has(String(r.id)) || friendIds.has(Number(r.id));
+    }
+    return isDishSaved(r.id, r.weekId);
+  }).length;
   
   const tabs = document.querySelectorAll('[data-tab="saved"]');
   tabs.forEach(tab => {
