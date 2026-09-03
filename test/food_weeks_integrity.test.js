@@ -101,4 +101,23 @@ describe("Food Weeks Registry & Data Integrity", () => {
     expect(html.includes('id="week-switcher"')).toBe(true);
     expect(html.includes('id="compact-week-switcher"')).toBe(true);
   });
+
+  test("Loading all week datasets sequentially into a shared window preserves items without ID collision drops", () => {
+    const sharedEnv = { window: { FOOD_WEEKS: [], RESTAURANTS: [] } };
+    vm.createContext(sharedEnv);
+
+    for (const week of foodWeeks) {
+      const dataPath = path.join(projectRoot, "data", week.dataFile);
+      const code = fs.readFileSync(dataPath, "utf8");
+      vm.runInContext(code, sharedEnv);
+    }
+
+    for (const week of foodWeeks) {
+      const count = sharedEnv.window.RESTAURANTS.filter(r => r.weekId === week.id).length;
+      expect(
+        count,
+        `Week "${week.id}" lost items when loaded alongside other datasets into shared window.RESTAURANTS`
+      ).toBe(week.totalLocations);
+    }
+  });
 });

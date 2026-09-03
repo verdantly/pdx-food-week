@@ -2876,7 +2876,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   }
 ];
   newItems.forEach(item => {
-    if (!window.RESTAURANTS.some(r => r.id === item.id)) {
+    if (!window.RESTAURANTS.some(r => r.id === item.id && r.weekId === item.weekId)) {
       window.RESTAURANTS.push(item);
     }
   });

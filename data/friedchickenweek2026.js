@@ -656,11 +656,11 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "url": "https://www.theactualportland.com/friedchickenlocations"
     }
   ];
-  const seen = new Set(window.RESTAURANTS.map(r => r.id));
+  const seen = new Set(window.RESTAURANTS.map(r => `${r.weekId}_${r.id}`));
   for (const item of newItems) {
-    if (!seen.has(item.id)) {
+    if (!seen.has(`${item.weekId}_${item.id}`)) {
       window.RESTAURANTS.push(item);
-      seen.add(item.id);
+      seen.add(`${item.weekId}_${item.id}`);
     }
   }
 })();
