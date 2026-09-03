@@ -1,5 +1,5 @@
 /* ── Rendering Loops & Week Switcher UI ── */
-import { State, saveState, WEEK_FILTERS } from './state.js';
+import { State, saveState, getWeekFilters } from './state.js';
 import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
@@ -19,7 +19,10 @@ export function renderBrowse() {
   const browseHoodsEl = document.getElementById('browse-stat-hoods');
   const browseTypesEl = document.getElementById('browse-stat-types');
   if (browseHoodsEl && browseTypesEl) {
-    if (State.currentWeekId === 'slushie-2026') {
+    const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+      ? window.getWeekMeta(State.currentWeekId)
+      : null;
+    if (weekMeta && weekMeta.hideHoodStats) {
       browseHoodsEl.parentElement.style.display = 'none';
       browseTypesEl.parentElement.style.display = 'none';
     } else {
@@ -44,12 +47,13 @@ export function renderBrowse() {
   container.classList.remove('fade-in');
   void container.offsetWidth;
   container.classList.add('fade-in');
+
+  updateMobileFabBadge();
 }
 
-export function renderSaved() {
+export function renderSaved(focusSelector = null) {
   const activeEl = document.activeElement;
-  let focusSelector = null;
-  if (activeEl && activeEl.closest('#cards-saved')) {
+  if (!focusSelector && activeEl && activeEl.closest('#cards-saved')) {
     const card = activeEl.closest('.dish-card');
     if (card) {
       const id = card.getAttribute('data-id');
@@ -72,7 +76,10 @@ export function renderSaved() {
   const hoodsBox = document.getElementById('stat-hoods')?.parentElement;
   const typesBox = document.getElementById('stat-types')?.parentElement;
   if (hoodsBox && typesBox) {
-    if (State.currentWeekId === 'slushie-2026') {
+    const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+      ? window.getWeekMeta(State.currentWeekId)
+      : null;
+    if (weekMeta && weekMeta.hideHoodStats) {
       hoodsBox.style.display = 'none';
       typesBox.style.display = 'none';
     } else {
@@ -181,8 +188,32 @@ export function renderSaved() {
   }
 }
 
+export function renderWeekSwitchers() {
+  const switchers = [
+    document.getElementById('week-switcher'),
+    document.getElementById('compact-week-switcher')
+  ].filter(Boolean);
+
+  const weeks = typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : [];
+
+  switchers.forEach(select => {
+    // Preserve the first option (placeholder)
+    const placeholder = select.firstElementChild ? select.firstElementChild.outerHTML : '<option value="" disabled selected hidden>Select food week</option>';
+    let optionsHtml = placeholder;
+
+    weeks.forEach(w => {
+      const displayName = w.name.replace(/\s*\d{4}/, '');
+      const emoji = w.emoji || '🍽️';
+      optionsHtml += `<option value="${esc(w.id)}">${emoji} ${esc(displayName)}</option>`;
+    });
+
+    select.innerHTML = optionsHtml;
+    select.value = State.currentWeekId || '';
+  });
+}
+
 export function renderFilters() {
-  let filters = [...(WEEK_FILTERS[State.currentWeekId] || [])];
+  let filters = [...getWeekFilters(State.currentWeekId)];
   const activeWeekRestaurants = getRestaurants();
   const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
   if (hasUnviewedNew || State.activeFilters.has('new')) {
@@ -266,15 +297,9 @@ export function applyWeekTheme(week) {
     return;
   }
   const themeColor = week.color || '#E85B38';
-  let dark = week.colorDark || '#B5472E';
-  let light = week.colorLight || '#F5E6DF';
-  let pale = week.colorPale || '#FDF7F4';
-
-  if (week.id === 'pizza-2026') {
-    dark = '#9E3318';
-    light = '#F5E6DF';
-    pale = '#FDF7F4';
-  }
+  const dark = week.colorDark || '#B5472E';
+  const light = week.colorLight || '#F5E6DF';
+  const pale = week.colorPale || '#FDF7F4';
 
   root.style.setProperty('--pizza', themeColor);
   root.style.setProperty('--pizza-dark', dark);

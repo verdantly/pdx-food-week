@@ -1,5 +1,5 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, WEEK_FILE_MAP } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile } from './modules/state.js';
 import { esc, debounce, showToast } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
@@ -23,7 +23,7 @@ import {
   toggleCrawlMode, clearCrawl, updateCrawlFab, generateCrawlItinerary,
   renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal
 } from './modules/crawl.js';
-import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll } from './modules/render.js';
+import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers } from './modules/render.js';
 
 // Firebase init reference
 if (window.firebase) {
@@ -164,8 +164,9 @@ function renderShimmer() {
 }
 
 function loadWeekData(weekId, callback) {
-  if (!weekId || !WEEK_FILE_MAP[weekId]) {
-    console.warn(`[loadWeekData] Unknown or missing weekId: "${weekId}"`);
+  const dataFile = getWeekFile(weekId);
+  if (!weekId || !dataFile) {
+    console.warn(`[loadWeekData] Unknown or missing dataFile for weekId: "${weekId}"`);
     showToast('Error loading data for this week');
     State.currentWeekId = null;
     applyWeekTheme(null);
@@ -182,7 +183,7 @@ function loadWeekData(weekId, callback) {
   }
 
   const script = document.createElement('script');
-  script.src = `data/${WEEK_FILE_MAP[weekId]}?v=2`;
+  script.src = `data/${dataFile}?v=2`;
   script.onload = () => {
     State.loadedWeeks.add(weekId);
     
@@ -288,6 +289,7 @@ function switchWeek(weekId, fromPopState = false) {
 
   const week = window.FOOD_WEEKS.find(w => w.id === State.currentWeekId);
   applyWeekTheme(week);
+  renderWeekSwitchers();
   renderHeader();
   renderFilters();
   renderSavedFilters();
@@ -815,6 +817,7 @@ function updateSearchPlaceholders() {
   updateSearchPlaceholders();
 
   setupMobileScrollListener();
+  renderWeekSwitchers();
 
   const isValidWeek = urlWeekId && window.FOOD_WEEKS && window.FOOD_WEEKS.some(w => w.id === urlWeekId);
 

@@ -197,7 +197,11 @@ export function openDetail(id, fromPopState = false) {
         </span>
       </a>
     </div>
-    ${r.whatsOnIt ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${State.currentWeekId === 'slushie-2026' ? "What's in it..." : "What's on it..."}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>` : ''}
+    ${r.whatsOnIt ? (() => {
+      const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function' ? window.getWeekMeta(State.currentWeekId) : null;
+      const sectionTitle = (weekMeta && weekMeta.ingredientLabel) ? weekMeta.ingredientLabel : "What's on it...";
+      return `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${sectionTitle}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>`;
+    })() : ''}
     ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc">${esc(r.whatTheySay)}</div>` : ''}
     ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc">${esc(r.desc)}</div>` : ''}
     <div class="sheet-tags">${buildTags(r)}</div>

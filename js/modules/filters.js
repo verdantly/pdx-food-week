@@ -1,5 +1,5 @@
 /* ── Filters & Search & Sort Logic ── */
-import { State, saveState, WEEK_FILTERS } from './state.js';
+import { State, saveState, getWeekFilters } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
 
@@ -222,7 +222,7 @@ export function toggleSavedFilter(f) {
 }
 
 export function renderSavedFilters() {
-  let filters = [...(WEEK_FILTERS[State.currentWeekId] || [])];
+  let filters = [...getWeekFilters(State.currentWeekId)];
   const activeWeekRestaurants = getRestaurants();
   const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
   if (hasUnviewedNew || State.activeSavedFilters.has('new')) {

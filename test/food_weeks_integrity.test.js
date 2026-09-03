@@ -8,13 +8,15 @@ import { WEEK_FILE_MAP, WEEK_FILTERS } from "../js/modules/state.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
 
+// Ensure global.window has meta.js loaded for node test environment
+if (typeof global.window === "undefined") {
+  global.window = {};
+}
+const metaCode = fs.readFileSync(path.join(projectRoot, "js/meta.js"), "utf8");
+vm.runInThisContext(metaCode);
+const foodWeeks = global.window.FOOD_WEEKS;
+
 describe("Food Weeks Registry & Data Integrity", () => {
-  // 1. Evaluate js/meta.js in an isolated sandbox to inspect window.FOOD_WEEKS
-  const metaCode = fs.readFileSync(path.join(projectRoot, "js/meta.js"), "utf8");
-  const sandbox = { window: {} };
-  vm.createContext(sandbox);
-  vm.runInContext(metaCode, sandbox);
-  const foodWeeks = sandbox.window.FOOD_WEEKS;
 
   test("FOOD_WEEKS is defined and has items", () => {
     expect(Array.isArray(foodWeeks)).toBe(true);
@@ -87,14 +89,16 @@ describe("Food Weeks Registry & Data Integrity", () => {
     }
   });
 
-  test("index.html week-switcher dropdowns include all registered food weeks", () => {
-    const html = fs.readFileSync(path.join(projectRoot, "index.html"), "utf8");
+  test("Every food week in meta.js defines dataFile and filters directly", () => {
     for (const week of foodWeeks) {
-      const expectedOption = `value="${week.id}"`;
-      expect(
-        html.includes(expectedOption),
-        `index.html does not contain dropdown option for week "${week.id}"`
-      ).toBe(true);
+      expect(week.dataFile, `Week "${week.id}" must define dataFile in js/meta.js`).toBeTruthy();
+      expect(Array.isArray(week.filters), `Week "${week.id}" must define filters array in js/meta.js`).toBe(true);
     }
+  });
+
+  test("index.html contains the week-switcher select elements ready for dynamic hydration", () => {
+    const html = fs.readFileSync(path.join(projectRoot, "index.html"), "utf8");
+    expect(html.includes('id="week-switcher"')).toBe(true);
+    expect(html.includes('id="compact-week-switcher"')).toBe(true);
   });
 });

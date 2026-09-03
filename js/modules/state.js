@@ -22,7 +22,7 @@ export const State = {
   viewedNew: new Set(),
   notes: {},
   selectedDish: null,
-  currentWeekId: 'nacho-2026',
+  currentWeekId: null,
   weekFilters: {},
   swipeQueue: null,
   swipeIdx: 0,
@@ -34,68 +34,70 @@ export const State = {
   lastScrollTop: 0
 };
 
-export const WEEK_FILE_MAP = {
-  'burger-2026': 'burgerweek2026.js',
-  'fried-chicken-2026': 'friedchickenweek2026.js',
-  'highball-2026': 'highballweek2026.js',
-  'nacho-2026': 'nachoweek2026.js',
-  'pizza-2026': 'pizzaweek2026.js',
-  'salad-2026': 'salads2026.js',
-  'slushie-2026': 'slushies2026.js',
-  'taco-2026': 'tacoweek2026.js',
-  'wing-2026': 'wingweek2026.js'
-};
+export function getWeekFile(weekId) {
+  if (typeof window !== 'undefined' && typeof window.getWeekFile === 'function') {
+    return window.getWeekFile(weekId);
+  }
+  const week = (typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : []).find(w => w.id === weekId);
+  return week ? week.dataFile : undefined;
+}
 
-export const WEEK_FILTERS = {
-  'wing-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'spicy', label: 'Spicy' }
-  ],
-  'burger-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' }
-  ],
-  'fried-chicken-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'spicy', label: 'Spicy' }
-  ],
-  'salad-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' }
-  ],
-  'slushie-2026': [],
-  'pizza-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'pie', label: 'Whole Pie' }
-  ],
-  'taco-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'spicy', label: 'Spicy' }
-  ],
-  'nacho-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' }
-  ],
-  'highball-2026': []
-};
+export function getWeekFilters(weekId) {
+  if (typeof window !== 'undefined' && typeof window.getWeekFilters === 'function') {
+    return window.getWeekFilters(weekId);
+  }
+  const week = (typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : []).find(w => w.id === weekId);
+  return week && week.filters ? week.filters : [];
+}
+
+// Backwards-compatibility proxies for any consumers expecting object maps
+export const WEEK_FILE_MAP = new Proxy({}, {
+  get(_, prop) {
+    if (typeof prop === 'string') {
+      return getWeekFile(prop);
+    }
+    return undefined;
+  },
+  has(_, prop) {
+    return Boolean(getWeekFile(prop));
+  },
+  ownKeys(_) {
+    const list = typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : [];
+    return list.map(w => w.id);
+  },
+  getOwnPropertyDescriptor(_, prop) {
+    return {
+      value: getWeekFile(prop),
+      writable: false,
+      enumerable: true,
+      configurable: true
+    };
+  }
+});
+
+export const WEEK_FILTERS = new Proxy({}, {
+  get(_, prop) {
+    if (typeof prop === 'string') {
+      return getWeekFilters(prop);
+    }
+    return [];
+  },
+  has(_, prop) {
+    return Boolean(getWeekFile(prop));
+  },
+  ownKeys(_) {
+    const list = typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : [];
+    return list.map(w => w.id);
+  },
+  getOwnPropertyDescriptor(_, prop) {
+    return {
+      value: getWeekFilters(prop),
+      writable: false,
+      enumerable: true,
+      configurable: true
+    };
+  }
+});
 
 const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
 const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
