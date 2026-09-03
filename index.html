@@ -759,6 +759,14 @@
   <script type="module" src="js/app.js?v=8"></script>
   <script>
     if ('serviceWorker' in navigator) {
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
+
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').then((registration) => {
           // Proactively check for Service Worker updates when returning to tab/window
