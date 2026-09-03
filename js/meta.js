@@ -113,6 +113,22 @@ window.FOOD_WEEKS = [
     emoji: "🍗",
     totalLocations: 30,
     url: "https://www.theactualportland.com/friedchickenlocations"
+  },
+  {
+    id: "wing-2026",
+    name: "Wing Week 2026",
+    organizer: "Portland Mercury",
+    dates: "September 21-27, 2026",
+    startDate: "2026-09-21",
+    endDate: "2026-09-27",
+    pricePills: ["$10 for 6 wings"],
+    color: "#E04F2E",
+    colorDark: "#B8361B",
+    colorLight: "#FDEAE6",
+    colorPale: "#FFF5F2",
+    emoji: "🍗",
+    totalLocations: 30,
+    url: "https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/"
   }
 ];
 

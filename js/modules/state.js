@@ -42,10 +42,18 @@ export const WEEK_FILE_MAP = {
   'pizza-2026': 'pizzaweek2026.js',
   'salad-2026': 'salads2026.js',
   'slushie-2026': 'slushies2026.js',
-  'taco-2026': 'tacoweek2026.js'
+  'taco-2026': 'tacoweek2026.js',
+  'wing-2026': 'wingweek2026.js'
 };
 
 export const WEEK_FILTERS = {
+  'wing-2026': [
+    { id: 'meat', label: 'Meat' },
+    { id: 'vegetarian', label: 'Vegetarian' },
+    { id: 'vegan', label: 'Vegan' },
+    { id: 'gf', label: 'Gluten-free' },
+    { id: 'spicy', label: 'Spicy' }
+  ],
   'burger-2026': [
     { id: 'meat', label: 'Meat' },
     { id: 'vegetarian', label: 'Vegetarian' },
