@@ -1,11 +1,11 @@
-const CACHE_NAME = 'pdxfw-cache-v4';
+const CACHE_NAME = 'pdxfw-cache-v5';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=7',
-  'js/app.js?v=7',
-  'js/meta.js?v=7',
+  'css/style.css?v=8',
+  'js/app.js?v=8',
+  'js/meta.js?v=8',
   'js/modules/cards.js',
   'js/modules/crawl.js',
   'js/modules/data.js',
@@ -61,7 +61,7 @@ self.addEventListener('fetch', (event) => {
   // 1. Network-First strategy for HTML navigation, metadata, and dynamic week datasets
   const isNavigation = event.request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
   const isMetadata = url.pathname.includes('/meta.js');
-  const isDataFile = url.pathname.startsWith('/data/') && url.pathname.endsWith('.js');
+  const isDataFile = url.pathname.includes('/data/') && url.pathname.endsWith('.js');
 
   if (isNavigation || isMetadata || isDataFile) {
     event.respondWith(
