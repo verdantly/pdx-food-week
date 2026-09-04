@@ -1,11 +1,12 @@
 /* ── Friends & Sharing Module ── */
-import { State, saveState } from './state.js';
+import { State, saveState, isDishSaved, getDishKey } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
 
 export function encodeShareCode() {
-  const ids = Array.from(State.saved).join(',');
+  const currentWeekSaved = getRestaurants().filter(r => isDishSaved(r.id, r.weekId)).map(r => r.id);
+  const ids = currentWeekSaved.join(',');
   return 'PDX26-' + btoa(ids).replace(/=/g, '');
 }
 
@@ -175,7 +176,8 @@ function timeoutPromise(promise, ms, errorMsg) {
 }
 
 export async function generateShareLink() {
-  if (State.saved.size === 0) {
+  const currentWeekSaved = getRestaurants().filter(r => isDishSaved(r.id, r.weekId)).map(r => r.id);
+  if (currentWeekSaved.length === 0) {
     showToast('⚠️ Save some spots first!');
     return;
   }
@@ -194,7 +196,7 @@ export async function generateShareLink() {
   if (db) {
     try {
       const writePromise = db.collection('shared_lists').doc(shortId).set({
-        ids: Array.from(State.saved),
+        ids: currentWeekSaved,
         name: myName,
         weekId: State.currentWeekId,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -423,10 +425,14 @@ export function mergeFriendList() {
   let addedCount = 0;
   
   friend.ids.forEach(id => {
-    if (!State.saved.has(id)) {
-      State.saved.add(id);
-      if (State.passed.has(id)) {
-        State.passed.delete(id);
+    if (!isDishSaved(id, State.currentWeekId)) {
+      const key = getDishKey(id, State.currentWeekId);
+      State.saved.add(key);
+      State.passed.delete(key);
+      State.passed.delete(id);
+      State.passed.delete(Number(id));
+      if (!State.customSavedOrder.includes(key)) {
+        State.customSavedOrder.push(key);
       }
       addedCount++;
     }

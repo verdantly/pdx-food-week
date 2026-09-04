@@ -146,6 +146,90 @@ export function loadState() {
   } catch (e) { }
 }
 
+export function getDishKey(id, weekId = State.currentWeekId) {
+  if (id == null) return '';
+  const strId = String(id);
+  if (strId.includes('_')) return strId;
+  return weekId ? `${weekId}_${strId}` : strId;
+}
+
+export function isDishSaved(id, weekId = State.currentWeekId) {
+  if (id == null) return false;
+  const key = getDishKey(id, weekId);
+  return State.saved.has(key) || State.saved.has(id) || State.saved.has(Number(id));
+}
+
+export function toggleDishSaved(id, weekId = State.currentWeekId) {
+  const key = getDishKey(id, weekId);
+  const currentlySaved = isDishSaved(id, weekId);
+  if (currentlySaved) {
+    State.saved.delete(key);
+    State.saved.delete(id);
+    State.saved.delete(Number(id));
+    State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== id && x !== Number(id));
+  } else {
+    State.saved.add(key);
+    if (!State.customSavedOrder.includes(key)) {
+      State.customSavedOrder.push(key);
+    }
+  }
+  saveState();
+  return !currentlySaved;
+}
+
+export function isDishPassed(id, weekId = State.currentWeekId) {
+  if (id == null) return false;
+  const key = getDishKey(id, weekId);
+  return State.passed.has(key) || State.passed.has(id) || State.passed.has(Number(id));
+}
+
+export function passDish(id, weekId = State.currentWeekId) {
+  const key = getDishKey(id, weekId);
+  State.passed.add(key);
+  State.saved.delete(key);
+  State.saved.delete(id);
+  State.saved.delete(Number(id));
+  State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== id && x !== Number(id));
+  saveState();
+}
+
+export function unpassDish(id, weekId = State.currentWeekId) {
+  const key = getDishKey(id, weekId);
+  State.passed.delete(key);
+  State.passed.delete(id);
+  State.passed.delete(Number(id));
+  saveState();
+}
+
+export function migrateWeekSavedState(weekId) {
+  if (!weekId) return;
+  const restaurants = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
+  let changed = false;
+  for (const r of restaurants) {
+    const key = `${weekId}_${r.id}`;
+    if (State.saved.has(r.id) || State.saved.has(Number(r.id))) {
+      State.saved.delete(r.id);
+      State.saved.delete(Number(r.id));
+      State.saved.add(key);
+      changed = true;
+    }
+    if (State.passed.has(r.id) || State.passed.has(Number(r.id))) {
+      State.passed.delete(r.id);
+      State.passed.delete(Number(r.id));
+      State.passed.add(key);
+      changed = true;
+    }
+    if (State.notes && State.notes[r.id] && !State.notes[key]) {
+      State.notes[key] = State.notes[r.id];
+      delete State.notes[r.id];
+      changed = true;
+    }
+  }
+  if (changed) {
+    saveState();
+  }
+}
+
 export function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY_SAVED, JSON.stringify([...State.saved]));

@@ -1,5 +1,5 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, getWeekFile } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState } from './modules/state.js';
 import { esc, debounce, showToast } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
@@ -215,12 +215,14 @@ async function loadWeekData(weekId, callback) {
   }
 
   if (State.loadedWeeks.has(weekId)) {
+    migrateWeekSavedState(weekId);
     if (callback) callback();
     return;
   }
 
   const finalizeLoad = () => {
     State.loadedWeeks.add(weekId);
+    migrateWeekSavedState(weekId);
 
     const uniqueWeeks = [];
     const seen = new Set();

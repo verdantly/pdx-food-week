@@ -1,5 +1,5 @@
 /* ── Leaflet Map Module ── */
-import { State } from './state.js';
+import { State, isDishSaved } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants } from './data.js';
 import { openDetail } from './ui.js';
@@ -75,14 +75,6 @@ export function renderMap() {
       maxClusterRadius: 40
     });
     leafletMap.addLayer(markerClusterGroup);
-
-    leafletMap.on('popupopen', e => {
-      const link = e.popup.getElement().querySelector('a[data-popup-id]');
-      if (link) link.addEventListener('click', ev => {
-        ev.preventDefault();
-        openDetail(parseInt(link.dataset.popupId, 10));
-      });
-    });
     
     leafletMap.setView([45.523064, -122.676483], 12);
   }
@@ -96,7 +88,7 @@ export function renderMap() {
     for (const r of points) {
       const isCrawlSelected = State.crawlSelection.includes(r.id);
       const m = L.marker([r.lat, r.lng], {
-        icon: pinIcon(State.saved.has(r.id), r.id === selectedMapId, isCrawlSelected, State.crawlModeActive),
+        icon: pinIcon(isDishSaved(r.id, r.weekId), r.id === selectedMapId, isCrawlSelected, State.crawlModeActive),
         title: `${r.dish} — ${r.restaurant}`,
         riseOnHover: true,
       });
@@ -160,7 +152,7 @@ export function showMapSelected(r) {
   selectedMapId = r.id;
   if (leafletMarkers) {
     for (const [id, m] of leafletMarkers) {
-      m.setIcon(pinIcon(State.saved.has(id), id === r.id));
+      m.setIcon(pinIcon(isDishSaved(id, r.weekId), id === r.id));
     }
   }
   

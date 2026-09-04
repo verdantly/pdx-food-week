@@ -1,5 +1,5 @@
 /* ── Card HTML Generation ── */
-import { State } from './state.js';
+import { State, isDishSaved } from './state.js';
 import { esc, highlightMatch, haversineDistance } from './utils.js';
 import { isVeganFriendly, isVegetarianFriendly } from './data.js';
 
@@ -63,7 +63,7 @@ export function buildTags(r) {
 }
 
 export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount = -1) {
-  const isSaved = State.saved.has(r.id);
+  const isSaved = isDishSaved(r.id, r.weekId);
   const isSelected = State.crawlSelection.includes(r.id);
   let cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
   if (State.crawlModeActive && isSavedTab && isSelected) cls += ' crawl-selected';
