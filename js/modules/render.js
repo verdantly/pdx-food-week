@@ -214,7 +214,7 @@ export function renderWeekSwitchers() {
     });
 
     select.innerHTML = optionsHtml;
-    select.value = State.currentWeekId || '';
+    select.selectedIndex = 0;
   });
 }
 
