@@ -254,6 +254,12 @@ export function clearAllSavedFilters() {
   State.savedSearchQuery = '';
   const searchInput = document.getElementById('saved-search-input');
   if (searchInput) searchInput.value = '';
+  const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
+  if (savedSearchClearBtn) savedSearchClearBtn.style.display = 'none';
+  const compactInput = document.getElementById('compact-search-input');
+  if (compactInput && State.activeTab === 'saved') compactInput.value = '';
+  const compactClearBtn = document.getElementById('compact-search-clear-btn');
+  if (compactClearBtn && State.activeTab === 'saved') compactClearBtn.style.display = 'none';
   
   if (State.activeSavedSort === 'distance') {
     toggleSavedDistanceSort();
@@ -376,11 +382,22 @@ export function clearAllFilters() {
   State.activeFilters.clear();
   State.draftFilters.clear();
   State.searchQuery = '';
+
+  if (State.currentWeekId && State.weekFilters[State.currentWeekId]) {
+    State.weekFilters[State.currentWeekId].activeFilters = [];
+    delete State.weekFilters[State.currentWeekId].searchQuery;
+  }
+  saveState();
+  
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
     searchInput.value = '';
     const searchClearBtn = document.getElementById('search-clear-btn');
     if (searchClearBtn) searchClearBtn.style.display = 'none';
+  }
+  const compactInput = document.getElementById('compact-search-input');
+  if (compactInput) {
+    compactInput.value = '';
     const compactClearBtn = document.getElementById('compact-search-clear-btn');
     if (compactClearBtn) compactClearBtn.style.display = 'none';
   }

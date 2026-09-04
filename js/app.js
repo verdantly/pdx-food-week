@@ -204,7 +204,6 @@ function switchWeek(weekId, fromPopState = false) {
   if (State.currentWeekId) {
     State.weekFilters[State.currentWeekId] = {
       activeFilters: Array.from(State.activeFilters),
-      searchQuery: State.searchQuery,
       activeSort: State.activeSort
     };
   }
@@ -214,19 +213,36 @@ function switchWeek(weekId, fromPopState = false) {
 
   const savedWeekState = State.weekFilters[weekId];
   if (savedWeekState) {
-    State.activeFilters = new Set(savedWeekState.activeFilters);
-    State.searchQuery = savedWeekState.searchQuery || '';
+    State.activeFilters = new Set(savedWeekState.activeFilters || []);
     State.activeSort = savedWeekState.activeSort || 'restaurant';
   } else {
     State.activeFilters.clear();
-    State.searchQuery = '';
     State.activeSort = 'restaurant';
   }
+  // Search query should not persist across week switches
+  State.searchQuery = '';
+  State.savedSearchQuery = '';
+  State.mapSearchQuery = '';
 
   saveState();
 
   const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.value = State.searchQuery;
+  if (searchInput) {
+    searchInput.value = '';
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    if (searchClearBtn) searchClearBtn.style.display = 'none';
+  }
+  const compactSearchInput = document.getElementById('compact-search-input');
+  if (compactSearchInput) {
+    compactSearchInput.value = '';
+    const compactSearchClearBtn = document.getElementById('compact-search-clear-btn');
+    if (compactSearchClearBtn) compactSearchClearBtn.style.display = 'none';
+  }
+
+  // Reset dropdown selects so they never stay stuck on the selected week
+  document.querySelectorAll('.week-switcher-select').forEach(sel => {
+    sel.selectedIndex = 0;
+  });
 
   State.activeSavedFilters.clear();
   State.savedSearchQuery = '';
@@ -573,11 +589,13 @@ function init() {
   if (searchInput && searchClearBtn) {
     const debouncedSearch = debounce(e => {
       State.searchQuery = e.target.value;
-      searchClearBtn.style.display = State.searchQuery ? 'flex' : 'none';
       renderBrowse();
       renderFilters();
     }, 150);
-    searchInput.addEventListener('input', debouncedSearch);
+    searchInput.addEventListener('input', e => {
+      searchClearBtn.style.display = e.target.value ? 'flex' : 'none';
+      debouncedSearch(e);
+    });
     searchClearBtn.addEventListener('click', () => {
       searchInput.value = '';
       State.searchQuery = '';
@@ -593,10 +611,12 @@ function init() {
   if (savedSearchInput && savedSearchClearBtn) {
     const debouncedSavedSearch = debounce(e => {
       State.savedSearchQuery = e.target.value;
-      savedSearchClearBtn.style.display = State.savedSearchQuery ? 'flex' : 'none';
       renderSaved();
     }, 150);
-    savedSearchInput.addEventListener('input', debouncedSavedSearch);
+    savedSearchInput.addEventListener('input', e => {
+      savedSearchClearBtn.style.display = e.target.value ? 'flex' : 'none';
+      debouncedSavedSearch(e);
+    });
     savedSearchClearBtn.addEventListener('click', () => {
       savedSearchInput.value = '';
       State.savedSearchQuery = '';
@@ -611,10 +631,12 @@ function init() {
   if (mapSearchInput && mapSearchClearBtn) {
     const debouncedMapSearch = debounce(e => {
       State.mapSearchQuery = e.target.value;
-      mapSearchClearBtn.style.display = State.mapSearchQuery ? 'flex' : 'none';
       renderMap();
     }, 150);
-    mapSearchInput.addEventListener('input', debouncedMapSearch);
+    mapSearchInput.addEventListener('input', e => {
+      mapSearchClearBtn.style.display = e.target.value ? 'flex' : 'none';
+      debouncedMapSearch(e);
+    });
     mapSearchClearBtn.addEventListener('click', () => {
       mapSearchInput.value = '';
       State.mapSearchQuery = '';
