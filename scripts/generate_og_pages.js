@@ -23,6 +23,17 @@ const context = {
 };
 vm.createContext(context);
 
+// Load metadata first from js/meta.js
+const metaPath = path.join(projectRoot, 'js', 'meta.js');
+if (fs.existsSync(metaPath)) {
+  const metaCode = fs.readFileSync(metaPath, 'utf8');
+  try {
+    vm.runInContext(metaCode, context);
+  } catch (err) {
+    console.error('Error loading js/meta.js in OG generator:', err);
+  }
+}
+
 // Load all dataset scripts from data/
 const dataFiles = fs.readdirSync(dataDir).filter(file => file.endsWith('.js') && file !== 'geocode_cache.json');
 
@@ -38,7 +49,14 @@ for (const file of dataFiles) {
 
 const targetFilter = process.argv[2] ? process.argv[2].toLowerCase() : null;
 
-const foodWeeks = context.window.FOOD_WEEKS || [];
+const rawFoodWeeks = context.window.FOOD_WEEKS || [];
+const weekMap = new Map();
+for (const w of rawFoodWeeks) {
+  if (w && w.id && !weekMap.has(w.id)) {
+    weekMap.set(w.id, w);
+  }
+}
+const foodWeeks = Array.from(weekMap.values());
 let restaurants = context.window.RESTAURANTS || [];
 
 if (targetFilter) {
@@ -49,8 +67,6 @@ if (targetFilter) {
 }
 
 console.log(`Loaded ${foodWeeks.length} food weeks and ${restaurants.length} dishes to generate.`);
-
-const weekMap = new Map(foodWeeks.map(w => [w.id, w]));
 
 function escapeHtml(str) {
   if (!str) return '';

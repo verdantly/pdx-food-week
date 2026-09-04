@@ -1,5 +1,5 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, WEEK_FILE_MAP } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile } from './modules/state.js';
 import { esc, debounce, showToast } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
@@ -23,7 +23,7 @@ import {
   toggleCrawlMode, clearCrawl, updateCrawlFab, generateCrawlItinerary,
   renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal
 } from './modules/crawl.js';
-import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll } from './modules/render.js';
+import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers } from './modules/render.js';
 
 // Firebase init reference
 if (window.firebase) {
@@ -163,17 +163,65 @@ function renderShimmer() {
   `;
 }
 
-function loadWeekData(weekId, callback) {
+async function checkMetadataUpdate() {
+  try {
+    const res = await fetch(`js/meta.js?t=${Date.now()}`, { cache: 'no-cache' });
+    if (!res || !res.ok) return;
+    const text = await res.text();
+    
+    // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS
+    const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*window\.getWeekMeta/);
+    if (!match) return;
+
+    let freshWeeks;
+    try {
+      freshWeeks = (new Function(`return ${match[1]}`))();
+    } catch (e) {
+      return;
+    }
+
+    if (!Array.isArray(freshWeeks) || freshWeeks.length === 0) return;
+
+    const currentIds = (window.FOOD_WEEKS || []).map(w => w.id).join(',');
+    const freshIds = freshWeeks.map(w => w.id).join(',');
+
+    if (currentIds !== freshIds) {
+      console.log('[checkMetadataUpdate] New food weeks detected. Hydrating UI...');
+      window.FOOD_WEEKS = freshWeeks;
+      renderWeekSwitchers();
+      if (!State.currentWeekId) {
+        renderLanding();
+      } else {
+        showToast('New food weeks added to PDX Food Week!');
+      }
+    }
+  } catch (err) {
+    // Silently ignore network failures (e.g. offline)
+  }
+}
+
+async function loadWeekData(weekId, callback) {
+  const dataFile = getWeekFile(weekId);
+  if (!weekId || !dataFile) {
+    console.warn(`[loadWeekData] Unknown or missing dataFile for weekId: "${weekId}"`);
+    showToast('Error loading data for this week');
+    State.currentWeekId = null;
+    applyWeekTheme(null);
+    document.body.classList.add('is-landing');
+    switchTab('landing', true);
+    renderLanding();
+    if (callback) callback();
+    return;
+  }
+
   if (State.loadedWeeks.has(weekId)) {
     if (callback) callback();
     return;
   }
 
-  const script = document.createElement('script');
-  script.src = `data/${WEEK_FILE_MAP[weekId]}?v=2`;
-  script.onload = () => {
+  const finalizeLoad = () => {
     State.loadedWeeks.add(weekId);
-    
+
     const uniqueWeeks = [];
     const seen = new Set();
     for (const w of (window.FOOD_WEEKS || [])) {
@@ -183,10 +231,11 @@ function loadWeekData(weekId, callback) {
       }
     }
     window.FOOD_WEEKS = uniqueWeeks;
-    
+
     if (callback) callback();
   };
-  script.onerror = () => {
+
+  const handleError = () => {
     showToast('Error loading data for this week');
     State.currentWeekId = null;
     applyWeekTheme(null);
@@ -195,6 +244,25 @@ function loadWeekData(weekId, callback) {
     renderLanding();
     if (callback) callback();
   };
+
+  // Modern fetch with fallback to script injection
+  try {
+    const res = await fetch(`data/${dataFile}?v=2`);
+    if (res && res.ok) {
+      const code = await res.text();
+      const fn = new Function(code);
+      fn.call(window);
+      finalizeLoad();
+      return;
+    }
+  } catch (fetchErr) {
+    // Fall back to script injection (e.g. for file:// or offline fallback)
+  }
+
+  const script = document.createElement('script');
+  script.src = `data/${dataFile}?v=2`;
+  script.onload = finalizeLoad;
+  script.onerror = handleError;
   document.body.appendChild(script);
 }
 
@@ -292,6 +360,7 @@ function switchWeek(weekId, fromPopState = false) {
 
   const week = window.FOOD_WEEKS.find(w => w.id === State.currentWeekId);
   applyWeekTheme(week);
+  renderWeekSwitchers();
   renderHeader();
   renderFilters();
   renderSavedFilters();
@@ -822,9 +891,19 @@ function updateSearchPlaceholders() {
   } else if (mql.addListener) {
     mql.addListener(updateSearchPlaceholders);
   }
-  updateSearchPlaceholders();
-
   setupMobileScrollListener();
+  renderWeekSwitchers();
+
+  // Background SWR check for newly published food weeks
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      checkMetadataUpdate();
+    }
+  });
+  window.addEventListener('focus', () => {
+    checkMetadataUpdate();
+  });
+  checkMetadataUpdate();
 
   const isValidWeek = urlWeekId && window.FOOD_WEEKS && window.FOOD_WEEKS.some(w => w.id === urlWeekId);
 
@@ -945,9 +1024,11 @@ const App = {
   renderSavedFilters,
   renderFriends,
   renderAll,
+  renderWeekSwitchers,
   setupSavedDragEvents,
   getActiveFriends,
-  hideCompactDropdowns
+  hideCompactDropdowns,
+  checkMetadataUpdate
 };
 
 window.App = App;

@@ -82,12 +82,17 @@ export function renderSwipe() {
 
     const isNew = item.isNew && !State.viewedNew.has(item.id);
 
+    const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+      ? window.getWeekMeta(State.currentWeekId)
+      : null;
+    const locationText = (weekMeta && weekMeta.preferStreetAddress) ? item.address : (item.neighborhood || item.address);
+
     cardEl.innerHTML = `
       <div class="swipe-card-image">${imageBlock}</div>
       <div class="swipe-card-body">
         <div class="swipe-card-dish">${esc(item.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
         <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
-        <div class="swipe-card-neighborhood">📍 ${esc(State.currentWeekId === 'slushie-2026' ? item.address : (item.neighborhood || item.address))}</div>
+        <div class="swipe-card-neighborhood">📍 ${esc(locationText)}</div>
         <div class="swipe-card-desc">${esc(item.desc)}</div>
         <div class="swipe-card-tags">${buildTags(item)}</div>
       </div>

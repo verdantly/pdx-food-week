@@ -12,76 +12,53 @@ export function hasVeganOptionInDesc(r) {
 }
 
 export function buildTags(r) {
+  const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+    ? window.getWeekMeta(State.currentWeekId)
+    : null;
+
+  if (weekMeta && weekMeta.hideTags) {
+    return '';
+  }
+
   const t = [];
-  if (State.currentWeekId === 'slushie-2026') {
-  } else if (State.currentWeekId === 'pizza-2026') {
-    if (r.type === 'meat') {
-      t.push('<span class="tag tag-meat">Meat</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else if (isVegetarianFriendly(r)) {
-        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-      }
-    } else if (r.type === 'vegetarian') {
-      t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      }
-    } else if (r.type === 'vegan') {
-      if (hasVeganOptionInDesc(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else {
-        t.push('<span class="tag tag-vegan">Vegan</span>');
-      }
+
+  // Meat / Vegetarian / Vegan badges
+  if (r.type === 'meat') {
+    t.push('<span class="tag tag-meat">Meat</span>');
+    if (isVeganFriendly(r)) {
+      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+    } else if (isVegetarianFriendly(r)) {
+      t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
     }
-    if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
+  } else if (r.type === 'vegetarian') {
+    t.push('<span class="tag tag-veg">Vegetarian</span>');
+    if (isVeganFriendly(r)) {
+      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+    }
+  } else if (r.type === 'vegan') {
+    if (hasVeganOptionInDesc(r)) {
+      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+    } else {
+      t.push('<span class="tag tag-vegan">Vegan</span>');
+    }
+  }
+
+  // Gluten-free
+  if (r.glutenFree) {
+    t.push('<span class="tag tag-gf">GF available</span>');
+  }
+
+  // Spicy
+  if (r.spicy) {
+    t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
+  }
+
+  // Pizza-specific slices/pies if applicable
+  if (r.wholePie !== undefined) {
     if (r.wholePie) t.push('<span class="tag tag-pie">Whole pie $25</span>');
     else t.push('<span class="tag tag-slice">By the slice</span>');
-  } else if (State.currentWeekId === 'highball-2026') {
-  } else if (State.currentWeekId === 'taco-2026') {
-    if (r.type === 'meat') {
-      t.push('<span class="tag tag-meat">Meat</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else if (isVegetarianFriendly(r)) {
-        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-      }
-    } else if (r.type === 'vegetarian') {
-      t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      }
-    } else if (r.type === 'vegan') {
-      if (hasVeganOptionInDesc(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else {
-        t.push('<span class="tag tag-vegan">Vegan</span>');
-      }
-    }
-    if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
-    if (r.spicy) t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
-  } else if (State.currentWeekId === 'nacho-2026') {
-    if (r.type === 'meat') {
-      t.push('<span class="tag tag-meat">Meat</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else if (isVegetarianFriendly(r)) {
-        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-      }
-    } else if (r.type === 'vegetarian') {
-      t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      }
-    } else if (r.type === 'vegan') {
-      if (hasVeganOptionInDesc(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else {
-        t.push('<span class="tag tag-vegan">Vegan</span>');
-      }
-    }
-    if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
   }
+
   return t.join('');
 }
 
@@ -118,6 +95,11 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
     `;
   }
 
+  const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+    ? window.getWeekMeta(State.currentWeekId)
+    : null;
+  const locationText = (weekMeta && weekMeta.preferStreetAddress) ? r.address : (r.neighborhood || r.address);
+
   return `
     <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})" ${isSavedTab && State.activeSavedSort === 'custom' ? 'draggable="true"' : ''}>
       ${dragHandleHtml}
@@ -125,7 +107,7 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
       <div class="card-body">
         <div class="card-dish">${highlightMatch(r.dish, q)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
         <div class="card-restaurant">${highlightMatch(r.restaurant, q)}${dist}</div>
-        <div class="card-neighborhood">📍 ${highlightMatch(State.currentWeekId === 'slushie-2026' ? r.address : (r.neighborhood || r.address), q)}</div>
+        <div class="card-neighborhood">📍 ${highlightMatch(locationText, q)}</div>
         <div class="card-desc">${esc(r.desc)}</div>
         <div class="card-tags">${buildTags(r)}</div>
       </div>

@@ -1,11 +1,11 @@
-const CACHE_NAME = 'pdxfw-cache-v3';
+const CACHE_NAME = 'pdxfw-cache-v6';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=6',
-  'js/app.js?v=6',
-  'js/meta.js',
+  'css/style.css?v=9',
+  'js/app.js?v=9',
+  'js/meta.js?v=9',
   'js/modules/cards.js',
   'js/modules/crawl.js',
   'js/modules/data.js',
@@ -58,23 +58,40 @@ self.addEventListener('fetch', (event) => {
   // Skip non-http/https requests (e.g. chrome-extension://, moz-extension://)
   if (!url.protocol.startsWith('http')) return;
 
-  // For data files, try network first, then fallback to cache
-  if (url.pathname.startsWith('/data/') && url.pathname.endsWith('.js')) {
+  // 1. Network-First strategy for HTML navigation, metadata, app code, and dynamic week datasets
+  const isNavigation = event.request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
+  const isAppCode = url.pathname.includes('/meta.js') || url.pathname.includes('/app.js') || url.pathname.includes('/modules/');
+  const isDataFile = url.pathname.includes('/data/') && url.pathname.endsWith('.js');
+
+  if (isNavigation || isAppCode || isDataFile) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
-          const resClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, resClone).catch(() => {});
-          });
+          if (response && response.status === 200) {
+            const resClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, resClone).catch(() => {});
+            });
+          }
           return response;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => {
+          // Offline fallback
+          return caches.match(event.request, { ignoreSearch: false })
+            .then((cached) => {
+              if (cached) return cached;
+              if (isNavigation) {
+                return caches.match('./', { ignoreSearch: true })
+                  .then((rootCached) => rootCached || caches.match('index.html', { ignoreSearch: true }));
+              }
+              return caches.match(event.request, { ignoreSearch: true });
+            });
+        })
     );
     return;
   }
 
-  // For static assets, Cache First strategy
+  // 2. Cache-First (with network fallback & cache population) for versioned static assets & libraries
   event.respondWith(
     caches.match(event.request, { ignoreSearch: false }).then((cachedResponse) => {
       if (cachedResponse) {

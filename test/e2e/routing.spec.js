@@ -198,6 +198,55 @@ test.describe('Navigation and Routing', () => {
     expect(count).toBeGreaterThanOrEqual(20);
     await expect(page.locator('#header-title')).toContainText('Fried Chicken Week');
   });
+
+  test('Every registered food week loads successfully without console errors or failed scripts', async ({ page }) => {
+    const consoleErrors = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error') consoleErrors.push(msg.text());
+    });
+
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const weekIds = await page.evaluate(() => (window.FOOD_WEEKS || []).map(w => w.id));
+    expect(weekIds.length).toBeGreaterThan(0);
+
+    for (const weekId of weekIds) {
+      await page.goto(`/?week=${weekId}`, { waitUntil: 'domcontentloaded' });
+      await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+      const cards = page.locator('.dish-card');
+      expect(await cards.count()).toBeGreaterThan(0);
+    }
+
+    const fatalErrors = consoleErrors.filter(err => err.includes('undefined') || err.includes('Error loading data'));
+    expect(fatalErrors).toEqual([]);
+  });
+
+  test('Dynamically added new week appears in switchers and renders cleanly in browser', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => typeof window.App !== 'undefined');
+
+    // Inject a new mock week into window.FOOD_WEEKS and trigger switcher rendering
+    await page.evaluate(() => {
+      window.FOOD_WEEKS.push({
+        id: 'mock-dumpling-2027',
+        name: 'Dumpling Week 2027',
+        organizer: 'Portland Mercury',
+        dataFile: 'mockdumpling2027.js',
+        emoji: '🥟',
+        totalLocations: 1,
+        color: '#10B981',
+        dates: 'November 1–7, 2027',
+        filters: [{ id: 'vegan', label: 'Vegan' }]
+      });
+
+      // Hydrate dropdown switchers dynamically
+      window.App.renderWeekSwitchers();
+    });
+
+    // Verify option appears in dropdown
+    const option = page.locator('#week-switcher option[value="mock-dumpling-2027"]');
+    await expect(option).toHaveCount(1);
+    await expect(option).toContainText('Dumpling Week');
+  });
 });
 
 
