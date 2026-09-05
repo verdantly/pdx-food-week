@@ -361,8 +361,6 @@ export function renderCrawlItineraryModal() {
     }
 
     listEl.innerHTML = itinerary.map((r, idx) => {
-      const isFirst = idx === 0;
-      const isLast = idx === itinerary.length - 1;
       return `
         <div class="crawl-sortable-item" data-id="${r.id}">
           <div class="crawl-drag-handle" aria-label="Drag to reorder">
@@ -371,19 +369,13 @@ export function renderCrawlItineraryModal() {
           <div class="crawl-step-num">${idx + 1}</div>
           <div class="crawl-sortable-details">
             <div class="crawl-sortable-dish">${esc(r.dish)}</div>
-            <div class="crawl-sortable-meta">${esc(r.restaurant)} • ${esc(r.neighborhood || r.address || '')}</div>
+            <div class="crawl-sortable-restaurant">${esc(r.restaurant)}</div>
           </div>
-          <div class="crawl-sortable-actions">
-            <button class="btn-crawl-arrow" onclick="App.moveCrawlItem(${idx}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
-              ▲
-            </button>
-            <button class="btn-crawl-arrow" onclick="App.moveCrawlItem(${idx}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
-              ▼
-            </button>
-            <button class="btn-crawl-remove" onclick="App.removeCrawlItem(${r.id})" aria-label="Remove stop">
-              <span class="material-symbols-outlined" style="font-size: 18px;">close</span>
-            </button>
-          </div>
+          <button class="btn-crawl-remove" onclick="App.removeCrawlItem(${r.id})" aria-label="Remove stop from crawl">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       `;
     }).join('');
