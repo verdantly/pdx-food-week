@@ -2780,12 +2780,17 @@ input[type="search"]::-webkit-search-cancel-button {
     display: none;
   }
 
+  body.is-landing .view {
+    padding-bottom: 0 !important;
+  }
+
   body.is-landing .view-footer {
     display: block;
     width: 100%;
     max-width: 1200px;
     margin: auto auto 0 auto;
-    padding-bottom: 24px;
+    padding-top: 24px;
+    padding-bottom: 12px;
   }
 
   body {
