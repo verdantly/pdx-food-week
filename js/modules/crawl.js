@@ -191,7 +191,7 @@ export function renderSavedPickerList() {
         </div>
         <div class="crawl-picker-details">
           <div class="crawl-picker-dish">${esc(r.dish)}</div>
-          <div class="crawl-picker-restaurant">${esc(r.restaurant)} • ${esc(r.neighborhood || r.address || '')}</div>
+          <div class="crawl-picker-restaurant">${esc(r.restaurant)}</div>
         </div>
       </div>
     `;

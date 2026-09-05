@@ -4293,64 +4293,69 @@ select:focus-visible {
 .crawl-picker-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--card-bg);
   cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   transition: all 0.15s ease;
+  min-width: 0;
 }
 .crawl-picker-row:hover {
   border-color: var(--teal);
+  box-shadow: 0 2px 8px rgba(40, 106, 95, 0.12);
 }
 .crawl-picker-row.selected {
   border-color: var(--teal);
   background: var(--teal-light);
 }
 .crawl-picker-checkbox {
-  width: 20px;
-  height: 20px;
-  accent-color: var(--teal);
-  cursor: pointer;
-}
-.crawl-picker-thumb {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  object-fit: cover;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
   background: var(--cream);
-  flex-shrink: 0;
-}
-.crawl-picker-emoji {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  background: var(--cream);
+  color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13px;
   flex-shrink: 0;
+  transition: all 0.15s ease;
 }
-.crawl-picker-info {
+.crawl-picker-checkbox.checked {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #ffffff;
+}
+.crawl-picker-details {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .crawl-picker-dish {
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 .crawl-picker-restaurant {
-  font-size: 12px;
-  color: var(--ink-70);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--ink-60);
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Crawl Itinerary Modal Reordering */
