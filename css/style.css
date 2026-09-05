@@ -4067,7 +4067,7 @@ select:focus-visible {
   border: 1px solid var(--border);
   border-radius: 32px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  z-index: 1200;
+  z-index: 1500;
   padding: 12px 24px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -4546,8 +4546,9 @@ select:focus-visible {
   gap: 8px;
 }
 
-/* Hide Mobile FAB when Detail sheet is open to prevent layering overlap */
-#app.detail-open #mobile-filter-fab {
+/* Hide Mobile FAB when Detail sheet is open or Crawl Mode is active to prevent layering overlap */
+#app.detail-open #mobile-filter-fab,
+body.crawl-mode-active #mobile-filter-fab {
   display: none !important;
 }
 

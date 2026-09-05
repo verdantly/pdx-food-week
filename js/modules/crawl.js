@@ -8,6 +8,7 @@ import { renderSaved } from './render.js';
 
 export function toggleCrawlMode() {
   State.crawlModeActive = !State.crawlModeActive;
+  document.body.classList.toggle('crawl-mode-active', State.crawlModeActive);
   if (!State.crawlModeActive) {
     closeDetail();
     closeCrawlItineraryModal();
@@ -231,6 +232,7 @@ export function submitSavedPickerForCrawl() {
   closeSavedPickerModal();
   if (!State.crawlModeActive) {
     State.crawlModeActive = true;
+    document.body.classList.add('crawl-mode-active');
     syncCrawlButtons();
   }
   openCrawlItineraryModal();

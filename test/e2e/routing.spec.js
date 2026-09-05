@@ -247,6 +247,46 @@ test.describe('Navigation and Routing', () => {
     await expect(option).toHaveCount(1);
     await expect(option).toContainText('Dumpling Week');
   });
+
+  test('Saved tab crawl mode displays crawl-fab without being obscured by mobile-filter-fab', async ({ page, isMobile }) => {
+    if (!isMobile) return;
+    await page.goto('/?week=burger-2026&tab=browse');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    // Save 2 dishes
+    const saveButtons = page.locator('.bookmark-btn');
+    await saveButtons.nth(0).click();
+    await saveButtons.nth(1).click();
+
+    // Navigate to Saved tab
+    if (isMobile) {
+      await page.click('#compact-menu-btn');
+      await page.waitForSelector('#compact-menu-dropdown', { state: 'visible' });
+      await page.click('#compact-menu-dropdown [data-tab="saved"]');
+    } else {
+      await page.click('.nav-tab[data-tab="saved"]');
+    }
+    await expect(page.locator('#saved-plan-crawl-btn')).toBeVisible();
+
+    // Verify filter FAB is initially visible when saved items exist
+    const filterFab = page.locator('#mobile-filter-fab');
+    await expect(filterFab).toBeVisible();
+
+    // Activate Crawl Mode
+    await page.click('#saved-plan-crawl-btn');
+
+    // Crawl FAB should be visible
+    const crawlFab = page.locator('#crawl-fab');
+    await expect(crawlFab).toBeVisible();
+
+    // Filter FAB must NOT be visible (no overlap or obscurity)
+    await expect(filterFab).not.toBeVisible();
+
+    // Cancel Crawl Mode
+    await page.click('#saved-plan-crawl-btn');
+    await expect(crawlFab).not.toBeVisible();
+    await expect(filterFab).toBeVisible();
+  });
 });
 
 
