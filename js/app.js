@@ -21,7 +21,13 @@ import {
 } from './modules/friends.js';
 import {
   toggleCrawlMode, clearCrawl, updateCrawlFab, generateCrawlItinerary,
-  renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal
+  renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal,
+  toggleSavedCrawlMode, handleCrawlCardClick, handleMapPlanCrawlClick,
+  openCrawlOptionsModal, closeCrawlOptionsModal, startMapPinCrawlMode,
+  openSavedCrawlPicker, closeSavedPickerModal, toggleSavedPickerItem,
+  selectAllSavedForCrawl, clearAllSavedFromCrawl, submitSavedPickerForCrawl,
+  openCrawlItineraryModal, closeCrawlItineraryModal, moveCrawlItem,
+  removeCrawlItem, optimizeCurrentCrawl, viewCrawlOnMap
 } from './modules/crawl.js';
 import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers } from './modules/render.js';
 
@@ -105,7 +111,7 @@ function switchTab(name, fromPopState = false) {
   
   const crawlFab = document.getElementById('crawl-fab');
   if (crawlFab) {
-    crawlFab.style.display = (name === 'map' && State.crawlModeActive) ? 'block' : 'none';
+    crawlFab.style.display = ((name === 'map' || name === 'saved') && State.crawlModeActive) ? 'block' : 'none';
   }
   
   if (window.App && window.App.updateMobileFabBadge) window.App.updateMobileFabBadge();
@@ -1020,6 +1026,24 @@ const App = {
   handleCrawlPinClick,
   clearCrawl,
   updateCrawlFab,
+  toggleSavedCrawlMode,
+  handleCrawlCardClick,
+  handleMapPlanCrawlClick,
+  openCrawlOptionsModal,
+  closeCrawlOptionsModal,
+  startMapPinCrawlMode,
+  openSavedCrawlPicker,
+  closeSavedPickerModal,
+  toggleSavedPickerItem,
+  selectAllSavedForCrawl,
+  clearAllSavedFromCrawl,
+  submitSavedPickerForCrawl,
+  openCrawlItineraryModal,
+  closeCrawlItineraryModal,
+  moveCrawlItem,
+  removeCrawlItem,
+  optimizeCurrentCrawl,
+  viewCrawlOnMap,
   renderBrowse,
   renderSaved,
   renderFilters,

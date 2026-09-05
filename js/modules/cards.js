@@ -64,9 +64,15 @@ export function buildTags(r) {
 
 export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount = -1) {
   const isSaved = isDishSaved(r.id, r.weekId);
-  const isSelected = State.crawlSelection.includes(r.id);
+  const crawlSelectionIndex = State.crawlSelection.indexOf(r.id);
+  const isSelected = crawlSelectionIndex > -1;
+  const isCrawlSelectable = State.crawlModeActive && isSavedTab;
+
   let cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
-  if (State.crawlModeActive && isSavedTab && isSelected) cls += ' crawl-selected';
+  if (isCrawlSelectable) {
+    cls += ' crawl-selectable';
+    if (isSelected) cls += ' crawl-selected';
+  }
   const q = isSavedTab ? State.savedSearchQuery : State.searchQuery;
   const thumb = r.image
     ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
@@ -80,7 +86,7 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
   const isNew = r.isNew && !State.viewedNew.has(r.id);
 
   let dragHandleHtml = '';
-  if (isSavedTab && State.activeSavedSort === 'custom') {
+  if (isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable) {
     const isFirst = index === 0;
     const isLast = index === totalCount - 1;
     dragHandleHtml = `
@@ -95,14 +101,28 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
     `;
   }
 
+  let crawlBadgeHtml = '';
+  if (isCrawlSelectable) {
+    crawlBadgeHtml = `
+      <div class="crawl-select-indicator ${isSelected ? 'selected' : ''}" style="margin-right: 10px; flex-shrink: 0;">
+        ${isSelected ? (crawlSelectionIndex + 1) : ''}
+      </div>
+    `;
+  }
+
   const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
     ? window.getWeekMeta(State.currentWeekId)
     : null;
   const locationText = (weekMeta && weekMeta.preferStreetAddress) ? r.address : (r.neighborhood || r.address);
 
+  const cardClickAction = isCrawlSelectable
+    ? `App.handleCrawlCardClick(${r.id})`
+    : `App.openDetail(${r.id})`;
+
   return `
-    <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})" ${isSavedTab && State.activeSavedSort === 'custom' ? 'draggable="true"' : ''}>
+    <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable ? 'draggable="true"' : ''}>
       ${dragHandleHtml}
+      ${crawlBadgeHtml}
       ${thumb}
       <div class="card-body">
         <div class="card-dish">${highlightMatch(r.dish, q)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
@@ -112,8 +132,8 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
         <div class="card-tags">${buildTags(r)}</div>
       </div>
       <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
-        onclick="event.stopPropagation(); App.toggleSave(${r.id})"
-        aria-label="${isSaved ? 'Remove from saved' : 'Save this dish'}">
+        onclick="event.stopPropagation(); ${isCrawlSelectable ? `App.handleCrawlCardClick(${r.id})` : `App.toggleSave(${r.id})`}"
+        aria-label="${isCrawlSelectable ? 'Select for crawl' : (isSaved ? 'Remove from saved' : 'Save this dish')}">
         <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>

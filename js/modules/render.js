@@ -143,6 +143,26 @@ export function renderSaved(focusSelector = null) {
   const exitBtn = document.getElementById('saved-exit-friend-btn');
   const mergeBtn = document.getElementById('saved-merge-friend-btn');
   
+  const crawlBtn = document.getElementById('saved-plan-crawl-btn');
+  if (crawlBtn) {
+    if (!hasSavedItems) {
+      crawlBtn.style.display = 'none';
+    } else {
+      crawlBtn.style.display = 'inline-block';
+      if (State.crawlModeActive) {
+        crawlBtn.style.background = 'white';
+        crawlBtn.style.color = 'var(--teal)';
+        crawlBtn.style.border = '2px solid var(--teal)';
+        crawlBtn.textContent = 'Cancel Crawl';
+      } else {
+        crawlBtn.style.background = 'var(--teal)';
+        crawlBtn.style.color = 'white';
+        crawlBtn.style.border = '2px solid var(--teal)';
+        crawlBtn.textContent = 'Plan Crawl';
+      }
+    }
+  }
+
   if (State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]) {
     if (headerTitle) headerTitle.textContent = `${esc(State.friends[State.viewingFriendIndex].name)}'s Spots`;
     if (copyBtn) copyBtn.style.display = 'none';

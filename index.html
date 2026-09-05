@@ -494,6 +494,8 @@
             </div>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            <button class="btn btn-primary" id="saved-plan-crawl-btn" onclick="App.toggleSavedCrawlMode()"
+              style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; background: var(--teal); border-color: var(--teal);">Plan Crawl</button>
             <button class="btn btn-primary" id="saved-copy-btn" onclick="App.exportSavedToClipboard()"
               style="width: auto; margin-bottom: 0; white-space: nowrap; flex-shrink: 0;">Copy List</button>
             <button class="btn btn-primary" id="saved-kml-btn" onclick="App.exportSavedKML()"
@@ -629,7 +631,7 @@
           </div>
         </div>
         <div class="map-container">
-          <button class="btn btn-primary" id="map-plan-crawl-btn" onclick="App.toggleCrawlMode()"
+          <button class="btn btn-primary" id="map-plan-crawl-btn" onclick="App.handleMapPlanCrawlClick()"
             style="position: absolute; top: 12px; right: 12px; z-index: 1000; width: auto; margin: 0; background: var(--teal); border-color: var(--teal); box-shadow: var(--shadow-lg);">Plan
             Crawl</button>
           <div id="map-canvas" role="application" aria-label="Map of Portland pizza week locations"></div>
@@ -762,8 +764,121 @@
           style="margin: 0; padding: 6px 12px; background: transparent; color: var(--ink);">Clear</button>
         <button class="btn btn-secondary" onclick="App.toggleCrawlMode()"
           style="margin: 0; padding: 6px 12px; background: transparent; color: var(--ink);">Close</button>
-        <button class="btn btn-primary" id="crawl-generate-btn" onclick="App.generateCrawlItinerary()"
-          style="margin: 0; padding: 6px 12px; border-radius: 16px;" disabled>Route</button>
+        <button class="btn btn-primary" id="crawl-generate-btn" onclick="App.openCrawlItineraryModal()"
+          style="margin: 0; padding: 6px 14px; border-radius: 16px; background: var(--teal); border-color: var(--teal);" disabled>Review Route</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Crawl Mode Selection Options Modal ── -->
+  <div id="crawl-options-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-options-title" onclick="App.closeCrawlOptionsModal()">
+    <div class="crawl-modal-card" onclick="event.stopPropagation()">
+      <div class="crawl-modal-header">
+        <h3 class="crawl-modal-title" id="crawl-options-title">Plan a Food Crawl</h3>
+        <button class="drawer-close" onclick="App.closeCrawlOptionsModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="crawl-modal-body" style="padding: 16px 20px 24px;">
+        <p style="margin-bottom: 20px; font-size: 14px; color: var(--ink-70);">Choose how you'd like to select spots for your food crawl:</p>
+        <div class="crawl-options-grid">
+          <button class="crawl-option-btn" id="crawl-opt-saved-btn" onclick="App.openSavedCrawlPicker()">
+            <div class="crawl-option-icon" style="background: var(--teal-light); color: var(--teal);">
+              <span class="material-symbols-outlined" style="font-size: 26px;">bookmark</span>
+            </div>
+            <div class="crawl-option-info">
+              <div class="crawl-option-heading">Choose from Saved Spots</div>
+              <div class="crawl-option-sub" id="crawl-opt-saved-sub">Select from your saved favorites</div>
+            </div>
+            <span class="material-symbols-outlined" style="color: var(--ink-30); font-size: 20px;">chevron_right</span>
+          </button>
+          <button class="crawl-option-btn" onclick="App.startMapPinCrawlMode()">
+            <div class="crawl-option-icon" style="background: var(--pizza-light); color: var(--pizza);">
+              <span class="material-symbols-outlined" style="font-size: 26px;">map</span>
+            </div>
+            <div class="crawl-option-info">
+              <div class="crawl-option-heading">Pick Spots on Map</div>
+              <div class="crawl-option-sub">Tap pins across the map to build your crawl</div>
+            </div>
+            <span class="material-symbols-outlined" style="color: var(--ink-30); font-size: 20px;">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Crawl Saved Spots Picker Modal ── -->
+  <div id="crawl-saved-picker-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-picker-title" onclick="App.closeSavedPickerModal()">
+    <div class="crawl-modal-card" onclick="event.stopPropagation()">
+      <div class="crawl-modal-header">
+        <div>
+          <h3 class="crawl-modal-title" id="crawl-picker-title">Select Saved Spots</h3>
+          <div class="crawl-modal-sub" id="crawl-picker-subtitle">Select up to 8 spots for your crawl (0/8)</div>
+        </div>
+        <button class="drawer-close" onclick="App.closeSavedPickerModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="crawl-picker-toolbar">
+        <button class="btn btn-secondary" onclick="App.selectAllSavedForCrawl()" style="margin: 0; padding: 4px 12px; font-size: 13px;">Select All (up to 8)</button>
+        <button class="btn btn-secondary" onclick="App.clearAllSavedFromCrawl()" style="margin: 0; padding: 4px 12px; font-size: 13px; background: transparent; color: var(--ink-60);">Clear</button>
+      </div>
+      <div id="crawl-saved-picker-list" class="crawl-picker-list">
+        <!-- Dynamically populated rows -->
+      </div>
+      <div class="crawl-modal-footer">
+        <button class="btn btn-secondary" onclick="App.closeSavedPickerModal()" style="margin: 0;">Cancel</button>
+        <button class="btn btn-primary" id="crawl-picker-submit-btn" onclick="App.submitSavedPickerForCrawl()" style="margin: 0; background: var(--teal); border-color: var(--teal);" disabled>Continue to Itinerary</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Crawl Itinerary & Reorder Popup Modal ── -->
+  <div id="crawl-itinerary-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-itinerary-title" onclick="App.closeCrawlItineraryModal()">
+    <div class="crawl-modal-card" onclick="event.stopPropagation()">
+      <div class="crawl-modal-header">
+        <div>
+          <h3 class="crawl-modal-title" id="crawl-itinerary-title">Your Food Crawl</h3>
+          <div class="crawl-modal-sub" id="crawl-itinerary-count-sub">0 stops selected</div>
+        </div>
+        <button class="drawer-close" onclick="App.closeCrawlItineraryModal()" aria-label="Close itinerary">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="crawl-itinerary-stats" id="crawl-itinerary-stats">
+        <!-- Distance and time stats populated dynamically -->
+      </div>
+
+      <div class="crawl-reorder-toolbar">
+        <span style="font-size: 12px; color: var(--ink-60); font-weight: 500;">Drag or tap arrows to reorder stops:</span>
+        <button class="btn-optimize-route" onclick="App.optimizeCurrentCrawl()" title="Auto-sort stops by shortest distance">
+          <span class="material-symbols-outlined" style="font-size: 16px;">route</span> Auto-Order
+        </button>
+      </div>
+
+      <div id="crawl-sortable-list" class="crawl-sortable-list">
+        <!-- Populated dynamically with sortable items -->
+      </div>
+
+      <div class="crawl-modal-footer">
+        <button class="btn btn-primary" id="crawl-maps-btn" onclick="App.openCrawlMapsUrl()" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; padding: 12px; border-radius: 16px; background: var(--teal); border-color: var(--teal);">
+          <span class="material-symbols-outlined" style="font-size: 20px;">directions_walk</span> Open in Google Maps
+        </button>
+        <div style="display: flex; gap: 8px; width: 100%;">
+          <button class="btn btn-secondary" onclick="App.viewCrawlOnMap()" style="flex: 1; margin: 0; padding: 10px; border-radius: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <span class="material-symbols-outlined" style="font-size: 18px;">map</span> View on Map
+          </button>
+          <button class="btn btn-secondary" onclick="App.closeCrawlItineraryModal()" style="flex: 1; margin: 0; padding: 10px; border-radius: 14px;">
+            Edit Selection
+          </button>
+        </div>
       </div>
     </div>
   </div>

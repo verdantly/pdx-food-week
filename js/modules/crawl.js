@@ -1,66 +1,254 @@
 /* ── Crawl Builder Module ── */
-import { State } from './state.js';
+import { State, isDishSaved } from './state.js';
 import { esc, haversineDistance } from './utils.js';
 import { getRestaurants } from './data.js';
-import { closeDetail } from './ui.js';
+import { closeDetail, showToast } from './ui.js';
 import { renderMap } from './map.js';
+import { renderSaved } from './render.js';
 
 export function toggleCrawlMode() {
   State.crawlModeActive = !State.crawlModeActive;
   if (!State.crawlModeActive) {
     closeDetail();
+    closeCrawlItineraryModal();
+    closeSavedPickerModal();
+    closeCrawlOptionsModal();
   }
   const fab = document.getElementById('crawl-fab');
-  if (fab) fab.style.display = State.crawlModeActive ? 'block' : 'none';
-  
-  const btn = document.getElementById('map-plan-crawl-btn');
-  if (btn) {
-    if (State.crawlModeActive) {
-      btn.style.background = 'white';
-      btn.style.color = 'var(--teal)';
-      btn.style.border = '2px solid var(--teal)';
-      btn.textContent = 'Cancel Crawl';
-    } else {
-      btn.style.background = 'var(--teal)';
-      btn.style.color = 'white';
-      btn.style.border = '2px solid var(--teal)';
-      btn.textContent = 'Plan Crawl';
-    }
+  if (fab) {
+    const isMapOrSaved = State.activeTab === 'map' || State.activeTab === 'saved';
+    fab.style.display = (State.crawlModeActive && isMapOrSaved) ? 'block' : 'none';
   }
   
+  syncCrawlButtons();
   updateCrawlFab();
   renderMap();
-  if (State.crawlModeActive && window.innerWidth >= 1024) {
-    generateCrawlItinerary();
+  if (State.activeTab === 'saved') {
+    renderSaved();
   }
+}
+
+export function syncCrawlButtons() {
+  const mapBtn = document.getElementById('map-plan-crawl-btn');
+  if (mapBtn) {
+    if (State.crawlModeActive) {
+      mapBtn.style.background = 'white';
+      mapBtn.style.color = 'var(--teal)';
+      mapBtn.style.border = '2px solid var(--teal)';
+      mapBtn.textContent = 'Cancel Crawl';
+    } else {
+      mapBtn.style.background = 'var(--teal)';
+      mapBtn.style.color = 'white';
+      mapBtn.style.border = '2px solid var(--teal)';
+      mapBtn.textContent = 'Plan Crawl';
+    }
+  }
+
+  const savedBtn = document.getElementById('saved-plan-crawl-btn');
+  if (savedBtn) {
+    if (State.crawlModeActive) {
+      savedBtn.style.background = 'white';
+      savedBtn.style.color = 'var(--teal)';
+      savedBtn.style.border = '2px solid var(--teal)';
+      savedBtn.textContent = 'Cancel Crawl';
+    } else {
+      savedBtn.style.background = 'var(--teal)';
+      savedBtn.style.color = 'white';
+      savedBtn.style.border = '2px solid var(--teal)';
+      savedBtn.textContent = 'Plan Crawl';
+    }
+  }
+}
+
+export function toggleSavedCrawlMode() {
+  toggleCrawlMode();
+  if (State.crawlModeActive) {
+    showToast('Tap up to 8 saved spots to build your crawl');
+  }
+}
+
+export function handleCrawlCardClick(id) {
+  const index = State.crawlSelection.indexOf(id);
+  if (index > -1) {
+    State.crawlSelection.splice(index, 1);
+  } else {
+    if (State.crawlSelection.length >= 8) {
+      showToast('Maximum 8 stops reached for a crawl');
+      return;
+    }
+    State.crawlSelection.push(id);
+  }
+  updateCrawlFab();
+  renderSaved();
+  if (State.crawlSelection.length >= 2) {
+    const routeBtn = document.getElementById('crawl-generate-btn');
+    if (routeBtn) routeBtn.disabled = false;
+  }
+}
+
+export function handleMapPlanCrawlClick() {
+  if (State.crawlModeActive) {
+    toggleCrawlMode();
+    return;
+  }
+
+  const savedSpots = getSavedRestaurants();
+  if (savedSpots.length > 0) {
+    openCrawlOptionsModal();
+  } else {
+    startMapPinCrawlMode();
+  }
+}
+
+export function openCrawlOptionsModal() {
+  const modal = document.getElementById('crawl-options-modal');
+  if (!modal) return;
+  const count = getSavedRestaurants().length;
+  const sub = document.getElementById('crawl-opt-saved-sub');
+  if (sub) {
+    sub.textContent = `${count} saved spot${count === 1 ? '' : 's'} available`;
+  }
+  modal.classList.add('open');
+}
+
+export function closeCrawlOptionsModal() {
+  const modal = document.getElementById('crawl-options-modal');
+  if (modal) modal.classList.remove('open');
+}
+
+export function startMapPinCrawlMode() {
+  closeCrawlOptionsModal();
+  if (!State.crawlModeActive) {
+    toggleCrawlMode();
+  }
+  showToast('Tap pins on the map to add stops to your crawl');
+}
+
+export function getSavedRestaurants() {
+  const friendIds = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]
+    ? new Set(State.friends[State.viewingFriendIndex].ids)
+    : null;
+
+  return getRestaurants().filter(r => {
+    if (friendIds) {
+      return friendIds.has(r.id) || friendIds.has(String(r.id)) || friendIds.has(Number(r.id));
+    }
+    return isDishSaved(r.id, r.weekId);
+  });
+}
+
+export function openSavedCrawlPicker() {
+  closeCrawlOptionsModal();
+  const modal = document.getElementById('crawl-saved-picker-modal');
+  if (!modal) return;
+
+  renderSavedPickerList();
+  modal.classList.add('open');
+}
+
+export function closeSavedPickerModal() {
+  const modal = document.getElementById('crawl-saved-picker-modal');
+  if (modal) modal.classList.remove('open');
+}
+
+export function renderSavedPickerList() {
+  const listEl = document.getElementById('crawl-saved-picker-list');
+  const subtitleEl = document.getElementById('crawl-picker-subtitle');
+  const submitBtn = document.getElementById('crawl-picker-submit-btn');
+  if (!listEl) return;
+
+  const savedSpots = getSavedRestaurants();
+  const selCount = State.crawlSelection.length;
+  if (subtitleEl) {
+    subtitleEl.textContent = `Select up to 8 spots for your crawl (${selCount}/8)`;
+  }
+  if (submitBtn) {
+    submitBtn.disabled = selCount < 2;
+    submitBtn.textContent = selCount < 2 ? 'Select at least 2 spots' : `Review Crawl (${selCount} spots)`;
+  }
+
+  if (savedSpots.length === 0) {
+    listEl.innerHTML = `<div style="text-align: center; padding: 24px; color: var(--ink-60);">No saved spots for this week yet. Save dishes first to plan a crawl from your saved list.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = savedSpots.map(r => {
+    const isChecked = State.crawlSelection.includes(r.id);
+    const orderIdx = State.crawlSelection.indexOf(r.id);
+    return `
+      <div class="crawl-picker-row ${isChecked ? 'selected' : ''}" onclick="App.toggleSavedPickerItem(${r.id})">
+        <div class="crawl-picker-checkbox ${isChecked ? 'checked' : ''}">
+          ${isChecked ? (orderIdx + 1) : ''}
+        </div>
+        <div class="crawl-picker-details">
+          <div class="crawl-picker-dish">${esc(r.dish)}</div>
+          <div class="crawl-picker-restaurant">${esc(r.restaurant)} • ${esc(r.neighborhood || r.address || '')}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+export function toggleSavedPickerItem(id) {
+  const index = State.crawlSelection.indexOf(id);
+  if (index > -1) {
+    State.crawlSelection.splice(index, 1);
+  } else {
+    if (State.crawlSelection.length >= 8) {
+      showToast('Maximum 8 stops reached for a crawl');
+      return;
+    }
+    State.crawlSelection.push(id);
+  }
+  renderSavedPickerList();
+  updateCrawlFab();
+}
+
+export function selectAllSavedForCrawl() {
+  const savedSpots = getSavedRestaurants();
+  const toSelect = savedSpots.slice(0, 8).map(r => r.id);
+  State.crawlSelection = toSelect;
+  renderSavedPickerList();
+  updateCrawlFab();
+}
+
+export function clearAllSavedFromCrawl() {
+  State.crawlSelection = [];
+  renderSavedPickerList();
+  updateCrawlFab();
+}
+
+export function submitSavedPickerForCrawl() {
+  if (State.crawlSelection.length < 2) return;
+  closeSavedPickerModal();
+  if (!State.crawlModeActive) {
+    State.crawlModeActive = true;
+    syncCrawlButtons();
+  }
+  openCrawlItineraryModal();
 }
 
 export function clearCrawl() {
   State.crawlSelection = [];
   updateCrawlFab();
   renderMap();
-  if (State.crawlModeActive && window.innerWidth >= 1024) {
-    generateCrawlItinerary();
+  if (State.activeTab === 'saved') {
+    renderSaved();
   }
 }
 
 export function updateCrawlFab() {
   const textEl = document.getElementById('crawl-fab-text');
   const routeBtn = document.getElementById('crawl-generate-btn');
-  if (textEl) textEl.textContent = `Select up to 8 spots (${State.crawlSelection.length}/8)`;
-  if (routeBtn) routeBtn.disabled = State.crawlSelection.length < 2;
+  const count = State.crawlSelection.length;
+  if (textEl) textEl.textContent = `Select up to 8 spots (${count}/8)`;
+  if (routeBtn) {
+    routeBtn.disabled = count < 2;
+  }
 }
 
-export function generateCrawlItinerary() {
-  const spots = State.crawlSelection.map(id => getRestaurants().find(r => r.id === id)).filter(Boolean);
-  
-  if (spots.length < 2) {
-    State.currentItinerary = spots;
-    renderItinerarySheet();
-    document.getElementById('detail-overlay').classList.add('open');
-    document.getElementById('app').classList.add('detail-open');
-    return;
-  }
+export function calculateOptimizedOrder(spots) {
+  if (spots.length <= 2) return [...spots];
 
   let bestOrder = null;
   let minDistance = Infinity;
@@ -85,18 +273,48 @@ export function generateCrawlItinerary() {
   };
 
   permute(spots);
-  State.currentItinerary = bestOrder;
-  
-  renderItinerarySheet();
-  document.getElementById('detail-overlay').classList.add('open');
-  document.getElementById('app').classList.add('detail-open');
+  return bestOrder || spots;
 }
 
-export function renderItinerarySheet() {
-  const sheetEl = document.getElementById('detail-sheet-content');
-  if (!sheetEl) return;
+export function openCrawlItineraryModal(skipOptimize = false) {
+  const modal = document.getElementById('crawl-itinerary-modal');
+  if (!modal) return;
+
+  const spots = State.crawlSelection.map(id => getRestaurants().find(r => r.id === id)).filter(Boolean);
   
+  if (spots.length === 0) {
+    showToast('Please select at least 2 spots first');
+    return;
+  }
+
+  if (!skipOptimize && (!State.currentItinerary || State.currentItinerary.length !== spots.length || !State.currentItinerary.every(s => spots.some(x => x.id === s.id)))) {
+    State.currentItinerary = calculateOptimizedOrder(spots);
+  }
+
+  renderCrawlItineraryModal();
+  modal.classList.add('open');
+}
+
+export function closeCrawlItineraryModal() {
+  const modal = document.getElementById('crawl-itinerary-modal');
+  if (modal) modal.classList.remove('open');
+}
+
+export function renderCrawlItineraryModal() {
   const itinerary = State.currentItinerary || [];
+  const countSub = document.getElementById('crawl-itinerary-count-sub');
+  const statsEl = document.getElementById('crawl-itinerary-stats');
+  const listEl = document.getElementById('crawl-sortable-list');
+  const mapsBtn = document.getElementById('crawl-maps-btn');
+
+  if (countSub) {
+    countSub.textContent = `${itinerary.length} stop${itinerary.length === 1 ? '' : 's'} in crawl`;
+  }
+
+  if (mapsBtn) {
+    mapsBtn.disabled = itinerary.length < 2;
+  }
+
   let totalMiles = 0;
   for (let i = 0; i < itinerary.length - 1; i++) {
     totalMiles += haversineDistance(itinerary[i].lat, itinerary[i].lng, itinerary[i+1].lat, itinerary[i+1].lng);
@@ -105,66 +323,131 @@ export function renderItinerarySheet() {
   let walkMins = Math.round((totalMiles / 3.0) * 60);
   let driveMins = Math.round((totalMiles / 15.0) * 60);
 
-  let html = `
-    <button class="sheet-close-btn" onclick="App.closeDetail()" aria-label="Close detail view" style="top: 24px;">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="sheet-handle"></div>
-    <div class="sheet-dish" style="margin-top: 32px; margin-bottom: 4px;">Your Food Crawl</div>
-  `;
-  
-  if (itinerary.length === 0) {
-    html += `<div style="font-size: 14px; color: var(--ink-80); margin-bottom: 16px;">
-      Tap on map pins to start building your itinerary.
-    </div>`;
-  } else {
-    html += `<div style="font-size: 14px; color: var(--ink-80); margin-bottom: 16px;">
-      <strong>Distance:</strong> ~${totalMiles.toFixed(1)} miles<br>
-      <strong>Walk:</strong> ${walkMins} mins • <strong>Drive:</strong> ${driveMins} mins
-    </div>
-    <div id="itinerary-sortable-list" class="crawl-steps" style="margin-bottom: 24px;">`;
-
-    itinerary.forEach((r, idx) => {
-      html += `<div class="crawl-step" data-id="${r.id}" style="cursor: grab; display: flex; align-items: center; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; box-shadow: var(--shadow);">
-        <div style="margin-right: 12px; color: var(--ink-30);">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="8" y1="6" x2="21" y2="6"></line>
-            <line x1="8" y1="12" x2="21" y2="12"></line>
-            <line x1="8" y1="18" x2="21" y2="18"></line>
-            <line x1="3" y1="6" x2="3.01" y2="6"></line>
-            <line x1="3" y1="12" x2="3.01" y2="12"></line>
-            <line x1="3" y1="18" x2="3.01" y2="18"></line>
-          </svg>
-        </div>
-        <div class="crawl-step-num" style="margin-right: 12px;">${idx + 1}</div>
-        <div class="crawl-step-details" style="flex: 1;">
-          <div class="crawl-step-title" style="font-weight: 700; font-family: var(--font-display);">${esc(r.dish)}</div>
-          <div class="crawl-step-meta" style="font-size: 12px; color: var(--ink-60);">${esc(r.restaurant)}</div>
-        </div>
-      </div>`;
-    });
-
-    html += `</div>
-      <button class="btn btn-primary" onclick="App.openCrawlMapsUrl()" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 24px; padding: 12px; border-radius: 24px;" ${itinerary.length < 2 ? 'disabled' : ''}>
-        <span style="font-size:18px;">Open in Google Maps</span>
-      </button>
+  if (statsEl) {
+    statsEl.innerHTML = `
+      <div class="crawl-stat-box">
+        <div class="crawl-stat-val">~${totalMiles.toFixed(1)} mi</div>
+        <div class="crawl-stat-lbl">Est. Distance</div>
+      </div>
+      <div class="crawl-stat-box">
+        <div class="crawl-stat-val">${walkMins} min</div>
+        <div class="crawl-stat-lbl">Walk Time</div>
+      </div>
+      <div class="crawl-stat-box">
+        <div class="crawl-stat-val">${driveMins} min</div>
+        <div class="crawl-stat-lbl">Drive Time</div>
+      </div>
     `;
   }
 
-  sheetEl.innerHTML = html;
+  if (listEl) {
+    if (itinerary.length === 0) {
+      listEl.innerHTML = `<div style="text-align: center; padding: 24px; color: var(--ink-60);">No spots selected.</div>`;
+      return;
+    }
 
-  const listEl = document.getElementById('itinerary-sortable-list');
-  if (listEl && window.Sortable) {
-    Sortable.create(listEl, {
-      animation: 150,
-      handle: '.crawl-step',
-      onEnd: function(evt) {
-        const item = State.currentItinerary.splice(evt.oldIndex, 1)[0];
-        State.currentItinerary.splice(evt.newIndex, 0, item);
-        renderItinerarySheet();
+    listEl.innerHTML = itinerary.map((r, idx) => {
+      const isFirst = idx === 0;
+      const isLast = idx === itinerary.length - 1;
+      return `
+        <div class="crawl-sortable-item" data-id="${r.id}">
+          <div class="crawl-drag-handle" aria-label="Drag to reorder">
+            <span class="material-symbols-outlined" style="font-size: 20px;">drag_indicator</span>
+          </div>
+          <div class="crawl-step-num">${idx + 1}</div>
+          <div class="crawl-sortable-details">
+            <div class="crawl-sortable-dish">${esc(r.dish)}</div>
+            <div class="crawl-sortable-meta">${esc(r.restaurant)} • ${esc(r.neighborhood || r.address || '')}</div>
+          </div>
+          <div class="crawl-sortable-actions">
+            <button class="btn-crawl-arrow" onclick="App.moveCrawlItem(${idx}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
+              ▲
+            </button>
+            <button class="btn-crawl-arrow" onclick="App.moveCrawlItem(${idx}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
+              ▼
+            </button>
+            <button class="btn-crawl-remove" onclick="App.removeCrawlItem(${r.id})" aria-label="Remove stop">
+              <span class="material-symbols-outlined" style="font-size: 18px;">close</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (window.Sortable) {
+      if (listEl._sortable) {
+        listEl._sortable.destroy();
       }
-    });
+      listEl._sortable = Sortable.create(listEl, {
+        animation: 150,
+        handle: '.crawl-drag-handle',
+        onEnd: function(evt) {
+          const item = State.currentItinerary.splice(evt.oldIndex, 1)[0];
+          State.currentItinerary.splice(evt.newIndex, 0, item);
+          State.crawlSelection = State.currentItinerary.map(r => r.id);
+          renderCrawlItineraryModal();
+          updateCrawlFab();
+          renderMap();
+          if (State.activeTab === 'saved') renderSaved();
+        }
+      });
+    }
   }
+}
+
+export function moveCrawlItem(index, direction) {
+  const newIndex = index + direction;
+  if (!State.currentItinerary || newIndex < 0 || newIndex >= State.currentItinerary.length) return;
+
+  const item = State.currentItinerary.splice(index, 1)[0];
+  State.currentItinerary.splice(newIndex, 0, item);
+  State.crawlSelection = State.currentItinerary.map(r => r.id);
+
+  renderCrawlItineraryModal();
+  updateCrawlFab();
+  renderMap();
+  if (State.activeTab === 'saved') renderSaved();
+}
+
+export function removeCrawlItem(id) {
+  State.crawlSelection = State.crawlSelection.filter(x => x !== id);
+  if (State.currentItinerary) {
+    State.currentItinerary = State.currentItinerary.filter(r => r.id !== id);
+  }
+  renderCrawlItineraryModal();
+  updateCrawlFab();
+  renderMap();
+  if (State.activeTab === 'saved') renderSaved();
+}
+
+export function optimizeCurrentCrawl() {
+  if (!State.currentItinerary || State.currentItinerary.length < 3) {
+    showToast('Already optimal');
+    return;
+  }
+  State.currentItinerary = calculateOptimizedOrder(State.currentItinerary);
+  State.crawlSelection = State.currentItinerary.map(r => r.id);
+  renderCrawlItineraryModal();
+  renderMap();
+  if (State.activeTab === 'saved') renderSaved();
+  showToast('Stops reordered by shortest walking distance');
+}
+
+export function viewCrawlOnMap() {
+  closeCrawlItineraryModal();
+  if (window.App && window.App.switchTab) {
+    window.App.switchTab('map');
+  }
+  renderMap();
+}
+
+export function generateCrawlItinerary() {
+  openCrawlItineraryModal();
+}
+
+export function renderItinerarySheet() {
+  // Backwards compatibility if called
+  openCrawlItineraryModal();
 }
 
 export function openCrawlMapsUrl() {
@@ -182,5 +465,5 @@ export function openCrawlMapsUrl() {
 
 export function closeCrawlModal(e) {
   if (e) e.preventDefault();
-  closeDetail();
+  closeCrawlItineraryModal();
 }
