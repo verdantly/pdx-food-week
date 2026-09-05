@@ -482,7 +482,7 @@ function renderLanding() {
           </div>
           <div class="landing-card-meta-row">
             <span class="landing-card-dates">${esc(w.dates)}</span>
-            ${metaHTML ? `<span class="landing-card-divider">•</span>${metaHTML}` : ''}
+            ${metaHTML ? `<span class="landing-card-extra"><span class="landing-card-divider">•</span>${metaHTML}</span>` : ''}
           </div>
         </div>
         <div class="landing-card-arrow" aria-hidden="true">

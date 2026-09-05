@@ -1362,6 +1362,8 @@ body.is-landing .view-footer,
   background-color: var(--cream);
   min-height: 100vh;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 .landing-hero {
@@ -1666,6 +1668,19 @@ body.is-landing .view-footer,
   font-weight: 600;
   color: var(--ink);
   margin: 0;
+}
+
+.landing-card-extra {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .landing-card-extra {
+    gap: 5px;
+  }
 }
 
 .landing-card-divider {
@@ -2759,8 +2774,10 @@ input[type="search"]::-webkit-search-cancel-button {
 
   body.is-landing .view-footer {
     display: block;
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto auto 0 auto;
+    padding-bottom: 24px;
   }
 
   body {
