@@ -468,17 +468,28 @@ function renderLanding() {
     const countText = totalLocations ? `${totalLocations} spots` : '';
 
     const metaParts = [priceText, countText].filter(Boolean).join(' • ');
-    const metaHTML = metaParts ? `<p class="landing-card-subinfo">${metaParts}</p>` : '';
+    const metaHTML = metaParts ? `<span class="landing-card-subinfo">${metaParts}</span>` : '';
 
     const themeColor = w.color || 'var(--pizza)';
 
     return `
       <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
-        ${badgeHTML}
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
-        <h3>${esc(w.name)}</h3>
-        <p class="landing-card-dates">${esc(w.dates)}</p>
-        ${metaHTML}
+        <div class="landing-card-main">
+          <div class="landing-card-title-row">
+            <h3>${esc(w.name)}</h3>
+            ${badgeHTML}
+          </div>
+          <div class="landing-card-meta-row">
+            <span class="landing-card-dates">${esc(w.dates)}</span>
+            ${metaHTML ? `<span class="landing-card-divider">•</span>${metaHTML}` : ''}
+          </div>
+        </div>
+        <div class="landing-card-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </div>
       </a>
     `;
   }).join('');
