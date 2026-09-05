@@ -1,8 +1,8 @@
 /* ── Crawl Builder Module ── */
 import { State, isDishSaved } from './state.js';
-import { esc, haversineDistance } from './utils.js';
+import { esc, haversineDistance, showToast } from './utils.js';
 import { getRestaurants } from './data.js';
-import { closeDetail, showToast } from './ui.js';
+import { closeDetail } from './ui.js';
 import { renderMap } from './map.js';
 import { renderSaved } from './render.js';
 
@@ -108,12 +108,16 @@ export function openCrawlOptionsModal() {
   if (sub) {
     sub.textContent = `${count} saved spot${count === 1 ? '' : 's'} available`;
   }
+  modal.style.display = 'flex';
   modal.classList.add('open');
 }
 
 export function closeCrawlOptionsModal() {
   const modal = document.getElementById('crawl-options-modal');
-  if (modal) modal.classList.remove('open');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.style.display = 'none';
+  }
 }
 
 export function startMapPinCrawlMode() {
@@ -143,12 +147,16 @@ export function openSavedCrawlPicker() {
   if (!modal) return;
 
   renderSavedPickerList();
+  modal.style.display = 'flex';
   modal.classList.add('open');
 }
 
 export function closeSavedPickerModal() {
   const modal = document.getElementById('crawl-saved-picker-modal');
-  if (modal) modal.classList.remove('open');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.style.display = 'none';
+  }
 }
 
 export function renderSavedPickerList() {
@@ -292,12 +300,16 @@ export function openCrawlItineraryModal(skipOptimize = false) {
   }
 
   renderCrawlItineraryModal();
+  modal.style.display = 'flex';
   modal.classList.add('open');
 }
 
 export function closeCrawlItineraryModal() {
   const modal = document.getElementById('crawl-itinerary-modal');
-  if (modal) modal.classList.remove('open');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.style.display = 'none';
+  }
 }
 
 export function renderCrawlItineraryModal() {

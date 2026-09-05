@@ -1,11 +1,11 @@
-const CACHE_NAME = 'pdxfw-cache-v6';
+const CACHE_NAME = 'pdxfw-cache-v7';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=9',
-  'js/app.js?v=9',
-  'js/meta.js?v=9',
+  'css/style.css?v=10',
+  'js/app.js?v=10',
+  'js/meta.js?v=10',
   'js/modules/cards.js',
   'js/modules/crawl.js',
   'js/modules/data.js',
@@ -58,12 +58,13 @@ self.addEventListener('fetch', (event) => {
   // Skip non-http/https requests (e.g. chrome-extension://, moz-extension://)
   if (!url.protocol.startsWith('http')) return;
 
-  // 1. Network-First strategy for HTML navigation, metadata, app code, and dynamic week datasets
+  // 1. Network-First strategy for HTML navigation, metadata, app code, CSS, and dynamic week datasets
   const isNavigation = event.request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
   const isAppCode = url.pathname.includes('/meta.js') || url.pathname.includes('/app.js') || url.pathname.includes('/modules/');
   const isDataFile = url.pathname.includes('/data/') && url.pathname.endsWith('.js');
+  const isCSS = url.pathname.includes('/css/') || url.pathname.endsWith('.css');
 
-  if (isNavigation || isAppCode || isDataFile) {
+  if (isNavigation || isAppCode || isDataFile || isCSS) {
     event.respondWith(
       fetch(event.request)
         .then((response) => {

@@ -39,7 +39,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=10" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -771,7 +771,7 @@
   </div>
 
   <!-- ── Crawl Mode Selection Options Modal ── -->
-  <div id="crawl-options-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-options-title" onclick="App.closeCrawlOptionsModal()">
+  <div id="crawl-options-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-options-title" onclick="App.closeCrawlOptionsModal()" style="display: none;">
     <div class="crawl-modal-card" onclick="event.stopPropagation()">
       <div class="crawl-modal-header">
         <h3 class="crawl-modal-title" id="crawl-options-title">Plan a Food Crawl</h3>
@@ -810,7 +810,7 @@
   </div>
 
   <!-- ── Crawl Saved Spots Picker Modal ── -->
-  <div id="crawl-saved-picker-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-picker-title" onclick="App.closeSavedPickerModal()">
+  <div id="crawl-saved-picker-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-picker-title" onclick="App.closeSavedPickerModal()" style="display: none;">
     <div class="crawl-modal-card" onclick="event.stopPropagation()">
       <div class="crawl-modal-header">
         <div>
@@ -838,7 +838,7 @@
   </div>
 
   <!-- ── Crawl Itinerary & Reorder Popup Modal ── -->
-  <div id="crawl-itinerary-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-itinerary-title" onclick="App.closeCrawlItineraryModal()">
+  <div id="crawl-itinerary-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="crawl-itinerary-title" onclick="App.closeCrawlItineraryModal()" style="display: none;">
     <div class="crawl-modal-card" onclick="event.stopPropagation()">
       <div class="crawl-modal-header">
         <div>
@@ -889,8 +889,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=9"></script>
-  <script type="module" src="js/app.js?v=9"></script>
+  <script src="js/meta.js?v=10"></script>
+  <script type="module" src="js/app.js?v=10"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
