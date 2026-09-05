@@ -1372,8 +1372,7 @@ body.is-landing .view-footer,
 .landing-hero {
   background: radial-gradient(circle at 50% -20%, #3a2b1c 0%, var(--ink) 75%);
   color: var(--cream);
-  padding: 24px 20px 20px;
-  text-align: center;
+  padding: 24px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
@@ -1381,8 +1380,20 @@ body.is-landing .view-footer,
 
 @media (max-width: 767.98px) {
   .landing-hero {
-    padding: 16px 16px 14px;
+    padding: 16px 0 14px;
   }
+}
+
+.landing-hero-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
 }
 
 .landing-title {
@@ -1395,13 +1406,14 @@ body.is-landing .view-footer,
   text-transform: uppercase;
   color: #F06A48;
   font-style: normal;
-  margin-bottom: 4px;
+  margin: 0;
+  flex: 0 0 auto;
+  text-align: left;
 }
 
 @media (max-width: 767.98px) {
   .landing-title {
     font-size: 1.65rem;
-    margin-bottom: 2px;
   }
 }
 
@@ -1412,16 +1424,22 @@ body.is-landing .view-footer,
   font-size: 14.5px;
   font-weight: 500;
   color: #FFFFFF;
-  margin: 0 auto;
+  margin: 0;
+  flex: 1 1 360px;
   max-width: 540px;
   line-height: 1.45;
   letter-spacing: 0.01em;
+  text-align: right;
+  margin-left: auto;
 }
 
 @media (max-width: 767.98px) {
   .landing-subtitle {
     font-size: 13px;
     line-height: 1.4;
+    text-align: left;
+    margin-left: 0;
+    flex: 1 1 100%;
   }
 }
 
@@ -1439,9 +1457,15 @@ body.is-landing .view-footer,
   border-top: 1px solid rgba(26, 18, 8, 0.1);
   border-bottom: 1px solid rgba(26, 18, 8, 0.1);
   border-radius: 0;
-  padding: 44px 24px;
+  padding: 44px 0;
   margin: 0;
   width: 100%;
+}
+
+.landing-features .landing-section-title,
+.landing-features .landing-section-sub {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .landing-section-title {
@@ -2543,6 +2567,7 @@ input[type="search"]::-webkit-search-cancel-button {
     margin: 0 auto;
   }
 
+  .landing-hero-content,
   .landing-steps-grid {
     padding: 0 24px;
     max-width: 900px;
@@ -3171,6 +3196,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .landing-grid,
+  .landing-hero-content,
   .landing-steps-grid {
     max-width: 1200px;
   }

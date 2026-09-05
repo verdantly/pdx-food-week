@@ -287,6 +287,59 @@ test.describe('Navigation and Routing', () => {
     await expect(crawlFab).not.toBeVisible();
     await expect(filterFab).toBeVisible();
   });
+
+  test('Landing hero row layout wraps as needed and matches landing-steps-grid margins', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.landing-hero-content', { state: 'visible' });
+
+    // Test across several viewport sizes
+    const viewports = [
+      { width: 1440, height: 900, expectSameRow: true, expectedAlign: 'right' },
+      { width: 1024, height: 768, expectSameRow: true, expectedAlign: 'right' },
+      { width: 768, height: 1024, expectSameRow: true, expectedAlign: 'right' },
+      { width: 480, height: 800, expectSameRow: false, expectedAlign: 'left' },
+      { width: 375, height: 667, expectSameRow: false, expectedAlign: 'left' },
+    ];
+
+    for (const vp of viewports) {
+      await page.setViewportSize({ width: vp.width, height: vp.height });
+      const layout = await page.evaluate(() => {
+        const heroContent = document.querySelector('.landing-hero-content');
+        const stepsGrid = document.querySelector('.landing-steps-grid');
+        const title = document.querySelector('.landing-title');
+        const sub = document.querySelector('.landing-subtitle');
+
+        const heroRect = heroContent.getBoundingClientRect();
+        const stepsRect = stepsGrid.getBoundingClientRect();
+        const titleRect = title.getBoundingClientRect();
+        const subRect = sub.getBoundingClientRect();
+
+        return {
+          heroLeft: heroRect.left,
+          heroWidth: heroRect.width,
+          stepsLeft: stepsRect.left,
+          stepsWidth: stepsRect.width,
+          titleTop: titleRect.top,
+          subTop: subRect.top,
+          subAlign: window.getComputedStyle(sub).textAlign,
+        };
+      });
+
+      // Margin/padding alignment check: hero-content and steps-grid should match left and width
+      if (Math.abs(layout.heroLeft - layout.stepsLeft) > 1) {
+        console.log(`Mismatch at width ${vp.width}:`, layout);
+      }
+      expect(Math.abs(layout.heroLeft - layout.stepsLeft)).toBeLessThanOrEqual(1);
+      expect(Math.abs(layout.heroWidth - layout.stepsWidth)).toBeLessThanOrEqual(1);
+
+      // Subtitle alignment check
+      expect(layout.subAlign).toBe(vp.expectedAlign);
+
+      // Same row check: if expected same row, vertical tops should be close
+      const isSameRow = Math.abs(layout.titleTop - layout.subTop) < 25;
+      expect(isSameRow).toBe(vp.expectSameRow);
+    }
+  });
 });
 
 
