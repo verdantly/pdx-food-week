@@ -480,10 +480,10 @@ function renderLanding() {
             <h3>${esc(w.name)}</h3>
             ${badgeHTML}
           </div>
-          <div class="landing-card-meta-row">
+          <div class="landing-card-dates-row">
             <span class="landing-card-dates">${esc(w.dates)}</span>
-            ${metaHTML ? `<span class="landing-card-extra"><span class="landing-card-divider">•</span>${metaHTML}</span>` : ''}
           </div>
+          ${metaHTML ? `<div class="landing-card-meta-row">${metaHTML}</div>` : ''}
         </div>
         <div class="landing-card-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
