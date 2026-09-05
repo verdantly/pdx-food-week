@@ -1362,6 +1362,9 @@ body.is-landing .view-footer,
   background-color: var(--cream);
   min-height: 100vh;
   min-height: 100dvh;
+}
+
+#view-landing.active {
   display: flex;
   flex-direction: column;
 }
@@ -1707,9 +1710,11 @@ body.is-landing .view-footer,
 
 .landing-status-badge {
   position: static;
+  margin-left: auto;
+  flex-shrink: 0;
   font-size: 10.5px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 10px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1717,6 +1722,14 @@ body.is-landing .view-footer,
   align-items: center;
   gap: 5px;
   white-space: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  .landing-status-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    gap: 4px;
+  }
 }
 
 .landing-status-badge.active {
