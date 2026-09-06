@@ -1584,9 +1584,8 @@ body.is-landing .view-footer,
   border-radius: 14px;
   padding: 12px 16px;
   text-align: left;
-  box-shadow: 0 2px 10px rgba(26, 18, 8, 0.06);
+  box-shadow: none;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1608,65 +1607,72 @@ body.is-landing .view-footer,
 }
 
 .landing-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(26, 18, 8, 0.12), 0 0 12px var(--week-brand, rgba(0,0,0,0.06));
+  transform: none;
+  box-shadow: none;
+}
+
+.landing-card:hover h3 {
+  text-decoration: underline;
 }
 
 .landing-card:focus-visible {
   outline: 3px solid var(--week-brand, var(--pizza, #C94B2C));
   outline-offset: 2px;
-  transform: translateY(-1px);
 }
 
 .landing-card.is-active-food-week {
-  box-shadow: 0 4px 16px rgba(19, 115, 51, 0.15);
+  box-shadow: none;
 }
 
-/* ── Featured Food Week Header Card (Columns 1 & 2, Row 1 on desktop) ── */
-.landing-featured-card {
+/* ── Visually Unified Featured Week Showcase (Columns 1 & 2, Rows 1-4 on desktop) ── */
+.landing-featured-showcase {
   grid-column: 1;
-  grid-row: 1;
   background: var(--card-bg, #fff);
-  border-radius: 14px;
-  padding: 18px 20px;
-  text-align: left;
-  box-shadow: 0 3px 12px rgba(26, 18, 8, 0.08);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: none;
+  border: none;
   overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  text-decoration: none;
-  color: var(--ink);
-  border: none;
+  gap: 16px;
 }
 
 @media (min-width: 768px) {
-  .landing-featured-card {
+  .landing-featured-showcase {
     grid-column: 1 / 3;
-    grid-row: 1;
-    padding: 20px 24px;
+    grid-row: 1 / 5;
+    padding: 24px 28px;
   }
 }
 
-.landing-featured-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(26, 18, 8, 0.14), 0 0 16px var(--week-brand, rgba(0,0,0,0.08));
+.landing-featured-showcase:hover {
+  transform: none;
+  box-shadow: none;
 }
 
-.landing-featured-card:focus-visible {
-  outline: 3px solid var(--week-brand, var(--pizza, #C94B2C));
-  outline-offset: 2px;
+.featured-showcase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(26, 18, 8, 0.08);
 }
 
-.featured-card-top {
+.featured-showcase-title-link {
   display: flex;
   align-items: center;
   gap: 14px;
-  width: 100%;
+  text-decoration: none;
+  color: var(--ink);
+  flex: 1;
+  min-width: 0;
+}
+
+.featured-showcase-title-link:hover .featured-title {
+  text-decoration: underline;
 }
 
 .featured-card-info {
@@ -1688,71 +1694,15 @@ body.is-landing .view-footer,
 
 @media (min-width: 768px) {
   .featured-title {
-    font-size: 22px;
+    font-size: 24px;
   }
 }
 
-.featured-card-action {
+.featured-showcase-header-right {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--week-brand, var(--pizza));
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding-top: 4px;
-  border-top: 1px solid rgba(26, 18, 8, 0.06);
-}
-
-.featured-card-action svg {
-  transition: transform 0.2s ease;
-}
-
-.landing-featured-card:hover .featured-card-action svg {
-  transform: translateX(4px);
-}
-
-/* ── Featured Spots Carousel (Columns 1 & 2, Rows 2-4 on desktop) ── */
-.landing-carousel-container {
-  grid-column: 1;
-  background: var(--card-bg, #fff);
-  border-radius: 14px;
-  padding: 16px 20px 20px;
-  box-shadow: 0 2px 10px rgba(26, 18, 8, 0.06);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: none;
-  overflow: hidden;
-  position: relative;
-  min-height: 240px;
-}
-
-@media (min-width: 768px) {
-  .landing-carousel-container {
-    grid-column: 1 / 3;
-    grid-row: 2 / 5;
-    padding: 20px 24px 22px;
-  }
-}
-
-.landing-carousel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
   gap: 12px;
-}
-
-.landing-carousel-heading {
-  font-family: var(--font-body);
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-80);
+  flex-shrink: 0;
 }
 
 .landing-carousel-nav {
@@ -1772,14 +1722,15 @@ body.is-landing .view-footer,
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.18s ease, transform 0.15s ease;
+  transition: background 0.18s ease;
 }
 
 .landing-carousel-btn:hover {
   background: rgba(26, 18, 8, 0.12);
-  transform: scale(1.05);
+  transform: none;
 }
 
+/* ── Carousel Viewport & Slides (Serious Eats Featured Style) ── */
 .landing-carousel-viewport {
   overflow: hidden;
   width: 100%;
@@ -1805,11 +1756,12 @@ body.is-landing .view-footer,
   box-shadow: none !important;
   border: none !important;
   background: transparent !important;
-  padding: 8px 4px !important;
+  padding: 0 !important;
   text-decoration: none;
   color: inherit;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: stretch;
   gap: 16px;
   cursor: pointer;
   width: 100%;
@@ -1819,52 +1771,101 @@ body.is-landing .view-footer,
   transform: none !important;
 }
 
-.landing-spot-card .card-emoji {
-  width: 72px;
-  height: 72px;
-  min-width: 72px;
+.landing-spot-card:hover .card-dish {
+  text-decoration: underline;
+}
+
+/* Large Serious Eats-style Hero Image */
+.landing-spot-media {
+  width: 100%;
   border-radius: 12px;
-  font-size: 38px;
+  overflow: hidden;
+  background: var(--cream, #FBF6EF);
+  position: relative;
+}
+
+.landing-spot-media .card-thumb {
+  width: 100%;
+  height: 240px;
+  min-width: 100%;
+  border-radius: 12px;
+  margin: 0;
+  display: block;
 }
 
 @media (min-width: 768px) {
-  .landing-spot-card .card-emoji {
-    width: 110px;
-    height: 110px;
-    min-width: 110px;
-    font-size: 54px;
-    border-radius: 14px;
+  .landing-spot-media .card-thumb {
+    height: 310px;
   }
 }
 
+.landing-spot-media .card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.landing-spot-media .card-emoji:not(.card-thumb) {
+  width: 100%;
+  height: 200px;
+  min-width: 100%;
+  border-radius: 12px;
+  font-size: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream, #FBF6EF);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .landing-spot-media .card-emoji:not(.card-thumb) {
+    height: 260px;
+    font-size: 88px;
+  }
+}
+
+.landing-spot-card .card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 0;
+}
+
 .landing-spot-card .card-dish {
-  font-size: 19px;
+  font-size: 22px;
+  font-weight: 800;
   padding-right: 0;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  line-height: 1.25;
+  color: var(--ink);
 }
 
 @media (min-width: 768px) {
   .landing-spot-card .card-dish {
-    font-size: 21px;
+    font-size: 26px;
   }
 }
 
 .landing-spot-card .card-restaurant {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--pizza);
-  margin-bottom: 4px;
-}
-
-.landing-spot-card .card-neighborhood {
-  font-size: 12.5px;
   margin-bottom: 6px;
 }
 
-.landing-spot-card .card-desc {
-  font-size: 13.5px;
-  line-height: 1.5;
+.landing-spot-card .card-neighborhood {
+  font-size: 13px;
+  margin-bottom: 8px;
   color: var(--ink-70);
+}
+
+.landing-spot-card .card-desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-80);
   -webkit-line-clamp: 3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -1874,7 +1875,7 @@ body.is-landing .view-footer,
 
 .landing-carousel-loading,
 .landing-carousel-empty {
-  padding: 36px 16px;
+  padding: 48px 16px;
   text-align: center;
   width: 100%;
   color: var(--ink-60);
@@ -1886,7 +1887,7 @@ body.is-landing .view-footer,
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-top: 14px;
+  margin-top: 4px;
 }
 
 .landing-carousel-dot {
@@ -1920,17 +1921,6 @@ body.is-landing .view-footer,
     grid-row: 1 / 5;
     height: 100%;
   }
-}
-
-.landing-others-title {
-  font-family: var(--font-body);
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-80);
-  margin-bottom: 4px;
-  padding-left: 2px;
 }
 
 .landing-others-list {

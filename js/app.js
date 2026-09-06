@@ -584,42 +584,35 @@ function renderLanding() {
 
   // Assemble full 3-column / 4-row landing grid
   grid.innerHTML = `
-    <!-- Featured Week Header Card (Row 1, Columns 1 & 2 on desktop) -->
-    <a href="?week=${featuredWeek.id}" class="landing-featured-card ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" onclick="event.preventDefault(); App.switchWeek('${featuredWeek.id}');">
-      <div class="featured-card-top">
-        <div class="landing-emoji">${featuredWeek.emoji || '🍽️'}</div>
-        <div class="featured-card-info">
-          <div class="landing-card-title-row">
-            <h3 class="featured-title">${esc(featuredWeek.name)}</h3>
+    <!-- Visually Unified Featured Week Showcase (Columns 1 & 2, Rows 1-4 on desktop) -->
+    <div class="landing-featured-showcase ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()">
+      <div class="featured-showcase-header">
+        <a href="?week=${featuredWeek.id}" class="featured-showcase-title-link" onclick="event.preventDefault(); App.switchWeek('${featuredWeek.id}');">
+          <div class="landing-emoji">${featuredWeek.emoji || '🍽️'}</div>
+          <div class="featured-card-info">
+            <div class="landing-card-title-row">
+              <h3 class="featured-title">${esc(featuredWeek.name)}</h3>
+            </div>
+            <div class="landing-card-dates-row">
+              <span class="landing-card-dates">${esc(featuredWeek.dates)}</span>
+            </div>
+            ${featuredMetaParts ? `<div class="landing-card-meta-row"><span class="landing-card-subinfo">${featuredMetaParts}</span></div>` : ''}
           </div>
-          <div class="landing-card-dates-row">
-            <span class="landing-card-dates">${esc(featuredWeek.dates)}</span>
+        </a>
+        <div class="featured-showcase-header-right">
+          ${featuredBadgeHTML}
+          <div class="landing-carousel-nav">
+            <button type="button" class="landing-carousel-btn prev" onclick="App.moveLandingCarousel(-1)" aria-label="Previous special">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="landing-carousel-btn next" onclick="App.moveLandingCarousel(1)" aria-label="Next special">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
           </div>
-          ${featuredMetaParts ? `<div class="landing-card-meta-row"><span class="landing-card-subinfo">${featuredMetaParts}</span></div>` : ''}
         </div>
-        ${featuredBadgeHTML}
       </div>
-      <div class="featured-card-action">
-        <span>Explore Specials</span>
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </div>
-    </a>
 
-    <!-- Featured Spots Carousel (Rows 2-4, Columns 1 & 2 on desktop) -->
-    <div class="landing-carousel-container" id="landing-carousel-container" onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()">
-      <div class="landing-carousel-header">
-        <span class="landing-carousel-heading">Featured ${esc(featuredWeek.name)} Specials</span>
-        <div class="landing-carousel-nav">
-          <button type="button" class="landing-carousel-btn prev" onclick="App.moveLandingCarousel(-1)" aria-label="Previous special">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button type="button" class="landing-carousel-btn next" onclick="App.moveLandingCarousel(1)" aria-label="Next special">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-        </div>
-      </div>
+      <!-- Carousel Viewport with Large Photos -->
       <div class="landing-carousel-viewport" id="landing-carousel-viewport">
         <div class="landing-carousel-track" id="landing-carousel-track">
           <!-- Populated with random spots -->
@@ -631,7 +624,6 @@ function renderLanding() {
 
     <!-- Right Column: Other Food Weeks List (Rows 1-4, Column 3 on desktop) -->
     <div class="landing-others-column">
-      <div class="landing-others-title">More Food Weeks</div>
       <div class="landing-others-list">
         ${otherWeeksHTML}
       </div>
@@ -717,7 +709,9 @@ function populateLandingCarousel(spots, weekId) {
     return `
       <div class="landing-carousel-slide">
         <a href="?week=${weekId}&dish=${r.id}" class="dish-card landing-spot-card" onclick="event.preventDefault(); App.switchWeek('${weekId}'); setTimeout(() => App.openDetail(${r.id}), 500);">
-          ${thumb}
+          <div class="landing-spot-media">
+            ${thumb}
+          </div>
           <div class="card-body">
             <div class="card-dish">${esc(r.dish)}</div>
             <div class="card-restaurant">${esc(r.restaurant)}</div>

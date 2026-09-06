@@ -341,19 +341,17 @@ test.describe('Navigation and Routing', () => {
     }
   });
 
-  test('Landing grid renders 3-column desktop layout with featured week, carousel, and other weeks', async ({ page }) => {
+  test('Landing grid renders 3-column desktop layout with unified featured week showcase and other weeks', async ({ page }) => {
     await page.setViewportSize({ width: 1200, height: 900 });
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForSelector('.landing-featured-card', { state: 'visible' });
+    await page.waitForSelector('.landing-featured-showcase', { state: 'visible' });
 
-    // Verify featured card is present
-    const featuredCard = page.locator('.landing-featured-card');
-    await expect(featuredCard).toBeVisible();
-    await expect(featuredCard.locator('.featured-title')).toBeVisible();
+    // Verify unified featured showcase is present with header and carousel
+    const showcase = page.locator('.landing-featured-showcase');
+    await expect(showcase).toBeVisible();
+    await expect(showcase.locator('.featured-title')).toBeVisible();
 
-    // Verify carousel container and buttons are present
-    const carousel = page.locator('.landing-carousel-container');
-    await expect(carousel).toBeVisible();
+    // Verify carousel controls inside showcase
     const nextBtn = page.locator('.landing-carousel-btn.next');
     await expect(nextBtn).toBeVisible();
 
@@ -363,22 +361,41 @@ test.describe('Navigation and Routing', () => {
     const otherCards = page.locator('.landing-others-list .landing-card');
     await expect(otherCards.first()).toBeVisible();
 
-    // Verify borderless styling on landing cards and featured card
-    const borderInfo = await page.evaluate(() => {
+    // Verify redundant headers are NOT in DOM
+    const featuredHeading = page.locator('.landing-carousel-heading');
+    await expect(featuredHeading).toHaveCount(0);
+    const othersHeading = page.locator('.landing-others-title');
+    await expect(othersHeading).toHaveCount(0);
+
+    // Verify borderless and shadowless styling on landing cards and showcase
+    const styleInfo = await page.evaluate(() => {
       const card = document.querySelector('.landing-card');
-      const feat = document.querySelector('.landing-featured-card');
+      const showcaseEl = document.querySelector('.landing-featured-showcase');
       const cardStyle = card ? window.getComputedStyle(card) : null;
-      const featStyle = feat ? window.getComputedStyle(feat) : null;
+      const featStyle = showcaseEl ? window.getComputedStyle(showcaseEl) : null;
       return {
         cardBorderWidth: cardStyle ? cardStyle.borderWidth : '',
         cardBorderStyle: cardStyle ? cardStyle.borderStyle : '',
+        cardBoxShadow: cardStyle ? cardStyle.boxShadow : '',
         featBorderWidth: featStyle ? featStyle.borderWidth : '',
         featBorderStyle: featStyle ? featStyle.borderStyle : '',
+        featBoxShadow: featStyle ? featStyle.boxShadow : '',
       };
     });
 
-    expect(['0px', 'none'].includes(borderInfo.cardBorderWidth) || borderInfo.cardBorderStyle === 'none').toBe(true);
-    expect(['0px', 'none'].includes(borderInfo.featBorderWidth) || borderInfo.featBorderStyle === 'none').toBe(true);
+    expect(['0px', 'none'].includes(styleInfo.cardBorderWidth) || styleInfo.cardBorderStyle === 'none').toBe(true);
+    expect(['0px', 'none'].includes(styleInfo.featBorderWidth) || styleInfo.featBorderStyle === 'none').toBe(true);
+    expect(['none', ''].includes(styleInfo.cardBoxShadow) || styleInfo.cardBoxShadow.includes('rgba(0, 0, 0, 0)')).toBe(true);
+    expect(['none', ''].includes(styleInfo.featBoxShadow) || styleInfo.featBoxShadow.includes('rgba(0, 0, 0, 0)')).toBe(true);
+
+    // Verify hover underline effect
+    const hoverTitle = page.locator('.landing-card').first();
+    await hoverTitle.hover();
+    const hoverDecoration = await page.evaluate(() => {
+      const h3 = document.querySelector('.landing-card:hover h3');
+      return h3 ? window.getComputedStyle(h3).textDecorationLine : '';
+    });
+    expect(hoverDecoration).toBe('underline');
 
     // Verify landing grid margins match landing-hero-content and landing-steps-grid
     const marginMatch = await page.evaluate(() => {
@@ -404,28 +421,24 @@ test.describe('Navigation and Routing', () => {
     expect(marginMatch.stepsWidthDiff).toBeLessThanOrEqual(1);
   });
 
-  test('Landing grid stacks featured week before other weeks on mobile', async ({ page }) => {
+  test('Landing grid stacks featured showcase before other weeks on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForSelector('.landing-featured-card', { state: 'visible' });
+    await page.waitForSelector('.landing-featured-showcase', { state: 'visible' });
 
     const order = await page.evaluate(() => {
-      const featured = document.querySelector('.landing-featured-card');
-      const carousel = document.querySelector('.landing-carousel-container');
+      const showcase = document.querySelector('.landing-featured-showcase');
       const others = document.querySelector('.landing-others-column');
 
-      const fRect = featured.getBoundingClientRect();
-      const cRect = carousel.getBoundingClientRect();
+      const sRect = showcase.getBoundingClientRect();
       const oRect = others.getBoundingClientRect();
 
       return {
-        featuredBeforeCarousel: fRect.bottom <= cRect.top + 10,
-        carouselBeforeOthers: cRect.bottom <= oRect.top + 10,
+        showcaseBeforeOthers: sRect.bottom <= oRect.top + 10,
       };
     });
 
-    expect(order.featuredBeforeCarousel).toBe(true);
-    expect(order.carouselBeforeOthers).toBe(true);
+    expect(order.showcaseBeforeOthers).toBe(true);
   });
 });
 
