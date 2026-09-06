@@ -1359,7 +1359,7 @@ body.is-landing .view-footer,
 }
 
 #view-landing {
-  background-color: var(--cream);
+  background-color: #FFFFFF;
   min-height: 100vh;
   min-height: 100dvh;
 }
@@ -1546,6 +1546,9 @@ body.is-landing .view-footer,
 .landing-festivals-header {
   padding: 16px 20px 4px;
   text-align: center;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 767.98px) {
@@ -1554,30 +1557,36 @@ body.is-landing .view-footer,
   }
 }
 
+/* ── Overhauled 3-Column x 4-Row Landing Grid ── */
 .landing-grid {
-  padding: 12px 20px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 12px 20px 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
-@media (max-width: 767.98px) {
+@media (min-width: 768px) {
   .landing-grid {
-    padding: 8px 14px 24px;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 20px;
+    align-items: stretch;
   }
 }
 
+/* ── Borderless Landing Cards (match dish-card) ── */
 .landing-card {
   background: var(--card-bg, #fff);
   border-radius: 14px;
   padding: 12px 16px;
   text-align: left;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px rgba(26, 18, 8, 0.06);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -1586,7 +1595,7 @@ body.is-landing .view-footer,
   gap: 14px;
   text-decoration: none;
   color: var(--ink);
-  border: 1.5px solid var(--border);
+  border: none;
   min-height: 64px;
 }
 
@@ -1600,8 +1609,7 @@ body.is-landing .view-footer,
 
 .landing-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(26, 18, 8, 0.1), 0 0 12px var(--week-brand, rgba(0,0,0,0.06));
-  border-color: var(--week-brand, var(--ink));
+  box-shadow: 0 8px 24px rgba(26, 18, 8, 0.12), 0 0 12px var(--week-brand, rgba(0,0,0,0.06));
 }
 
 .landing-card:focus-visible {
@@ -1611,8 +1619,326 @@ body.is-landing .view-footer,
 }
 
 .landing-card.is-active-food-week {
-  border-color: var(--week-brand, #137333);
-  box-shadow: 0 3px 12px rgba(19, 115, 51, 0.12);
+  box-shadow: 0 4px 16px rgba(19, 115, 51, 0.15);
+}
+
+/* ── Featured Food Week Header Card (Columns 1 & 2, Row 1 on desktop) ── */
+.landing-featured-card {
+  grid-column: 1;
+  grid-row: 1;
+  background: var(--card-bg, #fff);
+  border-radius: 14px;
+  padding: 18px 20px;
+  text-align: left;
+  box-shadow: 0 3px 12px rgba(26, 18, 8, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .landing-featured-card {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    padding: 20px 24px;
+  }
+}
+
+.landing-featured-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(26, 18, 8, 0.14), 0 0 16px var(--week-brand, rgba(0,0,0,0.08));
+}
+
+.landing-featured-card:focus-visible {
+  outline: 3px solid var(--week-brand, var(--pizza, #C94B2C));
+  outline-offset: 2px;
+}
+
+.featured-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.featured-card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.featured-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .featured-title {
+    font-size: 22px;
+  }
+}
+
+.featured-card-action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--week-brand, var(--pizza));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 4px;
+  border-top: 1px solid rgba(26, 18, 8, 0.06);
+}
+
+.featured-card-action svg {
+  transition: transform 0.2s ease;
+}
+
+.landing-featured-card:hover .featured-card-action svg {
+  transform: translateX(4px);
+}
+
+/* ── Featured Spots Carousel (Columns 1 & 2, Rows 2-4 on desktop) ── */
+.landing-carousel-container {
+  grid-column: 1;
+  background: var(--card-bg, #fff);
+  border-radius: 14px;
+  padding: 16px 20px 20px;
+  box-shadow: 0 2px 10px rgba(26, 18, 8, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  overflow: hidden;
+  position: relative;
+  min-height: 240px;
+}
+
+@media (min-width: 768px) {
+  .landing-carousel-container {
+    grid-column: 1 / 3;
+    grid-row: 2 / 5;
+    padding: 20px 24px 22px;
+  }
+}
+
+.landing-carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.landing-carousel-heading {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-80);
+}
+
+.landing-carousel-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.landing-carousel-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(26, 18, 8, 0.06);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.15s ease;
+}
+
+.landing-carousel-btn:hover {
+  background: rgba(26, 18, 8, 0.12);
+  transform: scale(1.05);
+}
+
+.landing-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 12px;
+  flex: 1;
+  display: flex;
+}
+
+.landing-carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.landing-carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.landing-spot-card {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 8px 4px !important;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.landing-spot-card:hover {
+  transform: none !important;
+}
+
+.landing-spot-card .card-emoji {
+  width: 72px;
+  height: 72px;
+  min-width: 72px;
+  border-radius: 12px;
+  font-size: 38px;
+}
+
+@media (min-width: 768px) {
+  .landing-spot-card .card-emoji {
+    width: 110px;
+    height: 110px;
+    min-width: 110px;
+    font-size: 54px;
+    border-radius: 14px;
+  }
+}
+
+.landing-spot-card .card-dish {
+  font-size: 19px;
+  padding-right: 0;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .landing-spot-card .card-dish {
+    font-size: 21px;
+  }
+}
+
+.landing-spot-card .card-restaurant {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pizza);
+  margin-bottom: 4px;
+}
+
+.landing-spot-card .card-neighborhood {
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+
+.landing-spot-card .card-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-70);
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.landing-carousel-loading,
+.landing-carousel-empty {
+  padding: 36px 16px;
+  text-align: center;
+  width: 100%;
+  color: var(--ink-60);
+  font-size: 14px;
+}
+
+.landing-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.landing-carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(26, 18, 8, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.landing-carousel-dot.active {
+  width: 22px;
+  border-radius: 6px;
+  background: var(--pizza);
+}
+
+/* ── Right Column: Other Food Weeks (Column 3, Rows 1-4 on desktop) ── */
+.landing-others-column {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .landing-others-column {
+    grid-column: 3;
+    grid-row: 1 / 5;
+    height: 100%;
+  }
+}
+
+.landing-others-title {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-80);
+  margin-bottom: 4px;
+  padding-left: 2px;
+}
+
+.landing-others-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .landing-emoji {
@@ -1640,7 +1966,8 @@ body.is-landing .view-footer,
   }
 }
 
-.landing-card:hover .landing-emoji {
+.landing-card:hover .landing-emoji,
+.landing-featured-card:hover .landing-emoji {
   transform: scale(1.1);
 }
 
@@ -2558,16 +2885,8 @@ input[type="search"]::-webkit-search-cancel-button {
     flex-direction: unset;
   }
 
-  .landing-grid {
-    display: grid;
-    padding: 20px 24px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
   .landing-hero-content,
+  .landing-grid,
   .landing-steps-grid {
     padding: 0 24px;
     max-width: 900px;
@@ -3199,13 +3518,6 @@ input[type="search"]::-webkit-search-cancel-button {
   .landing-hero-content,
   .landing-steps-grid {
     max-width: 1200px;
-  }
-
-  .landing-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    max-width: 1040px;
   }
 }
 

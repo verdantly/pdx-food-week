@@ -28,7 +28,7 @@ test.describe('Navigation and Routing', () => {
     await page.waitForSelector('.landing-card', { state: 'visible', timeout: 10000 });
     await page.locator('.landing-card', { hasText: 'Taco Week' }).click();
 
-    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+    await page.waitForSelector('#cards-browse .dish-card', { state: 'visible', timeout: 10000 });
 
     if (isMobile) {
       await page.click('#mobile-filter-fab');
@@ -66,9 +66,9 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('#header-title')).toHaveText(/PDX\s*Food Week/);
     
     // Ensure landing cards render properly with spots count
-    const landingCards = page.locator('.landing-card');
-    await expect(landingCards.first()).toBeVisible();
-    await expect(page.locator('.landing-card', { hasText: 'Burger Week' })).toContainText('124 spots');
+    const featuredOrCard = page.locator('.landing-featured-card, .landing-card');
+    await expect(featuredOrCard.first()).toBeVisible();
+    await expect(page.locator('.landing-featured-card, .landing-card', { hasText: 'Burger Week' })).toContainText('124 spots');
   });
 
   test('Header title displays PDX Food Week on root landing page and updates when navigating to a week', async ({ page }) => {
@@ -339,6 +339,93 @@ test.describe('Navigation and Routing', () => {
       const isSameRow = Math.abs(layout.titleTop - layout.subTop) < 25;
       expect(isSameRow).toBe(vp.expectSameRow);
     }
+  });
+
+  test('Landing grid renders 3-column desktop layout with featured week, carousel, and other weeks', async ({ page }) => {
+    await page.setViewportSize({ width: 1200, height: 900 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.landing-featured-card', { state: 'visible' });
+
+    // Verify featured card is present
+    const featuredCard = page.locator('.landing-featured-card');
+    await expect(featuredCard).toBeVisible();
+    await expect(featuredCard.locator('.featured-title')).toBeVisible();
+
+    // Verify carousel container and buttons are present
+    const carousel = page.locator('.landing-carousel-container');
+    await expect(carousel).toBeVisible();
+    const nextBtn = page.locator('.landing-carousel-btn.next');
+    await expect(nextBtn).toBeVisible();
+
+    // Verify other weeks column is present
+    const othersCol = page.locator('.landing-others-column');
+    await expect(othersCol).toBeVisible();
+    const otherCards = page.locator('.landing-others-list .landing-card');
+    await expect(otherCards.first()).toBeVisible();
+
+    // Verify borderless styling on landing cards and featured card
+    const borderInfo = await page.evaluate(() => {
+      const card = document.querySelector('.landing-card');
+      const feat = document.querySelector('.landing-featured-card');
+      const cardStyle = card ? window.getComputedStyle(card) : null;
+      const featStyle = feat ? window.getComputedStyle(feat) : null;
+      return {
+        cardBorderWidth: cardStyle ? cardStyle.borderWidth : '',
+        cardBorderStyle: cardStyle ? cardStyle.borderStyle : '',
+        featBorderWidth: featStyle ? featStyle.borderWidth : '',
+        featBorderStyle: featStyle ? featStyle.borderStyle : '',
+      };
+    });
+
+    expect(['0px', 'none'].includes(borderInfo.cardBorderWidth) || borderInfo.cardBorderStyle === 'none').toBe(true);
+    expect(['0px', 'none'].includes(borderInfo.featBorderWidth) || borderInfo.featBorderStyle === 'none').toBe(true);
+
+    // Verify landing grid margins match landing-hero-content and landing-steps-grid
+    const marginMatch = await page.evaluate(() => {
+      const hero = document.querySelector('.landing-hero-content');
+      const grid = document.querySelector('.landing-grid');
+      const steps = document.querySelector('.landing-steps-grid');
+
+      const heroRect = hero.getBoundingClientRect();
+      const gridRect = grid.getBoundingClientRect();
+      const stepsRect = steps.getBoundingClientRect();
+
+      return {
+        leftDiff: Math.abs(heroRect.left - gridRect.left),
+        widthDiff: Math.abs(heroRect.width - gridRect.width),
+        stepsLeftDiff: Math.abs(gridRect.left - stepsRect.left),
+        stepsWidthDiff: Math.abs(gridRect.width - stepsRect.width),
+      };
+    });
+
+    expect(marginMatch.leftDiff).toBeLessThanOrEqual(1);
+    expect(marginMatch.widthDiff).toBeLessThanOrEqual(1);
+    expect(marginMatch.stepsLeftDiff).toBeLessThanOrEqual(1);
+    expect(marginMatch.stepsWidthDiff).toBeLessThanOrEqual(1);
+  });
+
+  test('Landing grid stacks featured week before other weeks on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.landing-featured-card', { state: 'visible' });
+
+    const order = await page.evaluate(() => {
+      const featured = document.querySelector('.landing-featured-card');
+      const carousel = document.querySelector('.landing-carousel-container');
+      const others = document.querySelector('.landing-others-column');
+
+      const fRect = featured.getBoundingClientRect();
+      const cRect = carousel.getBoundingClientRect();
+      const oRect = others.getBoundingClientRect();
+
+      return {
+        featuredBeforeCarousel: fRect.bottom <= cRect.top + 10,
+        carouselBeforeOthers: cRect.bottom <= oRect.top + 10,
+      };
+    });
+
+    expect(order.featuredBeforeCarousel).toBe(true);
+    expect(order.carouselBeforeOthers).toBe(true);
   });
 });
 

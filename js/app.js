@@ -395,6 +395,69 @@ function switchWeek(weekId, fromPopState = false) {
   });
 }
 
+let landingCarouselState = {
+  currentIndex: 0,
+  timer: null,
+  spots: [],
+  weekId: null
+};
+
+function initLandingCarousel(spots, weekId) {
+  landingCarouselState.spots = spots || [];
+  landingCarouselState.weekId = weekId;
+  landingCarouselState.currentIndex = 0;
+  if (landingCarouselState.timer) {
+    clearInterval(landingCarouselState.timer);
+    landingCarouselState.timer = null;
+  }
+  updateLandingCarouselDOM();
+  startLandingCarouselTimer();
+}
+
+function startLandingCarouselTimer() {
+  if (landingCarouselState.timer) clearInterval(landingCarouselState.timer);
+  if (landingCarouselState.spots.length <= 1) return;
+  landingCarouselState.timer = setInterval(() => {
+    moveLandingCarousel(1);
+  }, 5000);
+}
+
+function stopLandingCarouselTimer() {
+  if (landingCarouselState.timer) {
+    clearInterval(landingCarouselState.timer);
+    landingCarouselState.timer = null;
+  }
+}
+
+function moveLandingCarousel(delta) {
+  const count = landingCarouselState.spots.length;
+  if (count <= 1) return;
+  landingCarouselState.currentIndex = (landingCarouselState.currentIndex + delta + count) % count;
+  updateLandingCarouselDOM();
+}
+
+function setLandingCarouselIndex(index) {
+  const count = landingCarouselState.spots.length;
+  if (index < 0 || index >= count) return;
+  landingCarouselState.currentIndex = index;
+  updateLandingCarouselDOM();
+  startLandingCarouselTimer();
+}
+
+function updateLandingCarouselDOM() {
+  const track = document.getElementById('landing-carousel-track');
+  const dots = document.querySelectorAll('.landing-carousel-dot');
+  if (!track || !landingCarouselState.spots.length) return;
+
+  const currentIdx = landingCarouselState.currentIndex;
+  track.style.transform = `translateX(-${currentIdx * 100}%)`;
+
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === currentIdx);
+    dot.setAttribute('aria-current', idx === currentIdx ? 'true' : 'false');
+  });
+}
+
 function renderLanding() {
   applyWeekTheme(null);
   const grid = document.getElementById('landing-grid');
@@ -448,7 +511,33 @@ function renderLanding() {
     return dateB - dateA;
   });
 
-  grid.innerHTML = sortedWeeks.map(w => {
+  // Determine featured week: currently active, or next upcoming, or first sorted week
+  let featuredWeek = currentWeeks[0] || nextWeek || sortedWeeks[0];
+  const otherWeeks = sortedWeeks.filter(w => w.id !== featuredWeek.id);
+
+  const isFeaturedActive = currentWeeks.some(cw => cw.id === featuredWeek.id);
+  const isFeaturedNext = !isFeaturedActive && nextWeek && featuredWeek.id === nextWeek.id;
+
+  let featuredBadgeHTML = '';
+  if (isFeaturedActive) {
+    featuredBadgeHTML = '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>';
+  } else if (isFeaturedNext) {
+    featuredBadgeHTML = '<div class="landing-status-badge next">Up Next</div>';
+  }
+
+  const featuredPriceText = (featuredWeek.pricePills && featuredWeek.pricePills.length > 0)
+    ? esc(featuredWeek.pricePills[0])
+    : (featuredWeek.priceSlice ? `${esc(featuredWeek.priceSlice)} slice` : '');
+
+  const featuredActualCount = (window.RESTAURANTS || []).filter(r => r.weekId === featuredWeek.id).length;
+  const featuredTotalLocations = featuredActualCount > 0 ? featuredActualCount : featuredWeek.totalLocations;
+  const featuredCountText = featuredTotalLocations ? `${featuredTotalLocations} spots` : '';
+  const featuredMetaParts = [featuredPriceText, featuredCountText].filter(Boolean).join(' • ');
+
+  const featuredThemeColor = featuredWeek.color || 'var(--pizza)';
+
+  // Render other weeks list items
+  const otherWeeksHTML = otherWeeks.map(w => {
     let badgeHTML = '';
     const isActive = currentWeeks.some(cw => cw.id === w.id);
     const isNext = nextWeek && w.id === nextWeek.id;
@@ -469,7 +558,6 @@ function renderLanding() {
 
     const metaParts = [priceText, countText].filter(Boolean).join(' • ');
     const metaHTML = metaParts ? `<span class="landing-card-subinfo">${metaParts}</span>` : '';
-
     const themeColor = w.color || 'var(--pizza)';
 
     return `
@@ -493,6 +581,159 @@ function renderLanding() {
       </a>
     `;
   }).join('');
+
+  // Assemble full 3-column / 4-row landing grid
+  grid.innerHTML = `
+    <!-- Featured Week Header Card (Row 1, Columns 1 & 2 on desktop) -->
+    <a href="?week=${featuredWeek.id}" class="landing-featured-card ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" onclick="event.preventDefault(); App.switchWeek('${featuredWeek.id}');">
+      <div class="featured-card-top">
+        <div class="landing-emoji">${featuredWeek.emoji || '🍽️'}</div>
+        <div class="featured-card-info">
+          <div class="landing-card-title-row">
+            <h3 class="featured-title">${esc(featuredWeek.name)}</h3>
+          </div>
+          <div class="landing-card-dates-row">
+            <span class="landing-card-dates">${esc(featuredWeek.dates)}</span>
+          </div>
+          ${featuredMetaParts ? `<div class="landing-card-meta-row"><span class="landing-card-subinfo">${featuredMetaParts}</span></div>` : ''}
+        </div>
+        ${featuredBadgeHTML}
+      </div>
+      <div class="featured-card-action">
+        <span>Explore Specials</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </div>
+    </a>
+
+    <!-- Featured Spots Carousel (Rows 2-4, Columns 1 & 2 on desktop) -->
+    <div class="landing-carousel-container" id="landing-carousel-container" onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()">
+      <div class="landing-carousel-header">
+        <span class="landing-carousel-heading">Featured ${esc(featuredWeek.name)} Specials</span>
+        <div class="landing-carousel-nav">
+          <button type="button" class="landing-carousel-btn prev" onclick="App.moveLandingCarousel(-1)" aria-label="Previous special">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="landing-carousel-btn next" onclick="App.moveLandingCarousel(1)" aria-label="Next special">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="landing-carousel-viewport" id="landing-carousel-viewport">
+        <div class="landing-carousel-track" id="landing-carousel-track">
+          <!-- Populated with random spots -->
+          <div class="landing-carousel-loading">Loading specials...</div>
+        </div>
+      </div>
+      <div class="landing-carousel-dots" id="landing-carousel-dots"></div>
+    </div>
+
+    <!-- Right Column: Other Food Weeks List (Rows 1-4, Column 3 on desktop) -->
+    <div class="landing-others-column">
+      <div class="landing-others-title">More Food Weeks</div>
+      <div class="landing-others-list">
+        ${otherWeeksHTML}
+      </div>
+    </div>
+  `;
+
+  // Attach touch gestures for mobile carousel swipe
+  attachLandingCarouselTouch();
+
+  // Load spots for featured week if needed
+  ensureFeaturedSpotsLoaded(featuredWeek.id);
+}
+
+function attachLandingCarouselTouch() {
+  const viewport = document.getElementById('landing-carousel-viewport');
+  if (!viewport) return;
+
+  let startX = 0;
+  let startY = 0;
+  let isSwiping = false;
+
+  viewport.addEventListener('touchstart', (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isSwiping = true;
+    stopLandingCarouselTimer();
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', (e) => {
+    if (!isSwiping || !e.changedTouches || !e.changedTouches[0]) return;
+    isSwiping = false;
+    const diffX = e.changedTouches[0].clientX - startX;
+    const diffY = e.changedTouches[0].clientY - startY;
+
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX < 0) {
+        moveLandingCarousel(1);
+      } else {
+        moveLandingCarousel(-1);
+      }
+    }
+    startLandingCarouselTimer();
+  }, { passive: true });
+}
+
+function ensureFeaturedSpotsLoaded(weekId) {
+  const existingSpots = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
+  if (existingSpots.length > 0) {
+    populateLandingCarousel(existingSpots, weekId);
+    return;
+  }
+
+  loadWeekData(weekId, () => {
+    const loadedSpots = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
+    populateLandingCarousel(loadedSpots, weekId);
+  });
+}
+
+function populateLandingCarousel(spots, weekId) {
+  const track = document.getElementById('landing-carousel-track');
+  const dotsContainer = document.getElementById('landing-carousel-dots');
+  if (!track || !dotsContainer) return;
+
+  if (!spots || spots.length === 0) {
+    track.innerHTML = `<div class="landing-carousel-empty">Specials coming soon!</div>`;
+    dotsContainer.innerHTML = '';
+    return;
+  }
+
+  // Pick up to 8 randomized spots
+  const shuffled = [...spots].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 8);
+
+  track.innerHTML = selected.map(r => {
+    const thumb = r.image
+      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+      : `<div class="card-emoji">${esc(r.emoji || '🍽️')}</div>`;
+
+    const locationText = r.neighborhood || r.address || '';
+    const descText = r.desc || r.whatsOnIt || '';
+
+    return `
+      <div class="landing-carousel-slide">
+        <a href="?week=${weekId}&dish=${r.id}" class="dish-card landing-spot-card" onclick="event.preventDefault(); App.switchWeek('${weekId}'); setTimeout(() => App.openDetail(${r.id}), 500);">
+          ${thumb}
+          <div class="card-body">
+            <div class="card-dish">${esc(r.dish)}</div>
+            <div class="card-restaurant">${esc(r.restaurant)}</div>
+            ${locationText ? `<div class="card-neighborhood">📍 ${esc(locationText)}</div>` : ''}
+            ${descText ? `<div class="card-desc">${esc(descText)}</div>` : ''}
+          </div>
+        </a>
+      </div>
+    `;
+  }).join('');
+
+  dotsContainer.innerHTML = selected.map((_, idx) => `
+    <button type="button" class="landing-carousel-dot ${idx === 0 ? 'active' : ''}" onclick="App.setLandingCarouselIndex(${idx})" aria-label="Go to special ${idx + 1}"></button>
+  `).join('');
+
+  initLandingCarousel(selected, weekId);
 }
 
 function setupMobileScrollListener() {
@@ -1065,7 +1306,11 @@ const App = {
   setupSavedDragEvents,
   getActiveFriends,
   hideCompactDropdowns,
-  checkMetadataUpdate
+  checkMetadataUpdate,
+  moveLandingCarousel,
+  setLandingCarouselIndex,
+  startLandingCarouselTimer,
+  stopLandingCarouselTimer
 };
 
 window.App = App;
