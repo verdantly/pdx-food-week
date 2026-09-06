@@ -292,11 +292,11 @@ test.describe('Navigation and Routing', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('.landing-hero-content', { state: 'visible' });
 
-    // Test across several viewport sizes
+    // Test across several viewport sizes (landing-subtitle is always left-aligned)
     const viewports = [
-      { width: 1440, height: 900, expectSameRow: true, expectedAlign: 'right' },
-      { width: 1024, height: 768, expectSameRow: true, expectedAlign: 'right' },
-      { width: 768, height: 1024, expectSameRow: true, expectedAlign: 'right' },
+      { width: 1440, height: 900, expectSameRow: true, expectedAlign: 'left' },
+      { width: 1024, height: 768, expectSameRow: true, expectedAlign: 'left' },
+      { width: 768, height: 1024, expectSameRow: true, expectedAlign: 'left' },
       { width: 480, height: 800, expectSameRow: false, expectedAlign: 'left' },
       { width: 375, height: 667, expectSameRow: false, expectedAlign: 'left' },
     ];
@@ -332,7 +332,7 @@ test.describe('Navigation and Routing', () => {
       expect(Math.abs(layout.heroLeft - layout.stepsLeft)).toBeLessThanOrEqual(1);
       expect(Math.abs(layout.heroWidth - layout.stepsWidth)).toBeLessThanOrEqual(1);
 
-      // Subtitle alignment check
+      // Subtitle alignment check (always left-aligned)
       expect(layout.subAlign).toBe(vp.expectedAlign);
 
       // Same row check: if expected same row, vertical tops should be close
@@ -361,17 +361,21 @@ test.describe('Navigation and Routing', () => {
     await expect(prevBtn).toBeVisible();
     await expect(nextBtn).toBeVisible();
 
-    // Verify other weeks column is present
+    // Verify other weeks column is present with "More Food Weeks" subtitle
     const othersCol = page.locator('.landing-others-column');
     await expect(othersCol).toBeVisible();
+    const othersSubtitle = othersCol.locator('.landing-others-title');
+    await expect(othersSubtitle).toBeVisible();
+    await expect(othersSubtitle).toHaveText('More Food Weeks');
+
     const otherCards = page.locator('.landing-others-list .landing-card');
     await expect(otherCards.first()).toBeVisible();
 
-    // Verify redundant headers are NOT in DOM
+    // Verify "Explore Food Weeks" and "Featured Specials" headers are NOT in DOM
+    const exploreHeading = page.locator('.landing-festivals-header');
+    await expect(exploreHeading).toHaveCount(0);
     const featuredHeading = page.locator('.landing-carousel-heading');
     await expect(featuredHeading).toHaveCount(0);
-    const othersHeading = page.locator('.landing-others-title');
-    await expect(othersHeading).toHaveCount(0);
 
     // Verify borderless and shadowless styling on landing cards and showcase
     const styleInfo = await page.evaluate(() => {

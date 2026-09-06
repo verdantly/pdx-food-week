@@ -621,6 +621,7 @@ function renderLanding() {
 
     <!-- Right Column: Other Food Weeks List (Rows 1-4, Column 3 on desktop) -->
     <div class="landing-others-column">
+      <div class="landing-others-title">More Food Weeks</div>
       <div class="landing-others-list">
         ${otherWeeksHTML}
       </div>
