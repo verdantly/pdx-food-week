@@ -621,10 +621,11 @@ function renderLanding() {
         </div>
       </div>
 
+      <!-- Screen reader live region for slide announcements -->
+      <span class="sr-only" id="landing-carousel-live-status" aria-live="polite" aria-atomic="true"></span>
+
       <!-- Carousel Viewport with Large Photos and Overlay Navigation Arrows -->
       <div class="landing-carousel-viewport" id="landing-carousel-viewport">
-        <!-- Screen reader live region for slide announcements -->
-        <span class="sr-only" id="landing-carousel-live-status" aria-live="polite" aria-atomic="true"></span>
         <button type="button" class="landing-carousel-arrow-overlay prev" onclick="event.stopPropagation(); App.moveLandingCarousel(-1)" aria-label="Previous special">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
