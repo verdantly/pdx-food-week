@@ -450,6 +450,36 @@ test.describe('Navigation and Routing', () => {
 
     expect(order.showcaseBeforeOthers).toBe(true);
   });
+
+  test('Landing page meets WCAG accessibility standards', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.landing-featured-showcase', { state: 'visible' });
+
+    // 1. Carousel region role and aria-roledescription
+    const showcase = page.locator('.landing-featured-showcase');
+    await expect(showcase).toHaveAttribute('role', 'region');
+    await expect(showcase).toHaveAttribute('aria-roledescription', 'carousel');
+
+    // 2. Screen reader live region
+    const liveStatus = page.locator('#landing-carousel-live-status');
+    await expect(liveStatus).toHaveAttribute('aria-live', 'polite');
+
+    // 3. Slides carry group role and slide roledescription
+    const firstSlide = page.locator('.landing-carousel-slide').first();
+    await expect(firstSlide).toHaveAttribute('role', 'group');
+    await expect(firstSlide).toHaveAttribute('aria-roledescription', 'slide');
+
+    // 4. Dot controls have accessible names and aria-current
+    const dots = page.locator('.landing-carousel-dot');
+    await expect(dots.first()).toHaveAttribute('aria-current', 'true');
+    await expect(dots.first()).toHaveAttribute('aria-label', /Go to special/);
+
+    // 5. Arrow overlay buttons have accessible names
+    const prevBtn = page.locator('.landing-carousel-arrow-overlay.prev');
+    const nextBtn = page.locator('.landing-carousel-arrow-overlay.next');
+    await expect(prevBtn).toHaveAttribute('aria-label', 'Previous special');
+    await expect(nextBtn).toHaveAttribute('aria-label', 'Next special');
+  });
 });
 
 

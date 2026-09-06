@@ -411,12 +411,17 @@ function initLandingCarousel(spots, weekId) {
     landingCarouselState.timer = null;
   }
   updateLandingCarouselDOM();
-  startLandingCarouselTimer();
+  // Check prefers-reduced-motion before starting timer
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    startLandingCarouselTimer();
+  }
 }
 
 function startLandingCarouselTimer() {
   if (landingCarouselState.timer) clearInterval(landingCarouselState.timer);
-  if (landingCarouselState.spots.length <= 1) return;
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || landingCarouselState.spots.length <= 1) return;
   landingCarouselState.timer = setInterval(() => {
     moveLandingCarousel(1);
   }, 5000);
@@ -441,12 +446,16 @@ function setLandingCarouselIndex(index) {
   if (index < 0 || index >= count) return;
   landingCarouselState.currentIndex = index;
   updateLandingCarouselDOM();
-  startLandingCarouselTimer();
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    startLandingCarouselTimer();
+  }
 }
 
 function updateLandingCarouselDOM() {
   const track = document.getElementById('landing-carousel-track');
   const dots = document.querySelectorAll('.landing-carousel-dot');
+  const liveStatus = document.getElementById('landing-carousel-live-status');
   if (!track || !landingCarouselState.spots.length) return;
 
   const currentIdx = landingCarouselState.currentIndex;
@@ -456,6 +465,12 @@ function updateLandingCarouselDOM() {
     dot.classList.toggle('active', idx === currentIdx);
     dot.setAttribute('aria-current', idx === currentIdx ? 'true' : 'false');
   });
+
+  // Update live status for screen reader announcement
+  if (liveStatus && landingCarouselState.spots[currentIdx]) {
+    const spot = landingCarouselState.spots[currentIdx];
+    liveStatus.textContent = `Special ${currentIdx + 1} of ${landingCarouselState.spots.length}: ${spot.dish} at ${spot.restaurant}`;
+  }
 }
 
 function renderLanding() {
@@ -585,7 +600,10 @@ function renderLanding() {
   // Assemble full 3-column / 4-row landing grid
   grid.innerHTML = `
     <!-- Visually Unified Featured Week Showcase (Columns 1 & 2, Rows 1-4 on desktop) -->
-    <div class="landing-featured-showcase ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()">
+    <div class="landing-featured-showcase ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" 
+         onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()"
+         onfocusin="App.stopLandingCarouselTimer()" onfocusout="App.startLandingCarouselTimer()"
+         role="region" aria-roledescription="carousel" aria-label="Featured ${esc(featuredWeek.name)} specials">
       <div class="featured-showcase-header">
         <a href="?week=${featuredWeek.id}" class="featured-showcase-title-link" onclick="event.preventDefault(); App.switchWeek('${featuredWeek.id}');">
           <div class="featured-card-info">
@@ -605,6 +623,8 @@ function renderLanding() {
 
       <!-- Carousel Viewport with Large Photos and Overlay Navigation Arrows -->
       <div class="landing-carousel-viewport" id="landing-carousel-viewport">
+        <!-- Screen reader live region for slide announcements -->
+        <span class="sr-only" id="landing-carousel-live-status" aria-live="polite" aria-atomic="true"></span>
         <button type="button" class="landing-carousel-arrow-overlay prev" onclick="event.stopPropagation(); App.moveLandingCarousel(-1)" aria-label="Previous special">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
@@ -696,7 +716,7 @@ function populateLandingCarousel(spots, weekId) {
   const shuffled = [...spots].sort(() => 0.5 - Math.random());
   const selected = shuffled.slice(0, 8);
 
-  track.innerHTML = selected.map(r => {
+  track.innerHTML = selected.map((r, idx) => {
     const thumb = r.image
       ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
       : `<div class="card-emoji">${esc(r.emoji || '🍽️')}</div>`;
@@ -705,7 +725,7 @@ function populateLandingCarousel(spots, weekId) {
     const descText = r.desc || r.whatsOnIt || '';
 
     return `
-      <div class="landing-carousel-slide">
+      <div class="landing-carousel-slide" role="group" aria-roledescription="slide" aria-label="${idx + 1} of ${selected.length}">
         <a href="?week=${weekId}&dish=${r.id}" class="dish-card landing-spot-card" onclick="event.preventDefault(); App.switchWeek('${weekId}'); setTimeout(() => App.openDetail(${r.id}), 500);">
           <div class="landing-spot-media">
             ${thumb}

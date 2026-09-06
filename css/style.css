@@ -1909,25 +1909,35 @@ body.is-landing .view-footer,
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin-top: 4px;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .landing-carousel-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: none;
-  background: rgba(26, 18, 8, 0.2);
+  border: 1px solid rgba(26, 18, 8, 0.45);
+  background: rgba(26, 18, 8, 0.25);
   cursor: pointer;
   padding: 0;
   transition: all 0.2s ease;
 }
 
+.landing-carousel-dot:hover {
+  background: rgba(26, 18, 8, 0.5);
+}
+
 .landing-carousel-dot.active {
-  width: 22px;
+  width: 24px;
   border-radius: 6px;
   background: var(--pizza);
+  border-color: var(--pizza-dark, var(--pizza));
+}
+
+.landing-carousel-dot:focus-visible {
+  outline: 3px solid var(--week-brand, var(--pizza, #C94B2C));
+  outline-offset: 2px;
 }
 
 /* ── Right Column: Other Food Weeks (Column 3, Rows 1-4 on desktop) ── */
@@ -4965,5 +4975,25 @@ body.crawl-mode-active #mobile-filter-fab {
 
   .card-venue {
     color: #333 !important;
+  }
+}
+
+/* ── Accessibility: Prefers Reduced Motion (WCAG 2.3.3) ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .landing-carousel-track {
+    transition: none !important;
+  }
+
+  .badge-dot-live {
+    animation: none !important;
   }
 }
