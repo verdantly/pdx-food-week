@@ -1628,7 +1628,7 @@ body.is-landing .view-footer,
   grid-column: 1;
   background: var(--card-bg, #fff);
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: 20px 0;
   box-shadow: none;
   border: none;
   overflow: hidden;
@@ -1642,7 +1642,7 @@ body.is-landing .view-footer,
   .landing-featured-showcase {
     grid-column: 1 / 3;
     grid-row: 1 / 5;
-    padding: 24px 28px;
+    padding: 24px 0;
   }
 }
 
@@ -1943,6 +1943,8 @@ body.is-landing .view-footer,
     grid-column: 3;
     grid-row: 1 / 5;
     height: 100%;
+    padding: 24px 0;
+    box-sizing: border-box;
   }
 }
 
