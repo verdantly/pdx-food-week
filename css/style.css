@@ -1705,31 +1705,6 @@ body.is-landing .view-footer,
   flex-shrink: 0;
 }
 
-.landing-carousel-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.landing-carousel-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(26, 18, 8, 0.06);
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.18s ease;
-}
-
-.landing-carousel-btn:hover {
-  background: rgba(26, 18, 8, 0.12);
-  transform: none;
-}
-
 /* ── Carousel Viewport & Slides (Serious Eats Featured Style) ── */
 .landing-carousel-viewport {
   overflow: hidden;
@@ -1737,6 +1712,54 @@ body.is-landing .view-footer,
   border-radius: 12px;
   flex: 1;
   display: flex;
+  position: relative;
+}
+
+/* Navigation arrows overlaying the left and right sides of the photo */
+.landing-carousel-arrow-overlay {
+  position: absolute;
+  top: 120px; /* Centered on the mobile 240px photo */
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+@media (min-width: 768px) {
+  .landing-carousel-arrow-overlay {
+    top: 155px; /* Centered on the desktop 310px photo */
+    width: 42px;
+    height: 42px;
+  }
+}
+
+.landing-carousel-arrow-overlay.prev {
+  left: 12px;
+}
+
+.landing-carousel-arrow-overlay.next {
+  right: 12px;
+}
+
+.landing-carousel-arrow-overlay:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.landing-carousel-arrow-overlay:focus-visible {
+  outline: 3px solid var(--week-brand, var(--pizza, #C94B2C));
+  outline-offset: 2px;
 }
 
 .landing-carousel-track {

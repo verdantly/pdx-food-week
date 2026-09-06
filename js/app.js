@@ -588,7 +588,6 @@ function renderLanding() {
     <div class="landing-featured-showcase ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()">
       <div class="featured-showcase-header">
         <a href="?week=${featuredWeek.id}" class="featured-showcase-title-link" onclick="event.preventDefault(); App.switchWeek('${featuredWeek.id}');">
-          <div class="landing-emoji">${featuredWeek.emoji || '🍽️'}</div>
           <div class="featured-card-info">
             <div class="landing-card-title-row">
               <h3 class="featured-title">${esc(featuredWeek.name)}</h3>
@@ -601,19 +600,17 @@ function renderLanding() {
         </a>
         <div class="featured-showcase-header-right">
           ${featuredBadgeHTML}
-          <div class="landing-carousel-nav">
-            <button type="button" class="landing-carousel-btn prev" onclick="App.moveLandingCarousel(-1)" aria-label="Previous special">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button type="button" class="landing-carousel-btn next" onclick="App.moveLandingCarousel(1)" aria-label="Next special">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-          </div>
         </div>
       </div>
 
-      <!-- Carousel Viewport with Large Photos -->
+      <!-- Carousel Viewport with Large Photos and Overlay Navigation Arrows -->
       <div class="landing-carousel-viewport" id="landing-carousel-viewport">
+        <button type="button" class="landing-carousel-arrow-overlay prev" onclick="event.stopPropagation(); App.moveLandingCarousel(-1)" aria-label="Previous special">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="landing-carousel-arrow-overlay next" onclick="event.stopPropagation(); App.moveLandingCarousel(1)" aria-label="Next special">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
         <div class="landing-carousel-track" id="landing-carousel-track">
           <!-- Populated with random spots -->
           <div class="landing-carousel-loading">Loading specials...</div>

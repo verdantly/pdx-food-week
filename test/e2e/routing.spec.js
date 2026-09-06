@@ -351,8 +351,14 @@ test.describe('Navigation and Routing', () => {
     await expect(showcase).toBeVisible();
     await expect(showcase.locator('.featured-title')).toBeVisible();
 
-    // Verify carousel controls inside showcase
-    const nextBtn = page.locator('.landing-carousel-btn.next');
+    // Verify no emoji in featured showcase header
+    const featuredEmoji = showcase.locator('.featured-showcase-header .landing-emoji');
+    await expect(featuredEmoji).toHaveCount(0);
+
+    // Verify carousel controls overlaying the photo inside showcase
+    const prevBtn = page.locator('.landing-carousel-arrow-overlay.prev');
+    const nextBtn = page.locator('.landing-carousel-arrow-overlay.next');
+    await expect(prevBtn).toBeVisible();
     await expect(nextBtn).toBeVisible();
 
     // Verify other weeks column is present
