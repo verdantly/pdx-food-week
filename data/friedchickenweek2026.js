@@ -1,5 +1,5 @@
 // The Actual Portland's Fried Chicken Week 2026
-// 39 locations
+// 38 locations
 // Source: https://www.theactualportland.com/friedchickenlocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 39,
+    totalLocations: 38,
     url: "https://www.theactualportland.com/friedchickenlocations",
   }
 );
@@ -652,7 +652,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "takeout": true,
     "desc": "Crispy fried chicken piled over creamy mashed potatoes, smothered with melted cheese, topped with roasted corn and jalapeño, then drizzled with tangy alabama white sauce. It ain’t pretty. It’s damn good!",
     "emoji": "🍗",
-    "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR6MSJF0FRSwAx_vk2bHD2196yAUvO7EEGA1GlFbqD5VmIiqMfRHvRJkQEw7Afyp4hmpiQOSWkDxLLV6OMqu6fmW3EM2xWweErcRdpwAlFvDD84IHSZtmiX0L2SZsJ_BlqrHtrJy7182cP0fX3Xza-NExQYiVCMyC80Yq6THTX1ythHLJMatf-iiyhgPY7toevHTtLc2DTFKm3kAd7AGBFMWlp87GRG1yxrf6jsom8sFGN4r5d4IImmBCLY?fife=s16383",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/0cc2bbf1-4964-41d3-a814-1f769a048667/IMG_6358.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
@@ -808,7 +808,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "dish": "Crispy Garlic Chicken Wings",
     "restaurant": "E-San Thai Woodstock",
     "neighborhood": "Woodstock",
-    "address": "4818 Southeast Woodstock Blvd, Portland, OR 97206",
+    "address": "4818 SE Woodstock Blvd, Portland, OR 97206",
     "lat": 45.479532,
     "lng": -122.612845,
     "type": "meat",
@@ -821,27 +821,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy thai wings.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/3f980f48-8352-4cf9-926b-d90bdd62a2ed/IMG_5299+-+Huyen+Tram+Huynh.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
-  },
-  {
-    "id": 39,
-    "weekId": "fried-chicken-2026",
-    "dish": "Crispy Garlic Chicken Wings",
-    "restaurant": "Lariat Lounge",
-    "neighborhood": "Woodstock",
-    "address": "4818 Southeast Woodstock Blvd, Portland, OR 97206",
-    "lat": 45.479532,
-    "lng": -122.612845,
-    "type": "meat",
-    "vegOption": false,
-    "veganOption": false,
-    "glutenFree": false,
-    "spicy": true,
-    "minors": true,
-    "takeout": true,
-    "desc": "Alabama hot mess - crispy fried chicken piled over creamy mashed potatoes, smothered with melted cheese, topped with roasted corn and jalapeño, then drizzled with tangy alabama white sauce. It ain’t pretty. It’s damn good!",
-    "emoji": "🍗",
-    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/0cc2bbf1-4964-41d3-a814-1f769a048667/IMG_6358.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   }
 ];

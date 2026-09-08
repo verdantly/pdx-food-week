@@ -52,6 +52,7 @@ const NAME_MAP = {
   'lorrellschickenshake': 'lorellschickenshack',
   'lorellschickenshack': 'lorellschickenshack',
   'esanthaiwoodstock': 'esanthaiwoodstock',
+  'thelariatlounge': 'lariatlounge',
   'wajan': 'wajan'
 };
 
@@ -79,6 +80,12 @@ const ADDRESS_OVERRIDES = {
     neighborhood: 'North Tabor',
     lat: 45.5261828,
     lng: -122.6155435
+  },
+  'E-San Thai Woodstock': {
+    address: '4818 SE Woodstock Blvd, Portland, OR 97206',
+    neighborhood: 'Woodstock',
+    lat: 45.479532,
+    lng: -122.612845
   }
 };
 
@@ -351,13 +358,14 @@ async function scrape() {
   for (const [sqKey, sqItem] of Object.entries(squarespaceMap)) {
     if (!processedKeys.has(sqKey)) {
       console.log(`Adding Squarespace-only listing: "${sqItem.title}"`);
-      let address = '4818 Southeast Woodstock Blvd, Portland, OR 97206';
-      let streetAddress = '4818 SE Woodstock Blvd';
-      let neighborhood = 'Woodstock';
-      let lat = 45.479532;
-      let lng = -122.612845;
+      const override = ADDRESS_OVERRIDES[sqItem.title] || {};
+      let address = override.address || 'Portland, OR';
+      let streetAddress = override.address ? override.address.split(',')[0].trim() : '';
+      let neighborhood = override.neighborhood || 'Portland';
+      let lat = override.lat || 45.5231;
+      let lng = override.lng || -122.6765;
 
-      let dish = 'Crispy Garlic Chicken Wings';
+      let dish = 'Crispy Fried Chicken';
       let desc = sqItem.description ? toSentenceCase(sqItem.description) : 'Crispy fried chicken special';
       if (DISH_OVERRIDES[sqItem.title] && DISH_OVERRIDES[sqItem.title].dish) {
         dish = DISH_OVERRIDES[sqItem.title].dish;
