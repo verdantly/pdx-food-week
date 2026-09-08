@@ -313,5 +313,45 @@
     "address": "4611 East Burnside St, Portland, OR 97215",
     "streetAddress": "4611 East Burnside St",
     "neighborhood": "North Tabor"
+  },
+  "45.4244738,-122.5153086": {
+    "address": "13551 Southeast 145th Ave, Happy Valley, OR 97015",
+    "streetAddress": "13551 Southeast 145th Ave",
+    "neighborhood": "Happy Valley"
+  },
+  "45.5043979,-122.4852199": {
+    "address": "17238 Southeast Division St, Portland, OR 97236",
+    "streetAddress": "17238 Southeast Division St",
+    "neighborhood": "Centennial"
+  },
+  "45.5122289,-122.6246892": {
+    "address": "3757 Southeast Hawthorne Blvd, Portland, OR 97214",
+    "streetAddress": "3757 Southeast Hawthorne Blvd",
+    "neighborhood": "Richmond"
+  },
+  "45.5769337,-122.7020461": {
+    "address": "3414 North Lombard St, Portland, OR 97217",
+    "streetAddress": "3414 North Lombard St",
+    "neighborhood": "Kenton"
+  },
+  "45.5162883,-122.6393545": {
+    "address": "2534 Southeast Belmont St, Portland, OR 97214",
+    "streetAddress": "2534 Southeast Belmont St",
+    "neighborhood": "Buckman"
+  },
+  "45.5592399,-122.6415569": {
+    "address": "2315 Northeast Alberta St, Portland, OR 97211",
+    "streetAddress": "2315 Northeast Alberta St",
+    "neighborhood": "Concordia"
+  },
+  "45.5826568,-122.6864691": {
+    "address": "8212 North Denver Ave, Portland, OR 97217",
+    "streetAddress": "8212 North Denver Ave",
+    "neighborhood": "Kenton"
+  },
+  "45.5194341,-122.6514688": {
+    "address": "1403 Southeast Stark St, Portland, OR 97214",
+    "streetAddress": "1403 Southeast Stark St",
+    "neighborhood": "Buckman"
   }
 }
