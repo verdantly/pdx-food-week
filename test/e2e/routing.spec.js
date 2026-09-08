@@ -133,10 +133,16 @@ test.describe('Navigation and Routing', () => {
 
   test('Service worker offline load serves Landing Page on root URL', async ({ context, page }) => {
     await page.goto('/', { waitUntil: 'networkidle' });
+    await page.evaluate(async () => {
+      if ('serviceWorker' in navigator) {
+        await navigator.serviceWorker.ready;
+      }
+    });
     await context.setOffline(true);
     await page.reload({ waitUntil: 'domcontentloaded' }).catch(() => {});
     await expect(page.locator('#view-landing')).toBeVisible();
     await expect(page.locator('body')).toHaveClass(/is-landing/);
+    await context.setOffline(false);
   });
 
   test('Map tab search bar filters locations and clear button resets query', async ({ page }) => {
