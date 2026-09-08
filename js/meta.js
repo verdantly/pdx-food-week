@@ -3,6 +3,75 @@
 
 window.FOOD_WEEKS = [
   {
+    id: "wiener-2026",
+    name: "Wiener Week 2026",
+    organizer: "Portland Mercury",
+    dataFile: "wienerweek2026.js",
+    dates: "January 26 – February 1, 2026",
+    startDate: "2026-01-26",
+    endDate: "2026-02-01",
+    pricePills: ["$8 wieners"],
+    color: "#D32F2F",
+    colorDark: "#9A0007",
+    colorLight: "#FFCDD2",
+    colorPale: "#FFEBEE",
+    emoji: "🌭",
+    totalLocations: 2,
+    url: "https://everout.com/portland/events/the-portland-mercurys-wiener-week-2026/e222740/",
+    filters: [
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' }
+    ]
+  },
+  {
+    id: "dumpling-2026",
+    name: "Dumpling Week 2026",
+    organizer: "The Oregonian",
+    dataFile: "dumplingweek2026.js",
+    dates: "February 15–21, 2026",
+    startDate: "2026-02-15",
+    endDate: "2026-02-21",
+    pricePills: ["$12–$15 dumplings"],
+    color: "#8E24AA",
+    colorDark: "#5C007A",
+    colorLight: "#E1BEE7",
+    colorPale: "#F3E5F5",
+    emoji: "🥟",
+    totalLocations: 2,
+    url: "https://www.dumplingweek.com/",
+    filters: [
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' }
+    ]
+  },
+  {
+    id: "sandwich-2026",
+    name: "Sandwich Week 2026",
+    organizer: "Portland Mercury",
+    dataFile: "sandwichweek2026.js",
+    dates: "March 2–8, 2026",
+    startDate: "2026-03-02",
+    endDate: "2026-03-08",
+    pricePills: ["$10 sandwiches"],
+    color: "#00897B",
+    colorDark: "#00564D",
+    colorLight: "#B2DFDB",
+    colorPale: "#E0F2F1",
+    emoji: "🥪",
+    totalLocations: 2,
+    url: "https://everout.com/portland/events/the-portland-mercurys-sandwich-week-2026/e222742/",
+    filters: [
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' }
+    ]
+  },
+  {
     id: "burger-2026",
     name: "Burger Week 2026",
     organizer: "Portland Mercury",

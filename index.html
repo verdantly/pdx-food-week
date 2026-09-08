@@ -39,7 +39,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="css/style.css?v=a9ccb15c" />
+  <link rel="stylesheet" href="css/style.css?v=452ea616" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -209,6 +209,12 @@
           <div class="landing-hero-content">
             <h1 class="landing-title">PDX Food Week</h1>
             <p class="landing-subtitle">Your unofficial guide to Portland food weeks — browse menus, save favorites &amp; plan crawls.</p>
+            <div class="landing-search-wrap">
+              <span class="material-symbols-outlined search-icon" aria-hidden="true">search</span>
+              <input type="search" id="landing-global-search" placeholder="Search dishes, restaurants, or neighborhoods..." autocomplete="off" aria-label="Search all food weeks">
+              <button type="button" id="landing-search-clear" class="search-clear-btn" aria-label="Clear search" hidden>✕</button>
+            </div>
+            <div class="landing-search-results" id="landing-search-results" hidden role="listbox" aria-label="Search results"></div>
           </div>
         </div>
 
@@ -216,24 +222,63 @@
           <!-- Populated dynamically -->
         </div>
 
+        <!-- ── Annual Food Week Calendar Strip (Option B) ── -->
+        <section class="landing-calendar-section" aria-label="Annual Portland Food Week Calendar">
+          <div class="landing-calendar-header">
+            <h2 class="landing-section-title">2026 Food Week Calendar</h2>
+            <span class="landing-calendar-sub">Portland's annual culinary season at a glance</span>
+          </div>
+          <div class="landing-timeline-container" id="landing-timeline-container">
+            <!-- Dynamically populated timeline nodes -->
+          </div>
+        </section>
+
         <!-- ── How It Works ── -->
         <div class="landing-features">
           <h2 class="landing-section-title">How It Works</h2>
           <div class="landing-steps-grid">
             <div class="landing-step-item">
-              <div class="step-num">01</div>
+              <div class="landing-step-header">
+                <div class="landing-step-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                    <path d="M7 2v20"/>
+                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+                  </svg>
+                </div>
+                <div class="step-num">01</div>
+              </div>
               <h3 class="step-title">Explore specials</h3>
               <p class="step-desc">Browse all the food week specials and filter by location, dietary options, then save
                 your favorites. Use our fun Tinder-style swipe feature to help you choose!</p>
             </div>
             <div class="landing-step-item">
-              <div class="step-num">02</div>
+              <div class="landing-step-header">
+                <div class="landing-step-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <div class="step-num">02</div>
+              </div>
               <h3 class="step-title">Share with friends</h3>
               <p class="step-desc">Share your must-try dishes with friends and family and see what places everyone has
                 in common.</p>
             </div>
             <div class="landing-step-item">
-              <div class="step-num">03</div>
+              <div class="landing-step-header">
+                <div class="landing-step-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="19" r="3"/>
+                    <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/>
+                    <circle cx="18" cy="5" r="3"/>
+                  </svg>
+                </div>
+                <div class="step-num">03</div>
+              </div>
               <h3 class="step-title">Plan your visits</h3>
               <p class="step-desc">Build walking or driving itineraries to make it easy to get to all the places you
                 want to try.
@@ -872,14 +917,31 @@
     </div>
   </div>
 
+  <!-- ── PWA Install Banner ── -->
+  <div id="pwa-install-banner" class="pwa-install-banner" hidden role="region" aria-label="Install app">
+    <div class="pwa-install-content">
+      <div class="pwa-install-icon">
+        <img src="favicon-96x96.png" width="36" height="36" alt="PDX Food Week icon" style="border-radius: 8px;">
+      </div>
+      <div class="pwa-install-text">
+        <div class="pwa-install-title">Install PDX Food Week</div>
+        <div class="pwa-install-desc">Fast home screen access &amp; 100% offline menus</div>
+      </div>
+      <div class="pwa-install-actions">
+        <button type="button" id="pwa-install-btn" class="btn-pwa-install">Install</button>
+        <button type="button" id="pwa-dismiss-btn" class="btn-pwa-dismiss" aria-label="Dismiss install prompt">✕</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Scripts ── -->
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=a9ccb15c"></script>
-  <script type="module" src="js/app.js?v=a9ccb15c"></script>
+  <script src="js/meta.js?v=452ea616"></script>
+  <script type="module" src="js/app.js?v=452ea616"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;

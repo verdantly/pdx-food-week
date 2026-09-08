@@ -483,39 +483,101 @@ function renderLanding() {
   let nextWeek = null;
   let minDiff = Infinity;
 
-  window.FOOD_WEEKS.forEach(w => {
-    if (w.startDate) {
-      const [sy, sm, sd] = w.startDate.split('-');
-      const start = new Date(sy, sm - 1, sd, 0, 0, 0);
-      let end = new Date(sy, sm - 1, sd, 23, 59, 59);
+  // Helper to compute dynamic badge and dates for any week
+  function getWeekTiming(w) {
+    if (!w.startDate) return { badgeHTML: '', status: 'unknown', start: null, end: null };
+    const [sy, sm, sd] = w.startDate.split('-');
+    const start = new Date(sy, sm - 1, sd, 0, 0, 0);
+    let end = new Date(sy, sm - 1, sd, 23, 59, 59);
 
-      if (w.endDate) {
-        const [ey, em, ed] = w.endDate.split('-');
-        end = new Date(ey, em - 1, ed, 23, 59, 59);
-      } else if (w.dates) {
-        const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
-        const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
-        if (weekMatch) {
-          end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
-        } else if (monthMatch) {
-          end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
-          end.setMonth(end.getMonth() + 1);
-          end.setDate(0);
-        } else {
-          end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-        }
+    if (w.endDate) {
+      const [ey, em, ed] = w.endDate.split('-');
+      end = new Date(ey, em - 1, ed, 23, 59, 59);
+    } else if (w.dates) {
+      const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
+      const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
+      if (weekMatch) {
+        end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
+      } else if (monthMatch) {
+        end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
+        end.setMonth(end.getMonth() + 1);
+        end.setDate(0);
       } else {
         end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
       }
+    } else {
+      end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+    }
 
-      if (now >= start && now <= end) {
-        currentWeeks.push(w);
-      } else if (now < start) {
-        const diff = start - now;
-        if (diff < minDiff) {
-          minDiff = diff;
-          nextWeek = w;
-        }
+    if (now >= start && now <= end) {
+      const daysLeft = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+      if (daysLeft <= 1) {
+        return {
+          badgeHTML: '<div class="landing-status-badge active urgent"><span class="badge-dot-live"></span> Ends Today!</div>',
+          status: 'active',
+          label: 'Ends Today!',
+          start, end
+        };
+      }
+      if (daysLeft <= 3) {
+        return {
+          badgeHTML: `<div class="landing-status-badge active"><span class="badge-dot-live"></span> Ends in ${daysLeft}d</div>`,
+          status: 'active',
+          label: `Ends in ${daysLeft}d`,
+          start, end
+        };
+      }
+      return {
+        badgeHTML: '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>',
+        status: 'active',
+        label: 'Active Now',
+        start, end
+      };
+    }
+
+    if (now < start) {
+      const daysUntil = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
+      if (daysUntil === 1) {
+        return {
+          badgeHTML: '<div class="landing-status-badge next">Starts Tomorrow</div>',
+          status: 'upcoming',
+          label: 'Starts Tomorrow',
+          start, end, daysUntil
+        };
+      }
+      if (daysUntil <= 14) {
+        return {
+          badgeHTML: `<div class="landing-status-badge next">Starts in ${daysUntil}d</div>`,
+          status: 'upcoming',
+          label: `Starts in ${daysUntil}d`,
+          start, end, daysUntil
+        };
+      }
+      return {
+        badgeHTML: '<div class="landing-status-badge upcoming">Upcoming</div>',
+        status: 'upcoming',
+        label: 'Upcoming',
+        start, end, daysUntil
+      };
+    }
+
+    return {
+      badgeHTML: '<div class="landing-status-badge past">Past Event</div>',
+      status: 'past',
+      label: 'Past Event',
+      start, end
+    };
+  }
+
+  window.FOOD_WEEKS.forEach(w => {
+    const timing = getWeekTiming(w);
+    if (timing.status === 'active') {
+      currentWeeks.push(w);
+    } else if (timing.status === 'upcoming') {
+      const diff = timing.start - now;
+      if (diff < minDiff) {
+        minDiff = diff;
+        nextWeek = w;
       }
     }
   });
@@ -530,15 +592,9 @@ function renderLanding() {
   let featuredWeek = currentWeeks[0] || nextWeek || sortedWeeks[0];
   const otherWeeks = sortedWeeks.filter(w => w.id !== featuredWeek.id);
 
-  const isFeaturedActive = currentWeeks.some(cw => cw.id === featuredWeek.id);
-  const isFeaturedNext = !isFeaturedActive && nextWeek && featuredWeek.id === nextWeek.id;
-
-  let featuredBadgeHTML = '';
-  if (isFeaturedActive) {
-    featuredBadgeHTML = '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>';
-  } else if (isFeaturedNext) {
-    featuredBadgeHTML = '<div class="landing-status-badge next">Up Next</div>';
-  }
+  const featuredTiming = getWeekTiming(featuredWeek);
+  const isFeaturedActive = featuredTiming.status === 'active';
+  const featuredBadgeHTML = featuredTiming.badgeHTML;
 
   const featuredPriceText = (featuredWeek.pricePills && featuredWeek.pricePills.length > 0)
     ? esc(featuredWeek.pricePills[0])
@@ -553,15 +609,9 @@ function renderLanding() {
 
   // Render other weeks list items
   const otherWeeksHTML = otherWeeks.map(w => {
-    let badgeHTML = '';
-    const isActive = currentWeeks.some(cw => cw.id === w.id);
-    const isNext = nextWeek && w.id === nextWeek.id;
-
-    if (isActive) {
-      badgeHTML = '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>';
-    } else if (isNext) {
-      badgeHTML = '<div class="landing-status-badge next">Up Next</div>';
-    }
+    const timing = getWeekTiming(w);
+    const badgeHTML = timing.badgeHTML;
+    const isActive = timing.status === 'active';
 
     const priceText = (w.pricePills && w.pricePills.length > 0)
       ? esc(w.pricePills[0])
@@ -655,6 +705,244 @@ function renderLanding() {
 
   // Load spots for featured week if needed
   ensureFeaturedSpotsLoaded(featuredWeek.id);
+
+  // Render the Annual Timeline Strip in Option B placement
+  renderLandingTimeline(getWeekTiming);
+
+  // Initialize Global Cross-Week Search
+  initLandingSearch();
+
+  // Initialize PWA Install Banner
+  initPwaInstallPrompt();
+}
+
+function renderLandingTimeline(timingHelper) {
+  const container = document.getElementById('landing-timeline-container');
+  if (!container || !window.FOOD_WEEKS) return;
+
+  // Chronological order (January to December)
+  const chronologicalWeeks = [...window.FOOD_WEEKS].sort((a, b) => {
+    const da = a.startDate ? new Date(a.startDate) : new Date(0);
+    const db = b.startDate ? new Date(b.startDate) : new Date(0);
+    return da - db;
+  });
+
+  const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+  container.innerHTML = `
+    <div class="landing-timeline-track">
+      ${chronologicalWeeks.map(w => {
+        const timing = timingHelper ? timingHelper(w) : { status: 'upcoming', label: '' };
+        const cleanName = (w.name || '').replace(/\s+\d{4}\b/, '');
+        const dateObj = w.startDate ? new Date(w.startDate + 'T12:00:00') : null;
+        const monthStr = dateObj ? monthNames[dateObj.getMonth()] : '';
+        const themeColor = w.color || 'var(--pizza)';
+        const isCurrent = timing.status === 'active';
+
+        return `
+          <a href="?week=${w.id}" class="landing-timeline-node ${isCurrent ? 'is-current' : ''} ${timing.status}" 
+             style="--node-color: ${themeColor};"
+             onclick="event.preventDefault(); App.switchWeek('${w.id}');">
+            <div class="timeline-node-month">${monthStr}</div>
+            <div class="timeline-node-dot"></div>
+            <div class="timeline-node-card">
+              <span class="timeline-node-emoji">${w.emoji || '🍽️'}</span>
+              <div class="timeline-node-content">
+                <span class="timeline-node-title">${esc(cleanName)}</span>
+                <span class="timeline-node-dates">${esc(w.dates || '')}</span>
+                ${timing.badgeHTML}
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+// ── Global Cross-Week Search ──
+let allWeeksLoadedPromise = null;
+
+function ensureAllWeeksLoaded() {
+  if (allWeeksLoadedPromise) return allWeeksLoadedPromise;
+
+  allWeeksLoadedPromise = new Promise((resolve) => {
+    const weeks = window.FOOD_WEEKS || [];
+    let remaining = weeks.length;
+    if (remaining === 0) return resolve();
+
+    weeks.forEach(w => {
+      loadWeekData(w.id, () => {
+        remaining--;
+        if (remaining <= 0) resolve();
+      });
+    });
+  });
+
+  return allWeeksLoadedPromise;
+}
+
+function initLandingSearch() {
+  const searchInput = document.getElementById('landing-global-search');
+  const clearBtn = document.getElementById('landing-search-clear');
+  const resultsContainer = document.getElementById('landing-search-results');
+  if (!searchInput || !resultsContainer) return;
+
+  // Pre-load remaining datasets in background when user focuses search
+  searchInput.addEventListener('focus', () => {
+    ensureAllWeeksLoaded();
+  });
+
+  const performSearch = () => {
+    const query = (searchInput.value || '').trim().toLowerCase();
+    if (clearBtn) clearBtn.hidden = !query;
+
+    if (query.length < 2) {
+      resultsContainer.hidden = true;
+      resultsContainer.innerHTML = '';
+      return;
+    }
+
+    ensureAllWeeksLoaded().then(() => {
+      const allDishes = window.RESTAURANTS || [];
+      const queryWords = query.split(/\s+/).filter(Boolean);
+
+      const matches = allDishes.filter(r => {
+        const dish = (r.dish || '').toLowerCase();
+        const rest = (r.restaurant || '').toLowerCase();
+        const hood = (r.neighborhood || r.address || '').toLowerCase();
+        const desc = (r.desc || r.whatsOnIt || '').toLowerCase();
+        const fullText = `${dish} ${rest} ${hood} ${desc}`;
+        return queryWords.every(word => fullText.includes(word));
+      });
+
+      if (matches.length === 0) {
+        resultsContainer.hidden = false;
+        resultsContainer.innerHTML = `
+          <div class="search-no-results">
+            <p>No dishes matching "<strong>${esc(query)}</strong>"</p>
+            <span style="font-size: 13px; color: var(--ink-60);">Try searching for tacos, smash burgers, vegan, or a neighborhood.</span>
+          </div>
+        `;
+        return;
+      }
+
+      const topMatches = matches.slice(0, 15);
+      resultsContainer.hidden = false;
+      resultsContainer.innerHTML = `
+        <div class="search-results-header">
+          <span>${matches.length} special${matches.length === 1 ? '' : 's'} across Portland Food Weeks</span>
+        </div>
+        <div class="search-results-list">
+          ${topMatches.map(r => {
+            const week = (window.FOOD_WEEKS || []).find(w => w.id === r.weekId);
+            const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
+            const weekColor = week ? week.color : 'var(--pizza)';
+            const weekEmoji = week ? week.emoji : '🍽️';
+
+            return `
+              <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" 
+                 onclick="event.preventDefault(); resultsContainer.hidden=true; App.switchWeek('${r.weekId}'); setTimeout(() => App.openDetail(${r.id}), 400);">
+                <div class="search-result-media">
+                  ${r.image 
+                    ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
+                    : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
+                </div>
+                <div class="search-result-info">
+                  <div class="search-result-dish">${esc(r.dish)}</div>
+                  <div class="search-result-meta">
+                    <span class="search-result-restaurant">${esc(r.restaurant)}</span>
+                    ${r.neighborhood ? ` &bull; <span class="search-result-hood">${esc(r.neighborhood)}</span>` : ''}
+                  </div>
+                </div>
+                <div class="search-result-badge" style="--badge-color: ${weekColor};">
+                  ${weekEmoji} ${esc(weekName)}
+                </div>
+              </a>
+            `;
+          }).join('')}
+        </div>
+      `;
+    });
+  };
+
+  searchInput.addEventListener('input', debounce(performSearch, 150));
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearBtn.hidden = true;
+      resultsContainer.hidden = true;
+      resultsContainer.innerHTML = '';
+      searchInput.focus();
+    });
+  }
+
+  // Close search results on Outside Click or Escape
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+      resultsContainer.hidden = true;
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !resultsContainer.hidden) {
+      resultsContainer.hidden = true;
+    }
+  });
+}
+
+// ── PWA Install Prompt Banner ──
+let deferredPwaPrompt = null;
+
+function initPwaInstallPrompt() {
+  const banner = document.getElementById('pwa-install-banner');
+  const installBtn = document.getElementById('pwa-install-btn');
+  const dismissBtn = document.getElementById('pwa-dismiss-btn');
+  if (!banner || !installBtn || !dismissBtn) return;
+
+  // Don't show if already in standalone display mode
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
+  if (isStandalone) {
+    banner.hidden = true;
+    return;
+  }
+
+  // Don't show if user dismissed it in this session/browser
+  if (localStorage.getItem('pdx_pwa_dismissed') === 'true') {
+    banner.hidden = true;
+    return;
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPwaPrompt = e;
+    banner.hidden = false;
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (deferredPwaPrompt) {
+      deferredPwaPrompt.prompt();
+      const { outcome } = await deferredPwaPrompt.userChoice;
+      deferredPwaPrompt = null;
+      banner.hidden = true;
+      if (outcome === 'accepted') {
+        localStorage.setItem('pdx_pwa_dismissed', 'true');
+      }
+    } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      // iOS Safari instructions
+      showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
+      banner.hidden = true;
+      localStorage.setItem('pdx_pwa_dismissed', 'true');
+    } else {
+      banner.hidden = true;
+    }
+  });
+
+  dismissBtn.addEventListener('click', () => {
+    banner.hidden = true;
+    localStorage.setItem('pdx_pwa_dismissed', 'true');
+  });
 }
 
 function attachLandingCarouselTouch() {
