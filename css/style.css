@@ -1521,6 +1521,23 @@ body.is-landing .view-footer,
   border: none;
   padding: 0;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.landing-step-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.landing-step-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .step-num {
@@ -1529,7 +1546,8 @@ body.is-landing .view-footer,
   font-weight: 900;
   color: var(--pizza, #C94B2C);
   letter-spacing: 0.06em;
-  margin-bottom: 6px;
+  line-height: 1;
+  text-align: center;
 }
 
 .step-title {
@@ -1537,7 +1555,9 @@ body.is-landing .view-footer,
   font-size: 17px;
   font-weight: 800;
   color: var(--ink);
+  margin-top: 0;
   margin-bottom: 6px;
+  line-height: 1.25;
 }
 
 .step-desc {
