@@ -574,13 +574,14 @@ function renderLanding() {
     const metaParts = [priceText, countText].filter(Boolean).join(' • ');
     const metaHTML = metaParts ? `<span class="landing-card-subinfo">${metaParts}</span>` : '';
     const themeColor = w.color || 'var(--pizza)';
+    const displayName = (w.name || '').replace(/\s+\d{4}\b/, '');
 
     return `
       <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
         <div class="landing-card-main">
           <div class="landing-card-title-row">
-            <h3>${esc(w.name)}</h3>
+            <h3>${esc(displayName)}</h3>
           </div>
           <div class="landing-card-dates-row">
             <span class="landing-card-dates">${esc(w.dates)}</span>
