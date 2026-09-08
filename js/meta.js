@@ -167,7 +167,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 30,
+    totalLocations: 39,
     url: "https://www.theactualportland.com/friedchickenlocations",
     filters: [
       { id: 'meat', label: 'Meat' },
@@ -191,7 +191,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FDEAE6",
     colorPale: "#FFF5F2",
     emoji: "🍗",
-    totalLocations: 30,
+    totalLocations: 73,
     url: "https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/",
     filters: [
       { id: 'meat', label: 'Meat' },

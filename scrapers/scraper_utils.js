@@ -100,3 +100,24 @@ export function loadExistingData(filePath) {
   }
   return new Map();
 }
+
+/**
+ * Updates totalLocations in js/meta.js for the given weekId.
+ */
+export function updateMetaTotalLocations(weekId, totalLocations, metaPath = null) {
+  try {
+    const resolvedPath = metaPath || new URL('../js/meta.js', import.meta.url).pathname.replace(/^\/([a-zA-Z]:)/, '$1');
+    if (!fs.existsSync(resolvedPath)) return;
+    let content = fs.readFileSync(resolvedPath, 'utf8');
+
+    // Match the week object in js/meta.js and update its totalLocations property
+    const weekRegex = new RegExp(`(id:\\s*["']${weekId}["'][\\s\\S]*?totalLocations:\\s*)(\\d+)`, 'm');
+    if (weekRegex.test(content)) {
+      content = content.replace(weekRegex, `$1${totalLocations}`);
+      fs.writeFileSync(resolvedPath, content, 'utf8');
+      console.log(`Updated js/meta.js totalLocations for "${weekId}" to ${totalLocations}.`);
+    }
+  } catch (e) {
+    console.warn(`  ⚠ Could not update js/meta.js for ${weekId}: ${e.message}`);
+  }
+}

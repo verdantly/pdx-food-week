@@ -12,7 +12,7 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { decodeHTML, fetchHtml, loadExistingData } from './scraper_utils.js';
+import { decodeHTML, fetchHtml, loadExistingData, updateMetaTotalLocations } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -389,6 +389,7 @@ window.FOOD_WEEKS.push(
 })();\n`;
 
   fs.writeFileSync(outPath, header + '\n' + weeksBlock + '\n' + restaurantsBlock);
+  updateMetaTotalLocations('wing-2026', entries.length, path.resolve(__dirname, '../js/meta.js'));
 
   console.log(`\n✅ Wrote ${entries.length} restaurants to ${outPath}`);
   console.log(`   Skipped: ${skipped}, geocode fallbacks: ${fallbackCount}`);

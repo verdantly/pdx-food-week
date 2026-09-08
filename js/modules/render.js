@@ -306,7 +306,9 @@ export function renderHeader() {
   if (metaEl) {
     const dates = `<span>${esc(week.dates)}</span>`;
     const pills = (week.pricePills || []).map(p => `<span class="pill">${esc(p)}</span>`).join('');
-    const locations = `<span>${week.totalLocations || getRestaurants().length} locations</span>`;
+    const actualCount = getRestaurants().length;
+    const totalCount = actualCount > 0 ? actualCount : (week.totalLocations || 0);
+    const locations = `<span>${totalCount} locations</span>`;
     metaEl.innerHTML = dates + pills + locations;
   }
 

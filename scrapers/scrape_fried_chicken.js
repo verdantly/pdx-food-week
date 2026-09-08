@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import { fileURLToPath } from 'url';
-import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase } from './scraper_utils.js';
+import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, updateMetaTotalLocations } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.resolve(__dirname, '../data/geocode_cache.json');
@@ -427,6 +427,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 
   fs.writeFileSync(OUTPUT_PATH, fileContent, 'utf8');
   console.log(`Successfully generated ${OUTPUT_PATH} with ${entries.length} locations.`);
+  updateMetaTotalLocations('fried-chicken-2026', entries.length, path.resolve(__dirname, '../js/meta.js'));
 }
 
 scrape().catch(err => {

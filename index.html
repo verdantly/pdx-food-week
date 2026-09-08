@@ -883,7 +883,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;
-      const hadController = !!navigator.serviceWorker.controller;
+      // When an updated Service Worker takes over an existing worker, reload once to show fresh assets
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!refreshing && hadController) {
           refreshing = true;
@@ -893,6 +893,7 @@
 
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').then((registration) => {
+          // Immediately check for updates on page load
           registration.update().catch(() => {});
           // Proactively check for Service Worker updates when returning to tab/window
           document.addEventListener('visibilitychange', () => {
