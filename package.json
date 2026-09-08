@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "npx -y serve .",
+    "build": "node scripts/hash_assets.js",
     "build:og": "node scripts/generate_og_pages.js",
     "scrape:burgers": "node scrapers/scrape_burgers.js",
     "scrape:pizza": "node scrapers/scrape_everout.js",
@@ -14,7 +15,7 @@
     "scrape:slushies": "node scrapers/scrape_slushies.js",
     "scrape:chicken": "node scrapers/scrape_fried_chicken.js",
     "scrape:wings": "node scrapers/scrape_wings.js",
-    "test:unit": "node -c js/app.js && vitest run",
+    "test:unit": "node -c js/app.js && node scripts/hash_assets.js && vitest run",
     "test:e2e": "playwright test"
   },
   "dependencies": {
