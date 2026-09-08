@@ -1987,7 +1987,34 @@ body.is-landing .view-footer,
   flex-direction: column;
   gap: 10px;
   flex: 1;
+  max-height: calc(6 * 68px + 5 * 10px); /* Exactly 6 cards visible (~458px), then scrollable */
   overflow-y: auto;
+  padding-right: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767.98px) {
+  .landing-others-list {
+    max-height: calc(6 * 64px + 5 * 10px); /* 6 cards on mobile (~434px) */
+  }
+}
+
+/* Subtly styled scrollbar for more food weeks list */
+.landing-others-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.landing-others-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.landing-others-list::-webkit-scrollbar-thumb {
+  background: rgba(26, 18, 8, 0.2);
+  border-radius: 4px;
+}
+
+.landing-others-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 18, 8, 0.35);
 }
 
 .landing-emoji {
@@ -2367,168 +2394,6 @@ body.is-landing .view-footer,
   font-size: 15px;
 }
 
-/* ── Annual Food Week Timeline / Calendar Strip (Option B) ── */
-.landing-calendar-section {
-  width: 100%;
-  max-width: 1100px;
-  margin: 12px auto 28px;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.landing-calendar-header {
-  margin-bottom: 14px;
-  text-align: center;
-}
-
-.landing-calendar-header .landing-section-title {
-  margin-bottom: 2px;
-}
-
-.landing-calendar-sub {
-  font-size: 13.5px;
-  color: var(--ink-60);
-  display: block;
-}
-
-.landing-timeline-container {
-  background: var(--card-bg, #fff);
-  border-radius: 16px;
-  padding: 20px 16px;
-  border: 1px solid rgba(26, 18, 8, 0.08);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.landing-timeline-track {
-  display: flex;
-  gap: 16px;
-  min-width: max-content;
-  padding: 4px 8px 10px;
-  position: relative;
-}
-
-/* Connecting timeline guideline */
-.landing-timeline-track::before {
-  content: '';
-  position: absolute;
-  top: 36px;
-  left: 24px;
-  right: 24px;
-  height: 2px;
-  background: rgba(26, 18, 8, 0.12);
-  z-index: 1;
-}
-
-.landing-timeline-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  width: 140px;
-  position: relative;
-  z-index: 2;
-  cursor: pointer;
-  transition: transform 0.18s ease;
-}
-
-.landing-timeline-node:hover {
-  transform: translateY(-2px);
-}
-
-.landing-timeline-node:focus-visible {
-  outline: 3px solid var(--node-color, var(--pizza));
-  outline-offset: 4px;
-  border-radius: 10px;
-}
-
-.timeline-node-month {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--ink-60);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
-
-.timeline-node-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 3px solid var(--node-color, var(--ink-40));
-  margin-bottom: 12px;
-  box-shadow: 0 0 0 2px #fff;
-  transition: transform 0.18s ease, background-color 0.18s ease;
-}
-
-.landing-timeline-node:hover .timeline-node-dot,
-.landing-timeline-node.is-current .timeline-node-dot {
-  background: var(--node-color, var(--pizza));
-  transform: scale(1.25);
-}
-
-.timeline-node-card {
-  background: var(--cream, #FBF6EF);
-  border: 1px solid rgba(26, 18, 8, 0.08);
-  border-radius: 12px;
-  padding: 10px 8px;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  min-height: 112px;
-  transition: border-color 0.18s, box-shadow 0.18s;
-}
-
-.landing-timeline-node:hover .timeline-node-card {
-  border-color: var(--node-color, var(--pizza));
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.landing-timeline-node.is-current .timeline-node-card {
-  border-color: var(--node-color, var(--pizza));
-  background: #ffffff;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-node-emoji {
-  font-size: 22px;
-  line-height: 1;
-}
-
-.timeline-node-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  width: 100%;
-}
-
-.timeline-node-title {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.25;
-}
-
-.timeline-node-dates {
-  font-size: 11px;
-  color: var(--ink-60);
-  line-height: 1.2;
-}
-
-.timeline-node-card .landing-status-badge {
-  margin: 4px auto 0;
-  font-size: 9px;
-  padding: 2px 6px;
-}
 
 /* ── How It Works Step Headers & Clean Vector Icons ── */
 .landing-step-header {

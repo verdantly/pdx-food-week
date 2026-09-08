@@ -706,9 +706,6 @@ function renderLanding() {
   // Load spots for featured week if needed
   ensureFeaturedSpotsLoaded(featuredWeek.id);
 
-  // Render the Annual Timeline Strip in Option B placement
-  renderLandingTimeline(getWeekTiming);
-
   // Initialize Global Cross-Week Search
   initLandingSearch();
 
@@ -716,49 +713,6 @@ function renderLanding() {
   initPwaInstallPrompt();
 }
 
-function renderLandingTimeline(timingHelper) {
-  const container = document.getElementById('landing-timeline-container');
-  if (!container || !window.FOOD_WEEKS) return;
-
-  // Chronological order (January to December)
-  const chronologicalWeeks = [...window.FOOD_WEEKS].sort((a, b) => {
-    const da = a.startDate ? new Date(a.startDate) : new Date(0);
-    const db = b.startDate ? new Date(b.startDate) : new Date(0);
-    return da - db;
-  });
-
-  const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-  container.innerHTML = `
-    <div class="landing-timeline-track">
-      ${chronologicalWeeks.map(w => {
-        const timing = timingHelper ? timingHelper(w) : { status: 'upcoming', label: '' };
-        const cleanName = (w.name || '').replace(/\s+\d{4}\b/, '');
-        const dateObj = w.startDate ? new Date(w.startDate + 'T12:00:00') : null;
-        const monthStr = dateObj ? monthNames[dateObj.getMonth()] : '';
-        const themeColor = w.color || 'var(--pizza)';
-        const isCurrent = timing.status === 'active';
-
-        return `
-          <a href="?week=${w.id}" class="landing-timeline-node ${isCurrent ? 'is-current' : ''} ${timing.status}" 
-             style="--node-color: ${themeColor};"
-             onclick="event.preventDefault(); App.switchWeek('${w.id}');">
-            <div class="timeline-node-month">${monthStr}</div>
-            <div class="timeline-node-dot"></div>
-            <div class="timeline-node-card">
-              <span class="timeline-node-emoji">${w.emoji || '🍽️'}</span>
-              <div class="timeline-node-content">
-                <span class="timeline-node-title">${esc(cleanName)}</span>
-                <span class="timeline-node-dates">${esc(w.dates || '')}</span>
-                ${timing.badgeHTML}
-              </div>
-            </div>
-          </a>
-        `;
-      }).join('')}
-    </div>
-  `;
-}
 
 // ── Global Cross-Week Search ──
 let allWeeksLoadedPromise = null;
