@@ -25,8 +25,8 @@ test.describe('Navigation and Routing', () => {
   test('Browser Back button safely closes overlays', async ({ page, isMobile }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     
-    await page.waitForSelector('.landing-card', { state: 'visible', timeout: 10000 });
-    await page.locator('.landing-card', { hasText: 'Taco Week' }).click();
+    await page.waitForSelector('.landing-card:not(.landing-card-hidden-mobile)', { state: 'visible', timeout: 10000 });
+    await page.locator('.landing-card:not(.landing-card-hidden-mobile)').first().click();
 
     await page.waitForSelector('#cards-browse .dish-card', { state: 'visible', timeout: 10000 });
 
@@ -485,6 +485,52 @@ test.describe('Navigation and Routing', () => {
     const nextBtn = page.locator('.landing-carousel-arrow-overlay.next');
     await expect(prevBtn).toHaveAttribute('aria-label', 'Previous special');
     await expect(nextBtn).toHaveAttribute('aria-label', 'Next special');
+  });
+
+  test('Mobile collapsible more food weeks shows button and expands/collapses', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.landing-others-column', { state: 'visible' });
+
+    const seeMoreBtn = page.locator('#landing-see-more-btn');
+    await expect(seeMoreBtn).toBeVisible();
+
+    // Verify hidden cards on mobile initially
+    const hiddenCards = page.locator('.landing-card.landing-card-hidden-mobile');
+    expect(await hiddenCards.count()).toBeGreaterThan(0);
+    await expect(hiddenCards.first()).not.toBeVisible();
+
+    // Click see more to expand
+    await seeMoreBtn.click();
+    await expect(page.locator('#landing-others-list')).toHaveClass(/is-expanded/);
+    await expect(hiddenCards.first()).toBeVisible();
+    await expect(seeMoreBtn).toContainText('See fewer food weeks');
+
+    // Click again to collapse
+    await seeMoreBtn.click();
+    await expect(page.locator('#landing-others-list')).not.toHaveClass(/is-expanded/);
+    await expect(hiddenCards.first()).not.toBeVisible();
+  });
+
+  test('Search placeholder adapts on narrow screen and global search opens dish detail modal', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    // Verify narrow placeholder
+    const searchInput = page.locator('#landing-global-search');
+    await expect(searchInput).toHaveAttribute('placeholder', 'Search dishes, restaurants, etc...');
+
+    // Perform global search
+    await searchInput.fill('taco');
+    await page.waitForSelector('#landing-search-results .search-result-row', { state: 'visible', timeout: 10000 });
+
+    const firstResult = page.locator('#landing-search-results .search-result-row').first();
+    await firstResult.click();
+
+    // Verify detail overlay opens and displays the special
+    const overlay = page.locator('#detail-overlay');
+    await expect(overlay).toHaveClass(/open/, { timeout: 10000 });
+    await expect(page).toHaveURL(/.*week=.*dish=.*/);
   });
 });
 

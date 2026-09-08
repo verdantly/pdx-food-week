@@ -1997,7 +1997,64 @@ body.is-landing .view-footer,
 
 @media (max-width: 767.98px) {
   .landing-others-list {
-    max-height: 550px; /* Shows exactly 6 cards on mobile, then scrollable */
+    max-height: none; /* No vertical scrollbox on mobile */
+    overflow-y: visible;
+    padding-right: 2px;
+  }
+
+  .landing-card.landing-card-hidden-mobile {
+    display: none;
+  }
+
+  .landing-others-list.is-expanded .landing-card.landing-card-hidden-mobile {
+    display: flex;
+    animation: fadeInWeekCard 0.25s ease-out;
+  }
+}
+
+@keyframes fadeInWeekCard {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* See more food weeks button (Mobile only) */
+.landing-see-more-btn {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .landing-see-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 4px;
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--ink-10, rgba(0, 0, 0, 0.08));
+    border-radius: 12px;
+    color: var(--ink, #1a1816);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .landing-see-more-btn:active {
+    transform: scale(0.985);
+    background: var(--cream, #FBF6EF);
+  }
+
+  .landing-see-more-btn .see-more-arrow {
+    transition: transform 0.25s ease;
+    color: var(--ink-60, rgba(0, 0, 0, 0.6));
+  }
+
+  .landing-see-more-btn[aria-expanded="true"] .see-more-arrow {
+    transform: rotate(180deg);
   }
 }
 

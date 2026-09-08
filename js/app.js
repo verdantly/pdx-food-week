@@ -274,7 +274,7 @@ async function loadWeekData(weekId, callback) {
   document.body.appendChild(script);
 }
 
-function switchWeek(weekId, fromPopState = false) {
+function switchWeek(weekId, fromPopState = false, targetDishId = null) {
   if (!window.FOOD_WEEKS || !window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
   if (State.currentWeekId) {
@@ -377,7 +377,12 @@ function switchWeek(weekId, fromPopState = false) {
     const url = new URL(window.location);
     url.searchParams.set('week', weekId);
     url.searchParams.delete('tab');
-    history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    if (targetDishId) {
+      url.searchParams.set('dish', targetDishId);
+    } else {
+      url.searchParams.delete('dish');
+    }
+    history.pushState({ ...history.state, week: weekId, tab: 'browse', detailDishId: targetDishId || undefined }, '', url);
   }
   document.body.classList.remove('is-landing');
 
@@ -388,6 +393,9 @@ function switchWeek(weekId, fromPopState = false) {
     renderAll();
     updateBrowseBadge();
     showToast(`Switched to ${week.name}!`);
+    if (targetDishId) {
+      openDetail(targetDishId);
+    }
   };
 
   loadWeekData(weekId, () => {
@@ -608,7 +616,7 @@ function renderLanding() {
   const featuredThemeColor = featuredWeek.color || 'var(--pizza)';
 
   // Render other weeks list items
-  const otherWeeksHTML = otherWeeks.map(w => {
+  const otherWeeksHTML = otherWeeks.map((w, index) => {
     const timing = getWeekTiming(w);
     const badgeHTML = timing.badgeHTML;
     const isActive = timing.status === 'active';
@@ -625,9 +633,10 @@ function renderLanding() {
     const metaHTML = metaParts ? `<span class="landing-card-subinfo">${metaParts}</span>` : '';
     const themeColor = w.color || 'var(--pizza)';
     const displayName = (w.name || '').replace(/\s+\d{4}\b/, '');
+    const isHiddenMobile = index >= 4 ? ' landing-card-hidden-mobile' : '';
 
     return `
-      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
+      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
         <div class="landing-card-main">
           <div class="landing-card-title-row">
@@ -694,9 +703,15 @@ function renderLanding() {
     <!-- Right Column: Other Food Weeks List (Rows 1-4, Column 3 on desktop) -->
     <div class="landing-others-column">
       <div class="landing-others-title">More Food Weeks</div>
-      <div class="landing-others-list">
+      <div class="landing-others-list" id="landing-others-list">
         ${otherWeeksHTML}
       </div>
+      ${otherWeeks.length > 4 ? `
+        <button type="button" class="landing-see-more-btn" id="landing-see-more-btn" onclick="App.toggleMoreWeeksMobile()" aria-expanded="false" aria-controls="landing-others-list">
+          <span class="see-more-label">See all ${otherWeeks.length} food weeks</span>
+          <svg class="see-more-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      ` : ''}
     </div>
   `;
 
@@ -713,6 +728,19 @@ function renderLanding() {
   initPwaInstallPrompt();
 }
 
+function toggleMoreWeeksMobile() {
+  const list = document.getElementById('landing-others-list');
+  const btn = document.getElementById('landing-see-more-btn');
+  if (!list || !btn) return;
+
+  const isExpanded = list.classList.toggle('is-expanded');
+  btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+  const label = btn.querySelector('.see-more-label');
+  const totalWeeks = list.querySelectorAll('.landing-card').length;
+  if (label) {
+    label.textContent = isExpanded ? 'See fewer food weeks' : `See all ${totalWeeks} food weeks`;
+  }
+}
 
 // ── Global Cross-Week Search ──
 let allWeeksLoadedPromise = null;
@@ -796,7 +824,7 @@ function initLandingSearch() {
 
             return `
               <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" 
-                 onclick="event.preventDefault(); resultsContainer.hidden=true; App.switchWeek('${r.weekId}'); setTimeout(() => App.openDetail(${r.id}), 400);">
+                 onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${r.weekId}', false, ${r.id});">
                 <div class="search-result-media">
                   ${r.image 
                     ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
@@ -970,7 +998,7 @@ function populateLandingCarousel(spots, weekId) {
 
     return `
       <div class="landing-carousel-slide" role="group" aria-roledescription="slide" aria-label="${idx + 1} of ${selected.length}">
-        <a href="?week=${weekId}&dish=${r.id}" class="dish-card landing-spot-card" onclick="event.preventDefault(); App.switchWeek('${weekId}'); setTimeout(() => App.openDetail(${r.id}), 500);">
+        <a href="?week=${weekId}&dish=${r.id}" class="dish-card landing-spot-card" onclick="event.preventDefault(); App.switchWeek('${weekId}', false, ${r.id});">
           <div class="landing-spot-media">
             ${thumb}
           </div>
@@ -1382,12 +1410,15 @@ function init() {
   });
 
 function updateSearchPlaceholders() {
-  const isDesktop = window.innerWidth >= 768;
-  const placeholder = isDesktop
-    ? 'Search restaurants, dishes, neighborhoods...'
-    : 'Search restaurants, dishes, areas...';
+  const width = window.innerWidth;
+  let placeholder = 'Search restaurants, dishes, neighborhoods...';
+  if (width < 480) {
+    placeholder = 'Search dishes, restaurants, etc...';
+  } else if (width < 768) {
+    placeholder = 'Search dishes, restaurants, areas...';
+  }
 
-  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input'].forEach(id => {
+  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'landing-global-search'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.placeholder = placeholder;
   });
@@ -1407,6 +1438,7 @@ function updateSearchPlaceholders() {
   } else if (mql.addListener) {
     mql.addListener(updateSearchPlaceholders);
   }
+  updateSearchPlaceholders();
   setupMobileScrollListener();
   renderWeekSwitchers();
 
@@ -1566,7 +1598,8 @@ const App = {
   moveLandingCarousel,
   setLandingCarouselIndex,
   startLandingCarouselTimer,
-  stopLandingCarouselTimer
+  stopLandingCarouselTimer,
+  toggleMoreWeeksMobile
 };
 
 window.App = App;
