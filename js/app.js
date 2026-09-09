@@ -400,7 +400,7 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
     updateBrowseBadge();
     showToast(`Switched to ${week.name}!`);
     if (targetDishId) {
-      openDetail(targetDishId);
+      openDetail(targetDishId, true);
     }
   };
 
@@ -640,9 +640,12 @@ function renderLanding() {
     const themeColor = w.color || 'var(--pizza)';
     const displayName = (w.name || '').replace(/\s+\d{4}\b/, '');
     const isHiddenMobile = index >= 4 ? ' landing-card-hidden-mobile' : '';
+    const pageSize = 5;
+    const desktopPage = Math.floor(index / pageSize);
+    const isHiddenDesktop = desktopPage > 0 ? ' landing-card-hidden-desktop' : '';
 
     return `
-      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
+      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}${isHiddenDesktop}" data-desktop-page="${desktopPage}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
         <div class="landing-card-main">
           <div class="landing-card-title-row">
@@ -662,6 +665,8 @@ function renderLanding() {
       </a>
     `;
   }).join('');
+
+  const totalOtherPages = Math.ceil(otherWeeks.length / 5);
 
   // Assemble full 3-column / 4-row landing grid
   grid.innerHTML = `
@@ -712,6 +717,17 @@ function renderLanding() {
       <div class="landing-others-list" id="landing-others-list">
         ${otherWeeksHTML}
       </div>
+      ${totalOtherPages > 1 ? `
+        <div class="landing-others-pagination" id="landing-others-pagination">
+          <button type="button" class="landing-others-nav-btn" id="landing-others-prev" onclick="App.stepOtherWeeksPage(-1)" aria-label="Previous food weeks page" disabled>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="landing-others-page-num" id="landing-others-page-num">1 / ${totalOtherPages}</span>
+          <button type="button" class="landing-others-nav-btn" id="landing-others-next" onclick="App.stepOtherWeeksPage(1)" aria-label="Next food weeks page">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      ` : ''}
       ${otherWeeks.length > 4 ? `
         <button type="button" class="landing-see-more-btn" id="landing-see-more-btn" onclick="App.toggleMoreWeeksMobile()" aria-expanded="false" aria-controls="landing-others-list">
           <span class="see-more-label">See all ${otherWeeks.length} food weeks</span>
@@ -746,6 +762,43 @@ function toggleMoreWeeksMobile() {
   if (label) {
     label.textContent = isExpanded ? 'See fewer food weeks' : `See all ${totalWeeks} food weeks`;
   }
+}
+
+let otherWeeksCurrentPage = 0;
+
+function setOtherWeeksPage(pageIdx) {
+  const list = document.getElementById('landing-others-list');
+  if (!list) return;
+
+  const cards = list.querySelectorAll('.landing-card');
+  const totalPages = Math.ceil(cards.length / 5);
+  if (pageIdx < 0) pageIdx = 0;
+  if (pageIdx >= totalPages) pageIdx = totalPages - 1;
+
+  otherWeeksCurrentPage = pageIdx;
+
+  cards.forEach(card => {
+    const cardPage = parseInt(card.getAttribute('data-desktop-page') || '0', 10);
+    if (cardPage === pageIdx) {
+      card.classList.remove('landing-card-hidden-desktop');
+    } else {
+      card.classList.add('landing-card-hidden-desktop');
+    }
+  });
+
+  const pageNumEl = document.getElementById('landing-others-page-num');
+  if (pageNumEl) {
+    pageNumEl.textContent = `${pageIdx + 1} / ${totalPages}`;
+  }
+
+  const prevBtn = document.getElementById('landing-others-prev');
+  const nextBtn = document.getElementById('landing-others-next');
+  if (prevBtn) prevBtn.disabled = pageIdx === 0;
+  if (nextBtn) nextBtn.disabled = pageIdx >= totalPages - 1;
+}
+
+function stepOtherWeeksPage(delta) {
+  setOtherWeeksPage(otherWeeksCurrentPage + delta);
 }
 
 // ── Global Cross-Week Search ──
@@ -1697,7 +1750,9 @@ const App = {
   setLandingCarouselIndex,
   startLandingCarouselTimer,
   stopLandingCarouselTimer,
-  toggleMoreWeeksMobile
+  toggleMoreWeeksMobile,
+  setOtherWeeksPage,
+  stepOtherWeeksPage
 };
 
 window.App = App;

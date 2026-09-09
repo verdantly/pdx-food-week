@@ -1410,24 +1410,50 @@ body.is-landing .view-footer,
   padding: 0 20px;
 }
 
+@media (max-width: 767.98px) {
+  .landing-hero-content {
+    gap: 8px 16px;
+  }
+}
+
+.landing-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (max-width: 767.98px) {
+  .landing-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+  }
+}
+
 .landing-title {
   position: relative;
   z-index: 1;
   font-family: var(--font-brand);
   font-size: 2.2em;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #F06A48;
+  color: #E85B38;
   font-style: normal;
   margin: 0;
   flex: 0 0 auto;
   text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
 }
 
 @media (max-width: 767.98px) {
   .landing-title {
     font-size: 1.65rem;
+    gap: 10px;
   }
 }
 
@@ -1439,7 +1465,7 @@ body.is-landing .view-footer,
   font-weight: 500;
   color: #FFFFFF;
   margin: 0;
-  flex: 1 1 360px;
+  flex: 1 1 320px;
   max-width: 540px;
   line-height: 1.45;
   letter-spacing: 0.01em;
@@ -1487,7 +1513,7 @@ body.is-landing .view-footer,
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-80);
+  color: var(--pizza);
   margin-bottom: 6px;
   text-align: center;
 }
@@ -1604,7 +1630,7 @@ body.is-landing .view-footer,
 
 @media (min-width: 768px) {
   .landing-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr)) 380px;
     grid-template-rows: auto auto auto auto;
     gap: 20px;
     align-items: stretch;
@@ -1998,9 +2024,10 @@ body.is-landing .view-footer,
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-80);
+  color: var(--pizza);
   margin-bottom: 2px;
   padding-left: 2px;
+  text-align: center;
   flex-shrink: 0;
 }
 
@@ -2010,13 +2037,89 @@ body.is-landing .view-footer,
   gap: 10px;
   flex: 1;
   min-height: 0;
-  max-height: 600px; /* Shows exactly 6 cards on desktop, then scrollable */
-  overflow-y: auto;
   padding: 4px 6px 4px 2px;
-  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .landing-card.landing-card-hidden-desktop {
+    display: none !important;
+  }
+}
+
+/* ── Desktop Pagination Footer for More Food Weeks ── */
+.landing-others-pagination {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .landing-others-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+    padding: 6px 0 2px;
+  }
+
+  .landing-others-nav-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(26, 18, 8, 0.15);
+    background: var(--card-bg, #fff);
+    color: var(--ink-80);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.18s ease;
+    padding: 0;
+  }
+
+  .landing-others-nav-btn:hover:not(:disabled) {
+    background: var(--pizza);
+    color: #fff;
+    border-color: var(--pizza);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(201, 75, 44, 0.25);
+  }
+
+  .landing-others-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  .landing-others-page-num {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--ink-60);
+    letter-spacing: 0.04em;
+    min-width: 48px;
+    text-align: center;
+  }
 }
 
 @media (max-width: 767.98px) {
+  .landing-others-title {
+    padding-left: 0;
+    padding-top: 18px;
+    margin-bottom: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .landing-others-title::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: rgba(26, 18, 8, 0.12);
+  }
+
   .landing-others-list {
     max-height: none; /* No vertical scrollbox on mobile */
     overflow-y: visible;
@@ -2224,12 +2327,12 @@ body.is-landing .view-footer,
   position: static;
   margin-left: auto;
   flex-shrink: 0;
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
   padding: 3px 8px;
-  border-radius: 10px;
+  border-radius: 20px;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -2281,9 +2384,51 @@ body.is-landing .view-footer,
 }
 
 .landing-status-badge.past {
-  background: rgba(0, 0, 0, 0.04);
-  color: var(--ink-50);
+  background: rgba(0, 0, 0, 0.035);
+  color: rgba(26, 18, 8, 0.46);
   border: 1px solid rgba(0, 0, 0, 0.06);
+  opacity: 0.88;
+}
+
+/* ── Featured Showcase Header: Prominent Status Badge (matching .tag system) ── */
+.featured-showcase-header .landing-status-badge {
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+  gap: 7px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.featured-showcase-header .landing-status-badge.active {
+  border-width: 1.5px;
+}
+
+.featured-showcase-header .landing-status-badge.urgent {
+  border-width: 1.5px;
+}
+
+.featured-showcase-header .landing-status-badge.next {
+  border-width: 1.5px;
+}
+
+.featured-showcase-header .landing-status-badge .badge-dot-live {
+  width: 8px;
+  height: 8px;
+}
+
+@media (max-width: 767.98px) {
+  .featured-showcase-header .landing-status-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    gap: 5px;
+  }
+
+  .featured-showcase-header .landing-status-badge .badge-dot-live {
+    width: 7px;
+    height: 7px;
+  }
 }
 
 /* ── Landing Global Search ── */
