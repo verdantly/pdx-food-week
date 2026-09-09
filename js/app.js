@@ -193,7 +193,13 @@ async function checkMetadataUpdate() {
 
     if (currentIds !== freshIds) {
       console.log('[checkMetadataUpdate] New food weeks detected. Hydrating UI...');
-      window.FOOD_WEEKS = freshWeeks;
+      const mergedWeeks = [...freshWeeks];
+      (window.FOOD_WEEKS || []).forEach(w => {
+        if (!mergedWeeks.some(f => f.id === w.id)) {
+          mergedWeeks.push(w);
+        }
+      });
+      window.FOOD_WEEKS = mergedWeeks;
       renderWeekSwitchers();
       if (!State.currentWeekId) {
         renderLanding();
@@ -770,6 +776,11 @@ function initLandingSearch() {
   const resultsContainer = document.getElementById('landing-search-results');
   if (!searchInput || !resultsContainer) return;
 
+  if (searchInput.dataset.searchInitialized === 'true') return;
+  searchInput.dataset.searchInitialized = 'true';
+
+  let activeIndex = -1;
+
   // Pre-load remaining datasets in background when user focuses search
   searchInput.addEventListener('focus', () => {
     ensureAllWeeksLoaded();
@@ -778,6 +789,7 @@ function initLandingSearch() {
   const performSearch = () => {
     const query = (searchInput.value || '').trim().toLowerCase();
     if (clearBtn) clearBtn.hidden = !query;
+    activeIndex = -1;
 
     if (query.length < 2) {
       resultsContainer.hidden = true;
@@ -786,65 +798,119 @@ function initLandingSearch() {
     }
 
     ensureAllWeeksLoaded().then(() => {
-      const allDishes = window.RESTAURANTS || [];
-      const queryWords = query.split(/\s+/).filter(Boolean);
+      const currentQuery = (searchInput.value || '').trim().toLowerCase();
+      if (currentQuery.length < 2) {
+        resultsContainer.hidden = true;
+        resultsContainer.innerHTML = '';
+        return;
+      }
 
+      const allDishes = window.RESTAURANTS || [];
+      const allWeeks = window.FOOD_WEEKS || [];
+      const queryWords = currentQuery.split(/\s+/).filter(Boolean);
+
+      // Match food weeks
+      const matchingWeeks = allWeeks.filter(w => {
+        const name = (w.name || '').toLowerCase();
+        const org = (w.organizer || '').toLowerCase();
+        const dates = (w.dates || '').toLowerCase();
+        const id = (w.id || '').toLowerCase();
+        const fullText = `${name} ${org} ${dates} ${id}`;
+        return queryWords.every(word => fullText.includes(word));
+      });
+
+      // Match dishes (search dish name, restaurant, neighborhood, desc, plus food week name and organizer)
       const matches = allDishes.filter(r => {
         const dish = (r.dish || '').toLowerCase();
         const rest = (r.restaurant || '').toLowerCase();
         const hood = (r.neighborhood || r.address || '').toLowerCase();
-        const desc = (r.desc || r.whatsOnIt || '').toLowerCase();
-        const fullText = `${dish} ${rest} ${hood} ${desc}`;
+        const desc = (r.desc || r.whatsOnIt || r.whatTheySay || '').toLowerCase();
+        const week = allWeeks.find(w => w.id === r.weekId);
+        const weekName = week ? week.name.toLowerCase() : '';
+        const weekOrg = week ? (week.organizer || '').toLowerCase() : '';
+        const fullText = `${dish} ${rest} ${hood} ${desc} ${weekName} ${weekOrg} ${r.weekId || ''}`;
         return queryWords.every(word => fullText.includes(word));
       });
 
-      if (matches.length === 0) {
+      if (matchingWeeks.length === 0 && matches.length === 0) {
         resultsContainer.hidden = false;
         resultsContainer.innerHTML = `
           <div class="search-no-results">
-            <p>No dishes matching "<strong>${esc(query)}</strong>"</p>
-            <span style="font-size: 13px; color: var(--ink-60);">Try searching for tacos, smash burgers, vegan, or a neighborhood.</span>
+            <p>No results matching "<strong>${esc(currentQuery)}</strong>"</p>
+            <span style="font-size: 13px; color: var(--ink-60);">Try searching for pizza, tacos, smash burgers, dumplings, vegan, or a neighborhood.</span>
           </div>
         `;
         return;
       }
 
       const topMatches = matches.slice(0, 15);
-      resultsContainer.hidden = false;
-      resultsContainer.innerHTML = `
-        <div class="search-results-header">
-          <span>${matches.length} special${matches.length === 1 ? '' : 's'} across Portland Food Weeks</span>
-        </div>
-        <div class="search-results-list">
-          ${topMatches.map(r => {
-            const week = (window.FOOD_WEEKS || []).find(w => w.id === r.weekId);
-            const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
-            const weekColor = week ? week.color : 'var(--pizza)';
-            const weekEmoji = week ? week.emoji : '🍽️';
+      let html = '';
 
-            return `
-              <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" 
-                 onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${r.weekId}', false, ${r.id});">
-                <div class="search-result-media">
-                  ${r.image 
-                    ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
-                    : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
-                </div>
+      if (matchingWeeks.length > 0) {
+        html += `
+          <div class="search-results-header">
+            <span>${matchingWeeks.length} Food Week${matchingWeeks.length === 1 ? '' : 's'}</span>
+          </div>
+          <div class="search-results-list">
+            ${matchingWeeks.map(w => `
+              <a href="?week=${w.id}" class="search-result-week-row" data-search-item="true"
+                 onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${w.id}');">
+                <span class="search-result-week-emoji">${esc(w.emoji || '🍽️')}</span>
                 <div class="search-result-info">
-                  <div class="search-result-dish">${esc(r.dish)}</div>
+                  <div class="search-result-dish">${esc(w.name)}</div>
                   <div class="search-result-meta">
-                    <span class="search-result-restaurant">${esc(r.restaurant)}</span>
-                    ${r.neighborhood ? ` &bull; <span class="search-result-hood">${esc(r.neighborhood)}</span>` : ''}
+                    <span class="search-result-restaurant">${esc(w.organizer || 'Food Week')}</span>
+                    ${w.dates ? ` &bull; <span>${esc(w.dates)}</span>` : ''}
                   </div>
                 </div>
-                <div class="search-result-badge" style="--badge-color: ${weekColor};">
-                  ${weekEmoji} ${esc(weekName)}
+                <div class="search-result-badge" style="--badge-color: ${w.color || 'var(--pizza)'};">
+                  View Week &rarr;
                 </div>
               </a>
-            `;
-          }).join('')}
-        </div>
-      `;
+            `).join('')}
+          </div>
+        `;
+      }
+
+      if (topMatches.length > 0) {
+        html += `
+          <div class="search-results-header">
+            <span>${matches.length} special${matches.length === 1 ? '' : 's'} across Portland Food Weeks</span>
+          </div>
+          <div class="search-results-list">
+            ${topMatches.map(r => {
+              const week = allWeeks.find(w => w.id === r.weekId);
+              const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
+              const weekColor = week ? week.color : 'var(--pizza)';
+              const weekEmoji = week ? week.emoji : '🍽️';
+
+              return `
+                <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" data-search-item="true"
+                   onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${r.weekId}', false, ${r.id});">
+                  <div class="search-result-media">
+                    ${r.image 
+                      ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
+                      : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
+                  </div>
+                  <div class="search-result-info">
+                    <div class="search-result-dish">${esc(r.dish)}</div>
+                    <div class="search-result-meta">
+                      <span class="search-result-restaurant">${esc(r.restaurant)}</span>
+                      ${r.neighborhood ? ` &bull; <span class="search-result-hood">${esc(r.neighborhood)}</span>` : ''}
+                    </div>
+                  </div>
+                  <div class="search-result-badge" style="--badge-color: ${weekColor};">
+                    ${weekEmoji} ${esc(weekName)}
+                  </div>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      resultsContainer.hidden = false;
+      resultsContainer.innerHTML = html;
     });
   };
 
@@ -857,6 +923,38 @@ function initLandingSearch() {
       resultsContainer.hidden = true;
       resultsContainer.innerHTML = '';
       searchInput.focus();
+    });
+  }
+
+  // Keyboard navigation for dropdown results
+  searchInput.addEventListener('keydown', (e) => {
+    if (resultsContainer.hidden) return;
+    const items = resultsContainer.querySelectorAll('[data-search-item="true"]');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const target = activeIndex >= 0 ? items[activeIndex] : items[0];
+      if (target) target.click();
+    }
+  });
+
+  function updateActiveItem(items) {
+    items.forEach((item, idx) => {
+      if (idx === activeIndex) {
+        item.classList.add('is-selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('is-selected');
+      }
     });
   }
 

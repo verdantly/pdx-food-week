@@ -522,7 +522,17 @@ test.describe('Navigation and Routing', () => {
 
     // Perform global search
     await searchInput.fill('taco');
+    const resultsContainer = page.locator('#landing-search-results');
     await page.waitForSelector('#landing-search-results .search-result-row', { state: 'visible', timeout: 10000 });
+
+    // Verify that dropdown is physically rendered on top and unclipped by hero
+    const resultsBox = await resultsContainer.boundingBox();
+    expect(resultsBox).not.toBeNull();
+    const hitElement = await page.evaluate(({ x, y }) => {
+      const el = document.elementFromPoint(x, y);
+      return el ? (el.closest('#landing-search-results') ? 'in-results' : el.className) : null;
+    }, { x: resultsBox.x + resultsBox.width / 2, y: resultsBox.y + 15 });
+    expect(hitElement).toBe('in-results');
 
     const firstResult = page.locator('#landing-search-results .search-result-row').first();
     await firstResult.click();
@@ -531,6 +541,27 @@ test.describe('Navigation and Routing', () => {
     const overlay = page.locator('#detail-overlay');
     await expect(overlay).toHaveClass(/open/, { timeout: 10000 });
     await expect(page).toHaveURL(/.*week=.*dish=.*/);
+  });
+
+  test('Global search matches food weeks, supports keyboard and clear button', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const searchInput = page.locator('#landing-global-search');
+    const clearBtn = page.locator('#landing-search-clear');
+    const resultsContainer = page.locator('#landing-search-results');
+
+    // Search for a food week phrase
+    await searchInput.fill('dumpling week');
+    await page.waitForSelector('#landing-search-results .search-result-week-row', { state: 'visible', timeout: 10000 });
+    const weekRow = resultsContainer.locator('.search-result-week-row').first();
+    await expect(weekRow).toContainText('Dumpling Week 2026');
+
+    // Test clear button
+    await expect(clearBtn).toBeVisible();
+    await clearBtn.click();
+    await expect(searchInput).toHaveValue('');
+    await expect(resultsContainer).toBeHidden();
   });
 });
 

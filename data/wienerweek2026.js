@@ -70,9 +70,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   ];
 
-  const existingIds = new Set(window.RESTAURANTS.map(r => r.id));
   newItems.forEach(item => {
-    if (!existingIds.has(item.id)) {
+    if (!window.RESTAURANTS.some(r => r.id === item.id && r.weekId === item.weekId)) {
       window.RESTAURANTS.push(item);
     }
   });
