@@ -2168,7 +2168,7 @@ body.is-landing .view-footer,
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  border: 1px solid rgba(26, 18, 8, 0.45);
+  border: none;
   background: rgba(26, 18, 8, 0.25);
   cursor: pointer;
   padding: 0;
@@ -2183,7 +2183,7 @@ body.is-landing .view-footer,
   width: 24px;
   border-radius: 6px;
   background: var(--pizza);
-  border-color: var(--pizza-dark, var(--pizza));
+  border: none;
 }
 
 .landing-carousel-dot:focus-visible {
