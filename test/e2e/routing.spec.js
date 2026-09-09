@@ -605,6 +605,18 @@ test.describe('Navigation and Routing', () => {
     // Verify footer links
     await expect(footer.locator('a[href="privacy.html"]')).toBeVisible();
     await expect(footer.locator('a[href="terms.html"]')).toBeVisible();
+
+    // Verify hero has no gradient
+    const heroBg = await page.locator('.landing-hero').evaluate(el => window.getComputedStyle(el).backgroundImage);
+    expect(heroBg).toBe('none');
+
+    // Verify food weeks column and about column are close together
+    const col1Box = await cols.nth(1).boundingBox();
+    const col2Box = await cols.nth(2).boundingBox();
+    expect(col1Box).not.toBeNull();
+    expect(col2Box).not.toBeNull();
+    const colDistance = col2Box.x - (col1Box.x + col1Box.width);
+    expect(colDistance).toBeLessThanOrEqual(40);
   });
 });
 

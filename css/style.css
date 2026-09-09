@@ -1394,7 +1394,7 @@ body.is-landing .view-footer,
 }
 
 .landing-hero {
-  background: radial-gradient(circle at 50% -20%, #3a2b1c 0%, var(--ink) 75%);
+  background: var(--ink);
   color: var(--cream);
   padding: 24px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -1625,8 +1625,8 @@ body.is-landing .view-footer,
 
 .landing-footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 2fr auto auto;
+  gap: 48px 36px;
   margin-bottom: 40px;
 }
 
