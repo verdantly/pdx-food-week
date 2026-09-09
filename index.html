@@ -39,7 +39,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="css/style.css?v=6dc6e74a" />
+  <link rel="stylesheet" href="css/style.css?v=a206da74" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,8 +60,7 @@
     <!-- ── Header ── -->
     <header class="app-header">
       <div class="compact-app-bar" style="display: none;">
-        <a href="?" class="compact-brand" onclick="App.goToLanding(event)"
-          style="text-decoration: none; color: inherit;">PDX Food Week</a>
+        <a href="?" class="compact-brand" onclick="App.goToLanding(event)">PDX Food Week</a>
         <div class="compact-actions">
           <button id="compact-search-btn" class="compact-icon-btn" aria-label="Toggle Search">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -142,8 +141,7 @@
       </div>
 
       <div class="header-top">
-        <a href="?" class="app-wordmark" onclick="App.goToLanding(event)"
-          style="text-decoration: none; color: inherit;">PDX Food Week</a>
+        <a href="?" class="app-wordmark" onclick="App.goToLanding(event)">PDX Food Week</a>
       </div>
 
       <h1 class="header-title" id="header-title">PDX <em>Food Week</em></h1>
@@ -285,13 +283,77 @@
             </div>
           </div>
         </div>
-        <div class="view-footer">
-          PDX Food Week<br>
-          <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>
-          Not affiliated with event organizers.<br>
-          Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
-            href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-        </div>
+        <footer class="landing-footer" role="contentinfo">
+          <div class="landing-footer-inner">
+            <div class="landing-footer-grid">
+              <!-- Col 1: Brand & Mission -->
+              <div class="landing-footer-col brand-col">
+                <a href="?" class="landing-footer-brand" onclick="App.goToLanding(event)">
+                  <img src="web-app-manifest-192x192.png" alt="" class="landing-footer-logo" width="32" height="32" />
+                  PDX Food Week
+                </a>
+                <p class="landing-footer-about">
+                  Your unofficial guide to Portland's legendary food and drink weeks. Discover special menus, plan crawls, and bookmark your favorites across the city.
+                </p>
+                <div class="landing-footer-badge">
+                  <span class="landing-footer-badge-dot"></span>
+                  <span>12 Food Weeks Tracked</span>
+                </div>
+              </div>
+
+              <!-- Col 2: Food Weeks -->
+              <div class="landing-footer-col">
+                <h4 class="landing-footer-heading">Food Weeks</h4>
+                <ul class="landing-footer-links">
+                  <li><a href="?week=pizza-2026" onclick="event.preventDefault(); App.switchWeek('pizza-2026');">🍕 Pizza Week</a></li>
+                  <li><a href="?week=burger-2026" onclick="event.preventDefault(); App.switchWeek('burger-2026');">🍔 Burger Week</a></li>
+                  <li><a href="?week=taco-2026" onclick="event.preventDefault(); App.switchWeek('taco-2026');">🌮 Taco Week</a></li>
+                  <li><a href="?week=dumpling-2026" onclick="event.preventDefault(); App.switchWeek('dumpling-2026');">🥟 Dumpling Week</a></li>
+                  <li><a href="?week=wing-2026" onclick="event.preventDefault(); App.switchWeek('wing-2026');">🍗 Wing Week</a></li>
+                  <li><a href="?week=sandwich-2026" onclick="event.preventDefault(); App.switchWeek('sandwich-2026');">🥪 Sandwich Week</a></li>
+                </ul>
+              </div>
+
+              <!-- Col 3: Explore & Tools -->
+              <div class="landing-footer-col">
+                <h4 class="landing-footer-heading">Explore &amp; Tools</h4>
+                <ul class="landing-footer-links">
+                  <li><a href="#landing-global-search" onclick="document.getElementById('landing-global-search')?.focus();">🔍 Cross-Week Search</a></li>
+                  <li><a href="?week=burger-2026&tab=map" onclick="event.preventDefault(); App.switchWeek('burger-2026'); App.switchTab('map');">🗺️ Interactive Map</a></li>
+                  <li><a href="?week=burger-2026&tab=saved" onclick="event.preventDefault(); App.switchWeek('burger-2026'); App.switchTab('saved');">🔖 Saved &amp; Crawl Planner</a></li>
+                  <li><a href="?week=burger-2026&tab=friends" onclick="event.preventDefault(); App.switchWeek('burger-2026'); App.switchTab('friends');">👥 Group Match &amp; Share</a></li>
+                  <li><a href="?week=burger-2026&tab=swipe" onclick="event.preventDefault(); App.switchWeek('burger-2026'); App.switchTab('swipe');">✨ Discover Dishes</a></li>
+                </ul>
+              </div>
+
+              <!-- Col 4: About & Legal -->
+              <div class="landing-footer-col">
+                <h4 class="landing-footer-heading">About &amp; Legal</h4>
+                <ul class="landing-footer-links">
+                  <li><a href="privacy.html">Privacy Policy</a></li>
+                  <li><a href="terms.html">Terms of Use</a></li>
+                  <li><a href="https://github.com/verdantly/pdx-food-week" target="_blank" rel="noopener">GitHub Project ↗</a></li>
+                  <li><span class="landing-footer-meta-text">Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a></span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Divider & Bottom Bar -->
+            <div class="landing-footer-bottom">
+              <div class="landing-footer-disclaimer">
+                An independent community project. Not affiliated with Portland Mercury, The Oregonian, or official event organizers. All event names, trademarks, and logos belong to their respective owners.
+              </div>
+              <div class="landing-footer-copy-row">
+                <div class="landing-footer-copy">
+                  &copy; 2026 PDX Food Week &bull; Made with ❤️ for Portland foodies
+                </div>
+                <a href="#app" class="landing-footer-back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
+                  Back to top &uarr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </section>
 
       <!-- ── Browse View ── -->
@@ -939,8 +1001,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=6dc6e74a"></script>
-  <script type="module" src="js/app.js?v=6dc6e74a"></script>
+  <script src="js/meta.js?v=a206da74"></script>
+  <script type="module" src="js/app.js?v=a206da74"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;

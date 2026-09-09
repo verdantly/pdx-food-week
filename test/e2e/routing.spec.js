@@ -563,6 +563,49 @@ test.describe('Navigation and Routing', () => {
     await expect(searchInput).toHaveValue('');
     await expect(resultsContainer).toBeHidden();
   });
+
+  test('Brand wordmark matches compact-brand style and transitions to pizza on hover', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/?week=pizza-2026', { waitUntil: 'domcontentloaded' });
+    const wordmark = page.locator('.app-wordmark').first();
+    await expect(wordmark).toBeVisible();
+
+    const wordmarkStyles = await wordmark.evaluate(el => {
+      const s = window.getComputedStyle(el);
+      return { fontSize: s.fontSize, fontWeight: s.fontWeight, textTransform: s.textTransform };
+    });
+    expect(wordmarkStyles.fontSize).toBe('14px');
+    expect(wordmarkStyles.fontWeight).toBe('700');
+    expect(wordmarkStyles.textTransform).toBe('uppercase');
+
+    await wordmark.hover();
+    await page.waitForTimeout(200);
+    const hoverColor = await wordmark.evaluate(el => window.getComputedStyle(el).color);
+    expect(hoverColor).toMatch(/rgb\(181,\s*71,\s*46\)|rgb\(201,\s*75,\s*44\)/);
+  });
+
+  test('Landing footer renders multi-column layout seamlessly below features', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    const footer = page.locator('.landing-footer');
+    await expect(footer).toBeVisible();
+
+    const cols = footer.locator('.landing-footer-col');
+    await expect(cols).toHaveCount(4);
+
+    // Verify flush attachment to .landing-features (no awkward gap)
+    const featuresBox = await page.locator('.landing-features').boundingBox();
+    const footerBox = await footer.boundingBox();
+    expect(featuresBox).not.toBeNull();
+    expect(footerBox).not.toBeNull();
+    const gap = footerBox.y - (featuresBox.y + featuresBox.height);
+    expect(gap).toBeLessThanOrEqual(1);
+
+    // Verify footer links
+    await expect(footer.locator('a[href="privacy.html"]')).toBeVisible();
+    await expect(footer.locator('a[href="terms.html"]')).toBeVisible();
+  });
 });
 
 
