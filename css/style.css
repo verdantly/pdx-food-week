@@ -1626,7 +1626,7 @@ body.is-landing .view-footer,
 .landing-footer-grid {
   display: grid;
   grid-template-columns: 2fr auto auto;
-  gap: 48px 36px;
+  gap: 48px 64px;
   margin-bottom: 40px;
 }
 
@@ -1760,8 +1760,9 @@ body.is-landing .view-footer,
 
 @media (max-width: 1023.98px) {
   .landing-footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    gap: 32px 64px;
   }
 
   .landing-footer-col.brand-col {

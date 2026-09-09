@@ -610,13 +610,14 @@ test.describe('Navigation and Routing', () => {
     const heroBg = await page.locator('.landing-hero').evaluate(el => window.getComputedStyle(el).backgroundImage);
     expect(heroBg).toBe('none');
 
-    // Verify food weeks column and about column are close together
+    // Verify food weeks column and about column have breathing room
     const col1Box = await cols.nth(1).boundingBox();
     const col2Box = await cols.nth(2).boundingBox();
     expect(col1Box).not.toBeNull();
     expect(col2Box).not.toBeNull();
     const colDistance = col2Box.x - (col1Box.x + col1Box.width);
-    expect(colDistance).toBeLessThanOrEqual(40);
+    expect(colDistance).toBeGreaterThanOrEqual(50);
+    expect(colDistance).toBeLessThanOrEqual(80);
   });
 });
 
