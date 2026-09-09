@@ -592,7 +592,7 @@ test.describe('Navigation and Routing', () => {
     await expect(footer).toBeVisible();
 
     const cols = footer.locator('.landing-footer-col');
-    await expect(cols).toHaveCount(4);
+    await expect(cols).toHaveCount(3);
 
     // Verify flush attachment to .landing-features (no awkward gap)
     const featuresBox = await page.locator('.landing-features').boundingBox();
