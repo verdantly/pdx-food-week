@@ -4181,6 +4181,10 @@ input[type="search"]::-webkit-search-cancel-button {
     padding: 24px 32px 0;
   }
 
+  .header-controls-row {
+    padding: 8px 32px 12px;
+  }
+
   .filter-row {
     padding: 12px 32px;
   }

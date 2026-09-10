@@ -16,7 +16,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FFCDD2",
     colorPale: "#FFEBEE",
     emoji: "🌭",
-    totalLocations: 2,
+    totalLocations: 47,
     url: "https://everout.com/portland/events/the-portland-mercurys-wiener-week-2026/e222740/",
     filters: [
       { id: 'meat', label: 'Meat' },
@@ -39,7 +39,7 @@ window.FOOD_WEEKS = [
     colorLight: "#E1BEE7",
     colorPale: "#F3E5F5",
     emoji: "🥟",
-    totalLocations: 2,
+    totalLocations: 57,
     url: "https://www.dumplingweek.com/",
     filters: [
       { id: 'meat', label: 'Meat' },
@@ -62,7 +62,7 @@ window.FOOD_WEEKS = [
     colorLight: "#B2DFDB",
     colorPale: "#E0F2F1",
     emoji: "🥪",
-    totalLocations: 2,
+    totalLocations: 90,
     url: "https://everout.com/portland/events/the-portland-mercurys-sandwich-week-2026/e222742/",
     filters: [
       { id: 'meat', label: 'Meat' },
@@ -236,7 +236,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 38,
+    totalLocations: 40,
     url: "https://www.theactualportland.com/friedchickenlocations",
     filters: [
       { id: 'meat', label: 'Meat' },

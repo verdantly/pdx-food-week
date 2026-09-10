@@ -15,6 +15,9 @@
     "scrape:slushies": "node scrapers/scrape_slushies.js",
     "scrape:chicken": "node scrapers/scrape_fried_chicken.js",
     "scrape:wings": "node scrapers/scrape_wings.js",
+    "scrape:sandwiches": "node scrapers/scrape_sandwiches.js",
+    "scrape:wieners": "node scrapers/scrape_wieners.js",
+    "scrape:dumplings": "node scrapers/scrape_dumplings.js",
     "test:unit": "node -c js/app.js && node scripts/hash_assets.js && vitest run",
     "test:e2e": "playwright test"
   },

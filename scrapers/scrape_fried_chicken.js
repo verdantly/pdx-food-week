@@ -113,7 +113,8 @@ const DISH_OVERRIDES = {
   'Wajan': { dish: 'Ayam Geprek' },
   'Say When': { dish: 'Buttermilk Brined Fried Chicken Sandwich' },
   "Big's Chicken | Alabama Fried Chicken": { dish: 'Fried Chicken Tenders & Huli-Huli Sauce' },
-  'E-San Thai Woodstock': { dish: 'Crispy Garlic Chicken Wings' }
+  'E-San Thai Woodstock': { dish: 'Crispy Garlic Chicken Wings' },
+  'Hawker Station PDX': { dish: 'Fried Chicken Thighs with Hong Kong Style Curry Dipping Sauce' }
 };
 
 async function scrape() {

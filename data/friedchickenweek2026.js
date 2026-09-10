@@ -1,5 +1,5 @@
 // The Actual Portland's Fried Chicken Week 2026
-// 38 locations
+// 40 locations
 // Source: https://www.theactualportland.com/friedchickenlocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 38,
+    totalLocations: 40,
     url: "https://www.theactualportland.com/friedchickenlocations",
   }
 );
@@ -778,7 +778,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "takeout": true,
     "desc": "Tamarind crispy chicken bowl.",
     "emoji": "🍗",
-    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/8929e1dc-b886-4bdb-8257-da9c1af4fcb3/B1766703-8011-4DBD-A0E4-6F1DE8A4A44C+-+Nhu+Nguyen.png",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/86bb2e37-f16d-456d-bb80-63b8af13ebe0/IMG_6444.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
   {
@@ -805,6 +805,48 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 38,
     "weekId": "fried-chicken-2026",
+    "dish": "Fried Chicken Special",
+    "restaurant": "Hawker Station PDX",
+    "neighborhood": "Central Beaverton",
+    "address": "12675 Southwest 1st St, Beaverton, OR 97005",
+    "lat": 45.4867061,
+    "lng": -122.8069168,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Fried chicken thighs with hong kong style curry dipping sauce.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/eb297f4c-3951-4ad4-898a-39946b0d8bdc/inbound9145835864276702059+-+Hawkerstation+PDX.png",
+    "url": "https://www.theactualportland.com/friedchickenlocations"
+  },
+  {
+    "id": 39,
+    "weekId": "fried-chicken-2026",
+    "dish": "The Hot Honey Chicken Sandwich",
+    "restaurant": "Wolf's Burger Company",
+    "neighborhood": "Eliot",
+    "address": "1825 North Williams Ave, Portland, OR 97227",
+    "lat": 45.5362725,
+    "lng": -122.6668978,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Hand-cut chicken breast marinated in our buttermilk marinade, hand-breaded to order, fried, then tossed in our spicy oil and blackened seasoning, topped with local honey. Served on a sandwich with our royal sauce and pickles.",
+    "emoji": "🥪",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a96a6b29-cf4a-488c-8272-8aaab70c2034/Hot+Honey+Friend+Chicken.jpg",
+    "url": "https://www.theactualportland.com/friedchickenlocations"
+  },
+  {
+    "id": 40,
+    "weekId": "fried-chicken-2026",
     "dish": "Crispy Garlic Chicken Wings",
     "restaurant": "E-San Thai Woodstock",
     "neighborhood": "Woodstock",
@@ -818,7 +860,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "spicy": true,
     "minors": true,
     "takeout": true,
-    "desc": "Crispy thai wings.",
+    "desc": "CRISPY THAI WINGS. (Closed Tuesday’s)",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/3f980f48-8352-4cf9-926b-d90bdd62a2ed/IMG_5299+-+Huyen+Tram+Huynh.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations"
