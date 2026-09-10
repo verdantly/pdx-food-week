@@ -143,7 +143,7 @@ body.is-landing .view {
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--cream);
   text-decoration: none;
   font-style: normal;
@@ -1454,7 +1454,7 @@ body.is-landing .view-footer,
   font-size: 2.2em;
   font-weight: 600;
   letter-spacing: 0em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: #E85B38;
   font-style: normal;
   margin: 0;
@@ -1645,7 +1645,7 @@ body.is-landing .view-footer,
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0em;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: #E85B38;
   text-decoration: none;
   display: inline-flex;
@@ -4560,7 +4560,7 @@ select:focus-visible {
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0em;
-    text-transform: uppercase;
+    text-transform: lowercase;
     color: var(--cream);
     cursor: pointer;
     text-decoration: none;

@@ -602,7 +602,7 @@ test.describe('Navigation and Routing', () => {
     expect(wordmarkStyles.fontWeight).toBe('600');
     expect(wordmarkStyles.fontFamily).toContain('Syne');
     expect(wordmarkStyles.letterSpacing).toMatch(/^(0px|normal)$/);
-    expect(wordmarkStyles.textTransform).toBe('uppercase');
+    expect(wordmarkStyles.textTransform).toBe('lowercase');
 
     await wordmark.hover();
     await page.waitForTimeout(200);
