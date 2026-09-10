@@ -260,7 +260,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FDEAE6",
     colorPale: "#FFF5F2",
     emoji: "🍗",
-    totalLocations: 73,
+    totalLocations: 95,
     url: "https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/",
     filters: [
       { id: 'meat', label: 'Meat' },
