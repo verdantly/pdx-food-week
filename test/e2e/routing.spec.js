@@ -618,6 +618,14 @@ test.describe('Navigation and Routing', () => {
     const colDistance = col2Box.x - (col1Box.x + col1Box.width);
     expect(colDistance).toBeGreaterThanOrEqual(50);
     expect(colDistance).toBeLessThanOrEqual(80);
+
+    // Verify footer margins match landing-steps-grid
+    const footerInnerBox = await page.locator('.landing-footer-inner').boundingBox();
+    const stepsBox = await page.locator('.landing-steps-grid').boundingBox();
+    expect(footerInnerBox).not.toBeNull();
+    expect(stepsBox).not.toBeNull();
+    expect(Math.abs(footerInnerBox.x - stepsBox.x)).toBeLessThanOrEqual(1);
+    expect(Math.abs(footerInnerBox.width - stepsBox.width)).toBeLessThanOrEqual(1);
   });
 });
 
