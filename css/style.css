@@ -141,7 +141,7 @@ body.is-landing .view {
 .compact-brand {
   font-family: var(--font-brand);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cream);
@@ -334,7 +334,7 @@ body.is-landing .view-footer,
   background: var(--pizza-light);
   color: var(--pizza);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   padding: 2px 6px;
   border-radius: 12px;
   min-width: 14px;
@@ -678,7 +678,7 @@ body.is-landing .view-footer,
   font-family: var(--font-display);
   font-size: 18px;
   /* Increased from 16px */
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   line-height: 1.25;
   margin-bottom: 3px;
@@ -691,7 +691,7 @@ body.is-landing .view-footer,
   color: #fff;
   font-family: var(--font-body);
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
   margin-left: 6px;
@@ -872,7 +872,7 @@ body.is-landing .view-footer,
 
 .tab-header-title {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   font-family: var(--font-display);
   margin: 0;
   color: var(--pizza);
@@ -906,7 +906,7 @@ body.is-landing .view-footer,
 }
 
 .stat-pill span {
-  font-weight: 800;
+  font-weight: 600;
   color: var(--pizza);
 }
 .stat-pill.clickable:hover span {
@@ -917,7 +917,7 @@ body.is-landing .view-footer,
   font-family: var(--font-display);
   display: inline-block;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--pizza);
   text-align: center;
   padding: 8px 16px 0;
@@ -961,7 +961,7 @@ body.is-landing .view-footer,
 .share-panel h3 {
   font-family: var(--font-display);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
   margin-bottom: 6px;
 }
@@ -1096,7 +1096,7 @@ body.is-landing .view-footer,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   flex-shrink: 0;
   font-family: var(--font-display);
@@ -1293,7 +1293,7 @@ body.is-landing .view-footer,
 
 .leaflet-popup-content .popup-dish {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 15px;
   line-height: 1.2;
   margin-bottom: 2px;
@@ -1448,7 +1448,7 @@ body.is-landing .view-footer,
   z-index: 1;
   font-family: var(--font-brand);
   font-size: 2.2em;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #E85B38;
@@ -1521,7 +1521,7 @@ body.is-landing .view-footer,
 .landing-section-title {
   font-family: var(--font-body);
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--pizza);
@@ -1591,7 +1591,7 @@ body.is-landing .view-footer,
 .step-title {
   font-family: var(--font-display);
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--ink);
   margin-top: 0;
   margin-bottom: 6px;
@@ -1609,7 +1609,6 @@ body.is-landing .view-footer,
 .landing-footer {
   width: 100%;
   margin: 0;
-  margin-top: auto;
   background: var(--ink);
   color: var(--cream);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -1640,7 +1639,7 @@ body.is-landing .view-footer,
 .landing-footer-brand {
   font-family: var(--font-brand);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #E85B38;
@@ -1675,7 +1674,7 @@ body.is-landing .view-footer,
 .landing-footer-heading {
   font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cream);
@@ -1938,7 +1937,7 @@ body.is-landing .view-footer,
 .featured-title {
   font-family: var(--font-display);
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 600;
   margin: 0;
   color: var(--ink);
   line-height: 1.2;
@@ -2112,7 +2111,7 @@ body.is-landing .view-footer,
 
 .landing-spot-card .card-dish {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   padding-right: 0;
   margin-bottom: 4px;
   line-height: 1.3;
@@ -2215,7 +2214,7 @@ body.is-landing .view-footer,
 .landing-others-title {
   font-family: var(--font-body);
   font-size: 13.5px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--pizza);
@@ -2287,7 +2286,7 @@ body.is-landing .view-footer,
 
   .landing-others-page-num {
     font-size: 12.5px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--ink-60);
     letter-spacing: 0.04em;
     min-width: 48px;
@@ -2443,7 +2442,7 @@ body.is-landing .view-footer,
 .landing-card h3 {
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   margin: 0;
   color: var(--ink);
   line-height: 1.3;
@@ -2522,7 +2521,7 @@ body.is-landing .view-footer,
   margin-left: auto;
   flex-shrink: 0;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 3px 8px;
   border-radius: 20px;
   text-transform: uppercase;
@@ -2587,7 +2586,7 @@ body.is-landing .view-footer,
 /* ── Featured Showcase Header: Prominent Status Badge (matching .tag system) ── */
 .featured-showcase-header .landing-status-badge {
   font-size: 12.5px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 5px 12px;
   border-radius: 20px;
   letter-spacing: 0.04em;
@@ -2709,7 +2708,7 @@ body.is-landing .view-footer,
   background: var(--cream, #FBF6EF);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
   font-size: 12.5px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink-70);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -2791,7 +2790,7 @@ body.is-landing .view-footer,
 
 .search-result-dish {
   font-size: 14.5px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
@@ -2815,7 +2814,7 @@ body.is-landing .view-footer,
 .search-result-badge {
   flex-shrink: 0;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 3px 8px;
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.05);
@@ -2907,7 +2906,7 @@ body.is-landing .view-footer,
 
 .pwa-install-title {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   line-height: 1.25;
 }
@@ -2932,7 +2931,7 @@ body.is-landing .view-footer,
   border: none;
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 7px 14px;
   border-radius: 20px;
   cursor: pointer;
@@ -2979,7 +2978,7 @@ body.is-landing .view-footer,
   background: #C94B2C;
   color: #fff;
   font-size: 11.5px;
-  font-weight: 800;
+  font-weight: 600;
   text-transform: uppercase;
   padding: 4px 0;
   transform: rotate(45deg);
@@ -3387,7 +3386,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .swipe-card-dish {
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.15;
   margin-bottom: 3px;
 }
@@ -3506,7 +3505,7 @@ input[type="search"]::-webkit-search-cancel-button {
   font-family: var(--font-display);
   font-size: 28px;
   color: var(--pizza);
-  font-weight: 700;
+  font-weight: 600;
   margin: 8px 0 4px;
 }
 
@@ -4275,7 +4274,7 @@ input[type="search"]::-webkit-search-cancel-button {
   .swipe-desktop-hint {
     font-family: var(--font-display);
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--ink-20);
     opacity: 0.5;
   }
@@ -4554,7 +4553,7 @@ select:focus-visible {
   .compact-brand {
     font-family: var(--font-brand);
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--cream);
@@ -4794,7 +4793,7 @@ select:focus-visible {
   background: var(--pizza);
   color: white;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -4861,7 +4860,7 @@ select:focus-visible {
 .drawer-header h3 {
   font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .drawer-close {
@@ -5340,7 +5339,7 @@ select:focus-visible {
   background: var(--teal);
   border-color: var(--teal);
   color: white;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 13px;
   transform: scale(1.08);
 }
@@ -5417,7 +5416,7 @@ select:focus-visible {
 .crawl-modal-title {
   font-family: var(--font-display);
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--ink);
   margin: 0;
 }
@@ -5474,7 +5473,7 @@ select:focus-visible {
 .crawl-option-heading {
   font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   margin-bottom: 2px;
 }
@@ -5533,7 +5532,7 @@ select:focus-visible {
   align-items: center;
   justify-content: center;
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 13px;
   flex-shrink: 0;
   transition: all 0.15s ease;
@@ -5552,7 +5551,7 @@ select:focus-visible {
 }
 .crawl-picker-dish {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 15px;
   color: var(--ink);
   line-height: 1.25;
@@ -5650,7 +5649,7 @@ select:focus-visible {
   border-radius: 50%;
   background: var(--teal);
   color: white;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -5666,7 +5665,7 @@ select:focus-visible {
 }
 .crawl-sortable-dish {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 15px;
   color: var(--ink);
   line-height: 1.25;

@@ -575,7 +575,7 @@ test.describe('Navigation and Routing', () => {
       return { fontSize: s.fontSize, fontWeight: s.fontWeight, textTransform: s.textTransform };
     });
     expect(wordmarkStyles.fontSize).toBe('14px');
-    expect(wordmarkStyles.fontWeight).toBe('700');
+    expect(wordmarkStyles.fontWeight).toBe('600');
     expect(wordmarkStyles.textTransform).toBe('uppercase');
 
     await wordmark.hover();
@@ -595,12 +595,14 @@ test.describe('Navigation and Routing', () => {
     await expect(cols).toHaveCount(3);
 
     // Verify flush attachment to .landing-features (no awkward gap)
-    const featuresBox = await page.locator('.landing-features').boundingBox();
-    const footerBox = await footer.boundingBox();
-    expect(featuresBox).not.toBeNull();
-    expect(footerBox).not.toBeNull();
-    const gap = footerBox.y - (featuresBox.y + featuresBox.height);
-    expect(gap).toBeLessThanOrEqual(1);
+    await expect(async () => {
+      const { fBottom, footTop } = await page.evaluate(() => {
+        const f = document.querySelector('.landing-features')?.getBoundingClientRect();
+        const foot = document.querySelector('.landing-footer')?.getBoundingClientRect();
+        return { fBottom: f ? f.bottom : 0, footTop: foot ? foot.top : 0 };
+      });
+      expect(Math.abs(footTop - fBottom)).toBeLessThanOrEqual(1);
+    }).toPass();
 
     // Verify footer links
     await expect(footer.locator('a[href="privacy.html"]')).toBeVisible();

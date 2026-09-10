@@ -95,9 +95,9 @@ export function renderFriends() {
 
   const activeFriends = window.App && window.App.getActiveFriends ? window.App.getActiveFriends() : [];
 
-  let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No friends added yet.</p>`;
+  let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No friends added yet.</p>`;
   if (State.friends.length > 0 && activeFriends.length === 0) {
-    emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No shared lists for this week.</p>`;
+    emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No shared lists for this week.</p>`;
   }
 
   const fl = document.getElementById('friends-list');
@@ -148,7 +148,7 @@ export function renderFriends() {
         <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; opacity: 0.8">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
-        <p style="font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No overlap yet</p>
+        <p style="font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No overlap yet</p>
         <p style="color: var(--ink-60);">Save more spots and add more friends!</p>
       </div>`;
     } else {
