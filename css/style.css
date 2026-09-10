@@ -45,7 +45,7 @@ select {
   --radius-sm: 8px;
   --shadow: 0 2px 12px rgba(26, 18, 8, 0.08);
   --shadow-lg: 0 8px 32px rgba(26, 18, 8, 0.14);
-  --font-brand: 'Outfit', sans-serif;
+  --font-brand: 'Syne', sans-serif;
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-mono: 'DM Mono', monospace;
@@ -142,7 +142,7 @@ body.is-landing .view {
   font-family: var(--font-brand);
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0em;
   text-transform: uppercase;
   color: var(--cream);
   text-decoration: none;
@@ -205,7 +205,7 @@ body.is-landing .view {
 .header-title {
   font-family: var(--font-display);
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 600;
   line-height: 1.1;
   color: #fff;
   margin-bottom: 6px;
@@ -1428,6 +1428,8 @@ body.is-landing .view-footer,
 }
 
 .landing-logo {
+  font-family: var(--font-brand);
+  letter-spacing: 0em;
   width: 36px;
   height: 36px;
   border-radius: 8px;
@@ -1437,6 +1439,8 @@ body.is-landing .view-footer,
 
 @media (max-width: 767.98px) {
   .landing-logo {
+  font-family: var(--font-brand);
+  letter-spacing: 0em;
     width: 30px;
     height: 30px;
     border-radius: 6px;
@@ -1449,7 +1453,7 @@ body.is-landing .view-footer,
   font-family: var(--font-brand);
   font-size: 2.2em;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0em;
   text-transform: uppercase;
   color: #E85B38;
   font-style: normal;
@@ -1524,7 +1528,7 @@ body.is-landing .view-footer,
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--pizza);
+  color: var(--pizza-dark);
   margin-bottom: 6px;
   text-align: center;
 }
@@ -1581,8 +1585,8 @@ body.is-landing .view-footer,
 .step-num {
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 900;
-  color: var(--pizza, #C94B2C);
+  font-weight: 600;
+  color: var(--pizza-dark, #8C3420);
   letter-spacing: 0.06em;
   line-height: 1;
   text-align: center;
@@ -1640,7 +1644,7 @@ body.is-landing .view-footer,
   font-family: var(--font-brand);
   font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0em;
   text-transform: uppercase;
   color: #E85B38;
   text-decoration: none;
@@ -1657,6 +1661,8 @@ body.is-landing .view-footer,
 }
 
 .landing-footer-logo {
+  font-family: var(--font-brand);
+  letter-spacing: 0em;
   width: 28px;
   height: 28px;
   border-radius: 6px;
@@ -2127,7 +2133,7 @@ body.is-landing .view-footer,
 .landing-spot-card .card-restaurant {
   font-size: 14.5px;
   font-weight: 600;
-  color: var(--pizza);
+  color: var(--pizza-dark);
   margin-bottom: 6px;
 }
 
@@ -2217,7 +2223,7 @@ body.is-landing .view-footer,
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--pizza);
+  color: var(--pizza-dark);
   margin-bottom: 2px;
   padding-left: 2px;
   text-align: center;
@@ -2577,10 +2583,9 @@ body.is-landing .view-footer,
 }
 
 .landing-status-badge.past {
-  background: rgba(0, 0, 0, 0.035);
-  color: rgba(26, 18, 8, 0.46);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  opacity: 0.88;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ink-70);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* ── Featured Showcase Header: Prominent Status Badge (matching .tag system) ── */
@@ -3077,7 +3082,7 @@ body.is-landing .view-footer,
 .sheet-dish {
   font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 900;
+  font-weight: 600;
   color: var(--ink);
   text-align: center;
   line-height: 1.25;
@@ -3456,7 +3461,7 @@ input[type="search"]::-webkit-search-cancel-button {
   top: 24px;
   font-family: var(--font-display);
   font-size: 34px;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.08em;
   padding: 6px 16px;
   border: 4px solid;
@@ -4038,7 +4043,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .app-wordmark {
     font-size: 14px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0em;
     text-align: left;
     align-self: flex-start;
   }
@@ -4554,7 +4559,7 @@ select:focus-visible {
     font-family: var(--font-brand);
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0em;
     text-transform: uppercase;
     color: var(--cream);
     cursor: pointer;

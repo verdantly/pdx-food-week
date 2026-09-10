@@ -485,6 +485,24 @@ test.describe('Navigation and Routing', () => {
     const nextBtn = page.locator('.landing-carousel-arrow-overlay.next');
     await expect(prevBtn).toHaveAttribute('aria-label', 'Previous special');
     await expect(nextBtn).toHaveAttribute('aria-label', 'Next special');
+
+    // 6. Automated WCAG 2.1 AA audit with axe-core
+    await page.addScriptTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.9.1/axe.min.js' });
+    const violations = await page.evaluate(async () => {
+      const results = await window.axe.run(document, {
+        runOnly: {
+          type: 'tag',
+          values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
+        }
+      });
+      return results.violations.map(v => ({
+        id: v.id,
+        impact: v.impact,
+        description: v.description,
+        nodes: v.nodes.map(n => n.target)
+      }));
+    });
+    expect(violations).toEqual([]);
   });
 
   test('Mobile collapsible more food weeks shows button and expands/collapses', async ({ page }) => {
@@ -572,10 +590,18 @@ test.describe('Navigation and Routing', () => {
 
     const wordmarkStyles = await wordmark.evaluate(el => {
       const s = window.getComputedStyle(el);
-      return { fontSize: s.fontSize, fontWeight: s.fontWeight, textTransform: s.textTransform };
+      return {
+        fontSize: s.fontSize,
+        fontWeight: s.fontWeight,
+        fontFamily: s.fontFamily,
+        letterSpacing: s.letterSpacing,
+        textTransform: s.textTransform
+      };
     });
     expect(wordmarkStyles.fontSize).toBe('14px');
     expect(wordmarkStyles.fontWeight).toBe('600');
+    expect(wordmarkStyles.fontFamily).toContain('Syne');
+    expect(wordmarkStyles.letterSpacing).toMatch(/^(0px|normal)$/);
     expect(wordmarkStyles.textTransform).toBe('uppercase');
 
     await wordmark.hover();
