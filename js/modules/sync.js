@@ -7,11 +7,13 @@ let syncUnsubscribe = null;
 let syncDebounceTimer = null;
 let isApplyingCloudUpdate = false;
 
-export function onUserSignedIn(user) {
-  // Capture a snapshot of guest entries right before any cloud merging happens
-  backupGuestUserData();
+export function onUserSignedIn(user, fromGuest = false) {
+  // Capture a snapshot of guest entries right before any cloud merging happens (only if transitioning from guest)
+  if (fromGuest) {
+    backupGuestUserData();
+  }
   if (!window.db) return;
-  subscribeToCloud(user.uid);
+  subscribeToCloud(user.uid, fromGuest);
 }
 
 export function onUserSignedOut() {
@@ -22,6 +24,11 @@ export function onUserSignedOut() {
   clearTimeout(syncDebounceTimer);
   State.syncStatus = 'idle';
   updateSyncStatusUI();
+
+  // Cancel crawl mode if currently active
+  if (State.crawlModeActive && window.App && window.App.toggleCrawlMode) {
+    window.App.toggleCrawlMode();
+  }
 
   // Restore the guest entries that were saved before the user signed in
   restoreGuestUserData();
@@ -43,12 +50,15 @@ export function updateSyncStatusUI() {
   statusEls.forEach(el => {
     if (State.syncStatus === 'syncing') {
       el.textContent = 'Syncing...';
+      el.style.color = 'var(--pizza)';
       el.classList.add('syncing');
     } else if (State.syncStatus === 'synced') {
       el.textContent = 'Cloud Synced ✓';
+      el.style.color = '#2e7d32';
       el.classList.remove('syncing');
     } else if (State.syncStatus === 'error') {
-      el.textContent = 'Sync offline';
+      el.textContent = 'Offline / Sync pending';
+      el.style.color = 'var(--ink-50)';
       el.classList.remove('syncing');
     } else {
       el.textContent = '';
@@ -57,30 +67,78 @@ export function updateSyncStatusUI() {
   });
 }
 
-export function subscribeToCloud(uid) {
+export function subscribeToCloud(uid, fromGuest = false) {
   if (!window.db) return;
   if (syncUnsubscribe) syncUnsubscribe();
 
+  let initialCloudSnapshotDone = false;
   const userDocRef = window.db.collection('users').doc(uid);
 
   syncUnsubscribe = userDocRef.onSnapshot(async doc => {
     if (isApplyingCloudUpdate) return;
 
     if (!doc.exists) {
-      // First time user: initial push of local state to cloud
+      // First time user: push local state to cloud
       await pushLocalToCloud(uid);
+      initialCloudSnapshotDone = true;
       return;
     }
 
-    const cloudData = doc.data();
-    mergeCloudWithLocal(cloudData);
+    const cloudData = doc.data() || {};
+
+    if (!initialCloudSnapshotDone) {
+      initialCloudSnapshotDone = true;
+      if (fromGuest) {
+        // User had guest entries prior to logging in: union merge with cloud, then upload combined result
+        mergeCloudWithLocal(cloudData);
+        await pushLocalToCloud(uid);
+      } else {
+        // Existing signed-in session (e.g. reload): cloud is source of truth
+        applyRemoteCloudState(cloudData);
+      }
+    } else {
+      // Live updates from another tab/device: ignore local echo of uncommitted writes
+      if (doc.metadata && doc.metadata.hasPendingWrites) {
+        return;
+      }
+      applyRemoteCloudState(cloudData);
+    }
+
     State.syncStatus = 'synced';
     updateSyncStatusUI();
   }, err => {
-    console.error('Firestore cloud sync error:', err);
+    if (err && err.code === 'permission-denied') {
+      console.warn('Firestore Permission Denied: Ensure Firestore Security Rules allow read/write for /users/{uid}.');
+    } else {
+      console.error('Firestore cloud sync error:', err);
+    }
     State.syncStatus = 'error';
     updateSyncStatusUI();
   });
+}
+
+export function applyRemoteCloudState(cloudData) {
+  if (!cloudData) return;
+  isApplyingCloudUpdate = true;
+
+  try {
+    State.saved = new Set(cloudData.saved || []);
+    State.passed = new Set(cloudData.passed || []);
+    State.notes = cloudData.notes || {};
+    State.crawlSelection = Array.isArray(cloudData.crawlSelection) ? cloudData.crawlSelection : [];
+    State.customSavedOrder = (cloudData.customSavedOrder || []).filter(id => State.saved.has(id));
+
+    saveState();
+
+    if (State.activeTab === 'saved') renderSaved();
+    if (State.activeTab === 'browse') renderBrowse();
+    if (State.activeTab === 'map') renderAll();
+    if (window.App && window.App.updateCrawlFab) window.App.updateCrawlFab();
+  } finally {
+    setTimeout(() => {
+      isApplyingCloudUpdate = false;
+    }, 100);
+  }
 }
 
 export function mergeCloudWithLocal(cloudData) {

@@ -59,6 +59,13 @@ if (window.firebase) {
       firebase.initializeApp(firebaseConfig);
     }
     window.db = firebase.firestore();
+    window.db.enablePersistence({ synchronizeTabs: true }).catch(err => {
+      if (err.code === 'failed-precondition') {
+        console.warn('Firestore multi-tab offline persistence not enabled: multiple tabs open');
+      } else if (err.code === 'unimplemented') {
+        console.warn('Firestore offline persistence unsupported in this browser');
+      }
+    });
     if (firebase.analytics) {
       window.analytics = firebase.analytics();
     }

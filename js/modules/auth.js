@@ -28,6 +28,7 @@ export function initAuth() {
           url.searchParams.delete('oobCode');
           url.searchParams.delete('mode');
           url.searchParams.delete('lang');
+          url.searchParams.delete('auth');
           window.history.replaceState({}, document.title, url.pathname + (url.search ? url.search : ''));
           showToast('Signed in successfully! 🎉');
         })
@@ -40,12 +41,19 @@ export function initAuth() {
 
   // Listen to auth state changes
   auth.onAuthStateChanged(user => {
+    const wasLoggedIn = Boolean(State.user) || Boolean(localStorage.getItem('pdxfw_logged_in_uid'));
     State.user = user;
     updateAuthUI();
+
     if (user) {
-      onUserSignedIn(user);
+      const fromGuest = !wasLoggedIn;
+      localStorage.setItem('pdxfw_logged_in_uid', user.uid);
+      onUserSignedIn(user, fromGuest);
     } else {
-      onUserSignedOut();
+      if (wasLoggedIn) {
+        localStorage.removeItem('pdxfw_logged_in_uid');
+        onUserSignedOut();
+      }
     }
   });
 }
