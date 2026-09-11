@@ -37,7 +37,9 @@ import {
 import {
   initAuth, openAccountModal, closeAccountModal, signInWithGoogle,
   sendMagicLink, signInWithPassword, registerWithPassword, sendPasswordReset,
-  handleSignOut, updateAuthUI
+  handleSignOut, updateAuthUI, showAuthSubView,
+  handleMagicLinkSubmit, handlePasswordLoginSubmit, handlePasswordSignupSubmit,
+  handlePasswordResetSubmit, togglePasswordVisibility
 } from './modules/auth.js';
 import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 
@@ -45,13 +47,13 @@ import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 if (window.firebase) {
   try {
     const firebaseConfig = {
-      apiKey: "AIzaSyAdTylbo7DYxF7yXAUZCC3_Ft4j2DYVmIc",
+      apiKey: "AIzaSyBRqAcWvXkQHF52VRP23agkfIufWrOf0rA",
       authDomain: "pdx-food-week.firebaseapp.com",
       projectId: "pdx-food-week",
       storageBucket: "pdx-food-week.firebasestorage.app",
       messagingSenderId: "641950496269",
-      appId: "1:641950496269:web:05be564e86427f24d08744",
-      measurementId: "G-78YTW9CPLJ"
+      appId: "1:641950496269:web:1e6b06112b9bd1f4d08744",
+      measurementId: "G-YY5J6DF5TW"
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
@@ -1035,57 +1037,8 @@ function initLandingSearch() {
   });
 }
 
-// ── PWA Install Prompt Banner ──
-let deferredPwaPrompt = null;
-
 function initPwaInstallPrompt() {
-  const banner = document.getElementById('pwa-install-banner');
-  const installBtn = document.getElementById('pwa-install-btn');
-  const dismissBtn = document.getElementById('pwa-dismiss-btn');
-  if (!banner || !installBtn || !dismissBtn) return;
-
-  // Don't show if already in standalone display mode
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
-  if (isStandalone) {
-    banner.hidden = true;
-    return;
-  }
-
-  // Don't show if user dismissed it in this session/browser
-  if (localStorage.getItem('pdx_pwa_dismissed') === 'true') {
-    banner.hidden = true;
-    return;
-  }
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPwaPrompt = e;
-    banner.hidden = false;
-  });
-
-  installBtn.addEventListener('click', async () => {
-    if (deferredPwaPrompt) {
-      deferredPwaPrompt.prompt();
-      const { outcome } = await deferredPwaPrompt.userChoice;
-      deferredPwaPrompt = null;
-      banner.hidden = true;
-      if (outcome === 'accepted') {
-        localStorage.setItem('pdx_pwa_dismissed', 'true');
-      }
-    } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      // iOS Safari instructions
-      showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
-      banner.hidden = true;
-      localStorage.setItem('pdx_pwa_dismissed', 'true');
-    } else {
-      banner.hidden = true;
-    }
-  });
-
-  dismissBtn.addEventListener('click', () => {
-    banner.hidden = true;
-    localStorage.setItem('pdx_pwa_dismissed', 'true');
-  });
+  updateInstallUI();
 }
 
 function attachLandingCarouselTouch() {
@@ -1771,6 +1724,12 @@ const App = {
   sendPasswordReset,
   handleSignOut,
   updateAuthUI,
+  showAuthSubView,
+  handleMagicLinkSubmit,
+  handlePasswordLoginSubmit,
+  handlePasswordSignupSubmit,
+  handlePasswordResetSubmit,
+  togglePasswordVisibility,
   pushLocalToCloud,
   queueCloudSync,
   checkMetadataUpdate,
