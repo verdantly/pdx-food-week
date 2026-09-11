@@ -1,5 +1,5 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, WEEK_FILE_MAP } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState } from './modules/state.js';
 import { esc, debounce, showToast } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
@@ -21,9 +21,15 @@ import {
 } from './modules/friends.js';
 import {
   toggleCrawlMode, clearCrawl, updateCrawlFab, generateCrawlItinerary,
-  renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal
+  renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal,
+  toggleSavedCrawlMode, handleCrawlCardClick, handleMapPlanCrawlClick,
+  openCrawlOptionsModal, closeCrawlOptionsModal, startMapPinCrawlMode,
+  openSavedCrawlPicker, closeSavedPickerModal, toggleSavedPickerItem,
+  selectAllSavedForCrawl, clearAllSavedFromCrawl, submitSavedPickerForCrawl,
+  openCrawlItineraryModal, closeCrawlItineraryModal, moveCrawlItem,
+  removeCrawlItem, optimizeCurrentCrawl, viewCrawlOnMap
 } from './modules/crawl.js';
-import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll } from './modules/render.js';
+import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers } from './modules/render.js';
 import {
   initInstallPrompt, triggerInstall, openInstallModal, closeInstallModal,
   dismissInstallBanner, updateInstallUI
@@ -115,7 +121,7 @@ function switchTab(name, fromPopState = false) {
   
   const crawlFab = document.getElementById('crawl-fab');
   if (crawlFab) {
-    crawlFab.style.display = (name === 'map' && State.crawlModeActive) ? 'block' : 'none';
+    crawlFab.style.display = ((name === 'map' || name === 'saved') && State.crawlModeActive) ? 'block' : 'none';
   }
   
   if (window.App && window.App.updateMobileFabBadge) window.App.updateMobileFabBadge();
@@ -173,17 +179,73 @@ function renderShimmer() {
   `;
 }
 
-function loadWeekData(weekId, callback) {
-  if (State.loadedWeeks.has(weekId)) {
+async function checkMetadataUpdate() {
+  try {
+    const res = await fetch(`js/meta.js?t=${Date.now()}`, { cache: 'no-cache' });
+    if (!res || !res.ok) return;
+    const text = await res.text();
+    
+    // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS
+    const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*window\.getWeekMeta/);
+    if (!match) return;
+
+    let freshWeeks;
+    try {
+      freshWeeks = (new Function(`return ${match[1]}`))();
+    } catch (e) {
+      return;
+    }
+
+    if (!Array.isArray(freshWeeks) || freshWeeks.length === 0) return;
+
+    const currentIds = (window.FOOD_WEEKS || []).map(w => w.id).join(',');
+    const freshIds = freshWeeks.map(w => w.id).join(',');
+
+    if (currentIds !== freshIds) {
+      console.log('[checkMetadataUpdate] New food weeks detected. Hydrating UI...');
+      const mergedWeeks = [...freshWeeks];
+      (window.FOOD_WEEKS || []).forEach(w => {
+        if (!mergedWeeks.some(f => f.id === w.id)) {
+          mergedWeeks.push(w);
+        }
+      });
+      window.FOOD_WEEKS = mergedWeeks;
+      renderWeekSwitchers();
+      if (!State.currentWeekId) {
+        renderLanding();
+      } else {
+        showToast('New food weeks added to PDX Food Week!');
+      }
+    }
+  } catch (err) {
+    // Silently ignore network failures (e.g. offline)
+  }
+}
+
+async function loadWeekData(weekId, callback) {
+  const dataFile = getWeekFile(weekId);
+  if (!weekId || !dataFile) {
+    console.warn(`[loadWeekData] Unknown or missing dataFile for weekId: "${weekId}"`);
+    showToast('Error loading data for this week');
+    State.currentWeekId = null;
+    applyWeekTheme(null);
+    document.body.classList.add('is-landing');
+    switchTab('landing', true);
+    renderLanding();
     if (callback) callback();
     return;
   }
 
-  const script = document.createElement('script');
-  script.src = `data/${WEEK_FILE_MAP[weekId]}?v=2`;
-  script.onload = () => {
+  if (State.loadedWeeks.has(weekId)) {
+    migrateWeekSavedState(weekId);
+    if (callback) callback();
+    return;
+  }
+
+  const finalizeLoad = () => {
     State.loadedWeeks.add(weekId);
-    
+    migrateWeekSavedState(weekId);
+
     const uniqueWeeks = [];
     const seen = new Set();
     for (const w of (window.FOOD_WEEKS || [])) {
@@ -193,10 +255,11 @@ function loadWeekData(weekId, callback) {
       }
     }
     window.FOOD_WEEKS = uniqueWeeks;
-    
+
     if (callback) callback();
   };
-  script.onerror = () => {
+
+  const handleError = () => {
     showToast('Error loading data for this week');
     State.currentWeekId = null;
     applyWeekTheme(null);
@@ -205,16 +268,34 @@ function loadWeekData(weekId, callback) {
     renderLanding();
     if (callback) callback();
   };
+
+  // Modern fetch with fallback to script injection
+  try {
+    const res = await fetch(`data/${dataFile}?v=2`);
+    if (res && res.ok) {
+      const code = await res.text();
+      const fn = new Function(code);
+      fn.call(window);
+      finalizeLoad();
+      return;
+    }
+  } catch (fetchErr) {
+    // Fall back to script injection (e.g. for file:// or offline fallback)
+  }
+
+  const script = document.createElement('script');
+  script.src = `data/${dataFile}?v=2`;
+  script.onload = finalizeLoad;
+  script.onerror = handleError;
   document.body.appendChild(script);
 }
 
-function switchWeek(weekId, fromPopState = false) {
+function switchWeek(weekId, fromPopState = false, targetDishId = null) {
   if (!window.FOOD_WEEKS || !window.FOOD_WEEKS.some(w => w.id === weekId)) return;
 
   if (State.currentWeekId) {
     State.weekFilters[State.currentWeekId] = {
       activeFilters: Array.from(State.activeFilters),
-      searchQuery: State.searchQuery,
       activeSort: State.activeSort
     };
   }
@@ -224,19 +305,36 @@ function switchWeek(weekId, fromPopState = false) {
 
   const savedWeekState = State.weekFilters[weekId];
   if (savedWeekState) {
-    State.activeFilters = new Set(savedWeekState.activeFilters);
-    State.searchQuery = savedWeekState.searchQuery || '';
+    State.activeFilters = new Set(savedWeekState.activeFilters || []);
     State.activeSort = savedWeekState.activeSort || 'restaurant';
   } else {
     State.activeFilters.clear();
-    State.searchQuery = '';
     State.activeSort = 'restaurant';
   }
+  // Search query should not persist across week switches
+  State.searchQuery = '';
+  State.savedSearchQuery = '';
+  State.mapSearchQuery = '';
 
   saveState();
 
   const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.value = State.searchQuery;
+  if (searchInput) {
+    searchInput.value = '';
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    if (searchClearBtn) searchClearBtn.style.display = 'none';
+  }
+  const compactSearchInput = document.getElementById('compact-search-input');
+  if (compactSearchInput) {
+    compactSearchInput.value = '';
+    const compactSearchClearBtn = document.getElementById('compact-search-clear-btn');
+    if (compactSearchClearBtn) compactSearchClearBtn.style.display = 'none';
+  }
+
+  // Reset dropdown selects so they never stay stuck on the selected week
+  document.querySelectorAll('.week-switcher-select').forEach(sel => {
+    sel.selectedIndex = 0;
+  });
 
   State.activeSavedFilters.clear();
   State.savedSearchQuery = '';
@@ -286,6 +384,7 @@ function switchWeek(weekId, fromPopState = false) {
 
   const week = window.FOOD_WEEKS.find(w => w.id === State.currentWeekId);
   applyWeekTheme(week);
+  renderWeekSwitchers();
   renderHeader();
   renderFilters();
   renderSavedFilters();
@@ -294,7 +393,12 @@ function switchWeek(weekId, fromPopState = false) {
     const url = new URL(window.location);
     url.searchParams.set('week', weekId);
     url.searchParams.delete('tab');
-    history.pushState({ ...history.state, week: weekId, tab: 'browse' }, '', url);
+    if (targetDishId) {
+      url.searchParams.set('dish', targetDishId);
+    } else {
+      url.searchParams.delete('dish');
+    }
+    history.pushState({ ...history.state, week: weekId, tab: 'browse', detailDishId: targetDishId || undefined }, '', url);
   }
   document.body.classList.remove('is-landing');
 
@@ -305,11 +409,92 @@ function switchWeek(weekId, fromPopState = false) {
     renderAll();
     updateBrowseBadge();
     showToast(`Switched to ${week.name}!`);
+    if (targetDishId) {
+      openDetail(targetDishId, true);
+    }
   };
 
   loadWeekData(weekId, () => {
     setTimeout(loadDataAndRender, 450);
   });
+}
+
+let landingCarouselState = {
+  currentIndex: 0,
+  timer: null,
+  spots: [],
+  weekId: null
+};
+
+function initLandingCarousel(spots, weekId) {
+  landingCarouselState.spots = spots || [];
+  landingCarouselState.weekId = weekId;
+  landingCarouselState.currentIndex = 0;
+  if (landingCarouselState.timer) {
+    clearInterval(landingCarouselState.timer);
+    landingCarouselState.timer = null;
+  }
+  updateLandingCarouselDOM();
+  // Check prefers-reduced-motion before starting timer
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    startLandingCarouselTimer();
+  }
+}
+
+function startLandingCarouselTimer() {
+  if (landingCarouselState.timer) clearInterval(landingCarouselState.timer);
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion || landingCarouselState.spots.length <= 1) return;
+  landingCarouselState.timer = setInterval(() => {
+    moveLandingCarousel(1);
+  }, 5000);
+}
+
+function stopLandingCarouselTimer() {
+  if (landingCarouselState.timer) {
+    clearInterval(landingCarouselState.timer);
+    landingCarouselState.timer = null;
+  }
+}
+
+function moveLandingCarousel(delta) {
+  const count = landingCarouselState.spots.length;
+  if (count <= 1) return;
+  landingCarouselState.currentIndex = (landingCarouselState.currentIndex + delta + count) % count;
+  updateLandingCarouselDOM();
+}
+
+function setLandingCarouselIndex(index) {
+  const count = landingCarouselState.spots.length;
+  if (index < 0 || index >= count) return;
+  landingCarouselState.currentIndex = index;
+  updateLandingCarouselDOM();
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    startLandingCarouselTimer();
+  }
+}
+
+function updateLandingCarouselDOM() {
+  const track = document.getElementById('landing-carousel-track');
+  const dots = document.querySelectorAll('.landing-carousel-dot');
+  const liveStatus = document.getElementById('landing-carousel-live-status');
+  if (!track || !landingCarouselState.spots.length) return;
+
+  const currentIdx = landingCarouselState.currentIndex;
+  track.style.transform = `translateX(-${currentIdx * 100}%)`;
+
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === currentIdx);
+    dot.setAttribute('aria-current', idx === currentIdx ? 'true' : 'false');
+  });
+
+  // Update live status for screen reader announcement
+  if (liveStatus && landingCarouselState.spots[currentIdx]) {
+    const spot = landingCarouselState.spots[currentIdx];
+    liveStatus.textContent = `Special ${currentIdx + 1} of ${landingCarouselState.spots.length}: ${spot.dish} at ${spot.restaurant}`;
+  }
 }
 
 function renderLanding() {
@@ -322,39 +507,101 @@ function renderLanding() {
   let nextWeek = null;
   let minDiff = Infinity;
 
-  window.FOOD_WEEKS.forEach(w => {
-    if (w.startDate) {
-      const [sy, sm, sd] = w.startDate.split('-');
-      const start = new Date(sy, sm - 1, sd, 0, 0, 0);
-      let end = new Date(sy, sm - 1, sd, 23, 59, 59);
+  // Helper to compute dynamic badge and dates for any week
+  function getWeekTiming(w) {
+    if (!w.startDate) return { badgeHTML: '', status: 'unknown', start: null, end: null };
+    const [sy, sm, sd] = w.startDate.split('-');
+    const start = new Date(sy, sm - 1, sd, 0, 0, 0);
+    let end = new Date(sy, sm - 1, sd, 23, 59, 59);
 
-      if (w.endDate) {
-        const [ey, em, ed] = w.endDate.split('-');
-        end = new Date(ey, em - 1, ed, 23, 59, 59);
-      } else if (w.dates) {
-        const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
-        const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
-        if (weekMatch) {
-          end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
-        } else if (monthMatch) {
-          end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
-          end.setMonth(end.getMonth() + 1);
-          end.setDate(0);
-        } else {
-          end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-        }
+    if (w.endDate) {
+      const [ey, em, ed] = w.endDate.split('-');
+      end = new Date(ey, em - 1, ed, 23, 59, 59);
+    } else if (w.dates) {
+      const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
+      const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
+      if (weekMatch) {
+        end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
+      } else if (monthMatch) {
+        end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
+        end.setMonth(end.getMonth() + 1);
+        end.setDate(0);
       } else {
         end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
       }
+    } else {
+      end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
+    }
 
-      if (now >= start && now <= end) {
-        currentWeeks.push(w);
-      } else if (now < start) {
-        const diff = start - now;
-        if (diff < minDiff) {
-          minDiff = diff;
-          nextWeek = w;
-        }
+    if (now >= start && now <= end) {
+      const daysLeft = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+      if (daysLeft <= 1) {
+        return {
+          badgeHTML: '<div class="landing-status-badge active urgent"><span class="badge-dot-live"></span> Ends Today!</div>',
+          status: 'active',
+          label: 'Ends Today!',
+          start, end
+        };
+      }
+      if (daysLeft <= 3) {
+        return {
+          badgeHTML: `<div class="landing-status-badge active"><span class="badge-dot-live"></span> Ends in ${daysLeft}d</div>`,
+          status: 'active',
+          label: `Ends in ${daysLeft}d`,
+          start, end
+        };
+      }
+      return {
+        badgeHTML: '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>',
+        status: 'active',
+        label: 'Active Now',
+        start, end
+      };
+    }
+
+    if (now < start) {
+      const daysUntil = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
+      if (daysUntil === 1) {
+        return {
+          badgeHTML: '<div class="landing-status-badge next">Starts Tomorrow</div>',
+          status: 'upcoming',
+          label: 'Starts Tomorrow',
+          start, end, daysUntil
+        };
+      }
+      if (daysUntil <= 14) {
+        return {
+          badgeHTML: `<div class="landing-status-badge next">Starts in ${daysUntil}d</div>`,
+          status: 'upcoming',
+          label: `Starts in ${daysUntil}d`,
+          start, end, daysUntil
+        };
+      }
+      return {
+        badgeHTML: '<div class="landing-status-badge upcoming">Upcoming</div>',
+        status: 'upcoming',
+        label: 'Upcoming',
+        start, end, daysUntil
+      };
+    }
+
+    return {
+      badgeHTML: '<div class="landing-status-badge past">Past Event</div>',
+      status: 'past',
+      label: 'Past Event',
+      start, end
+    };
+  }
+
+  window.FOOD_WEEKS.forEach(w => {
+    const timing = getWeekTiming(w);
+    if (timing.status === 'active') {
+      currentWeeks.push(w);
+    } else if (timing.status === 'upcoming') {
+      const diff = timing.start - now;
+      if (diff < minDiff) {
+        minDiff = diff;
+        nextWeek = w;
       }
     }
   });
@@ -365,16 +612,30 @@ function renderLanding() {
     return dateB - dateA;
   });
 
-  grid.innerHTML = sortedWeeks.map(w => {
-    let badgeHTML = '';
-    const isActive = currentWeeks.some(cw => cw.id === w.id);
-    const isNext = nextWeek && w.id === nextWeek.id;
+  // Determine featured week: currently active, or next upcoming, or first sorted week
+  let featuredWeek = currentWeeks[0] || nextWeek || sortedWeeks[0];
+  const otherWeeks = sortedWeeks.filter(w => w.id !== featuredWeek.id);
 
-    if (isActive) {
-      badgeHTML = '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>';
-    } else if (isNext) {
-      badgeHTML = '<div class="landing-status-badge next">Up Next</div>';
-    }
+  const featuredTiming = getWeekTiming(featuredWeek);
+  const isFeaturedActive = featuredTiming.status === 'active';
+  const featuredBadgeHTML = featuredTiming.badgeHTML;
+
+  const featuredPriceText = (featuredWeek.pricePills && featuredWeek.pricePills.length > 0)
+    ? esc(featuredWeek.pricePills[0])
+    : (featuredWeek.priceSlice ? `${esc(featuredWeek.priceSlice)} slice` : '');
+
+  const featuredActualCount = (window.RESTAURANTS || []).filter(r => r.weekId === featuredWeek.id).length;
+  const featuredTotalLocations = featuredActualCount > 0 ? featuredActualCount : featuredWeek.totalLocations;
+  const featuredCountText = featuredTotalLocations ? `${featuredTotalLocations} spots` : '';
+  const featuredMetaParts = [featuredPriceText, featuredCountText].filter(Boolean).join(' • ');
+
+  const featuredThemeColor = featuredWeek.color || 'var(--pizza)';
+
+  // Render other weeks list items
+  const otherWeeksHTML = otherWeeks.map((w, index) => {
+    const timing = getWeekTiming(w);
+    const badgeHTML = timing.badgeHTML;
+    const isActive = timing.status === 'active';
 
     const priceText = (w.pricePills && w.pricePills.length > 0)
       ? esc(w.pricePills[0])
@@ -385,20 +646,539 @@ function renderLanding() {
     const countText = totalLocations ? `${totalLocations} spots` : '';
 
     const metaParts = [priceText, countText].filter(Boolean).join(' • ');
-    const metaHTML = metaParts ? `<p class="landing-card-subinfo">${metaParts}</p>` : '';
-
+    const metaHTML = metaParts ? `<span class="landing-card-subinfo">${metaParts}</span>` : '';
     const themeColor = w.color || 'var(--pizza)';
+    const displayName = (w.name || '').replace(/\s+\d{4}\b/, '');
+    const isHiddenMobile = index >= 4 ? ' landing-card-hidden-mobile' : '';
+    const pageSize = 5;
+    const desktopPage = Math.floor(index / pageSize);
+    const isHiddenDesktop = desktopPage > 0 ? ' landing-card-hidden-desktop' : '';
 
     return `
-      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
-        ${badgeHTML}
+      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}${isHiddenDesktop}" data-desktop-page="${desktopPage}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
-        <h3>${esc(w.name)}</h3>
-        <p class="landing-card-dates">${esc(w.dates)}</p>
-        ${metaHTML}
+        <div class="landing-card-main">
+          <div class="landing-card-title-row">
+            <h3>${esc(displayName)}</h3>
+            ${badgeHTML}
+          </div>
+          <div class="landing-card-dates-row">
+            <span class="landing-card-dates">${esc(w.dates)}</span>
+          </div>
+          ${metaHTML ? `<div class="landing-card-meta-row">${metaHTML}</div>` : ''}
+        </div>
+        <div class="landing-card-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </div>
       </a>
     `;
   }).join('');
+
+  const totalOtherPages = Math.ceil(otherWeeks.length / 5);
+
+  // Assemble full 3-column / 4-row landing grid
+  grid.innerHTML = `
+    <!-- Visually Unified Featured Week Showcase (Columns 1 & 2, Rows 1-4 on desktop) -->
+    <div class="landing-featured-showcase ${isFeaturedActive ? 'is-active-food-week' : ''}" style="--week-brand: ${featuredThemeColor};" 
+         onmouseenter="App.stopLandingCarouselTimer()" onmouseleave="App.startLandingCarouselTimer()"
+         onfocusin="App.stopLandingCarouselTimer()" onfocusout="App.startLandingCarouselTimer()"
+         role="region" aria-roledescription="carousel" aria-label="Featured ${esc(featuredWeek.name)} specials">
+      <div class="featured-showcase-header">
+        <a href="?week=${featuredWeek.id}" class="featured-showcase-title-link" onclick="event.preventDefault(); App.switchWeek('${featuredWeek.id}');">
+          <div class="featured-card-info">
+            <div class="landing-card-title-row">
+              <h3 class="featured-title">${esc(featuredWeek.name)}</h3>
+            </div>
+            <div class="landing-card-dates-row">
+              <span class="landing-card-dates">${esc(featuredWeek.dates)}</span>
+            </div>
+            ${featuredMetaParts ? `<div class="landing-card-meta-row"><span class="landing-card-subinfo">${featuredMetaParts}</span></div>` : ''}
+          </div>
+        </a>
+        <div class="featured-showcase-header-right">
+          ${featuredBadgeHTML}
+        </div>
+      </div>
+
+      <!-- Screen reader live region for slide announcements -->
+      <span class="sr-only" id="landing-carousel-live-status" aria-live="polite" aria-atomic="true"></span>
+
+      <!-- Carousel Viewport with Large Photos and Overlay Navigation Arrows -->
+      <div class="landing-carousel-viewport" id="landing-carousel-viewport">
+        <button type="button" class="landing-carousel-arrow-overlay prev" onclick="event.stopPropagation(); App.moveLandingCarousel(-1)" aria-label="Previous special">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="landing-carousel-arrow-overlay next" onclick="event.stopPropagation(); App.moveLandingCarousel(1)" aria-label="Next special">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="landing-carousel-track" id="landing-carousel-track">
+          <!-- Populated with random spots -->
+          <div class="landing-carousel-loading">Loading specials...</div>
+        </div>
+      </div>
+      <div class="landing-carousel-dots" id="landing-carousel-dots"></div>
+    </div>
+
+    <!-- Right Column: Other Food Weeks List (Rows 1-4, Column 3 on desktop) -->
+    <div class="landing-others-column">
+      <div class="landing-others-title">More Food Weeks</div>
+      <div class="landing-others-list" id="landing-others-list">
+        ${otherWeeksHTML}
+      </div>
+      ${totalOtherPages > 1 ? `
+        <div class="landing-others-pagination" id="landing-others-pagination">
+          <button type="button" class="landing-others-nav-btn" id="landing-others-prev" onclick="App.stepOtherWeeksPage(-1)" aria-label="Previous food weeks page" disabled>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="landing-others-page-num" id="landing-others-page-num">1 / ${totalOtherPages}</span>
+          <button type="button" class="landing-others-nav-btn" id="landing-others-next" onclick="App.stepOtherWeeksPage(1)" aria-label="Next food weeks page">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      ` : ''}
+      ${otherWeeks.length > 4 ? `
+        <button type="button" class="landing-see-more-btn" id="landing-see-more-btn" onclick="App.toggleMoreWeeksMobile()" aria-expanded="false" aria-controls="landing-others-list">
+          <span class="see-more-label">See all ${otherWeeks.length} food weeks</span>
+          <svg class="see-more-arrow" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      ` : ''}
+    </div>
+  `;
+
+  // Attach touch gestures for mobile carousel swipe
+  attachLandingCarouselTouch();
+
+  // Load spots for featured week if needed
+  ensureFeaturedSpotsLoaded(featuredWeek.id);
+
+  // Initialize Global Cross-Week Search
+  initLandingSearch();
+
+  // Initialize PWA Install Banner
+  initPwaInstallPrompt();
+}
+
+function toggleMoreWeeksMobile() {
+  const list = document.getElementById('landing-others-list');
+  const btn = document.getElementById('landing-see-more-btn');
+  if (!list || !btn) return;
+
+  const isExpanded = list.classList.toggle('is-expanded');
+  btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+  const label = btn.querySelector('.see-more-label');
+  const totalWeeks = list.querySelectorAll('.landing-card').length;
+  if (label) {
+    label.textContent = isExpanded ? 'See fewer food weeks' : `See all ${totalWeeks} food weeks`;
+  }
+}
+
+let otherWeeksCurrentPage = 0;
+
+function setOtherWeeksPage(pageIdx) {
+  const list = document.getElementById('landing-others-list');
+  if (!list) return;
+
+  const cards = list.querySelectorAll('.landing-card');
+  const totalPages = Math.ceil(cards.length / 5);
+  if (pageIdx < 0) pageIdx = 0;
+  if (pageIdx >= totalPages) pageIdx = totalPages - 1;
+
+  otherWeeksCurrentPage = pageIdx;
+
+  cards.forEach(card => {
+    const cardPage = parseInt(card.getAttribute('data-desktop-page') || '0', 10);
+    if (cardPage === pageIdx) {
+      card.classList.remove('landing-card-hidden-desktop');
+    } else {
+      card.classList.add('landing-card-hidden-desktop');
+    }
+  });
+
+  const pageNumEl = document.getElementById('landing-others-page-num');
+  if (pageNumEl) {
+    pageNumEl.textContent = `${pageIdx + 1} / ${totalPages}`;
+  }
+
+  const prevBtn = document.getElementById('landing-others-prev');
+  const nextBtn = document.getElementById('landing-others-next');
+  if (prevBtn) prevBtn.disabled = pageIdx === 0;
+  if (nextBtn) nextBtn.disabled = pageIdx >= totalPages - 1;
+}
+
+function stepOtherWeeksPage(delta) {
+  setOtherWeeksPage(otherWeeksCurrentPage + delta);
+}
+
+// ── Global Cross-Week Search ──
+let allWeeksLoadedPromise = null;
+
+function ensureAllWeeksLoaded() {
+  if (allWeeksLoadedPromise) return allWeeksLoadedPromise;
+
+  allWeeksLoadedPromise = new Promise((resolve) => {
+    const weeks = window.FOOD_WEEKS || [];
+    let remaining = weeks.length;
+    if (remaining === 0) return resolve();
+
+    weeks.forEach(w => {
+      loadWeekData(w.id, () => {
+        remaining--;
+        if (remaining <= 0) resolve();
+      });
+    });
+  });
+
+  return allWeeksLoadedPromise;
+}
+
+function initLandingSearch() {
+  const searchInput = document.getElementById('landing-global-search');
+  const clearBtn = document.getElementById('landing-search-clear');
+  const resultsContainer = document.getElementById('landing-search-results');
+  if (!searchInput || !resultsContainer) return;
+
+  if (searchInput.dataset.searchInitialized === 'true') return;
+  searchInput.dataset.searchInitialized = 'true';
+
+  let activeIndex = -1;
+
+  // Pre-load remaining datasets in background when user focuses search
+  searchInput.addEventListener('focus', () => {
+    ensureAllWeeksLoaded();
+  });
+
+  const performSearch = () => {
+    const query = (searchInput.value || '').trim().toLowerCase();
+    if (clearBtn) clearBtn.hidden = !query;
+    activeIndex = -1;
+
+    if (query.length < 2) {
+      resultsContainer.hidden = true;
+      resultsContainer.innerHTML = '';
+      return;
+    }
+
+    ensureAllWeeksLoaded().then(() => {
+      const currentQuery = (searchInput.value || '').trim().toLowerCase();
+      if (currentQuery.length < 2) {
+        resultsContainer.hidden = true;
+        resultsContainer.innerHTML = '';
+        return;
+      }
+
+      const allDishes = window.RESTAURANTS || [];
+      const allWeeks = window.FOOD_WEEKS || [];
+      const queryWords = currentQuery.split(/\s+/).filter(Boolean);
+
+      // Match food weeks
+      const matchingWeeks = allWeeks.filter(w => {
+        const name = (w.name || '').toLowerCase();
+        const org = (w.organizer || '').toLowerCase();
+        const dates = (w.dates || '').toLowerCase();
+        const id = (w.id || '').toLowerCase();
+        const fullText = `${name} ${org} ${dates} ${id}`;
+        return queryWords.every(word => fullText.includes(word));
+      });
+
+      // Match dishes (search dish name, restaurant, neighborhood, desc, plus food week name and organizer)
+      const matches = allDishes.filter(r => {
+        const dish = (r.dish || '').toLowerCase();
+        const rest = (r.restaurant || '').toLowerCase();
+        const hood = (r.neighborhood || r.address || '').toLowerCase();
+        const desc = (r.desc || r.whatsOnIt || r.whatTheySay || '').toLowerCase();
+        const week = allWeeks.find(w => w.id === r.weekId);
+        const weekName = week ? week.name.toLowerCase() : '';
+        const weekOrg = week ? (week.organizer || '').toLowerCase() : '';
+        const fullText = `${dish} ${rest} ${hood} ${desc} ${weekName} ${weekOrg} ${r.weekId || ''}`;
+        return queryWords.every(word => fullText.includes(word));
+      });
+
+      if (matchingWeeks.length === 0 && matches.length === 0) {
+        resultsContainer.hidden = false;
+        resultsContainer.innerHTML = `
+          <div class="search-no-results">
+            <p>No results matching "<strong>${esc(currentQuery)}</strong>"</p>
+            <span style="font-size: 13px; color: var(--ink-60);">Try searching for pizza, tacos, smash burgers, dumplings, vegan, or a neighborhood.</span>
+          </div>
+        `;
+        return;
+      }
+
+      const topMatches = matches.slice(0, 15);
+      let html = '';
+
+      if (matchingWeeks.length > 0) {
+        html += `
+          <div class="search-results-header">
+            <span>${matchingWeeks.length} Food Week${matchingWeeks.length === 1 ? '' : 's'}</span>
+          </div>
+          <div class="search-results-list">
+            ${matchingWeeks.map(w => `
+              <a href="?week=${w.id}" class="search-result-week-row" data-search-item="true"
+                 onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${w.id}');">
+                <span class="search-result-week-emoji">${esc(w.emoji || '🍽️')}</span>
+                <div class="search-result-info">
+                  <div class="search-result-dish">${esc(w.name)}</div>
+                  <div class="search-result-meta">
+                    <span class="search-result-restaurant">${esc(w.organizer || 'Food Week')}</span>
+                    ${w.dates ? ` &bull; <span>${esc(w.dates)}</span>` : ''}
+                  </div>
+                </div>
+                <div class="search-result-badge" style="--badge-color: ${w.color || 'var(--pizza)'};">
+                  View Week &rarr;
+                </div>
+              </a>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      if (topMatches.length > 0) {
+        html += `
+          <div class="search-results-header">
+            <span>${matches.length} special${matches.length === 1 ? '' : 's'} across Portland Food Weeks</span>
+          </div>
+          <div class="search-results-list">
+            ${topMatches.map(r => {
+              const week = allWeeks.find(w => w.id === r.weekId);
+              const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
+              const weekColor = week ? week.color : 'var(--pizza)';
+              const weekEmoji = week ? week.emoji : '🍽️';
+
+              return `
+                <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" data-search-item="true"
+                   onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${r.weekId}', false, ${r.id});">
+                  <div class="search-result-media">
+                    ${r.image 
+                      ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
+                      : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
+                  </div>
+                  <div class="search-result-info">
+                    <div class="search-result-dish">${esc(r.dish)}</div>
+                    <div class="search-result-meta">
+                      <span class="search-result-restaurant">${esc(r.restaurant)}</span>
+                      ${r.neighborhood ? ` &bull; <span class="search-result-hood">${esc(r.neighborhood)}</span>` : ''}
+                    </div>
+                  </div>
+                  <div class="search-result-badge" style="--badge-color: ${weekColor};">
+                    ${weekEmoji} ${esc(weekName)}
+                  </div>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      resultsContainer.hidden = false;
+      resultsContainer.innerHTML = html;
+    });
+  };
+
+  searchInput.addEventListener('input', debounce(performSearch, 150));
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearBtn.hidden = true;
+      resultsContainer.hidden = true;
+      resultsContainer.innerHTML = '';
+      searchInput.focus();
+    });
+  }
+
+  // Keyboard navigation for dropdown results
+  searchInput.addEventListener('keydown', (e) => {
+    if (resultsContainer.hidden) return;
+    const items = resultsContainer.querySelectorAll('[data-search-item="true"]');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const target = activeIndex >= 0 ? items[activeIndex] : items[0];
+      if (target) target.click();
+    }
+  });
+
+  function updateActiveItem(items) {
+    items.forEach((item, idx) => {
+      if (idx === activeIndex) {
+        item.classList.add('is-selected');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('is-selected');
+      }
+    });
+  }
+
+  // Close search results on Outside Click or Escape
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+      resultsContainer.hidden = true;
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !resultsContainer.hidden) {
+      resultsContainer.hidden = true;
+    }
+  });
+}
+
+// ── PWA Install Prompt Banner ──
+let deferredPwaPrompt = null;
+
+function initPwaInstallPrompt() {
+  const banner = document.getElementById('pwa-install-banner');
+  const installBtn = document.getElementById('pwa-install-btn');
+  const dismissBtn = document.getElementById('pwa-dismiss-btn');
+  if (!banner || !installBtn || !dismissBtn) return;
+
+  // Don't show if already in standalone display mode
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
+  if (isStandalone) {
+    banner.hidden = true;
+    return;
+  }
+
+  // Don't show if user dismissed it in this session/browser
+  if (localStorage.getItem('pdx_pwa_dismissed') === 'true') {
+    banner.hidden = true;
+    return;
+  }
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPwaPrompt = e;
+    banner.hidden = false;
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (deferredPwaPrompt) {
+      deferredPwaPrompt.prompt();
+      const { outcome } = await deferredPwaPrompt.userChoice;
+      deferredPwaPrompt = null;
+      banner.hidden = true;
+      if (outcome === 'accepted') {
+        localStorage.setItem('pdx_pwa_dismissed', 'true');
+      }
+    } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      // iOS Safari instructions
+      showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
+      banner.hidden = true;
+      localStorage.setItem('pdx_pwa_dismissed', 'true');
+    } else {
+      banner.hidden = true;
+    }
+  });
+
+  dismissBtn.addEventListener('click', () => {
+    banner.hidden = true;
+    localStorage.setItem('pdx_pwa_dismissed', 'true');
+  });
+}
+
+function attachLandingCarouselTouch() {
+  const viewport = document.getElementById('landing-carousel-viewport');
+  if (!viewport) return;
+
+  let startX = 0;
+  let startY = 0;
+  let isSwiping = false;
+
+  viewport.addEventListener('touchstart', (e) => {
+    if (!e.touches || !e.touches[0]) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isSwiping = true;
+    stopLandingCarouselTimer();
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', (e) => {
+    if (!isSwiping || !e.changedTouches || !e.changedTouches[0]) return;
+    isSwiping = false;
+    const diffX = e.changedTouches[0].clientX - startX;
+    const diffY = e.changedTouches[0].clientY - startY;
+
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX < 0) {
+        moveLandingCarousel(1);
+      } else {
+        moveLandingCarousel(-1);
+      }
+    }
+    startLandingCarouselTimer();
+  }, { passive: true });
+}
+
+function ensureFeaturedSpotsLoaded(weekId) {
+  const existingSpots = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
+  if (existingSpots.length > 0) {
+    populateLandingCarousel(existingSpots, weekId);
+    return;
+  }
+
+  loadWeekData(weekId, () => {
+    const loadedSpots = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
+    populateLandingCarousel(loadedSpots, weekId);
+  });
+}
+
+function populateLandingCarousel(spots, weekId) {
+  const track = document.getElementById('landing-carousel-track');
+  const dotsContainer = document.getElementById('landing-carousel-dots');
+  if (!track || !dotsContainer) return;
+
+  if (!spots || spots.length === 0) {
+    track.innerHTML = `<div class="landing-carousel-empty">Specials coming soon!</div>`;
+    dotsContainer.innerHTML = '';
+    return;
+  }
+
+  // Pick up to 8 randomized spots
+  const shuffled = [...spots].sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 8);
+
+  track.innerHTML = selected.map((r, idx) => {
+    const thumb = r.image
+      ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
+      : `<div class="card-emoji">${esc(r.emoji || '🍽️')}</div>`;
+
+    const locationText = r.neighborhood || r.address || '';
+    const descText = r.desc || r.whatsOnIt || '';
+
+    return `
+      <div class="landing-carousel-slide" role="group" aria-roledescription="slide" aria-label="${idx + 1} of ${selected.length}">
+        <a href="?week=${weekId}&dish=${r.id}" class="dish-card landing-spot-card" onclick="event.preventDefault(); App.switchWeek('${weekId}', false, ${r.id});">
+          <div class="landing-spot-media">
+            ${thumb}
+          </div>
+          <div class="card-body">
+            <div class="card-dish">${esc(r.dish)}</div>
+            <div class="card-restaurant">${esc(r.restaurant)}</div>
+            ${locationText ? `<div class="card-neighborhood">📍 ${esc(locationText)}</div>` : ''}
+            ${descText ? `<div class="card-desc">${esc(descText)}</div>` : ''}
+          </div>
+        </a>
+      </div>
+    `;
+  }).join('');
+
+  dotsContainer.innerHTML = selected.map((_, idx) => `
+    <button type="button" class="landing-carousel-dot ${idx === 0 ? 'active' : ''}" onclick="App.setLandingCarouselIndex(${idx})" aria-label="Go to special ${idx + 1}"></button>
+  `).join('');
+
+  initLandingCarousel(selected, weekId);
 }
 
 function setupMobileScrollListener() {
@@ -585,11 +1365,13 @@ function init() {
   if (searchInput && searchClearBtn) {
     const debouncedSearch = debounce(e => {
       State.searchQuery = e.target.value;
-      searchClearBtn.style.display = State.searchQuery ? 'flex' : 'none';
       renderBrowse();
       renderFilters();
     }, 150);
-    searchInput.addEventListener('input', debouncedSearch);
+    searchInput.addEventListener('input', e => {
+      searchClearBtn.style.display = e.target.value ? 'flex' : 'none';
+      debouncedSearch(e);
+    });
     searchClearBtn.addEventListener('click', () => {
       searchInput.value = '';
       State.searchQuery = '';
@@ -605,10 +1387,12 @@ function init() {
   if (savedSearchInput && savedSearchClearBtn) {
     const debouncedSavedSearch = debounce(e => {
       State.savedSearchQuery = e.target.value;
-      savedSearchClearBtn.style.display = State.savedSearchQuery ? 'flex' : 'none';
       renderSaved();
     }, 150);
-    savedSearchInput.addEventListener('input', debouncedSavedSearch);
+    savedSearchInput.addEventListener('input', e => {
+      savedSearchClearBtn.style.display = e.target.value ? 'flex' : 'none';
+      debouncedSavedSearch(e);
+    });
     savedSearchClearBtn.addEventListener('click', () => {
       savedSearchInput.value = '';
       State.savedSearchQuery = '';
@@ -623,10 +1407,12 @@ function init() {
   if (mapSearchInput && mapSearchClearBtn) {
     const debouncedMapSearch = debounce(e => {
       State.mapSearchQuery = e.target.value;
-      mapSearchClearBtn.style.display = State.mapSearchQuery ? 'flex' : 'none';
       renderMap();
     }, 150);
-    mapSearchInput.addEventListener('input', debouncedMapSearch);
+    mapSearchInput.addEventListener('input', e => {
+      mapSearchClearBtn.style.display = e.target.value ? 'flex' : 'none';
+      debouncedMapSearch(e);
+    });
     mapSearchClearBtn.addEventListener('click', () => {
       mapSearchInput.value = '';
       State.mapSearchQuery = '';
@@ -787,12 +1573,15 @@ function init() {
   });
 
 function updateSearchPlaceholders() {
-  const isDesktop = window.innerWidth >= 768;
-  const placeholder = isDesktop
-    ? 'Search restaurants, dishes, neighborhoods...'
-    : 'Search restaurants, dishes, areas...';
+  const width = window.innerWidth;
+  let placeholder = 'Search restaurants, dishes, neighborhoods...';
+  if (width < 480) {
+    placeholder = 'Search dishes, restaurants, etc...';
+  } else if (width < 768) {
+    placeholder = 'Search dishes, restaurants, areas...';
+  }
 
-  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input'].forEach(id => {
+  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'landing-global-search'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.placeholder = placeholder;
   });
@@ -813,8 +1602,19 @@ function updateSearchPlaceholders() {
     mql.addListener(updateSearchPlaceholders);
   }
   updateSearchPlaceholders();
-
   setupMobileScrollListener();
+  renderWeekSwitchers();
+
+  // Background SWR check for newly published food weeks
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      checkMetadataUpdate();
+    }
+  });
+  window.addEventListener('focus', () => {
+    checkMetadataUpdate();
+  });
+  checkMetadataUpdate();
 
   const isValidWeek = urlWeekId && window.FOOD_WEEKS && window.FOOD_WEEKS.some(w => w.id === urlWeekId);
 
@@ -929,12 +1729,31 @@ const App = {
   handleCrawlPinClick,
   clearCrawl,
   updateCrawlFab,
+  toggleSavedCrawlMode,
+  handleCrawlCardClick,
+  handleMapPlanCrawlClick,
+  openCrawlOptionsModal,
+  closeCrawlOptionsModal,
+  startMapPinCrawlMode,
+  openSavedCrawlPicker,
+  closeSavedPickerModal,
+  toggleSavedPickerItem,
+  selectAllSavedForCrawl,
+  clearAllSavedFromCrawl,
+  submitSavedPickerForCrawl,
+  openCrawlItineraryModal,
+  closeCrawlItineraryModal,
+  moveCrawlItem,
+  removeCrawlItem,
+  optimizeCurrentCrawl,
+  viewCrawlOnMap,
   renderBrowse,
   renderSaved,
   renderFilters,
   renderSavedFilters,
   renderFriends,
   renderAll,
+  renderWeekSwitchers,
   setupSavedDragEvents,
   getActiveFriends,
   hideCompactDropdowns,
@@ -953,7 +1772,15 @@ const App = {
   handleSignOut,
   updateAuthUI,
   pushLocalToCloud,
-  queueCloudSync
+  queueCloudSync,
+  checkMetadataUpdate,
+  moveLandingCarousel,
+  setLandingCarouselIndex,
+  startLandingCarouselTimer,
+  stopLandingCarouselTimer,
+  toggleMoreWeeksMobile,
+  setOtherWeeksPage,
+  stepOtherWeeksPage
 };
 
 window.App = App;

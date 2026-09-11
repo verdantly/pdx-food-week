@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import { fileURLToPath } from 'url';
-import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase } from './scraper_utils.js';
+import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, updateMetaTotalLocations } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.resolve(__dirname, '../data/geocode_cache.json');
@@ -52,6 +52,7 @@ const NAME_MAP = {
   'lorrellschickenshake': 'lorellschickenshack',
   'lorellschickenshack': 'lorellschickenshack',
   'esanthaiwoodstock': 'esanthaiwoodstock',
+  'thelariatlounge': 'lariatlounge',
   'wajan': 'wajan'
 };
 
@@ -79,6 +80,12 @@ const ADDRESS_OVERRIDES = {
     neighborhood: 'North Tabor',
     lat: 45.5261828,
     lng: -122.6155435
+  },
+  'E-San Thai Woodstock': {
+    address: '4818 SE Woodstock Blvd, Portland, OR 97206',
+    neighborhood: 'Woodstock',
+    lat: 45.479532,
+    lng: -122.612845
   }
 };
 
@@ -106,7 +113,8 @@ const DISH_OVERRIDES = {
   'Wajan': { dish: 'Ayam Geprek' },
   'Say When': { dish: 'Buttermilk Brined Fried Chicken Sandwich' },
   "Big's Chicken | Alabama Fried Chicken": { dish: 'Fried Chicken Tenders & Huli-Huli Sauce' },
-  'E-San Thai Woodstock': { dish: 'Crispy Garlic Chicken Wings' }
+  'E-San Thai Woodstock': { dish: 'Crispy Garlic Chicken Wings' },
+  'Hawker Station PDX': { dish: 'Fried Chicken Thighs with Hong Kong Style Curry Dipping Sauce' }
 };
 
 async function scrape() {
@@ -351,13 +359,14 @@ async function scrape() {
   for (const [sqKey, sqItem] of Object.entries(squarespaceMap)) {
     if (!processedKeys.has(sqKey)) {
       console.log(`Adding Squarespace-only listing: "${sqItem.title}"`);
-      let address = '4818 Southeast Woodstock Blvd, Portland, OR 97206';
-      let streetAddress = '4818 SE Woodstock Blvd';
-      let neighborhood = 'Woodstock';
-      let lat = 45.479532;
-      let lng = -122.612845;
+      const override = ADDRESS_OVERRIDES[sqItem.title] || {};
+      let address = override.address || 'Portland, OR';
+      let streetAddress = override.address ? override.address.split(',')[0].trim() : '';
+      let neighborhood = override.neighborhood || 'Portland';
+      let lat = override.lat || 45.5231;
+      let lng = override.lng || -122.6765;
 
-      let dish = 'Crispy Garlic Chicken Wings';
+      let dish = 'Crispy Fried Chicken';
       let desc = sqItem.description ? toSentenceCase(sqItem.description) : 'Crispy fried chicken special';
       if (DISH_OVERRIDES[sqItem.title] && DISH_OVERRIDES[sqItem.title].dish) {
         dish = DISH_OVERRIDES[sqItem.title].dish;
@@ -406,7 +415,7 @@ window.FOOD_WEEKS.push(
     colorDark: "#92400E",
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
-    emoji: "🍗",
+    emoji: "🐔",
     totalLocations: ${entries.length},
     url: "${LOCATIONS_URL}",
   }
@@ -415,11 +424,11 @@ window.FOOD_WEEKS.push(
 window.RESTAURANTS = window.RESTAURANTS || [];
 (function() {
   const newItems = ${JSON.stringify(entries, null, 2)};
-  const seen = new Set(window.RESTAURANTS.map(r => r.id));
+  const seen = new Set(window.RESTAURANTS.map(r => \`\${r.weekId}_\${r.id}\`));
   for (const item of newItems) {
-    if (!seen.has(item.id)) {
+    if (!seen.has(\`\${item.weekId}_\${item.id}\`)) {
       window.RESTAURANTS.push(item);
-      seen.add(item.id);
+      seen.add(\`\${item.weekId}_\${item.id}\`);
     }
   }
 })();
@@ -427,6 +436,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
 
   fs.writeFileSync(OUTPUT_PATH, fileContent, 'utf8');
   console.log(`Successfully generated ${OUTPUT_PATH} with ${entries.length} locations.`);
+  updateMetaTotalLocations('fried-chicken-2026', entries.length, path.resolve(__dirname, '../js/meta.js'));
 }
 
 scrape().catch(err => {

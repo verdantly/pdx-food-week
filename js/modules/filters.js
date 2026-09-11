@@ -1,5 +1,5 @@
 /* ── Filters & Search & Sort Logic ── */
-import { State, saveState, WEEK_FILTERS } from './state.js';
+import { State, saveState, getWeekFilters } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
 
@@ -42,6 +42,7 @@ export const PORTLAND_ZIP_CACHE = {
   "97219": { lat: 45.4580, lng: -122.7074 },
   "97220": { lat: 45.5411, lng: -122.5566 },
   "97221": { lat: 45.4918, lng: -122.7267 },
+  "97045": { lat: 45.3573, lng: -122.6068 },
   "97222": { lat: 45.4373, lng: -122.6147 },
   "97223": { lat: 45.4403, lng: -122.7793 },
   "97224": { lat: 45.4094, lng: -122.8014 },
@@ -55,7 +56,18 @@ export const PORTLAND_ZIP_CACHE = {
   "97236": { lat: 45.4887, lng: -122.5091 },
   "97239": { lat: 45.4983, lng: -122.6913 },
   "97266": { lat: 45.4762, lng: -122.5596 },
-  "97267": { lat: 45.4021, lng: -122.6144 }
+  "97267": { lat: 45.4021, lng: -122.6144 },
+  "98660": { lat: 45.6312, lng: -122.6716 },
+  "98661": { lat: 45.6384, lng: -122.6146 },
+  "98662": { lat: 45.6669, lng: -122.5855 },
+  "98663": { lat: 45.6517, lng: -122.6582 },
+  "98664": { lat: 45.6201, lng: -122.5866 },
+  "98665": { lat: 45.6738, lng: -122.6687 },
+  "98682": { lat: 45.6702, lng: -122.5198 },
+  "98683": { lat: 45.6083, lng: -122.5287 },
+  "98684": { lat: 45.6179, lng: -122.4878 },
+  "98685": { lat: 45.7107, lng: -122.7092 },
+  "98686": { lat: 45.7275, lng: -122.6394 }
 };
 
 export function updateMobileFabBadge() {
@@ -222,7 +234,7 @@ export function toggleSavedFilter(f) {
 }
 
 export function renderSavedFilters() {
-  let filters = [...(WEEK_FILTERS[State.currentWeekId] || [])];
+  let filters = [...getWeekFilters(State.currentWeekId)];
   const activeWeekRestaurants = getRestaurants();
   const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
   if (hasUnviewedNew || State.activeSavedFilters.has('new')) {
@@ -254,6 +266,12 @@ export function clearAllSavedFilters() {
   State.savedSearchQuery = '';
   const searchInput = document.getElementById('saved-search-input');
   if (searchInput) searchInput.value = '';
+  const savedSearchClearBtn = document.getElementById('saved-search-clear-btn');
+  if (savedSearchClearBtn) savedSearchClearBtn.style.display = 'none';
+  const compactInput = document.getElementById('compact-search-input');
+  if (compactInput && State.activeTab === 'saved') compactInput.value = '';
+  const compactClearBtn = document.getElementById('compact-search-clear-btn');
+  if (compactClearBtn && State.activeTab === 'saved') compactClearBtn.style.display = 'none';
   
   if (State.activeSavedSort === 'distance') {
     toggleSavedDistanceSort();
@@ -376,11 +394,22 @@ export function clearAllFilters() {
   State.activeFilters.clear();
   State.draftFilters.clear();
   State.searchQuery = '';
+
+  if (State.currentWeekId && State.weekFilters[State.currentWeekId]) {
+    State.weekFilters[State.currentWeekId].activeFilters = [];
+    delete State.weekFilters[State.currentWeekId].searchQuery;
+  }
+  saveState();
+  
   const searchInput = document.getElementById('search-input');
   if (searchInput) {
     searchInput.value = '';
     const searchClearBtn = document.getElementById('search-clear-btn');
     if (searchClearBtn) searchClearBtn.style.display = 'none';
+  }
+  const compactInput = document.getElementById('compact-search-input');
+  if (compactInput) {
+    compactInput.value = '';
     const compactClearBtn = document.getElementById('compact-search-clear-btn');
     if (compactClearBtn) compactClearBtn.style.display = 'none';
   }

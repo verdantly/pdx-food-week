@@ -1,11 +1,11 @@
-const CACHE_NAME = 'pdxfw-cache-v4';
+const CACHE_NAME = 'pdxfw-cache-66e43344';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=7',
-  'js/app.js?v=7',
-  'js/meta.js?v=7',
+  'css/style.css?v=66e43344',
+  'js/app.js?v=66e43344',
+  'js/meta.js?v=66e43344',
   'js/modules/cards.js',
   'js/modules/crawl.js',
   'js/modules/data.js',
@@ -58,14 +58,23 @@ self.addEventListener('fetch', (event) => {
   // Skip non-http/https requests (e.g. chrome-extension://, moz-extension://)
   if (!url.protocol.startsWith('http')) return;
 
-  // 1. Network-First strategy for HTML navigation, metadata, and dynamic week datasets
   const isNavigation = event.request.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
-  const isMetadata = url.pathname.includes('/meta.js');
-  const isDataFile = url.pathname.startsWith('/data/') && url.pathname.endsWith('.js');
+  const isAppCode = url.pathname.includes('/meta.js') || url.pathname.includes('/app.js') || url.pathname.includes('/modules/');
+  const isDataFile = url.pathname.includes('/data/') && url.pathname.endsWith('.js');
+  const isCSS = url.pathname.includes('/css/') || url.pathname.endsWith('.css');
 
-  if (isNavigation || isMetadata || isDataFile) {
+  // 1. Navigation requests (HTML / entrypoint): Network-First with cache: 'no-cache'
+  // Guarantees online visitors immediately receive the latest index.html from server without force-refreshing,
+  // while seamlessly falling back to cached HTML when offline.
+  if (isNavigation) {
+    const navRequest = new Request(event.request.url, {
+      headers: event.request.headers,
+      credentials: event.request.credentials,
+      cache: 'no-cache'
+    });
+
     event.respondWith(
-      fetch(event.request)
+      fetch(navRequest)
         .then((response) => {
           if (response && response.status === 200) {
             const resClone = response.clone();
@@ -80,18 +89,37 @@ self.addEventListener('fetch', (event) => {
           return caches.match(event.request, { ignoreSearch: false })
             .then((cached) => {
               if (cached) return cached;
-              if (isNavigation) {
-                return caches.match('./', { ignoreSearch: true })
-                  .then((rootCached) => rootCached || caches.match('index.html', { ignoreSearch: true }));
-              }
-              return caches.match(event.request, { ignoreSearch: true });
+              return caches.match('./', { ignoreSearch: true })
+                .then((rootCached) => rootCached || caches.match('index.html', { ignoreSearch: true }));
             });
         })
     );
     return;
   }
 
-  // 2. Cache-First (with network fallback & cache population) for versioned static assets & libraries
+  // 2. Unversioned app code & dynamic datasets: Network-First with cache fallback
+  const isUnversionedCode = (isAppCode || isDataFile || isCSS) && !url.searchParams.has('v');
+  if (isUnversionedCode) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const resClone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, resClone).catch(() => {});
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(event.request, { ignoreSearch: false })
+            .then((cached) => cached || caches.match(event.request, { ignoreSearch: true }));
+        })
+    );
+    return;
+  }
+
+  // 3. Versioned static assets (?v=...) & CDN vendor libraries: Cache-First with network fallback & cache population
   event.respondWith(
     caches.match(event.request, { ignoreSearch: false }).then((cachedResponse) => {
       if (cachedResponse) {

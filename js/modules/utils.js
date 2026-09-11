@@ -21,11 +21,17 @@ export function highlightMatch(text, query) {
   if (!text) return '';
   if (!query || !query.trim()) return esc(text);
 
-  const escapedText = esc(text);
   const q = query.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const regex = new RegExp(`(${q})`, 'gi');
+  const parts = String(text).split(regex);
+  if (parts.length <= 1) return esc(text);
 
-  return escapedText.replace(regex, '<mark class="search-highlight">$1</mark>');
+  return parts.map(part => {
+    if (regex.test(part)) {
+      return `<mark class="search-highlight">${esc(part)}</mark>`;
+    }
+    return esc(part);
+  }).join('');
 }
 
 export function safeUrl(u) {

@@ -22,7 +22,7 @@ export const State = {
   viewedNew: new Set(),
   notes: {},
   selectedDish: null,
-  currentWeekId: 'nacho-2026',
+  currentWeekId: null,
   weekFilters: {},
   swipeQueue: null,
   swipeIdx: 0,
@@ -37,60 +37,70 @@ export const State = {
   deferredInstallPrompt: null
 };
 
-export const WEEK_FILE_MAP = {
-  'burger-2026': 'burgerweek2026.js',
-  'fried-chicken-2026': 'friedchickenweek2026.js',
-  'highball-2026': 'highballweek2026.js',
-  'nacho-2026': 'nachoweek2026.js',
-  'pizza-2026': 'pizzaweek2026.js',
-  'salad-2026': 'salads2026.js',
-  'slushie-2026': 'slushies2026.js',
-  'taco-2026': 'tacoweek2026.js'
-};
+export function getWeekFile(weekId) {
+  if (typeof window !== 'undefined' && typeof window.getWeekFile === 'function') {
+    return window.getWeekFile(weekId);
+  }
+  const week = (typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : []).find(w => w.id === weekId);
+  return week ? week.dataFile : undefined;
+}
 
-export const WEEK_FILTERS = {
-  'burger-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' }
-  ],
-  'fried-chicken-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'spicy', label: 'Spicy' }
-  ],
-  'salad-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' }
-  ],
-  'slushie-2026': [],
-  'pizza-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'pie', label: 'Whole Pie' }
-  ],
-  'taco-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' },
-    { id: 'spicy', label: 'Spicy' }
-  ],
-  'nacho-2026': [
-    { id: 'meat', label: 'Meat' },
-    { id: 'vegetarian', label: 'Vegetarian' },
-    { id: 'vegan', label: 'Vegan' },
-    { id: 'gf', label: 'Gluten-free' }
-  ],
-  'highball-2026': []
-};
+export function getWeekFilters(weekId) {
+  if (typeof window !== 'undefined' && typeof window.getWeekFilters === 'function') {
+    return window.getWeekFilters(weekId);
+  }
+  const week = (typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : []).find(w => w.id === weekId);
+  return week && week.filters ? week.filters : [];
+}
+
+// Backwards-compatibility proxies for any consumers expecting object maps
+export const WEEK_FILE_MAP = new Proxy({}, {
+  get(_, prop) {
+    if (typeof prop === 'string') {
+      return getWeekFile(prop);
+    }
+    return undefined;
+  },
+  has(_, prop) {
+    return Boolean(getWeekFile(prop));
+  },
+  ownKeys(_) {
+    const list = typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : [];
+    return list.map(w => w.id);
+  },
+  getOwnPropertyDescriptor(_, prop) {
+    return {
+      value: getWeekFile(prop),
+      writable: false,
+      enumerable: true,
+      configurable: true
+    };
+  }
+});
+
+export const WEEK_FILTERS = new Proxy({}, {
+  get(_, prop) {
+    if (typeof prop === 'string') {
+      return getWeekFilters(prop);
+    }
+    return [];
+  },
+  has(_, prop) {
+    return Boolean(getWeekFile(prop));
+  },
+  ownKeys(_) {
+    const list = typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : [];
+    return list.map(w => w.id);
+  },
+  getOwnPropertyDescriptor(_, prop) {
+    return {
+      value: getWeekFilters(prop),
+      writable: false,
+      enumerable: true,
+      configurable: true
+    };
+  }
+});
 
 const STORAGE_KEY_SAVED = 'pdxfw_saved_v1';
 const STORAGE_KEY_PASSED = 'pdxfw_passed_v1';
@@ -137,6 +147,90 @@ export function loadState() {
 
     localStorage.removeItem(STORAGE_KEY_VISITED); // Clean up legacy global visited key
   } catch (e) { }
+}
+
+export function getDishKey(id, weekId = State.currentWeekId) {
+  if (id == null) return '';
+  const strId = String(id);
+  if (strId.includes('_')) return strId;
+  return weekId ? `${weekId}_${strId}` : strId;
+}
+
+export function isDishSaved(id, weekId = State.currentWeekId) {
+  if (id == null) return false;
+  const key = getDishKey(id, weekId);
+  return State.saved.has(key) || State.saved.has(id) || State.saved.has(Number(id));
+}
+
+export function toggleDishSaved(id, weekId = State.currentWeekId) {
+  const key = getDishKey(id, weekId);
+  const currentlySaved = isDishSaved(id, weekId);
+  if (currentlySaved) {
+    State.saved.delete(key);
+    State.saved.delete(id);
+    State.saved.delete(Number(id));
+    State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== id && x !== Number(id));
+  } else {
+    State.saved.add(key);
+    if (!State.customSavedOrder.includes(key)) {
+      State.customSavedOrder.push(key);
+    }
+  }
+  saveState();
+  return !currentlySaved;
+}
+
+export function isDishPassed(id, weekId = State.currentWeekId) {
+  if (id == null) return false;
+  const key = getDishKey(id, weekId);
+  return State.passed.has(key) || State.passed.has(id) || State.passed.has(Number(id));
+}
+
+export function passDish(id, weekId = State.currentWeekId) {
+  const key = getDishKey(id, weekId);
+  State.passed.add(key);
+  State.saved.delete(key);
+  State.saved.delete(id);
+  State.saved.delete(Number(id));
+  State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== id && x !== Number(id));
+  saveState();
+}
+
+export function unpassDish(id, weekId = State.currentWeekId) {
+  const key = getDishKey(id, weekId);
+  State.passed.delete(key);
+  State.passed.delete(id);
+  State.passed.delete(Number(id));
+  saveState();
+}
+
+export function migrateWeekSavedState(weekId) {
+  if (!weekId) return;
+  const restaurants = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
+  let changed = false;
+  for (const r of restaurants) {
+    const key = `${weekId}_${r.id}`;
+    if (State.saved.has(r.id) || State.saved.has(Number(r.id))) {
+      State.saved.delete(r.id);
+      State.saved.delete(Number(r.id));
+      State.saved.add(key);
+      changed = true;
+    }
+    if (State.passed.has(r.id) || State.passed.has(Number(r.id))) {
+      State.passed.delete(r.id);
+      State.passed.delete(Number(r.id));
+      State.passed.add(key);
+      changed = true;
+    }
+    if (State.notes && State.notes[r.id] && !State.notes[key]) {
+      State.notes[key] = State.notes[r.id];
+      delete State.notes[r.id];
+      changed = true;
+    }
+  }
+  if (changed) {
+    saveState();
+  }
 }
 
 export function saveState() {

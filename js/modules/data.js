@@ -1,5 +1,5 @@
 /* ── Data Helpers & Queries ── */
-import { State } from './state.js';
+import { State, isDishSaved, getDishKey } from './state.js';
 import { haversineDistance } from './utils.js';
 
 export function getRestaurants() {
@@ -128,10 +128,14 @@ export function getFiltered() {
 }
 
 export function getSaved() {
-  const targetSet = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex] 
-    ? new Set(State.friends[State.viewingFriendIndex].ids) 
-    : State.saved;
-  let savedItems = getRestaurants().filter(r => targetSet.has(r.id));
+  const isViewingFriend = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex];
+  const friendIds = isViewingFriend ? new Set(State.friends[State.viewingFriendIndex].ids) : null;
+  let savedItems = getRestaurants().filter(r => {
+    if (friendIds) {
+      return friendIds.has(r.id) || friendIds.has(String(r.id)) || friendIds.has(Number(r.id));
+    }
+    return isDishSaved(r.id, r.weekId);
+  });
 
   savedItems = savedItems.filter(r => {
     if (State.activeSavedFilters.has('meat') && r.type !== 'meat') return false;
@@ -163,8 +167,12 @@ export function getSaved() {
     });
   } else if (State.activeSavedSort === 'custom') {
     savedItems.sort((a, b) => {
-      let idxA = State.customSavedOrder.indexOf(a.id);
-      let idxB = State.customSavedOrder.indexOf(b.id);
+      const keyA = getDishKey(a.id, a.weekId);
+      const keyB = getDishKey(b.id, b.weekId);
+      let idxA = State.customSavedOrder.indexOf(keyA);
+      if (idxA === -1) idxA = State.customSavedOrder.indexOf(a.id);
+      let idxB = State.customSavedOrder.indexOf(keyB);
+      if (idxB === -1) idxB = State.customSavedOrder.indexOf(b.id);
       if (idxA === -1) idxA = 999999;
       if (idxB === -1) idxB = 999999;
       if (idxA === idxB) {

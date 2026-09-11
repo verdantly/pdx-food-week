@@ -1,5 +1,5 @@
 /* ── Rendering Loops & Week Switcher UI ── */
-import { State, saveState, WEEK_FILTERS } from './state.js';
+import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
 import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
@@ -19,7 +19,10 @@ export function renderBrowse() {
   const browseHoodsEl = document.getElementById('browse-stat-hoods');
   const browseTypesEl = document.getElementById('browse-stat-types');
   if (browseHoodsEl && browseTypesEl) {
-    if (State.currentWeekId === 'slushie-2026') {
+    const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+      ? window.getWeekMeta(State.currentWeekId)
+      : null;
+    if (weekMeta && weekMeta.hideHoodStats) {
       browseHoodsEl.parentElement.style.display = 'none';
       browseTypesEl.parentElement.style.display = 'none';
     } else {
@@ -35,7 +38,7 @@ export function renderBrowse() {
   if (filtered.length === 0) {
     container.innerHTML = `<div class="no-results">
       <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48" fill="#e3e3e3" style="margin-bottom: 16px; opacity: 0.8;"><path d="M280-80v-366q-51-14-85.5-56T160-596v-284h80v280h40v-280h80v280h40v-280h80v284q0 52-34.5 94T360-446v366h-80Zm400 0v-320H560v-480q66 0 113 47t47 113v640h-40Z"/></svg>
-      <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">Nothing on the menu</p>
+      <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">Nothing on the menu</p>
       <p style="color: var(--ink-60);">Try a different filter!</p>
     </div>`;
   } else {
@@ -44,12 +47,13 @@ export function renderBrowse() {
   container.classList.remove('fade-in');
   void container.offsetWidth;
   container.classList.add('fade-in');
+
+  updateMobileFabBadge();
 }
 
-export function renderSaved() {
+export function renderSaved(focusSelector = null) {
   const activeEl = document.activeElement;
-  let focusSelector = null;
-  if (activeEl && activeEl.closest('#cards-saved')) {
+  if (!focusSelector && activeEl && activeEl.closest('#cards-saved')) {
     const card = activeEl.closest('.dish-card');
     if (card) {
       const id = card.getAttribute('data-id');
@@ -72,7 +76,10 @@ export function renderSaved() {
   const hoodsBox = document.getElementById('stat-hoods')?.parentElement;
   const typesBox = document.getElementById('stat-types')?.parentElement;
   if (hoodsBox && typesBox) {
-    if (State.currentWeekId === 'slushie-2026') {
+    const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+      ? window.getWeekMeta(State.currentWeekId)
+      : null;
+    if (weekMeta && weekMeta.hideHoodStats) {
       hoodsBox.style.display = 'none';
       typesBox.style.display = 'none';
     } else {
@@ -105,10 +112,15 @@ export function renderSaved() {
     }
   }
 
-  const targetSet = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex] 
+  const friendIds = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex] 
     ? new Set(State.friends[State.viewingFriendIndex].ids) 
-    : State.saved;
-  const totalSavedForWeek = getRestaurants().filter(r => targetSet.has(r.id)).length;
+    : null;
+  const totalSavedForWeek = getRestaurants().filter(r => {
+    if (friendIds) {
+      return friendIds.has(r.id) || friendIds.has(String(r.id)) || friendIds.has(Number(r.id));
+    }
+    return isDishSaved(r.id, r.weekId);
+  }).length;
   
   const tabs = document.querySelectorAll('[data-tab="saved"]');
   tabs.forEach(tab => {
@@ -131,6 +143,26 @@ export function renderSaved() {
   const exitBtn = document.getElementById('saved-exit-friend-btn');
   const mergeBtn = document.getElementById('saved-merge-friend-btn');
   
+  const crawlBtn = document.getElementById('saved-plan-crawl-btn');
+  if (crawlBtn) {
+    if (!hasSavedItems) {
+      crawlBtn.style.display = 'none';
+    } else {
+      crawlBtn.style.display = 'inline-block';
+      if (State.crawlModeActive) {
+        crawlBtn.style.background = 'white';
+        crawlBtn.style.color = 'var(--teal)';
+        crawlBtn.style.border = '2px solid var(--teal)';
+        crawlBtn.textContent = 'Cancel Crawl';
+      } else {
+        crawlBtn.style.background = 'var(--teal)';
+        crawlBtn.style.color = 'white';
+        crawlBtn.style.border = '2px solid var(--teal)';
+        crawlBtn.textContent = 'Plan Crawl';
+      }
+    }
+  }
+
   if (State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]) {
     if (headerTitle) headerTitle.textContent = `${esc(State.friends[State.viewingFriendIndex].name)}'s Spots`;
     if (copyBtn) copyBtn.style.display = 'none';
@@ -148,7 +180,7 @@ export function renderSaved() {
       <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
       </svg>
-      <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">${State.viewingFriendIndex !== null ? "Friend hasn't saved spots yet" : "No saved spots yet"}</p>
+      <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">${State.viewingFriendIndex !== null ? "Friend hasn't saved spots yet" : "No saved spots yet"}</p>
       <p style="color: var(--ink-60);">${State.viewingFriendIndex !== null ? "Check back later!" : "Save spots from Browse to build your list!"}</p>
     </div>`;
   } else {
@@ -181,8 +213,38 @@ export function renderSaved() {
   }
 }
 
+export function renderWeekSwitchers() {
+  const switchers = [
+    document.getElementById('week-switcher'),
+    document.getElementById('compact-week-switcher')
+  ].filter(Boolean);
+
+  const weeks = typeof window !== 'undefined' && window.FOOD_WEEKS ? window.FOOD_WEEKS : [];
+
+  switchers.forEach(select => {
+    // Preserve the first option (placeholder)
+    const placeholder = select.firstElementChild ? select.firstElementChild.outerHTML : '<option value="" disabled selected hidden>Select food week</option>';
+    let optionsHtml = placeholder;
+
+    const sortedWeeks = [...weeks].sort((a, b) => {
+      const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
+      const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
+      return dateB - dateA;
+    });
+
+    sortedWeeks.forEach(w => {
+      const displayName = w.name.replace(/\s*\d{4}/, '');
+      const emoji = w.emoji || '🍽️';
+      optionsHtml += `<option value="${esc(w.id)}">${emoji} ${esc(displayName)}</option>`;
+    });
+
+    select.innerHTML = optionsHtml;
+    select.selectedIndex = 0;
+  });
+}
+
 export function renderFilters() {
-  let filters = [...(WEEK_FILTERS[State.currentWeekId] || [])];
+  let filters = [...getWeekFilters(State.currentWeekId)];
   const activeWeekRestaurants = getRestaurants();
   const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
   if (hasUnviewedNew || State.activeFilters.has('new')) {
@@ -244,7 +306,9 @@ export function renderHeader() {
   if (metaEl) {
     const dates = `<span>${esc(week.dates)}</span>`;
     const pills = (week.pricePills || []).map(p => `<span class="pill">${esc(p)}</span>`).join('');
-    const locations = `<span>${week.totalLocations || getRestaurants().length} locations</span>`;
+    const actualCount = getRestaurants().length;
+    const totalCount = actualCount > 0 ? actualCount : (week.totalLocations || 0);
+    const locations = `<span>${totalCount} locations</span>`;
     metaEl.innerHTML = dates + pills + locations;
   }
 
@@ -266,15 +330,9 @@ export function applyWeekTheme(week) {
     return;
   }
   const themeColor = week.color || '#E85B38';
-  let dark = week.colorDark || '#B5472E';
-  let light = week.colorLight || '#F5E6DF';
-  let pale = week.colorPale || '#FDF7F4';
-
-  if (week.id === 'pizza-2026') {
-    dark = '#9E3318';
-    light = '#F5E6DF';
-    pale = '#FDF7F4';
-  }
+  const dark = week.colorDark || '#B5472E';
+  const light = week.colorLight || '#F5E6DF';
+  const pale = week.colorPale || '#FDF7F4';
 
   root.style.setProperty('--pizza', themeColor);
   root.style.setProperty('--pizza-dark', dark);

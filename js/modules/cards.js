@@ -1,5 +1,5 @@
 /* ── Card HTML Generation ── */
-import { State } from './state.js';
+import { State, isDishSaved } from './state.js';
 import { esc, highlightMatch, haversineDistance } from './utils.js';
 import { isVeganFriendly, isVegetarianFriendly } from './data.js';
 
@@ -12,84 +12,67 @@ export function hasVeganOptionInDesc(r) {
 }
 
 export function buildTags(r) {
+  const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+    ? window.getWeekMeta(State.currentWeekId)
+    : null;
+
+  if (weekMeta && weekMeta.hideTags) {
+    return '';
+  }
+
   const t = [];
-  if (State.currentWeekId === 'slushie-2026') {
-  } else if (State.currentWeekId === 'pizza-2026') {
-    if (r.type === 'meat') {
-      t.push('<span class="tag tag-meat">Meat</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else if (isVegetarianFriendly(r)) {
-        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-      }
-    } else if (r.type === 'vegetarian') {
-      t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      }
-    } else if (r.type === 'vegan') {
-      if (hasVeganOptionInDesc(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else {
-        t.push('<span class="tag tag-vegan">Vegan</span>');
-      }
+
+  // Meat / Vegetarian / Vegan badges
+  if (r.type === 'meat') {
+    t.push('<span class="tag tag-meat">Meat</span>');
+    if (isVeganFriendly(r)) {
+      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+    } else if (isVegetarianFriendly(r)) {
+      t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
     }
-    if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
+  } else if (r.type === 'vegetarian') {
+    t.push('<span class="tag tag-veg">Vegetarian</span>');
+    if (isVeganFriendly(r)) {
+      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+    }
+  } else if (r.type === 'vegan') {
+    if (hasVeganOptionInDesc(r)) {
+      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+    } else {
+      t.push('<span class="tag tag-vegan">Vegan</span>');
+    }
+  }
+
+  // Gluten-free
+  if (r.glutenFree) {
+    t.push('<span class="tag tag-gf">GF available</span>');
+  }
+
+  // Spicy
+  if (r.spicy) {
+    t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
+  }
+
+  // Pizza-specific slices/pies if applicable
+  if (r.wholePie !== undefined) {
     if (r.wholePie) t.push('<span class="tag tag-pie">Whole pie $25</span>');
     else t.push('<span class="tag tag-slice">By the slice</span>');
-  } else if (State.currentWeekId === 'highball-2026') {
-  } else if (State.currentWeekId === 'taco-2026') {
-    if (r.type === 'meat') {
-      t.push('<span class="tag tag-meat">Meat</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else if (isVegetarianFriendly(r)) {
-        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-      }
-    } else if (r.type === 'vegetarian') {
-      t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      }
-    } else if (r.type === 'vegan') {
-      if (hasVeganOptionInDesc(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else {
-        t.push('<span class="tag tag-vegan">Vegan</span>');
-      }
-    }
-    if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
-    if (r.spicy) t.push('<span class="tag tag-spicy" style="background:#FAE8E0;color:#8B3015;">🌶️ Spicy</span>');
-  } else if (State.currentWeekId === 'nacho-2026') {
-    if (r.type === 'meat') {
-      t.push('<span class="tag tag-meat">Meat</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else if (isVegetarianFriendly(r)) {
-        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-      }
-    } else if (r.type === 'vegetarian') {
-      t.push('<span class="tag tag-veg">Vegetarian</span>');
-      if (isVeganFriendly(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      }
-    } else if (r.type === 'vegan') {
-      if (hasVeganOptionInDesc(r)) {
-        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-      } else {
-        t.push('<span class="tag tag-vegan">Vegan</span>');
-      }
-    }
-    if (r.glutenFree) t.push('<span class="tag tag-gf">GF available</span>');
   }
+
   return t.join('');
 }
 
 export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount = -1) {
-  const isSaved = State.saved.has(r.id);
-  const isSelected = State.crawlSelection.includes(r.id);
+  const isSaved = isDishSaved(r.id, r.weekId);
+  const crawlSelectionIndex = State.crawlSelection.indexOf(r.id);
+  const isSelected = crawlSelectionIndex > -1;
+  const isCrawlSelectable = State.crawlModeActive && isSavedTab;
+
   let cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
-  if (State.crawlModeActive && isSavedTab && isSelected) cls += ' crawl-selected';
+  if (isCrawlSelectable) {
+    cls += ' crawl-selectable';
+    if (isSelected) cls += ' crawl-selected';
+  }
   const q = isSavedTab ? State.savedSearchQuery : State.searchQuery;
   const thumb = r.image
     ? `<div class="card-emoji card-thumb"><img src="${esc(r.image)}" alt="Photo of ${esc(r.dish)}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`
@@ -103,7 +86,7 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
   const isNew = r.isNew && !State.viewedNew.has(r.id);
 
   let dragHandleHtml = '';
-  if (isSavedTab && State.activeSavedSort === 'custom') {
+  if (isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable) {
     const isFirst = index === 0;
     const isLast = index === totalCount - 1;
     dragHandleHtml = `
@@ -118,20 +101,39 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
     `;
   }
 
+  let crawlBadgeHtml = '';
+  if (isCrawlSelectable) {
+    crawlBadgeHtml = `
+      <div class="crawl-select-indicator ${isSelected ? 'selected' : ''}" style="margin-right: 10px; flex-shrink: 0;">
+        ${isSelected ? (crawlSelectionIndex + 1) : ''}
+      </div>
+    `;
+  }
+
+  const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
+    ? window.getWeekMeta(State.currentWeekId)
+    : null;
+  const locationText = (weekMeta && weekMeta.preferStreetAddress) ? r.address : (r.neighborhood || r.address);
+
+  const cardClickAction = isCrawlSelectable
+    ? `App.handleCrawlCardClick(${r.id})`
+    : `App.openDetail(${r.id})`;
+
   return `
-    <div class="${cls}" data-id="${r.id}" onclick="App.openDetail(${r.id})" ${isSavedTab && State.activeSavedSort === 'custom' ? 'draggable="true"' : ''}>
+    <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable ? 'draggable="true"' : ''}>
       ${dragHandleHtml}
+      ${crawlBadgeHtml}
       ${thumb}
       <div class="card-body">
         <div class="card-dish">${highlightMatch(r.dish, q)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
         <div class="card-restaurant">${highlightMatch(r.restaurant, q)}${dist}</div>
-        <div class="card-neighborhood">📍 ${highlightMatch(State.currentWeekId === 'slushie-2026' ? r.address : (r.neighborhood || r.address), q)}</div>
+        <div class="card-neighborhood">📍 ${highlightMatch(locationText, q)}</div>
         <div class="card-desc">${esc(r.desc)}</div>
         <div class="card-tags">${buildTags(r)}</div>
       </div>
       <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
-        onclick="event.stopPropagation(); App.toggleSave(${r.id})"
-        aria-label="${isSaved ? 'Remove from saved' : 'Save this dish'}">
+        onclick="event.stopPropagation(); ${isCrawlSelectable ? `App.handleCrawlCardClick(${r.id})` : `App.toggleSave(${r.id})`}"
+        aria-label="${isCrawlSelectable ? 'Select for crawl' : (isSaved ? 'Remove from saved' : 'Save this dish')}">
         <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>

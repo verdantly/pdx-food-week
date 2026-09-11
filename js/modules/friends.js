@@ -1,11 +1,12 @@
 /* ── Friends & Sharing Module ── */
-import { State, saveState } from './state.js';
+import { State, saveState, isDishSaved, getDishKey } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
 
 export function encodeShareCode() {
-  const ids = Array.from(State.saved).join(',');
+  const currentWeekSaved = getRestaurants().filter(r => isDishSaved(r.id, r.weekId)).map(r => r.id);
+  const ids = currentWeekSaved.join(',');
   return 'PDX26-' + btoa(ids).replace(/=/g, '');
 }
 
@@ -94,9 +95,9 @@ export function renderFriends() {
 
   const activeFriends = window.App && window.App.getActiveFriends ? window.App.getActiveFriends() : [];
 
-  let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No friends added yet.</p>`;
+  let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No friends added yet.</p>`;
   if (State.friends.length > 0 && activeFriends.length === 0) {
-    emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No shared lists for this week.</p>`;
+    emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No shared lists for this week.</p>`;
   }
 
   const fl = document.getElementById('friends-list');
@@ -147,7 +148,7 @@ export function renderFriends() {
         <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; opacity: 0.8">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         </svg>
-        <p style="font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 4px; font-weight: 700;">No overlap yet</p>
+        <p style="font-family: var(--font-display); font-size: 18px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No overlap yet</p>
         <p style="color: var(--ink-60);">Save more spots and add more friends!</p>
       </div>`;
     } else {
@@ -175,7 +176,8 @@ function timeoutPromise(promise, ms, errorMsg) {
 }
 
 export async function generateShareLink() {
-  if (State.saved.size === 0) {
+  const currentWeekSaved = getRestaurants().filter(r => isDishSaved(r.id, r.weekId)).map(r => r.id);
+  if (currentWeekSaved.length === 0) {
     showToast('⚠️ Save some spots first!');
     return;
   }
@@ -194,7 +196,7 @@ export async function generateShareLink() {
   if (db) {
     try {
       const writePromise = db.collection('shared_lists').doc(shortId).set({
-        ids: Array.from(State.saved),
+        ids: currentWeekSaved,
         name: myName,
         weekId: State.currentWeekId,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -423,10 +425,14 @@ export function mergeFriendList() {
   let addedCount = 0;
   
   friend.ids.forEach(id => {
-    if (!State.saved.has(id)) {
-      State.saved.add(id);
-      if (State.passed.has(id)) {
-        State.passed.delete(id);
+    if (!isDishSaved(id, State.currentWeekId)) {
+      const key = getDishKey(id, State.currentWeekId);
+      State.saved.add(key);
+      State.passed.delete(key);
+      State.passed.delete(id);
+      State.passed.delete(Number(id));
+      if (!State.customSavedOrder.includes(key)) {
+        State.customSavedOrder.push(key);
       }
       addedCount++;
     }
