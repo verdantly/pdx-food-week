@@ -1,5 +1,5 @@
 /* ── Cloud Synchronization Module ── */
-import { State, saveState, clearUserDataState } from './state.js';
+import { State, saveState, backupGuestUserData, restoreGuestUserData } from './state.js';
 import { showToast } from './utils.js';
 import { renderBrowse, renderSaved, renderAll } from './render.js';
 
@@ -8,6 +8,8 @@ let syncDebounceTimer = null;
 let isApplyingCloudUpdate = false;
 
 export function onUserSignedIn(user) {
+  // Capture a snapshot of guest entries right before any cloud merging happens
+  backupGuestUserData();
   if (!window.db) return;
   subscribeToCloud(user.uid);
 }
@@ -21,10 +23,10 @@ export function onUserSignedOut() {
   State.syncStatus = 'idle';
   updateSyncStatusUI();
 
-  // Clear user data (saved dishes, notes, crawl list) from memory and local storage
-  clearUserDataState();
+  // Restore the guest entries that were saved before the user signed in
+  restoreGuestUserData();
 
-  // Re-render views so the UI reflects the signed-out state immediately
+  // Re-render views so the UI immediately reflects the restored guest state
   renderAll();
 
   // Update crawl floating bar and buttons if active

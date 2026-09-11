@@ -1,5 +1,5 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState, backupGuestUserData, restoreGuestUserData } from './modules/state.js';
 import { esc, debounce, showToast } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
@@ -1684,6 +1684,8 @@ const App = {
   updateCrawlFab,
   syncCrawlButtons,
   clearUserDataState,
+  backupGuestUserData,
+  restoreGuestUserData,
   toggleSavedCrawlMode,
   handleCrawlCardClick,
   handleMapPlanCrawlClick,

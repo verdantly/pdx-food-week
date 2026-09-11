@@ -262,6 +262,47 @@ export function checkWeekVisited(weekId) {
   }
 }
 
+const STORAGE_KEY_GUEST_BACKUP = 'pdxfw_guest_backup_v1';
+
+export function backupGuestUserData() {
+  try {
+    // Only capture a guest backup if there is no existing backup already saved
+    // (this ensures we preserve the state right before logging in)
+    if (!localStorage.getItem(STORAGE_KEY_GUEST_BACKUP)) {
+      const backup = {
+        saved: [...State.saved],
+        passed: [...State.passed],
+        notes: State.notes || {},
+        crawlSelection: State.crawlSelection || [],
+        customSavedOrder: State.customSavedOrder || []
+      };
+      localStorage.setItem(STORAGE_KEY_GUEST_BACKUP, JSON.stringify(backup));
+    }
+  } catch (e) { }
+}
+
+export function restoreGuestUserData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_GUEST_BACKUP);
+    if (raw) {
+      const backup = JSON.parse(raw);
+      State.saved = new Set(backup.saved || []);
+      State.passed = new Set(backup.passed || []);
+      State.notes = backup.notes || {};
+      State.crawlSelection = backup.crawlSelection || [];
+      State.customSavedOrder = backup.customSavedOrder || [...State.saved];
+
+      // Clean up the guest backup once restored
+      localStorage.removeItem(STORAGE_KEY_GUEST_BACKUP);
+      saveState();
+      return;
+    }
+  } catch (e) { }
+
+  // If there was no pre-login guest backup, clear state cleanly
+  clearUserDataState();
+}
+
 export function clearUserDataState() {
   State.saved.clear();
   State.passed.clear();
