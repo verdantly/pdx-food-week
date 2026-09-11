@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import { fileURLToPath } from 'url';
-import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, updateMetaTotalLocations } from './scraper_utils.js';
+import { decodeHTML, isAllCaps, toTitleCase, toSentenceCase, updateMetaTotalLocations, loadExistingData } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.resolve(__dirname, '../data/geocode_cache.json');
@@ -113,7 +113,7 @@ const DISH_OVERRIDES = {
   'Wajan': { dish: 'Ayam Geprek' },
   'Say When': { dish: 'Buttermilk Brined Fried Chicken Sandwich' },
   "Big's Chicken | Alabama Fried Chicken": { dish: 'Fried Chicken Tenders & Huli-Huli Sauce' },
-  'E-San Thai Woodstock': { dish: 'Crispy Garlic Chicken Wings' },
+  'E-San Thai Woodstock': { dish: 'Crispy Thai Wings' },
   'Hawker Station PDX': { dish: 'Fried Chicken Thighs with Hong Kong Style Curry Dipping Sauce' }
 };
 
@@ -154,6 +154,13 @@ async function scrape() {
   console.log(`Parsed ${Object.keys(squarespaceMap).length} items from Squarespace page.`);
 
   const $kml = cheerio.load(kmlText, { xmlMode: true });
+  const existingMap = loadExistingData(OUTPUT_PATH);
+  const existingRestaurants = new Set();
+  for (const item of existingMap.values()) {
+    if (item && item.restaurant) {
+      existingRestaurants.add(item.restaurant.toLowerCase().trim());
+    }
+  }
   const entries = [];
   const processedKeys = new Set();
   let counter = 1;
@@ -330,6 +337,8 @@ async function scrape() {
     else if (/curry/i.test(dish)) emoji = '🍛';
     else if (/tenders/i.test(dish)) emoji = '🍗';
 
+    const isNew = existingRestaurants.size > 0 && !existingRestaurants.has(name.toLowerCase().trim());
+
     entries.push({
       id: counter,
       weekId: 'fried-chicken-2026',
@@ -349,7 +358,8 @@ async function scrape() {
       desc,
       emoji,
       image,
-      url: LOCATIONS_URL
+      url: LOCATIONS_URL,
+      ...(isNew ? { isNew: true } : {})
     });
 
     counter++;
@@ -372,6 +382,8 @@ async function scrape() {
         dish = DISH_OVERRIDES[sqItem.title].dish;
       }
 
+      const isNew = existingRestaurants.size > 0 && !existingRestaurants.has(sqItem.title.toLowerCase().trim());
+
       entries.push({
         id: counter,
         weekId: 'fried-chicken-2026',
@@ -391,7 +403,8 @@ async function scrape() {
         desc,
         emoji: '🍗',
         image: sqItem.image,
-        url: LOCATIONS_URL
+        url: LOCATIONS_URL,
+        ...(isNew ? { isNew: true } : {})
       });
       counter++;
     }

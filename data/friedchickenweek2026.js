@@ -805,7 +805,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 38,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Fried Chicken Thighs With Hong Kong Style Curry Dipping Sauce",
     "restaurant": "Hawker Station PDX",
     "neighborhood": "Central Beaverton",
     "address": "12675 Southwest 1st St, Beaverton, OR 97005",
@@ -819,7 +819,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "desc": "Fried chicken thighs with hong kong style curry dipping sauce.",
-    "emoji": "🍗",
+    "emoji": "🍛",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/eb297f4c-3951-4ad4-898a-39946b0d8bdc/inbound9145835864276702059+-+Hawkerstation+PDX.png",
     "url": "https://www.theactualportland.com/friedchickenlocations"
   },
@@ -847,7 +847,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 40,
     "weekId": "fried-chicken-2026",
-    "dish": "Crispy Garlic Chicken Wings",
+    "dish": "Crispy Thai Wings",
     "restaurant": "E-San Thai Woodstock",
     "neighborhood": "Woodstock",
     "address": "4818 SE Woodstock Blvd, Portland, OR 97206",
