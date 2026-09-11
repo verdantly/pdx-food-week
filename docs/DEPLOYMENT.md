@@ -146,7 +146,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /shared_lists/{document} {
-      allow read, write: if true;
+      allow create: if request.resource.data.keys().hasAll(['ids', 'name'])
+                    && request.resource.data.ids.size() < 150;
+      allow read: if true;
+      allow update, delete: if false;
+    }
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
 }

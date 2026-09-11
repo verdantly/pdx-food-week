@@ -1,5 +1,5 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState, backupGuestUserData, restoreGuestUserData } from './modules/state.js';
 import { esc, debounce, showToast, getWeekTiming } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
@@ -20,7 +20,7 @@ import {
   viewFriendList, exitFriendView, mergeFriendList
 } from './modules/friends.js';
 import {
-  toggleCrawlMode, clearCrawl, updateCrawlFab, generateCrawlItinerary,
+  toggleCrawlMode, clearCrawl, updateCrawlFab, syncCrawlButtons, generateCrawlItinerary,
   renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal,
   toggleSavedCrawlMode, handleCrawlCardClick, handleMapPlanCrawlClick,
   openCrawlOptionsModal, closeCrawlOptionsModal, startMapPinCrawlMode,
@@ -31,23 +31,42 @@ import {
 } from './modules/crawl.js';
 import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers, renderDayFilters } from './modules/render.js';
 import { exportTopPicksCard } from './modules/picks_exporter.js';
+import {
+  initInstallPrompt, triggerInstall, openInstallModal, closeInstallModal,
+  dismissInstallBanner, updateInstallUI
+} from './modules/install.js';
+import {
+  initAuth, openAccountModal, closeAccountModal, signInWithGoogle,
+  sendMagicLink, signInWithPassword, registerWithPassword, sendPasswordReset,
+  handleSignOut, updateAuthUI, showAuthSubView,
+  handleMagicLinkSubmit, handlePasswordLoginSubmit, handlePasswordSignupSubmit,
+  handlePasswordResetSubmit, togglePasswordVisibility
+} from './modules/auth.js';
+import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 
 // Firebase init reference
 if (window.firebase) {
   try {
     const firebaseConfig = {
-      apiKey: "AIzaSyAdTylbo7DYxF7yXAUZCC3_Ft4j2DYVmIc",
+      apiKey: "AIzaSyBRqAcWvXkQHF52VRP23agkfIufWrOf0rA",
       authDomain: "pdx-food-week.firebaseapp.com",
       projectId: "pdx-food-week",
       storageBucket: "pdx-food-week.firebasestorage.app",
       messagingSenderId: "641950496269",
-      appId: "1:641950496269:web:05be564e86427f24d08744",
-      measurementId: "G-78YTW9CPLJ"
+      appId: "1:641950496269:web:1e6b06112b9bd1f4d08744",
+      measurementId: "G-YY5J6DF5TW"
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
     window.db = firebase.firestore();
+    window.db.enablePersistence({ synchronizeTabs: true }).catch(err => {
+      if (err.code === 'failed-precondition') {
+        console.warn('Firestore multi-tab offline persistence not enabled: multiple tabs open');
+      } else if (err.code === 'unimplemented') {
+        console.warn('Firestore offline persistence unsupported in this browser');
+      }
+    });
     if (firebase.analytics) {
       window.analytics = firebase.analytics();
     }
@@ -941,53 +960,13 @@ function initLandingSearch() {
 }
 
 // ── PWA Install & Notifications ──
-let deferredPwaPrompt = null;
-
 export async function triggerPwaInstall(event) {
   if (event && event.preventDefault) event.preventDefault();
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
-  if (isStandalone) {
-    showToast('PDX Food Week is already installed on your device!');
-    return;
-  }
-
-  if (deferredPwaPrompt) {
-    deferredPwaPrompt.prompt();
-    const { outcome } = await deferredPwaPrompt.userChoice;
-    deferredPwaPrompt = null;
-    if (outcome === 'accepted') {
-      showToast('Thank you for installing PDX Food Week!');
-      localStorage.setItem('pdx_pwa_dismissed', 'true');
-    }
-  } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-    showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
-  } else {
-    showToast('To install, use the Install option in your browser menu or address bar.');
-  }
+  return triggerInstall();
 }
 
 function initPwaInstallPrompt() {
-  const banner = document.getElementById('pwa-install-banner');
-  const installBtn = document.getElementById('pwa-install-btn');
-  const dismissBtn = document.getElementById('pwa-dismiss-btn');
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPwaPrompt = e;
-    // Keep banner hidden by default — accessible via footer links
-    if (banner) banner.hidden = true;
-  });
-
-  if (installBtn) {
-    installBtn.addEventListener('click', triggerPwaInstall);
-  }
-
-  if (dismissBtn && banner) {
-    dismissBtn.addEventListener('click', () => {
-      banner.hidden = true;
-      localStorage.setItem('pdx_pwa_dismissed', 'true');
-    });
-  }
+  updateInstallUI();
 }
 
 // ── Notification Preferences Modal ──
@@ -1229,6 +1208,8 @@ function setupSavedDragEvents() {
 
 function init() {
   loadState();
+  initInstallPrompt();
+  initAuth();
 
   const urlParams = new URLSearchParams(window.location.search);
   const urlWeekId = urlParams.get('week');
@@ -1679,6 +1660,10 @@ const App = {
   handleCrawlPinClick,
   clearCrawl,
   updateCrawlFab,
+  syncCrawlButtons,
+  clearUserDataState,
+  backupGuestUserData,
+  restoreGuestUserData,
   toggleSavedCrawlMode,
   handleCrawlCardClick,
   handleMapPlanCrawlClick,
@@ -1714,6 +1699,28 @@ const App = {
   setupSavedDragEvents,
   getActiveFriends,
   hideCompactDropdowns,
+  triggerInstall,
+  openInstallModal,
+  closeInstallModal,
+  dismissInstallBanner,
+  updateInstallUI,
+  openAccountModal,
+  closeAccountModal,
+  signInWithGoogle,
+  sendMagicLink,
+  signInWithPassword,
+  registerWithPassword,
+  sendPasswordReset,
+  handleSignOut,
+  updateAuthUI,
+  showAuthSubView,
+  handleMagicLinkSubmit,
+  handlePasswordLoginSubmit,
+  handlePasswordSignupSubmit,
+  handlePasswordResetSubmit,
+  togglePasswordVisibility,
+  pushLocalToCloud,
+  queueCloudSync,
   checkMetadataUpdate,
   moveLandingCarousel,
   setLandingCarouselIndex,

@@ -33,7 +33,10 @@ export const State = {
   userLng: null,
   lastActiveElement: null,
   viewingFriendIndex: null,
-  lastScrollTop: 0
+  lastScrollTop: 0,
+  user: null,
+  syncStatus: 'idle',
+  deferredInstallPrompt: null
 };
 
 export function getWeekFile(weekId) {
@@ -248,6 +251,10 @@ export function saveState() {
     localStorage.setItem(STORAGE_KEY_WEEK_FILTERS, JSON.stringify(State.weekFilters));
     localStorage.setItem(STORAGE_KEY_NOTIF_PREFS, JSON.stringify(State.notificationPrefs));
   } catch (e) { }
+
+  if (window.App && window.App.queueCloudSync) {
+    window.App.queueCloudSync();
+  }
 }
 
 export function checkWeekVisited(weekId) {
@@ -259,4 +266,60 @@ export function checkWeekVisited(weekId) {
     localStorage.setItem(visitedKey, 'true');
     saveState();
   }
+}
+
+const STORAGE_KEY_GUEST_BACKUP = 'pdxfw_guest_backup_v1';
+
+export function backupGuestUserData() {
+  try {
+    // Only capture a guest backup if there is no existing backup already saved
+    // (this ensures we preserve the state right before logging in)
+    if (!localStorage.getItem(STORAGE_KEY_GUEST_BACKUP)) {
+      const backup = {
+        saved: [...State.saved],
+        passed: [...State.passed],
+        notes: State.notes || {},
+        crawlSelection: State.crawlSelection || [],
+        customSavedOrder: State.customSavedOrder || []
+      };
+      localStorage.setItem(STORAGE_KEY_GUEST_BACKUP, JSON.stringify(backup));
+    }
+  } catch (e) { }
+}
+
+export function restoreGuestUserData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_GUEST_BACKUP);
+    if (raw) {
+      const backup = JSON.parse(raw);
+      State.saved = new Set(backup.saved || []);
+      State.passed = new Set(backup.passed || []);
+      State.notes = backup.notes || {};
+      State.crawlSelection = backup.crawlSelection || [];
+      State.customSavedOrder = backup.customSavedOrder || [...State.saved];
+
+      // Clean up the guest backup once restored
+      localStorage.removeItem(STORAGE_KEY_GUEST_BACKUP);
+      saveState();
+      return;
+    }
+  } catch (e) { }
+
+  // If there was no pre-login guest backup, clear state cleanly
+  clearUserDataState();
+}
+
+export function clearUserDataState() {
+  State.saved.clear();
+  State.passed.clear();
+  State.notes = {};
+  State.crawlSelection = [];
+  State.customSavedOrder = [];
+
+  try {
+    localStorage.removeItem(STORAGE_KEY_SAVED);
+    localStorage.removeItem(STORAGE_KEY_PASSED);
+    localStorage.removeItem(STORAGE_KEY_NOTES);
+    localStorage.removeItem(STORAGE_KEY_CUSTOM_ORDER);
+  } catch (e) { }
 }
