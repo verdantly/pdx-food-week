@@ -261,3 +261,18 @@ export function checkWeekVisited(weekId) {
     saveState();
   }
 }
+
+export function clearUserDataState() {
+  State.saved.clear();
+  State.passed.clear();
+  State.notes = {};
+  State.crawlSelection = [];
+  State.customSavedOrder = [];
+
+  try {
+    localStorage.removeItem(STORAGE_KEY_SAVED);
+    localStorage.removeItem(STORAGE_KEY_PASSED);
+    localStorage.removeItem(STORAGE_KEY_NOTES);
+    localStorage.removeItem(STORAGE_KEY_CUSTOM_ORDER);
+  } catch (e) { }
+}

@@ -1,7 +1,7 @@
 /* ── Cloud Synchronization Module ── */
-import { State, saveState } from './state.js';
+import { State, saveState, clearUserDataState } from './state.js';
 import { showToast } from './utils.js';
-import { renderBrowse, renderSaved } from './render.js';
+import { renderBrowse, renderSaved, renderAll } from './render.js';
 
 let syncUnsubscribe = null;
 let syncDebounceTimer = null;
@@ -17,8 +17,23 @@ export function onUserSignedOut() {
     syncUnsubscribe();
     syncUnsubscribe = null;
   }
+  clearTimeout(syncDebounceTimer);
   State.syncStatus = 'idle';
   updateSyncStatusUI();
+
+  // Clear user data (saved dishes, notes, crawl list) from memory and local storage
+  clearUserDataState();
+
+  // Re-render views so the UI reflects the signed-out state immediately
+  renderAll();
+
+  // Update crawl floating bar and buttons if active
+  if (window.App && window.App.updateCrawlFab) {
+    window.App.updateCrawlFab();
+  }
+  if (window.App && window.App.syncCrawlButtons) {
+    window.App.syncCrawlButtons();
+  }
 }
 
 export function updateSyncStatusUI() {
