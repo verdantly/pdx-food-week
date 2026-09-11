@@ -45,7 +45,7 @@ import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 if (window.firebase) {
   try {
     const firebaseConfig = {
-      apiKey: "AIzaSyD4aVF_dVWxrZ6F_GNQuZa1eBLOWdL0xXc",
+      apiKey: "AIzaSyAdTylbo7DYxF7yXAUZCC3_Ft4j2DYVmIc",
       authDomain: "pdx-food-week.firebaseapp.com",
       projectId: "pdx-food-week",
       storageBucket: "pdx-food-week.firebasestorage.app",
@@ -118,12 +118,12 @@ function switchTab(name, fromPopState = false) {
       fabButton.classList.remove('show-fab');
     }
   }
-  
+
   const crawlFab = document.getElementById('crawl-fab');
   if (crawlFab) {
     crawlFab.style.display = ((name === 'map' || name === 'saved') && State.crawlModeActive) ? 'block' : 'none';
   }
-  
+
   if (window.App && window.App.updateMobileFabBadge) window.App.updateMobileFabBadge();
   State.lastScrollTop = 0;
 
@@ -134,7 +134,7 @@ function switchTab(name, fromPopState = false) {
     } else {
       url.searchParams.set('tab', name);
     }
-    
+
     const newState = { ...history.state, tab: name };
     delete newState.dishOpenedHere;
     if (appContainer && appContainer.classList.contains('detail-open')) {
@@ -184,7 +184,7 @@ async function checkMetadataUpdate() {
     const res = await fetch(`js/meta.js?t=${Date.now()}`, { cache: 'no-cache' });
     if (!res || !res.ok) return;
     const text = await res.text();
-    
+
     // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS
     const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*window\.getWeekMeta/);
     if (!match) return;
@@ -404,7 +404,7 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
 
   switchTab('browse', true);
   renderShimmer();
-  
+
   const loadDataAndRender = () => {
     renderAll();
     updateBrowseBadge();
@@ -942,18 +942,18 @@ function initLandingSearch() {
           </div>
           <div class="search-results-list">
             ${topMatches.map(r => {
-              const week = allWeeks.find(w => w.id === r.weekId);
-              const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
-              const weekColor = week ? week.color : 'var(--pizza)';
-              const weekEmoji = week ? week.emoji : '🍽️';
+          const week = allWeeks.find(w => w.id === r.weekId);
+          const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
+          const weekColor = week ? week.color : 'var(--pizza)';
+          const weekEmoji = week ? week.emoji : '🍽️';
 
-              return `
+          return `
                 <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" data-search-item="true"
                    onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${r.weekId}', false, ${r.id});">
                   <div class="search-result-media">
-                    ${r.image 
-                      ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
-                      : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
+                    ${r.image
+              ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">`
+              : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
                   </div>
                   <div class="search-result-info">
                     <div class="search-result-dish">${esc(r.dish)}</div>
@@ -967,7 +967,7 @@ function initLandingSearch() {
                   </div>
                 </a>
               `;
-            }).join('')}
+        }).join('')}
           </div>
         `;
       }
@@ -1214,7 +1214,7 @@ function setupMobileScrollListener() {
       scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
       clientHeight = window.innerHeight;
     }
-    
+
     const isScrollable = scrollHeight > clientHeight + 10;
     const isNearBottom = isScrollable && st > 50 && (st + clientHeight >= scrollHeight - 40);
 
@@ -1456,7 +1456,7 @@ function init() {
     compactSearchInput.addEventListener('input', e => {
       const val = e.target.value;
       compactSearchClearBtn.style.display = val ? 'flex' : 'none';
-      
+
       if (State.activeTab === 'browse') {
         State.searchQuery = val;
         const mainSearchInput = document.getElementById('search-input');
@@ -1572,20 +1572,20 @@ function init() {
     else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
   });
 
-function updateSearchPlaceholders() {
-  const width = window.innerWidth;
-  let placeholder = 'Search restaurants, dishes, neighborhoods...';
-  if (width < 480) {
-    placeholder = 'Search dishes, restaurants, etc...';
-  } else if (width < 768) {
-    placeholder = 'Search dishes, restaurants, areas...';
-  }
+  function updateSearchPlaceholders() {
+    const width = window.innerWidth;
+    let placeholder = 'Search restaurants, dishes, neighborhoods...';
+    if (width < 480) {
+      placeholder = 'Search dishes, restaurants, etc...';
+    } else if (width < 768) {
+      placeholder = 'Search dishes, restaurants, areas...';
+    }
 
-  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'landing-global-search'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.placeholder = placeholder;
-  });
-}
+    ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'landing-global-search'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.placeholder = placeholder;
+    });
+  }
 
   window.addEventListener('resize', () => {
     if (State.activeTab === 'swipe') renderSwipe();
@@ -1644,7 +1644,7 @@ function updateSearchPlaceholders() {
   } else {
     switchTab('browse', true);
   }
-  
+
   loadWeekData(State.currentWeekId, () => {
     renderAll();
     updateBrowseBadge();
