@@ -1,6 +1,6 @@
 /* ── Data Helpers & Queries ── */
 import { State, isDishSaved, getDishKey } from './state.js';
-import { haversineDistance } from './utils.js';
+import { haversineDistance, isRestaurantOpenOnDay, isRestaurantOpenNow } from './utils.js';
 
 export function getRestaurants() {
   return (window.RESTAURANTS || []).filter(r => r.weekId === State.currentWeekId);
@@ -100,6 +100,13 @@ export function getFiltered() {
     if (State.activeFilters.has('pie') && !r.wholePie) return false;
     if (State.activeFilters.has('spicy') && !r.spicy) return false;
     if (State.activeFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
+    if (State.activeDayFilter !== null && State.activeDayFilter !== undefined) {
+      if (State.activeDayFilter === 'now') {
+        if (!isRestaurantOpenNow(r)) return false;
+      } else {
+        if (!isRestaurantOpenOnDay(r, State.activeDayFilter)) return false;
+      }
+    }
     if (State.searchQuery) {
       const q = State.searchQuery.toLowerCase();
       if (!(r.dish || '').toLowerCase().includes(q) &&

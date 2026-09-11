@@ -1,6 +1,6 @@
 /* ── Rendering Loops & Week Switcher UI ── */
 import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
-import { esc } from './utils.js';
+import { esc, getWeekTiming } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
 import { updateMobileFabBadge, renderSavedFilters } from './filters.js';
@@ -260,14 +260,40 @@ export function renderFilters() {
 
   const currentSet = State.filterDrawerOpen ? State.draftFilters : State.activeFilters;
   const labelHTML = `<span class="filter-label">Filter:</span>`;
-  const clearHTML = (currentSet.size > 0 || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
+  const clearHTML = (currentSet.size > 0 || State.activeDayFilter !== null || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
   const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
     const activeCls = currentSet.has(f.id) ? 'active' : '';
     return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
   }).join('') + `</div>`;
 
   container.innerHTML = labelHTML + chipsHTML;
+  renderDayFilters();
   updateMobileFabBadge();
+}
+
+export function renderDayFilters() {
+  const container = document.getElementById('browse-day-filters');
+  if (!container) return;
+
+  const days = [
+    { id: null, label: 'All Days' },
+    { id: 'now', label: 'Open Now' },
+    { id: 1, label: 'Mon' },
+    { id: 2, label: 'Tue' },
+    { id: 3, label: 'Wed' },
+    { id: 4, label: 'Thu' },
+    { id: 5, label: 'Fri' },
+    { id: 6, label: 'Sat' },
+    { id: 0, label: 'Sun' }
+  ];
+
+  const chipsHTML = days.map(d => {
+    const isAct = State.activeDayFilter === d.id;
+    const arg = d.id === null ? 'null' : (typeof d.id === 'string' ? `'${d.id}'` : d.id);
+    return `<button class="filter-chip day-chip ${isAct ? 'active' : ''}" onclick="App.setDayFilter(${arg})">${esc(d.label)}</button>`;
+  }).join('');
+
+  container.innerHTML = `<span class="filter-label">Days:</span><div class="filter-chips-wrapper">${chipsHTML}</div>`;
 }
 
 export function renderHeader() {
@@ -283,7 +309,7 @@ export function renderHeader() {
   }
   const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
   footers.forEach(el => {
-    el.innerHTML = `PDX Food Week<br><a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
+    el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;•&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
   });
 
   const titleEl = document.getElementById('header-title');
@@ -304,12 +330,14 @@ export function renderHeader() {
 
   const metaEl = document.getElementById('header-meta');
   if (metaEl) {
+    const timing = getWeekTiming(week);
+    const badgeHTML = timing && timing.badgeHTML ? timing.badgeHTML : '';
     const dates = `<span>${esc(week.dates)}</span>`;
     const pills = (week.pricePills || []).map(p => `<span class="pill">${esc(p)}</span>`).join('');
     const actualCount = getRestaurants().length;
     const totalCount = actualCount > 0 ? actualCount : (week.totalLocations || 0);
     const locations = `<span>${totalCount} locations</span>`;
-    metaEl.innerHTML = dates + pills + locations;
+    metaEl.innerHTML = badgeHTML + dates + pills + locations;
   }
 
   document.title = `PDX ${week.name}`;

@@ -4,6 +4,7 @@ export const State = {
   activeTab: 'browse',
   activeFilters: new Set(),
   draftFilters: new Set(),
+  activeDayFilter: null,
   activeSort: 'restaurant',
   searchQuery: '',
   activeSavedFilters: new Set(),
@@ -20,6 +21,7 @@ export const State = {
   crawlSelection: [],
   friends: [],
   viewedNew: new Set(),
+  notificationPrefs: { weekAlerts: false, menuDrops: false },
   notes: {},
   selectedDish: null,
   currentWeekId: null,
@@ -108,6 +110,7 @@ const STORAGE_KEY_VIEWED_NEW = 'pdxfw_viewed_new_v1';
 const STORAGE_KEY_SAVED_SORT = 'pdxfw_saved_sort_v1';
 const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
 const STORAGE_KEY_WEEK_FILTERS = 'pdxfw_week_filters_v1';
+const STORAGE_KEY_NOTIF_PREFS = 'pdxfw_notif_prefs_v1';
 const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
 
 export function loadState() {
@@ -128,6 +131,8 @@ export function loadState() {
     if (ss) State.activeSavedSort = ss;
     const wf = localStorage.getItem(STORAGE_KEY_WEEK_FILTERS);
     if (wf) State.weekFilters = JSON.parse(wf);
+    const np = localStorage.getItem(STORAGE_KEY_NOTIF_PREFS);
+    if (np) State.notificationPrefs = Object.assign({ weekAlerts: false, menuDrops: false }, JSON.parse(np));
     const co = localStorage.getItem(STORAGE_KEY_CUSTOM_ORDER);
     if (co) {
       State.customSavedOrder = JSON.parse(co);
@@ -241,6 +246,7 @@ export function saveState() {
     localStorage.setItem(STORAGE_KEY_SAVED_SORT, State.activeSavedSort);
     localStorage.setItem(STORAGE_KEY_CUSTOM_ORDER, JSON.stringify(State.customSavedOrder));
     localStorage.setItem(STORAGE_KEY_WEEK_FILTERS, JSON.stringify(State.weekFilters));
+    localStorage.setItem(STORAGE_KEY_NOTIF_PREFS, JSON.stringify(State.notificationPrefs));
   } catch (e) { }
 }
 

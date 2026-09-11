@@ -1,6 +1,6 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
 import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState } from './modules/state.js';
-import { esc, debounce, showToast } from './modules/utils.js';
+import { esc, debounce, showToast, getWeekTiming } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
   openDetail, closeDetail, shareDish, toggleSave, setRating, setNote, handleNoteInput,
@@ -10,7 +10,7 @@ import {
   toggleFilter, setSort, toggleDistanceSort, useMyLocation, applyZipCode,
   toggleSavedFilter, clearAllSavedFilters, setSavedSort, toggleSavedDistanceSort,
   applySavedZipCode, moveSavedItem, clearAllFilters, openFilterDrawer,
-  applyFilterDrawer, closeFilterDrawer, renderSavedFilters
+  applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter
 } from './modules/filters.js';
 import { renderMap, refreshMapLayout, handleCrawlPinClick } from './modules/map.js';
 import { buildSwipeQueue, renderSwipe, swipe, undoSwipe, skipSwipe, resetSwipe, swipeOpenDetail, attachSwipeGestures } from './modules/swipe.js';
@@ -29,7 +29,8 @@ import {
   openCrawlItineraryModal, closeCrawlItineraryModal, moveCrawlItem,
   removeCrawlItem, optimizeCurrentCrawl, viewCrawlOnMap
 } from './modules/crawl.js';
-import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers } from './modules/render.js';
+import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers, renderDayFilters } from './modules/render.js';
+import { exportTopPicksCard } from './modules/picks_exporter.js';
 
 // Firebase init reference
 if (window.firebase) {
@@ -497,92 +498,6 @@ function renderLanding() {
   let nextWeek = null;
   let minDiff = Infinity;
 
-  // Helper to compute dynamic badge and dates for any week
-  function getWeekTiming(w) {
-    if (!w.startDate) return { badgeHTML: '', status: 'unknown', start: null, end: null };
-    const [sy, sm, sd] = w.startDate.split('-');
-    const start = new Date(sy, sm - 1, sd, 0, 0, 0);
-    let end = new Date(sy, sm - 1, sd, 23, 59, 59);
-
-    if (w.endDate) {
-      const [ey, em, ed] = w.endDate.split('-');
-      end = new Date(ey, em - 1, ed, 23, 59, 59);
-    } else if (w.dates) {
-      const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
-      const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
-      if (weekMatch) {
-        end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
-      } else if (monthMatch) {
-        end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
-        end.setMonth(end.getMonth() + 1);
-        end.setDate(0);
-      } else {
-        end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-      }
-    } else {
-      end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-    }
-
-    if (now >= start && now <= end) {
-      const daysLeft = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
-      if (daysLeft <= 1) {
-        return {
-          badgeHTML: '<div class="landing-status-badge active urgent"><span class="badge-dot-live"></span> Ends Today!</div>',
-          status: 'active',
-          label: 'Ends Today!',
-          start, end
-        };
-      }
-      if (daysLeft <= 3) {
-        return {
-          badgeHTML: `<div class="landing-status-badge active"><span class="badge-dot-live"></span> Ends in ${daysLeft}d</div>`,
-          status: 'active',
-          label: `Ends in ${daysLeft}d`,
-          start, end
-        };
-      }
-      return {
-        badgeHTML: '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>',
-        status: 'active',
-        label: 'Active Now',
-        start, end
-      };
-    }
-
-    if (now < start) {
-      const daysUntil = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
-      if (daysUntil === 1) {
-        return {
-          badgeHTML: '<div class="landing-status-badge next">Starts Tomorrow</div>',
-          status: 'upcoming',
-          label: 'Starts Tomorrow',
-          start, end, daysUntil
-        };
-      }
-      if (daysUntil <= 14) {
-        return {
-          badgeHTML: `<div class="landing-status-badge next">Starts in ${daysUntil}d</div>`,
-          status: 'upcoming',
-          label: `Starts in ${daysUntil}d`,
-          start, end, daysUntil
-        };
-      }
-      return {
-        badgeHTML: '<div class="landing-status-badge upcoming">Upcoming</div>',
-        status: 'upcoming',
-        label: 'Upcoming',
-        start, end, daysUntil
-      };
-    }
-
-    return {
-      badgeHTML: '<div class="landing-status-badge past">Past Event</div>',
-      status: 'past',
-      label: 'Past Event',
-      start, end
-    };
-  }
-
   window.FOOD_WEEKS.forEach(w => {
     const timing = getWeekTiming(w);
     if (timing.status === 'active') {
@@ -1025,57 +940,104 @@ function initLandingSearch() {
   });
 }
 
-// ── PWA Install Prompt Banner ──
+// ── PWA Install & Notifications ──
 let deferredPwaPrompt = null;
+
+export async function triggerPwaInstall(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
+  if (isStandalone) {
+    showToast('PDX Food Week is already installed on your device!');
+    return;
+  }
+
+  if (deferredPwaPrompt) {
+    deferredPwaPrompt.prompt();
+    const { outcome } = await deferredPwaPrompt.userChoice;
+    deferredPwaPrompt = null;
+    if (outcome === 'accepted') {
+      showToast('Thank you for installing PDX Food Week!');
+      localStorage.setItem('pdx_pwa_dismissed', 'true');
+    }
+  } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
+  } else {
+    showToast('To install, use the Install option in your browser menu or address bar.');
+  }
+}
 
 function initPwaInstallPrompt() {
   const banner = document.getElementById('pwa-install-banner');
   const installBtn = document.getElementById('pwa-install-btn');
   const dismissBtn = document.getElementById('pwa-dismiss-btn');
-  if (!banner || !installBtn || !dismissBtn) return;
-
-  // Don't show if already in standalone display mode
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
-  if (isStandalone) {
-    banner.hidden = true;
-    return;
-  }
-
-  // Don't show if user dismissed it in this session/browser
-  if (localStorage.getItem('pdx_pwa_dismissed') === 'true') {
-    banner.hidden = true;
-    return;
-  }
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPwaPrompt = e;
-    banner.hidden = false;
+    // Keep banner hidden by default — accessible via footer links
+    if (banner) banner.hidden = true;
   });
 
-  installBtn.addEventListener('click', async () => {
-    if (deferredPwaPrompt) {
-      deferredPwaPrompt.prompt();
-      const { outcome } = await deferredPwaPrompt.userChoice;
-      deferredPwaPrompt = null;
-      banner.hidden = true;
-      if (outcome === 'accepted') {
-        localStorage.setItem('pdx_pwa_dismissed', 'true');
-      }
-    } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      // iOS Safari instructions
-      showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
+  if (installBtn) {
+    installBtn.addEventListener('click', triggerPwaInstall);
+  }
+
+  if (dismissBtn && banner) {
+    dismissBtn.addEventListener('click', () => {
       banner.hidden = true;
       localStorage.setItem('pdx_pwa_dismissed', 'true');
-    } else {
-      banner.hidden = true;
-    }
-  });
+    });
+  }
+}
 
-  dismissBtn.addEventListener('click', () => {
-    banner.hidden = true;
-    localStorage.setItem('pdx_pwa_dismissed', 'true');
-  });
+// ── Notification Preferences Modal ──
+export function openNotificationsModal() {
+  const modal = document.getElementById('notifications-modal');
+  if (!modal) return;
+  
+  const weekAlertsCheckbox = document.getElementById('notif-pref-week-alerts');
+  const menuDropsCheckbox = document.getElementById('notif-pref-menu-drops');
+  if (weekAlertsCheckbox) weekAlertsCheckbox.checked = !!State.notificationPrefs.weekAlerts;
+  if (menuDropsCheckbox) menuDropsCheckbox.checked = !!State.notificationPrefs.menuDrops;
+
+  updateNotifPermissionStatus();
+  modal.classList.add('open');
+}
+
+export function closeNotificationsModal() {
+  const modal = document.getElementById('notifications-modal');
+  if (modal) modal.classList.remove('open');
+}
+
+export async function toggleNotificationPref(key, enabled) {
+  State.notificationPrefs[key] = enabled;
+  saveState();
+
+  if (enabled && 'Notification' in window) {
+    if (Notification.permission === 'default') {
+      const perm = await Notification.requestPermission();
+      updateNotifPermissionStatus();
+      if (perm === 'granted') {
+        showToast('Notifications enabled!');
+      } else if (perm === 'denied') {
+        showToast('Notifications blocked in browser settings.');
+      }
+    }
+  }
+}
+
+function updateNotifPermissionStatus() {
+  const statusEl = document.getElementById('notif-permission-status');
+  if (!statusEl) return;
+  if (!('Notification' in window)) {
+    statusEl.textContent = 'Push notifications are not supported on this browser.';
+  } else if (Notification.permission === 'denied') {
+    statusEl.innerHTML = '⚠️ Notifications blocked in browser settings.<br>Enable in site permissions to receive alerts.';
+  } else if (Notification.permission === 'granted') {
+    statusEl.textContent = '✓ Browser permission granted.';
+  } else {
+    statusEl.textContent = 'Enabling alerts will request browser notification permission.';
+  }
 }
 
 function attachLandingCarouselTouch() {
@@ -1738,6 +1700,13 @@ const App = {
   renderBrowse,
   renderSaved,
   renderFilters,
+  renderDayFilters,
+  setDayFilter,
+  exportTopPicksCard,
+  triggerPwaInstall,
+  openNotificationsModal,
+  closeNotificationsModal,
+  toggleNotificationPref,
   renderSavedFilters,
   renderFriends,
   renderAll,

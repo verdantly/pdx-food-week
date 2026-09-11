@@ -1,0 +1,141 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Roadmap Features E2E', () => {
+  test('Day-of-Week filter pills correctly filter restaurants by schedule', async ({ page, isMobile }) => {
+    await page.goto('/?week=fried-chicken-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    if (isMobile) {
+      await page.click('#mobile-filter-fab');
+      await expect(page.locator('#filter-drawer-overlay')).toHaveClass(/open/);
+    }
+
+    const dayFilters = page.locator('#browse-day-filters .day-chip');
+    await expect(dayFilters.first()).toBeVisible();
+
+    // Verify Tuesday filter excludes E-San Thai Woodstock (Closed Tuesday's)
+    const tueBtn = dayFilters.filter({ hasText: 'Tue' });
+    await expect(tueBtn).toBeVisible();
+    await tueBtn.click();
+
+    if (isMobile) {
+      await page.click('#filter-drawer-overlay .btn-apply');
+      await expect(page.locator('#filter-drawer-overlay')).not.toHaveClass(/open/);
+    }
+
+    // E-San Thai Woodstock should NOT be visible
+    const eSanCard = page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' });
+    await expect(eSanCard).toHaveCount(0);
+
+    // Monday filter includes E-San Thai Woodstock
+    if (isMobile) {
+      await page.click('#mobile-filter-fab');
+      await expect(page.locator('#filter-drawer-overlay')).toHaveClass(/open/);
+    }
+    const monBtn = dayFilters.filter({ hasText: 'Mon' });
+    await monBtn.click();
+
+    if (isMobile) {
+      await page.click('#filter-drawer-overlay .btn-apply');
+      await expect(page.locator('#filter-drawer-overlay')).not.toHaveClass(/open/);
+    }
+    await expect(page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' })).toHaveCount(1);
+  });
+
+  test('Status badges have no pulsing dots or live dot elements', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForSelector('.landing-card', { state: 'visible', timeout: 10000 });
+
+    const liveDots = page.locator('.badge-dot-live');
+    await expect(liveDots).toHaveCount(0);
+
+    const badges = page.locator('.landing-status-badge');
+    expect(await badges.count()).toBeGreaterThan(0);
+  });
+
+  test('Install App links are present in footers alongside Privacy Policy', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForSelector('.landing-footer', { state: 'visible', timeout: 10000 });
+
+    const landingInstallLink = page.locator('.landing-footer-links .install-app-link');
+    await expect(landingInstallLink).toBeVisible();
+    await expect(landingInstallLink).toHaveText('Install App');
+
+    // Go to a week view
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.sidebar-footer', { state: 'attached', timeout: 10000 });
+
+    const sidebarInstallLink = page.locator('.sidebar-footer .install-app-link');
+    await expect(sidebarInstallLink).toHaveCount(1);
+  });
+
+  test('Notification Preferences modal opens and toggles work', async ({ page, isMobile }) => {
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('#view-browse', { state: 'visible', timeout: 10000 });
+
+    const notifModal = page.locator('#notifications-modal');
+    await expect(notifModal).toBeHidden();
+
+    // Trigger modal via header or compact menu
+    if (isMobile) {
+      await page.click('#compact-menu-btn');
+      await page.click('.compact-menu-item:has-text("Notifications")');
+    } else {
+      await page.click('.header-notif-btn');
+    }
+
+    await expect(notifModal).toBeVisible();
+
+    const switchToggles = page.locator('.notif-switch');
+    await expect(switchToggles.first()).toBeVisible();
+
+    // Close modal
+    await notifModal.locator('.drawer-close').click();
+    await expect(notifModal).toBeHidden();
+  });
+
+  test('Saved tab custom sort displays ordinal rank badges and Share Picks button', async ({ page, isMobile }) => {
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    // Save first two dishes
+    const bookmarkBtns = page.locator('.dish-card .bookmark-btn');
+    await bookmarkBtns.nth(0).click();
+    await bookmarkBtns.nth(1).click();
+
+    // Navigate to Saved tab
+    if (isMobile) {
+      await page.click('#compact-menu-btn');
+      await page.click('.compact-menu-item[data-tab="saved"]');
+    } else {
+      await page.click('.nav-tab[data-tab="saved"]');
+    }
+
+    await page.waitForSelector('#cards-saved .dish-card', { state: 'visible', timeout: 10000 });
+
+    // On mobile, sort might be in drawer or header
+    if (isMobile) {
+      await page.click('#mobile-filter-fab');
+      const customBtn = page.locator('#saved-sort-section button.filter-chip:has-text("Custom")');
+      await customBtn.click();
+      await page.click('#filter-drawer-overlay .btn-apply');
+    } else {
+      const customSortBtn = page.locator('#saved-sort-section button.filter-chip:has-text("Custom")');
+      await customSortBtn.click();
+    }
+
+    // Verify #1 and #2 badges
+    const rank1 = page.locator('.saved-rank-badge.rank-gold');
+    await expect(rank1).toBeVisible();
+    await expect(rank1).toHaveText('#1');
+
+    const rank2 = page.locator('.saved-rank-badge.rank-silver');
+    await expect(rank2).toBeVisible();
+    await expect(rank2).toHaveText('#2');
+
+    // Verify Share Picks button
+    const sharePicksBtn = page.locator('#saved-picks-card-btn');
+    await expect(sharePicksBtn).toBeVisible();
+    await expect(sharePicksBtn).toHaveText('Share Picks');
+  });
+});

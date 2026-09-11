@@ -89,14 +89,23 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
   if (isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable) {
     const isFirst = index === 0;
     const isLast = index === totalCount - 1;
+    const rankNum = index + 1;
+    let rankClass = 'saved-rank-badge';
+    if (rankNum === 1) rankClass += ' rank-gold';
+    else if (rankNum === 2) rankClass += ' rank-silver';
+    else if (rankNum === 3) rankClass += ' rank-bronze';
+
     dragHandleHtml = `
-      <div class="drag-reorder-buttons" style="display: flex; flex-direction: column; gap: 2px; margin-right: 8px;" onclick="event.stopPropagation();">
-        <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
-          ▲
-        </button>
-        <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
-          ▼
-        </button>
+      <div class="saved-rank-container" style="display: flex; align-items: center; gap: 6px; margin-right: 8px;" onclick="event.stopPropagation();">
+        <div class="${rankClass}" aria-label="Rank #${rankNum}">#${rankNum}</div>
+        <div class="drag-reorder-buttons" style="display: flex; flex-direction: column; gap: 2px;">
+          <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
+            ▲
+          </button>
+          <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
+            ▼
+          </button>
+        </div>
       </div>
     `;
   }

@@ -2541,8 +2541,7 @@ body.is-landing .view-footer,
 @media (max-width: 767.98px) {
   .landing-status-badge {
     font-size: 10px;
-    padding: 2px 6px;
-    gap: 4px;
+    padding: 2px 7px;
   }
 }
 
@@ -2552,22 +2551,10 @@ body.is-landing .view-footer,
   border: 1px solid #A8DAB5;
 }
 
-.badge-dot-live {
-  width: 6px;
-  height: 6px;
-  background-color: #0d5a27;
-  border-radius: 50%;
-  animation: pulse-green 1.5s infinite;
-}
-
 .landing-status-badge.urgent {
   background: #FCE8E6;
   color: #C5221F;
   border: 1px solid #F6AEA9;
-}
-
-.landing-status-badge.urgent .badge-dot-live {
-  background-color: #C5221F;
 }
 
 .landing-status-badge.next {
@@ -2588,14 +2575,19 @@ body.is-landing .view-footer,
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+.header-meta .landing-status-badge {
+  margin-left: 0;
+  font-size: 11px;
+  padding: 2px 8px;
+}
+
 /* ── Featured Showcase Header: Prominent Status Badge (matching .tag system) ── */
 .featured-showcase-header .landing-status-badge {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   letter-spacing: 0.04em;
-  gap: 7px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
@@ -2611,21 +2603,10 @@ body.is-landing .view-footer,
   border-width: 1.5px;
 }
 
-.featured-showcase-header .landing-status-badge .badge-dot-live {
-  width: 8px;
-  height: 8px;
-}
-
 @media (max-width: 767.98px) {
   .featured-showcase-header .landing-status-badge {
     font-size: 11px;
-    padding: 4px 10px;
-    gap: 5px;
-  }
-
-  .featured-showcase-header .landing-status-badge .badge-dot-live {
-    width: 7px;
-    height: 7px;
+    padding: 3px 8px;
   }
 }
 
@@ -2643,7 +2624,7 @@ body.is-landing .view-footer,
 .landing-search-wrap .search-icon {
   position: absolute;
   left: 14px;
-  color: var(--ink-60);
+  color: var(--ink-70);
   pointer-events: none;
   font-size: 20px;
 }
@@ -5832,8 +5813,170 @@ body.crawl-mode-active #mobile-filter-fab {
   .landing-carousel-track {
     transition: none !important;
   }
-
-  .badge-dot-live {
-    animation: none !important;
-  }
 }
+
+/* ── Day-of-Week Filter Pills ── */
+.day-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.day-chip {
+  min-width: 42px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* ── Saved Custom Order Rank Badges ── */
+.saved-rank-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.saved-rank-badge {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-weight: 700;
+  font-size: 12px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ink-70);
+  border: 1.5px solid var(--border);
+  line-height: 1;
+}
+
+.saved-rank-badge.rank-gold {
+  background: #FEF3C7;
+  color: #92400E;
+  border-color: #F59E0B;
+  font-weight: 800;
+}
+
+.saved-rank-badge.rank-silver {
+  background: #F3F4F6;
+  color: #374151;
+  border-color: #9CA3AF;
+  font-weight: 800;
+}
+
+.saved-rank-badge.rank-bronze {
+  background: #FFEDD5;
+  color: #9A3412;
+  border-color: #F97316;
+  font-weight: 800;
+}
+
+/* ── Notifications Modal & Switch Controls ── */
+.header-notif-btn {
+  background: transparent;
+  border: none;
+  color: var(--cream, #FFF8F3);
+  opacity: 0.85;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+.header-notif-btn:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.notif-pref-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.1));
+  border-radius: 14px;
+}
+
+.notif-pref-info {
+  flex: 1;
+}
+
+.notif-pref-title {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink, #1A1816);
+  margin-bottom: 4px;
+}
+
+.notif-pref-desc {
+  font-size: 12px;
+  color: var(--ink-60, #6E6864);
+  line-height: 1.4;
+}
+
+.notif-switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.notif-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.notif-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.25s;
+  border-radius: 26px;
+}
+
+.notif-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.25s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.notif-switch input:checked + .notif-slider {
+  background-color: var(--pizza, #E85B38);
+}
+
+.notif-switch input:checked + .notif-slider:before {
+  transform: translateX(20px);
+}
+
+/* ── Footer Install App Link ── */
+.install-app-link {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.install-app-link:hover {
+  text-decoration: underline;
+}
+

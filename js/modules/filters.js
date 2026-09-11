@@ -76,7 +76,7 @@ export function updateMobileFabBadge() {
   
   let count = 0;
   if (State.activeTab === 'browse') {
-    count = State.activeFilters.size + (State.searchQuery !== '' ? 1 : 0) + (State.activeSort === 'distance' ? 1 : 0);
+    count = State.activeFilters.size + (State.activeDayFilter !== null ? 1 : 0) + (State.searchQuery !== '' ? 1 : 0) + (State.activeSort === 'distance' ? 1 : 0);
   } else if (State.activeTab === 'saved') {
     count = State.activeSavedFilters.size + (State.savedSearchQuery !== '' ? 1 : 0) + (State.activeSavedSort === 'distance' ? 1 : 0);
   }
@@ -87,6 +87,18 @@ export function updateMobileFabBadge() {
   } else {
     badge.style.display = 'none';
   }
+}
+
+export function setDayFilter(day) {
+  if (State.activeDayFilter === day) {
+    State.activeDayFilter = null;
+  } else {
+    State.activeDayFilter = day;
+  }
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  updateMobileFabBadge();
 }
 
 export function toggleFilter(f) {
@@ -393,6 +405,7 @@ export function clearAllFilters() {
   
   State.activeFilters.clear();
   State.draftFilters.clear();
+  State.activeDayFilter = null;
   State.searchQuery = '';
 
   if (State.currentWeekId && State.weekFilters[State.currentWeekId]) {
@@ -421,6 +434,7 @@ export function clearAllFilters() {
   }
 
   if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
   if (window.App && window.App.renderBrowse) window.App.renderBrowse();
 }
 
@@ -448,12 +462,15 @@ export function openFilterDrawer() {
   } else {
     State.draftFilters = new Set(State.activeFilters);
     const browseFilters = document.getElementById('browse-filters');
+    const browseDayFilters = document.getElementById('browse-day-filters');
     const sortSection = document.getElementById('sort-section');
     if (browseFilters && sortSection) {
       drawerBody.appendChild(browseFilters);
+      if (browseDayFilters) drawerBody.appendChild(browseDayFilters);
       drawerBody.appendChild(sortSection);
 
       if (window.App && window.App.renderFilters) window.App.renderFilters();
+      if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -468,6 +485,7 @@ export function applyFilterDrawer() {
   } else {
     State.activeFilters = new Set(State.draftFilters);
     if (window.App && window.App.renderFilters) window.App.renderFilters();
+    if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
     if (window.App && window.App.renderBrowse) window.App.renderBrowse();
   }
   closeFilterDrawer();
@@ -494,13 +512,16 @@ export function closeFilterDrawer() {
   } else {
     State.draftFilters = new Set(State.activeFilters);
     const browseFilters = document.getElementById('browse-filters');
+    const browseDayFilters = document.getElementById('browse-day-filters');
     const sortSection = document.getElementById('sort-section');
     const browseHeader = document.querySelector('#view-browse .browse-header');
     if (browseFilters && sortSection && browseHeader) {
       const controlsRow = browseHeader.querySelector('.header-controls-row') || browseHeader;
       controlsRow.appendChild(browseFilters);
+      if (browseDayFilters) controlsRow.appendChild(browseDayFilters);
       controlsRow.appendChild(sortSection);
       if (window.App && window.App.renderFilters) window.App.renderFilters();
+      if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
     }
   }
 
