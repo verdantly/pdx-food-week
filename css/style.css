@@ -4678,6 +4678,31 @@ select:focus-visible {
     background: rgba(255, 255, 255, 0.1);
   }
 
+  .compact-menu-item-account {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .menu-avatar-inline.user-avatar-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .menu-avatar-inline.user-avatar-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+
   .compact-menu-footer {
     padding: 14px 16px 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);

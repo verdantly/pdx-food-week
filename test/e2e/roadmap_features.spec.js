@@ -191,5 +191,36 @@ test.describe('Roadmap Features E2E', () => {
 
     await page.click('#filter-drawer-overlay .drawer-close');
   });
+
+  test('Compact top bar has only Search and Menu, with Avatar inside compact menu', async ({ page, isMobile }) => {
+    if (!isMobile) return;
+
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.compact-app-bar', { state: 'visible', timeout: 10000 });
+
+    // Verify top bar actions only have compact-search-btn and compact-menu-btn
+    const actionButtons = page.locator('.compact-app-bar .compact-actions button');
+    await expect(actionButtons).toHaveCount(2);
+    await expect(page.locator('#compact-search-btn')).toBeVisible();
+    await expect(page.locator('#compact-menu-btn')).toBeVisible();
+    await expect(page.locator('#compact-account-btn')).toHaveCount(0);
+
+    // Open compact menu
+    await page.click('#compact-menu-btn');
+    const compactMenu = page.locator('#compact-menu-dropdown');
+    await expect(compactMenu).toBeVisible();
+
+    // Verify account menu button has inline avatar
+    const accountBtn = page.locator('.compact-menu-item-account');
+    await expect(accountBtn).toBeVisible();
+    const inlineAvatar = accountBtn.locator('.menu-avatar-inline.user-avatar-btn');
+    await expect(inlineAvatar).toBeVisible();
+
+    // Avatar should be to the left of the text label
+    const avatarBox = await inlineAvatar.boundingBox();
+    const labelSpan = accountBtn.locator('.auth-logged-out');
+    const labelBox = await labelSpan.boundingBox();
+    expect(avatarBox.x + avatarBox.width).toBeLessThanOrEqual(labelBox.x + 2);
+  });
 });
 
