@@ -172,7 +172,7 @@ export function getSaved() {
       const d2 = isFinite(b.lat) && isFinite(b.lng) ? haversineDistance(State.userLat, State.userLng, b.lat, b.lng) : Infinity;
       return d1 - d2;
     });
-  } else if (State.activeSavedSort === 'custom') {
+  } else if (State.rankingModeActive || State.activeSavedSort === 'custom') {
     savedItems.sort((a, b) => {
       const keyA = getDishKey(a.id, a.weekId);
       const keyB = getDishKey(b.id, b.weekId);

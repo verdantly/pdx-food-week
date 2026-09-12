@@ -113,16 +113,14 @@ test.describe('Roadmap Features E2E', () => {
 
     await page.waitForSelector('#cards-saved .dish-card', { state: 'visible', timeout: 10000 });
 
-    // On mobile, sort might be in drawer or header
-    if (isMobile) {
-      await page.click('#mobile-filter-fab');
-      const customBtn = page.locator('#saved-sort-section button.filter-chip:has-text("Custom")');
-      await customBtn.click();
-      await page.click('#filter-drawer-overlay .btn-apply');
-    } else {
-      const customSortBtn = page.locator('#saved-sort-section button.filter-chip:has-text("Custom")');
-      await customSortBtn.click();
-    }
+    // Initially, Share Rankings button is hidden before entering Ranking Mode
+    const shareRankingsBtn = page.locator('#saved-picks-card-btn');
+    await expect(shareRankingsBtn).toBeHidden();
+
+    // Toggle Ranking Mode via #saved-rank-mode-btn
+    const rankModeBtn = page.locator('#saved-rank-mode-btn');
+    await expect(rankModeBtn).toBeVisible();
+    await rankModeBtn.click();
 
     // Verify #1 and #2 badges
     const rank1 = page.locator('.saved-rank-badge.rank-gold');
@@ -133,10 +131,9 @@ test.describe('Roadmap Features E2E', () => {
     await expect(rank2).toBeVisible();
     await expect(rank2).toHaveText('#2');
 
-    // Verify Share Saved button
-    const shareSavedBtn = page.locator('#saved-picks-card-btn');
-    await expect(shareSavedBtn).toBeVisible();
-    await expect(shareSavedBtn).toHaveText('Share Saved');
+    // Verify Share Rankings button is now visible with updated text
+    await expect(shareRankingsBtn).toBeVisible();
+    await expect(shareRankingsBtn).toHaveText('Share Rankings');
   });
 
   test('Detail sheet displays restaurant days and hours schedule', async ({ page }) => {

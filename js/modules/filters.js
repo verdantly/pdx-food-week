@@ -397,6 +397,19 @@ export function moveSavedItem(id, direction) {
   if (window.App && window.App.renderSaved) window.App.renderSaved();
 }
 
+export function toggleSavedRankingMode() {
+  State.rankingModeActive = !State.rankingModeActive;
+  if (State.rankingModeActive) {
+    if (State.crawlModeActive && window.App && window.App.toggleCrawlMode) {
+      window.App.toggleCrawlMode();
+    }
+    State.activeSavedSort = 'custom';
+    showToast('Rank your top 5 places, then tap Share Rankings!');
+  }
+  saveState();
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
 export function clearAllFilters() {
   if (State.activeTab === 'saved') {
     clearAllSavedFilters();

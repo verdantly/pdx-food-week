@@ -13,6 +13,7 @@ export const State = {
   mapSearchQuery: '',
   activeSavedSort: 'restaurant',
   customSavedOrder: [],
+  rankingModeActive: false,
   filterDrawerOpen: false,
   saved: new Set(),
   passed: new Set(),

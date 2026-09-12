@@ -53,7 +53,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMDM3NjA2NDQ2My1Ib25leS1CdXR0ZXItQ291bnRyeS1GYWlyLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/the-yellow-submarine/e227051/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227053,
@@ -77,7 +97,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMzc3MDg3NDE5Ny1TYW1taWNoLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/chicago-dog/e227053/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227057,
@@ -101,7 +141,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzgwNTU1Mjc2MDA2Mi11c2VyaW1hZ2UtMTc2NjQ0MTc4NDU1OTg2Ni1ETzAxMDA3MDYxLmpwZWciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/glazed-confused/e227057/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227060,
@@ -125,7 +185,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzg5MjQxMjMzNTM0OS1IdW5ncnktVGlnZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/vegan-curry-corndogs/e227060/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227063,
@@ -149,7 +229,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MTIwMzA4Mjg1Mi1Ib3B3b3Jrcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/abominable-chili-brewdog/e227063/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227067,
@@ -173,7 +273,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODAwMjU1ODgzMjAyNC1CYWNrd29vZHMtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/timber-beast-pasta-bowl/e227067/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227068,
@@ -197,7 +317,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMzg0NTg4MzIxNS1Mb293aXQtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/seoul-burner/e227068/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227070,
@@ -221,7 +361,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMjk3NTMyMjYxNS1IdW5ueS1CZWV6LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/kare-kare-bacon-dog/e227070/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227072,
@@ -245,7 +405,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMjYyNzM3MTI4NS1Mb3lhbC1MZWdpb24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/sonoran-dog/e227072/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227073,
@@ -269,7 +449,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzg5MjAwMzA2MDM1NS1Mb25lLVN0YXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/perrito-caliente/e227073/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227097,
@@ -293,7 +493,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzgyMjY5MTg2MjU0OC0xMC1CYXJyZWwuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/a-hope-a-prayer/e227097/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227190,
@@ -317,7 +537,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMjM3NTI5NDQxNi1UaHJlc2hvbGQtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/down-to-clown/e227190/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227191,
@@ -341,7 +581,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwMjc2MDU3NzQ3NS1CdW5rLUJhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/new-mexico-chili-verde-dog/e227191/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227195,
@@ -365,7 +625,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MDM2Njg1NTM1NC1QYW1iaWNoZS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/cubano-dog/e227195/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227196,
@@ -389,7 +669,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNDIwNzEwMjU3MS1Xb25kZXJib3ktU21va2VzdGFjay5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/glizzinator-3000/e227196/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227197,
@@ -413,7 +713,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNDQwNjk2NDA2My11c2VyaW1hZ2UtMTc2NzAzMjQ2NTUyNzIzNC13YXl3ZWluZXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/pozocalypse-dog/e227197/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227198,
@@ -437,7 +757,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNDUyMjQzMTE5Mi1UYWtlLVR3by5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/skyline-chili-dog/e227198/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227199,
@@ -461,7 +801,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNDgyNjk1NTI0My1Cb2tlLUJvd2wuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/boke-curry-clutch/e227199/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227200,
@@ -485,7 +845,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk5MjY2OTAxMDM1NS01MDMtRGlzdGlsbGluZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/island-time/e227200/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227201,
@@ -509,7 +889,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNTI0OTc4ODQyMy11c2VyaW1hZ2UtMTc2NzczMDc4MjM1MDU0Ni1JTUdfMzgyNy5KUEciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/little-chi-town/e227201/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227202,
@@ -533,7 +933,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNTMyODMzNzYzNy1CaW5hcnktQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/teriyakimotos-braaap-dog/e227202/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227204,
@@ -557,7 +977,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNTc2OTk5MDgwNC1NaWdyYXRpb25fV2lsbGlhbXNfMS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/perrito-de-la-calle/e227204/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227205,
@@ -581,7 +1021,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwNTg0MDkxMzE4NC1NaWdyYXRpb25fR2xpc2FuLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/country-gravy-breakfast-dog/e227205/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227226,
@@ -605,7 +1065,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwODQ3NTUzOTM3Ni1Xb3ctQ293LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/korean-philly-dog/e227226/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227227,
@@ -629,7 +1109,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODI0MTY3NTQ5OTM5MS1NaWRDaXR5LTEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/frank-gallagher/e227227/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227228,
@@ -653,7 +1153,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwODU5NTM4MTA1Mi1MYXJkby5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/hound-dog/e227228/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227230,
@@ -677,7 +1197,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwODc1OTM1ODk4Mi1CcmVha3NpZGVfU2xhYnRvd24uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/the-glizzy-slice/e227230/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227231,
@@ -701,7 +1241,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2NzkwODgyNzgwODItRHVrZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/the-big-dumper-dog/e227231/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227291,
@@ -725,7 +1285,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODI0MTcyMzYxNTI3My1NaWRDaXR5LTIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/frank-gallagher/e227291/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227292,
@@ -749,7 +1329,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODI0MTc2MDQ2MDM3NC1NaWRDaXR5LTMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/frank-gallagher/e227292/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227293,
@@ -773,7 +1373,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MDYzNzU2MjkzMi1Xb3JsZC1Gb29kc19FdmVyZXR0LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/date-night-wieners/e227293/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227294,
@@ -797,7 +1417,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MDcwNzYwMzYxMi1CYXJidXItV29ybGQtRm9vZHMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/pomegranate-glazed-wieners/e227294/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227295,
@@ -821,7 +1461,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MDc5MTEwNTg2Ni1ZYS1IYWxhLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/honey-mustard-tahini-weenies/e227295/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227296,
@@ -845,7 +1505,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MDkxMjQ3NjczNC1Wb24tRWJlcnQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/the-backyard-bandit/e227296/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227297,
@@ -869,7 +1549,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MTAzMjg0MjMxNi1Ob20tTm9tLVdpbmdzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/chana-dog/e227297/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227298,
@@ -893,7 +1593,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MTM4NjkwOTY2OS1CYXR0bGUtQ3JlZWstQ2VsbGFycy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/the-vineyard-dog/e227298/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227299,
@@ -917,7 +1637,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MTU3MjQwMjgwMi1GcnktQmFieS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/korean-corn-cheese-dog-2-0/e227299/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227300,
@@ -941,7 +1681,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2OTAyNjc0Nzk5ODU3NS1HaWZ0LUJhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/fancy-flamingo/e227300/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227301,
@@ -965,7 +1725,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4MTgzNzQzNjYzNy1DbGFya2xld2lzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
     "url": "https://everout.com/portland/events/the-reuben/e227301/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227310,
@@ -989,7 +1769,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4Mjk5ODMzNjY3NS1GaXZlLURpbWUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/dimes-devil-dog/e227310/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227354,
@@ -1013,7 +1813,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2Nzk4NzYzMTczNzg3OS1Nb3JlbGFuZC1BbGUtSG91c2UuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/smothered-smoked-kielbasa-dog/e227354/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227415,
@@ -1037,7 +1857,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODAwMjY4ODU3NzY0NC1MYXp5LURheXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/hop-diggity-dog/e227415/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227490,
@@ -1061,7 +1901,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODI0MzcyODQzNjA3NS1UaGUtUmFtYmxlci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/ramblin-reuben/e227490/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227505,
@@ -1085,7 +1945,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODk0NjM4MTkyMzU2OC1HcmFuZC1GaXIuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/cubano-dog/e227505/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 227832,
@@ -1109,7 +1989,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODQzNDk5MDg5MTA1Ny1EZXNjaHV0ZXMtQnJld2luZy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/linguica-dawg/e227832/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 228337,
@@ -1133,7 +2033,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🔥",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2ODkzMjM2NjkyMjM0NS1TaG93LUJhci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
     "url": "https://everout.com/portland/events/unicorndog/e228337/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 228917,
@@ -1157,7 +2077,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🌭",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc2OTIxMjc4MDI2MjEyNi1Hb29kLU1lYXN1cmUuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
     "url": "https://everout.com/portland/events/caesar-salad-martini-weenie/e228917/",
-    "isNew": true
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   }
 ];
   newItems.forEach(item => {

@@ -39,7 +39,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mojo braised Anderson Ranch lamb, harissa spiced tomato sauce, feta, kalamata olive tapenade, Mama Lil's peppers",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDA4MDc5NDI5Ni1DbGFya2xld2lzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/mediterranean-mojo-lamb/e233600/"
+    "url": "https://everout.com/portland/events/mediterranean-mojo-lamb/e233600/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234094,
@@ -58,7 +78,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mozzarella-cheddar blend, yellow curry chicken, jalapeño, pickled carrot & daikon, cilantro, sweet chili mayo",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDEzODk4ODE4Ny1Cb3hjYXItUGl6emEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/banh-to-be-wild/e234094/"
+    "url": "https://everout.com/portland/events/banh-to-be-wild/e234094/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234340,
@@ -77,7 +117,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "White Pie (garlic + evoo), Roasted Pork, Rapini, Calabrian Chili, Caciocavallo",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDI1MDczNDU3NS1DaGVja2VyYm9hcmQuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/snyder-weccacoe/e234340/"
+    "url": "https://everout.com/portland/events/snyder-weccacoe/e234340/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234547,
@@ -96,7 +156,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Caesar dressing base, spinach, chicken, mozzarella, and shredded Parmesan, finished with lemon vinaigrette",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDQxMTYzMjg0Mi1CbGluZC1Pbmlvbi1Ccm9hZHdheS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-caeza/e234547/"
+    "url": "https://everout.com/portland/events/the-caeza/e234547/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234548,
@@ -115,7 +195,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Ranch base with chicken, mozzarella cheese, crispy bacon, and a light dusting of cheddar. Finished with a ranch drizzle and fresh herbs.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDQ0NzExNTcwMS1CbGluZC1Pbmlvbi1CZWxtb250LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/chicken-bacon-ranch-pizza/e234548/"
+    "url": "https://everout.com/portland/events/chicken-bacon-ranch-pizza/e234548/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234557,
@@ -134,7 +234,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Whipped potato base, shredded mozzarella and cheddar cheese, smoked bacon, pickled jalapeños topped with green onions, garden herbs, parmesan cheese and sour cream.",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE1MjM5MDY2NjI0NS0xMC1CYXJyZWwuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/spuds-mackenzie/e234557/"
+    "url": "https://everout.com/portland/events/spuds-mackenzie/e234557/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234898,
@@ -153,7 +273,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Capicola ham, hot cherry bomb peppers, chèvre, hot honey.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE1MjM0NjkyMjI1Ny1GaXJlLW9udGhlLU1vdW50YWluLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-goat-father/e234898/"
+    "url": "https://everout.com/portland/events/the-goat-father/e234898/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234899,
@@ -172,7 +312,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Double pepperoni",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDgxNzE4NTI0NC1EYW50ZXMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/pepperoni-pony/e234899/"
+    "url": "https://everout.com/portland/events/pepperoni-pony/e234899/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234903,
@@ -191,7 +351,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Spicy vodka sauce, bacon, fermented chili hot honey, mozzarella, Grana Padano, Pecorino, and fried basil",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDkxOTIxMjg3My1EaW1vcy1BcGl6emEuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-drunken-pig/e234903/"
+    "url": "https://everout.com/portland/events/the-drunken-pig/e234903/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 234906,
@@ -210,7 +390,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Alliuminati features a rich roasted garlic cream base topped with caramelized onions, sautéed mushrooms, crispy bacon, tender potato, and a generous dusting of parmesan, finished with fresh chives",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MDk1MTEwMTc1My1GaW5vLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/alliuminati/e234906/"
+    "url": "https://everout.com/portland/events/alliuminati/e234906/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235001,
@@ -229,7 +429,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Cilantro pesto, mozzarella, southwest marinated pork belly lardons, oven roasted corn and onions, sliced roasted red peppers, finished with cotija cheese.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTE2MDQ4MzI3NC1Eb3VibGUtTW91bnRhaW4tT3Zlcmxvb2suanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/taos/e235001/"
+    "url": "https://everout.com/portland/events/taos/e235001/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235002,
@@ -248,7 +468,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Olive oil, mozzarella, thinly sliced apples and pears, braised brown sugar pork belly slices, pulled burrata, hard cheese, finished and topped with candied walnuts, hot honey, and light arugula.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTI3NzAzMDE3My1Eb3VibGUtTW91bnRhaW4tV29vZHN0b2NrLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/belly-up-to-the-orchard/e235002/"
+    "url": "https://everout.com/portland/events/belly-up-to-the-orchard/e235002/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235004,
@@ -267,7 +507,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Apple butter, apple compote, mint, shiso, miso vinaigrette, whipped lemon ricotta, house taro chips",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTI1OTk4NjMxNi1IYXBhLVBpenphLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/miso-apple-pizza/e235004/"
+    "url": "https://everout.com/portland/events/miso-apple-pizza/e235004/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235006,
@@ -286,7 +546,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fennel sausage, garlic confit, fresh tomato, smoked peppers, smoked mozzarella, hot honey. Vegetarian sausage available.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTg0MzUxMDMxMy1FZGFuLVBpenphLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/smoky-4-2026/e235006/"
+    "url": "https://everout.com/portland/events/smoky-4-2026/e235006/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235007,
@@ -305,7 +585,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Housemade focaccia, red sauce, mortadella, pineapple, jalapeño, fontina, parmesan, Italian chile crisp",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTMzMzc3OTkyLUdhYnlzLU5leHQtRG9vci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/haters-gonna-hate/e235007/"
+    "url": "https://everout.com/portland/events/haters-gonna-hate/e235007/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235009,
@@ -324,7 +624,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Hand-stretched crust with savory peanut sauce, mozzarella, marinated chicken, and roasted peppers. Topped with fresh bean sprouts, Sriracha, cilantro, and a crunchy crushed peanut finish.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NjMxODQ2MjI4NC1Ccml4LmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/thai-chicken-pizza/e235009/"
+    "url": "https://everout.com/portland/events/thai-chicken-pizza/e235009/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235010,
@@ -343,7 +663,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Creamy garlic sauce, house cheese blend, cheddar cheese, tater tots, bacon & green onions",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTM4MjkyMzk0Mi1GYXN0LVRpbWVzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/tater-tot-hot-dish-pizza/e235010/"
+    "url": "https://everout.com/portland/events/tater-tot-hot-dish-pizza/e235010/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235013,
@@ -362,7 +702,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Beer cheese & stone ground mustard, mozzarella, caramelized onion, sauerkraut, and beer sausage.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NDI2MDIyNDc0Ni1Ib3B3b3Jrcy5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-wurst-pizza-ever/e235013/"
+    "url": "https://everout.com/portland/events/the-wurst-pizza-ever/e235013/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235015,
@@ -381,7 +741,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Spinach, sun-dried tomatoes, chicken, topped with Italian seasoning. Made with house marinara red sauce.",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NTA2MTc2OTAyNC0yMXN0LUNlbnR1cnkuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/the-farm-feast/e235015/"
+    "url": "https://everout.com/portland/events/the-farm-feast/e235015/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235018,
@@ -400,7 +780,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "3 cheese blend, cream cheese, house-pickled jalapeño, fresh jalepeño, berry hot honey drizzle, Frito crumbs.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NjcwNzIzODM0MjEwNy1FYXN0X0dsaXNhbl9QaXp6YV9Mb3VuZ2UucG5nIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/heated-rivalry/e235018/"
+    "url": "https://everout.com/portland/events/heated-rivalry/e235018/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235020,
@@ -419,7 +819,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Monterey Jack, cheddar, cream cheese, chiles, cream, poblano, dough, butter, flour, milk.",
     "emoji": "🌿",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTY1ODI4NjIxMy1CYXJidXItV29ybGQtRm9vZHMuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/triple-mac-cheese-pizza/e235020/"
+    "url": "https://everout.com/portland/events/triple-mac-cheese-pizza/e235020/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235165,
@@ -438,7 +858,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "We got tiny little slices of pizza on top of a big ol' slice of pizza.",
     "emoji": "🌱",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTc1NjIwOTg1LUF0bGFzLVBpenphLUZvc3Rlci5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/schwilly-pie/e235165/"
+    "url": "https://everout.com/portland/events/schwilly-pie/e235165/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235167,
@@ -457,7 +897,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The Kim(chi)-possible pie: garlic base, spicy pork belly bulgogi, onion, baechu-kimchi, gochujang aioli drizzle, and scallions Vegan slice: Garlic oil base, Spicy bulgogi soy curls, Onion, Baechu-Kimc",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTc4NDEwNjgwOS1BdGxhcy1QaXp6YS1LaWxsaW5nc3dvcnRoLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/the-kim-chi-possible/e235167/"
+    "url": "https://everout.com/portland/events/the-kim-chi-possible/e235167/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235171,
@@ -476,7 +936,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Candied bacon, chopped dates, caramelized onion, chèvre, balsamic glaze, arugula salad tossed in Newk’s Elderfire Mango Habanero hot sauce",
     "emoji": "🥓",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTgwOTQyOTg4MS1BdGxhcy1QaXp6YS1EaXZpc2lvbi5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/the-hot-date/e235171/"
+    "url": "https://everout.com/portland/events/the-hot-date/e235171/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235174,
@@ -495,7 +975,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Sausage, pickled hot peppers, red bell peppers, onion, garlic and parsley.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NDY1MTg0MzU4ODQzMy1EaWNrcy1QaXp6YS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/pizza-scarp-no-chicken/e235174/"
+    "url": "https://everout.com/portland/events/pizza-scarp-no-chicken/e235174/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235792,
@@ -514,7 +1014,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Slow-roasted pork belly, caramelized onions, arugula tossed in lemon vinaigrette, topped with herb aioli.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE3MjI3Mzc1MDUzMy1CYWJ5ZG9sbC1NTEsuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
-    "url": "https://everout.com/portland/events/belly-of-the-beast/e235792/"
+    "url": "https://everout.com/portland/events/belly-of-the-beast/e235792/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235793,
@@ -533,7 +1053,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Corned beef, sauerkraut, provolone & mozzarella cheese, green onion on a pepperoncini aioli base. (Allergy alert for Paprika)",
     "emoji": "🍕",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3Njg3OTAwODE1NzUxMS1CYWJ5ZG9sbF9Tb3V0aGVhc3QuanBlZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/a-reuben-jamaica-ooh-i-wanna-take-ya-to-baby-doll-pizza/e235793/"
+    "url": "https://everout.com/portland/events/a-reuben-jamaica-ooh-i-wanna-take-ya-to-baby-doll-pizza/e235793/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 235928,
@@ -552,7 +1092,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Red sauce base, pepperoni, pulled pork, crushed red pepper flakes and jalapeños, finished with a honey drizzle and fresh lemon zest.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE0NjI0NTM5OTc1NS1Hb29kLU5laWdoYm9yLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/hot-honey-hog/e235928/"
+    "url": "https://everout.com/portland/events/hot-honey-hog/e235928/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 236080,
@@ -571,7 +1131,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Carolina Gold BBQ base, slow-cooked pulled pork, perfectly pickled red onions, fresh jalapeños, whole milk mozzarella, finished with a lime-cilantro crema drizzle.",
     "emoji": "🥩",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc3NTE3MjIxNjMxODI1OS00OC1Ob3J0aC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/crema-my-pork/e236080/"
+    "url": "https://everout.com/portland/events/crema-my-pork/e236080/",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   }
 ];
   newItems.forEach(item => {

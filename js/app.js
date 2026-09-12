@@ -9,7 +9,7 @@ import {
 import {
   toggleFilter, setSort, toggleDistanceSort, useMyLocation, applyZipCode,
   toggleSavedFilter, clearAllSavedFilters, setSavedSort, toggleSavedDistanceSort,
-  applySavedZipCode, moveSavedItem, clearAllFilters, openFilterDrawer,
+  applySavedZipCode, moveSavedItem, toggleSavedRankingMode, clearAllFilters, openFilterDrawer,
   applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter
 } from './modules/filters.js';
 import { renderMap, refreshMapLayout, handleCrawlPinClick } from './modules/map.js';
@@ -1630,6 +1630,7 @@ const App = {
   toggleSavedDistanceSort,
   applySavedZipCode,
   moveSavedItem,
+  toggleSavedRankingMode,
   goToLanding: (e) => {
     if (e) e.preventDefault();
     if (!State.currentWeekId) {

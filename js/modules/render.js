@@ -168,6 +168,34 @@ export function renderSaved(focusSelector = null) {
     }
   }
 
+  const rankModeBtn = document.getElementById('saved-rank-mode-btn');
+  if (rankModeBtn) {
+    if (!hasSavedItems) {
+      rankModeBtn.style.display = 'none';
+    } else {
+      rankModeBtn.style.display = 'inline-flex';
+      const textSpan = rankModeBtn.querySelector('span') || rankModeBtn;
+      if (State.rankingModeActive) {
+        rankModeBtn.classList.add('ranking-active');
+        rankModeBtn.classList.remove('saved-btn-primary');
+        textSpan.textContent = 'Exit Ranking';
+      } else {
+        rankModeBtn.classList.remove('ranking-active');
+        rankModeBtn.classList.add('saved-btn-primary');
+        textSpan.textContent = 'Rank Top 5';
+      }
+    }
+  }
+
+  const shareRankingsBtn = document.getElementById('saved-picks-card-btn');
+  if (shareRankingsBtn) {
+    if (hasSavedItems && State.rankingModeActive) {
+      shareRankingsBtn.style.display = 'inline-flex';
+    } else {
+      shareRankingsBtn.style.display = 'none';
+    }
+  }
+
   if (State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]) {
     if (headerTitle) headerTitle.textContent = `${esc(State.friends[State.viewingFriendIndex].name)}'s Spots`;
     if (copyBtn) copyBtn.style.display = 'none';

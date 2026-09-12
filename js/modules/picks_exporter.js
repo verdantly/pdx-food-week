@@ -51,7 +51,7 @@ export async function exportTopPicksCard() {
   // Main Title
   ctx.font = 'bold 54px "Fraunces", Georgia, serif';
   ctx.fillStyle = '#FFF8F3';
-  ctx.fillText('My Top Picks', width / 2, 210);
+  ctx.fillText('My Top 5 Rankings', width / 2, 210);
 
   // Subtitle (Week Name)
   ctx.font = '500 30px "Syne", sans-serif';
@@ -199,17 +199,17 @@ export async function exportTopPicksCard() {
       return;
     }
 
-    const filename = `pdx-${(week ? week.id : 'food-week')}-top-picks.png`;
+    const filename = `pdx-${(week ? week.id : 'food-week')}-top-5-rankings.png`;
     const file = new File([blob], filename, { type: 'image/png' });
 
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
         await navigator.share({
-          title: `My Top Picks for ${weekName}`,
-          text: `Check out my top picks for Portland ${weekName}!`,
+          title: `My Top 5 Rankings for ${weekName}`,
+          text: `Check out my top 5 rankings for Portland ${weekName}!`,
           files: [file]
         });
-        showToast('Top picks shared!');
+        showToast('Rankings shared!');
         return;
       } catch (err) {
         if (err.name === 'AbortError') return;

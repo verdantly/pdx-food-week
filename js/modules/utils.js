@@ -165,13 +165,22 @@ export function getRestaurantScheduleText(r) {
   if (r.hours && Array.isArray(r.hours.weekdayDescriptions) && r.hours.weekdayDescriptions.length > 0) {
     const todayIndex = new Date().getDay();
     // In Google Places / standard JS: 0: Sun, 1: Mon, ...
+    const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const todayDesc = r.hours.weekdayDescriptions.find(d => {
       const lower = d.toLowerCase();
-      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
       return lower.startsWith(dayNames[todayIndex]);
     }) || r.hours.weekdayDescriptions[0];
+
+    // Find if there are specific closed days across the week
+    const closedEntries = r.hours.weekdayDescriptions.filter(d => /closed/i.test(d));
+    let summary = todayDesc;
+    if (closedEntries.length > 0 && !/closed/i.test(todayDesc)) {
+      const closedDaysList = closedEntries.map(e => e.split(':')[0].trim()).join(', ');
+      summary = `${todayDesc} · (Closed ${closedDaysList})`;
+    }
+
     return {
-      summary: todayDesc,
+      summary,
       all: r.hours.weekdayDescriptions
     };
   }

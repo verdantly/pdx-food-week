@@ -86,7 +86,8 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
   const isNew = r.isNew && !State.viewedNew.has(r.id);
 
   let dragHandleHtml = '';
-  if (isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable) {
+  const isRankingMode = isSavedTab && (State.rankingModeActive || State.activeSavedSort === 'custom') && !isCrawlSelectable;
+  if (isRankingMode) {
     const isFirst = index === 0;
     const isLast = index === totalCount - 1;
     const rankNum = index + 1;
@@ -129,7 +130,7 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
     : `App.openDetail(${r.id})`;
 
   return `
-    <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable ? 'draggable="true"' : ''}>
+    <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isRankingMode ? 'draggable="true"' : ''}>
       ${dragHandleHtml}
       ${crawlBadgeHtml}
       ${thumb}

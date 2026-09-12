@@ -6577,8 +6577,9 @@ body.crawl-mode-active #mobile-filter-fab {
   border-color: var(--ink-40);
 }
 
-/* Crawl Mode Active Overrides */
-.saved-action-btn.crawl-active {
+/* Crawl Mode & Ranking Mode Active Overrides */
+.saved-action-btn.crawl-active,
+.saved-action-btn.ranking-active {
   background: #fff !important;
   color: var(--pizza) !important;
   border: 1.5px solid var(--pizza) !important;

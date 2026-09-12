@@ -8,6 +8,9 @@ import { renderSaved } from './render.js';
 
 export function toggleCrawlMode() {
   State.crawlModeActive = !State.crawlModeActive;
+  if (State.crawlModeActive) {
+    State.rankingModeActive = false;
+  }
   document.body.classList.toggle('crawl-mode-active', State.crawlModeActive);
   if (!State.crawlModeActive) {
     closeDetail();

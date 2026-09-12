@@ -153,4 +153,25 @@ describe("Roadmap Features: Saved Custom Order Rank Badges", () => {
     expect(html4).not.toContain("rank-silver");
     expect(html4).not.toContain("rank-bronze");
   });
+
+  test("cardHTML renders rank badges when State.rankingModeActive is true", () => {
+    State.activeSavedSort = "restaurant";
+    State.rankingModeActive = true;
+    State.crawlModeActive = false;
+
+    const sampleDish = {
+      id: 102,
+      restaurant: "Great Spot",
+      dish: "Tasty Burger",
+      type: "meat",
+      weekId: "burger-2026"
+    };
+
+    const html1 = cardHTML(sampleDish, false, true, 0, 5);
+    expect(html1).toContain("saved-rank-badge");
+    expect(html1).toContain("rank-gold");
+    expect(html1).toContain("#1");
+
+    State.rankingModeActive = false;
+  });
 });
