@@ -158,6 +158,49 @@ export function isRestaurantOpenNow(r, now = new Date()) {
   return true;
 }
 
+export function getRestaurantScheduleText(r) {
+  if (!r) return null;
+
+  // 1. Structured hours with weekday descriptions
+  if (r.hours && Array.isArray(r.hours.weekdayDescriptions) && r.hours.weekdayDescriptions.length > 0) {
+    const todayIndex = new Date().getDay();
+    // In Google Places / standard JS: 0: Sun, 1: Mon, ...
+    const todayDesc = r.hours.weekdayDescriptions.find(d => {
+      const lower = d.toLowerCase();
+      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      return lower.startsWith(dayNames[todayIndex]);
+    }) || r.hours.weekdayDescriptions[0];
+    return {
+      summary: todayDesc,
+      all: r.hours.weekdayDescriptions
+    };
+  }
+
+  // 2. Structured openDays list
+  if (r.hours && Array.isArray(r.hours.openDays) && r.hours.openDays.length > 0) {
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const openDayNames = r.hours.openDays.map(d => dayNames[d]);
+    return {
+      summary: `Open: ${openDayNames.join(', ')}`,
+      all: [`Open: ${openDayNames.join(', ')}`]
+    };
+  }
+
+  // 3. Heuristic closed days from description / notes
+  const textToCheck = `${r.desc || ''} ${r.whatsOnIt || ''} ${r.notes || ''} ${r.restaurant || ''}`;
+  const closedDays = parseClosedDays(textToCheck);
+  if (closedDays.size > 0) {
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const closedList = [...closedDays].sort((a, b) => a - b).map(d => dayNames[d]);
+    return {
+      summary: `Closed ${closedList.join(', ')}`,
+      all: [`Closed: ${closedList.join(', ')}`]
+    };
+  }
+
+  return null;
+}
+
 // ── Relative Food Week Timing Badges (Clean & Solid, No Pulsing Dots) ──
 export function getWeekTiming(w, now = new Date()) {
   if (!w || !w.startDate) return { badgeHTML: '', status: 'unknown', start: null, end: null, label: '' };

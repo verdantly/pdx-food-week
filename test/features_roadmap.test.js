@@ -1,5 +1,5 @@
 import { expect, test, describe } from "vitest";
-import { isRestaurantOpenOnDay, isRestaurantOpenNow, parseClosedDays, getWeekTiming } from "../js/modules/utils.js";
+import { isRestaurantOpenOnDay, isRestaurantOpenNow, parseClosedDays, getRestaurantScheduleText, getWeekTiming } from "../js/modules/utils.js";
 import { cardHTML } from "../js/modules/cards.js";
 import { State } from "../js/modules/state.js";
 
@@ -9,6 +9,40 @@ describe("Roadmap Features: Schedules & Day Filters", () => {
     expect([...parseClosedDays("Burger special (closed monday's & tuesday's)")].sort()).toEqual([1, 2]);
     expect([...parseClosedDays("Delicious dish. Closed Mon-Wed.")].sort()).toEqual([1, 2, 3]);
     expect([...parseClosedDays("No closures noted here")]).toEqual([]);
+  });
+
+  test("getRestaurantScheduleText formats weekday descriptions, openDays, and closure text", () => {
+    const rWithDescriptions = {
+      hours: {
+        weekdayDescriptions: [
+          "Monday: 11:30 AM – 9:00 PM",
+          "Tuesday: 11:30 AM – 9:00 PM",
+          "Wednesday: Closed"
+        ]
+      }
+    };
+    const descSchedule = getRestaurantScheduleText(rWithDescriptions);
+    expect(descSchedule).not.toBeNull();
+    expect(descSchedule.summary).toMatch(/(Monday|Tuesday|Wednesday):/);
+
+    const rWithOpenDays = {
+      hours: {
+        openDays: [1, 2, 3, 4, 5]
+      }
+    };
+    const openSchedule = getRestaurantScheduleText(rWithOpenDays);
+    expect(openSchedule.summary).toBe("Open: Mon, Tue, Wed, Thu, Fri");
+
+    const rWithClosure = {
+      desc: "Awesome taco (closed tuesday's)"
+    };
+    const closureSchedule = getRestaurantScheduleText(rWithClosure);
+    expect(closureSchedule.summary).toBe("Closed Tuesday");
+
+    const rUnstated = {
+      desc: "Delicious food with no special hours"
+    };
+    expect(getRestaurantScheduleText(rUnstated)).toBeNull();
   });
 
   test("isRestaurantOpenOnDay checks closures from description heuristics", () => {

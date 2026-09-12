@@ -6299,6 +6299,18 @@ body.crawl-mode-active #mobile-filter-fab {
   gap: 8px;
 }
 
+#filter-drawer-body .day-filter-section {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  row-gap: 8px !important;
+}
+
+#filter-drawer-body .day-filter-section .filter-chips-wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+}
+
 .day-chip {
   min-width: 42px;
   text-align: center;

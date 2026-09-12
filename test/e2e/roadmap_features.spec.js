@@ -138,4 +138,58 @@ test.describe('Roadmap Features E2E', () => {
     await expect(sharePicksBtn).toBeVisible();
     await expect(sharePicksBtn).toHaveText('Share Picks');
   });
+
+  test('Detail sheet displays restaurant days and hours schedule', async ({ page }) => {
+    await page.goto('/?week=fried-chicken-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    // Open E-San Thai Woodstock detail sheet (which has "(Closed Tuesday's)")
+    const eSanCard = page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' });
+    await eSanCard.click();
+
+    const detailOverlay = page.locator('#detail-overlay');
+    await expect(detailOverlay).toHaveClass(/open/);
+
+    const scheduleEl = page.locator('#detail-sheet-content .sheet-schedule');
+    await expect(scheduleEl).toBeVisible();
+    await expect(scheduleEl).toContainText('Closed Tuesday');
+
+    // Close detail
+    const closeBtn = detailOverlay.locator('.sheet-close-btn');
+    if (await closeBtn.isVisible()) {
+      await closeBtn.click();
+    } else {
+      await detailOverlay.click({ position: { x: 5, y: 5 } });
+    }
+    await expect(detailOverlay).not.toHaveClass(/open/);
+  });
+
+  test('Mobile filter drawer displays Days label stacked above pills', async ({ page, isMobile }) => {
+    if (!isMobile) return;
+
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('#mobile-filter-fab', { state: 'visible', timeout: 10000 });
+
+    await page.click('#mobile-filter-fab');
+    const overlay = page.locator('#filter-drawer-overlay');
+    await expect(overlay).toHaveClass(/open/);
+    const drawer = overlay.locator('.filter-drawer');
+    await expect(drawer).toBeVisible();
+    await page.waitForTimeout(400); // Wait for CSS translateY transition
+
+    const dayFilter = overlay.locator('#browse-day-filters');
+    await expect(dayFilter).toBeVisible();
+
+    const label = dayFilter.locator('.filter-label');
+    const firstChip = dayFilter.locator('.day-chip').first();
+
+    const labelBox = await label.boundingBox();
+    const chipBox = await firstChip.boundingBox();
+
+    // The label is stacked above the chips (label bottom <= chip top)
+    expect(labelBox.y + labelBox.height).toBeLessThanOrEqual(chipBox.y + 2);
+
+    await page.click('#filter-drawer-overlay .drawer-close');
+  });
 });
+

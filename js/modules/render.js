@@ -1,6 +1,6 @@
 /* ── Rendering Loops & Week Switcher UI ── */
 import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
-import { esc, getWeekTiming } from './utils.js';
+import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
 import { updateMobileFabBadge, renderSavedFilters } from './filters.js';
@@ -330,14 +330,12 @@ export function renderHeader() {
 
   const metaEl = document.getElementById('header-meta');
   if (metaEl) {
-    const timing = getWeekTiming(week);
-    const badgeHTML = timing && timing.badgeHTML ? timing.badgeHTML : '';
     const dates = `<span>${esc(week.dates)}</span>`;
     const pills = (week.pricePills || []).map(p => `<span class="pill">${esc(p)}</span>`).join('');
     const actualCount = getRestaurants().length;
     const totalCount = actualCount > 0 ? actualCount : (week.totalLocations || 0);
     const locations = `<span>${totalCount} locations</span>`;
-    metaEl.innerHTML = badgeHTML + dates + pills + locations;
+    metaEl.innerHTML = dates + pills + locations;
   }
 
   document.title = `PDX ${week.name}`;

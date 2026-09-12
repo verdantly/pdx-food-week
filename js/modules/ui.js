@@ -1,6 +1,6 @@
 /* ── UI Components & Detail Overlays ── */
 import { State, saveState, isDishSaved, toggleDishSaved, getDishKey } from './state.js';
-import { esc, safeUrl, showToast } from './utils.js';
+import { esc, safeUrl, showToast, getRestaurantScheduleText } from './utils.js';
 import { getRestaurants, getFiltered, getSaved, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
 
@@ -197,6 +197,19 @@ export function openDetail(id, fromPopState = false) {
         </span>
       </a>
     </div>
+    ${(() => {
+      const schedule = getRestaurantScheduleText(r);
+      if (!schedule) return '';
+      return `
+        <div class="sheet-schedule" style="display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; color: var(--ink-70); margin-top: -8px; margin-bottom: 16px; font-weight: 500;">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; color: var(--pizza);">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>${esc(schedule.summary)}</span>
+        </div>
+      `;
+    })()}
     ${r.whatsOnIt ? (() => {
       const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function' ? window.getWeekMeta(State.currentWeekId) : null;
       const sectionTitle = (weekMeta && weekMeta.ingredientLabel) ? weekMeta.ingredientLabel : "What's on it...";
