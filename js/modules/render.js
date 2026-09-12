@@ -148,17 +148,22 @@ export function renderSaved(focusSelector = null) {
     if (!hasSavedItems) {
       crawlBtn.style.display = 'none';
     } else {
-      crawlBtn.style.display = 'inline-block';
+      crawlBtn.style.display = 'inline-flex';
+      const textSpan = crawlBtn.querySelector('span') || crawlBtn;
       if (State.crawlModeActive) {
-        crawlBtn.style.background = 'white';
-        crawlBtn.style.color = 'var(--teal)';
-        crawlBtn.style.border = '2px solid var(--teal)';
-        crawlBtn.textContent = 'Cancel Crawl';
+        crawlBtn.classList.add('crawl-active');
+        crawlBtn.classList.remove('saved-btn-primary');
+        crawlBtn.style.background = '';
+        crawlBtn.style.color = '';
+        crawlBtn.style.border = '';
+        textSpan.textContent = 'Cancel Crawl';
       } else {
-        crawlBtn.style.background = 'var(--teal)';
-        crawlBtn.style.color = 'white';
-        crawlBtn.style.border = '2px solid var(--teal)';
-        crawlBtn.textContent = 'Plan Crawl';
+        crawlBtn.classList.remove('crawl-active');
+        crawlBtn.classList.add('saved-btn-primary');
+        crawlBtn.style.background = '';
+        crawlBtn.style.color = '';
+        crawlBtn.style.border = '';
+        textSpan.textContent = 'Plan Crawl';
       }
     }
   }
@@ -166,11 +171,11 @@ export function renderSaved(focusSelector = null) {
   if (State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]) {
     if (headerTitle) headerTitle.textContent = `${esc(State.friends[State.viewingFriendIndex].name)}'s Spots`;
     if (copyBtn) copyBtn.style.display = 'none';
-    if (exitBtn) exitBtn.style.display = 'inline-block';
-    if (mergeBtn) mergeBtn.style.display = 'inline-block';
+    if (exitBtn) exitBtn.style.display = 'inline-flex';
+    if (mergeBtn) mergeBtn.style.display = 'inline-flex';
   } else {
     if (headerTitle) headerTitle.textContent = 'Your Saved Spots';
-    if (copyBtn) copyBtn.style.display = 'inline-block';
+    if (copyBtn) copyBtn.style.display = 'inline-flex';
     if (exitBtn) exitBtn.style.display = 'none';
     if (mergeBtn) mergeBtn.style.display = 'none';
   }

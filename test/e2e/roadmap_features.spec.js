@@ -133,10 +133,10 @@ test.describe('Roadmap Features E2E', () => {
     await expect(rank2).toBeVisible();
     await expect(rank2).toHaveText('#2');
 
-    // Verify Share Picks button
-    const sharePicksBtn = page.locator('#saved-picks-card-btn');
-    await expect(sharePicksBtn).toBeVisible();
-    await expect(sharePicksBtn).toHaveText('Share Picks');
+    // Verify Share Saved button
+    const shareSavedBtn = page.locator('#saved-picks-card-btn');
+    await expect(shareSavedBtn).toBeVisible();
+    await expect(shareSavedBtn).toHaveText('Share Saved');
   });
 
   test('Detail sheet displays restaurant days and hours schedule', async ({ page }) => {

@@ -47,16 +47,21 @@ export function syncCrawlButtons() {
 
   const savedBtn = document.getElementById('saved-plan-crawl-btn');
   if (savedBtn) {
+    const textSpan = savedBtn.querySelector('span') || savedBtn;
     if (State.crawlModeActive) {
-      savedBtn.style.background = 'white';
-      savedBtn.style.color = 'var(--teal)';
-      savedBtn.style.border = '2px solid var(--teal)';
-      savedBtn.textContent = 'Cancel Crawl';
+      savedBtn.classList.add('crawl-active');
+      savedBtn.classList.remove('saved-btn-primary');
+      savedBtn.style.background = '';
+      savedBtn.style.color = '';
+      savedBtn.style.border = '';
+      textSpan.textContent = 'Cancel Crawl';
     } else {
-      savedBtn.style.background = 'var(--teal)';
-      savedBtn.style.color = 'white';
-      savedBtn.style.border = '2px solid var(--teal)';
-      savedBtn.textContent = 'Plan Crawl';
+      savedBtn.classList.remove('crawl-active');
+      savedBtn.classList.add('saved-btn-primary');
+      savedBtn.style.background = '';
+      savedBtn.style.color = '';
+      savedBtn.style.border = '';
+      textSpan.textContent = 'Plan Crawl';
     }
   }
 }
