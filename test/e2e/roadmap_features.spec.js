@@ -219,5 +219,87 @@ test.describe('Roadmap Features E2E', () => {
     const labelBox = await labelSpan.boundingBox();
     expect(avatarBox.x + avatarBox.width).toBeLessThanOrEqual(labelBox.x + 2);
   });
+
+  test('Saved tab More dropdown allows entering bulk remove mode and removing spots after confirmation', async ({ page, isMobile }) => {
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    // Save three dishes
+    const bookmarkBtns = page.locator('.dish-card .bookmark-btn');
+    await bookmarkBtns.nth(0).click();
+    await bookmarkBtns.nth(1).click();
+    await bookmarkBtns.nth(2).click();
+
+    // Navigate to Saved tab
+    if (isMobile) {
+      await page.click('#compact-menu-btn');
+      await page.click('.compact-menu-item[data-tab="saved"]');
+    } else {
+      await page.click('.nav-tab[data-tab="saved"]');
+    }
+
+    await page.waitForSelector('#cards-saved .dish-card', { state: 'visible', timeout: 10000 });
+    const initialSavedCards = page.locator('#cards-saved .dish-card');
+    await expect(initialSavedCards).toHaveCount(3);
+
+    // Click More dropdown button
+    const moreBtn = page.locator('#saved-more-btn');
+    await expect(moreBtn).toBeVisible();
+    await moreBtn.click();
+
+    // Verify More dropdown menu is open
+    const actionsMenu = page.locator('#saved-actions-menu');
+    await expect(actionsMenu).toBeVisible();
+
+    // Click "Manage / Remove Spots"
+    const manageBtn = page.locator('#saved-manage-mode-btn');
+    await expect(manageBtn).toBeVisible();
+    await manageBtn.click();
+
+    // Bulk actions bar should now be visible
+    const bulkActionsBar = page.locator('#saved-bulk-actions');
+    await expect(bulkActionsBar).toBeVisible();
+
+    // Cards should have bulk select indicators
+    const selectIndicators = page.locator('#cards-saved .bulk-select-indicator');
+    await expect(selectIndicators.first()).toBeVisible();
+
+    // Click first card to select it
+    await initialSavedCards.nth(0).click();
+    const removeBtn = page.locator('#saved-bulk-remove-btn');
+    await expect(removeBtn).toBeEnabled();
+    await expect(removeBtn).toContainText('Remove (1)');
+
+    // Click "Select All"
+    await page.click('#saved-select-all-btn');
+    await expect(removeBtn).toContainText('Remove (3)');
+
+    // Click "Deselect All"
+    await page.click('#saved-deselect-all-btn');
+    await expect(removeBtn).toBeDisabled();
+    await expect(removeBtn).toContainText('Remove (0)');
+
+    // Select the first card again
+    await initialSavedCards.nth(0).click();
+    await expect(removeBtn).toBeEnabled();
+    await expect(removeBtn).toContainText('Remove (1)');
+
+    // Click Remove (1) to open confirmation modal
+    await removeBtn.click();
+    const confirmModal = page.locator('#bulk-remove-confirm-modal');
+    await expect(confirmModal).toBeVisible();
+    await expect(confirmModal.locator('#bulk-remove-count')).toHaveText('1 spot');
+
+    // Confirm removal
+    await confirmModal.locator('#confirm-remove-btn').click();
+    await expect(confirmModal).toBeHidden();
+
+    // Card count in saved tab should now be 2
+    await expect(page.locator('#cards-saved .dish-card')).toHaveCount(2);
+
+    // Normal actions should be restored
+    await expect(page.locator('#saved-normal-actions')).toBeVisible();
+  });
 });
+
 

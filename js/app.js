@@ -4,13 +4,16 @@ import { esc, debounce, showToast, getWeekTiming } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
   openDetail, closeDetail, shareDish, toggleSave, setRating, setNote, handleNoteInput,
-  openPhotoZoom, closePhotoZoom, showMetricDetails, closeMetricModal, getActiveFriends, getCurrentContextList
+  openPhotoZoom, closePhotoZoom, showMetricDetails, closeMetricModal, getActiveFriends, getCurrentContextList,
+  toggleSheetScheduleDropdown
 } from './modules/ui.js';
 import {
   toggleFilter, setSort, toggleDistanceSort, useMyLocation, applyZipCode,
   toggleSavedFilter, clearAllSavedFilters, setSavedSort, toggleSavedDistanceSort,
   applySavedZipCode, moveSavedItem, toggleSavedRankingMode, clearAllFilters, openFilterDrawer,
-  applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter
+  applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter,
+  toggleSavedBulkEdit, toggleBulkEditItem, selectAllBulkEdit, deselectAllBulkEdit,
+  confirmBulkRemove, closeBulkRemoveConfirm, executeBulkRemove
 } from './modules/filters.js';
 import { renderMap, refreshMapLayout, handleCrawlPinClick } from './modules/map.js';
 import { buildSwipeQueue, renderSwipe, swipe, undoSwipe, skipSwipe, resetSwipe, swipeOpenDetail, attachSwipeGestures } from './modules/swipe.js';
@@ -1435,6 +1438,11 @@ function init() {
       compactSearchDropdown.style.display = 'none';
       compactMenuDropdown.style.display = 'none';
     }
+
+    const isSavedDropdownClick = e.target.closest('#saved-more-dropdown-wrap');
+    if (!isSavedDropdownClick) {
+      closeSavedMoreMenu();
+    }
   });
 
   const shareListId = urlParams.get('list');
@@ -1586,6 +1594,30 @@ function init() {
   });
 }
 
+function toggleSavedMoreMenu(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('saved-actions-menu');
+  const btn = document.getElementById('saved-more-btn');
+  if (!menu) return;
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  } else {
+    menu.classList.add('open');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+function closeSavedMoreMenu() {
+  const menu = document.getElementById('saved-actions-menu');
+  const btn = document.getElementById('saved-more-btn');
+  if (menu && menu.classList.contains('open')) {
+    menu.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
+}
+
 // Assemble the App object for window.App
 const App = {
   init,
@@ -1729,7 +1761,17 @@ const App = {
   stopLandingCarouselTimer,
   toggleMoreWeeksMobile,
   setOtherWeeksPage,
-  stepOtherWeeksPage
+  stepOtherWeeksPage,
+  toggleSavedMoreMenu,
+  closeSavedMoreMenu,
+  toggleSavedBulkEdit,
+  toggleBulkEditItem,
+  selectAllBulkEdit,
+  deselectAllBulkEdit,
+  confirmBulkRemove,
+  closeBulkRemoveConfirm,
+  executeBulkRemove,
+  toggleSheetScheduleDropdown
 };
 
 window.App = App;

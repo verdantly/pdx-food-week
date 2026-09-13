@@ -39,7 +39,7 @@
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="css/style.css?v=d0871207" />
+  <link rel="stylesheet" href="css/style.css?v=6e7d4aa8" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -626,7 +626,8 @@
             </div>
           </div>
           <div class="saved-actions-toolbar" id="saved-actions-toolbar" role="toolbar" aria-label="Saved list actions">
-            <div class="saved-actions-primary">
+            <!-- Normal Saved Actions -->
+            <div class="saved-actions-primary" id="saved-normal-actions">
               <button class="btn saved-action-btn saved-btn-primary" id="saved-plan-crawl-btn" onclick="App.toggleSavedCrawlMode()">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <polygon points="3 11 22 2 13 21 11 13 3 11"/>
@@ -646,32 +647,80 @@
                 </svg>
                 <span>Share Rankings</span>
               </button>
-            </div>
-            <div class="saved-actions-secondary">
-              <button class="btn saved-action-btn saved-btn-outline" id="saved-copy-btn" onclick="App.exportSavedToClipboard()" title="Copy list to clipboard">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                </svg>
-                <span>Copy List</span>
-              </button>
-              <button class="btn saved-action-btn saved-btn-outline" id="saved-kml-btn" onclick="App.exportSavedKML()" title="Export KML map file">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                <span>Export Map</span>
-              </button>
-              <button class="btn saved-action-btn saved-btn-secondary" id="saved-merge-friend-btn" onclick="App.mergeFriendList()" style="display: none;">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>
-                </svg>
-                <span>Merge All</span>
-              </button>
+
+              <!-- Actions Overflow Dropdown -->
+              <div class="saved-actions-dropdown-wrap" id="saved-more-dropdown-wrap">
+                <button class="btn saved-action-btn saved-btn-outline" id="saved-more-btn" onclick="App.toggleSavedMoreMenu(event)" aria-haspopup="true" aria-expanded="false" title="More list actions">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+                    <circle cx="5" cy="12" r="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="19" cy="12" r="2"/>
+                  </svg>
+                  <span>More</span>
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div class="saved-actions-menu" id="saved-actions-menu" role="menu" aria-label="Saved list options">
+                  <button class="saved-menu-item" id="saved-copy-btn" onclick="App.exportSavedToClipboard(); App.closeSavedMoreMenu();" role="menuitem">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                    <span>Copy List</span>
+                  </button>
+                  <button class="saved-menu-item" id="saved-kml-btn" onclick="App.exportSavedKML(); App.closeSavedMoreMenu();" role="menuitem">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span>Export Map</span>
+                  </button>
+                  <div class="saved-menu-divider" id="saved-manage-divider"></div>
+                  <button class="saved-menu-item" id="saved-manage-mode-btn" onclick="App.toggleSavedBulkEdit(); App.closeSavedMoreMenu();" role="menuitem">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <span>Manage / Remove Spots</span>
+                  </button>
+                  <button class="saved-menu-item" id="saved-merge-friend-btn" onclick="App.mergeFriendList(); App.closeSavedMoreMenu();" style="display: none;" role="menuitem">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>
+                    </svg>
+                    <span>Merge All</span>
+                  </button>
+                </div>
+              </div>
+
               <button class="btn saved-action-btn saved-btn-outline" id="saved-exit-friend-btn" onclick="App.exitFriendView()" style="display: none;">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
                 <span>Exit Friend View</span>
               </button>
+            </div>
+
+            <!-- Bulk Edit Active Toolbar -->
+            <div class="saved-actions-primary" id="saved-bulk-actions" style="display: none; width: 100%; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button class="btn saved-action-btn saved-btn-outline" id="saved-select-all-btn" onclick="App.selectAllBulkEdit()">
+                  Select All
+                </button>
+                <button class="btn saved-action-btn saved-btn-outline" id="saved-deselect-all-btn" onclick="App.deselectAllBulkEdit()">
+                  Deselect All
+                </button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button class="btn saved-action-btn saved-btn-outline" id="saved-bulk-cancel-btn" onclick="App.toggleSavedBulkEdit()">
+                  Cancel
+                </button>
+                <button class="btn saved-action-btn saved-btn-danger" id="saved-bulk-remove-btn" onclick="App.confirmBulkRemove()" disabled>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                  <span id="saved-bulk-remove-text">Remove (0)</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1419,6 +1468,27 @@
     </div>
   </div>
 
+  <!-- ── Bulk Remove Confirmation Modal ── -->
+  <div id="bulk-remove-confirm-modal" class="filter-drawer-overlay" onclick="App.closeBulkRemoveConfirm()" role="dialog" aria-modal="true" aria-hidden="true" style="display: none; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="filter-drawer modal-sheet-card" onclick="event.stopPropagation()" style="max-width: 420px; border-radius: 20px; padding: 24px; text-align: center;">
+      <div style="font-size: 40px; margin-bottom: 12px;" aria-hidden="true">🗑️</div>
+      <h3 style="font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">
+        Remove Saved Spots?
+      </h3>
+      <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 24px;">
+        Are you sure you want to remove <strong id="bulk-remove-count">these spots</strong> from your saved list? This action cannot be undone.
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button type="button" class="btn saved-action-btn saved-btn-outline" onclick="App.closeBulkRemoveConfirm()" style="flex: 1; padding: 10px 16px; font-size: 14px;">
+          Cancel
+        </button>
+        <button type="button" id="confirm-remove-btn" class="btn saved-action-btn saved-btn-danger" onclick="App.executeBulkRemove()" style="flex: 1; padding: 10px 16px; font-size: 14px;">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Scripts ── -->
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -1426,8 +1496,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=d0871207"></script>
-  <script type="module" src="js/app.js?v=d0871207"></script>
+  <script src="js/meta.js?v=6e7d4aa8"></script>
+  <script type="module" src="js/app.js?v=6e7d4aa8"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;

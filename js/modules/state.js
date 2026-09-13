@@ -14,6 +14,8 @@ export const State = {
   activeSavedSort: 'restaurant',
   customSavedOrder: [],
   rankingModeActive: false,
+  bulkEditActive: false,
+  bulkEditSelection: new Set(),
   filterDrawerOpen: false,
   saved: new Set(),
   passed: new Set(),

@@ -66,6 +66,18 @@ export function handleNoteInput(id, text) {
   }, 500);
 }
 
+export function toggleSheetScheduleDropdown(e) {
+  if (e) e.stopPropagation();
+  const dropdown = document.getElementById('sheet-schedule-dropdown');
+  const arrow = document.getElementById('sheet-schedule-toggle-arrow');
+  if (!dropdown) return;
+  const isHidden = dropdown.style.display === 'none' || !dropdown.style.display;
+  dropdown.style.display = isHidden ? 'grid' : 'none';
+  if (arrow) {
+    arrow.style.transform = isHidden ? 'rotate(180deg)' : 'none';
+  }
+}
+
 export function getActiveFriends() {
   const activeWeekRestaurants = getRestaurants();
   const currentWeekRestaurantIds = new Set(activeWeekRestaurants.map(r => r.id));
@@ -197,26 +209,64 @@ export function openDetail(id, fromPopState = false) {
         </span>
       </a>
     </div>
-    ${(() => {
-      const schedule = getRestaurantScheduleText(r);
-      if (!schedule) return '';
-      return `
-        <div class="sheet-schedule" style="display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; color: var(--ink-70); margin-top: -8px; margin-bottom: 16px; font-weight: 500;">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0; color: var(--pizza);">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          <span>${esc(schedule.summary)}</span>
-        </div>
-      `;
-    })()}
     ${r.whatsOnIt ? (() => {
       const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function' ? window.getWeekMeta(State.currentWeekId) : null;
       const sectionTitle = (weekMeta && weekMeta.ingredientLabel) ? weekMeta.ingredientLabel : "What's on it...";
       return `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${sectionTitle}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>`;
     })() : ''}
-    ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc">${esc(r.whatTheySay)}</div>` : ''}
-    ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc">${esc(r.desc)}</div>` : ''}
+    ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatTheySay)}</div>` : ''}
+    ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.desc)}</div>` : ''}
+    ${(() => {
+      const schedule = getRestaurantScheduleText(r);
+      if (!schedule) return '';
+      const hasMultipleDays = schedule.all && schedule.all.length > 1;
+      const todayIndex = new Date().getDay();
+      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const todayName = dayNames[todayIndex];
+
+      const daysListHtml = hasMultipleDays ? `
+        <div id="sheet-schedule-dropdown" class="sheet-schedule-days-list" style="display: none;">
+          ${schedule.all.map(dayText => {
+            const isToday = dayText.toLowerCase().startsWith(todayName);
+            const isClosed = /closed/i.test(dayText);
+            const parts = dayText.split(':');
+            const dayPart = parts[0] || '';
+            const hoursPart = parts.slice(1).join(':').trim() || (isClosed ? 'Closed' : 'Open');
+            return `
+              <div class="sheet-schedule-day-row ${isToday ? 'is-today' : ''} ${isClosed ? 'is-closed' : ''}">
+                <span>${esc(dayPart)}${isToday ? ' (Today)' : ''}</span>
+                <span>${esc(hoursPart)}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      ` : '';
+
+      return `
+        <div class="sheet-schedule-section">
+          <div class="sheet-schedule-header" onclick="App.toggleSheetScheduleDropdown(event)">
+            <div class="sheet-schedule-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="sheet-schedule-main sheet-schedule">
+              <span>${esc(schedule.summary)}</span>
+            </div>
+            ${hasMultipleDays ? `
+              <button type="button" class="sheet-schedule-toggle" aria-label="Toggle weekly schedule">
+                <span id="sheet-schedule-toggle-text">Hours</span>
+                <svg id="sheet-schedule-toggle-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+            ` : ''}
+          </div>
+          ${daysListHtml}
+        </div>
+      `;
+    })()}
     <div class="sheet-tags">${buildTags(r)}</div>
     <div class="sheet-actions" style="display: flex; gap: 8px;">
       <a class="btn btn-link" style="flex: 1;" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">

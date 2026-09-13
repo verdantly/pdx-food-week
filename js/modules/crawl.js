@@ -10,6 +10,8 @@ export function toggleCrawlMode() {
   State.crawlModeActive = !State.crawlModeActive;
   if (State.crawlModeActive) {
     State.rankingModeActive = false;
+    State.bulkEditActive = false;
+    if (State.bulkEditSelection) State.bulkEditSelection.clear();
   }
   document.body.classList.toggle('crawl-mode-active', State.crawlModeActive);
   if (!State.crawlModeActive) {

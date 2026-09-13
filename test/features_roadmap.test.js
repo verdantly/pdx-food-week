@@ -174,4 +174,40 @@ describe("Roadmap Features: Saved Custom Order Rank Badges", () => {
 
     State.rankingModeActive = false;
   });
+
+  test("cardHTML renders bulk-selectable and bulk-selected indicators in bulk edit mode", () => {
+    State.bulkEditActive = true;
+    State.bulkEditSelection = new Set([201]);
+    State.crawlModeActive = false;
+
+    const sampleDish1 = {
+      id: 201,
+      restaurant: "Selected Burger Place",
+      dish: "Bacon Burger",
+      type: "meat",
+      weekId: "burger-2026"
+    };
+
+    const sampleDish2 = {
+      id: 202,
+      restaurant: "Unselected Burger Place",
+      dish: "Cheeseburger",
+      type: "meat",
+      weekId: "burger-2026"
+    };
+
+    const htmlSelected = cardHTML(sampleDish1, false, true, 0, 2);
+    expect(htmlSelected).toContain("bulk-selectable");
+    expect(htmlSelected).toContain("bulk-selected");
+    expect(htmlSelected).toContain("bulk-select-indicator selected");
+
+    const htmlUnselected = cardHTML(sampleDish2, false, true, 1, 2);
+    expect(htmlUnselected).toContain("bulk-selectable");
+    expect(htmlUnselected).not.toContain("bulk-selected");
+    expect(htmlUnselected).toContain("bulk-select-indicator ");
+
+    State.bulkEditActive = false;
+    State.bulkEditSelection.clear();
+  });
 });
+

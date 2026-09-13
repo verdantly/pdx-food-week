@@ -1,7 +1,8 @@
 /* ── Filters & Search & Sort Logic ── */
-import { State, saveState, getWeekFilters } from './state.js';
+import { State, saveState, getWeekFilters, getDishKey } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
+import { queueCloudSync } from './sync.js';
 
 export const PORTLAND_ZIP_CACHE = {
   "97005": { lat: 45.4963, lng: -122.8001 },
@@ -403,10 +404,111 @@ export function toggleSavedRankingMode() {
     if (State.crawlModeActive && window.App && window.App.toggleCrawlMode) {
       window.App.toggleCrawlMode();
     }
+    if (State.bulkEditActive) {
+      State.bulkEditActive = false;
+      State.bulkEditSelection.clear();
+    }
     State.activeSavedSort = 'custom';
     showToast('Rank your top 5 places, then tap Share Rankings!');
   }
   saveState();
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function toggleSavedBulkEdit() {
+  State.bulkEditActive = !State.bulkEditActive;
+  if (State.bulkEditActive) {
+    State.bulkEditSelection = new Set();
+    if (State.crawlModeActive && window.App && window.App.toggleCrawlMode) {
+      window.App.toggleCrawlMode();
+    }
+    if (State.rankingModeActive) {
+      State.rankingModeActive = false;
+    }
+    showToast('Tap spots to select them for removal');
+  } else {
+    State.bulkEditSelection.clear();
+  }
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function toggleBulkEditItem(id) {
+  if (!State.bulkEditActive) return;
+  const numId = Number(id);
+  if (State.bulkEditSelection.has(numId) || State.bulkEditSelection.has(id)) {
+    State.bulkEditSelection.delete(numId);
+    State.bulkEditSelection.delete(id);
+  } else {
+    State.bulkEditSelection.add(numId);
+  }
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function selectAllBulkEdit() {
+  if (!State.bulkEditActive) return;
+  const savedItems = getSaved();
+  State.bulkEditSelection = new Set(savedItems.map(r => Number(r.id)));
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function deselectAllBulkEdit() {
+  if (!State.bulkEditActive) return;
+  State.bulkEditSelection.clear();
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function confirmBulkRemove() {
+  const count = State.bulkEditSelection.size;
+  if (count === 0) {
+    showToast('Select at least one spot to remove');
+    return;
+  }
+  const modal = document.getElementById('bulk-remove-confirm-modal');
+  const countSpan = document.getElementById('bulk-remove-count');
+  if (countSpan) {
+    countSpan.textContent = `${count} spot${count === 1 ? '' : 's'}`;
+  }
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+export function closeBulkRemoveConfirm() {
+  const modal = document.getElementById('bulk-remove-confirm-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+export function executeBulkRemove() {
+  const idsToRemove = [...State.bulkEditSelection];
+  if (idsToRemove.length === 0) return;
+
+  closeBulkRemoveConfirm();
+
+  const allRestaurants = getRestaurants();
+  idsToRemove.forEach(id => {
+    const r = allRestaurants.find(item => String(item.id) === String(id));
+    const weekId = r ? r.weekId : State.currentWeekId;
+    const key = getDishKey(id, weekId);
+    
+    State.saved.delete(key);
+    State.saved.delete(id);
+    State.saved.delete(Number(id));
+    State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== id && x !== Number(id));
+  });
+
+  const removedCount = idsToRemove.length;
+  State.bulkEditSelection.clear();
+  State.bulkEditActive = false;
+
+  saveState();
+  queueCloudSync();
+  showToast(`Removed ${removedCount} spot${removedCount === 1 ? '' : 's'} from saved`);
   if (window.App && window.App.renderSaved) window.App.renderSaved();
 }
 

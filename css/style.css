@@ -3886,18 +3886,27 @@ input[type="search"]::-webkit-search-cancel-button {
     padding: 20px 24px;
     align-items: center;
     flex-direction: row;
+    gap: 16px;
   }
   .header-left {
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
     flex: 1;
+    position: relative;
+    padding-right: 0;
   }
-  .header-left::after {
+  .saved-header-integrated::after {
     content: '';
     flex: 1;
     height: 2px;
     background: var(--pizza);
+    margin: 0 16px;
+    min-width: 24px;
+  }
+  .header-left::after {
+    display: none;
   }
 
   .section-header {
@@ -4191,9 +4200,58 @@ input[type="search"]::-webkit-search-cancel-button {
 
   .saved-header-integrated {
     padding: 20px 32px;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
   }
   .header-left {
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+    padding-right: 0;
+  }
+  .saved-header-integrated::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--pizza);
+    margin: 0 20px;
+    min-width: 24px;
+  }
+  .header-left::after {
+    display: none;
+  }
+  .header-left .stats-pills {
+    margin-top: 2px;
+  }
+
+  @media (min-width: 1440px) {
+    .saved-header-integrated::after {
+      display: none;
+    }
+    .header-left {
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      padding-right: 0;
+    }
+    .header-left::after {
+      display: block;
+      content: '';
+      position: static;
+      transform: none;
+      flex: 1;
+      height: 2px;
+      width: auto;
+      background: var(--pizza);
+      margin-left: 8px;
+    }
+    .header-left .stats-pills {
+      margin-top: 0;
+    }
   }
 
   .section-header {
@@ -6579,28 +6637,210 @@ body.crawl-mode-active #mobile-filter-fab {
 
 /* Crawl Mode & Ranking Mode Active Overrides */
 .saved-action-btn.crawl-active,
-.saved-action-btn.ranking-active {
+.saved-action-btn.ranking-active,
+.saved-action-btn.bulk-active {
   background: #fff !important;
   color: var(--pizza) !important;
   border: 1.5px solid var(--pizza) !important;
   box-shadow: 0 0 0 2px rgba(232, 91, 56, 0.2) !important;
 }
 
+/* Danger / Remove Selected Button */
+.saved-action-btn.saved-btn-danger {
+  background: #DC2626;
+  color: #fff;
+  border: 1.5px solid #DC2626;
+}
+
+.saved-action-btn.saved-btn-danger:hover {
+  background: #B91C1C;
+  border-color: #B91C1C;
+}
+
+/* Saved Actions More Dropdown Menu */
+.saved-actions-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.saved-actions-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--card-bg, #fff);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  min-width: 190px;
+  padding: 6px;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.saved-actions-menu.open {
+  display: flex;
+}
+
+.saved-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-80);
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.saved-menu-item:hover {
+  background: var(--cream, #FBF6EF);
+  color: var(--pizza);
+}
+
+.saved-menu-item svg {
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.saved-menu-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 6px;
+}
+
+/* Bulk Selection Indicator on Dish Cards */
+.bulk-select-indicator {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--ink-30);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  color: #fff;
+  transition: all 0.18s ease;
+  cursor: pointer;
+}
+
+.bulk-select-indicator.selected {
+  background: var(--pizza);
+  border-color: var(--pizza);
+  transform: scale(1.06);
+}
+
+.dish-card.bulk-selectable {
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.dish-card.bulk-selected {
+  border-color: var(--pizza) !important;
+  background: rgba(232, 91, 56, 0.04) !important;
+  box-shadow: 0 4px 18px rgba(232, 91, 56, 0.15) !important;
+  transform: scale(0.99);
+}
+
+/* Detail Sheet Schedule Styling */
+.sheet-schedule-section {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+}
+
+.sheet-schedule-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sheet-schedule-icon {
+  flex-shrink: 0;
+  color: var(--pizza);
+  display: flex;
+  align-items: center;
+}
+
+.sheet-schedule-main {
+  flex: 1;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.sheet-schedule-toggle {
+  font-size: 11.5px;
+  color: var(--pizza);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.sheet-schedule-days-list {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  font-size: 12.5px;
+  color: var(--ink-70);
+}
+
+.sheet-schedule-day-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.sheet-schedule-day-row.is-today {
+  font-weight: 700;
+  color: var(--pizza-dark);
+}
+
+.sheet-schedule-day-row.is-closed {
+  color: var(--ink-40);
+}
+
 @media (max-width: 600px) {
   .saved-actions-toolbar {
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
+    justify-content: center;
   }
 
   .saved-actions-primary,
   .saved-actions-secondary {
     width: 100%;
-    justify-content: stretch;
+    justify-content: center;
   }
 
-  .saved-actions-primary .saved-action-btn,
-  .saved-actions-secondary .saved-action-btn {
+  .saved-actions-primary .saved-action-btn {
     flex: 1 1 auto;
     text-align: center;
   }

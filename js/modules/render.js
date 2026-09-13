@@ -143,9 +143,25 @@ export function renderSaved(focusSelector = null) {
   const exitBtn = document.getElementById('saved-exit-friend-btn');
   const mergeBtn = document.getElementById('saved-merge-friend-btn');
   
+  const normalActions = document.getElementById('saved-normal-actions');
+  const bulkActions = document.getElementById('saved-bulk-actions');
+  const bulkRemoveBtn = document.getElementById('saved-bulk-remove-btn');
+  const bulkRemoveText = document.getElementById('saved-bulk-remove-text');
+
+  if (State.bulkEditActive) {
+    if (normalActions) normalActions.style.display = 'none';
+    if (bulkActions) bulkActions.style.display = 'flex';
+    const selCount = State.bulkEditSelection ? State.bulkEditSelection.size : 0;
+    if (bulkRemoveBtn) bulkRemoveBtn.disabled = selCount === 0;
+    if (bulkRemoveText) bulkRemoveText.textContent = `Remove (${selCount})`;
+  } else {
+    if (normalActions) normalActions.style.display = 'flex';
+    if (bulkActions) bulkActions.style.display = 'none';
+  }
+
   const crawlBtn = document.getElementById('saved-plan-crawl-btn');
   if (crawlBtn) {
-    if (!hasSavedItems) {
+    if (!hasSavedItems || State.bulkEditActive) {
       crawlBtn.style.display = 'none';
     } else {
       crawlBtn.style.display = 'inline-flex';
@@ -170,7 +186,7 @@ export function renderSaved(focusSelector = null) {
 
   const rankModeBtn = document.getElementById('saved-rank-mode-btn');
   if (rankModeBtn) {
-    if (!hasSavedItems) {
+    if (!hasSavedItems || State.bulkEditActive) {
       rankModeBtn.style.display = 'none';
     } else {
       rankModeBtn.style.display = 'inline-flex';
@@ -189,23 +205,36 @@ export function renderSaved(focusSelector = null) {
 
   const shareRankingsBtn = document.getElementById('saved-picks-card-btn');
   if (shareRankingsBtn) {
-    if (hasSavedItems && State.rankingModeActive) {
+    if (hasSavedItems && State.rankingModeActive && !State.bulkEditActive) {
       shareRankingsBtn.style.display = 'inline-flex';
     } else {
       shareRankingsBtn.style.display = 'none';
     }
   }
 
-  if (State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]) {
+  const moreDropdownWrap = document.getElementById('saved-more-dropdown-wrap');
+  if (moreDropdownWrap) {
+    moreDropdownWrap.style.display = (hasSavedItems && !State.bulkEditActive) ? 'inline-block' : 'none';
+  }
+
+  const manageDivider = document.getElementById('saved-manage-divider');
+  const manageModeBtn = document.getElementById('saved-manage-mode-btn');
+  const isViewingFriend = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex];
+
+  if (isViewingFriend) {
     if (headerTitle) headerTitle.textContent = `${esc(State.friends[State.viewingFriendIndex].name)}'s Spots`;
     if (copyBtn) copyBtn.style.display = 'none';
     if (exitBtn) exitBtn.style.display = 'inline-flex';
-    if (mergeBtn) mergeBtn.style.display = 'inline-flex';
+    if (mergeBtn) mergeBtn.style.display = 'flex';
+    if (manageDivider) manageDivider.style.display = 'none';
+    if (manageModeBtn) manageModeBtn.style.display = 'none';
   } else {
-    if (headerTitle) headerTitle.textContent = 'Your Saved Spots';
-    if (copyBtn) copyBtn.style.display = 'inline-flex';
+    if (headerTitle) headerTitle.textContent = State.bulkEditActive ? 'Manage Saved Spots' : 'Your Saved Spots';
+    if (copyBtn) copyBtn.style.display = 'flex';
     if (exitBtn) exitBtn.style.display = 'none';
     if (mergeBtn) mergeBtn.style.display = 'none';
+    if (manageDivider) manageDivider.style.display = 'block';
+    if (manageModeBtn) manageModeBtn.style.display = 'flex';
   }
 
   if (items.length === 0) {
