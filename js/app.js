@@ -1261,18 +1261,23 @@ function init() {
     let sheetStartY = 0;
     let sheetCurrentY = 0;
     let sheetIsDragging = false;
-    let sheetAtTop = false;
+    let sheetCanDrag = false;
 
     detailSheet.addEventListener('touchstart', e => {
       if (window.innerWidth > 768) return;
+      const isHandle = e.target.closest('.sheet-handle');
+      const isAtTop = detailSheet.scrollTop <= 2;
       sheetStartY = e.touches[0].clientY;
-      sheetAtTop = detailSheet.scrollTop <= 2;
+      sheetCurrentY = sheetStartY;
+      sheetCanDrag = !!(isHandle || isAtTop);
       sheetIsDragging = true;
-      detailSheet.style.transition = 'none';
+      if (sheetCanDrag) {
+        detailSheet.style.transition = 'none';
+      }
     }, { passive: false });
 
     detailSheet.addEventListener('touchmove', e => {
-      if (!sheetIsDragging || !sheetAtTop || window.innerWidth > 768) return;
+      if (!sheetIsDragging || !sheetCanDrag || window.innerWidth > 768) return;
       sheetCurrentY = e.touches[0].clientY;
       const deltaY = sheetCurrentY - sheetStartY;
       if (deltaY > 0) {
@@ -1286,12 +1291,13 @@ function init() {
       sheetIsDragging = false;
       detailSheet.style.transition = '';
       const deltaY = sheetCurrentY - sheetStartY;
-      if (sheetAtTop && deltaY > 80) {
+      if (sheetCanDrag && deltaY > 80) {
         closeDetail();
         setTimeout(() => { detailSheet.style.transform = ''; }, 300);
       } else {
         detailSheet.style.transform = '';
       }
+      sheetCanDrag = false;
     });
   }
 

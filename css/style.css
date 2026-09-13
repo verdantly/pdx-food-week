@@ -3067,6 +3067,7 @@ body.is-landing .view-footer,
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   cursor: grab;
+  touch-action: none;
 }
 
 .sheet-handle::after {

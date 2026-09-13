@@ -228,6 +228,29 @@ test.describe('Roadmap Features E2E', () => {
       };
     });
     expect(scrolledPositions.handleTop).toBeCloseTo(scrolledPositions.sheetTop, 0);
+
+    // Pull handle down when scrolled down and verify detail sheet closes
+    const handleBox = await handle.boundingBox();
+    const startX = handleBox.x + handleBox.width / 2;
+    const startY = handleBox.y + handleBox.height / 2;
+
+    await page.mouse.move(startX, startY);
+    await page.mouse.down();
+    // Dispatch touch sequence to trigger touch drag
+    await page.evaluate(({ sx, sy }) => {
+      const h = document.querySelector('.sheet-handle');
+      const touchStart = new Touch({ identifier: 1, target: h, clientX: sx, clientY: sy });
+      h.dispatchEvent(new TouchEvent('touchstart', { touches: [touchStart], changedTouches: [touchStart], bubbles: true, cancelable: true }));
+
+      const touchMove = new Touch({ identifier: 1, target: h, clientX: sx, clientY: sy + 120 });
+      h.dispatchEvent(new TouchEvent('touchmove', { touches: [touchMove], changedTouches: [touchMove], bubbles: true, cancelable: true }));
+
+      const touchEnd = new Touch({ identifier: 1, target: h, clientX: sx, clientY: sy + 120 });
+      h.dispatchEvent(new TouchEvent('touchend', { touches: [], changedTouches: [touchEnd], bubbles: true, cancelable: true }));
+    }, { sx: startX, sy: startY });
+
+    const overlay = page.locator('#detail-overlay');
+    await expect(overlay).not.toHaveClass(/open/);
   });
 
   test('Mobile filter drawer displays Days label stacked above pills', async ({ page, isMobile }) => {
