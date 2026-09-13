@@ -4676,7 +4676,7 @@ select:focus-visible {
   /* Hide the desktop specific components on mobile */
   .header-top,
   .header-switcher,
-  .header-meta-row,
+  .header-meta-row .header-switcher,
   .header-search-slot,
   .nav-tabs {
     display: none !important;
