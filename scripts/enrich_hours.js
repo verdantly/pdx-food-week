@@ -88,16 +88,22 @@ async function fetchGooglePlacesHours(restaurant, address, apiKey) {
       res.on('end', () => {
         try {
           const json = JSON.parse(data);
+          if (json.status && json.status !== 'OK' && json.status !== 'ZERO_RESULTS') {
+            console.warn(`[Places API FindPlace Error] status: ${json.status}`, json.error_message ? `— ${json.error_message}` : '');
+          }
           if (json.candidates && json.candidates.length > 0) {
             resolve(json.candidates[0].place_id);
           } else {
             resolve(null);
           }
-        } catch {
+        } catch (e) {
           resolve(null);
         }
       });
-    }).on('error', () => resolve(null));
+    }).on('error', (err) => {
+      console.warn(`[Places API Network Error]: ${err.message}`);
+      resolve(null);
+    });
   });
 
   if (!placeId) return null;
@@ -110,6 +116,9 @@ async function fetchGooglePlacesHours(restaurant, address, apiKey) {
       res.on('end', () => {
         try {
           const json = JSON.parse(data);
+          if (json.status && json.status !== 'OK') {
+            console.warn(`[Places API Details Error] status: ${json.status}`, json.error_message ? `— ${json.error_message}` : '');
+          }
           if (json.result && json.result.opening_hours) {
             const oh = json.result.opening_hours;
             const periods = oh.periods || [];
@@ -127,14 +136,24 @@ async function fetchGooglePlacesHours(restaurant, address, apiKey) {
           resolve(null);
         }
       });
-    }).on('error', () => resolve(null));
+    }).on('error', (err) => {
+      console.warn(`[Places API Details Network Error]: ${err.message}`);
+      resolve(null);
+    });
   });
 }
 
+function isHeuristicHours(hours) {
+  if (!hours || !hours.weekdayDescriptions || hours.weekdayDescriptions.length === 0) return true;
+  // Heuristic hours only say "Open" or "Closed" without specific times like "11:00 AM"
+  return hours.weekdayDescriptions.every(d => /: (Open|Closed)$/i.test(d.trim()));
+}
+
 async function enrichHours() {
+  const isForce = process.argv.includes('--force');
   const apiKey = process.env.GOOGLE_PLACES_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
   if (apiKey) {
-    console.log('Google Places API key detected. Will attempt to query Google Places API for un-cached items.');
+    console.log(`Google Places API key detected.${isForce ? ' (Force refresh enabled)' : ''} Will query Google Places API for real opening hours.`);
   } else {
     console.log('No Google Places API key detected. Using heuristic hours enrichment from text / closures.');
   }
@@ -177,8 +196,12 @@ async function enrichHours() {
       totalRestaurants++;
       const cacheKey = getCacheKey(r);
 
-      // Check if item already has hours
-      if (r.hours && (r.hours.weekdayDescriptions || r.hours.openDays)) {
+      const hasValidHours = r.hours && (r.hours.weekdayDescriptions || r.hours.openDays);
+      const isHeuristic = isHeuristicHours(r.hours);
+
+      // If we have an API key, we want to upgrade heuristic hours to real Places hours
+      // If we don't have an API key and it already has hours, keep it
+      if (hasValidHours && !isHeuristic && !isForce) {
         if (!cache[cacheKey]) {
           cache[cacheKey] = r.hours;
           cacheUpdated = true;
@@ -186,8 +209,8 @@ async function enrichHours() {
         continue;
       }
 
-      // Check cache
-      if (cache[cacheKey]) {
+      // Check cache if cache already has real hours
+      if (cache[cacheKey] && !isHeuristicHours(cache[cacheKey]) && !isForce) {
         r.hours = cache[cacheKey];
         fileChanged = true;
         totalEnriched++;
@@ -197,7 +220,15 @@ async function enrichHours() {
       // Check Google Places API if key is set
       let googleHours = null;
       if (apiKey) {
+        process.stdout.write(`Fetching hours for: ${r.restaurant}... `);
         googleHours = await fetchGooglePlacesHours(r.restaurant, r.address, apiKey);
+        if (googleHours) {
+          console.log('✓ Found hours');
+        } else {
+          console.log('✗ Not found / no hours');
+        }
+        // Small rate limit delay (100ms) to prevent burst throttling
+        await new Promise(res => setTimeout(res, 100));
       }
 
       if (googleHours) {
@@ -206,7 +237,7 @@ async function enrichHours() {
         cacheUpdated = true;
         fileChanged = true;
         totalEnriched++;
-      } else {
+      } else if (!hasValidHours || isForce) {
         // Fallback: heuristic hours from descriptions/notes
         const textToCheck = `${r.desc || ''} ${r.whatsOnIt || ''} ${r.whatTheySay || ''} ${r.notes || ''} ${r.restaurant || ''}`;
         const closed = parseClosedDays(textToCheck);
