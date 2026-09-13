@@ -348,6 +348,25 @@ test.describe('Roadmap Features E2E', () => {
     // Floating FAB should be visible on tablet
     const fab = page.locator('#mobile-filter-fab');
     await expect(fab).toBeVisible();
+
+    // Verify tablet header search input matches compact search input styling (16px font, 8px border-radius)
+    const searchInput = page.locator('#tablet-header-search-input');
+    const inputStyles = await searchInput.evaluate(el => {
+      const s = window.getComputedStyle(el);
+      return { borderRadius: s.borderRadius, fontSize: s.fontSize };
+    });
+    expect(inputStyles.borderRadius).toBe('8px');
+    expect(inputStyles.fontSize).toBe('16px');
+
+    // Verify filter drawer opens with fully curved corners (border-radius: 24px) on tablet
+    await fab.click();
+    const overlay = page.locator('#filter-drawer-overlay');
+    await expect(overlay).toHaveClass(/open/);
+    const drawer = overlay.locator('.filter-drawer');
+    const drawerBorderRadius = await drawer.evaluate(el => window.getComputedStyle(el).borderRadius);
+    expect(drawerBorderRadius).toBe('24px');
+    await page.click('#filter-drawer-overlay .drawer-close');
+    await expect(overlay).not.toHaveClass(/open/);
   });
 
   test('Breakpoints > 1440px do not render underline directly under .tab-header-title in saved view', async ({ page }) => {
