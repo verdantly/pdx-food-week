@@ -1834,7 +1834,11 @@ const App = {
   confirmBulkRemove,
   closeBulkRemoveConfirm,
   executeBulkRemove,
-  toggleSheetScheduleDropdown
+  toggleSheetScheduleDropdown,
+  toggleDayFilter,
+  clearAllDayFilters,
+  toggleDayFilterDropdown,
+  closeDayFilterDropdown
 };
 
 window.App = App;
