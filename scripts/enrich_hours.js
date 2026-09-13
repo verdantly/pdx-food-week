@@ -108,7 +108,7 @@ async function fetchGooglePlacesHours(restaurant, address, apiKey) {
 
   if (!placeId) return null;
 
-  const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=opening_hours,utc_offset_minutes&key=${apiKey}`;
+  const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=opening_hours,utc_offset&key=${apiKey}`;
   return new Promise((resolve) => {
     https.get(detailsUrl, (res) => {
       let data = '';
