@@ -3902,30 +3902,31 @@ input[type="search"]::-webkit-search-cancel-button {
   .saved-header-integrated {
     padding: 20px 24px;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
   }
   .header-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    flex: 1;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
     position: relative;
     padding-right: 0;
-    order: 1;
+    text-align: center;
+  }
+  .header-left .tab-header-title {
+    text-align: center;
+  }
+  .header-left .tab-header-title::after {
+    display: block;
+  }
+  .header-left .stats-pills {
+    justify-content: center;
+    margin-top: 0;
   }
   .saved-header-integrated::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: var(--pizza);
-    margin: 0 16px;
-    min-width: 24px;
-    order: 2;
-  }
-  .saved-actions-toolbar {
-    order: 3;
+    display: none;
   }
   .header-left::after {
     display: none;
@@ -4223,36 +4224,34 @@ input[type="search"]::-webkit-search-cancel-button {
   .saved-header-integrated {
     padding: 20px 32px;
     align-items: center;
-    flex-direction: row;
-    gap: 20px;
+    flex-direction: column;
+    gap: 16px;
   }
   .header-left {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    flex: 1;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
     position: relative;
     padding-right: 0;
-    order: 1;
+    text-align: center;
+  }
+  .header-left .tab-header-title {
+    text-align: center;
+  }
+  .header-left .tab-header-title::after {
+    display: block;
+  }
+  .header-left .stats-pills {
+    justify-content: center;
+    margin-top: 0;
   }
   .saved-header-integrated::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: var(--pizza);
-    margin: 0 20px;
-    min-width: 24px;
-    order: 2;
-  }
-  .saved-actions-toolbar {
-    order: 3;
+    display: none;
   }
   .header-left::after {
     display: none;
-  }
-  .header-left .stats-pills {
-    margin-top: 2px;
   }
 
   @media (min-width: 1440px) {
