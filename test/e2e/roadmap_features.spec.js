@@ -393,6 +393,25 @@ test.describe('Roadmap Features E2E', () => {
     });
     expect(pseudoDisplay).toBe('none');
   });
+
+  test('Tablet viewport displays .view-footer in content views but desktop and mobile do not', async ({ page }) => {
+    // Tablet viewport: 800px width
+    await page.setViewportSize({ width: 800, height: 900 });
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    const tabletBrowseFooter = page.locator('#view-browse .view-footer');
+    await expect(tabletBrowseFooter).toBeVisible();
+
+    // Desktop viewport: 1200px width
+    await page.setViewportSize({ width: 1200, height: 900 });
+    await expect(tabletBrowseFooter).toBeHidden();
+    await expect(page.locator('.sidebar-footer')).toBeVisible();
+
+    // Mobile viewport: 390px width
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(tabletBrowseFooter).toBeHidden();
+  });
 });
 
 

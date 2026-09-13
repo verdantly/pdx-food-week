@@ -1,9 +1,9 @@
-const CACHE_NAME = 'pdxfw-cache-mu04h2b2';
+const CACHE_NAME = 'pdxfw-cache-mu04t8ao';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=mu04h2b2',
+  'css/style.css?v=mu04t8ao',
   'js/app.js?v=mu044r7p',
   'js/meta.js?v=mu044r7p',
   'js/modules/auth.js',

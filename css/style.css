@@ -3689,8 +3689,12 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   .view-footer {
-    margin-left: 24px;
-    margin-right: 24px;
+    display: block;
+    margin: 48px auto 32px;
+    padding: 24px 24px 32px;
+    max-width: 800px;
+    border-top: 1px solid var(--border);
+    text-align: center;
   }
 
   #app {
