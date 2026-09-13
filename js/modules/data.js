@@ -100,7 +100,17 @@ export function getFiltered() {
     if (State.activeFilters.has('pie') && !r.wholePie) return false;
     if (State.activeFilters.has('spicy') && !r.spicy) return false;
     if (State.activeFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
-    if (State.activeDayFilter !== null && State.activeDayFilter !== undefined) {
+    if (State.activeDayFilters && State.activeDayFilters.size > 0) {
+      let matchesAny = false;
+      for (const day of State.activeDayFilters) {
+        if (day === 'now') {
+          if (isRestaurantOpenNow(r)) { matchesAny = true; break; }
+        } else {
+          if (isRestaurantOpenOnDay(r, day)) { matchesAny = true; break; }
+        }
+      }
+      if (!matchesAny) return false;
+    } else if (State.activeDayFilter !== null && State.activeDayFilter !== undefined) {
       if (State.activeDayFilter === 'now') {
         if (!isRestaurantOpenNow(r)) return false;
       } else {

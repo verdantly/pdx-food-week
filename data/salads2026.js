@@ -55,13 +55,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 3:00 – 9:00 PM",
+        "Tuesday: 11:30 AM – 9:00 PM",
+        "Wednesday: 11:30 AM – 9:00 PM",
+        "Thursday: 11:30 AM – 9:00 PM",
+        "Friday: 11:30 AM – 9:00 PM",
+        "Saturday: 3:00 – 9:00 PM",
+        "Sunday: 3:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1500"
+          }
+        }
       ]
     }
   },
@@ -89,21 +161,71 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:30 AM – 8:00 PM",
+        "Thursday: 11:30 AM – 8:00 PM",
+        "Friday: 11:30 AM – 8:00 PM",
+        "Saturday: 11:30 AM – 8:00 PM",
+        "Sunday: 11:30 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1130"
+          }
+        }
       ]
     }
   },
@@ -139,13 +261,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 5:00 – 10:00 PM",
+        "Tuesday: 5:00 – 10:00 PM",
+        "Wednesday: 5:00 – 10:00 PM",
+        "Thursday: 5:00 – 10:00 PM",
+        "Friday: 5:00 – 10:00 PM",
+        "Saturday: 5:00 – 10:00 PM",
+        "Sunday: 5:00 – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2200"
+          },
+          "open": {
+            "day": 0,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1700"
+          }
+        }
       ]
     }
   },
@@ -181,13 +375,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 10:30 AM – 8:00 PM",
+        "Tuesday: 10:30 AM – 8:00 PM",
+        "Wednesday: 10:30 AM – 8:00 PM",
+        "Thursday: 10:30 AM – 8:00 PM",
+        "Friday: 10:30 AM – 8:00 PM",
+        "Saturday: 10:30 AM – 8:00 PM",
+        "Sunday: 10:30 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1030"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1030"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1030"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1030"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1030"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1030"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1030"
+          }
+        }
       ]
     }
   },
@@ -223,13 +489,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 8:00 PM",
+        "Tuesday: 8:00 AM – 8:00 PM",
+        "Wednesday: 8:00 AM – 8:00 PM",
+        "Thursday: 8:00 AM – 8:00 PM",
+        "Friday: 8:00 AM – 8:00 PM",
+        "Saturday: 9:00 AM – 6:30 PM",
+        "Sunday: 9:00 AM – 4:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1600"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1830"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        }
       ]
     }
   },
@@ -265,13 +603,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 4:00 PM",
+        "Tuesday: 8:00 AM – 4:00 PM",
+        "Wednesday: 8:00 AM – 4:00 PM",
+        "Thursday: 8:00 AM – 4:00 PM",
+        "Friday: 8:00 AM – 4:00 PM",
+        "Saturday: 8:00 AM – 4:00 PM",
+        "Sunday: 9:00 AM – 4:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1600"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1600"
+          },
+          "open": {
+            "day": 1,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1600"
+          },
+          "open": {
+            "day": 2,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1600"
+          },
+          "open": {
+            "day": 3,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1600"
+          },
+          "open": {
+            "day": 4,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1600"
+          },
+          "open": {
+            "day": 5,
+            "time": "0800"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1600"
+          },
+          "open": {
+            "day": 6,
+            "time": "0800"
+          }
+        }
       ]
     }
   },
@@ -299,7 +709,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -307,13 +716,75 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
       ]
     }
   },
@@ -349,13 +820,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:30 AM – 7:30 PM",
+        "Tuesday: 8:30 AM – 7:30 PM",
+        "Wednesday: 8:30 AM – 7:30 PM",
+        "Thursday: 8:30 AM – 7:30 PM",
+        "Friday: 8:30 AM – 7:30 PM",
+        "Saturday: 8:30 AM – 7:30 PM",
+        "Sunday: 8:30 AM – 7:30 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1930"
+          },
+          "open": {
+            "day": 0,
+            "time": "0830"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1930"
+          },
+          "open": {
+            "day": 1,
+            "time": "0830"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1930"
+          },
+          "open": {
+            "day": 2,
+            "time": "0830"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1930"
+          },
+          "open": {
+            "day": 3,
+            "time": "0830"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1930"
+          },
+          "open": {
+            "day": 4,
+            "time": "0830"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1930"
+          },
+          "open": {
+            "day": 5,
+            "time": "0830"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1930"
+          },
+          "open": {
+            "day": 6,
+            "time": "0830"
+          }
+        }
       ]
     }
   },
@@ -391,13 +934,155 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Tuesday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Wednesday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Thursday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Friday: 11:00 AM – 2:00 PM, 4:00 – 10:00 PM",
+        "Saturday: 11:00 AM – 2:00 PM, 4:00 – 10:00 PM",
+        "Sunday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1400"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1400"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1400"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1400"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1400"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1400"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
       ]
     }
   },
@@ -433,13 +1118,155 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Tuesday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Wednesday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Thursday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM",
+        "Friday: 11:00 AM – 2:00 PM, 4:00 – 10:00 PM",
+        "Saturday: 11:00 AM – 2:00 PM, 4:00 – 10:00 PM",
+        "Sunday: 11:00 AM – 2:00 PM, 4:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1400"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1400"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1400"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1400"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1400"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1400"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
       ]
     }
   },
@@ -467,7 +1294,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -475,13 +1301,115 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 5:00 – 9:00 PM",
+        "Wednesday: 9:00 AM – 2:00 PM, 5:00 – 9:00 PM",
+        "Thursday: 9:00 AM – 2:00 PM, 5:00 – 9:00 PM",
+        "Friday: 9:00 AM – 2:00 PM, 5:00 – 10:00 PM",
+        "Saturday: 9:00 AM – 2:00 PM, 5:00 – 10:00 PM",
+        "Sunday: 9:00 AM – 2:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1400"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1400"
+          },
+          "open": {
+            "day": 3,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1400"
+          },
+          "open": {
+            "day": 5,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1400"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1700"
+          }
+        }
       ]
     }
   },
@@ -508,7 +1436,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "url": "https://bridgetownbites.com/2026/07/20/2026-portland-salad-week-restaurant-specials-oregon/",
     "hours": {
       "openDays": [
-        0,
         1,
         2,
         3,
@@ -517,13 +1444,75 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 5:00 – 9:00 PM",
+        "Tuesday: 5:00 – 9:00 PM",
+        "Wednesday: 5:00 – 9:00 PM",
+        "Thursday: 5:00 – 9:00 PM",
+        "Friday: 4:30 – 10:00 PM",
+        "Saturday: 4:30 – 10:00 PM",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1630"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1630"
+          }
+        }
       ]
     }
   },
@@ -551,7 +1540,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -559,13 +1547,75 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 3:00 – 9:00 PM",
+        "Wednesday: 3:00 – 9:00 PM",
+        "Thursday: 3:00 – 9:00 PM",
+        "Friday: 3:00 – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
       ]
     }
   },
@@ -601,13 +1651,85 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 9:00 AM – 3:00 PM",
+        "Tuesday: 9:00 AM – 3:00 PM",
+        "Wednesday: 9:00 AM – 3:00 PM",
+        "Thursday: 9:00 AM – 3:00 PM",
+        "Friday: 9:00 AM – 3:00 PM",
+        "Saturday: 9:00 AM – 3:00 PM",
+        "Sunday: 9:00 AM – 3:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1500"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1500"
+          },
+          "open": {
+            "day": 1,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1500"
+          },
+          "open": {
+            "day": 2,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1500"
+          },
+          "open": {
+            "day": 3,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1500"
+          },
+          "open": {
+            "day": 4,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1500"
+          },
+          "open": {
+            "day": 5,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1500"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        }
       ]
     }
   },
@@ -636,20 +1758,81 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 3:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 11:00 AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 8:00 PM",
+        "Saturday: 11:00 AM – 8:00 PM",
+        "Sunday: 11:00 AM – 7:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1900"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1500"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
       ]
     }
   }

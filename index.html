@@ -170,23 +170,42 @@
       </div>
 
       <h1 class="header-title" id="header-title">PDX <em>Food Week</em></h1>
-      <div class="header-meta" id="header-meta" style="margin-bottom: 12px;">
-        <span>Portland's Unofficial Food Week Companion</span>
+      <div class="header-meta-row">
+        <div class="header-meta" id="header-meta">
+          <span>Portland's Unofficial Food Week Companion</span>
+        </div>
+        <div class="header-switcher">
+          <select class="week-switcher-select" id="week-switcher"
+            onchange="App.switchWeek(this.value); this.selectedIndex = 0;" aria-label="Switch food week">
+            <option value="" disabled selected hidden>Select food week</option>
+            <option value="wing-2026">🍗 Wing Week</option>
+            <option value="fried-chicken-2026">🐔 Fried Chicken Week</option>
+            <option value="burger-2026">🍔 Burger Week</option>
+            <option value="salad-2026">🥗 Salad Week</option>
+            <option value="slushie-2026">🧊 Summer of Slushies</option>
+            <option value="nacho-2026">🧀 Nacho Week</option>
+            <option value="taco-2026">🌮 Taco Week</option>
+            <option value="highball-2026">🥃 Highball Week</option>
+            <option value="pizza-2026">🍕 Pizza Week</option>
+          </select>
+        </div>
       </div>
-      <div class="header-switcher" style="margin-bottom: 24px; text-align: left;">
-        <select class="week-switcher-select" id="week-switcher"
-          onchange="App.switchWeek(this.value); this.selectedIndex = 0;" aria-label="Switch food week">
-          <option value="" disabled selected hidden>Select food week</option>
-          <option value="wing-2026">🍗 Wing Week</option>
-          <option value="fried-chicken-2026">🐔 Fried Chicken Week</option>
-          <option value="burger-2026">🍔 Burger Week</option>
-          <option value="salad-2026">🥗 Salad Week</option>
-          <option value="slushie-2026">🧊 Summer of Slushies</option>
-          <option value="nacho-2026">🧀 Nacho Week</option>
-          <option value="taco-2026">🌮 Taco Week</option>
-          <option value="highball-2026">🥃 Highball Week</option>
-          <option value="pizza-2026">🍕 Pizza Week</option>
-        </select>
+      <div class="header-search-slot" id="header-search-slot">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5" />
+            <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" />
+          </svg>
+          <input id="tablet-header-search-input" type="search" placeholder="Search restaurants, dishes, neighborhoods..."
+            aria-label="Search dishes and restaurants" autocomplete="off" />
+          <button id="tablet-header-search-clear" class="search-clear-btn" aria-label="Clear search" style="display: none;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
       <nav class="nav-tabs" role="tablist" aria-label="App sections">
         <button class="nav-tab active" data-tab="browse" role="tab" onclick="App.switchTab('browse')"

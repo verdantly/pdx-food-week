@@ -13,7 +13,8 @@ import {
   applySavedZipCode, moveSavedItem, toggleSavedRankingMode, clearAllFilters, openFilterDrawer,
   applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter,
   toggleSavedBulkEdit, toggleBulkEditItem, selectAllBulkEdit, deselectAllBulkEdit,
-  confirmBulkRemove, closeBulkRemoveConfirm, executeBulkRemove
+  confirmBulkRemove, closeBulkRemoveConfirm, executeBulkRemove,
+  toggleDayFilter, clearAllDayFilters, toggleDayFilterDropdown, closeDayFilterDropdown
 } from './modules/filters.js';
 import { renderMap, refreshMapLayout, handleCrawlPinClick } from './modules/map.js';
 import { buildSwipeQueue, renderSwipe, swipe, undoSwipe, skipSwipe, resetSwipe, swipeOpenDetail, attachSwipeGestures } from './modules/swipe.js';
@@ -1121,7 +1122,7 @@ function setupMobileScrollListener() {
   if (!viewBrowse || !viewSaved) return;
 
   const onScroll = () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth >= 1024) {
       document.getElementById('app').classList.remove('compact-header');
       const fab = document.getElementById('mobile-filter-fab');
       if (fab) fab.classList.remove('show-fab');
@@ -1432,6 +1433,59 @@ function init() {
     });
   }
 
+  const tabletSearchInput = document.getElementById('tablet-header-search-input');
+  const tabletSearchClearBtn = document.getElementById('tablet-header-search-clear');
+  if (tabletSearchInput && tabletSearchClearBtn) {
+    const debouncedTabletSearch = debounce(val => {
+      if (State.activeTab === 'browse') {
+        State.searchQuery = val;
+        const mainSearchInput = document.getElementById('search-input');
+        if (mainSearchInput) mainSearchInput.value = val;
+        renderBrowse();
+        renderFilters();
+      } else if (State.activeTab === 'saved') {
+        State.savedSearchQuery = val;
+        const mainSavedSearchInput = document.getElementById('saved-search-input');
+        if (mainSavedSearchInput) mainSavedSearchInput.value = val;
+        renderSaved();
+      } else if (State.activeTab === 'map') {
+        State.mapSearchQuery = val;
+        const mainMapSearchInput = document.getElementById('map-search-input');
+        if (mainMapSearchInput) mainMapSearchInput.value = val;
+        renderMap();
+      }
+    }, 150);
+
+    tabletSearchInput.addEventListener('input', e => {
+      const val = e.target.value;
+      tabletSearchClearBtn.style.display = val ? 'flex' : 'none';
+      debouncedTabletSearch(val);
+    });
+
+    tabletSearchClearBtn.addEventListener('click', () => {
+      tabletSearchInput.value = '';
+      tabletSearchClearBtn.style.display = 'none';
+      if (State.activeTab === 'browse') {
+        State.searchQuery = '';
+        const mainSearchInput = document.getElementById('search-input');
+        if (mainSearchInput) mainSearchInput.value = '';
+        renderBrowse();
+        renderFilters();
+      } else if (State.activeTab === 'saved') {
+        State.savedSearchQuery = '';
+        const mainSavedSearchInput = document.getElementById('saved-search-input');
+        if (mainSavedSearchInput) mainSavedSearchInput.value = '';
+        renderSaved();
+      } else if (State.activeTab === 'map') {
+        State.mapSearchQuery = '';
+        const mainMapSearchInput = document.getElementById('map-search-input');
+        if (mainMapSearchInput) mainMapSearchInput.value = '';
+        renderMap();
+      }
+      tabletSearchInput.focus();
+    });
+  }
+
   document.addEventListener('click', e => {
     const isCompactClick = e.target.closest('.compact-app-bar') || e.target.closest('.compact-dropdown');
     if (!isCompactClick && compactSearchDropdown && compactMenuDropdown) {
@@ -1442,6 +1496,11 @@ function init() {
     const isSavedDropdownClick = e.target.closest('#saved-more-dropdown-wrap');
     if (!isSavedDropdownClick) {
       closeSavedMoreMenu();
+    }
+
+    const isDayDropdownClick = e.target.closest('#day-filter-dropdown-wrap');
+    if (!isDayDropdownClick) {
+      closeDayFilterDropdown();
     }
   });
 
@@ -1520,7 +1579,7 @@ function init() {
       placeholder = 'Search dishes, restaurants, areas...';
     }
 
-    ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'landing-global-search'].forEach(id => {
+    ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'tablet-header-search-input', 'landing-global-search'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.placeholder = placeholder;
     });
@@ -1528,7 +1587,7 @@ function init() {
 
   window.addEventListener('resize', () => {
     if (State.activeTab === 'swipe') renderSwipe();
-    if (window.innerWidth > 768 && State.filterDrawerOpen) {
+    if (window.innerWidth >= 1024 && State.filterDrawerOpen) {
       closeFilterDrawer();
     }
     updateSearchPlaceholders();
@@ -1720,6 +1779,10 @@ const App = {
   renderFilters,
   renderDayFilters,
   setDayFilter,
+  toggleDayFilter,
+  clearAllDayFilters,
+  toggleDayFilterDropdown,
+  closeDayFilterDropdown,
   exportTopPicksCard,
   triggerPwaInstall,
   openNotificationsModal,

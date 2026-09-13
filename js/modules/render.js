@@ -349,13 +349,71 @@ export function renderDayFilters() {
     { id: 0, label: 'Sun' }
   ];
 
+  // Mobile pills HTML (rendered inside drawer or mobile views)
   const chipsHTML = days.map(d => {
-    const isAct = State.activeDayFilter === d.id;
+    const isAct = (State.activeDayFilters && State.activeDayFilters.has(d.id)) || (State.activeDayFilters.size === 0 && d.id === null) || State.activeDayFilter === d.id;
     const arg = d.id === null ? 'null' : (typeof d.id === 'string' ? `'${d.id}'` : d.id);
     return `<button class="filter-chip day-chip ${isAct ? 'active' : ''}" onclick="App.setDayFilter(${arg})">${esc(d.label)}</button>`;
   }).join('');
 
-  container.innerHTML = `<span class="filter-label">Days:</span><div class="filter-chips-wrapper">${chipsHTML}</div>`;
+  // Desktop dropdown with multi-select checkboxes
+  const hasActiveFilters = State.activeDayFilters && State.activeDayFilters.size > 0;
+  let dropdownBtnLabel = 'Days';
+  if (hasActiveFilters) {
+    const selectedLabels = days.filter(d => d.id !== null && State.activeDayFilters.has(d.id)).map(d => d.label);
+    if (selectedLabels.length === 1) {
+      dropdownBtnLabel = selectedLabels[0];
+    } else if (selectedLabels.length > 1) {
+      dropdownBtnLabel = `Days (${selectedLabels.length})`;
+    }
+  }
+
+  const dropdownItemsHTML = days.map(d => {
+    if (d.id === null) {
+      const isChecked = !hasActiveFilters;
+      return `
+        <label class="day-dropdown-item day-dropdown-all ${isChecked ? 'active' : ''}">
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="App.toggleDayFilter(null)">
+          <span>All Days</span>
+        </label>
+        <div class="day-dropdown-divider"></div>
+      `;
+    }
+    const isChecked = State.activeDayFilters && State.activeDayFilters.has(d.id);
+    const arg = typeof d.id === 'string' ? `'${d.id}'` : d.id;
+    return `
+      <label class="day-dropdown-item ${isChecked ? 'active' : ''}">
+        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="App.toggleDayFilter(${arg})">
+        <span>${esc(d.label)}</span>
+      </label>
+    `;
+  }).join('');
+
+  const dropdownHTML = `
+    <div class="day-filter-dropdown-wrap" id="day-filter-dropdown-wrap">
+      <button class="filter-chip day-filter-dropdown-btn ${hasActiveFilters ? 'active' : ''}" id="day-filter-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="${Boolean(State.dayFilterDropdownOpen)}" onclick="App.toggleDayFilterDropdown()">
+        <span>${esc(dropdownBtnLabel)}</span>
+        <svg viewBox="0 0 12 12" width="10" height="10" fill="currentColor" style="margin-left: 4px; pointer-events: none;">
+          <path d="M2 4l4 4 4-4z"/>
+        </svg>
+      </button>
+      <div class="day-filter-dropdown-menu ${State.dayFilterDropdownOpen ? 'open' : ''}" id="day-filter-dropdown-menu">
+        <div class="day-dropdown-header">
+          <span class="day-dropdown-title">Select Days</span>
+          ${hasActiveFilters ? `<button type="button" class="day-dropdown-clear" onclick="App.clearAllDayFilters()">Reset</button>` : ''}
+        </div>
+        <div class="day-dropdown-list">
+          ${dropdownItemsHTML}
+        </div>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = `
+    <span class="filter-label">Days:</span>
+    <div class="filter-chips-wrapper day-chips-desktop-hide">${chipsHTML}</div>
+    <div class="day-dropdown-container">${dropdownHTML}</div>
+  `;
 }
 
 export function renderHeader() {

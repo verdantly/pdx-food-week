@@ -5,6 +5,8 @@ export const State = {
   activeFilters: new Set(),
   draftFilters: new Set(),
   activeDayFilter: null,
+  activeDayFilters: new Set(),
+  dayFilterDropdownOpen: false,
   activeSort: 'restaurant',
   searchQuery: '',
   activeSavedFilters: new Set(),

@@ -8,38 +8,64 @@ test.describe('Roadmap Features E2E', () => {
     if (isMobile) {
       await page.click('#mobile-filter-fab');
       await expect(page.locator('#filter-drawer-overlay')).toHaveClass(/open/);
-    }
 
-    const dayFilters = page.locator('#browse-day-filters .day-chip');
-    await expect(dayFilters.first()).toBeVisible();
+      const dayFilters = page.locator('#browse-day-filters .day-chip');
+      await expect(dayFilters.first()).toBeVisible();
 
-    // Verify Tuesday filter excludes E-San Thai Woodstock (Closed Tuesday's)
-    const tueBtn = dayFilters.filter({ hasText: 'Tue' });
-    await expect(tueBtn).toBeVisible();
-    await tueBtn.click();
+      // Verify Tuesday filter excludes E-San Thai Woodstock (Closed Tuesday's)
+      const tueBtn = dayFilters.filter({ hasText: 'Tue' });
+      await expect(tueBtn).toBeVisible();
+      await tueBtn.click();
 
-    if (isMobile) {
       await page.click('#filter-drawer-overlay .btn-apply');
       await expect(page.locator('#filter-drawer-overlay')).not.toHaveClass(/open/);
-    }
 
-    // E-San Thai Woodstock should NOT be visible
-    const eSanCard = page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' });
-    await expect(eSanCard).toHaveCount(0);
+      // E-San Thai Woodstock should NOT be visible
+      const eSanCard = page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' });
+      await expect(eSanCard).toHaveCount(0);
 
-    // Monday filter includes E-San Thai Woodstock
-    if (isMobile) {
+      // Monday filter includes E-San Thai Woodstock
       await page.click('#mobile-filter-fab');
       await expect(page.locator('#filter-drawer-overlay')).toHaveClass(/open/);
-    }
-    const monBtn = dayFilters.filter({ hasText: 'Mon' });
-    await monBtn.click();
+      const monBtn = dayFilters.filter({ hasText: 'Mon' });
+      await monBtn.click();
 
-    if (isMobile) {
       await page.click('#filter-drawer-overlay .btn-apply');
       await expect(page.locator('#filter-drawer-overlay')).not.toHaveClass(/open/);
+      await expect(page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' })).toHaveCount(1);
+    } else {
+      // Desktop: test the Day filter dropdown with checkboxes
+      const dropdownBtn = page.locator('#day-filter-dropdown-btn');
+      await expect(dropdownBtn).toBeVisible();
+      await dropdownBtn.click();
+
+      const dropdownMenu = page.locator('#day-filter-dropdown-menu');
+      await expect(dropdownMenu).toBeVisible();
+
+      // Select Tuesday
+      const tueLabel = dropdownMenu.locator('.day-dropdown-item', { hasText: 'Tue' });
+      await expect(tueLabel).toBeVisible();
+      await tueLabel.click();
+
+      // Close dropdown
+      await page.click('body', { position: { x: 10, y: 10 } });
+      await expect(dropdownMenu).toBeHidden();
+
+      // E-San Thai Woodstock should NOT be visible (Closed Tuesday)
+      const eSanCard = page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' });
+      await expect(eSanCard).toHaveCount(0);
+
+      // Reopen dropdown and toggle Monday
+      await dropdownBtn.click();
+      await expect(dropdownMenu).toBeVisible();
+      const monLabel = dropdownMenu.locator('.day-dropdown-item', { hasText: 'Mon' });
+      await monLabel.click();
+      await page.click('body', { position: { x: 10, y: 10 } });
+      await expect(dropdownMenu).toBeHidden();
+
+      // E-San Thai Woodstock is open Monday, so it should now be visible
+      await expect(page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' })).toHaveCount(1);
     }
-    await expect(page.locator('.dish-card', { hasText: 'E-San Thai Woodstock' })).toHaveCount(1);
   });
 
   test('Status badges have no pulsing dots or live dot elements', async ({ page }) => {
@@ -299,6 +325,54 @@ test.describe('Roadmap Features E2E', () => {
 
     // Normal actions should be restored
     await expect(page.locator('#saved-normal-actions')).toBeVisible();
+  });
+
+  test('Tablet viewports show inline meta and switcher, header search slot, and floating FAB instead of controls row', async ({ page }) => {
+    // Set tablet viewport
+    await page.setViewportSize({ width: 820, height: 1180 });
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    // .header-meta-row should be visible and displayed as a flex row
+    const metaRow = page.locator('.header-meta-row');
+    await expect(metaRow).toBeVisible();
+
+    // The header-search-slot should be visible in app-header
+    const headerSearch = page.locator('#header-search-slot');
+    await expect(headerSearch).toBeVisible();
+
+    // The inline .header-controls-row should be hidden on tablet
+    const controlsRow = page.locator('#view-browse .header-controls-row');
+    await expect(controlsRow).toBeHidden();
+
+    // Floating FAB should be visible on tablet
+    const fab = page.locator('#mobile-filter-fab');
+    await expect(fab).toBeVisible();
+  });
+
+  test('Breakpoints > 1440px do not render underline directly under .tab-header-title in saved view', async ({ page }) => {
+    // Set wide desktop viewport
+    await page.setViewportSize({ width: 1600, height: 1000 });
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    // Save a spot so saved tab has contents
+    const saveBtn = page.locator('.dish-card .bookmark-btn').first();
+    await saveBtn.click();
+
+    // Navigate to saved tab
+    await page.click('.nav-tab[data-tab="saved"]');
+    await expect(page.locator('#view-saved')).toBeVisible();
+
+    const titleEl = page.locator('#saved-header-title');
+    await expect(titleEl).toBeVisible();
+
+    // Verify .tab-header-title::after is hidden via computed style
+    const pseudoDisplay = await page.evaluate(() => {
+      const el = document.getElementById('saved-header-title');
+      return window.getComputedStyle(el, '::after').display;
+    });
+    expect(pseudoDisplay).toBe('none');
   });
 });
 

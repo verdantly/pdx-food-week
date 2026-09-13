@@ -77,7 +77,8 @@ export function updateMobileFabBadge() {
   
   let count = 0;
   if (State.activeTab === 'browse') {
-    count = State.activeFilters.size + (State.activeDayFilter !== null ? 1 : 0) + (State.searchQuery !== '' ? 1 : 0) + (State.activeSort === 'distance' ? 1 : 0);
+    const dayFilterActive = (State.activeDayFilters && State.activeDayFilters.size > 0) || State.activeDayFilter !== null;
+    count = State.activeFilters.size + (dayFilterActive ? (State.activeDayFilters && State.activeDayFilters.size > 0 ? State.activeDayFilters.size : 1) : 0) + (State.searchQuery !== '' ? 1 : 0) + (State.activeSort === 'distance' ? 1 : 0);
   } else if (State.activeTab === 'saved') {
     count = State.activeSavedFilters.size + (State.savedSearchQuery !== '' ? 1 : 0) + (State.activeSavedSort === 'distance' ? 1 : 0);
   }
@@ -93,13 +94,60 @@ export function updateMobileFabBadge() {
 export function setDayFilter(day) {
   if (State.activeDayFilter === day) {
     State.activeDayFilter = null;
+    State.activeDayFilters.clear();
   } else {
     State.activeDayFilter = day;
+    State.activeDayFilters = day !== null ? new Set([day]) : new Set();
   }
   if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
   if (window.App && window.App.renderFilters) window.App.renderFilters();
   if (window.App && window.App.renderBrowse) window.App.renderBrowse();
   updateMobileFabBadge();
+}
+
+export function toggleDayFilter(day) {
+  if (day === null) {
+    State.activeDayFilters.clear();
+    State.activeDayFilter = null;
+  } else {
+    if (State.activeDayFilters.has(day)) {
+      State.activeDayFilters.delete(day);
+    } else {
+      State.activeDayFilters.add(day);
+    }
+    State.activeDayFilter = State.activeDayFilters.size === 1 ? Array.from(State.activeDayFilters)[0] : (State.activeDayFilters.size > 0 ? Array.from(State.activeDayFilters)[0] : null);
+  }
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  updateMobileFabBadge();
+}
+
+export function clearAllDayFilters() {
+  State.activeDayFilters.clear();
+  State.activeDayFilter = null;
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  updateMobileFabBadge();
+}
+
+export function toggleDayFilterDropdown(forceState) {
+  State.dayFilterDropdownOpen = typeof forceState === 'boolean' ? forceState : !State.dayFilterDropdownOpen;
+  const menu = document.getElementById('day-filter-dropdown-menu');
+  const btn = document.getElementById('day-filter-dropdown-btn');
+  if (menu) {
+    menu.classList.toggle('open', State.dayFilterDropdownOpen);
+  }
+  if (btn) {
+    btn.setAttribute('aria-expanded', String(State.dayFilterDropdownOpen));
+  }
+}
+
+export function closeDayFilterDropdown() {
+  if (State.dayFilterDropdownOpen) {
+    toggleDayFilterDropdown(false);
+  }
 }
 
 export function toggleFilter(f) {
@@ -521,6 +569,7 @@ export function clearAllFilters() {
   State.activeFilters.clear();
   State.draftFilters.clear();
   State.activeDayFilter = null;
+  State.activeDayFilters.clear();
   State.searchQuery = '';
 
   if (State.currentWeekId && State.weekFilters[State.currentWeekId]) {
