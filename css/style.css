@@ -4186,11 +4186,19 @@ input[type="search"]::-webkit-search-cancel-button {
   .header-meta-row {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 0;
   }
 
+  .header-meta-row .header-meta {
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
   .header-meta-row .header-switcher {
+    width: 100%;
     margin-bottom: 24px;
   }
 
