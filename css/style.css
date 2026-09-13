@@ -3060,8 +3060,8 @@ body.is-landing .view-footer,
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin: 0;
+  width: calc(100% + 40px);
+  margin: 0 -20px;
   padding: 12px 0 14px;
   background: var(--card-bg);
   border-top-left-radius: 20px;

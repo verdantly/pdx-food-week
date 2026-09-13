@@ -187,6 +187,49 @@ test.describe('Roadmap Features E2E', () => {
     await expect(detailOverlay).not.toHaveClass(/open/);
   });
 
+  test('Mobile detail sheet handle spans full width of the sheet and covers edges when scrolling', async ({ page, isMobile }) => {
+    if (!isMobile) return;
+
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    await page.click('.dish-card');
+    const sheet = page.locator('.detail-sheet');
+    await expect(sheet).toBeVisible();
+
+    const handle = sheet.locator('.sheet-handle');
+    await expect(handle).toBeVisible();
+
+    // Verify handle width matches sheet width exactly
+    const widths = await page.evaluate(() => {
+      const s = document.querySelector('.detail-sheet');
+      const h = document.querySelector('.sheet-handle');
+      return {
+        sheetWidth: s.getBoundingClientRect().width,
+        handleWidth: h.getBoundingClientRect().width,
+        sheetLeft: s.getBoundingClientRect().left,
+        handleLeft: h.getBoundingClientRect().left
+      };
+    });
+    expect(widths.handleWidth).toBeCloseTo(widths.sheetWidth, 0);
+    expect(widths.handleLeft).toBeCloseTo(widths.sheetLeft, 0);
+
+    // Scroll down and verify handle remains sticky at top of sheet
+    await page.evaluate(() => {
+      document.querySelector('.detail-sheet').scrollTop = 100;
+    });
+
+    const scrolledPositions = await page.evaluate(() => {
+      const s = document.querySelector('.detail-sheet');
+      const h = document.querySelector('.sheet-handle');
+      return {
+        sheetTop: s.getBoundingClientRect().top,
+        handleTop: h.getBoundingClientRect().top
+      };
+    });
+    expect(scrolledPositions.handleTop).toBeCloseTo(scrolledPositions.sheetTop, 0);
+  });
+
   test('Mobile filter drawer displays Days label stacked above pills', async ({ page, isMobile }) => {
     if (!isMobile) return;
 
