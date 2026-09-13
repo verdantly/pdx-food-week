@@ -209,13 +209,6 @@ export function openDetail(id, fromPopState = false) {
         </span>
       </a>
     </div>
-    ${r.whatsOnIt ? (() => {
-      const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function' ? window.getWeekMeta(State.currentWeekId) : null;
-      const sectionTitle = (weekMeta && weekMeta.ingredientLabel) ? weekMeta.ingredientLabel : "What's on it...";
-      return `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${sectionTitle}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>`;
-    })() : ''}
-    ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatTheySay)}</div>` : ''}
-    ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.desc)}</div>` : ''}
     ${(() => {
       const schedule = getRestaurantScheduleText(r);
       if (!schedule) return '';
@@ -267,6 +260,13 @@ export function openDetail(id, fromPopState = false) {
         </div>
       `;
     })()}
+    ${r.whatsOnIt ? (() => {
+      const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function' ? window.getWeekMeta(State.currentWeekId) : null;
+      const sectionTitle = (weekMeta && weekMeta.ingredientLabel) ? weekMeta.ingredientLabel : "What's on it...";
+      return `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${sectionTitle}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>`;
+    })() : ''}
+    ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatTheySay)}</div>` : ''}
+    ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.desc)}</div>` : ''}
     <div class="sheet-tags">${buildTags(r)}</div>
     <div class="sheet-actions" style="display: flex; gap: 8px;">
       <a class="btn btn-link" style="flex: 1;" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
