@@ -236,7 +236,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 46,
+    totalLocations: 45,
     url: "https://www.theactualportland.com/friedchickenlocations",
     filters: [
       { id: 'meat', label: 'Meat' },
@@ -272,16 +272,16 @@ window.FOOD_WEEKS = [
   }
 ];
 
-window.getWeekMeta = function(weekId) {
+window.getWeekMeta = function (weekId) {
   return (window.FOOD_WEEKS || []).find(w => w.id === weekId);
 };
 
-window.getWeekFile = function(weekId) {
+window.getWeekFile = function (weekId) {
   const meta = window.getWeekMeta(weekId);
   return meta ? meta.dataFile : undefined;
 };
 
-window.getWeekFilters = function(weekId) {
+window.getWeekFilters = function (weekId) {
   const meta = window.getWeekMeta(weekId);
   return meta && meta.filters ? meta.filters : [];
 };
