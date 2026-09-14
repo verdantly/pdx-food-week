@@ -4125,7 +4125,7 @@ input[type="search"]::-webkit-search-cancel-button {
     grid-column: 1;
     grid-row: auto;
     height: auto;
-    padding: 0;
+    padding: 0 0 16px;
   }
 
   .landing-others-title {
