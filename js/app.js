@@ -14,7 +14,8 @@ import {
   applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter,
   toggleSavedBulkEdit, toggleBulkEditItem, selectAllBulkEdit, deselectAllBulkEdit,
   confirmBulkRemove, closeBulkRemoveConfirm, executeBulkRemove,
-  toggleDayFilter, clearAllDayFilters, toggleDayFilterDropdown, closeDayFilterDropdown
+  toggleDayFilter, clearAllDayFilters, toggleDayFilterDropdown, closeDayFilterDropdown,
+  updateMobileFabBadge
 } from './modules/filters.js';
 import { renderMap, refreshMapLayout, handleCrawlPinClick } from './modules/map.js';
 import { buildSwipeQueue, renderSwipe, swipe, undoSwipe, skipSwipe, resetSwipe, swipeOpenDetail, attachSwipeGestures } from './modules/swipe.js';
@@ -102,6 +103,16 @@ function switchTab(name, fromPopState = false) {
   document.querySelectorAll('.view').forEach(el => {
     el.classList.toggle('active', el.id === `view-${name}`);
   });
+  if (name !== 'saved') {
+    if (State.bulkEditActive) {
+      State.bulkEditActive = false;
+      if (State.bulkEditSelection) State.bulkEditSelection.clear();
+      document.body.classList.remove('bulk-edit-active');
+    }
+    if (State.rankingModeActive) {
+      State.rankingModeActive = false;
+    }
+  }
   if (name === 'swipe' || name === 'share' || name === 'landing') {
     closeDetail(true);
   } else if (name !== 'map') {
@@ -1841,10 +1852,9 @@ const App = {
   closeBulkRemoveConfirm,
   executeBulkRemove,
   toggleSheetScheduleDropdown,
-  toggleDayFilter,
-  clearAllDayFilters,
-  toggleDayFilterDropdown,
-  closeDayFilterDropdown
+  showToast,
+  updateMobileFabBadge,
+  refreshMapLayout
 };
 
 window.App = App;

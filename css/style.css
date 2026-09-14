@@ -4511,7 +4511,7 @@ input[type="search"]::-webkit-search-cancel-button {
   }
 
   /* Desktop Detail Split Panel (Master-Detail) */
-  .lightbox-nav {
+  .detail-overlay .lightbox-nav {
     display: none !important;
   }
 
@@ -5499,6 +5499,29 @@ select:focus-visible {
   opacity: 1;
 }
 
+#photo-zoom-overlay .close-desktop {
+  display: flex !important;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10001;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+#photo-zoom-overlay .close-desktop:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+}
+
 #photo-zoom-img {
   max-width: 90vw;
   max-height: 90vh;
@@ -5999,9 +6022,19 @@ select:focus-visible {
   gap: 8px;
 }
 
-/* Hide Mobile FAB when Detail sheet is open or Crawl Mode is active to prevent layering overlap */
+/* Hide Mobile FAB when Detail sheet, modals, drawers, bulk edit, or Crawl Mode are active to prevent layering overlap */
 #app.detail-open #mobile-filter-fab,
-body.crawl-mode-active #mobile-filter-fab {
+body.crawl-mode-active #mobile-filter-fab,
+body.bulk-edit-active #mobile-filter-fab,
+body:has(.filter-drawer-overlay.open) #mobile-filter-fab,
+body:has(.crawl-modal-overlay.open) #mobile-filter-fab,
+body:has(#photo-zoom-overlay.open) #mobile-filter-fab,
+body:has(.detail-overlay.open) #mobile-filter-fab {
+  display: none !important;
+}
+
+/* Hide duplicate floating close button on detail overlay (sheet-close-btn handles closing on detail modal) */
+#detail-overlay .close-desktop {
   display: none !important;
 }
 

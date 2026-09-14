@@ -326,6 +326,7 @@ export function openDetail(id, fromPopState = false) {
     if (window.innerWidth <= 768) {
       setTimeout(() => {
         const closeBtn = sheetEl.querySelector('.sheet-close') || 
+                         sheetEl.querySelector('.sheet-close-btn') ||
                          document.getElementById('detail-overlay')?.querySelector('.close-desktop');
         if (closeBtn) {
           closeBtn.focus();

@@ -477,6 +477,7 @@ export function toggleSavedBulkEdit() {
   } else {
     State.bulkEditSelection.clear();
   }
+  document.body.classList.toggle('bulk-edit-active', !!State.bulkEditActive);
   if (window.App && window.App.renderSaved) window.App.renderSaved();
 }
 
@@ -553,6 +554,7 @@ export function executeBulkRemove() {
   const removedCount = idsToRemove.length;
   State.bulkEditSelection.clear();
   State.bulkEditActive = false;
+  document.body.classList.remove('bulk-edit-active');
 
   saveState();
   queueCloudSync();
