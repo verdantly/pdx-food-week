@@ -1,5 +1,5 @@
-// Portland Mercury's Wing Week 2026 — scraped 2026-09-10
-// 95 locations (skipped: 0, reused: 70, new: 25, geocode fallbacks: 0)
+// Portland Mercury's Wing Week 2026 — scraped 2026-09-14
+// 97 locations (skipped: 0, reused: 94, new: 3, geocode fallbacks: 0)
 // Source: https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FDEAE6",
     colorPale: "#FFF5F2",
     emoji: "🍗",
-    totalLocations: 95,
+    totalLocations: 97,
     url: "https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/",
   }
 );
@@ -2963,7 +2963,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 254431,
     "weekId": "wing-2026",
-    "dish": "Curry Gochujang Wing",
+    "dish": "Red Dragon Wings",
     "restaurant": "Nom Nom Wings",
     "neighborhood": "Pearl District - Northwest Portland",
     "address": "524 NW 14th Avenue, Portland, OR 97209",
@@ -2976,12 +2976,12 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "spicy": false,
-    "whatsOnIt": "Battered and fried wings tossed in a Nepalese/Korean curry sauce finished with fine herbs and citrus zest.",
-    "whatTheySay": "We wanted to marry Korean and Nepalese flavors to come up with something that will punch you in the mouth with flavor!",
-    "desc": "Battered and fried wings tossed in a Nepalese/Korean curry sauce finished with fine herbs and citrus zest.",
+    "whatsOnIt": "Citrus infused gochujang glaze, lime zest, toasted sesame, butter.",
+    "whatTheySay": "We wanted to showcase a little bit of our chef's Korean flavors in this wing.",
+    "desc": "Citrus infused gochujang glaze, lime zest, toasted sesame, butter.",
     "emoji": "🍗",
-    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4ODI4ODU2Mjg1NjUyMS1Ob20tTm9tLVdpbmdzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
-    "url": "https://everout.com/portland/events/curry-gochujang-wing/e254431/",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4OTE0ODUxMzc4ODE0OS1Ob20tTm9tLVdpbmdzLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
+    "url": "https://everout.com/portland/events/red-dragon-wings/e254431/",
     "isNew": true,
     "hours": {
       "openDays": [
@@ -10862,6 +10862,267 @@ window.RESTAURANTS = window.RESTAURANTS || [];
           "open": {
             "day": 6,
             "time": "0900"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 255555,
+    "weekId": "wing-2026",
+    "dish": "Golden Thai Curry Wings",
+    "restaurant": "E-Side Thai",
+    "neighborhood": "Sunnyside - Southeast Portland",
+    "address": "4255 SE Belmont St., Portland, OR 97215",
+    "lat": 45.5167818,
+    "lng": -122.6183724,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "minors": true,
+    "takeout": true,
+    "spicy": true,
+    "whatsOnIt": "Marinated in minced garlic, onions, salt and pepper, oyster sauce, curry powder, fresh Thai chilis, lemon grass, ginger, and cornstarch. Deep fried in vegetable oil. Garnished with sliced green onions. Served with our signature sweet n' sour sauce for dipping sauce. Mild or Hot.",
+    "whatTheySay": "Crunchy yellow curry chicken wings with perfect sweet and savory kick.",
+    "desc": "Marinated in minced garlic, onions, salt and pepper, oyster sauce, curry powder, fresh Thai chilis, lemon grass, ginger, and cornstarch. Deep fried in vegetable oil. Garnished with sliced green onions. Served with our signature sweet n' sour sauce for dipping sauce. Mild or Hot.",
+    "emoji": "🔥",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4OTA3NzEyMTU3MzcwNC1FLVNpZGUtVGhhaS5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
+    "url": "https://everout.com/portland/events/golden-thai-curry-wings/e255555/",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 8:00 PM",
+        "Tuesday: 12:00 – 8:00 PM",
+        "Wednesday: 12:00 – 8:00 PM",
+        "Thursday: 12:00 – 8:00 PM",
+        "Friday: 12:00 – 8:00 PM",
+        "Saturday: Closed",
+        "Sunday: 12:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 255708,
+    "weekId": "wing-2026",
+    "dish": "Asian Sticky Wings",
+    "restaurant": "Finch on Fifth",
+    "neighborhood": "Downtown Portland",
+    "address": "503 SW Alder St., Portland, OR 97204",
+    "lat": 45.5197488,
+    "lng": -122.6773449,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "minors": true,
+    "takeout": true,
+    "spicy": false,
+    "whatsOnIt": "Marinated in fish sauce, garlic, onion, cumin, coriander, and sumac. Rolled in rice and tapioca flour. Yuzu gochugang sauce.",
+    "whatTheySay": "Crispy, sticky and full of flavor.",
+    "desc": "Marinated in fish sauce, garlic, onion, cumin, coriander, and sumac. Rolled in rice and tapioca flour. Yuzu gochugang sauce.",
+    "emoji": "🧄",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4OTE1MzQ5ODMzMzgyNi1GaW5jaC1vbi1GaWZ0aC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
+    "url": "https://everout.com/portland/events/asian-sticky-wings/e255708/",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 7:00 – 10:30 AM",
+        "Tuesday: 7:00 – 10:30 AM",
+        "Wednesday: 7:00 – 10:30 AM, 4:00��– 9:00 PM",
+        "Thursday: 7:00 – 10:30 AM, 4:00 – 9:00 PM",
+        "Friday: 7:00 – 10:30 AM, 4:00 – 9:00 PM",
+        "Saturday: 7:00 – 10:30 AM, 4:00 – 9:00 PM",
+        "Sunday: 7:00 – 10:30 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1030"
+          },
+          "open": {
+            "day": 0,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1030"
+          },
+          "open": {
+            "day": 1,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1030"
+          },
+          "open": {
+            "day": 2,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1030"
+          },
+          "open": {
+            "day": 3,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1030"
+          },
+          "open": {
+            "day": 4,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1030"
+          },
+          "open": {
+            "day": 5,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1030"
+          },
+          "open": {
+            "day": 6,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
           }
         }
       ]

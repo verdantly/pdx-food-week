@@ -478,6 +478,56 @@ test.describe('Roadmap Features E2E', () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await expect(tabletBrowseFooter).toBeHidden();
   });
+
+  test('Detail sheet floating controls stay sticky on scroll and bookmark button toggles saved state and notes section', async ({ page }) => {
+    // Test on desktop/tablet viewport
+    await page.setViewportSize({ width: 900, height: 800 });
+    await page.goto('/?week=burger-2026');
+    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
+
+    await page.click('.dish-card');
+    const sheet = page.locator('.detail-sheet');
+    await expect(sheet).toBeVisible();
+
+    const floatingControls = sheet.locator('.sheet-floating-controls');
+    const bookmarkBtn = floatingControls.locator('.bookmark-btn');
+    await expect(bookmarkBtn).toBeVisible();
+    await expect(bookmarkBtn).toHaveText(/Save/i);
+    await expect(sheet.locator('.sheet-notes-section')).toHaveCount(0);
+
+    // Initial position before scroll
+    const initialPos = await bookmarkBtn.boundingBox();
+
+    // Scroll detail sheet down
+    await page.evaluate(() => {
+      document.querySelector('.detail-sheet').scrollTop = 250;
+    });
+
+    // Check sticky position after scroll: bookmark button should still be visible and floating at top
+    const scrolledPos = await bookmarkBtn.boundingBox();
+    expect(Math.abs(scrolledPos.y - initialPos.y)).toBeLessThanOrEqual(10);
+
+    // Click bookmark button in detail sheet
+    await bookmarkBtn.click();
+    await expect(bookmarkBtn).toHaveClass(/saved/);
+    await expect(bookmarkBtn).toHaveText(/Saved/i);
+
+    // Check that notes section is dynamically revealed
+    const notesSection = sheet.locator('.sheet-notes-section');
+    await expect(notesSection).toBeVisible();
+
+    // Toggle bookmark off
+    await bookmarkBtn.click();
+    await expect(bookmarkBtn).not.toHaveClass(/saved/);
+    await expect(bookmarkBtn).toHaveText(/Save/i);
+    await expect(sheet.locator('.sheet-notes-section')).toHaveCount(0);
+
+    // Close detail sheet using floating close button
+    const closeBtn = floatingControls.locator('.sheet-close-btn');
+    await expect(closeBtn).toBeVisible();
+    await closeBtn.click();
+    await expect(page.locator('#detail-overlay')).not.toHaveClass(/open/);
+  });
 });
 
 

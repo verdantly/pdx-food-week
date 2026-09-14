@@ -1,5 +1,5 @@
 // The Actual Portland's Fried Chicken Week 2026
-// 40 locations
+// 46 locations
 // Source: https://www.theactualportland.com/friedchickenlocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 40,
+    totalLocations: 46,
     url: "https://www.theactualportland.com/friedchickenlocations",
   }
 );
@@ -1409,7 +1409,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 14,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Tofu Sandwich",
+    "dish": "Fried Chicken Sandwich",
     "restaurant": "Basilisk",
     "neighborhood": "Kerns",
     "address": "2705 Northeast Sandy Blvd, Portland, OR 97232",
@@ -1422,7 +1422,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "spicy": false,
     "minors": true,
     "takeout": true,
-    "desc": "For vegetarians with slaw and pickled cucumbers, and a special fried chicken sandwich with pesto aioli cabbage slaw, tomato, and crunchy parmesan crisps.",
+    "desc": "Special fried chicken sandwich with pesto aioli, cabbage slaw, tomato, and crunchy parmesan crisp, and for vegetarians.",
     "emoji": "🌿",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/562dcfa3-02ec-4156-8c09-9251d0755e4b/IMG_6238.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations",
@@ -3447,7 +3447,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 33,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Fried Chicken Breast Over A House",
     "restaurant": "Canary",
     "neighborhood": "Kenton",
     "address": "3414 North Lombard St, Portland, OR 97217",
@@ -3460,9 +3460,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "spicy": false,
     "minors": true,
     "takeout": true,
-    "desc": "Fried chicken sandwich with brussels sprout slaw and honey sriracha sauce.",
-    "emoji": "🥪",
-    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/6a91d2fc-7284-4608-9293-da1f56dacdb3/1000028789+-+Alec+Pemberton.jpeg",
+    "desc": "Made waffle with maple syrup.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/59687a94-1128-4a71-b5f5-13a346cffb1e/image2.jpeg",
     "url": "https://www.theactualportland.com/friedchickenlocations",
     "hours": {
       "openDays": [
@@ -4204,6 +4204,536 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   },
   {
     "id": 40,
+    "weekId": "fried-chicken-2026",
+    "dish": "Fried Chicken Topped With House",
+    "restaurant": "Kanaka Island Grill",
+    "neighborhood": "Downtown Tigard",
+    "address": "12950 Southwest Pacific Highway, Tigard, OR 97223",
+    "lat": 45.4259194,
+    "lng": -122.7788647,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Made shoyu ginger sauce, spicy mayo, furikake, and green onions.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/f4f7fd36-c06a-4148-bf83-76bce1d09321/IMG_2048+-+Jonathan+Demattos.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 4:00 – 7:00 PM",
+        "Thursday: 12:00 – 7:00 PM",
+        "Friday: 12:00 – 7:00 PM",
+        "Saturday: 12:00 – 7:00 PM",
+        "Sunday: 1:00 – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1900"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1900"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1900"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1900"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 41,
+    "weekId": "fried-chicken-2026",
+    "dish": "Bring! Chimken & Woofles",
+    "restaurant": "Bring! Barkery and Pet Boutique",
+    "neighborhood": "Downtown",
+    "address": "750 Southwest 9th Ave, Portland, OR 97205",
+    "lat": 45.519159,
+    "lng": -122.681196,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "A roasted sweet potato & goat cheese croquette, rolled in our pumpkin cake crumbs and baked until golden. Served with everyone’s favorite woofle and a tiny drizzle of peanut butter maple syrup. (closed monday’s",
+    "emoji": "🍗",
+    "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5mBCpVDDDg2WDZR241_b9FO9O5kDB519Z2kfVciltH8E2oolle_JlhS_bPr-kFb7r_9l-wXMdXhf2ImyUYvRBa7np1AVNpH8cvwfO_-0jZXldEEYfh3VcE3fm2LyjpnfwXZOOEsTXZwzTAjf7316rwz94JRM5FQZaJbLzQLVZ99Z8zeTK0OhecVcRszfbHqXfcex-1oS14N1EENmJ8xAboLvIpje-RW_cHKgZb5HpTic8bKAYAjkVa2yg?fife=s16383",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:00 AM – 6:00 PM",
+        "Thursday: 11:00 AM – 6:00 PM",
+        "Friday: 11:00 AM – 6:00 PM",
+        "Saturday: 11:00 AM – 6:00 PM",
+        "Sunday: 11:00 AM – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1800"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1800"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1800"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1800"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 42,
+    "weekId": "fried-chicken-2026",
+    "dish": "Fried Chicken Special",
+    "restaurant": "Rhinestone",
+    "neighborhood": "Hosford-Abernethy",
+    "address": "2100 Southeast Clinton St, Portland, OR 97202",
+    "lat": 45.5032437,
+    "lng": -122.6444445,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "The spicy fried chicken sandobuttermilk brined fried chicken thigh coated in salsa macha, pineapple, shreduce, pickled jalapeño, with mayo.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c7bcfa0f-2d41-4b4e-aafc-4993ac03ddc6/IMG_2562+-+Rhinestone+PDX.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 4:00 PM – 12:00 AM",
+        "Sunday: 4:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 43,
+    "weekId": "fried-chicken-2026",
+    "dish": "Chicken Parm Garlic Knot Sandwich",
+    "restaurant": "The European Job",
+    "neighborhood": "Hollywood",
+    "address": "1607 Northeast 41st Ave, Portland, OR 97232",
+    "lat": 45.5346334,
+    "lng": -122.6217363,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Seasoned crispy chicken breast, topped with our slowly braised pomodoro sauce with melted mozzarella and parmiggiano, fresh basil, in a toasted pub bun finished like a garlic knot with garlic butter, grated parmiggiano and parsley flakes.",
+    "emoji": "🥪",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c08a53f4-fc12-451e-ba7e-294e2966a310/1000084541.jpg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 12:00 – 8:00 PM",
+        "Thursday: 12:00 – 8:00 PM",
+        "Friday: 12:00 – 8:00 PM",
+        "Saturday: 12:00 – 8:00 PM",
+        "Sunday: 12:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 44,
+    "weekId": "fried-chicken-2026",
+    "dish": "Fried Chicken Special",
+    "restaurant": "Office Lunch (by Verdure x Exquisite Creatures)",
+    "neighborhood": "Buckman",
+    "address": "107 Southeast Washington St, Portland, OR 97214",
+    "lat": 45.51874,
+    "lng": -122.664236,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "1. Nashville hot crispy tofu sandwich. It’s a crispy slab of tofu slathered in a cherry bomb hot sauce on a toasted house-made milk bun with a creamy ranch slaw and seasonal pickles. 2. Cacio e pepe crispy tofu sandwich. Crispy slab of tofu crusted with peppercorns in a toasted house-made milk bun with a creamy cacio e pepe sauce.",
+    "emoji": "🌿",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/5def79f7-ab27-4f81-9a13-8d31867c68f3/864F2F7D-5437-43B6-A102-D3E6235EFF52+-+Adolfo.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        4
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 11:00 AM – 2:00 PM",
+        "Friday: Closed",
+        "Saturday: Closed",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 45,
+    "weekId": "fried-chicken-2026",
+    "dish": "Crispy Fried Chicken",
+    "restaurant": "Bring! Barkery & Pet Boutique (For Dogs Only)",
+    "neighborhood": "Portland",
+    "address": "Portland, OR",
+    "lat": 45.5231,
+    "lng": -122.6765,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Bring! chimken & woofles - a roasted sweet potato & goat cheese croquette, rolled in our pumpkin cake crumbs and baked until golden. Served with everyone’s favorite woofle and a tiny drizzle of peanut butter maple syrup. (closed monday’s)",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/ac7ac5e3-8384-4b85-88dc-f51bf45d2e58/IMG_6499.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:00 AM – 6:00 PM",
+        "Thursday: 11:00 AM – 6:00 PM",
+        "Friday: 11:00 AM – 6:00 PM",
+        "Saturday: 11:00 AM – 6:00 PM",
+        "Sunday: 11:00 AM – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1800"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1800"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1800"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1800"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 46,
     "weekId": "fried-chicken-2026",
     "dish": "Crispy Thai Wings",
     "restaurant": "E-San Thai Woodstock",
