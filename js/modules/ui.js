@@ -1,6 +1,6 @@
 /* ── UI Components & Detail Overlays ── */
 import { State, saveState, isDishSaved, toggleDishSaved, getDishKey } from './state.js';
-import { esc, safeUrl, showToast } from './utils.js';
+import { esc, safeUrl, showToast, getRestaurantScheduleText } from './utils.js';
 import { getRestaurants, getFiltered, getSaved, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
 
@@ -66,6 +66,18 @@ export function handleNoteInput(id, text) {
   }, 500);
 }
 
+export function toggleSheetScheduleDropdown(e) {
+  if (e) e.stopPropagation();
+  const dropdown = document.getElementById('sheet-schedule-dropdown');
+  const arrow = document.getElementById('sheet-schedule-toggle-arrow');
+  if (!dropdown) return;
+  const isHidden = dropdown.style.display === 'none' || !dropdown.style.display;
+  dropdown.style.display = isHidden ? 'grid' : 'none';
+  if (arrow) {
+    arrow.style.transform = isHidden ? 'rotate(180deg)' : 'none';
+  }
+}
+
 export function getActiveFriends() {
   const activeWeekRestaurants = getRestaurants();
   const currentWeekRestaurantIds = new Set(activeWeekRestaurants.map(r => r.id));
@@ -114,6 +126,40 @@ export function toggleSave(id, weekId = State.currentWeekId) {
   if (btn) {
     btn.classList.toggle('saved', isSaved);
     btn.textContent = isSaved ? 'Saved ✓' : 'Save Spot';
+  }
+
+  const sheetBookmarkBtn = document.querySelector('.detail-sheet .bookmark-btn');
+  if (sheetBookmarkBtn) {
+    sheetBookmarkBtn.classList.toggle('saved', isSaved);
+    sheetBookmarkBtn.setAttribute('aria-pressed', isSaved);
+    sheetBookmarkBtn.setAttribute('aria-label', isSaved ? 'Remove from saved' : 'Save dish');
+    const textSpan = sheetBookmarkBtn.querySelector('.save-text');
+    if (textSpan) textSpan.textContent = isSaved ? 'Saved' : 'Save';
+  }
+
+  if (State.selectedDish && State.selectedDish.id === id) {
+    let notesSection = document.querySelector('.detail-sheet .sheet-notes-section');
+    if (isSaved && !notesSection) {
+      const noteKey = getDishKey(id, weekId);
+      const noteData = (State.notes && (State.notes[noteKey] || State.notes[id])) || { rating: 0, note: '' };
+      const notesHtml = `
+      <div class="sheet-notes-section" style="margin-top: 20px; border-top: 1px solid var(--ink-20); padding-top: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span style="font-size: 14px; font-weight: 600;">Your Notes</span>
+          <span id="note-save-indicator" style="font-size: 11px; color: var(--pizza); opacity: 0; transition: opacity 0.3s ease; font-weight: 500;">Saved to device ✓</span>
+        </div>
+        <div class="rating-stars" style="font-size: 24px; color: var(--ink-30); cursor: pointer; margin-bottom: 8px;">
+          ${[1, 2, 3, 4, 5].map(star => `<span style="${noteData.rating >= star ? 'color: #FFB800;' : ''}" onclick="App.setRating(${id}, ${star})">★</span>`).join('')}
+        </div>
+        <textarea class="note-input" placeholder="Add your personal notes..." oninput="App.handleNoteInput(${id}, this.value)" style="width: 100%; border: 1px solid var(--ink-20); border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; min-height: 80px;">${noteData.note ? esc(noteData.note) : ''}</textarea>
+      </div>`;
+      const sheetContent = document.getElementById('detail-sheet-content');
+      if (sheetContent) {
+        sheetContent.insertAdjacentHTML('beforeend', notesHtml);
+      }
+    } else if (!isSaved && notesSection) {
+      notesSection.remove();
+    }
   }
 
   if (window.App && window.App.renderBrowse) window.App.renderBrowse();
@@ -170,15 +216,17 @@ export function openDetail(id, fromPopState = false) {
   const noteData = (State.notes && (State.notes[noteKey] || State.notes[r.id])) || { rating: 0, note: '' };
 
   const contentHtml = `
-    <button class="sheet-close-btn" onclick="App.closeDetail()" aria-label="Close detail view">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <button class="bookmark-btn ${isSaved ? 'saved' : ''}" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
-      <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-      </svg>
-      <span class="save-text" style="display: inline-block;">${isSaved ? 'Saved' : 'Save'}</span>
-    </button>
+    <div class="sheet-floating-controls">
+      <button class="sheet-close-btn" onclick="App.closeDetail()" aria-label="Close detail view">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <button class="bookmark-btn ${isSaved ? 'saved' : ''}" onclick="App.toggleSave(${r.id})" aria-label="${isSaved ? 'Remove from saved' : 'Save dish'}" aria-pressed="${isSaved}">
+        <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="save-text" style="display: inline-block;">${isSaved ? 'Saved' : 'Save'}</span>
+      </button>
+    </div>
     <div class="sheet-handle"></div>
     ${hero}
     <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
@@ -197,13 +245,64 @@ export function openDetail(id, fromPopState = false) {
         </span>
       </a>
     </div>
+    ${(() => {
+      const schedule = getRestaurantScheduleText(r);
+      if (!schedule) return '';
+      const hasMultipleDays = schedule.all && schedule.all.length > 1;
+      const todayIndex = new Date().getDay();
+      const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      const todayName = dayNames[todayIndex];
+
+      const daysListHtml = hasMultipleDays ? `
+        <div id="sheet-schedule-dropdown" class="sheet-schedule-days-list" style="display: none;">
+          ${schedule.all.map(dayText => {
+            const isToday = dayText.toLowerCase().startsWith(todayName);
+            const isClosed = /closed/i.test(dayText);
+            const parts = dayText.split(':');
+            const dayPart = parts[0] || '';
+            const hoursPart = parts.slice(1).join(':').trim() || (isClosed ? 'Closed' : 'Open');
+            return `
+              <div class="sheet-schedule-day-row ${isToday ? 'is-today' : ''} ${isClosed ? 'is-closed' : ''}">
+                <span>${esc(dayPart)}${isToday ? ' (Today)' : ''}</span>
+                <span>${esc(hoursPart)}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      ` : '';
+
+      return `
+        <div class="sheet-schedule-section">
+          <div class="sheet-schedule-header" onclick="App.toggleSheetScheduleDropdown(event)">
+            <div class="sheet-schedule-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="sheet-schedule-main sheet-schedule">
+              <span>${esc(schedule.summary)}</span>
+            </div>
+            ${hasMultipleDays ? `
+              <button type="button" class="sheet-schedule-toggle" aria-label="Toggle weekly schedule">
+                <span id="sheet-schedule-toggle-text">Hours</span>
+                <svg id="sheet-schedule-toggle-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9l6 6 6-6"/>
+                </svg>
+              </button>
+            ` : ''}
+          </div>
+          ${daysListHtml}
+        </div>
+      `;
+    })()}
     ${r.whatsOnIt ? (() => {
       const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function' ? window.getWeekMeta(State.currentWeekId) : null;
       const sectionTitle = (weekMeta && weekMeta.ingredientLabel) ? weekMeta.ingredientLabel : "What's on it...";
       return `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">${sectionTitle}</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatsOnIt)}</div>`;
     })() : ''}
-    ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc">${esc(r.whatTheySay)}</div>` : ''}
-    ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc">${esc(r.desc)}</div>` : ''}
+    ${r.whatTheySay ? `<div class="sheet-section-title" style="font-weight: 600; margin-bottom: 4px; font-size: 15px;">What they say...</div><div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.whatTheySay)}</div>` : ''}
+    ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.desc)}</div>` : ''}
     <div class="sheet-tags">${buildTags(r)}</div>
     <div class="sheet-actions" style="display: flex; gap: 8px;">
       <a class="btn btn-link" style="flex: 1;" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
@@ -263,6 +362,7 @@ export function openDetail(id, fromPopState = false) {
     if (window.innerWidth <= 768) {
       setTimeout(() => {
         const closeBtn = sheetEl.querySelector('.sheet-close') || 
+                         sheetEl.querySelector('.sheet-close-btn') ||
                          document.getElementById('detail-overlay')?.querySelector('.close-desktop');
         if (closeBtn) {
           closeBtn.focus();

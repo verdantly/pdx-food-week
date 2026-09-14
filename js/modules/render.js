@@ -143,36 +143,98 @@ export function renderSaved(focusSelector = null) {
   const exitBtn = document.getElementById('saved-exit-friend-btn');
   const mergeBtn = document.getElementById('saved-merge-friend-btn');
   
+  const normalActions = document.getElementById('saved-normal-actions');
+  const bulkActions = document.getElementById('saved-bulk-actions');
+  const bulkRemoveBtn = document.getElementById('saved-bulk-remove-btn');
+  const bulkRemoveText = document.getElementById('saved-bulk-remove-text');
+
+  if (State.bulkEditActive) {
+    if (normalActions) normalActions.style.display = 'none';
+    if (bulkActions) bulkActions.style.display = 'flex';
+    const selCount = State.bulkEditSelection ? State.bulkEditSelection.size : 0;
+    if (bulkRemoveBtn) bulkRemoveBtn.disabled = selCount === 0;
+    if (bulkRemoveText) bulkRemoveText.textContent = `Remove (${selCount})`;
+  } else {
+    if (normalActions) normalActions.style.display = 'flex';
+    if (bulkActions) bulkActions.style.display = 'none';
+  }
+
   const crawlBtn = document.getElementById('saved-plan-crawl-btn');
   if (crawlBtn) {
-    if (!hasSavedItems) {
+    if (!hasSavedItems || State.bulkEditActive) {
       crawlBtn.style.display = 'none';
     } else {
-      crawlBtn.style.display = 'inline-block';
+      crawlBtn.style.display = 'inline-flex';
+      const textSpan = crawlBtn.querySelector('span') || crawlBtn;
       if (State.crawlModeActive) {
-        crawlBtn.style.background = 'white';
-        crawlBtn.style.color = 'var(--teal)';
-        crawlBtn.style.border = '2px solid var(--teal)';
-        crawlBtn.textContent = 'Cancel Crawl';
+        crawlBtn.classList.add('crawl-active');
+        crawlBtn.classList.remove('saved-btn-primary');
+        crawlBtn.style.background = '';
+        crawlBtn.style.color = '';
+        crawlBtn.style.border = '';
+        textSpan.textContent = 'Cancel Crawl';
       } else {
-        crawlBtn.style.background = 'var(--teal)';
-        crawlBtn.style.color = 'white';
-        crawlBtn.style.border = '2px solid var(--teal)';
-        crawlBtn.textContent = 'Plan Crawl';
+        crawlBtn.classList.remove('crawl-active');
+        crawlBtn.classList.add('saved-btn-primary');
+        crawlBtn.style.background = '';
+        crawlBtn.style.color = '';
+        crawlBtn.style.border = '';
+        textSpan.textContent = 'Plan Crawl';
       }
     }
   }
 
-  if (State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex]) {
+  const rankModeBtn = document.getElementById('saved-rank-mode-btn');
+  if (rankModeBtn) {
+    if (!hasSavedItems || State.bulkEditActive) {
+      rankModeBtn.style.display = 'none';
+    } else {
+      rankModeBtn.style.display = 'inline-flex';
+      const textSpan = rankModeBtn.querySelector('span') || rankModeBtn;
+      if (State.rankingModeActive) {
+        rankModeBtn.classList.add('ranking-active');
+        rankModeBtn.classList.remove('saved-btn-primary');
+        textSpan.textContent = 'Exit Ranking';
+      } else {
+        rankModeBtn.classList.remove('ranking-active');
+        rankModeBtn.classList.add('saved-btn-primary');
+        textSpan.textContent = 'Rank Top 5';
+      }
+    }
+  }
+
+  const shareRankingsBtn = document.getElementById('saved-picks-card-btn');
+  if (shareRankingsBtn) {
+    if (hasSavedItems && State.rankingModeActive && !State.bulkEditActive) {
+      shareRankingsBtn.style.display = 'inline-flex';
+    } else {
+      shareRankingsBtn.style.display = 'none';
+    }
+  }
+
+  const moreDropdownWrap = document.getElementById('saved-more-dropdown-wrap');
+  if (moreDropdownWrap) {
+    moreDropdownWrap.style.display = (hasSavedItems && !State.bulkEditActive) ? 'inline-block' : 'none';
+  }
+
+  const manageDivider = document.getElementById('saved-manage-divider');
+  const manageModeBtn = document.getElementById('saved-manage-mode-btn');
+  const isViewingFriend = State.viewingFriendIndex !== null && State.friends[State.viewingFriendIndex];
+
+  if (isViewingFriend) {
     if (headerTitle) headerTitle.textContent = `${esc(State.friends[State.viewingFriendIndex].name)}'s Spots`;
     if (copyBtn) copyBtn.style.display = 'none';
-    if (exitBtn) exitBtn.style.display = 'inline-block';
-    if (mergeBtn) mergeBtn.style.display = 'inline-block';
+    if (exitBtn) exitBtn.style.display = 'inline-flex';
+    if (mergeBtn) mergeBtn.style.display = 'flex';
+    if (manageDivider) manageDivider.style.display = 'none';
+    if (manageModeBtn) manageModeBtn.style.display = 'none';
   } else {
-    if (headerTitle) headerTitle.textContent = 'Your Saved Spots';
-    if (copyBtn) copyBtn.style.display = 'inline-block';
+    if (headerTitle) headerTitle.textContent = State.bulkEditActive ? 'Manage Saved Spots' : 'Your Saved Spots';
+    if (copyBtn) copyBtn.style.display = 'flex';
     if (exitBtn) exitBtn.style.display = 'none';
     if (mergeBtn) mergeBtn.style.display = 'none';
+    if (manageDivider) manageDivider.style.display = 'block';
+    if (manageModeBtn) manageModeBtn.style.display = 'flex';
   }
 
   if (items.length === 0) {
@@ -260,14 +322,98 @@ export function renderFilters() {
 
   const currentSet = State.filterDrawerOpen ? State.draftFilters : State.activeFilters;
   const labelHTML = `<span class="filter-label">Filter:</span>`;
-  const clearHTML = (currentSet.size > 0 || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
+  const clearHTML = (currentSet.size > 0 || State.activeDayFilter !== null || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
   const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
     const activeCls = currentSet.has(f.id) ? 'active' : '';
     return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
   }).join('') + `</div>`;
 
   container.innerHTML = labelHTML + chipsHTML;
+  renderDayFilters();
   updateMobileFabBadge();
+}
+
+export function renderDayFilters() {
+  const container = document.getElementById('browse-day-filters');
+  if (!container) return;
+
+  const days = [
+    { id: null, label: 'All Days' },
+    { id: 'now', label: 'Open Now' },
+    { id: 1, label: 'Mon' },
+    { id: 2, label: 'Tue' },
+    { id: 3, label: 'Wed' },
+    { id: 4, label: 'Thu' },
+    { id: 5, label: 'Fri' },
+    { id: 6, label: 'Sat' },
+    { id: 0, label: 'Sun' }
+  ];
+
+  // Mobile pills HTML (rendered inside drawer or mobile views)
+  const chipsHTML = days.map(d => {
+    const isAct = (State.activeDayFilters && State.activeDayFilters.has(d.id)) || (State.activeDayFilters.size === 0 && d.id === null) || State.activeDayFilter === d.id;
+    const arg = d.id === null ? 'null' : (typeof d.id === 'string' ? `'${d.id}'` : d.id);
+    return `<button class="filter-chip day-chip ${isAct ? 'active' : ''}" onclick="App.setDayFilter(${arg})">${esc(d.label)}</button>`;
+  }).join('');
+
+  // Desktop dropdown with multi-select checkboxes
+  const hasActiveFilters = State.activeDayFilters && State.activeDayFilters.size > 0;
+  let dropdownBtnLabel = 'Days';
+  if (hasActiveFilters) {
+    const selectedLabels = days.filter(d => d.id !== null && State.activeDayFilters.has(d.id)).map(d => d.label);
+    if (selectedLabels.length === 1) {
+      dropdownBtnLabel = selectedLabels[0];
+    } else if (selectedLabels.length > 1) {
+      dropdownBtnLabel = `Days (${selectedLabels.length})`;
+    }
+  }
+
+  const dropdownItemsHTML = days.map(d => {
+    if (d.id === null) {
+      const isChecked = !hasActiveFilters;
+      return `
+        <label class="day-dropdown-item day-dropdown-all ${isChecked ? 'active' : ''}">
+          <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="App.toggleDayFilter(null)">
+          <span>All Days</span>
+        </label>
+        <div class="day-dropdown-divider"></div>
+      `;
+    }
+    const isChecked = State.activeDayFilters && State.activeDayFilters.has(d.id);
+    const arg = typeof d.id === 'string' ? `'${d.id}'` : d.id;
+    return `
+      <label class="day-dropdown-item ${isChecked ? 'active' : ''}">
+        <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="App.toggleDayFilter(${arg})">
+        <span>${esc(d.label)}</span>
+      </label>
+    `;
+  }).join('');
+
+  const dropdownHTML = `
+    <div class="day-filter-dropdown-wrap" id="day-filter-dropdown-wrap">
+      <button class="filter-chip day-filter-dropdown-btn ${hasActiveFilters ? 'active' : ''}" id="day-filter-dropdown-btn" type="button" aria-haspopup="true" aria-expanded="${Boolean(State.dayFilterDropdownOpen)}" onclick="App.toggleDayFilterDropdown()">
+        <span>${esc(dropdownBtnLabel)}</span>
+        <svg viewBox="0 0 12 12" width="10" height="10" fill="currentColor" style="margin-left: 4px; pointer-events: none;">
+          <path d="M2 4l4 4 4-4z"/>
+        </svg>
+      </button>
+      <div class="day-filter-dropdown-menu ${State.dayFilterDropdownOpen ? 'open' : ''}" id="day-filter-dropdown-menu">
+        <div class="day-dropdown-header">
+          <span class="day-dropdown-title">Select Days</span>
+          ${hasActiveFilters ? `<button type="button" class="day-dropdown-clear" onclick="App.clearAllDayFilters()">Reset</button>` : ''}
+        </div>
+        <div class="day-dropdown-list">
+          ${dropdownItemsHTML}
+        </div>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = `
+    <span class="filter-label">Days:</span>
+    <div class="filter-chips-wrapper day-chips-desktop-hide">${chipsHTML}</div>
+    <div class="day-dropdown-container">${dropdownHTML}</div>
+  `;
 }
 
 export function renderHeader() {
@@ -283,7 +429,7 @@ export function renderHeader() {
   }
   const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
   footers.forEach(el => {
-    el.innerHTML = `PDX Food Week<br><a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
+    el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;•&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
   });
 
   const titleEl = document.getElementById('header-title');

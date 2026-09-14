@@ -1,7 +1,8 @@
 /* ── Filters & Search & Sort Logic ── */
-import { State, saveState, getWeekFilters } from './state.js';
+import { State, saveState, getWeekFilters, getDishKey } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
+import { queueCloudSync } from './sync.js';
 
 export const PORTLAND_ZIP_CACHE = {
   "97005": { lat: 45.4963, lng: -122.8001 },
@@ -76,7 +77,8 @@ export function updateMobileFabBadge() {
   
   let count = 0;
   if (State.activeTab === 'browse') {
-    count = State.activeFilters.size + (State.searchQuery !== '' ? 1 : 0) + (State.activeSort === 'distance' ? 1 : 0);
+    const dayFilterActive = (State.activeDayFilters && State.activeDayFilters.size > 0) || State.activeDayFilter !== null;
+    count = State.activeFilters.size + (dayFilterActive ? (State.activeDayFilters && State.activeDayFilters.size > 0 ? State.activeDayFilters.size : 1) : 0) + (State.searchQuery !== '' ? 1 : 0) + (State.activeSort === 'distance' ? 1 : 0);
   } else if (State.activeTab === 'saved') {
     count = State.activeSavedFilters.size + (State.savedSearchQuery !== '' ? 1 : 0) + (State.activeSavedSort === 'distance' ? 1 : 0);
   }
@@ -86,6 +88,65 @@ export function updateMobileFabBadge() {
     badge.style.display = 'flex';
   } else {
     badge.style.display = 'none';
+  }
+}
+
+export function setDayFilter(day) {
+  if (State.activeDayFilter === day) {
+    State.activeDayFilter = null;
+    State.activeDayFilters.clear();
+  } else {
+    State.activeDayFilter = day;
+    State.activeDayFilters = day !== null ? new Set([day]) : new Set();
+  }
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  updateMobileFabBadge();
+}
+
+export function toggleDayFilter(day) {
+  if (day === null) {
+    State.activeDayFilters.clear();
+    State.activeDayFilter = null;
+  } else {
+    if (State.activeDayFilters.has(day)) {
+      State.activeDayFilters.delete(day);
+    } else {
+      State.activeDayFilters.add(day);
+    }
+    State.activeDayFilter = State.activeDayFilters.size === 1 ? Array.from(State.activeDayFilters)[0] : (State.activeDayFilters.size > 0 ? Array.from(State.activeDayFilters)[0] : null);
+  }
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  updateMobileFabBadge();
+}
+
+export function clearAllDayFilters() {
+  State.activeDayFilters.clear();
+  State.activeDayFilter = null;
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderBrowse) window.App.renderBrowse();
+  updateMobileFabBadge();
+}
+
+export function toggleDayFilterDropdown(forceState) {
+  State.dayFilterDropdownOpen = typeof forceState === 'boolean' ? forceState : !State.dayFilterDropdownOpen;
+  const menu = document.getElementById('day-filter-dropdown-menu');
+  const btn = document.getElementById('day-filter-dropdown-btn');
+  if (menu) {
+    menu.classList.toggle('open', State.dayFilterDropdownOpen);
+  }
+  if (btn) {
+    btn.setAttribute('aria-expanded', String(State.dayFilterDropdownOpen));
+  }
+}
+
+export function closeDayFilterDropdown() {
+  if (State.dayFilterDropdownOpen) {
+    toggleDayFilterDropdown(false);
   }
 }
 
@@ -385,6 +446,122 @@ export function moveSavedItem(id, direction) {
   if (window.App && window.App.renderSaved) window.App.renderSaved();
 }
 
+export function toggleSavedRankingMode() {
+  State.rankingModeActive = !State.rankingModeActive;
+  if (State.rankingModeActive) {
+    if (State.crawlModeActive && window.App && window.App.toggleCrawlMode) {
+      window.App.toggleCrawlMode();
+    }
+    if (State.bulkEditActive) {
+      State.bulkEditActive = false;
+      State.bulkEditSelection.clear();
+    }
+    State.activeSavedSort = 'custom';
+    showToast('Rank your top 5 places, then tap Share Rankings!');
+  }
+  saveState();
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function toggleSavedBulkEdit() {
+  State.bulkEditActive = !State.bulkEditActive;
+  if (State.bulkEditActive) {
+    State.bulkEditSelection = new Set();
+    if (State.crawlModeActive && window.App && window.App.toggleCrawlMode) {
+      window.App.toggleCrawlMode();
+    }
+    if (State.rankingModeActive) {
+      State.rankingModeActive = false;
+    }
+    showToast('Tap spots to select them for removal');
+  } else {
+    State.bulkEditSelection.clear();
+  }
+  document.body.classList.toggle('bulk-edit-active', !!State.bulkEditActive);
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function toggleBulkEditItem(id) {
+  if (!State.bulkEditActive) return;
+  const numId = Number(id);
+  if (State.bulkEditSelection.has(numId) || State.bulkEditSelection.has(id)) {
+    State.bulkEditSelection.delete(numId);
+    State.bulkEditSelection.delete(id);
+  } else {
+    State.bulkEditSelection.add(numId);
+  }
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function selectAllBulkEdit() {
+  if (!State.bulkEditActive) return;
+  const savedItems = getSaved();
+  State.bulkEditSelection = new Set(savedItems.map(r => Number(r.id)));
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function deselectAllBulkEdit() {
+  if (!State.bulkEditActive) return;
+  State.bulkEditSelection.clear();
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
+export function confirmBulkRemove() {
+  const count = State.bulkEditSelection.size;
+  if (count === 0) {
+    showToast('Select at least one spot to remove');
+    return;
+  }
+  const modal = document.getElementById('bulk-remove-confirm-modal');
+  const countSpan = document.getElementById('bulk-remove-count');
+  if (countSpan) {
+    countSpan.textContent = `${count} spot${count === 1 ? '' : 's'}`;
+  }
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+export function closeBulkRemoveConfirm() {
+  const modal = document.getElementById('bulk-remove-confirm-modal');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+export function executeBulkRemove() {
+  const idsToRemove = [...State.bulkEditSelection];
+  if (idsToRemove.length === 0) return;
+
+  closeBulkRemoveConfirm();
+
+  const allRestaurants = getRestaurants();
+  idsToRemove.forEach(id => {
+    const r = allRestaurants.find(item => String(item.id) === String(id));
+    const weekId = r ? r.weekId : State.currentWeekId;
+    const key = getDishKey(id, weekId);
+    
+    State.saved.delete(key);
+    State.saved.delete(id);
+    State.saved.delete(Number(id));
+    State.customSavedOrder = State.customSavedOrder.filter(x => x !== key && x !== id && x !== Number(id));
+  });
+
+  const removedCount = idsToRemove.length;
+  State.bulkEditSelection.clear();
+  State.bulkEditActive = false;
+  document.body.classList.remove('bulk-edit-active');
+
+  saveState();
+  queueCloudSync();
+  showToast(`Removed ${removedCount} spot${removedCount === 1 ? '' : 's'} from saved`);
+  if (window.App && window.App.renderSaved) window.App.renderSaved();
+}
+
 export function clearAllFilters() {
   if (State.activeTab === 'saved') {
     clearAllSavedFilters();
@@ -393,6 +570,8 @@ export function clearAllFilters() {
   
   State.activeFilters.clear();
   State.draftFilters.clear();
+  State.activeDayFilter = null;
+  State.activeDayFilters.clear();
   State.searchQuery = '';
 
   if (State.currentWeekId && State.weekFilters[State.currentWeekId]) {
@@ -421,6 +600,7 @@ export function clearAllFilters() {
   }
 
   if (window.App && window.App.renderFilters) window.App.renderFilters();
+  if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
   if (window.App && window.App.renderBrowse) window.App.renderBrowse();
 }
 
@@ -448,12 +628,15 @@ export function openFilterDrawer() {
   } else {
     State.draftFilters = new Set(State.activeFilters);
     const browseFilters = document.getElementById('browse-filters');
+    const browseDayFilters = document.getElementById('browse-day-filters');
     const sortSection = document.getElementById('sort-section');
     if (browseFilters && sortSection) {
       drawerBody.appendChild(browseFilters);
+      if (browseDayFilters) drawerBody.appendChild(browseDayFilters);
       drawerBody.appendChild(sortSection);
 
       if (window.App && window.App.renderFilters) window.App.renderFilters();
+      if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -468,6 +651,7 @@ export function applyFilterDrawer() {
   } else {
     State.activeFilters = new Set(State.draftFilters);
     if (window.App && window.App.renderFilters) window.App.renderFilters();
+    if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
     if (window.App && window.App.renderBrowse) window.App.renderBrowse();
   }
   closeFilterDrawer();
@@ -494,13 +678,16 @@ export function closeFilterDrawer() {
   } else {
     State.draftFilters = new Set(State.activeFilters);
     const browseFilters = document.getElementById('browse-filters');
+    const browseDayFilters = document.getElementById('browse-day-filters');
     const sortSection = document.getElementById('sort-section');
     const browseHeader = document.querySelector('#view-browse .browse-header');
     if (browseFilters && sortSection && browseHeader) {
       const controlsRow = browseHeader.querySelector('.header-controls-row') || browseHeader;
       controlsRow.appendChild(browseFilters);
+      if (browseDayFilters) controlsRow.appendChild(browseDayFilters);
       controlsRow.appendChild(sortSection);
       if (window.App && window.App.renderFilters) window.App.renderFilters();
+      if (window.App && window.App.renderDayFilters) window.App.renderDayFilters();
     }
   }
 

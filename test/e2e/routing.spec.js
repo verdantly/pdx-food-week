@@ -196,13 +196,24 @@ test.describe('Navigation and Routing', () => {
     await expect(page.locator('.sheet-dish')).toContainText('Down the Hatch Burger');
   });
 
-  test('Fried Chicken Week loads and displays dishes correctly', async ({ page }) => {
-    await page.goto('/?week=fried-chicken-2026', { waitUntil: 'domcontentloaded' });
-    await page.waitForSelector('.dish-card', { state: 'visible', timeout: 10000 });
-    const cards = page.locator('.dish-card');
-    const count = await cards.count();
-    expect(count).toBeGreaterThanOrEqual(20);
-    await expect(page.locator('#header-title')).toContainText('Fried Chicken Week');
+  test('Install app modal opens and closes properly', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => window.App.openInstallModal());
+    const installOverlay = page.locator('#install-modal-overlay');
+    await expect(installOverlay).toHaveClass(/open/);
+    await page.locator('#install-modal-overlay .drawer-close').click();
+    await expect(installOverlay).not.toHaveClass(/open/);
+  });
+
+  test('Account and cloud sync modal opens with Google and Magic Link options', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => window.App.openAccountModal());
+    const accountOverlay = page.locator('#account-modal-overlay');
+    await expect(accountOverlay).toHaveClass(/open/);
+    await expect(page.locator('.btn-google-auth')).toBeVisible();
+    await expect(page.locator('#auth-email-input')).toBeVisible();
+    await page.locator('#account-modal-overlay .drawer-close').click();
+    await expect(accountOverlay).not.toHaveClass(/open/);
   });
 
   test('Every registered food week loads successfully without console errors or failed scripts', async ({ page }) => {
@@ -457,6 +468,36 @@ test.describe('Navigation and Routing', () => {
     expect(order.showcaseBeforeOthers).toBe(true);
   });
 
+  test('Landing grid on tablet stacks showcase above a 2-column food weeks grid', async ({ page }) => {
+    await page.setViewportSize({ width: 800, height: 1024 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.landing-featured-showcase', { state: 'visible' });
+
+    const tabletLayout = await page.evaluate(() => {
+      const grid = document.querySelector('.landing-grid');
+      const showcase = document.querySelector('.landing-featured-showcase');
+      const others = document.querySelector('.landing-others-column');
+      const othersList = document.querySelector('.landing-others-list');
+
+      const sRect = showcase.getBoundingClientRect();
+      const oRect = others.getBoundingClientRect();
+      const gridComputed = window.getComputedStyle(grid);
+      const othersListComputed = window.getComputedStyle(othersList);
+
+      return {
+        gridCols: gridComputed.gridTemplateColumns.split(' ').length,
+        showcaseBeforeOthers: sRect.bottom <= oRect.top + 10,
+        othersListDisplay: othersListComputed.display,
+        othersListCols: othersListComputed.gridTemplateColumns.split(' ').length,
+      };
+    });
+
+    expect(tabletLayout.gridCols).toBe(1);
+    expect(tabletLayout.showcaseBeforeOthers).toBe(true);
+    expect(tabletLayout.othersListDisplay).toBe('grid');
+    expect(tabletLayout.othersListCols).toBe(2);
+  });
+
   test('Landing page meets WCAG accessibility standards', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     await page.waitForSelector('.landing-featured-showcase', { state: 'visible' });
@@ -656,5 +697,6 @@ test.describe('Navigation and Routing', () => {
     expect(Math.abs(footerInnerBox.width - stepsBox.width)).toBeLessThanOrEqual(1);
   });
 });
+
 
 

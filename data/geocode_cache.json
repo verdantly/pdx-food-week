@@ -363,5 +363,30 @@
     "address": "1825 North Williams Ave, Portland, OR 97227",
     "streetAddress": "1825 North Williams Ave",
     "neighborhood": "Eliot"
+  },
+  "45.4259194,-122.7788647": {
+    "address": "12950 Southwest Pacific Highway, Tigard, OR 97223",
+    "streetAddress": "12950 Southwest Pacific Highway",
+    "neighborhood": "Downtown Tigard"
+  },
+  "45.519159,-122.681196": {
+    "address": "750 Southwest 9th Ave, Portland, OR 97205",
+    "streetAddress": "750 Southwest 9th Ave",
+    "neighborhood": "Downtown"
+  },
+  "45.5032437,-122.6444445": {
+    "address": "2100 Southeast Clinton St, Portland, OR 97202",
+    "streetAddress": "2100 Southeast Clinton St",
+    "neighborhood": "Hosford-Abernethy"
+  },
+  "45.5346334,-122.6217363": {
+    "address": "1607 Northeast 41st Ave, Portland, OR 97232",
+    "streetAddress": "1607 Northeast 41st Ave",
+    "neighborhood": "Hollywood"
+  },
+  "45.51874,-122.664236": {
+    "address": "107 Southeast Washington St, Portland, OR 97214",
+    "streetAddress": "107 Southeast Washington St",
+    "neighborhood": "Buckman"
   }
 }

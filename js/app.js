@@ -1,16 +1,21 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState } from './modules/state.js';
-import { esc, debounce, showToast } from './modules/utils.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState, backupGuestUserData, restoreGuestUserData } from './modules/state.js';
+import { esc, debounce, showToast, getWeekTiming } from './modules/utils.js';
 import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
   openDetail, closeDetail, shareDish, toggleSave, setRating, setNote, handleNoteInput,
-  openPhotoZoom, closePhotoZoom, showMetricDetails, closeMetricModal, getActiveFriends, getCurrentContextList
+  openPhotoZoom, closePhotoZoom, showMetricDetails, closeMetricModal, getActiveFriends, getCurrentContextList,
+  toggleSheetScheduleDropdown
 } from './modules/ui.js';
 import {
   toggleFilter, setSort, toggleDistanceSort, useMyLocation, applyZipCode,
   toggleSavedFilter, clearAllSavedFilters, setSavedSort, toggleSavedDistanceSort,
-  applySavedZipCode, moveSavedItem, clearAllFilters, openFilterDrawer,
-  applyFilterDrawer, closeFilterDrawer, renderSavedFilters
+  applySavedZipCode, moveSavedItem, toggleSavedRankingMode, clearAllFilters, openFilterDrawer,
+  applyFilterDrawer, closeFilterDrawer, renderSavedFilters, setDayFilter,
+  toggleSavedBulkEdit, toggleBulkEditItem, selectAllBulkEdit, deselectAllBulkEdit,
+  confirmBulkRemove, closeBulkRemoveConfirm, executeBulkRemove,
+  toggleDayFilter, clearAllDayFilters, toggleDayFilterDropdown, closeDayFilterDropdown,
+  updateMobileFabBadge
 } from './modules/filters.js';
 import { renderMap, refreshMapLayout, handleCrawlPinClick } from './modules/map.js';
 import { buildSwipeQueue, renderSwipe, swipe, undoSwipe, skipSwipe, resetSwipe, swipeOpenDetail, attachSwipeGestures } from './modules/swipe.js';
@@ -20,7 +25,7 @@ import {
   viewFriendList, exitFriendView, mergeFriendList
 } from './modules/friends.js';
 import {
-  toggleCrawlMode, clearCrawl, updateCrawlFab, generateCrawlItinerary,
+  toggleCrawlMode, clearCrawl, updateCrawlFab, syncCrawlButtons, generateCrawlItinerary,
   renderItinerarySheet, openCrawlMapsUrl, closeCrawlModal,
   toggleSavedCrawlMode, handleCrawlCardClick, handleMapPlanCrawlClick,
   openCrawlOptionsModal, closeCrawlOptionsModal, startMapPinCrawlMode,
@@ -29,24 +34,44 @@ import {
   openCrawlItineraryModal, closeCrawlItineraryModal, moveCrawlItem,
   removeCrawlItem, optimizeCurrentCrawl, viewCrawlOnMap
 } from './modules/crawl.js';
-import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers } from './modules/render.js';
+import { renderBrowse, renderSaved, renderFilters, renderHeader, applyWeekTheme, renderAll, renderWeekSwitchers, renderDayFilters } from './modules/render.js';
+import { exportTopPicksCard } from './modules/picks_exporter.js';
+import {
+  initInstallPrompt, triggerInstall, openInstallModal, closeInstallModal,
+  dismissInstallBanner, updateInstallUI
+} from './modules/install.js';
+import {
+  initAuth, openAccountModal, closeAccountModal, signInWithGoogle,
+  sendMagicLink, signInWithPassword, registerWithPassword, sendPasswordReset,
+  handleSignOut, updateAuthUI, showAuthSubView,
+  handleMagicLinkSubmit, handlePasswordLoginSubmit, handlePasswordSignupSubmit,
+  handlePasswordResetSubmit, togglePasswordVisibility
+} from './modules/auth.js';
+import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 
 // Firebase init reference
 if (window.firebase) {
   try {
     const firebaseConfig = {
-      apiKey: "AIzaSyD4aVF_dVWxrZ6F_GNQuZa1eBLOWdL0xXc",
+      apiKey: "AIzaSyBRqAcWvXkQHF52VRP23agkfIufWrOf0rA",
       authDomain: "pdx-food-week.firebaseapp.com",
       projectId: "pdx-food-week",
       storageBucket: "pdx-food-week.firebasestorage.app",
       messagingSenderId: "641950496269",
-      appId: "1:641950496269:web:05be564e86427f24d08744",
-      measurementId: "G-78YTW9CPLJ"
+      appId: "1:641950496269:web:1e6b06112b9bd1f4d08744",
+      measurementId: "G-YY5J6DF5TW"
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
     window.db = firebase.firestore();
+    window.db.enablePersistence({ synchronizeTabs: true }).catch(err => {
+      if (err.code === 'failed-precondition') {
+        console.warn('Firestore multi-tab offline persistence not enabled: multiple tabs open');
+      } else if (err.code === 'unimplemented') {
+        console.warn('Firestore offline persistence unsupported in this browser');
+      }
+    });
     if (firebase.analytics) {
       window.analytics = firebase.analytics();
     }
@@ -78,6 +103,16 @@ function switchTab(name, fromPopState = false) {
   document.querySelectorAll('.view').forEach(el => {
     el.classList.toggle('active', el.id === `view-${name}`);
   });
+  if (name !== 'saved') {
+    if (State.bulkEditActive) {
+      State.bulkEditActive = false;
+      if (State.bulkEditSelection) State.bulkEditSelection.clear();
+      document.body.classList.remove('bulk-edit-active');
+    }
+    if (State.rankingModeActive) {
+      State.rankingModeActive = false;
+    }
+  }
   if (name === 'swipe' || name === 'share' || name === 'landing') {
     closeDetail(true);
   } else if (name !== 'map') {
@@ -108,12 +143,12 @@ function switchTab(name, fromPopState = false) {
       fabButton.classList.remove('show-fab');
     }
   }
-  
+
   const crawlFab = document.getElementById('crawl-fab');
   if (crawlFab) {
     crawlFab.style.display = ((name === 'map' || name === 'saved') && State.crawlModeActive) ? 'block' : 'none';
   }
-  
+
   if (window.App && window.App.updateMobileFabBadge) window.App.updateMobileFabBadge();
   State.lastScrollTop = 0;
 
@@ -124,7 +159,7 @@ function switchTab(name, fromPopState = false) {
     } else {
       url.searchParams.set('tab', name);
     }
-    
+
     const newState = { ...history.state, tab: name };
     delete newState.dishOpenedHere;
     if (appContainer && appContainer.classList.contains('detail-open')) {
@@ -174,7 +209,7 @@ async function checkMetadataUpdate() {
     const res = await fetch(`js/meta.js?t=${Date.now()}`, { cache: 'no-cache' });
     if (!res || !res.ok) return;
     const text = await res.text();
-    
+
     // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS
     const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*window\.getWeekMeta/);
     if (!match) return;
@@ -394,7 +429,7 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
 
   switchTab('browse', true);
   renderShimmer();
-  
+
   const loadDataAndRender = () => {
     renderAll();
     updateBrowseBadge();
@@ -496,92 +531,6 @@ function renderLanding() {
   let currentWeeks = [];
   let nextWeek = null;
   let minDiff = Infinity;
-
-  // Helper to compute dynamic badge and dates for any week
-  function getWeekTiming(w) {
-    if (!w.startDate) return { badgeHTML: '', status: 'unknown', start: null, end: null };
-    const [sy, sm, sd] = w.startDate.split('-');
-    const start = new Date(sy, sm - 1, sd, 0, 0, 0);
-    let end = new Date(sy, sm - 1, sd, 23, 59, 59);
-
-    if (w.endDate) {
-      const [ey, em, ed] = w.endDate.split('-');
-      end = new Date(ey, em - 1, ed, 23, 59, 59);
-    } else if (w.dates) {
-      const weekMatch = w.dates.match(/([a-zA-Z]+)\s+\d+\s*[-–]\s*(\d+),\s+(\d{4})/);
-      const monthMatch = w.dates.match(/([a-zA-Z]+)\s+(\d{4})/);
-      if (weekMatch) {
-        end = new Date(`${weekMatch[1]} ${weekMatch[2]}, ${weekMatch[3]} 23:59:59`);
-      } else if (monthMatch) {
-        end = new Date(`${monthMatch[1]} 1, ${monthMatch[2]} 23:59:59`);
-        end.setMonth(end.getMonth() + 1);
-        end.setDate(0);
-      } else {
-        end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-      }
-    } else {
-      end = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000);
-    }
-
-    if (now >= start && now <= end) {
-      const daysLeft = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
-      if (daysLeft <= 1) {
-        return {
-          badgeHTML: '<div class="landing-status-badge active urgent"><span class="badge-dot-live"></span> Ends Today!</div>',
-          status: 'active',
-          label: 'Ends Today!',
-          start, end
-        };
-      }
-      if (daysLeft <= 3) {
-        return {
-          badgeHTML: `<div class="landing-status-badge active"><span class="badge-dot-live"></span> Ends in ${daysLeft}d</div>`,
-          status: 'active',
-          label: `Ends in ${daysLeft}d`,
-          start, end
-        };
-      }
-      return {
-        badgeHTML: '<div class="landing-status-badge active"><span class="badge-dot-live"></span> Active Now</div>',
-        status: 'active',
-        label: 'Active Now',
-        start, end
-      };
-    }
-
-    if (now < start) {
-      const daysUntil = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
-      if (daysUntil === 1) {
-        return {
-          badgeHTML: '<div class="landing-status-badge next">Starts Tomorrow</div>',
-          status: 'upcoming',
-          label: 'Starts Tomorrow',
-          start, end, daysUntil
-        };
-      }
-      if (daysUntil <= 14) {
-        return {
-          badgeHTML: `<div class="landing-status-badge next">Starts in ${daysUntil}d</div>`,
-          status: 'upcoming',
-          label: `Starts in ${daysUntil}d`,
-          start, end, daysUntil
-        };
-      }
-      return {
-        badgeHTML: '<div class="landing-status-badge upcoming">Upcoming</div>',
-        status: 'upcoming',
-        label: 'Upcoming',
-        start, end, daysUntil
-      };
-    }
-
-    return {
-      badgeHTML: '<div class="landing-status-badge past">Past Event</div>',
-      status: 'past',
-      label: 'Past Event',
-      start, end
-    };
-  }
 
   window.FOOD_WEEKS.forEach(w => {
     const timing = getWeekTiming(w);
@@ -932,18 +881,18 @@ function initLandingSearch() {
           </div>
           <div class="search-results-list">
             ${topMatches.map(r => {
-              const week = allWeeks.find(w => w.id === r.weekId);
-              const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
-              const weekColor = week ? week.color : 'var(--pizza)';
-              const weekEmoji = week ? week.emoji : '🍽️';
+          const week = allWeeks.find(w => w.id === r.weekId);
+          const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
+          const weekColor = week ? week.color : 'var(--pizza)';
+          const weekEmoji = week ? week.emoji : '🍽️';
 
-              return `
+          return `
                 <a href="?week=${r.weekId}&dish=${r.id}" class="search-result-row" data-search-item="true"
                    onclick="event.preventDefault(); const rc=document.getElementById('landing-search-results'); if(rc) rc.hidden=true; App.switchWeek('${r.weekId}', false, ${r.id});">
                   <div class="search-result-media">
-                    ${r.image 
-                      ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">` 
-                      : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
+                    ${r.image
+              ? `<img src="${esc(r.image)}" alt="" class="search-result-thumb" onerror="this.style.display='none'">`
+              : `<span class="search-result-emoji">${esc(r.emoji || weekEmoji)}</span>`}
                   </div>
                   <div class="search-result-info">
                     <div class="search-result-dish">${esc(r.dish)}</div>
@@ -957,7 +906,7 @@ function initLandingSearch() {
                   </div>
                 </a>
               `;
-            }).join('')}
+        }).join('')}
           </div>
         `;
       }
@@ -1025,57 +974,64 @@ function initLandingSearch() {
   });
 }
 
-// ── PWA Install Prompt Banner ──
-let deferredPwaPrompt = null;
+// ── PWA Install & Notifications ──
+export async function triggerPwaInstall(event) {
+  if (event && event.preventDefault) event.preventDefault();
+  return triggerInstall();
+}
 
 function initPwaInstallPrompt() {
-  const banner = document.getElementById('pwa-install-banner');
-  const installBtn = document.getElementById('pwa-install-btn');
-  const dismissBtn = document.getElementById('pwa-dismiss-btn');
-  if (!banner || !installBtn || !dismissBtn) return;
+  updateInstallUI();
+}
 
-  // Don't show if already in standalone display mode
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator && window.navigator.standalone === true);
-  if (isStandalone) {
-    banner.hidden = true;
-    return;
-  }
+// ── Notification Preferences Modal ──
+export function openNotificationsModal() {
+  const modal = document.getElementById('notifications-modal');
+  if (!modal) return;
+  
+  const weekAlertsCheckbox = document.getElementById('notif-pref-week-alerts');
+  const menuDropsCheckbox = document.getElementById('notif-pref-menu-drops');
+  if (weekAlertsCheckbox) weekAlertsCheckbox.checked = !!State.notificationPrefs.weekAlerts;
+  if (menuDropsCheckbox) menuDropsCheckbox.checked = !!State.notificationPrefs.menuDrops;
 
-  // Don't show if user dismissed it in this session/browser
-  if (localStorage.getItem('pdx_pwa_dismissed') === 'true') {
-    banner.hidden = true;
-    return;
-  }
+  updateNotifPermissionStatus();
+  modal.classList.add('open');
+}
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPwaPrompt = e;
-    banner.hidden = false;
-  });
+export function closeNotificationsModal() {
+  const modal = document.getElementById('notifications-modal');
+  if (modal) modal.classList.remove('open');
+}
 
-  installBtn.addEventListener('click', async () => {
-    if (deferredPwaPrompt) {
-      deferredPwaPrompt.prompt();
-      const { outcome } = await deferredPwaPrompt.userChoice;
-      deferredPwaPrompt = null;
-      banner.hidden = true;
-      if (outcome === 'accepted') {
-        localStorage.setItem('pdx_pwa_dismissed', 'true');
+export async function toggleNotificationPref(key, enabled) {
+  State.notificationPrefs[key] = enabled;
+  saveState();
+
+  if (enabled && 'Notification' in window) {
+    if (Notification.permission === 'default') {
+      const perm = await Notification.requestPermission();
+      updateNotifPermissionStatus();
+      if (perm === 'granted') {
+        showToast('Notifications enabled!');
+      } else if (perm === 'denied') {
+        showToast('Notifications blocked in browser settings.');
       }
-    } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      // iOS Safari instructions
-      showToast('Tap the Share button 􀈂 and select "Add to Home Screen"');
-      banner.hidden = true;
-      localStorage.setItem('pdx_pwa_dismissed', 'true');
-    } else {
-      banner.hidden = true;
     }
-  });
+  }
+}
 
-  dismissBtn.addEventListener('click', () => {
-    banner.hidden = true;
-    localStorage.setItem('pdx_pwa_dismissed', 'true');
-  });
+function updateNotifPermissionStatus() {
+  const statusEl = document.getElementById('notif-permission-status');
+  if (!statusEl) return;
+  if (!('Notification' in window)) {
+    statusEl.textContent = 'Push notifications are not supported on this browser.';
+  } else if (Notification.permission === 'denied') {
+    statusEl.innerHTML = '⚠️ Notifications blocked in browser settings.<br>Enable in site permissions to receive alerts.';
+  } else if (Notification.permission === 'granted') {
+    statusEl.textContent = '✓ Browser permission granted.';
+  } else {
+    statusEl.textContent = 'Enabling alerts will request browser notification permission.';
+  }
 }
 
 function attachLandingCarouselTouch() {
@@ -1177,7 +1133,7 @@ function setupMobileScrollListener() {
   if (!viewBrowse || !viewSaved) return;
 
   const onScroll = () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth >= 1024) {
       document.getElementById('app').classList.remove('compact-header');
       const fab = document.getElementById('mobile-filter-fab');
       if (fab) fab.classList.remove('show-fab');
@@ -1204,7 +1160,7 @@ function setupMobileScrollListener() {
       scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
       clientHeight = window.innerHeight;
     }
-    
+
     const isScrollable = scrollHeight > clientHeight + 10;
     const isNearBottom = isScrollable && st > 50 && (st + clientHeight >= scrollHeight - 40);
 
@@ -1267,6 +1223,8 @@ function setupSavedDragEvents() {
 
 function init() {
   loadState();
+  initInstallPrompt();
+  initAuth();
 
   const urlParams = new URLSearchParams(window.location.search);
   const urlWeekId = urlParams.get('week');
@@ -1314,18 +1272,23 @@ function init() {
     let sheetStartY = 0;
     let sheetCurrentY = 0;
     let sheetIsDragging = false;
-    let sheetAtTop = false;
+    let sheetCanDrag = false;
 
     detailSheet.addEventListener('touchstart', e => {
       if (window.innerWidth > 768) return;
+      const isHandle = e.target.closest('.sheet-handle');
+      const isAtTop = detailSheet.scrollTop <= 2;
       sheetStartY = e.touches[0].clientY;
-      sheetAtTop = detailSheet.scrollTop <= 2;
+      sheetCurrentY = sheetStartY;
+      sheetCanDrag = !!(isHandle || isAtTop);
       sheetIsDragging = true;
-      detailSheet.style.transition = 'none';
+      if (sheetCanDrag) {
+        detailSheet.style.transition = 'none';
+      }
     }, { passive: false });
 
     detailSheet.addEventListener('touchmove', e => {
-      if (!sheetIsDragging || !sheetAtTop || window.innerWidth > 768) return;
+      if (!sheetIsDragging || !sheetCanDrag || window.innerWidth > 768) return;
       sheetCurrentY = e.touches[0].clientY;
       const deltaY = sheetCurrentY - sheetStartY;
       if (deltaY > 0) {
@@ -1339,12 +1302,13 @@ function init() {
       sheetIsDragging = false;
       detailSheet.style.transition = '';
       const deltaY = sheetCurrentY - sheetStartY;
-      if (sheetAtTop && deltaY > 80) {
+      if (sheetCanDrag && deltaY > 80) {
         closeDetail();
         setTimeout(() => { detailSheet.style.transform = ''; }, 300);
       } else {
         detailSheet.style.transform = '';
       }
+      sheetCanDrag = false;
     });
   }
 
@@ -1444,7 +1408,7 @@ function init() {
     compactSearchInput.addEventListener('input', e => {
       const val = e.target.value;
       compactSearchClearBtn.style.display = val ? 'flex' : 'none';
-      
+
       if (State.activeTab === 'browse') {
         State.searchQuery = val;
         const mainSearchInput = document.getElementById('search-input');
@@ -1486,11 +1450,74 @@ function init() {
     });
   }
 
+  const tabletSearchInput = document.getElementById('tablet-header-search-input');
+  const tabletSearchClearBtn = document.getElementById('tablet-header-search-clear');
+  if (tabletSearchInput && tabletSearchClearBtn) {
+    const debouncedTabletSearch = debounce(val => {
+      if (State.activeTab === 'browse') {
+        State.searchQuery = val;
+        const mainSearchInput = document.getElementById('search-input');
+        if (mainSearchInput) mainSearchInput.value = val;
+        renderBrowse();
+        renderFilters();
+      } else if (State.activeTab === 'saved') {
+        State.savedSearchQuery = val;
+        const mainSavedSearchInput = document.getElementById('saved-search-input');
+        if (mainSavedSearchInput) mainSavedSearchInput.value = val;
+        renderSaved();
+      } else if (State.activeTab === 'map') {
+        State.mapSearchQuery = val;
+        const mainMapSearchInput = document.getElementById('map-search-input');
+        if (mainMapSearchInput) mainMapSearchInput.value = val;
+        renderMap();
+      }
+    }, 150);
+
+    tabletSearchInput.addEventListener('input', e => {
+      const val = e.target.value;
+      tabletSearchClearBtn.style.display = val ? 'flex' : 'none';
+      debouncedTabletSearch(val);
+    });
+
+    tabletSearchClearBtn.addEventListener('click', () => {
+      tabletSearchInput.value = '';
+      tabletSearchClearBtn.style.display = 'none';
+      if (State.activeTab === 'browse') {
+        State.searchQuery = '';
+        const mainSearchInput = document.getElementById('search-input');
+        if (mainSearchInput) mainSearchInput.value = '';
+        renderBrowse();
+        renderFilters();
+      } else if (State.activeTab === 'saved') {
+        State.savedSearchQuery = '';
+        const mainSavedSearchInput = document.getElementById('saved-search-input');
+        if (mainSavedSearchInput) mainSavedSearchInput.value = '';
+        renderSaved();
+      } else if (State.activeTab === 'map') {
+        State.mapSearchQuery = '';
+        const mainMapSearchInput = document.getElementById('map-search-input');
+        if (mainMapSearchInput) mainMapSearchInput.value = '';
+        renderMap();
+      }
+      tabletSearchInput.focus();
+    });
+  }
+
   document.addEventListener('click', e => {
     const isCompactClick = e.target.closest('.compact-app-bar') || e.target.closest('.compact-dropdown');
     if (!isCompactClick && compactSearchDropdown && compactMenuDropdown) {
       compactSearchDropdown.style.display = 'none';
       compactMenuDropdown.style.display = 'none';
+    }
+
+    const isSavedDropdownClick = e.target.closest('#saved-more-dropdown-wrap');
+    if (!isSavedDropdownClick) {
+      closeSavedMoreMenu();
+    }
+
+    const isDayDropdownClick = e.target.closest('#day-filter-dropdown-wrap');
+    if (!isDayDropdownClick) {
+      closeDayFilterDropdown();
     }
   });
 
@@ -1560,24 +1587,24 @@ function init() {
     else if (e.key === 'ArrowLeft') { e.preventDefault(); swipe('left'); }
   });
 
-function updateSearchPlaceholders() {
-  const width = window.innerWidth;
-  let placeholder = 'Search restaurants, dishes, neighborhoods...';
-  if (width < 480) {
-    placeholder = 'Search dishes, restaurants, etc...';
-  } else if (width < 768) {
-    placeholder = 'Search dishes, restaurants, areas...';
-  }
+  function updateSearchPlaceholders() {
+    const width = window.innerWidth;
+    let placeholder = 'Search restaurants, dishes, neighborhoods...';
+    if (width < 480) {
+      placeholder = 'Search dishes, restaurants, etc...';
+    } else if (width < 768) {
+      placeholder = 'Search dishes, restaurants, areas...';
+    }
 
-  ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'landing-global-search'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.placeholder = placeholder;
-  });
-}
+    ['search-input', 'saved-search-input', 'map-search-input', 'compact-search-input', 'tablet-header-search-input', 'landing-global-search'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.placeholder = placeholder;
+    });
+  }
 
   window.addEventListener('resize', () => {
     if (State.activeTab === 'swipe') renderSwipe();
-    if (window.innerWidth > 768 && State.filterDrawerOpen) {
+    if (window.innerWidth >= 1024 && State.filterDrawerOpen) {
       closeFilterDrawer();
     }
     updateSearchPlaceholders();
@@ -1632,7 +1659,7 @@ function updateSearchPlaceholders() {
   } else {
     switchTab('browse', true);
   }
-  
+
   loadWeekData(State.currentWeekId, () => {
     renderAll();
     updateBrowseBadge();
@@ -1641,6 +1668,30 @@ function updateSearchPlaceholders() {
       openDetail(parseInt(initialDishId, 10), true);
     }
   });
+}
+
+function toggleSavedMoreMenu(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('saved-actions-menu');
+  const btn = document.getElementById('saved-more-btn');
+  if (!menu) return;
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  } else {
+    menu.classList.add('open');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+function closeSavedMoreMenu() {
+  const menu = document.getElementById('saved-actions-menu');
+  const btn = document.getElementById('saved-more-btn');
+  if (menu && menu.classList.contains('open')) {
+    menu.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
 }
 
 // Assemble the App object for window.App
@@ -1687,6 +1738,7 @@ const App = {
   toggleSavedDistanceSort,
   applySavedZipCode,
   moveSavedItem,
+  toggleSavedRankingMode,
   goToLanding: (e) => {
     if (e) e.preventDefault();
     if (!State.currentWeekId) {
@@ -1717,6 +1769,10 @@ const App = {
   handleCrawlPinClick,
   clearCrawl,
   updateCrawlFab,
+  syncCrawlButtons,
+  clearUserDataState,
+  backupGuestUserData,
+  restoreGuestUserData,
   toggleSavedCrawlMode,
   handleCrawlCardClick,
   handleMapPlanCrawlClick,
@@ -1738,6 +1794,17 @@ const App = {
   renderBrowse,
   renderSaved,
   renderFilters,
+  renderDayFilters,
+  setDayFilter,
+  toggleDayFilter,
+  clearAllDayFilters,
+  toggleDayFilterDropdown,
+  closeDayFilterDropdown,
+  exportTopPicksCard,
+  triggerPwaInstall,
+  openNotificationsModal,
+  closeNotificationsModal,
+  toggleNotificationPref,
   renderSavedFilters,
   renderFriends,
   renderAll,
@@ -1745,6 +1812,28 @@ const App = {
   setupSavedDragEvents,
   getActiveFriends,
   hideCompactDropdowns,
+  triggerInstall,
+  openInstallModal,
+  closeInstallModal,
+  dismissInstallBanner,
+  updateInstallUI,
+  openAccountModal,
+  closeAccountModal,
+  signInWithGoogle,
+  sendMagicLink,
+  signInWithPassword,
+  registerWithPassword,
+  sendPasswordReset,
+  handleSignOut,
+  updateAuthUI,
+  showAuthSubView,
+  handleMagicLinkSubmit,
+  handlePasswordLoginSubmit,
+  handlePasswordSignupSubmit,
+  handlePasswordResetSubmit,
+  togglePasswordVisibility,
+  pushLocalToCloud,
+  queueCloudSync,
   checkMetadataUpdate,
   moveLandingCarousel,
   setLandingCarouselIndex,
@@ -1752,7 +1841,20 @@ const App = {
   stopLandingCarouselTimer,
   toggleMoreWeeksMobile,
   setOtherWeeksPage,
-  stepOtherWeeksPage
+  stepOtherWeeksPage,
+  toggleSavedMoreMenu,
+  closeSavedMoreMenu,
+  toggleSavedBulkEdit,
+  toggleBulkEditItem,
+  selectAllBulkEdit,
+  deselectAllBulkEdit,
+  confirmBulkRemove,
+  closeBulkRemoveConfirm,
+  executeBulkRemove,
+  toggleSheetScheduleDropdown,
+  showToast,
+  updateMobileFabBadge,
+  refreshMapLayout
 };
 
 window.App = App;

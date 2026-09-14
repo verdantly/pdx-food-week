@@ -1,6 +1,6 @@
 /* ── Data Helpers & Queries ── */
 import { State, isDishSaved, getDishKey } from './state.js';
-import { haversineDistance } from './utils.js';
+import { haversineDistance, isRestaurantOpenOnDay, isRestaurantOpenNow } from './utils.js';
 
 export function getRestaurants() {
   return (window.RESTAURANTS || []).filter(r => r.weekId === State.currentWeekId);
@@ -100,6 +100,23 @@ export function getFiltered() {
     if (State.activeFilters.has('pie') && !r.wholePie) return false;
     if (State.activeFilters.has('spicy') && !r.spicy) return false;
     if (State.activeFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
+    if (State.activeDayFilters && State.activeDayFilters.size > 0) {
+      let matchesAny = false;
+      for (const day of State.activeDayFilters) {
+        if (day === 'now') {
+          if (isRestaurantOpenNow(r)) { matchesAny = true; break; }
+        } else {
+          if (isRestaurantOpenOnDay(r, day)) { matchesAny = true; break; }
+        }
+      }
+      if (!matchesAny) return false;
+    } else if (State.activeDayFilter !== null && State.activeDayFilter !== undefined) {
+      if (State.activeDayFilter === 'now') {
+        if (!isRestaurantOpenNow(r)) return false;
+      } else {
+        if (!isRestaurantOpenOnDay(r, State.activeDayFilter)) return false;
+      }
+    }
     if (State.searchQuery) {
       const q = State.searchQuery.toLowerCase();
       if (!(r.dish || '').toLowerCase().includes(q) &&
@@ -165,7 +182,7 @@ export function getSaved() {
       const d2 = isFinite(b.lat) && isFinite(b.lng) ? haversineDistance(State.userLat, State.userLng, b.lat, b.lng) : Infinity;
       return d1 - d2;
     });
-  } else if (State.activeSavedSort === 'custom') {
+  } else if (State.rankingModeActive || State.activeSavedSort === 'custom') {
     savedItems.sort((a, b) => {
       const keyA = getDishKey(a.id, a.weekId);
       const keyB = getDishKey(b.id, b.weekId);

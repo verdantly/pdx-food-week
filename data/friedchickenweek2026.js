@@ -1,5 +1,5 @@
 // The Actual Portland's Fried Chicken Week 2026
-// 40 locations
+// 46 locations
 // Source: https://www.theactualportland.com/friedchickenlocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 40,
+    totalLocations: 46,
     url: "https://www.theactualportland.com/friedchickenlocations",
   }
 );
@@ -44,7 +44,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Zabb wings crispy fried chicken wings tossed in thai tom yum seasoning",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/7c286be2-e560-45dc-95bb-413f4e60e6c1/IMG_6135.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:30 AM – 10:00 PM",
+        "Tuesday: 11:30 AM – 10:00 PM",
+        "Wednesday: 11:30 AM – 10:00 PM",
+        "Thursday: 11:30 AM – 10:00 PM",
+        "Friday: 11:30 AM – 10:30 PM",
+        "Saturday: 11:30 AM – 10:30 PM",
+        "Sunday: 11:30 AM – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2200"
+          },
+          "open": {
+            "day": 0,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2230"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2230"
+          },
+          "open": {
+            "day": 6,
+            "time": "1130"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 2,
@@ -65,7 +157,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Our wet lemon pepper wings are crispy, juicy, and tossed in our signature buttery lemon pepper sauce. The perfect blend of fresh lemon, black pepper, garlic, and butter creates a bold, flavorful wing that’s both tangy and savory. It’s one of our customer favorites and a must-try for anyone who loves big flavor.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/2a6b2b95-46fb-48e8-b427-e265883c04cd/Lemon+Pepper+wings+-+Exotic+Eggrollz.png",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 7:30 PM",
+        "Tuesday: 12:00 – 7:30 PM",
+        "Wednesday: 12:00 – 7:30 PM",
+        "Thursday: 12:00 – 7:30 PM",
+        "Friday: 12:00 – 7:30 PM",
+        "Saturday: 11:00 AM – 7:00 PM",
+        "Sunday: 10:00 AM – 3:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1500"
+          },
+          "open": {
+            "day": 0,
+            "time": "1000"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1930"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1930"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1930"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1930"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1930"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1900"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 3,
@@ -86,7 +270,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy ginger chicken $10 à la carte side $18 plate (1 scoop mac, 2 scoops rice) chicken thigh, ginger-scallion relish, pickled onion.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/9aed575c-81d1-4b56-9dba-31e7e914f713/ACTUALPDXFCW2.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: Closed",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 4,
@@ -107,7 +372,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fried chicken, sweet chili flavored, hot wings, bbq wings.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/880e96bd-6859-44d6-80ff-6e45eaffd1e9/IMG_8407+-+Shawntae+Barber.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:30 AM – 8:00 PM",
+        "Tuesday: 11:30 AM – 8:00 PM",
+        "Wednesday: Closed",
+        "Thursday: 11:30 AM – 8:00 PM",
+        "Friday: 11:30 AM – 9:00 PM",
+        "Saturday: 11:30 AM – 9:00 PM",
+        "Sunday: 11:30 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1130"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 5,
@@ -128,7 +474,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Glazed chicken. Fried chicken glazed in a mix of filipino fish sauce, honey, brown sugar, and ginger.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/5e6979b9-fc99-4449-aa47-b9331e2eb879/IMG_4125+-+Hunny+Beez+Portland.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 10:00 PM",
+        "Tuesday: 11:00 AM – 10:00 PM",
+        "Wednesday: 11:00 AM – 10:00 PM",
+        "Thursday: 11:00 AM – 12:00 AM",
+        "Friday: 11:00 AM – 2:00 AM",
+        "Saturday: 10:00 AM – 2:00 AM",
+        "Sunday: 10:00 AM – 7:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1900"
+          },
+          "open": {
+            "day": 0,
+            "time": "1000"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1000"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 6,
@@ -149,7 +587,77 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Some call it magic, we call it generations of love. Our crispy, made-to-order 100% gluten-free fried chicken is smothered in our family’s 75-year-old mole recipe, crafted with roasted chiles, warm spices, seeds, nuts, and just a touch of chocolate. Every bite is rich, smoky, savory, and unforgettable. Built on immigrant roots, salvadoran tradition, and the belief that great food brings people together. That’s the salvi magic.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/3fc278d3-0587-4129-888d-99f6e943cc0d/fried+chicken+-+Patricia+Garcia.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 2:00 – 8:00 PM",
+        "Thursday: 2:00 – 8:00 PM",
+        "Friday: 2:00 – 8:30 PM",
+        "Saturday: 2:00 – 8:30 PM",
+        "Sunday: 2:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2030"
+          },
+          "open": {
+            "day": 5,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2030"
+          },
+          "open": {
+            "day": 6,
+            "time": "1400"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 7,
@@ -170,7 +678,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Some call it magic, we call it generations of love. Our crispy, made-to-order 100% gluten-free fried chicken is smothered in our family’s 75-year-old mole recipe, crafted with roasted chiles, warm spices, seeds, nuts, and just a touch of chocolate. Every bite is rich, smoky, savory, and unforgettable. Built on immigrant roots, salvadoran tradition, and the belief that great food brings people together. That’s the salvi magic.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/0a740713-79c8-42fd-a8a4-8ef80925fee4/fried+chicken+-+Patricia+Garcia.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 5:00 – 8:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 3:00 – 8:00 PM",
+        "Thursday: 5:00 – 8:00 PM",
+        "Friday: 3:00 – 8:00 PM",
+        "Saturday: 3:00 – 8:30 PM",
+        "Sunday: 3:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2030"
+          },
+          "open": {
+            "day": 6,
+            "time": "1500"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 8,
@@ -191,7 +780,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Boke Hot Chicken Sando Boke fried chicken dipped in hot and sour gochujang/pickled Serrano sauce, Chinese mustard slaw, and pickles, on a toasted An Xuyen brioche bun.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/584f1916-ada5-43b6-a912-3fd76b3392f4/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTczOTQ3NDY2NDkxNjcxNy1Cb2tlX0Jvd2...pb24iOiAiY2VudHJlIiwgIndpZHRoIjogOTYwLCAiaGVpZ2h0IjogNjAwLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm9.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 8:00 PM",
+        "Wednesday: 11:00 AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 8:30 PM",
+        "Saturday: 11:00 AM – 8:30 PM",
+        "Sunday: 11:00 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2030"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2030"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 9,
@@ -212,7 +882,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy fried chicken piled high on a toasted brioche bun with pickles and a crunchy cabbage slaw tossed in a sweet and spicy hot honey mustard. Finished with a bold red pepper sauce, served with golden crispy waffle fries.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/9f323ca5-4825-4208-ad07-d04e70ea674f/Screenshot+2026-08-20+at+12.55.13%E2%80%AFPM.png",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 2:00 – 9:00 PM",
+        "Wednesday: 2:00 – 9:00 PM",
+        "Thursday: 2:00 – 9:00 PM",
+        "Friday: 12:00 – 10:00 PM",
+        "Saturday: 12:00 – 10:00 PM",
+        "Sunday: 12:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 10,
@@ -233,7 +984,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Braised red cabbage, chicken schnitzel, straight outta portland infused curry mustard, pickles.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/1473f271-3a87-46d2-9573-157610910846/IMG_6146.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 9:00 PM",
+        "Tuesday: 12:00 – 9:00 PM",
+        "Wednesday: 12:00 – 9:00 PM",
+        "Thursday: 12:00 – 9:00 PM",
+        "Friday: 12:00 – 10:00 PM",
+        "Saturday: 12:00 – 10:00 PM",
+        "Sunday: 12:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 11,
@@ -254,7 +1097,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tenderloin with a lime coleslaw, topped with an avocado slice on a homemade flour or corn tortilla.",
     "emoji": "🌮",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c992fec2-95d6-4b3a-94c6-154674bb2170/IMG_6166.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 12:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 12,
@@ -275,7 +1199,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Mixed with honey, garlic, hot sauce, and crushed red pepper.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/93098a9d-af8c-4643-95d7-4b833bd452c9/IMG_6169.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 3:00 PM – 2:00 AM",
+        "Tuesday: 3:00 PM – 2:00 AM",
+        "Wednesday: 3:00 PM – 2:00 AM",
+        "Thursday: 3:00 PM – 2:00 AM",
+        "Friday: 12:00 PM – 2:00 AM",
+        "Saturday: 11:00 AM – 2:00 AM",
+        "Sunday: 11:00 AM – 2:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0200"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 13,
@@ -296,12 +1312,104 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "(thigh + drum or 3 whole wings) served w/ crispy shallots, fresh cucumber slices, and sweet chili sauce.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/cdd018c6-74de-4ada-9b0e-80fab5310e6d/IMG_6190.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 14,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Tofu Sandwich",
+    "dish": "Fried Chicken Sandwich",
     "restaurant": "Basilisk",
     "neighborhood": "Kerns",
     "address": "2705 Northeast Sandy Blvd, Portland, OR 97232",
@@ -314,10 +1422,102 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "spicy": false,
     "minors": true,
     "takeout": true,
-    "desc": "For vegetarians with slaw and pickled cucumbers, and a special fried chicken sandwich with pesto aioli cabbage slaw, tomato, and crunchy parmesan crisps.",
+    "desc": "Special fried chicken sandwich with pesto aioli, cabbage slaw, tomato, and crunchy parmesan crisp, and for vegetarians.",
     "emoji": "🌿",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/562dcfa3-02ec-4156-8c09-9251d0755e4b/IMG_6238.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 11:00 PM",
+        "Tuesday: 12:00 – 11:00 PM",
+        "Wednesday: 12:00 – 11:00 PM",
+        "Thursday: 12:00 PM – 12:00 AM",
+        "Friday: 12:00 PM – 1:00 AM",
+        "Saturday: 12:00 PM – 1:00 AM",
+        "Sunday: 12:00 – 11:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2300"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2300"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2300"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2300"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 15,
@@ -338,7 +1538,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Orange chicken | sesame chicken | salt pepper chicken.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/7e983881-bfd2-4b80-b1e8-d07dbec2f86c/Crispy-Orange-Chicken-52-3.webp",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 8:00 PM",
+        "Tuesday: 11:00 AM – 8:00 PM",
+        "Wednesday: 11:00 AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 16,
@@ -359,7 +1651,119 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "A crispy fried vegan chicken patty piled onto a soft pub bun with fresh lettuce and tomato, then smothered in our rich, creamy garlic shiitake parmesan sauce. Savory, saucy, crispy, and just messy enough—in all the right ways.",
     "emoji": "🌱",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/064575c7-60bd-46b0-892b-b7d2ddb8c3ff/IMG_6249.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 7:00 AM – 3:00 PM",
+        "Tuesday: 7:00 AM – 3:00 PM",
+        "Wednesday: 7:00 AM – 3:00 PM",
+        "Thursday: 7:00 AM – 3:00 PM",
+        "Friday: 7:00 AM – 3:00 PM, 5:00 – 9:00 PM",
+        "Saturday: 7:00 AM – 3:00 PM, 5:00 – 9:00 PM",
+        "Sunday: 7:00 AM – 3:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1500"
+          },
+          "open": {
+            "day": 0,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1500"
+          },
+          "open": {
+            "day": 1,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1500"
+          },
+          "open": {
+            "day": 2,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1500"
+          },
+          "open": {
+            "day": 3,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1500"
+          },
+          "open": {
+            "day": 4,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1500"
+          },
+          "open": {
+            "day": 5,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1500"
+          },
+          "open": {
+            "day": 6,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1700"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 17,
@@ -380,7 +1784,77 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Bhuna indian spiced fried chicken sandwich.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a293fa45-b6b9-48e6-a79f-e8f55cb9be5d/IMG_6253.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 12:00 – 9:00 PM",
+        "Thursday: 12:00 – 9:00 PM",
+        "Friday: 12:00 – 9:00 PM",
+        "Saturday: 12:00 – 9:00 PM",
+        "Sunday: 12:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 18,
@@ -401,7 +1875,107 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Vegan buffalo fried chicken caesar hoagie. Made with fried chicken tossed in buffalo sauce, fresh chopped lettuce, house made caesar dressing, shredded parmesan on a toasted dos hermanos semolina roll.",
     "emoji": "🌱",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/1c26d26e-a279-42d1-8c4f-41707c52a5d0/IMG_6284.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 9:00 AM – 2:00 PM, 3:00 – 8:00 PM",
+        "Thursday: 9:00 AM – 2:00 PM, 3:00 – 8:00 PM",
+        "Friday: 9:00 AM – 2:00 PM, 3:00 – 8:00 PM",
+        "Saturday: 9:00 AM – 3:00 PM",
+        "Sunday: 9:00 AM – 3:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1500"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1400"
+          },
+          "open": {
+            "day": 3,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1400"
+          },
+          "open": {
+            "day": 5,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1500"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 19,
@@ -422,7 +1996,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Ate-oh-ate mac salad and charred pineapple huli-huli sauce.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/44530dc4-7585-4ae7-a4cc-ee8071cfc6b4/IMG_6283.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:30 AM – 9:00 PM",
+        "Tuesday: 11:30 AM – 9:00 PM",
+        "Wednesday: 11:30 AM – 9:00 PM",
+        "Thursday: 11:30 AM – 9:00 PM",
+        "Friday: 11:30 AM – 9:00 PM",
+        "Saturday: 11:30 AM – 9:00 PM",
+        "Sunday: 11:30 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1130"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 20,
@@ -443,7 +2109,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Buttermilk brined fried chicken, ham, swiss, dijonnaise, mornay sauce on seeded brioche.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/663a763f-3493-4165-a66e-5d15b12065d5/IMG_6289.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 1:00 AM",
+        "Saturday: 4:00 PM – 1:00 AM",
+        "Sunday: 4:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 21,
@@ -464,7 +2222,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Our crispy take on the classic hainan chicken. Buttermilk-marinated fried chicken, infused with ginger, pandan, and our special seasoning, fried to golden, crunchy perfection. Topped with our house-made ginger scallion sauce, sweet chili, and sweet dark.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/8282682d-a846-4b64-99c8-7765a3052bfc/IMG_6324.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 22,
@@ -485,7 +2335,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "With spicy mayo, dill pickles, on a buttery brioche bun.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/17a16de4-cc60-4822-92af-3d819ea2a834/IMG_8048.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 1:00 AM",
+        "Saturday: 2:00 PM – 1:00 AM",
+        "Sunday: 2:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1400"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 23,
@@ -506,7 +2448,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Brined chicken tenders with classic frank’s hot sauce, dredged in a seasoned blend of rice flour and corn starch for the perfect crispy bite. Finished with a rich, sticky sambal hot honey garlic sauce.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/f2ce5578-cab8-43ab-86a6-d1ec0ce10463/IMG_6302.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 10:00 PM",
+        "Tuesday: 12:00 – 10:00 PM",
+        "Wednesday: 12:00 – 10:00 PM",
+        "Thursday: 12:00 – 10:00 PM",
+        "Friday: 11:00 AM – 11:00 PM",
+        "Saturday: 11:00 AM – 11:00 PM",
+        "Sunday: 12:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2300"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2300"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 24,
@@ -527,7 +2561,77 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Two fried chicken wings with our biscuit on the side.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/30a124f5-6a64-49d5-9256-bfd626d45715/IMG_6159+-+Stacey+Gibson.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 4:00 – 9:30 PM",
+        "Thursday: 4:00 – 9:30 PM",
+        "Friday: 4:00 – 9:30 PM",
+        "Saturday: 4:00 – 9:30 PM",
+        "Sunday: 4:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2130"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2130"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2130"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2130"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 25,
@@ -548,7 +2652,77 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fried chichen tacos.",
     "emoji": "🌮",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/12933e14-e2f5-415e-9de9-e0cace339bf9/IMG_5657+-+Fabos+Tacos.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 8:00 PM",
+        "Wednesday: 11:00 AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 8:00 PM",
+        "Saturday: 11:00 AM – 8:00 PM",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 26,
@@ -569,7 +2743,66 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fried chicken wings",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/fe335557-2ac0-45c7-b679-6b36f4e1cd04/IMG_6322.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 12:00 – 7:30 PM",
+        "Thursday: 12:00 – 7:30 PM",
+        "Friday: 12:00 – 7:30 PM",
+        "Saturday: 12:00 – 7:30 PM",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 3,
+            "time": "1930"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1930"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1930"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1930"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 27,
@@ -590,7 +2823,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Chicago style four piece party wings to get my lemon peppers, dust and hot honey or chicago style mild sauce.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a32e1368-d568-4070-a2f7-5e141dbb44d2/IMG_6334.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 7:00 PM",
+        "Wednesday: 11:00 AM – 7:00 PM",
+        "Thursday: 11:00 AM – 7:00 PM",
+        "Friday: 11:00 AM – 7:00 PM",
+        "Saturday: 11:00 AM – 7:00 PM",
+        "Sunday: 11:00 AM – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1900"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1900"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1900"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1900"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1900"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 28,
@@ -611,7 +2925,127 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Ayam geprek is a dish that originates from indonesia, consisting of battered fried chicken.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a6c3e080-b4b8-4630-bbd6-c64b72882b4a/Ayam+Geprek+-+Warung+Jajan.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 12:00 – 2:30 PM, 4:00 – 9:00 PM",
+        "Thursday: 12:00 – 2:30 PM, 4:00 – 9:00 PM",
+        "Friday: 12:00 – 2:30 PM, 4:00 – 9:00 PM",
+        "Saturday: 12:00 – 2:30 PM, 4:00 – 9:00 PM",
+        "Sunday: 12:00 – 2:30 PM, 4:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1430"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1430"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1430"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1430"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1430"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 29,
@@ -632,7 +3066,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fried chicken parm tacos with, blue corn tortillas, grilled mozzarella, san marzano marinara, hand-battered tenders, pesto ranch, shaved parmesan, and crispy fried basil.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/435a9c43-09e6-4446-926d-6ac6586f4599/inbound922683859764017235+-+Christina+Goodall.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 8:00 PM",
+        "Tuesday: 11:00 AM – 8:00 PM",
+        "Wednesday: 11:00���AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 8:00 PM",
+        "Saturday: 11:00 AM – 8:00 PM",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 30,
@@ -653,7 +3168,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Crispy fried chicken piled over creamy mashed potatoes, smothered with melted cheese, topped with roasted corn and jalapeño, then drizzled with tangy alabama white sauce. It ain’t pretty. It’s damn good!",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/0cc2bbf1-4964-41d3-a814-1f769a048667/IMG_6358.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 9:00 AM – 11:00 PM",
+        "Tuesday: 9:00 AM – 11:30 PM",
+        "Wednesday: 9:00 AM – 11:30 PM",
+        "Thursday: 9:00 AM – 11:30 PM",
+        "Friday: 9:00 AM – 1:00 AM",
+        "Saturday: 9:00 AM – 1:00 AM",
+        "Sunday: 9:00 AM – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2200"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2300"
+          },
+          "open": {
+            "day": 1,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2330"
+          },
+          "open": {
+            "day": 2,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2330"
+          },
+          "open": {
+            "day": 3,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2330"
+          },
+          "open": {
+            "day": 4,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0100"
+          },
+          "open": {
+            "day": 5,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0100"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 31,
@@ -674,7 +3281,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "The innovative curry influences from japanese cuisine to our new fusion-thai curry special. The thick curry is topped with a crispy, deep-fried chicken cutlet and served over white rice. Adding parmesan cheese to the curry rice creates an even richer flavor.",
     "emoji": "🍛",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/d2c123f2-6407-4a38-a76b-852945850b36/IMG_6164.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 32,
@@ -695,12 +3383,71 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "With bok choy dipping sauce",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/1a852f86-e491-4143-b1ce-8f411f01db28/inbound6886801852023214375+-+jeff+chow.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 12:00 – 7:00 PM",
+        "Friday: 12:00 – 7:00 PM",
+        "Saturday: 12:00 – 7:00 PM",
+        "Sunday: 12:00 – 5:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1700"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1900"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1900"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1900"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 33,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Fried Chicken Breast Over A House",
     "restaurant": "Canary",
     "neighborhood": "Kenton",
     "address": "3414 North Lombard St, Portland, OR 97217",
@@ -713,10 +3460,102 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "spicy": false,
     "minors": true,
     "takeout": true,
-    "desc": "Fried chicken sandwich with brussels sprout slaw and honey sriracha sauce.",
-    "emoji": "🥪",
-    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/6a91d2fc-7284-4608-9293-da1f56dacdb3/1000028789+-+Alec+Pemberton.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "desc": "Made waffle with maple syrup.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/59687a94-1128-4a71-b5f5-13a346cffb1e/image2.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 3:00 PM – 2:00 AM",
+        "Tuesday: 3:00 PM – 2:00 AM",
+        "Wednesday: 3:00 PM – 2:00 AM",
+        "Thursday: 3:00 PM – 2:00 AM",
+        "Friday: 3:00 PM – 2:00 AM",
+        "Saturday: 10:00 AM – 2:00 AM",
+        "Sunday: 10:00 AM – 2:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0200"
+          },
+          "open": {
+            "day": 0,
+            "time": "1000"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1000"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 34,
@@ -737,7 +3576,149 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Fried chicken wings tossed with chili lime sauce thai style with rice powder, shallot, green onion and ngao gai.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/5fad82a4-ffe7-4bb4-aaec-e7f6452937ae/14961+-+RukDiew+Cafe.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:30 AM – 3:00 PM, 4:30 – 9:00 PM",
+        "Tuesday: 11:30 AM – 3:00 PM, 4:30 – 9:00 PM",
+        "Wednesday: 11:30 AM – 3:00 PM, 4:30 – 9:00 PM",
+        "Thursday: 11:30 AM – 3:00 PM, 4:30 – 9:00 PM",
+        "Friday: 11:30 AM – 3:00 PM, 4:30 – 9:30 PM",
+        "Saturday: 12:00 – 9:30 PM",
+        "Sunday: 12:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1500"
+          },
+          "open": {
+            "day": 1,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1630"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1500"
+          },
+          "open": {
+            "day": 2,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1630"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1500"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1630"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1500"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1630"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1500"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2130"
+          },
+          "open": {
+            "day": 5,
+            "time": "1630"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2130"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 35,
@@ -758,7 +3739,99 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Popcorn chicken po boy",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/ca1eb362-59a4-480c-83c3-53eb959b731b/IMG_6412.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 2:00 AM",
+        "Saturday: 12:00 PM – 2:00 AM",
+        "Sunday: 12:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 36,
@@ -779,7 +3852,27 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Tamarind crispy chicken bowl.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/86bb2e37-f16d-456d-bb80-63b8af13ebe0/IMG_6444.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
   },
   {
     "id": 37,
@@ -800,12 +3893,104 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Smoked and buttermilk fried chicken drumsticks, served with chipotle ranch.",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/8e3527c2-738b-48b3-868d-7f0041cc7752/processed-F375A766-545E-498A-BCA9-68994BEF5F19.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 9:00 PM",
+        "Tuesday: 12:00 – 10:00 PM",
+        "Wednesday: 12:00 – 10:00 PM",
+        "Thursday: 12:00 – 10:00 PM",
+        "Friday: 12:00 – 10:00 PM",
+        "Saturday: 12:00 – 10:00 PM",
+        "Sunday: 12:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 38,
     "weekId": "fried-chicken-2026",
-    "dish": "Fried Chicken Special",
+    "dish": "Fried Chicken Thighs With Hong Kong Style Curry Dipping Sauce",
     "restaurant": "Hawker Station PDX",
     "neighborhood": "Central Beaverton",
     "address": "12675 Southwest 1st St, Beaverton, OR 97005",
@@ -819,9 +4004,90 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "minors": true,
     "takeout": true,
     "desc": "Fried chicken thighs with hong kong style curry dipping sauce.",
-    "emoji": "🍗",
+    "emoji": "🍛",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/eb297f4c-3951-4ad4-898a-39946b0d8bdc/inbound9145835864276702059+-+Hawkerstation+PDX.png",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 8:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 11:00 AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 39,
@@ -842,12 +4108,634 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Hand-cut chicken breast marinated in our buttermilk marinade, hand-breaded to order, fried, then tossed in our spicy oil and blackened seasoning, topped with local honey. Served on a sandwich with our royal sauce and pickles.",
     "emoji": "🥪",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/a96a6b29-cf4a-488c-8272-8aaab70c2034/Hot+Honey+Friend+Chicken.jpg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
   },
   {
     "id": 40,
     "weekId": "fried-chicken-2026",
-    "dish": "Crispy Garlic Chicken Wings",
+    "dish": "Fried Chicken Topped With House",
+    "restaurant": "Kanaka Island Grill",
+    "neighborhood": "Downtown Tigard",
+    "address": "12950 Southwest Pacific Highway, Tigard, OR 97223",
+    "lat": 45.4259194,
+    "lng": -122.7788647,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Made shoyu ginger sauce, spicy mayo, furikake, and green onions.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/f4f7fd36-c06a-4148-bf83-76bce1d09321/IMG_2048+-+Jonathan+Demattos.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 4:00 – 7:00 PM",
+        "Thursday: 12:00 – 7:00 PM",
+        "Friday: 12:00 – 7:00 PM",
+        "Saturday: 12:00 – 7:00 PM",
+        "Sunday: 1:00 – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1900"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1900"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1900"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1900"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 41,
+    "weekId": "fried-chicken-2026",
+    "dish": "Bring! Chimken & Woofles",
+    "restaurant": "Bring! Barkery and Pet Boutique",
+    "neighborhood": "Downtown",
+    "address": "750 Southwest 9th Ave, Portland, OR 97205",
+    "lat": 45.519159,
+    "lng": -122.681196,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "A roasted sweet potato & goat cheese croquette, rolled in our pumpkin cake crumbs and baked until golden. Served with everyone’s favorite woofle and a tiny drizzle of peanut butter maple syrup. (closed monday’s",
+    "emoji": "🍗",
+    "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5mBCpVDDDg2WDZR241_b9FO9O5kDB519Z2kfVciltH8E2oolle_JlhS_bPr-kFb7r_9l-wXMdXhf2ImyUYvRBa7np1AVNpH8cvwfO_-0jZXldEEYfh3VcE3fm2LyjpnfwXZOOEsTXZwzTAjf7316rwz94JRM5FQZaJbLzQLVZ99Z8zeTK0OhecVcRszfbHqXfcex-1oS14N1EENmJ8xAboLvIpje-RW_cHKgZb5HpTic8bKAYAjkVa2yg?fife=s16383",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:00 AM – 6:00 PM",
+        "Thursday: 11:00 AM – 6:00 PM",
+        "Friday: 11:00 AM – 6:00 PM",
+        "Saturday: 11:00 AM – 6:00 PM",
+        "Sunday: 11:00 AM – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1800"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1800"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1800"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1800"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 42,
+    "weekId": "fried-chicken-2026",
+    "dish": "Fried Chicken Special",
+    "restaurant": "Rhinestone",
+    "neighborhood": "Hosford-Abernethy",
+    "address": "2100 Southeast Clinton St, Portland, OR 97202",
+    "lat": 45.5032437,
+    "lng": -122.6444445,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "The spicy fried chicken sandobuttermilk brined fried chicken thigh coated in salsa macha, pineapple, shreduce, pickled jalapeño, with mayo.",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c7bcfa0f-2d41-4b4e-aafc-4993ac03ddc6/IMG_2562+-+Rhinestone+PDX.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 4:00 PM – 12:00 AM",
+        "Sunday: 4:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 43,
+    "weekId": "fried-chicken-2026",
+    "dish": "Chicken Parm Garlic Knot Sandwich",
+    "restaurant": "The European Job",
+    "neighborhood": "Hollywood",
+    "address": "1607 Northeast 41st Ave, Portland, OR 97232",
+    "lat": 45.5346334,
+    "lng": -122.6217363,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Seasoned crispy chicken breast, topped with our slowly braised pomodoro sauce with melted mozzarella and parmiggiano, fresh basil, in a toasted pub bun finished like a garlic knot with garlic butter, grated parmiggiano and parsley flakes.",
+    "emoji": "🥪",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c08a53f4-fc12-451e-ba7e-294e2966a310/1000084541.jpg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 12:00 – 8:00 PM",
+        "Thursday: 12:00 – 8:00 PM",
+        "Friday: 12:00 – 8:00 PM",
+        "Saturday: 12:00 – 8:00 PM",
+        "Sunday: 12:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 44,
+    "weekId": "fried-chicken-2026",
+    "dish": "Fried Chicken Special",
+    "restaurant": "Office Lunch (by Verdure x Exquisite Creatures)",
+    "neighborhood": "Buckman",
+    "address": "107 Southeast Washington St, Portland, OR 97214",
+    "lat": 45.51874,
+    "lng": -122.664236,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "1. Nashville hot crispy tofu sandwich. It’s a crispy slab of tofu slathered in a cherry bomb hot sauce on a toasted house-made milk bun with a creamy ranch slaw and seasonal pickles. 2. Cacio e pepe crispy tofu sandwich. Crispy slab of tofu crusted with peppercorns in a toasted house-made milk bun with a creamy cacio e pepe sauce.",
+    "emoji": "🌿",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/5def79f7-ab27-4f81-9a13-8d31867c68f3/864F2F7D-5437-43B6-A102-D3E6235EFF52+-+Adolfo.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        4
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 11:00 AM – 2:00 PM",
+        "Friday: Closed",
+        "Saturday: Closed",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 45,
+    "weekId": "fried-chicken-2026",
+    "dish": "Crispy Fried Chicken",
+    "restaurant": "Bring! Barkery & Pet Boutique (For Dogs Only)",
+    "neighborhood": "Portland",
+    "address": "Portland, OR",
+    "lat": 45.5231,
+    "lng": -122.6765,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Bring! chimken & woofles - a roasted sweet potato & goat cheese croquette, rolled in our pumpkin cake crumbs and baked until golden. Served with everyone’s favorite woofle and a tiny drizzle of peanut butter maple syrup. (closed monday’s)",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/ac7ac5e3-8384-4b85-88dc-f51bf45d2e58/IMG_6499.jpeg",
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:00 AM – 6:00 PM",
+        "Thursday: 11:00 AM – 6:00 PM",
+        "Friday: 11:00 AM – 6:00 PM",
+        "Saturday: 11:00 AM – 6:00 PM",
+        "Sunday: 11:00 AM – 6:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1800"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1800"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1800"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1800"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1800"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 46,
+    "weekId": "fried-chicken-2026",
+    "dish": "Crispy Thai Wings",
     "restaurant": "E-San Thai Woodstock",
     "neighborhood": "Woodstock",
     "address": "4818 SE Woodstock Blvd, Portland, OR 97206",
@@ -863,7 +4751,88 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "CRISPY THAI WINGS. (Closed Tuesday’s)",
     "emoji": "🍗",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/3f980f48-8352-4cf9-926b-d90bdd62a2ed/IMG_5299+-+Huyen+Tram+Huynh.jpeg",
-    "url": "https://www.theactualportland.com/friedchickenlocations"
+    "url": "https://www.theactualportland.com/friedchickenlocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 11:30 AM – 9:00 PM",
+        "Thursday: 11:30 AM – 10:00 PM",
+        "Friday: 11:30 AM – 10:00 PM",
+        "Saturday: 11:30 AM – 10:00 PM",
+        "Sunday: 11:30 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1130"
+          }
+        }
+      ]
+    }
   }
 ];
   const seen = new Set(window.RESTAURANTS.map(r => `${r.weekId}_${r.id}`));

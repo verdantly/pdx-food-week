@@ -67,11 +67,16 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
   const crawlSelectionIndex = State.crawlSelection.indexOf(r.id);
   const isSelected = crawlSelectionIndex > -1;
   const isCrawlSelectable = State.crawlModeActive && isSavedTab;
+  const isBulkEditMode = State.bulkEditActive && isSavedTab;
+  const isBulkSelected = isBulkEditMode && State.bulkEditSelection && State.bulkEditSelection.has(r.id);
 
   let cls = ['dish-card', isSaved ? 'bookmarked' : '', overlap ? 'overlap-card' : ''].filter(Boolean).join(' ');
   if (isCrawlSelectable) {
     cls += ' crawl-selectable';
     if (isSelected) cls += ' crawl-selected';
+  } else if (isBulkEditMode) {
+    cls += ' bulk-selectable';
+    if (isBulkSelected) cls += ' bulk-selected';
   }
   const q = isSavedTab ? State.savedSearchQuery : State.searchQuery;
   const thumb = r.image
@@ -86,17 +91,27 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
   const isNew = r.isNew && !State.viewedNew.has(r.id);
 
   let dragHandleHtml = '';
-  if (isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable) {
+  const isRankingMode = isSavedTab && (State.rankingModeActive || State.activeSavedSort === 'custom') && !isCrawlSelectable && !isBulkEditMode;
+  if (isRankingMode) {
     const isFirst = index === 0;
     const isLast = index === totalCount - 1;
+    const rankNum = index + 1;
+    let rankClass = 'saved-rank-badge';
+    if (rankNum === 1) rankClass += ' rank-gold';
+    else if (rankNum === 2) rankClass += ' rank-silver';
+    else if (rankNum === 3) rankClass += ' rank-bronze';
+
     dragHandleHtml = `
-      <div class="drag-reorder-buttons" style="display: flex; flex-direction: column; gap: 2px; margin-right: 8px;" onclick="event.stopPropagation();">
-        <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
-          ▲
-        </button>
-        <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
-          ▼
-        </button>
+      <div class="saved-rank-container" style="display: flex; align-items: center; gap: 6px; margin-right: 8px;" onclick="event.stopPropagation();">
+        <div class="${rankClass}" aria-label="Rank #${rankNum}">#${rankNum}</div>
+        <div class="drag-reorder-buttons" style="display: flex; flex-direction: column; gap: 2px;">
+          <button class="reorder-btn reorder-up" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, -1)" aria-label="Move up" ${isFirst ? 'disabled' : ''}>
+            ▲
+          </button>
+          <button class="reorder-btn reorder-down" onclick="event.stopPropagation(); App.moveSavedItem(${r.id}, 1)" aria-label="Move down" ${isLast ? 'disabled' : ''}>
+            ▼
+          </button>
+        </div>
       </div>
     `;
   }
@@ -108,6 +123,14 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
         ${isSelected ? (crawlSelectionIndex + 1) : ''}
       </div>
     `;
+  } else if (isBulkEditMode) {
+    crawlBadgeHtml = `
+      <div class="bulk-select-indicator ${isBulkSelected ? 'selected' : ''}" style="margin-right: 10px; flex-shrink: 0;" aria-label="${isBulkSelected ? 'Selected' : 'Not selected'}">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="${isBulkSelected ? 'display: block;' : 'display: none;'}">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+    `;
   }
 
   const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
@@ -117,10 +140,10 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
 
   const cardClickAction = isCrawlSelectable
     ? `App.handleCrawlCardClick(${r.id})`
-    : `App.openDetail(${r.id})`;
+    : (isBulkEditMode ? `App.toggleBulkEditItem(${r.id})` : `App.openDetail(${r.id})`);
 
   return `
-    <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isSavedTab && State.activeSavedSort === 'custom' && !isCrawlSelectable ? 'draggable="true"' : ''}>
+    <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isRankingMode ? 'draggable="true"' : ''}>
       ${dragHandleHtml}
       ${crawlBadgeHtml}
       ${thumb}
@@ -132,8 +155,8 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
         <div class="card-tags">${buildTags(r)}</div>
       </div>
       <button class="bookmark-btn ${isSaved ? 'saved' : ''}"
-        onclick="event.stopPropagation(); ${isCrawlSelectable ? `App.handleCrawlCardClick(${r.id})` : `App.toggleSave(${r.id})`}"
-        aria-label="${isCrawlSelectable ? 'Select for crawl' : (isSaved ? 'Remove from saved' : 'Save this dish')}">
+        onclick="event.stopPropagation(); ${isCrawlSelectable ? `App.handleCrawlCardClick(${r.id})` : (isBulkEditMode ? `App.toggleBulkEditItem(${r.id})` : `App.toggleSave(${r.id})`)}"
+        aria-label="${isCrawlSelectable ? 'Select for crawl' : (isBulkEditMode ? (isBulkSelected ? 'Deselect dish' : 'Select dish') : (isSaved ? 'Remove from saved' : 'Save this dish'))}">
         <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
         </svg>
