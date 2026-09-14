@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FEF3C7",
     colorPale: "#FFFBEB",
     emoji: "🐔",
-    totalLocations: 46,
+    totalLocations: 45,
     url: "https://www.theactualportland.com/friedchickenlocations",
   }
 );
@@ -4641,7 +4641,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       }
     },
     {
-      "id": 46,
+      "id": 45,
       "weekId": "fried-chicken-2026",
       "dish": "Crispy Thai Wings",
       "restaurant": "E-San Thai Woodstock",
