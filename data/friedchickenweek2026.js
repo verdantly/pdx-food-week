@@ -968,7 +968,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     {
       "id": 10,
       "weekId": "fried-chicken-2026",
-      "dish": "üBer Chicken Sandwich",
+      "dish": "Über Chicken Sandwich",
       "restaurant": "Migration Brewing - Glisan",
       "neighborhood": "Kerns",
       "address": "2828 Northeast Glisan St, Portland, OR 97232",
@@ -4312,7 +4312,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "takeout": true,
       "desc": "A roasted sweet potato & goat cheese croquette, rolled in our pumpkin cake crumbs and baked until golden. Served with everyone’s favorite woofle and a tiny drizzle of peanut butter maple syrup. (closed monday’s",
       "emoji": "🍗",
-      "image": "https://mymaps.usercontent.google.com/hostedimage/m/*/3AAjQbR5mBCpVDDDg2WDZR241_b9FO9O5kDB519Z2kfVciltH8E2oolle_JlhS_bPr-kFb7r_9l-wXMdXhf2ImyUYvRBa7np1AVNpH8cvwfO_-0jZXldEEYfh3VcE3fm2LyjpnfwXZOOEsTXZwzTAjf7316rwz94JRM5FQZaJbLzQLVZ99Z8zeTK0OhecVcRszfbHqXfcex-1oS14N1EENmJ8xAboLvIpje-RW_cHKgZb5HpTic8bKAYAjkVa2yg?fife=s16383",
+      "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/cd0411df-87f1-42c5-b825-525619eaabbc/AC5B1602-5ABC-41DE-9566-9E7E0A17BCCB.jpeg",
       "url": "https://www.theactualportland.com/friedchickenlocations",
       "isNew": true,
       "hours": {
