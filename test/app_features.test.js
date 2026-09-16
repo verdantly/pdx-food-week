@@ -3,7 +3,7 @@ import { isRestaurantOpenOnDay, isRestaurantOpenNow, parseClosedDays, getRestaur
 import { cardHTML } from "../js/modules/cards.js";
 import { State } from "../js/modules/state.js";
 
-describe("Roadmap Features: Schedules & Day Filters", () => {
+describe("App Features: Schedules & Day Filters", () => {
   test("parseClosedDays correctly parses single and multi-day closure strings", () => {
     expect([...parseClosedDays("CRISPY THAI WINGS. (Closed Tuesday’s)")].sort()).toEqual([2]);
     expect([...parseClosedDays("Burger special (closed monday's & tuesday's)")].sort()).toEqual([1, 2]);
@@ -82,7 +82,7 @@ describe("Roadmap Features: Schedules & Day Filters", () => {
   });
 });
 
-describe("Roadmap Features: Relative Timing Badges (Clean, No Pulsing Dots)", () => {
+describe("App Features: Relative Timing Badges (Clean, No Pulsing Dots)", () => {
   test("getWeekTiming produces clean badges without any badge-dot-live or pulse animations", () => {
     const activeWeek = {
       id: "active-test",
@@ -121,7 +121,7 @@ describe("Roadmap Features: Relative Timing Badges (Clean, No Pulsing Dots)", ()
   });
 });
 
-describe("Roadmap Features: Saved Custom Order Rank Badges", () => {
+describe("App Features: Saved Custom Order Rank Badges", () => {
   test("cardHTML renders #1 rank badge with rank-gold in saved tab custom sort", () => {
     State.activeSavedSort = "custom";
     State.crawlModeActive = false;
@@ -209,5 +209,79 @@ describe("Roadmap Features: Saved Custom Order Rank Badges", () => {
     State.bulkEditActive = false;
     State.bulkEditSelection.clear();
   });
+
+  test("Share tab friend list overlap correctly resolves between compound-saved keys and friend numeric IDs", async () => {
+    if (typeof global.window === "undefined") {
+      global.window = {};
+    }
+    const { toggleDishSaved } = await import("../js/modules/state.js");
+    const { renderFriends } = await import("../js/modules/friends.js");
+    const { getCurrentContextList } = await import("../js/modules/ui.js");
+
+    State.currentWeekId = "burger-2026";
+    State.saved.clear();
+    State.customSavedOrder = [];
+    State.friends = [];
+
+    const mockDishes = [
+      { id: 101, weekId: "burger-2026", restaurant: "Burger Bar", dish: "Double Cheeseburger", type: "meat" },
+      { id: 102, weekId: "burger-2026", restaurant: "Shake Shack", dish: "SmokeShack", type: "meat" },
+      { id: 103, weekId: "burger-2026", restaurant: "Hopdoddy", dish: "Magic Shroom", type: "meat" }
+    ];
+    global.window.RESTAURANTS = mockDishes;
+
+    // Save dishes 101 and 102 using toggleDishSaved (creates 'burger-2026_101', etc.)
+    toggleDishSaved(101, "burger-2026");
+    toggleDishSaved(102, "burger-2026");
+
+    // Add friends: Friend 1 saved 101 & 102, Friend 2 saved 101 & 103
+    State.friends = [
+      { name: "Alex", ids: [101, 102], code: "test1" },
+      { name: "Jordan", ids: [101, 103], code: "test2" }
+    ];
+
+    // Mock DOM elements needed by renderFriends
+    const mockElements = {
+      "copy-btn": { disabled: false },
+      "share-results": { style: { display: "none" } },
+      "friends-list": { innerHTML: "" },
+      "overlap-section": { style: { display: "none" } },
+      "overlap-container": { className: "", innerHTML: "" }
+    };
+    global.document = {
+      getElementById: (id) => mockElements[id] || null,
+      querySelectorAll: (sel) => {
+        if (sel.includes("#overlap-container") && mockElements["overlap-container"].innerHTML) {
+          const matches = [...mockElements["overlap-container"].innerHTML.matchAll(/data-id="(\d+)"/g)];
+          return matches.map(m => ({ getAttribute: () => m[1] }));
+        }
+        return [];
+      }
+    };
+
+    renderFriends();
+
+    // Overlap should be shown and contain only dish 101 (saved by user, Alex, and Jordan)
+    const overlapSection = document.getElementById("overlap-section");
+    expect(overlapSection.style.display).toBe("block");
+
+    const overlapCards = document.querySelectorAll("#overlap-container .dish-card");
+    expect(overlapCards.length).toBe(1);
+    expect(overlapCards[0].getAttribute("data-id")).toBe("101");
+
+    // Test getCurrentContextList in share tab
+    State.activeTab = "share";
+    const contextList = getCurrentContextList();
+    expect(contextList.length).toBe(1);
+    expect(contextList[0].id).toBe(101);
+
+    // Clean up
+    State.saved.clear();
+    State.customSavedOrder = [];
+    State.friends = [];
+    State.activeTab = "browse";
+    delete global.document;
+  });
 });
+
 

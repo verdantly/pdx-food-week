@@ -90,10 +90,11 @@ export function getActiveFriends() {
 export function getCurrentContextList() {
   if (State.activeTab === 'saved') return getSaved();
   if (State.activeTab === 'share') {
-    const myIds = [...State.saved];
     const activeFriends = getActiveFriends();
-    const allSets = [myIds, ...activeFriends.map(f => f.weekIds)];
-    const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
+    if (activeFriends.length === 0) return [];
+    const mySavedDishes = getRestaurants().filter(r => isDishSaved(r.id, r.weekId));
+    const friendSets = activeFriends.map(f => new Set(f.weekIds));
+    const overlap = mySavedDishes.filter(r => friendSets.every(set => set.has(r.id)));
     if (overlap.length > 0) return overlap;
     return [];
   }

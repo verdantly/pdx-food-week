@@ -3,6 +3,7 @@ import { State, saveState, isDishSaved, getDishKey } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
+import { getActiveFriends } from './ui.js';
 
 export function encodeShareCode() {
   const currentWeekSaved = getRestaurants().filter(r => isDishSaved(r.id, r.weekId)).map(r => r.id);
@@ -81,19 +82,20 @@ export function exportSavedKML() {
 }
 
 export function renderFriends() {
+  const mySavedDishes = getRestaurants().filter(r => isDishSaved(r.id, r.weekId));
   const copyBtn = document.getElementById('copy-btn');
   if (copyBtn) {
-    copyBtn.disabled = (State.saved.size === 0);
+    copyBtn.disabled = (mySavedDishes.length === 0);
   }
 
-  if (State.saved.size === 0) {
+  if (mySavedDishes.length === 0) {
     const resultsDiv = document.getElementById('share-results');
     if (resultsDiv) {
       resultsDiv.style.display = 'none';
     }
   }
 
-  const activeFriends = window.App && window.App.getActiveFriends ? window.App.getActiveFriends() : [];
+  const activeFriends = getActiveFriends();
 
   let emptyMessage = `<p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">No friends added yet.</p>`;
   if (State.friends.length > 0 && activeFriends.length === 0) {
@@ -136,9 +138,8 @@ export function renderFriends() {
   }
   overlapSection.style.display = 'block';
 
-  const myIds = [...State.saved];
-  const allSets = [myIds, ...activeFriends.map(f => f.weekIds)];
-  const overlap = getRestaurants().filter(r => allSets.every(set => set.includes(r.id)));
+  const friendSets = activeFriends.map(f => new Set(f.weekIds));
+  const overlap = mySavedDishes.filter(r => friendSets.every(set => set.has(r.id)));
   const overlapContainer = document.getElementById('overlap-container');
 
   if (overlapContainer) {
