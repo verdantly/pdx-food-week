@@ -159,7 +159,7 @@ service cloud.firestore {
 ```
 
 ### 3. Update Configuration Keys
-Update `firebaseConfig` at the top of [js/app.js](file:///q:/My%20Drive/GitHub/pdx-food-week/js/app.js) with your newly created project's configuration settings:
+Update `firebaseConfig` at the top of [js/app.js](../js/app.js) with your newly created project's configuration settings:
 ```javascript
 const firebaseConfig = {
   apiKey: "YOUR_GCP_API_KEY",

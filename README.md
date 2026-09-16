@@ -1,140 +1,144 @@
 # PDX Food Week App
 
-A mobile-first web app to browse, bookmark, and share your favorite dishes from Portland's themed food weeks (Pizza Week, Burger Week, etc.).
+A mobile-first, installable progressive web app (PWA) to browse, bookmark, plan crawls, and share your favorite dishes from Portland's themed food weeks (Pizza Week, Burger Week, Taco Week, Dumpling Week, Wing Week, and more).
 
 ## Features
 
-- 🍕 **Browse** — filter by meat/veg/vegan, gluten-free, whole pie, family-friendly
-- ★ **Bookmark** — save dishes you want to try; persists in browser storage
-- 👥 **Share** — share a short code, paste friends' codes, see overlap
-- 🗺️ **Map** — tap pins to see details; saved spots highlighted
+- 🍕 **Browse & Filter** — Filter listings by meat, vegetarian, vegan, gluten-free, whole pie, and family-friendly. Sort by distance (GPS or ZIP code), alphabet, or neighborhood.
+- 📱 **Interactive Swipe View** — Tinder-style swipe cards to quickly like/save or pass on dishes.
+- ★ **Bookmark & Plan Crawls** — Save dishes across multiple food weeks. Track visited spots, organize your crawl route with integrated directions, and view metrics by neighborhood and dish type.
+- 👥 **Share & Compare** — Share lists using short codes or Magic Links, load friends' lists, and instantly see common saved spots.
+- 🗺️ **Map View** — Interactive Portland map with custom coordinates, neighborhood pins, and route-planning highlights.
+- ⚡ **Offline & PWA Ready** — Installable on mobile and desktop devices with full offline service worker caching and automated asset hash cache-busting.
+- 🔗 **OpenGraph Share Pages** — Pre-rendered individual dish preview cards with social media tags and metadata under `/d/`.
 
 ---
 
 ## Project Structure
 
-The project is structured as a simple static web application with automated data scrapers:
+The project is a static progressive web application with automated data scrapers and node tooling:
 
-* **Core Frontend Layer**
-  * [index.html](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/index.html) — The main single-page application shell.
-  * [css/style.css](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/css/style.css) — Custom visual stylesheet (responsive, mobile-first, and accessibility-optimized).
-  * [js/app.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/js/app.js) — Core frontend logic (views, state, swipe tab, filtering, Leaflet map configuration).
+* **Frontend Shell**
+  * [`index.html`](index.html) — Single-page application shell and view containers (`view-landing`, `view-browse`, `view-saved`, `view-share`, `view-map`).
+  * [`css/style.css`](css/style.css) — Mobile-first, responsive stylesheet with desktop multi-column layouts and accessibility adjustments.
+  * [`js/meta.js`](js/meta.js) — Centralized metadata registry (`window.FOOD_WEEKS`) for all supported Portland food weeks.
+  * [`js/app.js`](js/app.js) — Main application controller, state management, routing, map, and view lifecycle.
+  * [`js/modules/`](js/modules/) — Modular utilities including `friends.js` and `ui.js`.
+  * [`sw.js`](sw.js) — Service worker handling offline caching, cache-first assets, and runtime caching.
 
-* **Data Layer**
-  * [data/tacoweek2026.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/data/tacoweek2026.js) — Taco Week 2026 listings, geocoded coordinates, and metadata (scraped, default view).
-  * [data/pizzaweek2026.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/data/pizzaweek2026.js) — Pizza Week 2026 listings and metadata (scraped).
-  * [data/highballweek2026.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/data/highballweek2026.js) — Highball Week 2026 listings and metadata (scraped).
+* **Data Layer (`data/`)**
+  Contains geocoded coordinates, dish details, pricing, and dietary metadata for all 2026 Portland food weeks:
+  * `wienerweek2026.js` (Wiener Week)
+  * `dumplingweek2026.js` (Dumpling Week)
+  * `sandwichweek2026.js` (Sandwich Week)
+  * `tacoweek2026.js` (Taco Week)
+  * `pizzaweek2026.js` (Pizza Week)
+  * `highballweek2026.js` (Highball Week)
+  * `burgerweek2026.js` (Burger Week)
+  * `nachoweek2026.js` (Nacho Week)
+  * `wingweek2026.js` (Wing Week)
+  * `friedchickenweek2026.js` (Fried Chicken Week)
+  * `salads2026.js` (Salad Week)
+  * `slushies2026.js` (Slushie Week)
 
-* **Scrapers and Tooling**
-  * [scrape_tacos.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/scrape_tacos.js) — Scraper for Taco Week (parses KML, matches Squarespace JSON, reverse-geocodes with local cache).
-  * [scrape_everout.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/scrape_everout.js) — Automated scraper and geocoder for EverOut-hosted food weeks.
-  * [scrape-console.js](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/scrape-console.js) — Browser console fallback utility scraper for EverOut.
+* **Scrapers & Build Tooling (`scrapers/` & `scripts/`)**
+  * `scrapers/` — Specialized scrapers for EverOut events, The Actual Portland KML sources, and geocoding utilities.
+  * `scripts/hash_assets.js` — Generates deterministic asset hashes for service worker cache versioning.
+  * `scripts/generate_og_pages.js` — Generates social OpenGraph preview landing pages.
+  * `scripts/enrich_hours.js` — Enriches restaurant listings with operating hours.
+
+---
+
+## Getting Started & Local Development
+
+No heavy build steps or bundlers are required.
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Start Local Server**:
+   ```bash
+   npm start
+   ```
+   Open `http://localhost:3000` (or `http://localhost:8080`) in your browser.
+
+---
+
+## Testing
+
+The project includes both fast unit tests and end-to-end browser tests:
+
+### Unit Tests (Vitest)
+Validates data integrity, friend-code sharing, overlap logic, and asset hashing:
+```bash
+npm run test:unit
+```
+
+### End-to-End Tests (Playwright)
+Simulates browser navigation, interactions, detail sheets, and filter behavior across devices:
+```bash
+npm run test:e2e
+```
+
+---
+
+## Scraping & Data Generation
+
+Scrapers extract restaurant details, dietary tags, descriptions, and coordinates into the `data/` directory:
+
+| Command | Target Week |
+| :--- | :--- |
+| `npm run scrape:burgers` | Burger Week |
+| `npm run scrape:pizza` | Pizza Week |
+| `npm run scrape:tacos` | Taco Week |
+| `npm run scrape:dumplings` | Dumpling Week |
+| `npm run scrape:chicken` | Fried Chicken Week |
+| `npm run scrape:nacho` | Nacho Week |
+| `npm run scrape:wings` | Wing Week |
+| `npm run scrape:sandwiches` | Sandwich Week |
+| `npm run scrape:wieners` | Wiener Week |
+| `npm run scrape:salads` | Salad Week |
+| `npm run scrape:slushies` | Slushie Week |
+| `npm run enrich:hours` | Operating Hours Enrichment |
+
+---
+
+## Adding or Updating a Food Week
+
+1. Add the week metadata in [`js/meta.js`](js/meta.js) under `window.FOOD_WEEKS`:
+   ```javascript
+   {
+     id: "burger-2026",
+     name: "Burger Week 2026",
+     organizer: "Portland Mercury",
+     dataFile: "burgerweek2026.js",
+     dates: "August 17–23, 2026",
+     startDate: "2026-08-17",
+     endDate: "2026-08-23",
+     pricePills: ["$8 burgers"],
+     color: "#D49E2A",
+     emoji: "🍔",
+     totalLocations: 50,
+     url: "https://everout.com/...",
+     filters: [
+       { id: 'meat', label: 'Meat' },
+       { id: 'vegetarian', label: 'Vegetarian' },
+       { id: 'vegan', label: 'Vegan' },
+       { id: 'gf', label: 'Gluten-free' }
+     ]
+   }
+   ```
+2. Place the corresponding dataset under `data/<dataFile>` (e.g. generated via the appropriate scraper).
+3. Update asset hashes before deploying:
+   ```bash
+   npm run build
+   ```
 
 ---
 
 ## Deployment
 
-Refer to the [DEPLOYMENT.md](file:///q:/My%20Drive/GitHub/pdx-food-week/pdx-food-week/DEPLOYMENT.md) guide for details on deploying the application to GitHub Pages, Raspberry Pi (local network), or other hosting servers.
-
----
-
-## Adding Data for New Food Weeks
-
-1. Create a data file under `data/` (e.g. `data/burgerweek2026.js`) containing the week's details.
-2. In the new data file, define your week in the `window.FOOD_WEEKS` array:
-   ```js
-   window.FOOD_WEEKS.push({
-     id: "burger-2026",
-     name: "Burger Week 2026",
-     dates: "August 10–16",
-     pricePills: ["$8 burger"],
-     totalLocations: 50,
-     emoji: "🍔",
-     color: "#D49E2A"
-   });
-   ```
-3. Populate `window.RESTAURANTS` with the dish entries, ensuring `weekId` matches (e.g. `"burger-2026"`).
-4. In `index.html`, load the new script tag **before** `js/app.js`:
-   ```html
-   <script src="data/burgerweek2026.js"></script>
-   ```
-5. Add the new option to the `<select id="week-switcher">` dropdown in `index.html`:
-   ```html
-   <option value="burger-2026">🍔 Burger Week</option>
-   ```
-6. Set the default active week `currentWeekId` in `js/app.js` if you want it to load by default.
-
-## Restaurant Data Fields
-
-```js
-{
-  id: 1,                        // unique integer
-  weekId: "pizza-2026",         // matches FOOD_WEEKS id
-  dish: "Dish Name",            // the special item name
-  restaurant: "Restaurant Name",
-  neighborhood: "Pearl District",
-  address: "123 NW Example St, Portland, OR 97209",
-  lat: 45.5272,                 // for map (decimal degrees)
-  lng: -122.6843,
-  type: "meat",                 // "meat" | "vegetarian" | "vegan"
-  glutenFree: false,            // true if GF option available
-  wholePie: false,              // true if $25 whole pie offered (Pizza Week specific)
-  minors: true,                 // true if minors allowed / Family OK
-  takeout: true,                // true if takeout available
-  desc: "Short description of the dish.",
-  emoji: "🍕",                  // display emoji
-  url: "https://everout.com/..." // link to EverOut listing
-}
-```
-
----
-
-## Scraping and Data Generation
-
-Instead of compiling restaurant data manually, you can use the automated scrapers included in this repository to fetch food week events:
-
-### 1. EverOut Food Weeks (e.g. Pizza Week) — `scrape_everout.js`
-Requires Node.js environment. It automatically fetches listings from EverOut, parses details/dietary flags, geocodes addresses using Nominatim, and outputs the completed JS file.
-```bash
-# Install dependencies
-npm install
-
-# Run the EverOut scraper
-npm run scrape:everout
-```
-
-### 2. Taco Week (hosted on The Actual Portland) — `scrape_tacos.js`
-Uses Node.js to parse the Taco Week KML coordinates and Squarespace JSON context, matches items, applies geocoding with local caching (`data/geocode_cache.json`), and outputs the completed JS file.
-```bash
-# Run the Taco Week scraper
-npm run scrape:tacos
-```
-
-### 3. Browser Console Scraper (`scrape-console.js`)
-If you are running in a restricted sandbox or get rate-limited during geocoding on EverOut, open the EverOut food week index page in your browser DevTools, paste the contents of `scrape-console.js` into the console, and hit enter. It extracts coordinates directly from Google Maps links inside the page and prompts a file download.
-
----
-
-## Development & Visual Testing
-
-The codebase includes an interactive E2E integration test dashboard (**[tests.html](file:///q:/My%20Drive/GitHub/pdx-food-week/tests.html)**) built with a custom terraform-inspired, styled cream theme. It uses an embedded iframe sandbox to mock user environments (including location details and local storage configurations) and verify critical app flows.
-
-### Covered Scenarios:
-1. **Smoke Test - Landing Week Selector**: Asserts that landing page week selectors, lists, and metadata are populated.
-2. **Deep-linking & Routing Fallbacks**: Verifies dynamic detail sheet rendering from dish parameters and checks routing safety.
-3. **Bookmarks & Persistence**: Validates that bookmark additions write and persist in local storage correctly across page reloads.
-4. **Search Filter & Clear Button**: Verifies text query matching and the dismiss/clear text field interaction.
-5. **Swipe Tinder-style transforms**: Simulates mouse drag/gestures and checks the rotation offsets (fans out layout on desktop, stacks vertically on mobile).
-6. **Share tab & Friends list import**: Validates Magic Link URLs, Base64 fallback protocols, and name mappings during code inputs.
-7. **Distance Sorting & Coordinates Lookup**: Mocks coordinates, resolves zip codes, and asserts ascending geographical sorting orders.
-8. **Browse Tab 'NEW' Badge**: Verifies notification dots, listings capsule badges, viewed lists storage sync, and banner updates.
-
-### How to Run the Tests:
-1. Start the local development web server:
-   ```bash
-   npm start
-   ```
-2. Open the visual test dashboard in your browser:
-   `http://localhost:3000/tests.html`
-3. Click the **Run All Tests** button at the top. The results and individual assertion steps will compile dynamically with a diagnostic error reporter if any fail.
+Refer to the [Deployment Guide](docs/DEPLOYMENT.md) for step-by-step instructions on deploying to GitHub Pages, Raspberry Pi, or any static web host.
 
