@@ -20,6 +20,7 @@
     "scrape:wieners": "node scrapers/scrape_wieners.js",
     "scrape:dumplings": "node scrapers/scrape_dumplings.js",
     "enrich:hours": "node scripts/enrich_hours.js",
+    "submit:indexnow": "node scripts/ping_indexnow.js",
     "test:unit": "node -c js/app.js && node scripts/hash_assets.js && vitest run",
     "test:e2e": "playwright test"
   },

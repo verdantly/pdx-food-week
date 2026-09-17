@@ -79,6 +79,48 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     expect(dishHtml).toContain('Open in Interactive App');
   });
 
+  test('Neighborhood landing pages are generated with CollectionPage schema and dish items', () => {
+    const hoodsDir = path.join(projectRoot, 'neighborhoods');
+    expect(fs.existsSync(hoodsDir)).toBe(true);
+
+    const hoodFiles = fs.readdirSync(hoodsDir).filter(f => f.endsWith('.html'));
+    expect(hoodFiles.length).toBeGreaterThanOrEqual(50);
+
+    // Verify sample neighborhood page
+    const sampleHoodPath = path.join(hoodsDir, 'buckman-southeast-portland.html');
+    expect(fs.existsSync(sampleHoodPath)).toBe(true);
+    const hoodHtml = fs.readFileSync(sampleHoodPath, 'utf8');
+
+    expect(hoodHtml).toContain('Buckman - Southeast Portland Food Week Guide');
+    expect(hoodHtml).toContain('"@type": "CollectionPage"');
+    expect(hoodHtml).toContain('Featured Dishes in Buckman - Southeast Portland');
+    expect(hoodHtml).toContain('href="../d/');
+  });
+
+  test('Dietary landing pages are generated with CollectionPage schema and dish lists', () => {
+    const dietsDir = path.join(projectRoot, 'diets');
+    expect(fs.existsSync(dietsDir)).toBe(true);
+
+    for (const dietSlug of ['vegan', 'vegetarian', 'gluten-free']) {
+      const dietPath = path.join(dietsDir, `${dietSlug}.html`);
+      expect(fs.existsSync(dietPath)).toBe(true);
+      const dietHtml = fs.readFileSync(dietPath, 'utf8');
+
+      expect(dietHtml).toContain('"@type": "CollectionPage"');
+      expect(dietHtml).toContain('Dishes &amp; Restaurants');
+      expect(dietHtml).toContain('dishes-grid');
+      expect(dietHtml).toContain('href="../d/');
+    }
+  });
+
+  test('IndexNow ping script exists and generates verification file', () => {
+    const scriptPath = path.join(projectRoot, 'scripts', 'ping_indexnow.js');
+    expect(fs.existsSync(scriptPath)).toBe(true);
+
+    const docPath = path.join(projectRoot, 'docs', 'SEARCH_CONSOLE_SETUP.md');
+    expect(fs.existsSync(docPath)).toBe(true);
+  });
+
   test('index.html references sitemap.xml and contains WebSite structured data', () => {
     const indexPath = path.join(projectRoot, 'index.html');
     const indexHtml = fs.readFileSync(indexPath, 'utf8');

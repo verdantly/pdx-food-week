@@ -9,6 +9,8 @@ const projectRoot = path.resolve(__dirname, '..');
 const dataDir = path.join(projectRoot, 'data');
 const dishOutputDir = path.join(projectRoot, 'd');
 const weeksOutputDir = path.join(projectRoot, 'weeks');
+const hoodsOutputDir = path.join(projectRoot, 'neighborhoods');
+const dietsOutputDir = path.join(projectRoot, 'diets');
 
 // Ensure output directories exist
 if (!fs.existsSync(dishOutputDir)) {
@@ -16,6 +18,12 @@ if (!fs.existsSync(dishOutputDir)) {
 }
 if (!fs.existsSync(weeksOutputDir)) {
   fs.mkdirSync(weeksOutputDir, { recursive: true });
+}
+if (!fs.existsSync(hoodsOutputDir)) {
+  fs.mkdirSync(hoodsOutputDir, { recursive: true });
+}
+if (!fs.existsSync(dietsOutputDir)) {
+  fs.mkdirSync(dietsOutputDir, { recursive: true });
 }
 
 // Global context mock for dataset files
@@ -491,7 +499,437 @@ ${JSON.stringify(restaurantSchema, null, 2)}
 
 console.log(`Generated ${generatedDishCount} enhanced dish pages in 'd/'.`);
 
-// 5. Generate sitemap.xml
+// 5. Generate Neighborhood Landing Pages (neighborhoods/<slug>.html)
+const neighborhoodMap = new Map();
+for (const dish of restaurants) {
+  if (!dish.neighborhood) continue;
+  const rawHood = dish.neighborhood.trim();
+  const slug = rawHood.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  if (!neighborhoodMap.has(slug)) {
+    neighborhoodMap.set(slug, {
+      slug,
+      name: rawHood,
+      dishes: []
+    });
+  }
+  neighborhoodMap.get(slug).dishes.push(dish);
+}
+
+const generatedHoodPages = [];
+for (const [slug, hoodData] of neighborhoodMap.entries()) {
+  const hoodDishes = hoodData.dishes;
+  const hoodTitle = `${hoodData.name} — Portland Food Week Spots & Menus`;
+  const metaDescription = `Explore ${hoodDishes.length} special dishes and participating restaurants in ${hoodData.name} across Portland food weeks. Plan your crawl route on the map!`;
+  const canonicalUrl = `https://www.pdxfoodweek.com/neighborhoods/${slug}.html`;
+
+  const dishesListHtml = hoodDishes.map(d => {
+    const dishUrl = `../d/${d.weekId}-${d.id}.html`;
+    const dishDeepLink = `../?week=${encodeURIComponent(d.weekId)}&amp;dish=${encodeURIComponent(d.id)}`;
+    const week = weekMap.get(d.weekId);
+    const weekName = week ? week.name : d.weekId;
+    const tagBadges = [];
+    if (d.type) tagBadges.push(`<span class="badge badge-subtle">${escapeHtml(d.type)}</span>`);
+    if (d.glutenFree) tagBadges.push('<span class="badge badge-gf">GF</span>');
+    if (d.wholePie) tagBadges.push('<span class="badge badge-subtle">Whole Pie</span>');
+    if (d.minors) tagBadges.push('<span class="badge badge-subtle">Family OK</span>');
+    if (d.takeout) tagBadges.push('<span class="badge badge-subtle">Takeout</span>');
+
+    return `
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">${escapeHtml(weekName)}</div>
+            <div class="restaurant-name">${escapeHtml(d.restaurant)}</div>
+            <h3 class="dish-title"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+          </div>
+          ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
+        </div>
+        ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
+        <div class="dish-meta">
+          ${d.address ? `<span class="dish-address">🏠 ${escapeHtml(d.address)}</span>` : ''}
+        </div>
+        <div class="dish-tags">${tagBadges.join(' ')}</div>
+        <div class="dish-card-footer">
+          <a href="${dishUrl}" class="link-detail">View Dish &rarr;</a>
+          <a href="${dishDeepLink}" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    `;
+  }).join('\n');
+
+  const hoodSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: hoodTitle,
+    description: metaDescription,
+    url: canonicalUrl,
+    about: {
+      '@type': 'Place',
+      name: hoodData.name,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Portland',
+        addressRegion: 'OR',
+        addressCountry: 'US'
+      }
+    }
+  };
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(hoodTitle)}</title>
+  <meta name="description" content="${escapeHtml(metaDescription)}">
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="PDX Food Week">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${escapeHtml(hoodTitle)}">
+  <meta property="og:description" content="${escapeHtml(metaDescription)}">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(hoodTitle)}">
+  <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
+  <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+${JSON.stringify(hoodSchema, null, 2)}
+  </script>
+
+  <style>
+    :root {
+      --primary: #B5472E;
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 24px 16px 64px;
+    }
+    .container { max-width: 1080px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
+    .hero-title { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--primary); color: #fff; }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
+    .hero-desc { font-size: 16.5px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-main {
+      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-main:hover { opacity: 0.92; }
+    .btn-outline {
+      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
+    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .dish-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .week-pill { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 2px; }
+    .restaurant-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
+    .dish-title a { color: inherit; text-decoration: none; }
+    .dish-title a:hover { color: var(--primary); }
+    .dish-emoji { font-size: 22px; }
+    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
+    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
+    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
+    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .link-detail:hover { text-decoration: underline; }
+    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .btn-app-sm:hover { background: var(--primary); color: #fff; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="breadcrumbs">
+        <a href="../">PDX Food Week</a> &gt; <span>${escapeHtml(hoodData.name)}</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge badge-primary">📍 Neighborhood</span>
+        <span class="badge badge-subtle">${hoodDishes.length} Spots</span>
+      </div>
+      <h1 class="hero-title">${escapeHtml(hoodData.name)} Food Week Guide</h1>
+      <p class="hero-desc">
+        Browse ${hoodDishes.length} special dishes and participating restaurants located in ${escapeHtml(hoodData.name)} across Portland's themed food weeks. Plan your crawl route and filter by dietary options!
+      </p>
+      <div class="cta-row">
+        <a href="../" class="btn-main">
+          <span>🚀 Explore All in App &amp; Map</span>
+        </a>
+        <a href="../" class="btn-outline">All Food Weeks</a>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="section-title">Featured Dishes in ${escapeHtml(hoodData.name)} (${hoodDishes.length})</h2>
+      <div class="dishes-grid">
+        ${dishesListHtml}
+      </div>
+    </main>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+    </footer>
+  </div>
+</body>
+</html>`;
+
+  const filename = `${slug}.html`;
+  fs.writeFileSync(path.join(hoodsOutputDir, filename), html, 'utf8');
+  generatedHoodPages.push({ slug, name: hoodData.name, url: canonicalUrl });
+}
+
+console.log(`Generated ${generatedHoodPages.length} neighborhood landing pages in 'neighborhoods/'.`);
+
+// 6. Generate Dietary Category Pages (diets/<diet-slug>.html)
+const dietCategories = [
+  {
+    slug: 'vegan',
+    title: 'Vegan Portland Food Week Dishes & Restaurants',
+    filterLabel: 'Vegan',
+    description: 'Find 100% plant-based and vegan specialty dishes participating across all 2026 Portland Food Weeks.',
+    predicate: d => d.type === 'vegan' || d.veganOption === true,
+    color: '#2E7D32'
+  },
+  {
+    slug: 'vegetarian',
+    title: 'Vegetarian Portland Food Week Dishes & Restaurants',
+    filterLabel: 'Vegetarian',
+    description: 'Explore delicious vegetarian-friendly pizzas, burgers, tacos, dumplings, and more for Portland Food Weeks.',
+    predicate: d => d.type === 'vegetarian' || d.vegOption === true || d.type === 'vegan' || d.veganOption === true,
+    color: '#8A5C14'
+  },
+  {
+    slug: 'gluten-free',
+    title: 'Gluten-Free Portland Food Week Dishes & Restaurants',
+    filterLabel: 'Gluten-Free',
+    description: 'Browse all restaurants offering gluten-free dishes or GF-friendly bun/crust options during Portland Food Weeks.',
+    predicate: d => d.glutenFree === true,
+    color: '#286A5F'
+  }
+];
+
+const generatedDietPages = [];
+for (const cat of dietCategories) {
+  const matchingDishes = restaurants.filter(cat.predicate);
+  const canonicalUrl = `https://www.pdxfoodweek.com/diets/${cat.slug}.html`;
+  const metaDescription = `${cat.description} Browse ${matchingDishes.length} dishes with dietary flags, ingredients, and map locations!`;
+
+  const dishesListHtml = matchingDishes.map(d => {
+    const dishUrl = `../d/${d.weekId}-${d.id}.html`;
+    const dishDeepLink = `../?week=${encodeURIComponent(d.weekId)}&amp;dish=${encodeURIComponent(d.id)}`;
+    const week = weekMap.get(d.weekId);
+    const weekName = week ? week.name : d.weekId;
+    const tagBadges = [];
+    if (d.type) tagBadges.push(`<span class="badge badge-subtle">${escapeHtml(d.type)}</span>`);
+    if (d.glutenFree) tagBadges.push('<span class="badge badge-gf">GF</span>');
+    if (d.wholePie) tagBadges.push('<span class="badge badge-subtle">Whole Pie</span>');
+    if (d.minors) tagBadges.push('<span class="badge badge-subtle">Family OK</span>');
+    if (d.takeout) tagBadges.push('<span class="badge badge-subtle">Takeout</span>');
+
+    return `
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">${escapeHtml(weekName)}</div>
+            <div class="restaurant-name">${escapeHtml(d.restaurant)}</div>
+            <h3 class="dish-title"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+          </div>
+          ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
+        </div>
+        ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
+        <div class="dish-meta">
+          ${d.neighborhood ? `<span>📍 ${escapeHtml(d.neighborhood)}</span>` : ''}
+          ${d.address ? `<span class="dish-address">🏠 ${escapeHtml(d.address)}</span>` : ''}
+        </div>
+        <div class="dish-tags">${tagBadges.join(' ')}</div>
+        <div class="dish-card-footer">
+          <a href="${dishUrl}" class="link-detail">View Dish &rarr;</a>
+          <a href="${dishDeepLink}" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    `;
+  }).join('\n');
+
+  const dietSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: cat.title,
+    description: metaDescription,
+    url: canonicalUrl
+  };
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(cat.title)}</title>
+  <meta name="description" content="${escapeHtml(metaDescription)}">
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="PDX Food Week">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${escapeHtml(cat.title)}">
+  <meta property="og:description" content="${escapeHtml(metaDescription)}">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(cat.title)}">
+  <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
+  <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+${JSON.stringify(dietSchema, null, 2)}
+  </script>
+
+  <style>
+    :root {
+      --primary: ${cat.color};
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 24px 16px 64px;
+    }
+    .container { max-width: 1080px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
+    .hero-title { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--primary); color: #fff; }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
+    .hero-desc { font-size: 16.5px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-main {
+      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-main:hover { opacity: 0.92; }
+    .btn-outline {
+      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
+    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .dish-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .week-pill { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 2px; }
+    .restaurant-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
+    .dish-title a { color: inherit; text-decoration: none; }
+    .dish-title a:hover { color: var(--primary); }
+    .dish-emoji { font-size: 22px; }
+    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
+    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
+    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
+    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .link-detail:hover { text-decoration: underline; }
+    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .btn-app-sm:hover { background: var(--primary); color: #fff; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="breadcrumbs">
+        <a href="../">PDX Food Week</a> &gt; <span>${escapeHtml(cat.filterLabel)} Dishes</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge badge-primary">🥗 ${escapeHtml(cat.filterLabel)} Category</span>
+        <span class="badge badge-subtle">${matchingDishes.length} Dishes</span>
+      </div>
+      <h1 class="hero-title">${escapeHtml(cat.title)}</h1>
+      <p class="hero-desc">
+        Browse all ${matchingDishes.length} ${escapeHtml(cat.filterLabel).toLowerCase()} dishes featured across Portland's themed food weeks. Filter, plan crawl routes, and view locations!
+      </p>
+      <div class="cta-row">
+        <a href="../" class="btn-main">
+          <span>🚀 Explore in Interactive App</span>
+        </a>
+        <a href="../" class="btn-outline">All Food Weeks</a>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="section-title">${escapeHtml(cat.filterLabel)} Offerings Across Portland (${matchingDishes.length})</h2>
+      <div class="dishes-grid">
+        ${dishesListHtml}
+      </div>
+    </main>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+    </footer>
+  </div>
+</body>
+</html>`;
+
+  const filename = `${cat.slug}.html`;
+  fs.writeFileSync(path.join(dietsOutputDir, filename), html, 'utf8');
+  generatedDietPages.push({ slug: cat.slug, url: canonicalUrl });
+}
+
+console.log(`Generated ${generatedDietPages.length} dietary category landing pages in 'diets/'.`);
+
+// 7. Generate sitemap.xml
 const sitemapUrls = [
   { loc: 'https://www.pdxfoodweek.com/', priority: '1.0', changefreq: 'daily' },
   { loc: 'https://www.pdxfoodweek.com/privacy.html', priority: '0.3', changefreq: 'monthly' },
@@ -502,6 +940,22 @@ for (const wp of generatedWeekPages) {
   sitemapUrls.push({
     loc: wp.url,
     priority: '0.8',
+    changefreq: 'weekly'
+  });
+}
+
+for (const dp of generatedDietPages) {
+  sitemapUrls.push({
+    loc: dp.url,
+    priority: '0.8',
+    changefreq: 'weekly'
+  });
+}
+
+for (const hp of generatedHoodPages) {
+  sitemapUrls.push({
+    loc: hp.url,
+    priority: '0.7',
     changefreq: 'weekly'
   });
 }
@@ -527,7 +981,7 @@ ${sitemapUrls.map(u => `  <url>
 fs.writeFileSync(path.join(projectRoot, 'sitemap.xml'), sitemapXml, 'utf8');
 console.log(`Generated sitemap.xml with ${sitemapUrls.length} indexed URLs.`);
 
-// 6. Generate robots.txt
+// 8. Generate robots.txt
 const robotsTxt = `User-agent: *
 Allow: /
 

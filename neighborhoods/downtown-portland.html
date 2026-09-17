@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downtown Portland — Portland Food Week Spots &amp; Menus</title>
+  <meta name="description" content="Explore 16 special dishes and participating restaurants in Downtown Portland across Portland food weeks. Plan your crawl route on the map!">
+  <link rel="canonical" href="https://www.pdxfoodweek.com/neighborhoods/downtown-portland.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="PDX Food Week">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Downtown Portland — Portland Food Week Spots &amp; Menus">
+  <meta property="og:description" content="Explore 16 special dishes and participating restaurants in Downtown Portland across Portland food weeks. Plan your crawl route on the map!">
+  <meta property="og:url" content="https://www.pdxfoodweek.com/neighborhoods/downtown-portland.html">
+  <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Downtown Portland — Portland Food Week Spots &amp; Menus">
+  <meta name="twitter:description" content="Explore 16 special dishes and participating restaurants in Downtown Portland across Portland food weeks. Plan your crawl route on the map!">
+  <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Downtown Portland — Portland Food Week Spots & Menus",
+  "description": "Explore 16 special dishes and participating restaurants in Downtown Portland across Portland food weeks. Plan your crawl route on the map!",
+  "url": "https://www.pdxfoodweek.com/neighborhoods/downtown-portland.html",
+  "about": {
+    "@type": "Place",
+    "name": "Downtown Portland",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Portland",
+      "addressRegion": "OR",
+      "addressCountry": "US"
+    }
+  }
+}
+  </script>
+
+  <style>
+    :root {
+      --primary: #B5472E;
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 24px 16px 64px;
+    }
+    .container { max-width: 1080px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
+    .hero-title { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--primary); color: #fff; }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
+    .hero-desc { font-size: 16.5px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-main {
+      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-main:hover { opacity: 0.92; }
+    .btn-outline {
+      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
+    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .dish-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .week-pill { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 2px; }
+    .restaurant-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
+    .dish-title a { color: inherit; text-decoration: none; }
+    .dish-title a:hover { color: var(--primary); }
+    .dish-emoji { font-size: 22px; }
+    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
+    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
+    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
+    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .link-detail:hover { text-decoration: underline; }
+    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .btn-app-sm:hover { background: var(--primary); color: #fff; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="breadcrumbs">
+        <a href="../">PDX Food Week</a> &gt; <span>Downtown Portland</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge badge-primary">📍 Neighborhood</span>
+        <span class="badge badge-subtle">16 Spots</span>
+      </div>
+      <h1 class="hero-title">Downtown Portland Food Week Guide</h1>
+      <p class="hero-desc">
+        Browse 16 special dishes and participating restaurants located in Downtown Portland across Portland's themed food weeks. Plan your crawl route and filter by dietary options!
+      </p>
+      <div class="cta-row">
+        <a href="../" class="btn-main">
+          <span>🚀 Explore All in App &amp; Map</span>
+        </a>
+        <a href="../" class="btn-outline">All Food Weeks</a>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="section-title">Featured Dishes in Downtown Portland (16)</h2>
+      <div class="dishes-grid">
+        
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Highball Week 2026</div>
+            <div class="restaurant-name">High Horse at The Bidwell</div>
+            <h3 class="dish-title"><a href="../d/highball-2026-239460.html">Rye Cadillac Highball</a></h3>
+          </div>
+          <span class="dish-emoji">🥃</span>
+        </div>
+        <p class="dish-desc">The ultimate summer-sipper for whiskey drinkers.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 520 SW Broadway, Portland, OR</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegan</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/highball-2026-239460.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=highball-2026&amp;dish=239460" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">High Horse at The Bidwell</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230096.html">Brown Butter Crab Roll</a></h3>
+          </div>
+          <span class="dish-emoji">🥪</span>
+        </div>
+        <p class="dish-desc">Local lump crab, brown butter vinaigrette, crème fraîche, chive, lemon, French roll.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 520 SW Broadway, Portland, Oregon 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230096.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230096" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">Bacchus Bar</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230098.html">Southern Katsu</a></h3>
+          </div>
+          <span class="dish-emoji">🥪</span>
+        </div>
+        <p class="dish-desc">Southern fried chicken, milk bread, chow-chow relish, tonkatsu sauce.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 422 SW Broadway, Portland, Oregon 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230098.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230098" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">Hunny Beez</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230101.html">All Day Brunch Sandwich</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">Pandesal bread, Sriracha ketchup, egg, American cheese, longanisa pork sausage &amp; Sriracha-maple syrup.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1434 SW Park Ave, Portland, OR 97209</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230101.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230101" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">Mucca Pizzeria</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230399.html">Trifecta Romana</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Roman-style sheet pan pizza with porchetta, provolone, Pecorino cream, potato, mozzarella, Carbocrema (eggs, Pecorino Romano cheese, crispy guanciale, pepper), topped with crispy guanciale.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1026 SW Morrison St, Portland, OR 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230399.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230399" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">The Social Spoon</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230400.html">Mama Didn&#39;t Braise No Fools</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Beef braised with red wine, mushrooms, and bacon; grilled broccolini, gruyere cheese, and parsley on a Dos Hermanos roll.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 550 SW Oak St, Portland, OR 97204</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230400.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230400" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wiener Week 2026</div>
+            <div class="restaurant-name">Hunny Beez</div>
+            <h3 class="dish-title"><a href="../d/wiener-2026-227070.html">Kare Kare Bacon Dog</a></h3>
+          </div>
+          <span class="dish-emoji">🌭</span>
+        </div>
+        <p class="dish-desc">Garlic aioli, mango slaw, Black Forest bacon, and our Kare Kare peanut gravy.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1434 SW Park Ave, Portland, OR 97209</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wiener-2026-227070.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wiener-2026&amp;dish=227070" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">High Horse at The Bidwell</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-254403.html">Pomegranate Molasses &amp; Harissa Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🍗</span>
+        </div>
+        <p class="dish-desc">Pomegranate molasses and harissa glaze, served with a Za&#39;tar yogurt dipping sauce.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 520 SW Broadway, Portland, Oregon 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-254403.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=254403" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">The Dusted Cup</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-254406.html">Smoked Drummies</a></h3>
+          </div>
+          <span class="dish-emoji">🌱</span>
+        </div>
+        <p class="dish-desc">Smoked vegan wings seasoned with a garlic-herb rub, then tossed in your choice of Creamy Lion’s Mane Buffalo or Reishi Pineapple BBQ sauce.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 727 SW Naito Pkwy, Portland, OR 97204</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegan</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-254406.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=254406" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Beer O’Clock</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-254410.html">Mo&#39;s Garlic and Parmesan Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🧄</span>
+        </div>
+        <p class="dish-desc">Garlic, parmesan, lemon, chile, gorgonzola dressing.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1205 SW Washington St, Portland, OR 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-254410.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=254410" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Heroes American Cafe</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-254906.html">Pickle Back Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🍗</span>
+        </div>
+        <p class="dish-desc">Our signature dry rub.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1440 SW Park Ave, Portland, OR 97201</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-254906.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=254906" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Hunny Beez</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-254908.html">Honey Patis Ginger Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🌿</span>
+        </div>
+        <p class="dish-desc">Sweet and spicy honey with ginger, and patis (Filipino fish sauce).</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1434 SW Park Ave, Portland, OR 97209</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegetarian</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-254908.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=254908" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Swine Moonshine &amp; Whiskey Bar</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-255002.html">Crispy Mango Habanero Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">Crispy fried wings, tossed in mango habanero sauce, carrot &amp; celery, blue cheese.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 808 SW Taylor, Portland, Oregon 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-255002.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=255002" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Taylor Street Tavern</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-255018.html">Mango Habanero Frenched Chicken Drums</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">Mango Habanero Frenched Chicken Drums with carrots Celery and ranch dressing.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 808 SW Taylor Street, Portland, OR 97205</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-255018.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=255018" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">PLS on Sixth</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-255398.html">Peace, Love, and Spicy BBQ Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">These spicy BBQ wings are the perfect combination of our hot wing sauce mixed with BBQ sauce. Served with blue cheese dressing, carrot, and celery.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 515 SW Clay St, Portland, OR 97201</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-255398.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=255398" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Finch on Fifth</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-255708.html">Asian Sticky Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🧄</span>
+        </div>
+        <p class="dish-desc">Marinated in fish sauce, garlic, onion, cumin, coriander, and sumac. Rolled in rice and tapioca flour. Yuzu gochugang sauce.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 503 SW Alder St., Portland, OR 97204</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-255708.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=255708" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+      </div>
+    </main>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+    </footer>
+  </div>
+</body>
+</html>

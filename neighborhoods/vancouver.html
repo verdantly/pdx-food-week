@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vancouver — Portland Food Week Spots &amp; Menus</title>
+  <meta name="description" content="Explore 12 special dishes and participating restaurants in Vancouver across Portland food weeks. Plan your crawl route on the map!">
+  <link rel="canonical" href="https://www.pdxfoodweek.com/neighborhoods/vancouver.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="PDX Food Week">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Vancouver — Portland Food Week Spots &amp; Menus">
+  <meta property="og:description" content="Explore 12 special dishes and participating restaurants in Vancouver across Portland food weeks. Plan your crawl route on the map!">
+  <meta property="og:url" content="https://www.pdxfoodweek.com/neighborhoods/vancouver.html">
+  <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vancouver — Portland Food Week Spots &amp; Menus">
+  <meta name="twitter:description" content="Explore 12 special dishes and participating restaurants in Vancouver across Portland food weeks. Plan your crawl route on the map!">
+  <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Vancouver — Portland Food Week Spots & Menus",
+  "description": "Explore 12 special dishes and participating restaurants in Vancouver across Portland food weeks. Plan your crawl route on the map!",
+  "url": "https://www.pdxfoodweek.com/neighborhoods/vancouver.html",
+  "about": {
+    "@type": "Place",
+    "name": "Vancouver",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Portland",
+      "addressRegion": "OR",
+      "addressCountry": "US"
+    }
+  }
+}
+  </script>
+
+  <style>
+    :root {
+      --primary: #B5472E;
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 24px 16px 64px;
+    }
+    .container { max-width: 1080px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
+    .hero-title { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--primary); color: #fff; }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
+    .hero-desc { font-size: 16.5px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-main {
+      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-main:hover { opacity: 0.92; }
+    .btn-outline {
+      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
+    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .dish-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .week-pill { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 2px; }
+    .restaurant-name { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
+    .dish-title a { color: inherit; text-decoration: none; }
+    .dish-title a:hover { color: var(--primary); }
+    .dish-emoji { font-size: 22px; }
+    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
+    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
+    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
+    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .link-detail:hover { text-decoration: underline; }
+    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .btn-app-sm:hover { background: var(--primary); color: #fff; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="breadcrumbs">
+        <a href="../">PDX Food Week</a> &gt; <span>Vancouver</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge badge-primary">📍 Neighborhood</span>
+        <span class="badge badge-subtle">12 Spots</span>
+      </div>
+      <h1 class="hero-title">Vancouver Food Week Guide</h1>
+      <p class="hero-desc">
+        Browse 12 special dishes and participating restaurants located in Vancouver across Portland's themed food weeks. Plan your crawl route and filter by dietary options!
+      </p>
+      <div class="cta-row">
+        <a href="../" class="btn-main">
+          <span>🚀 Explore All in App &amp; Map</span>
+        </a>
+        <a href="../" class="btn-outline">All Food Weeks</a>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="section-title">Featured Dishes in Vancouver (12)</h2>
+      <div class="dishes-grid">
+        
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Burger Week 2026</div>
+            <div class="restaurant-name">The Diner Vancouver</div>
+            <h3 class="dish-title"><a href="../d/burger-2026-248622.html">The Pastrami Burger</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">A quarter-pound beef patty topped with 4 oz. of house-made pastrami, grilled red onion, Swiss cheese, and garlic aioli on a brioche bun. Served with your lunch side of choice: fries, coleslaw, or a side salad.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 5303 East Mill Plain Boulevard, Vancouver, WA 98661</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/burger-2026-248622.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=burger-2026&amp;dish=248622" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Burger Week 2026</div>
+            <div class="restaurant-name">Grays Restaurant and Bar</div>
+            <h3 class="dish-title"><a href="../d/burger-2026-248849.html">Wipe Your Mouth Burger</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">¼ lb. patty, American cheese, house-crafted Walla Walla onion ring, white bean-kielbasa chili, mascarpone goop, leaf lettuce, tomato, cheddar bun.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 301 W Sixth St, Vancouver, WA 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/burger-2026-248849.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=burger-2026&amp;dish=248849" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Burger Week 2026</div>
+            <div class="restaurant-name">Amaros Table Downtown</div>
+            <h3 class="dish-title"><a href="../d/burger-2026-248995.html">The Pambazo Burger</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Country Natural ground chuck, Swiss cheese, chorizo-potato hash, shredded lettuce, caramelized onion, avocado, salsa verde, and crema on a rustic bun dipped in guajillo sauce, griddled until crisp, then spread with refried pinto beans.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 1220 Main St. Ste. 100, Vancouver, WA 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/burger-2026-248995.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=burger-2026&amp;dish=248995" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Burger Week 2026</div>
+            <div class="restaurant-name">Cecilia</div>
+            <h3 class="dish-title"><a href="../d/burger-2026-249320.html">Aloha, Neighbor</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Country Natural ground chuck topped with crispy fried pepper jack cheese, grilled onions, arugula, house-made pineapple jam and habanero aioli. Served on a toasted buttered brioche bun for the perfect balance of sweet heat, richness, and tropical flavor.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 2520 Columbia House Blvd #108, Vancouver, WA 98661</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/burger-2026-249320.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=burger-2026&amp;dish=249320" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Burger Week 2026</div>
+            <div class="restaurant-name">Bless Your Heart Burgers</div>
+            <h3 class="dish-title"><a href="../d/burger-2026-249403.html">The Smoke Show</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Locally sourced ground beef, smoked pastrami jam, shredded lettuce, chipotle aioli, pickled peppers, and smoked cheddar cheese.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 7910 E Mill Plain Blvd Suite 120, Vancouver, WA 98664</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/burger-2026-249403.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=burger-2026&amp;dish=249403" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Burger Week 2026</div>
+            <div class="restaurant-name">Loowit Brewing - Downtown Pub</div>
+            <h3 class="dish-title"><a href="../d/burger-2026-249775.html">Calimshan Cure</a></h3>
+          </div>
+          <span class="dish-emoji">🍔</span>
+        </div>
+        <p class="dish-desc">All-natural Angus beef, salami, pepperoni, provolone, lettuce, tomato, aioli, and pepper relish.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 507 Columbia St, Vancouver, Washington 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/burger-2026-249775.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=burger-2026&amp;dish=249775" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Nacho Week 2026</div>
+            <div class="restaurant-name">Grays Restaurant and Bar</div>
+            <h3 class="dish-title"><a href="../d/nacho-2026-243649.html">Grays Verde Loaded Nachos</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Inspired by Chef Troy Lucio&#39;s passion for bold, layered flavors, these nachos brings together the rustic soul of Mexican cuisine with subtle Italian influence. Rich, slow-braised pork chile verde meets creamy red chile cheese fonduta, echoing the indulgence of classic Italian sauces, while ranchero black beans and house-fried spiced tortilla chips ground the dish in tradition.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 301 W Sixth St, Vancouver, WA 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/nacho-2026-243649.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=nacho-2026&amp;dish=243649" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">The Diner Vancouver</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230102.html">Cubano Stacker</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">Grilled rustic white bread layered with turkey, ham, melted Swiss, tangy mustard slaw, pickles, and pickled carrots, finished with a semi-spicy Cuban mayo. The sandwich is served with a lunch side of choice: fries, coleslaw, or a side salad.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 5303 East Mill Plain Boulevard, Vancouver, WA 98661</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-gf">GF</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230102.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230102" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Sandwich Week 2026</div>
+            <div class="restaurant-name">Loowit Brewing - Downtown Pub</div>
+            <h3 class="dish-title"><a href="../d/sandwich-2026-230302.html">Sweet Violence</a></h3>
+          </div>
+          <span class="dish-emoji">🧀</span>
+        </div>
+        <p class="dish-desc">Toasted hoagie stacked with braised pork, melted pepper Jack cheese, smoked red pepper sherry aioli, and pepperoncini relish.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 507 Columbia St, Vancouver, Washington 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/sandwich-2026-230302.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=sandwich-2026&amp;dish=230302" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wiener Week 2026</div>
+            <div class="restaurant-name">Loowit Brewing - Downtown Pub</div>
+            <h3 class="dish-title"><a href="../d/wiener-2026-227068.html">Seoul Burner</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">A glorious Zenner dog built for excess—bright kimchi, charred onion and jalapeño heat, finished with a lush Asian BBQ–mustard glaze.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 507 Columbia St, Vancouver, Washington 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wiener-2026-227068.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wiener-2026&amp;dish=227068" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Grays Restaurant and Bar</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-254722.html">Calabrian Chile AB&amp;J Jumbo Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🔥</span>
+        </div>
+        <p class="dish-desc">Crispy buttermilk-dredged wings tossed in fire-roasted Calabrian chili sauce, finished with almond butter and jam for the perfect sweet-heat balance.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 301 W Sixth St, Vancouver, WA 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-254722.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=254722" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="week-pill">Wing Week 2026</div>
+            <div class="restaurant-name">Brickhouse Bar &amp; Grill</div>
+            <h3 class="dish-title"><a href="../d/wing-2026-255409.html">Strawberry Scorpion Wings</a></h3>
+          </div>
+          <span class="dish-emoji">🍯</span>
+        </div>
+        <p class="dish-desc">A balance of fresh strawberries, scorpion peppers, brown sugar and honey sauce. Garnished with fresh bee pollen.</p>
+        <div class="dish-meta">
+          <span class="dish-address">🏠 109 W 15th, Vancouver, WA 98660</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/wing-2026-255409.html" class="link-detail">View Dish &rarr;</a>
+          <a href="../?week=wing-2026&amp;dish=255409" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+      </div>
+    </main>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+    </footer>
+  </div>
+</body>
+</html>
