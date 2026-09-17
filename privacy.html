@@ -205,57 +205,56 @@
     <h1>Privacy Policy</h1>
     <div class="subtitle">Last updated: September 16, 2026</div>
 
-    <p>We built the <strong>PDX Food Week</strong> app to help you find delicious local food, plan your crawl routes, and share favorites with friends—not to track you. We believe in keeping things simple, transparent, and privacy-first. Here is exactly how we handle your data (spoiler: we don't collect much at all!).</p>
+    <p>We built <strong>PDX Food Week</strong> to help you explore Portland's amazing food weeks, plan your food crawls, and see what dishes your friends want to try—not to track you. We believe in keeping things simple, honest, and privacy-first.</p>
 
     <div class="alert-box">
-      <strong>Our Promise:</strong> We don't track you across the web, we don't show annoying ads, and we absolutely never sell your data. Almost everything you do in the app stays right on your own device unless you choose to sign in to sync across devices or share a list.
+      <strong>The Short Version:</strong> We don't track you across the web, we don't display ads, and we will never sell your information. Everything you do stays private on your own phone or computer unless you choose to sign in to sync your list or share a link with friends.
     </div>
 
-    <h2>1. Data Stored on Your Device (Keep it Local)</h2>
-    <p>To make the app super fast and let it work even when cellular connection is spotty, we save your choices directly inside your browser's local storage and offline cache (via Service Worker). This is like a private notebook stored on your own phone or computer, and it contains:</p>
+    <h2>1. What Stays on Your Device</h2>
+    <p>To keep the app fast and reliable even when you have poor cell service, the app saves your activity directly on your device. Think of it as a personal notebook stored on your own phone or computer:</p>
     <ul>
-      <li><strong>Saved & Passed Dishes:</strong> The list of food week dishes you saved (Like) or swiped past (Pass) across any of our 12 Portland food weeks.</li>
-      <li><strong>Crawl Route & Visited Spots:</strong> Dishes you add to your custom crawl planner and markings for spots you've visited.</li>
-      <li><strong>Your Notes & Ratings:</strong> Any personal reviews, notes, and star ratings you add to your saved spots.</li>
-      <li><strong>Friends' Lists:</strong> The names and lists of friends you choose to add so you can see where your cravings overlap.</li>
-      <li><strong>Your GPS Location (Optional):</strong> If you click "Use location" to sort by distance, your browser will ask for permission to access your GPS coordinates. These coordinates are used strictly locally on your device to calculate restaurant distances and are <strong>never</strong> uploaded to our servers or shared with any third parties.</li>
+      <li><strong>Your Saved &amp; Passed Dishes:</strong> The dishes you like, pass on, or mark as visited.</li>
+      <li><strong>Your Reviews &amp; Notes:</strong> Any ratings, personal thoughts, or tips you jot down about a dish.</li>
+      <li><strong>Crawl Route Plans:</strong> The stops you pick when planning your food crawls.</li>
+      <li><strong>Friends' Lists:</strong> Any friends you add to compare favorite spots.</li>
+      <li><strong>Your Location (Optional):</strong> If you tap "Use location" to see nearby restaurants, your device calculates the distance locally. Your exact location is never sent to us or anyone else.</li>
     </ul>
-    <p>This data stays on your device by default. We do not automatically send it to any servers. If you ever want to wipe the slate clean, you can clear your browser's cache/site data or click the reset options inside the app.</p>
+    <p>You can erase all of this anytime simply by clearing your browser's site history or clicking the reset options in the app settings.</p>
 
-    <h2>2. User Accounts & Cloud Sync (Optional)</h2>
-    <p>If you choose to create an account or sign in (via email link, email/password, or Google Sign-In):</p>
+    <h2>2. Signing In &amp; Syncing (Optional)</h2>
+    <p>You can use the entire app without ever creating an account. But if you want your saved spots to follow you across your phone, laptop, and tablet, you can optionally sign in:</p>
     <ul>
-      <li><strong>Authentication:</strong> User sign-in is managed securely via Google Firebase Authentication. We only receive your authentication identifier (UID) and email address. We never see or store your plaintext passwords.</li>
-      <li><strong>Cloud Synchronization:</strong> When signed in, your bookmarked spots, visited statuses, notes, ratings, and crawl plans sync to a private, authenticated Firestore database record so you can access your list seamlessly across your phone, tablet, or desktop.</li>
-      <li><strong>Signing Out & Guests:</strong> Signing out detaches cloud synchronization and restores your local guest state. You can delete your account and synced data at any time upon request.</li>
-    </ul>
-
-    <h2>3. Magic Link Sharing (Only If You Choose to Share)</h2>
-    <p>If you decide to use the <strong>Magic Link</strong> feature in the Friends tab to share your saved spots with friends:</p>
-    <ul>
-      <li>The app bundles up your saved dish IDs, the current food week name, and an <strong>optional nickname</strong> you provide.</li>
-      <li>It uploads this bundle to our secure Google Firebase database and generates a unique, random 5-letter web link for you (like <code>?list=abcde</code>).</li>
-      <li>Anyone you send this link to will be able to see the dishes you saved and your nickname.</li>
-      <li><strong>You're in Control:</strong> Sharing is totally optional. Entering a nickname is also optional—if you leave it blank, your list is completely anonymous. The shared data never contains your email address, phone number, physical location, or passwords.</li>
-      <li><strong>Data Retention:</strong> We reserve the right to periodically delete inactive shared lists from our database after the respective food week ends to keep our systems clean.</li>
+      <li><strong>Account Details:</strong> When you sign in with an email link, password, or Google, we only keep your email address to recognize you. We never see or store your passwords.</li>
+      <li><strong>Syncing:</strong> Your saved dishes and notes are securely backed up so your lists stay matched up on every device you use.</li>
+      <li><strong>Signing Out:</strong> If you sign out, your device returns to guest mode. If you ever want your account or synced lists removed completely, just reach out to us.</li>
     </ul>
 
-    <h2>4. Friendly Helpers (Third-Party Services)</h2>
-    <p>To show you maps, calculate distances, support list sharing, and improve the app, our app talks to a few standard web services. When your browser requests info from them, they may see standard HTTP request headers like your IP address and browser type:</p>
+    <h2>3. Sharing Links with Friends (Optional)</h2>
+    <p>Want to see which burger or taco spots both you and a friend want to visit? In the Share tab, you can create a <strong>Magic Link</strong>:</p>
     <ul>
-      <li><strong>Google Firebase & Google Analytics:</strong> Firebase powers optional user authentication, cloud sync, and shared Magic Links. We also use basic Google Analytics to measure aggregate site traffic (such as daily active visits and feature usage) to improve the app. No personal identifiers or saved list contents are sold.</li>
-      <li><strong>OpenStreetMap:</strong> We load map graphics from OpenStreetMap tile servers to show you where restaurants are located in Portland.</li>
-      <li><strong>Zippopotam.us:</strong> When you sort dishes by "Distance" and enter a zip code, this service translates that zip code into map coordinates. This calculation happens instantly and is not saved by us.</li>
+      <li>The app creates a short web link containing your saved dish numbers and an optional nickname you enter.</li>
+      <li>Whoever you text or message the link to will be able to see those saved spots and your nickname.</li>
+      <li>Sharing is completely optional. If you don't enter a nickname, your list is totally anonymous. We never include your email, phone number, or location in shared links.</li>
+    </ul>
+
+    <h2>4. Outside Services We Rely On</h2>
+    <p>Like most modern websites, we use a few trusted services to help run the app:</p>
+    <ul>
+      <li><strong>Google Firebase:</strong> Safely stores your optional account login, synced lists, and shared links.</li>
+      <li><strong>Basic Analytics:</strong> We look at general, anonymous traffic numbers (like how many people visit each day) to know what features to improve. We never collect or sell your personal details.</li>
+      <li><strong>OpenStreetMap:</strong> Provides the neighborhood maps so you can find restaurant addresses.</li>
+      <li><strong>ZIP Code Lookup:</strong> If you type in a ZIP code to sort by distance, a free web tool translates the ZIP into general map coordinates without storing what you typed.</li>
     </ul>
 
     <h2>5. Links to Other Websites</h2>
-    <p>We link out to websites like <em>The Actual Portland</em>, <em>EverOut</em>, Google Maps (for driving/walking directions), and our developer GitHub profiles. Once you click those links and leave our site, the privacy policies of those other websites will apply to you.</p>
+    <p>We link to external sites like restaurant menus, event guides (such as <em>The Portland Mercury</em>, <em>The Oregonian</em>, and <em>EverOut</em>), and driving directions in Google Maps. Once you click away from our site, the privacy policies of those other websites take over.</p>
 
-    <h2>6. Updates to This Policy</h2>
-    <p>If we update how the app works, we might tweak this policy. If we do, we will update the "Last updated" date at the top of this page.</p>
+    <h2>6. Changes to This Policy</h2>
+    <p>If we add new features or update how the app works, we may update this page. When we do, we'll change the "Last updated" date at the top.</p>
 
-    <h2>7. Say Hello</h2>
-    <p>Have questions, ideas, or want us to delete an account or shared list from our database? You can easily contact us by clicking our GitHub profile links at the bottom of the main app's sidebar.</p>
+    <h2>7. Questions or Feedback?</h2>
+    <p>Have questions about your data or want us to delete an account or shared link? Feel free to reach out anytime using our GitHub links in the app's sidebar or footer.</p>
   </main>
 
   <footer>
