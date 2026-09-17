@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portland Pizza Week 2026 — Participating Restaurants, Menus &amp; Map</title>
+  <meta name="description" content="Explore 29 participating restaurants, specialty dishes, and pricing for Pizza Week 2026 (April 20-26, 2026). Plan your crawl with the interactive PDX Food Week map!">
+  <link rel="canonical" href="https://www.pdxfoodweek.com/weeks/pizza-2026.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="PDX Food Week">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portland Pizza Week 2026 — Guide &amp; Participating Spots">
+  <meta property="og:description" content="Explore 29 participating restaurants, specialty dishes, and pricing for Pizza Week 2026 (April 20-26, 2026). Plan your crawl with the interactive PDX Food Week map!">
+  <meta property="og:url" content="https://www.pdxfoodweek.com/weeks/pizza-2026.html">
+  <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portland Pizza Week 2026">
+  <meta name="twitter:description" content="Explore 29 participating restaurants, specialty dishes, and pricing for Pizza Week 2026 (April 20-26, 2026). Plan your crawl with the interactive PDX Food Week map!">
+  <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEvent",
+  "name": "Pizza Week 2026",
+  "description": "Explore 29 participating restaurants, specialty dishes, and pricing for Pizza Week 2026 (April 20-26, 2026). Plan your crawl with the interactive PDX Food Week map!",
+  "startDate": "2026-04-20",
+  "endDate": "2026-04-26",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": "Portland, Oregon",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Portland",
+      "addressRegion": "OR",
+      "addressCountry": "US"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Portland Mercury"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "description": "$4 slices"
+  }
+}
+  </script>
+
+  <style>
+    :root {
+      --primary: #C94B2C;
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 24px 16px 64px;
+    }
+    .container { max-width: 1080px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
+    .hero-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--primary); color: #fff; }
+    .badge-dark { background: var(--ink); color: #fff; }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
+    .hero-desc { font-size: 17px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-main {
+      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-main:hover { opacity: 0.92; }
+    .btn-outline {
+      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
+    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+    .dish-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+    .restaurant-name { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.04em; }
+    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
+    .dish-title a { color: inherit; text-decoration: none; }
+    .dish-title a:hover { color: var(--primary); }
+    .dish-emoji { font-size: 22px; }
+    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
+    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
+    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
+    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .link-detail:hover { text-decoration: underline; }
+    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
+    .btn-app-sm:hover { background: var(--primary); color: #fff; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="breadcrumbs">
+        <a href="../">PDX Food Week</a> &gt; <span>Pizza Week 2026</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge badge-primary">🍕 Portland Mercury</span>
+        <span class="badge badge-dark">April 20-26, 2026</span>
+        <span class="badge badge-subtle">$4 slices</span>
+        <span class="badge badge-subtle">29 Spots</span>
+      </div>
+      <h1 class="hero-title">Portland Pizza Week 2026</h1>
+      <p class="hero-desc">
+        Browse all 29 special dish offerings, dietary options, and locations participating in Pizza Week 2026. Use our interactive crawl planner and map to filter spots by neighborhood, distance, and dietary preferences!
+      </p>
+      <div class="cta-row">
+        <a href="../?week=pizza-2026" class="btn-main">
+          <span>🚀 Open in Interactive App &amp; Map</span>
+        </a>
+        <a href="../" class="btn-outline">Browse All Food Weeks</a>
+      </div>
+    </header>
+
+    <main>
+      <h2 class="section-title">Participating Restaurants &amp; Dishes (29)</h2>
+      <div class="dishes-grid">
+        
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Clarklewis</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-233600.html">Mediterranean Mojo Lamb</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Mojo braised Anderson Ranch lamb, harissa spiced tomato sauce, feta, kalamata olive tapenade, Mama Lil&#39;s peppers</p>
+        <div class="dish-meta">
+          <span>📍 Buckman - Southeast Portland</span>
+          <span class="dish-address">1001 SE Water Ave., Portland, OR 97214</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-233600.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=233600" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Boxcar Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234094.html">Banh To Be Wild</a></h3>
+          </div>
+          <span class="dish-emoji">🌱</span>
+        </div>
+        <p class="dish-desc">Mozzarella-cheddar blend, yellow curry chicken, jalapeño, pickled carrot &amp; daikon, cilantro, sweet chili mayo</p>
+        <div class="dish-meta">
+          <span>📍 Kerns - Southeast Portland</span>
+          <span class="dish-address">2701 NE Sandy Blvd, Portland, OR 97232</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegan</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234094.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234094" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Checkerboard Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234340.html">Snyder Weccacoe</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">White Pie (garlic + evoo), Roasted Pork, Rapini, Calabrian Chili, Caciocavallo</p>
+        <div class="dish-meta">
+          
+          <span class="dish-address">159 Buxton Rd, Troutdale, OR 97060</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234340.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234340" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Blind Onion Pizza Pub</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234547.html">The Cae&#39;Za</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Caesar dressing base, spinach, chicken, mozzarella, and shredded Parmesan, finished with lemon vinaigrette</p>
+        <div class="dish-meta">
+          <span>📍 Grant Park - Northeast Portland</span>
+          <span class="dish-address">3345 NE Broadway, Portland, OR 97232</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234547.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234547" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Blind Onion</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234548.html">Chicken Bacon Ranch Pizza</a></h3>
+          </div>
+          <span class="dish-emoji">🥓</span>
+        </div>
+        <p class="dish-desc">Ranch base with chicken, mozzarella cheese, crispy bacon, and a light dusting of cheddar. Finished with a ranch drizzle and fresh herbs.</p>
+        <div class="dish-meta">
+          <span>📍 Mount Tabor - Southeast Portland</span>
+          <span class="dish-address">6031 SE Belmont St, Portland, OR 97215</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234548.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234548" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">10 Barrel Brewing</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234557.html">Spuds Mackenzie</a></h3>
+          </div>
+          <span class="dish-emoji">🥓</span>
+        </div>
+        <p class="dish-desc">Whipped potato base, shredded mozzarella and cheddar cheese, smoked bacon, pickled jalapeños topped with green onions, garden herbs, parmesan cheese and sour cream.</p>
+        <div class="dish-meta">
+          <span>📍 Pearl District - Northwest Portland</span>
+          <span class="dish-address">1411 NW Flanders, Portland, Oregon </span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234557.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234557" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Fire on the Mountain</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234898.html">The GOAT Father</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Capicola ham, hot cherry bomb peppers, chèvre, hot honey.</p>
+        <div class="dish-meta">
+          <span>📍 Rose City Park - Northeast Portland</span>
+          <span class="dish-address">3443 NE 57th, Portland, OR 97213</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234898.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234898" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Dante&#39;s PizzaSlut</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234899.html">Pepperoni Pony!</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Double pepperoni</p>
+        <div class="dish-meta">
+          <span>📍 Old Town-Chinatown - Northwest Portland</span>
+          <span class="dish-address">1 SW Third Ave, Portland, OR 97204</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234899.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234899" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Dimo&#39;s Apizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234903.html">The Drunken Pig</a></h3>
+          </div>
+          <span class="dish-emoji">🥓</span>
+        </div>
+        <p class="dish-desc">Spicy vodka sauce, bacon, fermented chili hot honey, mozzarella, Grana Padano, Pecorino, and fried basil</p>
+        <div class="dish-meta">
+          <span>📍 Kerns - Southeast Portland</span>
+          <span class="dish-address">701 E Burnside, Portland, Oregon </span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234903.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234903" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Fino Bistro &amp; Pizzeria</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-234906.html">Alliuminati</a></h3>
+          </div>
+          <span class="dish-emoji">🥓</span>
+        </div>
+        <p class="dish-desc">The Alliuminati features a rich roasted garlic cream base topped with caramelized onions, sautéed mushrooms, crispy bacon, tender potato, and a generous dusting of parmesan, finished with fresh chives</p>
+        <div class="dish-meta">
+          <span>📍 Kenton - North Portland</span>
+          <span class="dish-address">8225 N. Denver Ave, Portland, OR 97217</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-234906.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=234906" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Double Mountain Overlook Taproom</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235001.html">Taos</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Cilantro pesto, mozzarella, southwest marinated pork belly lardons, oven roasted corn and onions, sliced roasted red peppers, finished with cotija cheese.</p>
+        <div class="dish-meta">
+          <span>📍 Overlook - North Portland</span>
+          <span class="dish-address">1700 N Killingsworth Street, Portland, OR 97217</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235001.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235001" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Double Mountain Woodstock Taproom</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235002.html">Belly Up to the Orchard</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Olive oil, mozzarella, thinly sliced apples and pears, braised brown sugar pork belly slices, pulled burrata, hard cheese, finished and topped with candied walnuts, hot honey, and light arugula.</p>
+        <div class="dish-meta">
+          <span>📍 Southeast Portland</span>
+          <span class="dish-address">4436 SE Woodstock, Portland, Oregon 97206</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235002.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235002" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Hapa Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235004.html">Miso Apple Pizza</a></h3>
+          </div>
+          <span class="dish-emoji">🌿</span>
+        </div>
+        <p class="dish-desc">Apple butter, apple compote, mint, shiso, miso vinaigrette, whipped lemon ricotta, house taro chips</p>
+        <div class="dish-meta">
+          <span>📍 Beaverton</span>
+          <span class="dish-address">12755 SW Broadway Street, Portland, OR 97005</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegetarian</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235004.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235004" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Edan Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235006.html">Smoky 4/2026</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Fennel sausage, garlic confit, fresh tomato, smoked peppers, smoked mozzarella, hot honey. Vegetarian sausage available.</p>
+        <div class="dish-meta">
+          <span>📍 Downtown Portland - Southwest Portland</span>
+          <span class="dish-address">204 SW Yamhill St, Portland, OR 97204</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235006.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235006" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Gabby&#39;s Next Door</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235007.html">Haters Gonna Hate</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Housemade focaccia, red sauce, mortadella, pineapple, jalapeño, fontina, parmesan, Italian chile crisp</p>
+        <div class="dish-meta">
+          <span>📍 Concordia - Northeast Portland</span>
+          <span class="dish-address">5425 NE 30th Ave, Portland, OR 97211</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235007.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235007" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Brix Tavern</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235009.html">Thai Chicken Pizza</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Hand-stretched crust with savory peanut sauce, mozzarella, marinated chicken, and roasted peppers. Topped with fresh bean sprouts, Sriracha, cilantro, and a crunchy crushed peanut finish.</p>
+        <div class="dish-meta">
+          <span>📍 Pearl District - Northwest Portland</span>
+          <span class="dish-address">1338 NW Hoyt St, Portland, OR 97209</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235009.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235009" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Fast Times Pizza &amp; Soft Serve</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235010.html">TATER TOT HOT DISH Pizza</a></h3>
+          </div>
+          <span class="dish-emoji">🥓</span>
+        </div>
+        <p class="dish-desc">Creamy garlic sauce, house cheese blend, cheddar cheese, tater tots, bacon &amp; green onions</p>
+        <div class="dish-meta">
+          <span>📍 Buckman - Southeast Portland</span>
+          <span class="dish-address">624 E Burnside, Portland, OR 97214</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235010.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235010" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Hopworks Brewery</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235013.html">The Wurst Pizza Ever</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Beer cheese &amp; stone ground mustard, mozzarella, caramelized onion, sauerkraut, and beer sausage.</p>
+        <div class="dish-meta">
+          <span>📍 Creston - Kenilworth - Southeast Portland</span>
+          <span class="dish-address">2944 SE Powell, Portland, OR 97202</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235013.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235013" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">21st Century Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235015.html">The Farm Feast</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Spinach, sun-dried tomatoes, chicken, topped with Italian seasoning. Made with house marinara red sauce.</p>
+        <div class="dish-meta">
+          <span>📍 Southwest Portland</span>
+          <span class="dish-address">1221 SW Jefferson, Portland, Oregon 97201</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235015.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235015" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">East Glisan Pizza Lounge</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235018.html">Heated Rivalry</a></h3>
+          </div>
+          <span class="dish-emoji">🌿</span>
+        </div>
+        <p class="dish-desc">3 cheese blend, cream cheese, house-pickled jalapeño, fresh jalepeño, berry hot honey drizzle, Frito crumbs.</p>
+        <div class="dish-meta">
+          <span>📍 Montavilla - Southeast Portland</span>
+          <span class="dish-address">8001 NE Glisan, Portland, Oregon 97213</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegetarian</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235018.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235018" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Barbur World Foods</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235020.html">Triple (Mac &amp;) Cheese Pizza</a></h3>
+          </div>
+          <span class="dish-emoji">🌿</span>
+        </div>
+        <p class="dish-desc">Monterey Jack, cheddar, cream cheese, chiles, cream, poblano, dough, butter, flour, milk.</p>
+        <div class="dish-meta">
+          <span>📍 Southwest Portland</span>
+          <span class="dish-address">9845 SW Barbur Blvd., Portland, Oregon 97219</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegetarian</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235020.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235020" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Atlas Pizza Foster</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235165.html">Schwilly Pie</a></h3>
+          </div>
+          <span class="dish-emoji">🌱</span>
+        </div>
+        <p class="dish-desc">We got tiny little slices of pizza on top of a big ol&#39; slice of pizza.</p>
+        <div class="dish-meta">
+          <span>📍 Foster - Powell - Southeast Portland</span>
+          <span class="dish-address">6535 SE Foster, Portland, Oregon 97206</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">vegan</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235165.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235165" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Atlas Pizza Killingsworth</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235167.html">The Kim(chi)-Possible</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">The Kim(chi)-possible pie: garlic base, spicy pork belly bulgogi, onion, baechu-kimchi, gochujang aioli drizzle, and scallions Vegan slice: Garlic oil base, Spicy bulgogi soy curls, Onion, Baechu-Kimc</p>
+        <div class="dish-meta">
+          <span>📍 North Portland</span>
+          <span class="dish-address">710 N Killingsworth, Portland, Oregon </span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235167.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235167" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Atlas Pizza Division</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235171.html">The Hot Date</a></h3>
+          </div>
+          <span class="dish-emoji">🥓</span>
+        </div>
+        <p class="dish-desc">Candied bacon, chopped dates, caramelized onion, chèvre, balsamic glaze, arugula salad tossed in Newk’s Elderfire Mango Habanero hot sauce</p>
+        <div class="dish-meta">
+          <span>📍 Richmond - Southeast Portland</span>
+          <span class="dish-address">3570 SE Division, Portland, Oregon 97202</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235171.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235171" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Dick&#39;s Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235174.html">PIZZA SCARP, NO CHICKEN</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Sausage, pickled hot peppers, red bell peppers, onion, garlic and parsley.</p>
+        <div class="dish-meta">
+          <span>📍 Sellwood - Moreland - Southeast Portland</span>
+          <span class="dish-address">7738 SE 13th Ave, Portland, OR 97202</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235174.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235174" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Baby Doll Pizza Northeast</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235792.html">Belly of the Beast</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Slow-roasted pork belly, caramelized onions, arugula tossed in lemon vinaigrette, topped with herb aioli.</p>
+        <div class="dish-meta">
+          <span>📍 King - Northeast Portland</span>
+          <span class="dish-address">5201 NE Martin Luther King Jr Blvd, Portland, OR 97211</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235792.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235792" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Baby Doll Pizza</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235793.html">A-Reuben, Jamaica, Ooh I Wanna Take Ya (To Baby Doll Pizza)</a></h3>
+          </div>
+          <span class="dish-emoji">🍕</span>
+        </div>
+        <p class="dish-desc">Corned beef, sauerkraut, provolone &amp; mozzarella cheese, green onion on a pepperoncini aioli base. (Allergy alert for Paprika)</p>
+        <div class="dish-meta">
+          <span>📍 Kerns - Southeast Portland</span>
+          <span class="dish-address">2835 SE Stark, Portland, Oregon 97214</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235793.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235793" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">Good Neighbor Pizzeria</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-235928.html">Hot Honey Hog</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Red sauce base, pepperoni, pulled pork, crushed red pepper flakes and jalapeños, finished with a honey drizzle and fresh lemon zest.</p>
+        <div class="dish-meta">
+          <span>📍 Woodlawn - Northeast Portland</span>
+          <span class="dish-address">800 NE Dekum St., Portland, OR 97211</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Family OK</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-235928.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=235928" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+
+      <div class="dish-card">
+        <div class="dish-card-header">
+          <div>
+            <div class="restaurant-name">48 NORTH PIZZERIA &amp; PUB</div>
+            <h3 class="dish-title"><a href="../d/pizza-2026-236080.html">Crema My Pork</a></h3>
+          </div>
+          <span class="dish-emoji">🥩</span>
+        </div>
+        <p class="dish-desc">Carolina Gold BBQ base, slow-cooked pulled pork, perfectly pickled red onions, fresh jalapeños, whole milk mozzarella, finished with a lime-cilantro crema drizzle.</p>
+        <div class="dish-meta">
+          <span>📍 South Portland</span>
+          <span class="dish-address">6500 S VIRGINIA AVE, PORTLAND, OR 97239</span>
+        </div>
+        <div class="dish-tags"><span class="badge badge-subtle">meat</span> <span class="badge badge-subtle">Whole Pie</span> <span class="badge badge-subtle">Family OK</span> <span class="badge badge-subtle">Takeout</span></div>
+        <div class="dish-card-footer">
+          <a href="../d/pizza-2026-236080.html" class="link-detail">View Dish Details &rarr;</a>
+          <a href="../?week=pizza-2026&amp;dish=236080" class="btn-app-sm">Open in App</a>
+        </div>
+      </div>
+    
+      </div>
+    </main>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+    </footer>
+  </div>
+</body>
+</html>

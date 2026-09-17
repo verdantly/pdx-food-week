@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "npx -y serve .",
-    "build": "node scripts/hash_assets.js",
-    "build:og": "node scripts/generate_og_pages.js",
+    "build": "node scripts/hash_assets.js && node scripts/generate_seo.js",
+    "build:og": "node scripts/generate_seo.js",
+    "build:seo": "node scripts/generate_seo.js",
     "scrape:burgers": "node scrapers/scrape_burgers.js",
     "scrape:pizza": "node scrapers/scrape_everout.js",
     "scrape:tacos": "node scrapers/scrape_tacos.js",
