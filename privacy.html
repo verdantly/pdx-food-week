@@ -203,50 +203,59 @@
 
   <main class="content">
     <h1>Privacy Policy</h1>
-    <div class="subtitle">Last updated: August 8, 2026</div>
+    <div class="subtitle">Last updated: September 16, 2026</div>
 
-    <p>We built the <strong>PDX Food Week</strong> app to help you find delicious local food, plan your routes, and share favorites with friends—not to track you. We believe in keeping things simple, transparent, and privacy-first. Here is exactly how we handle your data (spoiler: we don't collect much at all!).</p>
+    <p>We built the <strong>PDX Food Week</strong> app to help you find delicious local food, plan your crawl routes, and share favorites with friends—not to track you. We believe in keeping things simple, transparent, and privacy-first. Here is exactly how we handle your data (spoiler: we don't collect much at all!).</p>
 
     <div class="alert-box">
-      <strong>Our Promise:</strong> We don't track you across the web, we don't show annoying ads, and we absolutely never sell your data. Almost everything you do in the app stays right on your own device.
+      <strong>Our Promise:</strong> We don't track you across the web, we don't show annoying ads, and we absolutely never sell your data. Almost everything you do in the app stays right on your own device unless you choose to sign in to sync across devices or share a list.
     </div>
 
     <h2>1. Data Stored on Your Device (Keep it Local)</h2>
-    <p>To make the app super fast and let it work even when your cellular connection is spotty, we save your choices directly inside your browser's local storage. This is like a private notebook stored on your own phone or computer, and it contains:</p>
+    <p>To make the app super fast and let it work even when cellular connection is spotty, we save your choices directly inside your browser's local storage and offline cache (via Service Worker). This is like a private notebook stored on your own phone or computer, and it contains:</p>
     <ul>
-      <li><strong>Saved & Passed Dishes:</strong> The list of food week dishes you saved (Like) or swiped past (Pass).</li>
+      <li><strong>Saved & Passed Dishes:</strong> The list of food week dishes you saved (Like) or swiped past (Pass) across any of our 12 Portland food weeks.</li>
+      <li><strong>Crawl Route & Visited Spots:</strong> Dishes you add to your custom crawl planner and markings for spots you've visited.</li>
       <li><strong>Your Notes & Ratings:</strong> Any personal reviews, notes, and star ratings you add to your saved spots.</li>
       <li><strong>Friends' Lists:</strong> The names and lists of friends you choose to add so you can see where your cravings overlap.</li>
       <li><strong>Your GPS Location (Optional):</strong> If you click "Use location" to sort by distance, your browser will ask for permission to access your GPS coordinates. These coordinates are used strictly locally on your device to calculate restaurant distances and are <strong>never</strong> uploaded to our servers or shared with any third parties.</li>
     </ul>
-    <p>This data stays on your device. We do not automatically send it to any servers. If you ever want to wipe the slate clean, you can clear your browser's cache/site data or click the reset options inside the app.</p>
+    <p>This data stays on your device by default. We do not automatically send it to any servers. If you ever want to wipe the slate clean, you can clear your browser's cache/site data or click the reset options inside the app.</p>
 
-    <h2>2. Magic Link Sharing (Only If You Choose to Share)</h2>
+    <h2>2. User Accounts & Cloud Sync (Optional)</h2>
+    <p>If you choose to create an account or sign in (via email link, email/password, or Google Sign-In):</p>
+    <ul>
+      <li><strong>Authentication:</strong> User sign-in is managed securely via Google Firebase Authentication. We only receive your authentication identifier (UID) and email address. We never see or store your plaintext passwords.</li>
+      <li><strong>Cloud Synchronization:</strong> When signed in, your bookmarked spots, visited statuses, notes, ratings, and crawl plans sync to a private, authenticated Firestore database record so you can access your list seamlessly across your phone, tablet, or desktop.</li>
+      <li><strong>Signing Out & Guests:</strong> Signing out detaches cloud synchronization and restores your local guest state. You can delete your account and synced data at any time upon request.</li>
+    </ul>
+
+    <h2>3. Magic Link Sharing (Only If You Choose to Share)</h2>
     <p>If you decide to use the <strong>Magic Link</strong> feature in the Friends tab to share your saved spots with friends:</p>
     <ul>
       <li>The app bundles up your saved dish IDs, the current food week name, and an <strong>optional nickname</strong> you provide.</li>
-      <li>It uploads this bundle to a secure Google Firebase database and generates a unique, random 5-letter web link for you (like <code>?list=abcde</code>).</li>
+      <li>It uploads this bundle to our secure Google Firebase database and generates a unique, random 5-letter web link for you (like <code>?list=abcde</code>).</li>
       <li>Anyone you send this link to will be able to see the dishes you saved and your nickname.</li>
       <li><strong>You're in Control:</strong> Sharing is totally optional. Entering a nickname is also optional—if you leave it blank, your list is completely anonymous. The shared data never contains your email address, phone number, physical location, or passwords.</li>
       <li><strong>Data Retention:</strong> We reserve the right to periodically delete inactive shared lists from our database after the respective food week ends to keep our systems clean.</li>
     </ul>
 
-    <h2>3. Friendly Helpers (Third-Party Services)</h2>
+    <h2>4. Friendly Helpers (Third-Party Services)</h2>
     <p>To show you maps, calculate distances, support list sharing, and improve the app, our app talks to a few standard web services. When your browser requests info from them, they may see standard HTTP request headers like your IP address and browser type:</p>
     <ul>
-      <li><strong>Google Firebase & Google Analytics:</strong> Firebase stores shared lists when you generate a Magic Link. We also use basic Google Analytics to measure aggregate site traffic (such as daily active visits and feature usage) to improve the app. No personal identifiers or saved list contents are sold.</li>
-      <li><strong>OpenStreetMap:</strong> We load map graphics from here to show you where restaurants are located in Portland.</li>
+      <li><strong>Google Firebase & Google Analytics:</strong> Firebase powers optional user authentication, cloud sync, and shared Magic Links. We also use basic Google Analytics to measure aggregate site traffic (such as daily active visits and feature usage) to improve the app. No personal identifiers or saved list contents are sold.</li>
+      <li><strong>OpenStreetMap:</strong> We load map graphics from OpenStreetMap tile servers to show you where restaurants are located in Portland.</li>
       <li><strong>Zippopotam.us:</strong> When you sort dishes by "Distance" and enter a zip code, this service translates that zip code into map coordinates. This calculation happens instantly and is not saved by us.</li>
     </ul>
 
-    <h2>4. Links to Other Websites</h2>
+    <h2>5. Links to Other Websites</h2>
     <p>We link out to websites like <em>The Actual Portland</em>, <em>EverOut</em>, Google Maps (for driving/walking directions), and our developer GitHub profiles. Once you click those links and leave our site, the privacy policies of those other websites will apply to you.</p>
 
-    <h2>5. Updates to This Policy</h2>
+    <h2>6. Updates to This Policy</h2>
     <p>If we update how the app works, we might tweak this policy. If we do, we will update the "Last updated" date at the top of this page.</p>
 
-    <h2>6. Say Hello</h2>
-    <p>Have questions, ideas, or want us to manually delete a shared Magic Link list from our database? You can easily contact us by clicking our GitHub profile links at the bottom of the main app's sidebar.</p>
+    <h2>7. Say Hello</h2>
+    <p>Have questions, ideas, or want us to delete an account or shared list from our database? You can easily contact us by clicking our GitHub profile links at the bottom of the main app's sidebar.</p>
   </main>
 
   <footer>
