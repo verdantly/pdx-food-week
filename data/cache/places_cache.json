@@ -38421,5 +38421,25 @@
         }
       }
     ]
+  },
+  "taptap pdx_3434 ne sandy blvd, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
   }
 }

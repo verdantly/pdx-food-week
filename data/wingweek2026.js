@@ -1,5 +1,5 @@
-// Portland Mercury's Wing Week 2026 — scraped 2026-09-14
-// 97 locations (skipped: 0, reused: 94, new: 3, geocode fallbacks: 0)
+// Portland Mercury's Wing Week 2026 — scraped 2026-09-18
+// 100 locations (skipped: 0, reused: 97, new: 3, geocode fallbacks: 0)
 // Source: https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FDEAE6",
     colorPale: "#FFF5F2",
     emoji: "🍗",
-    totalLocations: 97,
+    totalLocations: 100,
     url: "https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/",
   }
 );
@@ -11123,6 +11123,282 @@ window.RESTAURANTS = window.RESTAURANTS || [];
           "open": {
             "day": 6,
             "time": "1600"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 256021,
+    "weekId": "wing-2026",
+    "dish": "TapTap Creole Wings",
+    "restaurant": "TapTap PDX",
+    "neighborhood": "Laurelhurst - Southeast Portland",
+    "address": "3434 NE Sandy Blvd, Portland, OR 97232",
+    "lat": 45.532292,
+    "lng": -122.6283266,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "minors": true,
+    "takeout": true,
+    "spicy": false,
+    "whatsOnIt": "Crispy chicken wings tossed in our house-made Creole sauce, made with fresh epis, garlic, peppers, and a touch of citrus.",
+    "whatTheySay": "Our gluten-free Creole Wings come straight from the flavors we grew up on in Haiti and across the Caribbean. Each wing is seasoned with our own blend of herbs and spices, fried crispy, and tossed in a house-made Creole sauce. It's a small taste of home, and it's what TapTap is all about which is bringing real Haitian flavor to every plate.",
+    "desc": "Crispy chicken wings tossed in our house-made Creole sauce, made with fresh epis, garlic, peppers, and a touch of citrus.",
+    "emoji": "🧄",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4OTQyMjExNjUwNzIyLVRhcC1UYXAuanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/taptap-creole-wings/e256021/",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
+  },
+  {
+    "id": 256031,
+    "weekId": "wing-2026",
+    "dish": "Island Fire Wings",
+    "restaurant": "Kelly's Olympian",
+    "neighborhood": "Downtown Portland",
+    "address": "426 SW Washington, Portland, OR 97204",
+    "lat": 45.5199078,
+    "lng": -122.6765491,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "minors": false,
+    "takeout": false,
+    "spicy": true,
+    "whatsOnIt": "Sauce: charred pineapple, lime juice, agave, salt\nSalsa: roasted Serrano, charred yellow onion, cilantro, lime juice, salt, black pepper",
+    "whatTheySay": "The wings themselves are sweet, tangy, and delicious by themselves. The Serrano salsa is spicy, on the side for you to decide how much or how little you want.",
+    "desc": "Sauce: charred pineapple, lime juice, agave, salt Salsa: roasted Serrano, charred yellow onion, cilantro, lime juice, salt, black pepper",
+    "emoji": "🔥",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4OTQyMjU4Mjg2NjcyOS1LZWxseXMtT2x5bXBpYW4uanBnIiwgImVkaXRzIjogeyJyZXNpemUiOiB7ImZpdCI6ICJpbnNpZGUiLCAicG9zaXRpb24iOiAiY2VudHJlIiwgIndpZHRoIjogMTIwMCwgImhlaWdodCI6IG51bGwsICJ3aXRob3V0RW5sYXJnZW1lbnQiOiBmYWxzZX0sICJyb3RhdGUiOiBudWxsfX0=",
+    "url": "https://everout.com/portland/events/island-fire-wings/e256031/",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 1:00 PM – 1:00 AM",
+        "Tuesday: 1:00 PM – 1:00 AM",
+        "Wednesday: 1:00 PM – 2:00 AM",
+        "Thursday: 1:00 PM – 2:00 AM",
+        "Friday: 1:00 PM – 2:00 AM",
+        "Saturday: 1:00 PM – 2:00 AM",
+        "Sunday: 1:00 PM – 1:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1300"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1300"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 256189,
+    "weekId": "wing-2026",
+    "dish": "Missin' Carolina",
+    "restaurant": "Delta Cafe",
+    "neighborhood": "Southeast Portland",
+    "address": "4607 SE Woodstock, Portland, OR 97206",
+    "lat": 45.4793617,
+    "lng": -122.6152403,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": true,
+    "minors": true,
+    "takeout": true,
+    "spicy": false,
+    "whatsOnIt": "Creole smoked wings:  a bold, deeply flavorful, and multi-textured culinary experience that perfectly marries deep Southern smoke with the tangy, vibrant flair of Louisiana and Carolina BBQ traditions. Other sauces available.",
+    "whatTheySay": "Growing up in the South using the taste of the Carolinas. Southern cooking tradition is a sensory timeline of a person's life, passing down a profound relationship with food, community, and land. My recipes are bringing the South/Deep South to the great PNW. Come see for yourself!",
+    "desc": "Creole smoked wings: a bold, deeply flavorful, and multi-textured culinary experience that perfectly marries deep Southern smoke with the tangy, vibrant flair of Louisiana and Carolina BBQ traditions. Other sauces available.",
+    "emoji": "🍯",
+    "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4OTUxNjU1NTU2NDg0OC1EZWx0YS1DYWZlLmpwZyIsICJlZGl0cyI6IHsicmVzaXplIjogeyJmaXQiOiAiaW5zaWRlIiwgInBvc2l0aW9uIjogImNlbnRyZSIsICJ3aWR0aCI6IDEyMDAsICJoZWlnaHQiOiBudWxsLCAid2l0aG91dEVubGFyZ2VtZW50IjogZmFsc2V9LCAicm90YXRlIjogbnVsbH19",
+    "url": "https://everout.com/portland/events/missin-carolina/e256189/",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 3:00 – 9:00 PM",
+        "Tuesday: 3:00 – 9:00 PM",
+        "Wednesday: 3:00 – 9:00 PM",
+        "Thursday: 3:00 – 11:00 PM",
+        "Friday: 12:00 – 11:00 PM",
+        "Saturday: 9:00 AM – 11:00 PM",
+        "Sunday: 9:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2300"
+          },
+          "open": {
+            "day": 4,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2300"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2300"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
           }
         }
       ]

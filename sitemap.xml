@@ -596,6 +596,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.pdxfoodweek.com/neighborhoods/laurelhurst-southeast-portland.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.pdxfoodweek.com/d/burger-2026-248616.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -3872,6 +3877,21 @@
   </url>
   <url>
     <loc>https://www.pdxfoodweek.com/d/wing-2026-255708.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/wing-2026-256021.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/wing-2026-256031.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/wing-2026-256189.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
