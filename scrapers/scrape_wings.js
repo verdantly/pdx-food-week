@@ -207,12 +207,22 @@ function parseDishPage(html, url) {
     : /honey|sweet|bbq/.test(both) ? '🍯'
     : '🍗';
 
+  // Fix for permanently closed Bunk Sandwiches Morrison location -> Bunk Bar on SE Water
+  let finalRestaurant = restaurant;
+  let finalAddress = fullAddress || streetAddress;
+  let finalStreetAddress = streetAddress;
+  if (/bunk sandwiches/i.test(restaurant) && /morrison/i.test(finalAddress)) {
+    finalRestaurant = 'Bunk Bar';
+    finalAddress = '1028 SE Water Ave., Portland, OR 97214';
+    finalStreetAddress = '1028 SE Water Ave.';
+  }
+
   return {
     dish,
-    restaurant,
+    restaurant: finalRestaurant,
     neighborhood,
-    address: fullAddress || streetAddress,
-    streetAddress,
+    address: finalAddress,
+    streetAddress: finalStreetAddress,
     type,
     vegOption,
     veganOption,
