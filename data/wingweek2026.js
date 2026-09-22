@@ -1,5 +1,5 @@
-// Portland Mercury's Wing Week 2026 — scraped 2026-09-18
-// 100 locations (skipped: 0, reused: 97, new: 3, geocode fallbacks: 0)
+// Portland Mercury's Wing Week 2026 — scraped 2026-09-22
+// 100 locations (skipped: 0, reused: 99, new: 1, geocode fallbacks: 0)
 // Source: https://everout.com/portland/events/the-portland-mercurys-wing-week-2026/e222751/
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -8743,12 +8743,12 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 255392,
     "weekId": "wing-2026",
-    "dish": "Song Charoendee",
+    "dish": "Dried Thai Green Curry",
     "restaurant": "Short Round",
     "neighborhood": "Richmond - Southeast Portland",
     "address": "3962 A SE Hawthorne, Portland, Oregon 97214",
-    "lat": 45.5118371,
-    "lng": -122.6217045,
+    "lat": 45.5137171,
+    "lng": -122.6229359,
     "type": "meat",
     "vegOption": false,
     "veganOption": false,
@@ -8761,7 +8761,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "desc": "Another year of Wing Week means we’re still serving you with our signature dry rub style!",
     "emoji": "🍗",
     "image": "https://d2sa0osf92td39.cloudfront.net/eyJidWNrZXQiOiAiZXZlcm91dC1pbWFnZXMtcHJvZHVjdGlvbiIsICJrZXkiOiAiaW1hZ2UtMTc4ODk4MjQ0MDk4MzYxOS1TaG9ydC1Sb3VuZC5qcGciLCAiZWRpdHMiOiB7InJlc2l6ZSI6IHsiZml0IjogImluc2lkZSIsICJwb3NpdGlvbiI6ICJjZW50cmUiLCAid2lkdGgiOiAxMjAwLCAiaGVpZ2h0IjogbnVsbCwgIndpdGhvdXRFbmxhcmdlbWVudCI6IGZhbHNlfSwgInJvdGF0ZSI6IG51bGx9fQ==",
-    "url": "https://everout.com/portland/events/song-charoendee/e255392/",
+    "url": "https://everout.com/portland/events/dried-thai-green-curry/e255392/",
     "isNew": true,
     "hours": {
       "openDays": [
