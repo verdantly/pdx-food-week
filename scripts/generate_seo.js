@@ -307,6 +307,215 @@ ${JSON.stringify(foodEventSchema, null, 2)}
   generatedWeekPages.push({ id: week.id, title: weekTitle, url: canonicalUrl });
 }
 
+// 3b. Generate Upcoming Food Week Landing Pages (e.g., Mac & Cheese Week)
+const upcomingFoodWeeks = context.window.UPCOMING_FOOD_WEEKS || [];
+for (const week of upcomingFoodWeeks) {
+  const weekTitle = `Portland ${week.name}`;
+  const metaDescription = `${week.description || `Get ready for Portland ${week.name} (${week.dates || '2026'})!`} Check dates, pricing, event organizer details, and updates on participating Portland restaurants & food carts.`;
+  const canonicalUrl = `https://www.pdxfoodweek.com/weeks/${week.id}.html`;
+
+  const foodEventSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FoodEvent',
+    name: week.name,
+    description: metaDescription,
+    startDate: week.startDate || '2026-11-01',
+    endDate: week.endDate || '2026-11-30',
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: {
+      '@type': 'Place',
+      name: 'Portland, Oregon',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Portland',
+        addressRegion: 'OR',
+        addressCountry: 'US'
+      }
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: week.organizer || 'The Actual Portland',
+      url: week.url || 'https://www.theactualportland.com'
+    },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'USD',
+      description: (week.pricePills && week.pricePills.join(', ')) || '$10 mac & cheese specials'
+    }
+  };
+
+  const faqSchema = (week.faqs && week.faqs.length > 0) ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: week.faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  } : null;
+
+  const faqsHtml = (week.faqs && week.faqs.length > 0) ? `
+    <section class="faq-section">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        ${week.faqs.map(faq => `
+          <div class="faq-card">
+            <h3 class="faq-question">${escapeHtml(faq.question)}</h3>
+            <p class="faq-answer">${escapeHtml(faq.answer)}</p>
+          </div>
+        `).join('\n')}
+      </div>
+    </section>
+  ` : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(weekTitle)} — Guide, Dates &amp; Participating Spots</title>
+  <meta name="description" content="${escapeHtml(metaDescription)}">
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="PDX Food Week">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${escapeHtml(weekTitle)} — Guide &amp; Participating Spots">
+  <meta property="og:description" content="${escapeHtml(metaDescription)}">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(weekTitle)}">
+  <meta name="twitter:description" content="${escapeHtml(metaDescription)}">
+  <meta name="twitter:image" content="https://www.pdxfoodweek.com/images/og-preview.png">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+${JSON.stringify(foodEventSchema, null, 2)}
+  </script>
+  ${faqSchema ? `
+  <script type="application/ld+json">
+${JSON.stringify(faqSchema, null, 2)}
+  </script>` : ''}
+
+  <style>
+    :root {
+      --primary: ${week.color || '#E69500'};
+      --ink: #1A1208;
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 24px 16px 64px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { margin-bottom: 36px; }
+    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; }
+    .hero-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--primary); color: #fff; }
+    .badge-dark { background: var(--ink); color: #fff; }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-status { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
+    .hero-desc { font-size: 17px; color: rgba(26, 18, 8, 0.85); line-height: 1.6; margin-bottom: 24px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn-main {
+      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-main:hover { opacity: 0.92; }
+    .btn-outline {
+      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+    .section-title { font-size: 24px; font-weight: 700; margin: 36px 0 18px; }
+    .info-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .info-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+    .info-card p { font-size: 15px; color: rgba(26, 18, 8, 0.8); line-height: 1.6; margin-bottom: 12px; }
+    .info-card p:last-child { margin-bottom: 0; }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .faq-question { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+    .faq-answer { font-size: 14.5px; color: rgba(26, 18, 8, 0.75); line-height: 1.55; }
+    footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="breadcrumbs">
+        <a href="../">PDX Food Week</a> &gt; <span>${escapeHtml(week.name)}</span>
+      </div>
+      <div class="hero-meta">
+        <span class="badge badge-primary">${escapeHtml(week.emoji || '🧀')} ${escapeHtml(week.organizer || 'PDX Food Week')}</span>
+        ${week.dates ? `<span class="badge badge-dark">${escapeHtml(week.dates)}</span>` : ''}
+        <span class="badge badge-status">📅 Upcoming Event</span>
+        ${week.pricePills ? week.pricePills.map(p => `<span class="badge badge-subtle">${escapeHtml(p)}</span>`).join('') : ''}
+      </div>
+      <h1 class="hero-title">${escapeHtml(weekTitle)}</h1>
+      <p class="hero-desc">
+        ${escapeHtml(week.description || `Portland ${week.name} is scheduled for ${week.dates || 'November 2026'}. Check back here for full menus, participating venues, interactive crawl maps, and dietary filter options!`)}
+      </p>
+      <div class="cta-row">
+        <a href="../" class="btn-main">
+          <span>🚀 Explore Active Food Weeks</span>
+        </a>
+        ${week.url ? `<a href="${escapeHtml(week.url)}" target="_blank" rel="noopener" class="btn-outline">Organizer Website &rarr;</a>` : ''}
+      </div>
+    </header>
+
+    <main>
+      <section class="info-card">
+        <h3>🍽️ What is Portland Mac &amp; Cheese Week?</h3>
+        <p>
+          Organized by <strong>${escapeHtml(week.organizer)}</strong>, Mac &amp; Cheese Week celebrates Portland's best comfort food. Area restaurants, carts, and brewpubs present specialty creations—ranging from classic gourmet cheddar blends and smoked gouda skillets to buffalo chicken macs, crab and lobster bakes, and innovative plant-based vegan/gluten-free variations.
+        </p>
+        <p>
+          As the event approaches, this page and the PDX Food Week interactive web app will feature the complete directory of participating restaurants, dishes, addresses, hours, and customized filters.
+        </p>
+      </section>
+
+      ${faqsHtml}
+    </main>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+    </footer>
+  </div>
+</body>
+</html>`;
+
+  const filename = `${week.id}.html`;
+  fs.writeFileSync(path.join(weeksOutputDir, filename), html, 'utf8');
+  generatedWeekPages.push({ id: week.id, title: weekTitle, url: canonicalUrl });
+}
+
 console.log(`Generated ${generatedWeekPages.length} food week landing pages in 'weeks/'.`);
 
 // 4. Generate Enhanced Dish Pages (d/<weekId>-<dishId>.html)

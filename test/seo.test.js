@@ -57,6 +57,26 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     expect(pizzaHtml).toContain('href="../?week=pizza-2026"');
   });
 
+  test('Upcoming food week placeholder landing pages are generated with FoodEvent and FAQPage JSON-LD schema', () => {
+    const weeksDir = path.join(projectRoot, 'weeks');
+    const macAndCheesePath = path.join(weeksDir, 'mac-and-cheese-2026.html');
+    expect(fs.existsSync(macAndCheesePath)).toBe(true);
+
+    const macHtml = fs.readFileSync(macAndCheesePath, 'utf8');
+    expect(macHtml).toContain('Portland Mac &amp; Cheese Week 2026');
+    expect(macHtml).toContain('"@type": "FoodEvent"');
+    expect(macHtml).toContain('"name": "Mac & Cheese Week 2026"');
+    expect(macHtml).toContain('"@type": "FAQPage"');
+    expect(macHtml).toContain('When is Portland Mac & Cheese Week 2026?');
+    expect(macHtml).toContain('The Actual Portland');
+    expect(macHtml).toContain('Upcoming Event');
+    expect(macHtml).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html');
+
+    // Verify it is also listed in sitemap.xml
+    const sitemapContent = fs.readFileSync(path.join(projectRoot, 'sitemap.xml'), 'utf8');
+    expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html</loc>');
+  });
+
   test('Enhanced dish pages contain Restaurant and MenuItem JSON-LD and deep links without instant redirects', () => {
     const sampleDishPath = path.join(projectRoot, 'd', 'pizza-2026-233600.html');
     expect(fs.existsSync(sampleDishPath)).toBe(true);

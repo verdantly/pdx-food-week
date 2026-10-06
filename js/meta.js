@@ -272,8 +272,50 @@ window.FOOD_WEEKS = [
   }
 ];
 
+window.UPCOMING_FOOD_WEEKS = [
+  {
+    id: "mac-and-cheese-2026",
+    name: "Mac & Cheese Week 2026",
+    organizer: "The Actual Portland",
+    dates: "November 2026",
+    startDate: "2026-11-01",
+    endDate: "2026-11-30",
+    pricePills: ["$10 mac & cheese specials"],
+    color: "#E69500",
+    colorDark: "#A66300",
+    colorLight: "#FDE68A",
+    colorPale: "#FFFBEB",
+    emoji: "🧀",
+    url: "https://www.theactualportland.com",
+    description: "Portland Mac & Cheese Week celebrates cheesy, comforting culinary mastery across local Portland restaurants and food carts. Participating eateries offer limited-edition craft mac & cheese creations and special pairings throughout November 2026.",
+    faqs: [
+      {
+        question: "When is Portland Mac & Cheese Week 2026?",
+        answer: "Portland Mac & Cheese Week takes place throughout November 2026 across restaurants, pubs, and food carts throughout Portland, Oregon."
+      },
+      {
+        question: "Who organizes Portland Mac & Cheese Week?",
+        answer: "Portland Mac & Cheese Week is presented by The Actual Portland (theactualportland.com), celebrating local culinary culture across the Rose City."
+      },
+      {
+        question: "How does Portland Mac & Cheese Week work?",
+        answer: "Participating restaurants and food carts feature signature mac & cheese specials—often highlighting artisan cheeses, house-made pastas, dietary accommodations (gluten-free, vegetarian, vegan options), and decadent toppings. Diners visit participating venues, order the event special, and explore Portland's vibrant food scene."
+      },
+      {
+        question: "How do I get updates when participating restaurants are announced?",
+        answer: "Bookmark PDX Food Week or install the app to get direct access to interactive crawl maps, dietary filters, and live updates as participating spots and dishes are officially revealed."
+      }
+    ]
+  }
+];
+
 window.getWeekMeta = function (weekId) {
-  return (window.FOOD_WEEKS || []).find(w => w.id === weekId);
+  return (window.FOOD_WEEKS || []).find(w => w.id === weekId) ||
+         (window.UPCOMING_FOOD_WEEKS || []).find(w => w.id === weekId);
+};
+
+window.getUpcomingWeekMeta = function (weekId) {
+  return (window.UPCOMING_FOOD_WEEKS || []).find(w => w.id === weekId);
 };
 
 window.getWeekFile = function (weekId) {
