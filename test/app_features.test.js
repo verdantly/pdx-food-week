@@ -335,6 +335,41 @@ describe("App Features: Saved Custom Order Rank Badges", () => {
     // Saturday at 3:00 AM (after overnight close) -> false
     expect(isRestaurantOpenNow(testSpot, new Date("2026-09-12T03:00:00"))).toBe(false);
   });
+
+  test("cycleThemePreference cycles through system, dark, and light sequentially", async () => {
+    const store = new Map();
+    const mockStorage = {
+      getItem: (k) => store.get(k) || null,
+      setItem: (k, v) => store.set(k, String(v)),
+      removeItem: (k) => store.delete(k),
+      clear: () => store.clear()
+    };
+    const prevStorage = global.localStorage;
+    global.localStorage = mockStorage;
+
+    try {
+      const { cycleThemePreference, setThemePreference } = await import("../js/app.js");
+      
+      // Set baseline to system
+      setThemePreference("system");
+      expect(mockStorage.getItem("pdxfw_theme")).toBe("system");
+
+      // Cycle 1: system -> dark
+      cycleThemePreference();
+      expect(mockStorage.getItem("pdxfw_theme")).toBe("dark");
+
+      // Cycle 2: dark -> light
+      cycleThemePreference();
+      expect(mockStorage.getItem("pdxfw_theme")).toBe("light");
+
+      // Cycle 3: light -> system
+      cycleThemePreference();
+      expect(mockStorage.getItem("pdxfw_theme")).toBe("system");
+    } finally {
+      if (prevStorage) global.localStorage = prevStorage;
+      else delete global.localStorage;
+    }
+  });
 });
 
 

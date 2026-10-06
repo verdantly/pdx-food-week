@@ -54,6 +54,7 @@ export function haversineDistance(lat1, lon1, lat2, lon2) {
 
 let toastTimer = null;
 export function showToast(msg) {
+  if (typeof document === 'undefined') return;
   const t = document.getElementById('toast');
   if (!t) return;
   t.textContent = msg;

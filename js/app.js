@@ -1263,14 +1263,31 @@ function initThemePreference() {
 }
 
 export function setThemePreference(pref) {
-  localStorage.setItem('pdxfw_theme', pref);
+  try {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('pdxfw_theme', pref);
+    }
+  } catch (e) { }
   applyThemePreference(pref);
   showToast(pref === 'dark' ? 'Night mode enabled 🌙' : (pref === 'light' ? 'Light mode enabled ☀️' : 'System theme matched ⚡'));
 }
 
+export function cycleThemePreference() {
+  let currentPref = 'system';
+  try {
+    if (typeof localStorage !== 'undefined') {
+      currentPref = localStorage.getItem('pdxfw_theme') || 'system';
+    }
+  } catch (e) { }
+  const nextPref = currentPref === 'system' ? 'dark' : (currentPref === 'dark' ? 'light' : 'system');
+  setThemePreference(nextPref);
+}
+
 function applyThemePreference(pref) {
+  if (typeof document === 'undefined') return;
+
   const metaTheme = document.querySelector('meta[name="theme-color"]');
-  const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isSystemDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   if (pref === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -1289,6 +1306,35 @@ function applyThemePreference(pref) {
   document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.themeVal === pref);
   });
+
+  // Update landing hero theme toggle button icon & accessible label
+  const heroToggleBtn = document.getElementById('landing-theme-toggle-btn');
+  if (heroToggleBtn) {
+    const iconEl = heroToggleBtn.querySelector('.theme-toggle-icon');
+    const labelEl = heroToggleBtn.querySelector('.theme-toggle-label');
+    let iconSvg = '';
+    let labelText = '';
+    let tooltip = '';
+
+    if (pref === 'dark') {
+      iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.3 2a10 10 0 0 0 9.7 13.7 10 10 0 1 1-13.4-13.4 9.9 9.9 0 0 0 3.7-.3z"/></svg>`;
+      labelText = 'Night';
+      tooltip = 'Current theme: Night (click to switch to Light)';
+    } else if (pref === 'light') {
+      iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+      labelText = 'Light';
+      tooltip = 'Current theme: Light (click to switch to Auto)';
+    } else {
+      iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0 0 20V2z"/><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+      labelText = 'Auto';
+      tooltip = 'Current theme: Auto (system matched; click to switch to Night)';
+    }
+
+    if (iconEl) iconEl.innerHTML = iconSvg;
+    if (labelEl) labelEl.textContent = labelText;
+    heroToggleBtn.setAttribute('title', tooltip);
+    heroToggleBtn.setAttribute('aria-label', tooltip);
+  }
 }
 
 function init() {
@@ -1930,13 +1976,18 @@ const App = {
   openResetGuestDataConfirm,
   closeResetGuestDataConfirm,
   executeResetGuestData,
-  setThemePreference
+  setThemePreference,
+  cycleThemePreference
 };
 
-window.App = App;
+if (typeof window !== 'undefined') {
+  window.App = App;
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', App.init);
-} else {
-  App.init();
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', App.init);
+    } else {
+      App.init();
+    }
+  }
 }

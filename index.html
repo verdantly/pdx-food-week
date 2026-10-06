@@ -67,7 +67,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=e4b4c56c" />
+  <link rel="stylesheet" href="css/style.css?v=7d7e4480" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -235,10 +235,18 @@
       <section class="view active" id="view-landing" role="tabpanel" aria-label="Select a Food Week">
         <div class="landing-hero">
           <div class="landing-hero-content">
-            <h1 class="landing-title">
-              <img src="web-app-manifest-192x192.png" alt="" class="landing-logo" width="36" height="36" />
-              PDX Food Week
-            </h1>
+            <div class="landing-hero-top-row">
+              <h1 class="landing-title">
+                <img src="web-app-manifest-192x192.png" alt="" class="landing-logo" width="36" height="36" />
+                PDX Food Week
+              </h1>
+              <button type="button" id="landing-theme-toggle-btn" class="landing-theme-toggle-btn" onclick="App.cycleThemePreference()" aria-label="Toggle color theme (Auto / Light / Night)" title="Theme: Auto (click to cycle)">
+                <span class="theme-toggle-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2a10 10 0 0 0 0 20V2z"/><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </span>
+                <span class="theme-toggle-label">Auto</span>
+              </button>
+            </div>
             <p class="landing-subtitle">Your unofficial companion for Portland food weeks — browse specials, save and
               share favorites, and plan crawls.</p>
             <div class="landing-search-wrap">
@@ -382,6 +390,14 @@
               <div class="landing-footer-copy-row">
                 <div class="landing-footer-copy">
                   &copy; 2026 PDX Food Week &bull; Made for Portland foodies
+                </div>
+                <div class="landing-footer-theme-selector" role="group" aria-label="Theme selection">
+                  <span class="landing-footer-theme-label">Theme:</span>
+                  <div class="landing-footer-theme-group">
+                    <button type="button" class="theme-toggle-btn" data-theme-val="system" onclick="App.setThemePreference('system')" aria-label="Auto theme">Auto</button>
+                    <button type="button" class="theme-toggle-btn" data-theme-val="light" onclick="App.setThemePreference('light')" aria-label="Light theme">☀️ Light</button>
+                    <button type="button" class="theme-toggle-btn" data-theme-val="dark" onclick="App.setThemePreference('dark')" aria-label="Night theme">🌙 Night</button>
+                  </div>
                 </div>
                 <a href="#app" class="landing-footer-back-to-top"
                   onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">
@@ -1926,8 +1942,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=e4b4c56c"></script>
-  <script type="module" src="js/app.js?v=e4b4c56c"></script>
+  <script src="js/meta.js?v=7d7e4480"></script>
+  <script type="module" src="js/app.js?v=7d7e4480"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;
