@@ -1289,18 +1289,17 @@ function applyThemePreference(pref) {
   const metaTheme = document.querySelector('meta[name="theme-color"]');
   const isSystemDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  if (pref === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    if (document.body) document.body.setAttribute('data-theme', 'dark');
-    if (metaTheme) metaTheme.setAttribute('content', '#141414');
-  } else if (pref === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    if (document.body) document.body.setAttribute('data-theme', 'light');
-    if (metaTheme) metaTheme.setAttribute('content', '#1A1208');
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-    if (document.body) document.body.removeAttribute('data-theme');
-    if (metaTheme) metaTheme.setAttribute('content', isSystemDark ? '#141414' : '#1A1208');
+  const effectiveTheme = (pref === 'dark' || (pref === 'system' && isSystemDark)) ? 'dark' : 'light';
+
+  document.documentElement.setAttribute('data-theme', effectiveTheme);
+  document.documentElement.setAttribute('data-theme-mode', pref);
+  if (document.body) {
+    document.body.setAttribute('data-theme', effectiveTheme);
+    document.body.setAttribute('data-theme-mode', pref);
+  }
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', effectiveTheme === 'dark' ? '#141414' : '#1A1208');
   }
 
   document.querySelectorAll('.theme-toggle-btn').forEach(btn => {

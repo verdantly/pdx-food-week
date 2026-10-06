@@ -734,6 +734,12 @@ body.is-landing .view-footer,
   background: var(--pizza-pale);
 }
 
+[data-theme="dark"] .dish-card.bookmarked,
+body[data-theme="dark"] .dish-card.bookmarked {
+  border-color: rgba(255, 107, 74, 0.45);
+  background: rgba(255, 107, 74, 0.12) !important;
+}
+
 .card-emoji {
   font-size: 30px;
   width: 52px;
@@ -862,26 +868,47 @@ body.is-landing .view-footer,
   color: #185FA5;
 }
 
-[data-theme="dark"] .tag-meat,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-meat { background: rgba(224, 83, 50, 0.18); color: #FFA085; border: 1px solid rgba(224, 83, 50, 0.3); } }
+[data-theme="dark"] .tag-meat {
+  background: rgba(224, 83, 50, 0.18) !important;
+  color: #FFA085 !important;
+  border: 1px solid rgba(224, 83, 50, 0.3) !important;
+}
 
-[data-theme="dark"] .tag-veg,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-veg { background: rgba(47, 99, 22, 0.22); color: #97E077; border: 1px solid rgba(47, 99, 22, 0.35); } }
+[data-theme="dark"] .tag-veg {
+  background: rgba(47, 99, 22, 0.22) !important;
+  color: #97E077 !important;
+  border: 1px solid rgba(47, 99, 22, 0.35) !important;
+}
 
-[data-theme="dark"] .tag-vegan,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-vegan { background: rgba(15, 92, 78, 0.22); color: #6FE3CF; border: 1px solid rgba(15, 92, 78, 0.35); } }
+[data-theme="dark"] .tag-vegan {
+  background: rgba(15, 92, 78, 0.22) !important;
+  color: #6FE3CF !important;
+  border: 1px solid rgba(15, 92, 78, 0.35) !important;
+}
 
-[data-theme="dark"] .tag-gf,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-gf { background: rgba(74, 58, 138, 0.22); color: #C2B6F6; border: 1px solid rgba(74, 58, 138, 0.35); } }
+[data-theme="dark"] .tag-gf {
+  background: rgba(74, 58, 138, 0.22) !important;
+  color: #C2B6F6 !important;
+  border: 1px solid rgba(74, 58, 138, 0.35) !important;
+}
 
-[data-theme="dark"] .tag-pie,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-pie { background: rgba(217, 145, 32, 0.2); color: #FCD34D; border: 1px solid rgba(217, 145, 32, 0.35); } }
+[data-theme="dark"] .tag-pie {
+  background: rgba(217, 145, 32, 0.2) !important;
+  color: #FCD34D !important;
+  border: 1px solid rgba(217, 145, 32, 0.35) !important;
+}
 
-[data-theme="dark"] .tag-slice,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-slice { background: rgba(24, 95, 165, 0.22); color: #93C5FD; border: 1px solid rgba(24, 95, 165, 0.35); } }
+[data-theme="dark"] .tag-slice {
+  background: rgba(24, 95, 165, 0.22) !important;
+  color: #93C5FD !important;
+  border: 1px solid rgba(24, 95, 165, 0.35) !important;
+}
 
-[data-theme="dark"] .tag-spicy,
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tag-spicy { background: rgba(224, 83, 50, 0.18) !important; color: #FFA085 !important; border: 1px solid rgba(224, 83, 50, 0.3) !important; } }
+[data-theme="dark"] .tag-spicy {
+  background: rgba(224, 83, 50, 0.18) !important;
+  color: #FFA085 !important;
+  border: 1px solid rgba(224, 83, 50, 0.3) !important;
+}
 
 .bookmark-btn {
   position: absolute;
