@@ -130,6 +130,16 @@ export function renderSaved(focusSelector = null) {
     }
   });
 
+  const bottomBadge = document.getElementById('bottom-saved-badge');
+  if (bottomBadge) {
+    if (totalSavedForWeek > 0) {
+      bottomBadge.textContent = totalSavedForWeek;
+      bottomBadge.style.display = 'inline-block';
+    } else {
+      bottomBadge.style.display = 'none';
+    }
+  }
+
   const hasSavedItems = totalSavedForWeek > 0;
   const savedHeader = document.querySelector('#view-saved .saved-header');
   const savedSort = document.getElementById('saved-sort-section');
@@ -278,6 +288,7 @@ export function renderSaved(focusSelector = null) {
 export function renderWeekSwitchers() {
   const switchers = [
     document.getElementById('week-switcher'),
+    document.getElementById('more-week-switcher'),
     document.getElementById('compact-week-switcher')
   ].filter(Boolean);
 

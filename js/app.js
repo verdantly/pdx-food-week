@@ -45,7 +45,9 @@ import {
   sendMagicLink, signInWithPassword, registerWithPassword, sendPasswordReset,
   handleSignOut, updateAuthUI, showAuthSubView,
   handleMagicLinkSubmit, handlePasswordLoginSubmit, handlePasswordSignupSubmit,
-  handlePasswordResetSubmit, togglePasswordVisibility
+  handlePasswordResetSubmit, togglePasswordVisibility,
+  openDeleteAccountConfirm, closeDeleteAccountConfirm, executeDeleteAccount,
+  openResetGuestDataConfirm, closeResetGuestDataConfirm, executeResetGuestData
 } from './modules/auth.js';
 import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
 
@@ -81,9 +83,7 @@ if (window.firebase) {
 }
 
 function hideCompactDropdowns() {
-  const compactMenuDropdown = document.getElementById('compact-menu-dropdown');
   const compactSearchDropdown = document.getElementById('compact-search-dropdown');
-  if (compactMenuDropdown) compactMenuDropdown.style.display = 'none';
   if (compactSearchDropdown) compactSearchDropdown.style.display = 'none';
 }
 
@@ -93,7 +93,7 @@ function switchTab(name, fromPopState = false) {
   }
   hideCompactDropdowns();
   State.activeTab = name;
-  document.querySelectorAll('.nav-tab, .compact-menu-item').forEach(el => {
+  document.querySelectorAll('.nav-tab, .bottom-nav-item').forEach(el => {
     const isActive = el.dataset.tab === name;
     el.classList.toggle('active', isActive);
     if (el.classList.contains('nav-tab')) {
@@ -984,6 +984,23 @@ function initPwaInstallPrompt() {
   updateInstallUI();
 }
 
+// ── More Options Modal ──
+export function openMoreModal() {
+  const modal = document.getElementById('more-modal-overlay');
+  if (!modal) return;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+export function closeMoreModal() {
+  const modal = document.getElementById('more-modal-overlay');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
 // ── Notification Preferences Modal ──
 export function openNotificationsModal() {
   const modal = document.getElementById('notifications-modal');
@@ -1221,8 +1238,62 @@ function setupSavedDragEvents() {
   });
 }
 
+function initThemePreference() {
+  const pref = localStorage.getItem('pdxfw_theme') || 'system';
+  applyThemePreference(pref);
+
+  if (window.matchMedia) {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', () => {
+        const currentPref = localStorage.getItem('pdxfw_theme') || 'system';
+        if (currentPref === 'system') {
+          applyThemePreference('system');
+        }
+      });
+    } else if (mediaQuery.addListener) {
+      mediaQuery.addListener(() => {
+        const currentPref = localStorage.getItem('pdxfw_theme') || 'system';
+        if (currentPref === 'system') {
+          applyThemePreference('system');
+        }
+      });
+    }
+  }
+}
+
+export function setThemePreference(pref) {
+  localStorage.setItem('pdxfw_theme', pref);
+  applyThemePreference(pref);
+  showToast(pref === 'dark' ? 'Night mode enabled 🌙' : (pref === 'light' ? 'Light mode enabled ☀️' : 'System theme matched ⚡'));
+}
+
+function applyThemePreference(pref) {
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (pref === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (document.body) document.body.setAttribute('data-theme', 'dark');
+    if (metaTheme) metaTheme.setAttribute('content', '#141414');
+  } else if (pref === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    if (document.body) document.body.setAttribute('data-theme', 'light');
+    if (metaTheme) metaTheme.setAttribute('content', '#1A1208');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    if (document.body) document.body.removeAttribute('data-theme');
+    if (metaTheme) metaTheme.setAttribute('content', isSystemDark ? '#141414' : '#1A1208');
+  }
+
+  document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeVal === pref);
+  });
+}
+
 function init() {
   loadState();
+  initThemePreference();
   initInstallPrompt();
   initAuth();
 
@@ -1375,9 +1446,7 @@ function init() {
   }
 
   const compactSearchBtn = document.getElementById('compact-search-btn');
-  const compactMenuBtn = document.getElementById('compact-menu-btn');
   const compactSearchDropdown = document.getElementById('compact-search-dropdown');
-  const compactMenuDropdown = document.getElementById('compact-menu-dropdown');
   const compactSearchInput = document.getElementById('compact-search-input');
   const compactSearchClearBtn = document.getElementById('compact-search-clear-btn');
 
@@ -1385,7 +1454,6 @@ function init() {
     compactSearchBtn.addEventListener('click', () => {
       const isHidden = compactSearchDropdown.style.display === 'none';
       compactSearchDropdown.style.display = isHidden ? 'block' : 'none';
-      compactMenuDropdown.style.display = 'none';
       if (isHidden && compactSearchInput) {
         compactSearchInput.value = (State.activeTab === 'saved') ? State.savedSearchQuery : (State.activeTab === 'map' ? State.mapSearchQuery : State.searchQuery);
         if (compactSearchClearBtn) {
@@ -1393,14 +1461,6 @@ function init() {
         }
         compactSearchInput.focus();
       }
-    });
-  }
-
-  if (compactMenuBtn) {
-    compactMenuBtn.addEventListener('click', () => {
-      const isHidden = compactMenuDropdown.style.display === 'none';
-      compactMenuDropdown.style.display = isHidden ? 'block' : 'none';
-      compactSearchDropdown.style.display = 'none';
     });
   }
 
@@ -1578,6 +1638,13 @@ function init() {
           openDetail(nextId);
         }
       }
+      return;
+    }
+
+    const moreModal = document.getElementById('more-modal-overlay');
+    if (moreModal && moreModal.classList.contains('open') && e.key === 'Escape') {
+      e.preventDefault();
+      closeMoreModal();
       return;
     }
 
@@ -1812,6 +1879,8 @@ const App = {
   setupSavedDragEvents,
   getActiveFriends,
   hideCompactDropdowns,
+  openMoreModal,
+  closeMoreModal,
   triggerInstall,
   openInstallModal,
   closeInstallModal,
@@ -1854,7 +1923,14 @@ const App = {
   toggleSheetScheduleDropdown,
   showToast,
   updateMobileFabBadge,
-  refreshMapLayout
+  refreshMapLayout,
+  openDeleteAccountConfirm,
+  closeDeleteAccountConfirm,
+  executeDeleteAccount,
+  openResetGuestDataConfirm,
+  closeResetGuestDataConfirm,
+  executeResetGuestData,
+  setThemePreference
 };
 
 window.App = App;

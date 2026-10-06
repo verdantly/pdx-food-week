@@ -21,17 +21,22 @@ export function showSaveIndicator() {
 export function setRating(id, rating) {
   const key = getDishKey(id, State.currentWeekId);
   if (!State.notes[key]) State.notes[key] = { rating: 0, note: '' };
-  State.notes[key].rating = rating;
+
+  // Toggle off to 0 if tapping the currently selected rating
+  const finalRating = (State.notes[key].rating === rating) ? 0 : rating;
+  State.notes[key].rating = finalRating;
   saveState();
   
-  const starsContainer = document.querySelector('#detail-sheet-content .rating-stars') || document.querySelector('.rating-stars');
-  if (starsContainer) {
-    const stars = starsContainer.querySelectorAll('span');
-    stars.forEach((star, index) => {
-      star.style.color = (index < rating) ? '#FFB800' : '';
-    });
+  if (typeof document !== 'undefined') {
+    const starsContainer = document.querySelector('#detail-sheet-content .rating-stars') || document.querySelector('.rating-stars');
+    if (starsContainer) {
+      const stars = starsContainer.querySelectorAll('span');
+      stars.forEach((star, index) => {
+        star.style.color = (index < finalRating) ? '#FFB800' : '';
+      });
+    }
+    showSaveIndicator();
   }
-  showSaveIndicator();
 }
 
 export function setNote(id, note) {

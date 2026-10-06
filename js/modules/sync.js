@@ -233,3 +233,24 @@ export function queueCloudSync() {
     pushLocalToCloud(State.user.uid);
   }, 1200);
 }
+
+export async function deleteCloudUserData(uid) {
+  if (syncUnsubscribe) {
+    syncUnsubscribe();
+    syncUnsubscribe = null;
+  }
+  clearTimeout(syncDebounceTimer);
+  State.syncStatus = 'idle';
+  updateSyncStatusUI();
+
+  if (!window.db) return;
+  const targetUid = uid || (State.user && State.user.uid);
+  if (!targetUid) return;
+
+  try {
+    await window.db.collection('users').doc(targetUid).delete();
+  } catch (e) {
+    console.error('Failed to delete cloud user data:', e);
+    throw e;
+  }
+}

@@ -1,7 +1,6 @@
-/* ── Authentication Module ── */
-import { State } from './state.js';
+import { State, purgeAllUserData } from './state.js';
 import { showToast, esc } from './utils.js';
-import { onUserSignedIn, onUserSignedOut } from './sync.js';
+import { onUserSignedIn, onUserSignedOut, deleteCloudUserData } from './sync.js';
 
 let authListenerAttached = false;
 
@@ -520,5 +519,84 @@ export async function handleSignOut() {
     console.error('Sign out error:', e);
     showToast('Error signing out.');
   }
+}
+
+export function openDeleteAccountConfirm() {
+  const modal = document.getElementById('delete-account-confirm-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+export function closeDeleteAccountConfirm() {
+  const modal = document.getElementById('delete-account-confirm-modal');
+  if (modal) {
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+export async function executeDeleteAccount() {
+  if (!window.firebase || !window.firebase.auth) return;
+  const user = firebase.auth().currentUser;
+  if (!user) return;
+
+  setBtnLoading('confirm-delete-account-btn', true, 'Deleting...');
+
+  try {
+    const uid = user.uid;
+    // 1. Delete Firestore user document
+    await deleteCloudUserData(uid);
+
+    // 2. Delete Firebase Auth user
+    await user.delete();
+
+    // 3. Purge all local user storage & state
+    purgeAllUserData();
+
+    // 4. Update UI
+    closeDeleteAccountConfirm();
+    closeAccountModal();
+    if (window.App && window.App.renderAll) {
+      window.App.renderAll();
+    }
+    showToast('Account and all cloud data permanently deleted.');
+  } catch (err) {
+    console.error('Account deletion error:', err);
+    if (err.code === 'auth/requires-recent-login') {
+      alert('For security reasons, deleting your account requires a recent sign-in. Please sign out, sign in again, and retry deleting your account.');
+    } else {
+      showToast('Could not delete account. Please try again or contact support.');
+    }
+  } finally {
+    setBtnLoading('confirm-delete-account-btn', false, 'Permanently Delete Account');
+  }
+}
+
+export function openResetGuestDataConfirm() {
+  const modal = document.getElementById('reset-guest-confirm-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+export function closeResetGuestDataConfirm() {
+  const modal = document.getElementById('reset-guest-confirm-modal');
+  if (modal) {
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+export function executeResetGuestData() {
+  purgeAllUserData();
+  closeResetGuestDataConfirm();
+  closeAccountModal();
+  if (window.App && window.App.renderAll) {
+    window.App.renderAll();
+  }
+  showToast('Local app data has been reset.');
 }
 

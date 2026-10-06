@@ -134,28 +134,56 @@ export function isRestaurantOpenOnDay(r, dayIndex) {
   return true;
 }
 
+function parsePeriodMinutes(timeVal, defaultMin = 0) {
+  if (timeVal === undefined || timeVal === null) return defaultMin;
+  if (typeof timeVal === 'number') return timeVal;
+  const str = String(timeVal).padStart(4, '0');
+  const h = parseInt(str.slice(0, 2), 10);
+  const m = parseInt(str.slice(2, 4), 10);
+  return (isNaN(h) ? 0 : h) * 60 + (isNaN(m) ? 0 : m);
+}
+
 export function isRestaurantOpenNow(r, now = new Date()) {
   if (!r) return true;
   const currentDay = now.getDay();
-  if (!isRestaurantOpenOnDay(r, currentDay)) return false;
+  const prevDay = (currentDay + 6) % 7;
 
   // If structured hours are available:
-  if (r.hours && Array.isArray(r.hours.periods)) {
+  if (r.hours && Array.isArray(r.hours.periods) && r.hours.periods.length > 0) {
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // Check periods that started today
     const todayPeriods = r.hours.periods.filter(p => p.open && p.open.day === currentDay);
-    if (todayPeriods.length > 0) {
-      return todayPeriods.some(p => {
-        const openMin = p.open.hour * 60 + (p.open.minute || 0);
-        let closeMin = p.close ? (p.close.hour * 60 + (p.close.minute || 0)) : 1440;
-        if (p.close && p.close.day !== currentDay) {
+    const isOpenToday = todayPeriods.some(p => {
+      const openMin = p.open.hour !== undefined ? (p.open.hour * 60 + (p.open.minute || 0)) : parsePeriodMinutes(p.open.time, 0);
+      let closeMin;
+      if (p.close) {
+        closeMin = p.close.hour !== undefined ? (p.close.hour * 60 + (p.close.minute || 0)) : parsePeriodMinutes(p.close.time, 1440);
+        if (p.close.day !== currentDay) {
           closeMin += 1440;
         }
-        return currentMinutes >= openMin && currentMinutes < closeMin;
-      });
-    }
+      } else {
+        closeMin = 1440;
+      }
+      return currentMinutes >= openMin && currentMinutes < closeMin;
+    });
+
+    if (isOpenToday) return true;
+
+    // Check periods that started yesterday and extend past midnight into today
+    const yesterdayPeriods = r.hours.periods.filter(p => p.open && p.open.day === prevDay && p.close && p.close.day === currentDay);
+    const isOpenFromYesterday = yesterdayPeriods.some(p => {
+      const closeMin = p.close.hour !== undefined ? (p.close.hour * 60 + (p.close.minute || 0)) : parsePeriodMinutes(p.close.time, 0);
+      return currentMinutes < closeMin;
+    });
+
+    if (isOpenFromYesterday) return true;
+
+    return false;
   }
 
-  return true;
+  // Fallback to day-level open check if no structured periods exist
+  return isRestaurantOpenOnDay(r, currentDay);
 }
 
 export function getRestaurantScheduleText(r) {

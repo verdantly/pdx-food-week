@@ -328,3 +328,11 @@ export function clearUserDataState() {
     localStorage.removeItem(STORAGE_KEY_CUSTOM_ORDER);
   } catch (e) { }
 }
+
+export function purgeAllUserData() {
+  clearUserDataState();
+  try {
+    localStorage.removeItem(STORAGE_KEY_GUEST_BACKUP);
+    localStorage.removeItem('pdxfw_logged_in_uid');
+  } catch (e) { }
+}

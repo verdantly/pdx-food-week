@@ -282,6 +282,59 @@ describe("App Features: Saved Custom Order Rank Badges", () => {
     State.activeTab = "browse";
     delete global.document;
   });
+
+  test("setRating sets rating and toggles back to 0 on re-tap", async () => {
+    const { setRating } = await import("../js/modules/ui.js");
+    State.currentWeekId = "pizza-2024";
+    State.notes = {};
+
+    setRating(101, 4);
+    expect(State.notes["pizza-2024_101"]?.rating).toBe(4);
+
+    // Tapping a different rating changes it
+    setRating(101, 5);
+    expect(State.notes["pizza-2024_101"]?.rating).toBe(5);
+
+    // Tapping the same rating toggles it off to 0
+    setRating(101, 5);
+    expect(State.notes["pizza-2024_101"]?.rating).toBe(0);
+
+    // Clean up
+    State.notes = {};
+  });
+
+  test("isRestaurantOpenNow correctly compares current time against structured periods", async () => {
+    const { isRestaurantOpenNow } = await import("../js/modules/utils.js");
+    const testSpot = {
+      restaurant: "Burger Spot",
+      hours: {
+        periods: [
+          // Open Tuesday 11:30 AM (1130) to 10:00 PM (2200)
+          {
+            open: { day: 2, time: "1130" },
+            close: { day: 2, time: "2200" }
+          },
+          // Open Friday 4:00 PM (1600) to Saturday 2:00 AM (0200)
+          {
+            open: { day: 5, time: "1600" },
+            close: { day: 6, time: "0200" }
+          }
+        ]
+      }
+    };
+
+    // Tuesday at 10:00 AM (before open) -> false
+    expect(isRestaurantOpenNow(testSpot, new Date("2026-09-08T10:00:00"))).toBe(false);
+    // Tuesday at 12:30 PM (open) -> true
+    expect(isRestaurantOpenNow(testSpot, new Date("2026-09-08T12:30:00"))).toBe(true);
+    // Tuesday at 10:15 PM (after close) -> false
+    expect(isRestaurantOpenNow(testSpot, new Date("2026-09-08T22:15:00"))).toBe(false);
+
+    // Saturday at 1:00 AM (overnight span from Friday) -> true
+    expect(isRestaurantOpenNow(testSpot, new Date("2026-09-12T01:00:00"))).toBe(true);
+    // Saturday at 3:00 AM (after overnight close) -> false
+    expect(isRestaurantOpenNow(testSpot, new Date("2026-09-12T03:00:00"))).toBe(false);
+  });
 });
 
 

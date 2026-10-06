@@ -101,7 +101,7 @@ describe("Food Weeks Registry & Data Integrity", () => {
   test("index.html contains the week-switcher select elements ready for dynamic hydration", () => {
     const html = fs.readFileSync(path.join(projectRoot, "index.html"), "utf8");
     expect(html.includes('id="week-switcher"')).toBe(true);
-    expect(html.includes('id="compact-week-switcher"')).toBe(true);
+    expect(html.includes('id="more-week-switcher"')).toBe(true);
   });
 
   test("Loading all week datasets sequentially into a shared window preserves items without ID collision drops", () => {

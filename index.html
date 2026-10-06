@@ -11,6 +11,21 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="apple-mobile-web-app-title" content="PDX Food Week" />
 
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('pdxfw_theme') || 'system';
+        if (t === 'dark' || (t === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          var metaTheme = document.querySelector('meta[name="theme-color"]');
+          if (metaTheme) metaTheme.setAttribute('content', '#141414');
+        } else if (t === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
@@ -52,7 +67,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=28bd1e39" />
+  <link rel="stylesheet" href="css/style.css?v=e4b4c56c" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -83,12 +98,10 @@
               <line x1="10.5" y1="10.5" x2="14.5" y2="14.5" />
             </svg>
           </button>
-          <button id="compact-menu-btn" class="compact-icon-btn" aria-label="Toggle Menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              width="24" height="24">
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="18" x2="21" y2="18" />
+          <button id="compact-account-btn" class="compact-icon-btn user-avatar-btn" onclick="App.openAccountModal()" aria-label="Account & Sync" title="Account & Sync">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
             </svg>
           </button>
         </div>
@@ -110,63 +123,6 @@
               <path d="M18 6L6 18M6 6l12 12" />
             </svg>
           </button>
-        </div>
-      </div>
-
-      <div id="compact-menu-dropdown" class="compact-dropdown" style="display: none;">
-        <div class="compact-menu-list">
-          <button class="compact-menu-item" data-tab="browse" onclick="App.switchTab('browse')">Browse</button>
-          <button class="compact-menu-item" data-tab="swipe" onclick="App.switchTab('swipe')">Swipe</button>
-          <button class="compact-menu-item" data-tab="saved" onclick="App.switchTab('saved')">Saved</button>
-          <button class="compact-menu-item" data-tab="share" onclick="App.switchTab('share')">Share</button>
-          <button class="compact-menu-item" data-tab="map" onclick="App.switchTab('map')">Map</button>
-          <button class="compact-menu-item"
-            onclick="App.openNotificationsModal(); App.hideCompactDropdowns();">Notifications</button>
-          <button class="compact-menu-item compact-menu-item-account"
-            onclick="App.openAccountModal(); App.hideCompactDropdowns();">
-            <span class="menu-avatar-inline user-avatar-btn" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </span>
-            <span class="auth-logged-out">Sign In / Sync</span>
-            <span class="auth-logged-in" style="display:none;">My Account</span>
-          </button>
-          <div
-            style="padding: 4px 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 8px; display: flex; justify-content: flex-end;">
-            <select class="week-switcher-select" id="compact-week-switcher"
-              onchange="App.switchWeek(this.value); this.selectedIndex = 0;" aria-label="Switch food week"
-              style="margin-top: 12px; background-color: rgba(255, 255, 255, 0.1); color: var(--cream); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 16px; padding: 12px 32px 12px 16px; width: 100%;">
-              <option value="" disabled selected hidden style="color: #1a1816; background: #fff;">Select food week
-              </option>
-              <option value="wing-2026" style="color: #1a1816; background: #fff;">🍗 Wing Week</option>
-              <option value="fried-chicken-2026" style="color: #1a1816; background: #fff;">🐔 Fried Chicken Week
-              </option>
-              <option value="burger-2026" style="color: #1a1816; background: #fff;">🍔 Burger Week</option>
-              <option value="salad-2026" style="color: #1a1816; background: #fff;">🥗 Salad Week</option>
-              <option value="slushie-2026" style="color: #1a1816; background: #fff;">🧊 Summer of Slushies</option>
-              <option value="nacho-2026" style="color: #1a1816; background: #fff;">🧀 Nacho Week</option>
-              <option value="taco-2026" style="color: #1a1816; background: #fff;">🌮 Taco Week</option>
-              <option value="highball-2026" style="color: #1a1816; background: #fff;">🥃 Highball Week</option>
-              <option value="pizza-2026" style="color: #1a1816; background: #fff;">🍕 Pizza Week</option>
-            </select>
-          </div>
-          <div class="compact-menu-footer">
-            <div class="compact-footer-links">
-              <a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;•&nbsp;
-              <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a>
-            </div>
-            <div class="compact-footer-meta">
-              PDX Food Week<br>
-              Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual
-                Portland</a>.<br>
-              Not affiliated with event organizers.<br>
-              Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a
-                href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -684,6 +640,17 @@
                 </svg>
                 <span>Plan Crawl</span>
               </button>
+              <button class="btn saved-action-btn saved-btn-secondary" id="saved-share-tab-btn"
+                onclick="App.switchTab('share')" title="Share your list and see friends' spots">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span>Share &amp; Friends</span>
+              </button>
               <!--               <button class="btn saved-action-btn saved-btn-primary" id="saved-rank-mode-btn" onclick="App.toggleSavedRankingMode()" title="Rank your top 5 favorite spots">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -819,7 +786,7 @@
         <div class="share-panel">
           <div class="share-section">
             <h3 style="margin-bottom: 6px;">Share your list</h3>
-            <p style="margin-bottom: 12px; font-size: 14px; color: rgba(255,255,255,0.8);">Generate a magic link to send
+            <p style="margin-bottom: 12px; font-size: 14px; color: var(--ink-70);">Generate a magic link to send
               to friends so they can easily import your saved spots.</p>
             <p style="margin-bottom: 16px; font-size: 12px; color: var(--ink-60);">
               <em>Privacy Note: Your shared list is anonymous and contains no personal information. Providing a name is
@@ -828,7 +795,7 @@
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <input id="my-name-input" type="text" placeholder="Your Name (Optional)" autocomplete="off"
                 spellcheck="false" aria-label="Your Name"
-                style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1px solid var(--ink-60); background: rgba(255,255,255,0.05); color: #fff; padding: 10px 14px; border-radius: var(--radius-sm);" />
+                style="font-family: var(--font-body); font-size: 14px; width: 100%; border: 1.5px solid var(--border); background: var(--card-bg); color: var(--ink); padding: 10px 14px; border-radius: var(--radius-sm);" />
               <button class="btn btn-primary" id="copy-btn" onclick="App.generateShareLink()" style="margin-bottom: 0;">
                 Generate Magic Link
               </button>
@@ -845,7 +812,7 @@
                       style="display: none; background: var(--pizza); color: #fff;"
                       onclick="App.shareNative()">Share</button>
                   </div>
-                  <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">Tap to copy. Friends open
+                  <p style="margin: 4px 0 0; font-size: 11px; color: var(--ink-60);">Tap to copy. Friends open
                     this to automatically import your list.</p>
                 </div>
 
@@ -857,16 +824,16 @@
                     <button id="copy-manual-btn" class="btn" aria-label="Copy Backup Code"
                       onclick="App.copyTextFromElement('manual-code-display', 'copy-manual-btn')">Copy</button>
                   </div>
-                  <p style="margin: 4px 0 0; font-size: 11px; color: rgba(255,255,255,0.5);">A static copy of your list.
+                  <p style="margin: 4px 0 0; font-size: 11px; color: var(--ink-60);">A static copy of your list.
                     Friends can paste this in the field below.</p>
                 </div>
               </div>
             </div>
           </div>
-          <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.15); margin: 24px 0;">
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px 0;">
           <div class="share-section">
             <h3 style="margin-bottom: 6px;">Add your friends' lists</h3>
-            <p style="margin-bottom: 16px; font-size: 14px; color: rgba(255,255,255,0.8);">If your friend sends you a
+            <p style="margin-bottom: 16px; font-size: 14px; color: var(--ink-70);">If your friend sends you a
               Magic Link, just tap it to import! Or, paste the link here.</p>
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <div class="paste-row">
@@ -1350,10 +1317,136 @@
             </div>
           </div>
 
-          <button type="button" class="btn-install-primary" onclick="App.closeInstallModal()"
-            style="background: var(--ink); color: #fff; box-shadow: none;">
+          <button type="button" class="btn-install-primary" onclick="App.closeInstallModal()">
             Got It
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── More Options Modal ── -->
+  <div id="more-modal-overlay" class="filter-drawer-overlay" onclick="App.closeMoreModal()" role="dialog"
+    aria-modal="true" aria-hidden="true">
+    <div class="filter-drawer modal-sheet-card more-modal-card" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title">More Options</h3>
+        <button class="drawer-close" onclick="App.closeMoreModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body-scroll more-modal-body" style="padding: 0 20px 24px;">
+        <!-- Food Week Switcher Section -->
+        <div class="more-section">
+          <div class="more-section-header">
+            <div>
+              <div class="more-section-title">Food Week</div>
+              <div class="more-section-desc">Switch between Portland food events</div>
+            </div>
+          </div>
+          <select class="week-switcher-select" id="more-week-switcher"
+            onchange="App.switchWeek(this.value); this.selectedIndex = 0; App.closeMoreModal();" aria-label="Switch food week"
+            style="width: 100%; margin-top: 10px; padding: 10px 32px 10px 14px; font-size: 14px; border-radius: 10px; background-color: var(--card-bg); color: var(--ink); border: 1.5px solid var(--border);">
+            <option value="" disabled selected hidden>Select food week</option>
+          </select>
+        </div>
+
+        <!-- Quick Action Nav Items Section -->
+        <div class="more-section more-menu-list">
+          <button type="button" class="more-menu-row" onclick="App.closeMoreModal(); App.switchTab('share');">
+            <div class="more-menu-row-icon" style="background: rgba(40, 106, 95, 0.12); color: var(--teal);">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div class="more-menu-row-info">
+              <span class="more-menu-row-title">Friends &amp; Shared Lists</span>
+              <span class="more-menu-row-desc">Import friends' lists and compare spots</span>
+            </div>
+            <svg class="more-menu-row-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+
+          <button type="button" class="more-menu-row" onclick="App.closeMoreModal(); App.openNotificationsModal();">
+            <div class="more-menu-row-icon" style="background: rgba(232, 91, 56, 0.12); color: var(--pizza);">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </div>
+            <div class="more-menu-row-info">
+              <span class="more-menu-row-title">Notifications</span>
+              <span class="more-menu-row-desc">Week start alerts &amp; menu drops</span>
+            </div>
+            <svg class="more-menu-row-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+
+          <button type="button" class="more-menu-row" onclick="App.closeMoreModal(); App.openAccountModal();">
+            <div class="more-menu-row-icon user-avatar-btn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <div class="more-menu-row-info">
+              <span class="more-menu-row-title auth-logged-out">Account &amp; Cloud Sync</span>
+              <span class="more-menu-row-title auth-logged-in" style="display: none;">My Account</span>
+              <span class="more-menu-row-desc auth-logged-out">Sign in to sync your bookmarks</span>
+              <span class="more-menu-row-desc auth-logged-in" style="display: none;">Cloud sync and account settings</span>
+            </div>
+            <svg class="more-menu-row-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Appearance (Theme) Section -->
+        <div class="more-section">
+          <div class="more-section-header">
+            <div>
+              <div class="more-section-title">Appearance</div>
+              <div class="more-section-desc">Choose your preferred color theme</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px;">
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="system" onclick="App.setThemePreference('system')" style="flex: 1; padding: 9px 6px; font-size: 13px;">Auto</button>
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="light" onclick="App.setThemePreference('light')" style="flex: 1; padding: 9px 6px; font-size: 13px;">☀️ Light</button>
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="dark" onclick="App.setThemePreference('dark')" style="flex: 1; padding: 9px 6px; font-size: 13px;">🌙 Night</button>
+          </div>
+        </div>
+
+        <!-- App Links & Footer Section -->
+        <div class="more-section more-footer-section">
+          <button type="button" class="install-app-btn" onclick="App.closeMoreModal(); App.triggerPwaInstall(event);">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>Install App on Device</span>
+          </button>
+
+          <div class="more-footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <span>•</span>
+            <a href="terms.html">Terms of Use</a>
+          </div>
+
+          <div class="more-footer-meta">
+            PDX Food Week<br>
+            Data from <a href="https://www.theactualportland.com/locations" target="_blank" rel="noopener">The Actual Portland</a>.<br>
+            Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1377,258 +1470,323 @@
       </div>
 
       <!-- Logged-in View -->
-      <div class="auth-logged-in" style="display: none; padding: 0 24px 24px;">
-        <div class="user-profile-header" style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
-          <div class="modal-avatar-preview"
-            style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; background: var(--pizza); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700;">
-            👤
-          </div>
-          <div>
-            <div class="auth-user-name"
-              style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink);">Food
-              Explorer</div>
-            <div class="auth-user-email" style="font-size: 13px; color: var(--ink-60);"></div>
-            <div class="cloud-sync-status" style="font-size: 12px; font-weight: 600; color: #2e7d32; margin-top: 2px;">
-              Cloud Synced ✓</div>
+      <div class="auth-logged-in modal-body-scroll account-modal-body" style="display: none; padding: 0 20px 24px;">
+        <!-- User Profile Header Section -->
+        <div class="account-section" style="padding-top: 0;">
+          <div class="user-profile-header" style="display: flex; align-items: center; gap: 14px;">
+            <div class="modal-avatar-preview"
+              style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; background: var(--pizza); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; flex-shrink: 0;">
+              👤
+            </div>
+            <div>
+              <div class="auth-user-name"
+                style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink);">Food
+                Explorer</div>
+              <div class="auth-user-email" style="font-size: 13px; color: var(--ink-60);"></div>
+              <div class="cloud-sync-status" style="font-size: 12px; font-weight: 600; color: #2e7d32; margin-top: 2px;">
+                Cloud Synced ✓</div>
+            </div>
           </div>
         </div>
 
-        <div
-          style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin-bottom: 20px;">
-          <div
-            style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--ink-50); margin-bottom: 8px;">
-            Sync Details</div>
-          <div style="font-size: 13px; color: var(--ink-80); line-height: 1.6;">
+        <!-- Sync Details Section -->
+        <div class="account-section">
+          <div class="account-section-header">
+            <div class="account-section-title">Sync Details</div>
+          </div>
+          <p class="account-section-desc" style="margin-bottom: 14px;">
             Your saved spots, ratings, personal notes, and crawl plans automatically sync across all your devices.
+          </p>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-secondary" onclick="App.pushLocalToCloud(); App.showToast('Synced with cloud! ✓');"
+              style="flex: 1; margin: 0; padding: 10px 14px; font-size: 13.5px; font-weight: 600;">Sync Now</button>
+            <button class="btn btn-secondary" onclick="App.handleSignOut()"
+              style="flex: 1; margin: 0; padding: 10px 14px; font-size: 13.5px; font-weight: 600;">Sign Out</button>
           </div>
         </div>
 
-        <div style="display: flex; gap: 10px;">
-          <button class="btn btn-secondary" onclick="App.pushLocalToCloud(); App.showToast('Synced with cloud! ✓');"
-            style="flex: 1; margin: 0; padding: 12px;">Sync Now</button>
-          <button class="btn btn-secondary" onclick="App.handleSignOut()"
-            style="flex: 1; margin: 0; padding: 12px; color: #c62828; border-color: rgba(198, 40, 40, 0.3);">Sign
-            Out</button>
+        <!-- Appearance (Theme) Section -->
+        <div class="account-section">
+          <div class="account-section-header">
+            <div>
+              <div class="account-section-title">Appearance</div>
+              <div class="more-section-desc">Choose your preferred color theme</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="system" onclick="App.setThemePreference('system')" style="flex: 1; padding: 9px 6px; font-size: 13px;">Auto</button>
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="light" onclick="App.setThemePreference('light')" style="flex: 1; padding: 9px 6px; font-size: 13px;">☀️ Light</button>
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="dark" onclick="App.setThemePreference('dark')" style="flex: 1; padding: 9px 6px; font-size: 13px;">🌙 Night</button>
+          </div>
+        </div>
+
+        <!-- Danger Zone Section -->
+        <div class="account-section" style="padding-bottom: 0;">
+          <div class="account-section-header">
+            <div class="account-section-title" style="color: #c62828;">Danger Zone</div>
+          </div>
+          <p class="account-section-desc" style="margin-bottom: 12px;">
+            Permanently delete your account, your saved dishes, crawl itineraries, and cloud notes. This cannot be undone.
+          </p>
+          <button type="button" class="btn btn-secondary" onclick="App.openDeleteAccountConfirm()"
+            style="width: 100%; margin: 0; padding: 10px; color: #c62828; border-color: rgba(198, 40, 40, 0.4); font-size: 13.5px; font-weight: 600;">
+            Delete Account &amp; Cloud Data
+          </button>
         </div>
       </div>
 
       <!-- Logged-out View -->
-      <div class="auth-logged-out" style="padding: 0 24px 24px;">
-        <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 20px;">
-          Sign in to automatically sync your saved dishes, star ratings, notes, and crawl itineraries across all your
-          devices.
-        </p>
+      <div class="auth-logged-out modal-body-scroll account-modal-body" style="padding: 0 20px 24px;">
+        <!-- Intro Hero Section -->
+        <div class="account-section" style="padding-top: 0;">
+          <p class="account-section-desc" style="font-size: 13.5px; line-height: 1.55; margin-bottom: 16px;">
+            Sign in to automatically sync your saved dishes, star ratings, notes, and crawl itineraries across all your devices.
+          </p>
 
-        <!-- Sub-view: Main / Magic Link -->
-        <div id="auth-main-view">
-          <!-- 1-Click Google Sign In -->
-          <button class="btn-google-auth" onclick="App.signInWithGoogle()"
-            style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1.5px solid var(--border); background: #fff; color: #3c4043; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-              <path fill="#4285F4"
-                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-              <path fill="#34A853"
-                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-              <path fill="#FBBC05"
-                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
-              <path fill="#EA4335"
-                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
-            </svg>
-            Continue with Google
-          </button>
+          <!-- Sub-view: Main / Magic Link -->
+          <div id="auth-main-view">
+            <!-- 1-Click Google Sign In -->
+            <button class="btn-google-auth" onclick="App.signInWithGoogle()"
+              style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; border-radius: 12px; border: 1.5px solid var(--border); background: #fff; color: #3c4043; font-size: 15px; font-weight: 600; cursor: pointer; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                <path fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                <path fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+              </svg>
+              Continue with Google
+            </button>
 
-          <div
-            style="display: flex; align-items: center; text-align: center; margin: 16px 0; color: var(--ink-40); font-size: 12px;"
-            aria-hidden="true">
-            <div style="flex: 1; border-bottom: 1px solid var(--border);"></div>
-            <span style="padding: 0 10px; text-transform: uppercase; letter-spacing: 0.05em;">or email</span>
-            <div style="flex: 1; border-bottom: 1px solid var(--border);"></div>
+            <div
+              style="display: flex; align-items: center; text-align: center; margin: 14px 0; color: var(--ink-40); font-size: 12px;"
+              aria-hidden="true">
+              <div style="flex: 1; border-bottom: 1px solid var(--border);"></div>
+              <span style="padding: 0 10px; text-transform: uppercase; letter-spacing: 0.05em;">or email</span>
+              <div style="flex: 1; border-bottom: 1px solid var(--border);"></div>
+            </div>
+
+            <div id="auth-main-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
+
+            <form id="magic-link-form" onsubmit="App.handleMagicLinkSubmit(event); return false;" novalidate>
+              <label for="auth-email-input" class="auth-form-label">Email address</label>
+              <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <input type="email" id="auth-email-input" class="auth-input" placeholder="you@example.com"
+                  autocomplete="email" required />
+                <button type="submit" id="magic-link-submit-btn" class="btn btn-primary auth-submit-btn"
+                  style="margin: 0; padding: 12px 18px; border-radius: 10px; white-space: nowrap;">
+                  Send Link ✉️
+                </button>
+              </div>
+              <p class="auth-form-hint">
+                We’ll email you a passwordless sign-in link. No password needed!
+              </p>
+            </form>
+
+            <div style="display: flex; justify-content: center; gap: 16px; font-size: 13px; padding-top: 6px;">
+              <button type="button" class="btn-link" onclick="App.showAuthSubView('login', event)"
+                style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Log
+                in with password</button>
+              <span style="color: var(--ink-30);" aria-hidden="true">•</span>
+              <button type="button" class="btn-link" onclick="App.showAuthSubView('signup', event)"
+                style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Create
+                an account</button>
+            </div>
           </div>
 
-          <div id="auth-main-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
+          <!-- Sub-view: Log In with Password -->
+          <div id="auth-login-view" style="display: none;">
+            <h4
+              style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 14px;">
+              Log In</h4>
 
-          <form id="magic-link-form" onsubmit="App.handleMagicLinkSubmit(event); return false;" novalidate>
-            <label for="auth-email-input" class="auth-form-label">Email address</label>
-            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-              <input type="email" id="auth-email-input" class="auth-input" placeholder="you@example.com"
-                autocomplete="email" required />
-              <button type="submit" id="magic-link-submit-btn" class="btn btn-primary auth-submit-btn"
-                style="margin: 0; padding: 12px 18px; border-radius: 10px; white-space: nowrap;">
-                Send Link ✉️
+            <div id="auth-login-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
+
+            <form id="login-form" onsubmit="App.handlePasswordLoginSubmit(event); return false;" novalidate>
+              <label for="login-email-input" class="auth-form-label">Email address</label>
+              <input type="email" id="login-email-input" class="auth-input" placeholder="you@example.com"
+                autocomplete="email" required style="margin-bottom: 12px;" />
+
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label for="login-password-input" class="auth-form-label" style="margin-bottom: 0;">Password</label>
+                <button type="button" onclick="App.showAuthSubView('forgot', event)"
+                  style="background: none; border: none; padding: 0; font-size: 12px; color: var(--pizza); cursor: pointer; font-weight: 500;">Forgot
+                  password?</button>
+              </div>
+              <div class="auth-input-wrap">
+                <input type="password" id="login-password-input" class="auth-input" placeholder="Enter your password"
+                  autocomplete="current-password" required />
+                <button type="button" class="password-toggle-btn"
+                  onclick="App.togglePasswordVisibility('login-password-input', this)" aria-label="Show password">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+
+              <button type="submit" id="login-submit-btn" class="btn btn-primary auth-submit-btn"
+                style="width: 100%; margin: 14px 0; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600;">
+                Log In
               </button>
+            </form>
+
+            <div style="text-align: center; font-size: 13px; color: var(--ink-70);">
+              Don't have an account? <button type="button" onclick="App.showAuthSubView('signup', event)"
+                style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Sign
+                up</button>
+              <div style="margin-top: 10px;">
+                <button type="button" onclick="App.showAuthSubView('main', event)"
+                  style="background: none; border: none; padding: 0; color: var(--ink-70); cursor: pointer; font-size: 12px;">←
+                  Back to other sign in options</button>
+              </div>
             </div>
-            <p class="auth-form-hint">
-              We’ll email you a passwordless sign-in link. No password needed!
+          </div>
+
+          <!-- Sub-view: Sign Up with Password -->
+          <div id="auth-signup-view" style="display: none;">
+            <h4
+              style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 14px;">
+              Create an Account</h4>
+
+            <div id="auth-signup-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
+
+            <form id="signup-form" onsubmit="App.handlePasswordSignupSubmit(event); return false;" novalidate>
+              <label for="signup-email-input" class="auth-form-label">Email address</label>
+              <input type="email" id="signup-email-input" class="auth-input" placeholder="you@example.com"
+                autocomplete="email" required style="margin-bottom: 12px;" />
+
+              <label for="signup-password-input" class="auth-form-label">Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="signup-password-input" class="auth-input" placeholder="Min. 6 characters"
+                  autocomplete="new-password" required minlength="6" />
+                <button type="button" class="password-toggle-btn"
+                  onclick="App.togglePasswordVisibility('signup-password-input', this)" aria-label="Show password">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+
+              <label for="signup-confirm-password-input" class="auth-form-label">Confirm Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="signup-confirm-password-input" class="auth-input"
+                  placeholder="Re-enter your password" autocomplete="new-password" required minlength="6" />
+                <button type="button" class="password-toggle-btn"
+                  onclick="App.togglePasswordVisibility('signup-confirm-password-input', this)"
+                  aria-label="Show confirm password">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+
+              <button type="submit" id="signup-submit-btn" class="btn btn-primary auth-submit-btn"
+                style="width: 100%; margin: 14px 0; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600;">
+                Create Account
+              </button>
+            </form>
+
+            <div style="text-align: center; font-size: 13px; color: var(--ink-70);">
+              Already have an account? <button type="button" onclick="App.showAuthSubView('login', event)"
+                style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Log
+                in</button>
+              <div style="margin-top: 10px;">
+                <button type="button" onclick="App.showAuthSubView('main', event)"
+                  style="background: none; border: none; padding: 0; color: var(--ink-70); cursor: pointer; font-size: 12px;">←
+                  Back to other sign in options</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub-view: Forgot Password -->
+          <div id="auth-forgot-view" style="display: none;">
+            <h4
+              style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 8px;">
+              Reset Password</h4>
+            <p style="font-size: 13px; color: var(--ink-70); line-height: 1.5; margin-bottom: 14px;">
+              Enter your email address and we’ll send you a password reset link.
             </p>
-          </form>
 
-          <div style="display: flex; justify-content: center; gap: 16px; font-size: 13px; padding-top: 6px;">
-            <button type="button" class="btn-link" onclick="App.showAuthSubView('login', event)"
-              style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Log
-              in with password</button>
-            <span style="color: var(--ink-30);" aria-hidden="true">•</span>
-            <button type="button" class="btn-link" onclick="App.showAuthSubView('signup', event)"
-              style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Create
-              an account</button>
-          </div>
-        </div>
+            <div id="auth-forgot-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
 
-        <!-- Sub-view: Log In with Password -->
-        <div id="auth-login-view" style="display: none;">
-          <h4
-            style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 14px;">
-            Log In</h4>
+            <form id="forgot-form" onsubmit="App.handlePasswordResetSubmit(event); return false;" novalidate>
+              <label for="forgot-email-input" class="auth-form-label">Email address</label>
+              <input type="email" id="forgot-email-input" class="auth-input" placeholder="you@example.com"
+                autocomplete="email" required style="margin-bottom: 16px;" />
 
-          <div id="auth-login-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
-
-          <form id="login-form" onsubmit="App.handlePasswordLoginSubmit(event); return false;" novalidate>
-            <label for="login-email-input" class="auth-form-label">Email address</label>
-            <input type="email" id="login-email-input" class="auth-input" placeholder="you@example.com"
-              autocomplete="email" required style="margin-bottom: 12px;" />
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <label for="login-password-input" class="auth-form-label" style="margin-bottom: 0;">Password</label>
-              <button type="button" onclick="App.showAuthSubView('forgot', event)"
-                style="background: none; border: none; padding: 0; font-size: 12px; color: var(--pizza); cursor: pointer; font-weight: 500;">Forgot
-                password?</button>
-            </div>
-            <div class="auth-input-wrap">
-              <input type="password" id="login-password-input" class="auth-input" placeholder="Enter your password"
-                autocomplete="current-password" required />
-              <button type="button" class="password-toggle-btn"
-                onclick="App.togglePasswordVisibility('login-password-input', this)" aria-label="Show password">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
+              <button type="submit" id="forgot-submit-btn" class="btn btn-primary auth-submit-btn"
+                style="width: 100%; margin: 0 0 14px; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600;">
+                Send Reset Link
               </button>
-            </div>
+            </form>
 
-            <button type="submit" id="login-submit-btn" class="btn btn-primary auth-submit-btn"
-              style="width: 100%; margin: 14px 0; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600;">
-              Log In
-            </button>
-          </form>
-
-          <div style="text-align: center; font-size: 13px; color: var(--ink-70);">
-            Don't have an account? <button type="button" onclick="App.showAuthSubView('signup', event)"
-              style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Sign
-              up</button>
-            <div style="margin-top: 10px;">
-              <button type="button" onclick="App.showAuthSubView('main', event)"
-                style="background: none; border: none; padding: 0; color: var(--ink-70); cursor: pointer; font-size: 12px;">←
-                Back to other sign in options</button>
+            <div style="text-align: center; font-size: 13px;">
+              <button type="button" onclick="App.showAuthSubView('login', event)"
+                style="background: none; border: none; padding: 0; color: var(--ink-70); cursor: pointer; font-size: 13px;">←
+                Back to log in</button>
             </div>
+          </div>
+
+          <!-- Sub-view: Magic Link Sent Confirmation -->
+          <div id="magic-link-sent-view" style="display: none; text-align: center; padding: 16px 0;">
+            <div style="font-size: 38px; margin-bottom: 10px;" aria-hidden="true">✉️</div>
+            <div
+              style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">
+              Check your email</div>
+            <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 16px;">
+              We sent a sign-in link to <strong id="magic-link-sent-email"></strong>. Tap the link in your email to sign
+              in.
+            </p>
+            <button class="btn btn-secondary" onclick="App.showAuthSubView('main')"
+              style="padding: 8px 16px;">Back</button>
           </div>
         </div>
 
-        <!-- Sub-view: Sign Up with Password -->
-        <div id="auth-signup-view" style="display: none;">
-          <h4
-            style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 14px;">
-            Create an Account</h4>
-
-          <div id="auth-signup-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
-
-          <form id="signup-form" onsubmit="App.handlePasswordSignupSubmit(event); return false;" novalidate>
-            <label for="signup-email-input" class="auth-form-label">Email address</label>
-            <input type="email" id="signup-email-input" class="auth-input" placeholder="you@example.com"
-              autocomplete="email" required style="margin-bottom: 12px;" />
-
-            <label for="signup-password-input" class="auth-form-label">Password</label>
-            <div class="auth-input-wrap">
-              <input type="password" id="signup-password-input" class="auth-input" placeholder="Min. 6 characters"
-                autocomplete="new-password" required minlength="6" />
-              <button type="button" class="password-toggle-btn"
-                onclick="App.togglePasswordVisibility('signup-password-input', this)" aria-label="Show password">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              </button>
+        <!-- Appearance (Theme) Section -->
+        <div class="account-section">
+          <div class="account-section-header">
+            <div>
+              <div class="account-section-title">Appearance</div>
+              <div class="more-section-desc">Choose your preferred color theme</div>
             </div>
-
-            <label for="signup-confirm-password-input" class="auth-form-label">Confirm Password</label>
-            <div class="auth-input-wrap">
-              <input type="password" id="signup-confirm-password-input" class="auth-input"
-                placeholder="Re-enter your password" autocomplete="new-password" required minlength="6" />
-              <button type="button" class="password-toggle-btn"
-                onclick="App.togglePasswordVisibility('signup-confirm-password-input', this)"
-                aria-label="Show confirm password">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                  <circle cx="12" cy="12" r="3" />
-                </svg>
-              </button>
-            </div>
-
-            <button type="submit" id="signup-submit-btn" class="btn btn-primary auth-submit-btn"
-              style="width: 100%; margin: 14px 0; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600;">
-              Create Account
-            </button>
-          </form>
-
-          <div style="text-align: center; font-size: 13px; color: var(--ink-70);">
-            Already have an account? <button type="button" onclick="App.showAuthSubView('login', event)"
-              style="background: none; border: none; padding: 0; color: var(--pizza); font-weight: 600; cursor: pointer; font-size: 13px;">Log
-              in</button>
-            <div style="margin-top: 10px;">
-              <button type="button" onclick="App.showAuthSubView('main', event)"
-                style="background: none; border: none; padding: 0; color: var(--ink-70); cursor: pointer; font-size: 12px;">←
-                Back to other sign in options</button>
-            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="system" onclick="App.setThemePreference('system')" style="flex: 1; padding: 9px 6px; font-size: 13px;">Auto</button>
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="light" onclick="App.setThemePreference('light')" style="flex: 1; padding: 9px 6px; font-size: 13px;">☀️ Light</button>
+            <button type="button" class="btn btn-secondary theme-toggle-btn" data-theme-val="dark" onclick="App.setThemePreference('dark')" style="flex: 1; padding: 9px 6px; font-size: 13px;">🌙 Night</button>
           </div>
         </div>
 
-        <!-- Sub-view: Forgot Password -->
-        <div id="auth-forgot-view" style="display: none;">
-          <h4
-            style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin: 0 0 8px;">
-            Reset Password</h4>
-          <p style="font-size: 13px; color: var(--ink-70); line-height: 1.5; margin-bottom: 14px;">
-            Enter your email address and we’ll send you a password reset link.
-          </p>
-
-          <div id="auth-forgot-error" class="auth-inline-error" role="alert" aria-live="polite"></div>
-
-          <form id="forgot-form" onsubmit="App.handlePasswordResetSubmit(event); return false;" novalidate>
-            <label for="forgot-email-input" class="auth-form-label">Email address</label>
-            <input type="email" id="forgot-email-input" class="auth-input" placeholder="you@example.com"
-              autocomplete="email" required style="margin-bottom: 16px;" />
-
-            <button type="submit" id="forgot-submit-btn" class="btn btn-primary auth-submit-btn"
-              style="width: 100%; margin: 0 0 14px; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 600;">
-              Send Reset Link
+        <!-- Guest Data Reset Section -->
+        <div class="account-section">
+          <div class="account-section-header">
+            <div>
+              <div class="account-section-title">Local Guest Data</div>
+              <div class="more-section-desc">Clear locally saved bookmarks, ratings &amp; notes</div>
+            </div>
+          </div>
+          <div style="margin-top: 10px;">
+            <button type="button" class="btn btn-secondary" onclick="App.openResetGuestDataConfirm()"
+              style="width: 100%; padding: 10px; font-size: 13px; font-weight: 600; color: #c62828; border-color: rgba(198, 40, 40, 0.35);">
+              Reset Local Data
             </button>
-          </form>
-
-          <div style="text-align: center; font-size: 13px;">
-            <button type="button" onclick="App.showAuthSubView('login', event)"
-              style="background: none; border: none; padding: 0; color: var(--ink-70); cursor: pointer; font-size: 13px;">←
-              Back to log in</button>
           </div>
         </div>
 
-        <!-- Sub-view: Magic Link Sent Confirmation -->
-        <div id="magic-link-sent-view" style="display: none; text-align: center; padding: 16px 0;">
-          <div style="font-size: 38px; margin-bottom: 10px;" aria-hidden="true">✉️</div>
-          <div
-            style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">
-            Check your email</div>
-          <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 16px;">
-            We sent a sign-in link to <strong id="magic-link-sent-email"></strong>. Tap the link in your email to sign
-            in.
-          </p>
-          <button class="btn btn-secondary" onclick="App.showAuthSubView('main')"
-            style="padding: 8px 16px;">Back</button>
-        </div>
-
-        <div
-          style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--ink-50);">
-          No account needed to browse. You can always use the app as a guest.
+        <!-- Guest Disclaimer / Footer Section -->
+        <div class="account-section" style="padding-bottom: 0; text-align: center;">
+          <div style="font-size: 12px; color: var(--ink-50); line-height: 1.5;">
+            No account needed to browse. You can always use the app as a guest.
+          </div>
         </div>
       </div>
     </div>
@@ -1662,6 +1820,105 @@
     </div>
   </div>
 
+  <!-- ── Delete Account Confirmation Modal ── -->
+  <div id="delete-account-confirm-modal" class="filter-drawer-overlay" onclick="App.closeDeleteAccountConfirm()" role="dialog"
+    aria-modal="true" aria-hidden="true"
+    style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+    <div class="filter-drawer modal-sheet-card" onclick="event.stopPropagation()"
+      style="max-width: 420px; border-radius: 20px; padding: 24px; text-align: center;">
+      <div style="font-size: 40px; margin-bottom: 12px;" aria-hidden="true">⚠️</div>
+      <h3
+        style="font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #c62828; margin-bottom: 8px;">
+        Delete Account &amp; Data?
+      </h3>
+      <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 24px;">
+        This will permanently delete your account, your saved dishes, crawl routes, and cloud notes. <strong>This action cannot be undone.</strong>
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button type="button" class="btn saved-action-btn saved-btn-outline" onclick="App.closeDeleteAccountConfirm()"
+          style="flex: 1; padding: 10px 16px; font-size: 14px;">
+          Cancel
+        </button>
+        <button type="button" id="confirm-delete-account-btn" class="btn saved-action-btn saved-btn-danger"
+          onclick="App.executeDeleteAccount()" style="flex: 1; padding: 10px 16px; font-size: 14px; background: #c62828; border-color: #c62828; color: #fff;">
+          Delete Forever
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Reset Guest Data Confirmation Modal ── -->
+  <div id="reset-guest-confirm-modal" class="filter-drawer-overlay" onclick="App.closeResetGuestDataConfirm()" role="dialog"
+    aria-modal="true" aria-hidden="true"
+    style="display: none; align-items: center; justify-content: center; z-index: 10000;">
+    <div class="filter-drawer modal-sheet-card" onclick="event.stopPropagation()"
+      style="max-width: 420px; border-radius: 20px; padding: 24px; text-align: center;">
+      <div style="font-size: 40px; margin-bottom: 12px;" aria-hidden="true">🧹</div>
+      <h3
+        style="font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">
+        Reset Local Data?
+      </h3>
+      <p style="font-size: 14px; color: var(--ink-70); line-height: 1.5; margin-bottom: 24px;">
+        Are you sure you want to clear your local bookmarks, passed dishes, notes, and crawl plans?
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button type="button" class="btn saved-action-btn saved-btn-outline" onclick="App.closeResetGuestDataConfirm()"
+          style="flex: 1; padding: 10px 16px; font-size: 14px;">
+          Cancel
+        </button>
+        <button type="button" class="btn saved-action-btn saved-btn-danger"
+          onclick="App.executeResetGuestData()" style="flex: 1; padding: 10px 16px; font-size: 14px;">
+          Reset Data
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Mobile Bottom Navigation Bar (Option A) ── -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <button type="button" class="bottom-nav-item active" data-tab="browse" onclick="App.switchTab('browse')">
+      <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+      </svg>
+      <span class="bottom-nav-label">Browse</span>
+    </button>
+    <button type="button" class="bottom-nav-item" data-tab="swipe" onclick="App.switchTab('swipe')">
+      <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="2" width="14" height="17" rx="3" />
+        <path d="M3 7v13a2 2 0 0 0 2 2h12" />
+      </svg>
+      <span class="bottom-nav-label">Swipe</span>
+    </button>
+    <button type="button" class="bottom-nav-item" data-tab="saved" onclick="App.switchTab('saved')">
+      <span class="bottom-nav-icon-wrap">
+        <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+        </svg>
+        <span class="bottom-nav-badge" id="bottom-saved-badge" style="display: none;">0</span>
+      </span>
+      <span class="bottom-nav-label">Saved</span>
+    </button>
+    <button type="button" class="bottom-nav-item" data-tab="map" onclick="App.switchTab('map')">
+      <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+        <line x1="8" y1="2" x2="8" y2="18" />
+        <line x1="16" y1="6" x2="16" y2="22" />
+      </svg>
+      <span class="bottom-nav-label">Map</span>
+    </button>
+    <button type="button" class="bottom-nav-item bottom-nav-more" onclick="App.openMoreModal()" aria-label="More options">
+      <svg class="bottom-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="1.5" />
+        <circle cx="19" cy="12" r="1.5" />
+        <circle cx="5" cy="12" r="1.5" />
+      </svg>
+      <span class="bottom-nav-label">More</span>
+    </button>
+  </nav>
+
   <!-- ── Scripts ── -->
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -1669,8 +1926,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=28bd1e39"></script>
-  <script type="module" src="js/app.js?v=28bd1e39"></script>
+  <script src="js/meta.js?v=e4b4c56c"></script>
+  <script type="module" src="js/app.js?v=e4b4c56c"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;
