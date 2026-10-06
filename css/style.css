@@ -6555,11 +6555,10 @@ body:has(.detail-overlay.open) #mobile-filter-fab {
 
 /* ── PWA Install & Account Modal Styles ── */
 .modal-sheet-card {
-  max-width: 460px !important;
-  border-radius: 24px !important;
+  max-width: 480px;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .filter-drawer-overlay:has(.modal-sheet-card) {
     align-items: center !important;
     justify-content: center !important;
@@ -6576,6 +6575,7 @@ body:has(.detail-overlay.open) #mobile-filter-fab {
   }
 
   .modal-sheet-card {
+    max-width: 460px;
     border-radius: 24px !important;
     transform: translateY(20px) scale(0.96) !important;
     transition: transform 0.25s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 0.25s ease !important;
