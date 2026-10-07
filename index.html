@@ -68,7 +68,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=03c97d90" />
+  <link rel="stylesheet" href="css/style.css?v=e0694cef" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1486,32 +1486,35 @@
         </button>
       </div>
 
-      <div class="modal-body-scroll" style="padding: 0 20px 24px; display: flex; flex-direction: column; gap: 18px;">
-        <div class="upcoming-modal-badges" style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="badge" id="upcoming-modal-badge-status" style="background: #FEF3C7; color: #92400E; font-weight: 700;">📅 Upcoming Event</span>
-          <span class="badge" id="upcoming-modal-badge-dates" style="background: var(--card-bg); color: var(--ink); border: 1px solid var(--border); font-weight: 600;">Dates Pending</span>
-          <span class="badge" id="upcoming-modal-badge-price" style="background: rgba(26, 18, 8, 0.08); color: var(--ink); font-weight: 600;">$10 specials</span>
+      <div class="modal-body-scroll upcoming-modal-body">
+        <div class="upcoming-modal-header-meta">
+          <span class="landing-status-badge upcoming" id="upcoming-modal-badge-status">Lineup Pending</span>
+          <span class="upcoming-meta-date-text" id="upcoming-modal-badge-dates">Dates Pending</span>
         </div>
 
-        <div class="upcoming-modal-card" style="background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
-          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-70); margin-bottom: 6px;" id="upcoming-modal-organizer-label">
-            Presented by
+        <div class="upcoming-modal-details">
+          <div class="upcoming-detail-row">
+            <span class="upcoming-detail-label">Price / Special</span>
+            <span class="upcoming-detail-value" id="upcoming-modal-badge-price">$10 specials</span>
           </div>
-          <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;" id="upcoming-modal-organizer">
-            The Actual Portland
+
+          <div class="upcoming-detail-row">
+            <span class="upcoming-detail-label" id="upcoming-modal-organizer-label">Presented by</span>
+            <span class="upcoming-detail-value" id="upcoming-modal-organizer">The Actual Portland</span>
           </div>
-          <p style="font-size: 13.5px; color: var(--ink-70); line-height: 1.55; margin: 0;" id="upcoming-modal-desc">
+        </div>
+
+        <div class="upcoming-modal-about">
+          <p class="upcoming-modal-desc" id="upcoming-modal-desc">
             Participating restaurants and menus are being prepared. Check back soon for the complete interactive crawl map and dishes!
           </p>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <a id="upcoming-modal-guide-link" href="weeks/mac-and-cheese-2026.html" class="btn btn-primary"
-            style="width: 100%; text-align: center; text-decoration: none; padding: 12px 18px; font-size: 14.5px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+        <div class="upcoming-modal-actions">
+          <a id="upcoming-modal-guide-link" href="weeks/mac-and-cheese-2026.html" class="btn btn-primary upcoming-modal-btn">
             <span>View Event Guide &amp; Details &rarr;</span>
           </a>
-          <a id="upcoming-modal-org-link" href="https://www.theactualportland.com" target="_blank" rel="noopener" class="btn btn-secondary"
-            style="width: 100%; text-align: center; text-decoration: none; padding: 10px 18px; font-size: 13.5px; font-weight: 600; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border);">
+          <a id="upcoming-modal-org-link" href="https://www.theactualportland.com" target="_blank" rel="noopener" class="btn btn-secondary upcoming-modal-btn-secondary">
             <span>Visit Organizer Website</span>
           </a>
         </div>
@@ -1993,8 +1996,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=03c97d90"></script>
-  <script type="module" src="js/app.js?v=03c97d90"></script>
+  <script src="js/meta.js?v=e0694cef"></script>
+  <script type="module" src="js/app.js?v=e0694cef"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;
