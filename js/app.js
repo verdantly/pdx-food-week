@@ -627,9 +627,11 @@ function renderLanding() {
       : `event.preventDefault(); App.switchWeek('${w.id}');`;
     const cardHref = w.isUpcomingOnly ? `weeks/${w.id}.html` : `?week=${w.id}`;
 
+    const emojiHTML = w.isUpcomingOnly ? '' : `<div class="landing-emoji">${w.emoji || '🍽️'}</div>`;
+
     return `
-      <a href="${cardHref}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}${isHiddenDesktop}" data-desktop-page="${desktopPage}" style="--week-brand: ${themeColor};" onclick="${clickHandler}">
-        <div class="landing-emoji">${w.emoji || '🍽️'}</div>
+      <a href="${cardHref}" class="landing-card ${w.isUpcomingOnly ? 'is-upcoming-food-week' : ''} ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}${isHiddenDesktop}" data-desktop-page="${desktopPage}" style="--week-brand: ${themeColor};" onclick="${clickHandler}">
+        ${emojiHTML}
         <div class="landing-card-main">
           <div class="landing-card-title-row">
             <h3>${esc(displayName)}</h3>
