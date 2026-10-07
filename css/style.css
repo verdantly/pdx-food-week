@@ -7891,6 +7891,10 @@ body:has(.detail-overlay.open) #mobile-filter-fab {
   padding-bottom: 2px;
 }
 
+.upcoming-modal-header-meta .landing-status-badge {
+  margin-left: 0;
+}
+
 .upcoming-meta-date-text {
   font-family: var(--font-body);
   font-size: 13.5px;
