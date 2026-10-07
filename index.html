@@ -68,7 +68,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=88cc2ba8" />
+  <link rel="stylesheet" href="css/style.css?v=de4531ec" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1469,6 +1469,56 @@
     </div>
   </div>
 
+  <!-- ── Upcoming Food Week Preview Modal ── -->
+  <div id="upcoming-week-modal-overlay" class="filter-drawer-overlay" onclick="App.closeUpcomingWeekModal()" role="dialog"
+    aria-modal="true" aria-hidden="true">
+    <div class="filter-drawer modal-sheet-card" onclick="event.stopPropagation()" style="max-width: 520px;">
+      <div class="drawer-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span id="upcoming-modal-emoji" style="font-size: 24px;" aria-hidden="true">🧀</span>
+          <h3 class="drawer-title" id="upcoming-modal-title">Upcoming Food Week</h3>
+        </div>
+        <button class="drawer-close" onclick="App.closeUpcomingWeekModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body-scroll" style="padding: 0 20px 24px; display: flex; flex-direction: column; gap: 18px;">
+        <div class="upcoming-modal-badges" style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span class="badge" id="upcoming-modal-badge-status" style="background: #FEF3C7; color: #92400E; font-weight: 700;">📅 Upcoming Event</span>
+          <span class="badge" id="upcoming-modal-badge-dates" style="background: var(--card-bg); color: var(--ink); border: 1px solid var(--border); font-weight: 600;">Dates Pending</span>
+          <span class="badge" id="upcoming-modal-badge-price" style="background: rgba(26, 18, 8, 0.08); color: var(--ink); font-weight: 600;">$10 specials</span>
+        </div>
+
+        <div class="upcoming-modal-card" style="background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
+          <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-70); margin-bottom: 6px;" id="upcoming-modal-organizer-label">
+            Presented by
+          </div>
+          <div style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px;" id="upcoming-modal-organizer">
+            The Actual Portland
+          </div>
+          <p style="font-size: 13.5px; color: var(--ink-70); line-height: 1.55; margin: 0;" id="upcoming-modal-desc">
+            Participating restaurants and menus are being prepared. Check back soon for the complete interactive crawl map and dishes!
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a id="upcoming-modal-guide-link" href="weeks/mac-and-cheese-2026.html" class="btn btn-primary"
+            style="width: 100%; text-align: center; text-decoration: none; padding: 12px 18px; font-size: 14.5px; font-weight: 700; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>View Event Guide &amp; Details &rarr;</span>
+          </a>
+          <a id="upcoming-modal-org-link" href="https://www.theactualportland.com" target="_blank" rel="noopener" class="btn btn-secondary"
+            style="width: 100%; text-align: center; text-decoration: none; padding: 10px 18px; font-size: 13.5px; font-weight: 600; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border);">
+            <span>Visit Organizer Website</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Account & Cloud Sync Modal ── -->
   <div id="account-modal-overlay" class="filter-drawer-overlay" onclick="App.closeAccountModal()" role="dialog"
     aria-modal="true" aria-hidden="true">
@@ -1943,8 +1993,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=88cc2ba8"></script>
-  <script type="module" src="js/app.js?v=88cc2ba8"></script>
+  <script src="js/meta.js?v=de4531ec"></script>
+  <script type="module" src="js/app.js?v=de4531ec"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;

@@ -210,13 +210,19 @@ async function checkMetadataUpdate() {
     if (!res || !res.ok) return;
     const text = await res.text();
 
-    // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS
-    const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*window\.getWeekMeta/);
+    // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS and UPCOMING_FOOD_WEEKS
+    const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*(?:window\.UPCOMING_FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*)?window\.getWeekMeta/);
     if (!match) return;
 
     let freshWeeks;
     try {
       freshWeeks = (new Function(`return ${match[1]}`))();
+      if (match[2]) {
+        const freshUpcoming = (new Function(`return ${match[2]}`))();
+        if (Array.isArray(freshUpcoming)) {
+          window.UPCOMING_FOOD_WEEKS = freshUpcoming;
+        }
+      }
     } catch (e) {
       return;
     }
@@ -545,15 +551,28 @@ function renderLanding() {
     }
   });
 
-  const sortedWeeks = [...window.FOOD_WEEKS].sort((a, b) => {
+  const activeSortedWeeks = [...window.FOOD_WEEKS].sort((a, b) => {
     const dateA = a.startDate ? new Date(a.startDate) : new Date(0);
     const dateB = b.startDate ? new Date(b.startDate) : new Date(0);
     return dateB - dateA;
   });
 
   // Determine featured week: currently active, or next upcoming, or first sorted week
-  let featuredWeek = currentWeeks[0] || nextWeek || sortedWeeks[0];
-  const otherWeeks = sortedWeeks.filter(w => w.id !== featuredWeek.id);
+  let featuredWeek = currentWeeks[0] || nextWeek || activeSortedWeeks[0];
+  const otherActiveWeeks = activeSortedWeeks.filter(w => w.id !== featuredWeek.id);
+
+  // Collect upcoming food weeks (marked as upcoming/unreleased)
+  const upcomingWeeks = (window.UPCOMING_FOOD_WEEKS || []).map(w => ({ ...w, isUpcomingOnly: true }));
+
+  // Separate upcoming weeks into nearest/future order, then past active weeks
+  const upcomingSorted = [...upcomingWeeks].sort((a, b) => {
+    const dateA = a.startDate ? new Date(a.startDate) : new Date(9999, 0, 1);
+    const dateB = b.startDate ? new Date(b.startDate) : new Date(9999, 0, 1);
+    return dateA - dateB;
+  });
+
+  // Combined list: prioritize active/upcoming first, then past weeks
+  const otherWeeks = [...upcomingSorted, ...otherActiveWeeks];
 
   const featuredTiming = getWeekTiming(featuredWeek);
   const isFeaturedActive = featuredTiming.status === 'active';
@@ -573,16 +592,23 @@ function renderLanding() {
   // Render other weeks list items
   const otherWeeksHTML = otherWeeks.map((w, index) => {
     const timing = getWeekTiming(w);
-    const badgeHTML = timing.badgeHTML;
-    const isActive = timing.status === 'active';
+    const badgeHTML = w.isUpcomingOnly
+      ? (timing.status === 'upcoming' ? timing.badgeHTML : '<div class="landing-status-badge upcoming">Upcoming</div>')
+      : timing.badgeHTML;
+    const isActive = !w.isUpcomingOnly && timing.status === 'active';
 
     const priceText = (w.pricePills && w.pricePills.length > 0)
       ? esc(w.pricePills[0])
       : (w.priceSlice ? `${esc(w.priceSlice)} slice` : '');
 
-    const actualCount = (window.RESTAURANTS || []).filter(r => r.weekId === w.id).length;
-    const totalLocations = actualCount > 0 ? actualCount : w.totalLocations;
-    const countText = totalLocations ? `${totalLocations} spots` : '';
+    let countText = '';
+    if (w.isUpcomingOnly) {
+      countText = 'Lineup pending';
+    } else {
+      const actualCount = (window.RESTAURANTS || []).filter(r => r.weekId === w.id).length;
+      const totalLocations = actualCount > 0 ? actualCount : w.totalLocations;
+      countText = totalLocations ? `${totalLocations} spots` : '';
+    }
 
     const metaParts = [priceText, countText].filter(Boolean).join(' • ');
     const metaHTML = metaParts ? `<span class="landing-card-subinfo">${metaParts}</span>` : '';
@@ -593,8 +619,13 @@ function renderLanding() {
     const desktopPage = Math.floor(index / pageSize);
     const isHiddenDesktop = desktopPage > 0 ? ' landing-card-hidden-desktop' : '';
 
+    const clickHandler = w.isUpcomingOnly
+      ? `event.preventDefault(); App.openUpcomingWeekModal('${w.id}');`
+      : `event.preventDefault(); App.switchWeek('${w.id}');`;
+    const cardHref = w.isUpcomingOnly ? `weeks/${w.id}.html` : `?week=${w.id}`;
+
     return `
-      <a href="?week=${w.id}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}${isHiddenDesktop}" data-desktop-page="${desktopPage}" style="--week-brand: ${themeColor};" onclick="event.preventDefault(); App.switchWeek('${w.id}');">
+      <a href="${cardHref}" class="landing-card ${isActive ? 'is-active-food-week' : ''}${isHiddenMobile}${isHiddenDesktop}" data-desktop-page="${desktopPage}" style="--week-brand: ${themeColor};" onclick="${clickHandler}">
         <div class="landing-emoji">${w.emoji || '🍽️'}</div>
         <div class="landing-card-main">
           <div class="landing-card-title-row">
@@ -995,6 +1026,60 @@ export function openMoreModal() {
 
 export function closeMoreModal() {
   const modal = document.getElementById('more-modal-overlay');
+  if (!modal) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+export function openUpcomingWeekModal(weekId) {
+  const meta = (typeof window !== 'undefined' && typeof window.getUpcomingWeekMeta === 'function')
+    ? window.getUpcomingWeekMeta(weekId)
+    : (window.UPCOMING_FOOD_WEEKS || []).find(w => w.id === weekId);
+  if (!meta) return;
+
+  const modal = document.getElementById('upcoming-week-modal-overlay');
+  if (!modal) return;
+
+  const emojiEl = document.getElementById('upcoming-modal-emoji');
+  const titleEl = document.getElementById('upcoming-modal-title');
+  const badgeDatesEl = document.getElementById('upcoming-modal-badge-dates');
+  const badgePriceEl = document.getElementById('upcoming-modal-badge-price');
+  const orgEl = document.getElementById('upcoming-modal-organizer');
+  const descEl = document.getElementById('upcoming-modal-desc');
+  const guideLink = document.getElementById('upcoming-modal-guide-link');
+  const orgLink = document.getElementById('upcoming-modal-org-link');
+
+  if (emojiEl) emojiEl.textContent = meta.emoji || '🍽️';
+  if (titleEl) titleEl.textContent = meta.name || 'Upcoming Food Week';
+  if (badgeDatesEl) badgeDatesEl.textContent = meta.dates || 'Dates Pending';
+  if (badgePriceEl) {
+    const priceText = (meta.pricePills && meta.pricePills[0]) ? meta.pricePills[0] : 'Event specials';
+    badgePriceEl.textContent = priceText;
+  }
+  if (orgEl) orgEl.textContent = meta.organizer || 'Local Organizers';
+  if (descEl) {
+    descEl.textContent = meta.aboutText || meta.description || 'Participating restaurants and menus are currently being finalized. Check back soon for the complete interactive crawl map and dishes!';
+  }
+  if (guideLink) {
+    guideLink.href = `weeks/${meta.id}.html`;
+  }
+  if (orgLink) {
+    if (meta.url) {
+      orgLink.href = meta.url;
+      orgLink.style.display = 'inline-flex';
+    } else {
+      orgLink.style.display = 'none';
+    }
+  }
+
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+export function closeUpcomingWeekModal() {
+  const modal = document.getElementById('upcoming-week-modal-overlay');
   if (!modal) return;
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
@@ -1925,6 +2010,8 @@ const App = {
   hideCompactDropdowns,
   openMoreModal,
   closeMoreModal,
+  openUpcomingWeekModal,
+  closeUpcomingWeekModal,
   triggerInstall,
   openInstallModal,
   closeInstallModal,

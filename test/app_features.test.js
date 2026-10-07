@@ -370,6 +370,83 @@ describe("App Features: Saved Custom Order Rank Badges", () => {
       else delete global.localStorage;
     }
   });
+
+  test("openUpcomingWeekModal populates modal fields with Mac & Cheese Week data and opens modal", async () => {
+    // Ensure meta.js is loaded in node test environment
+    if (typeof global.window === "undefined") {
+      global.window = {};
+    }
+    if (!global.window.UPCOMING_FOOD_WEEKS) {
+      const fs = await import("fs");
+      const path = await import("path");
+      const vm = await import("vm");
+      const metaCode = fs.readFileSync(path.resolve(process.cwd(), "js/meta.js"), "utf8");
+      vm.runInThisContext(metaCode);
+    }
+
+    // Setup mock elements on global.document
+    const elements = new Map();
+    const createMockEl = (id) => {
+      const classes = new Set();
+      const attrs = new Map();
+      const el = {
+        id,
+        textContent: "",
+        href: "",
+        classList: {
+          contains: (cls) => classes.has(cls),
+          add: (cls) => classes.add(cls),
+          remove: (cls) => classes.delete(cls)
+        },
+        setAttribute: (k, v) => attrs.set(k, String(v)),
+        getAttribute: (k) => attrs.get(k) || null,
+        style: {}
+      };
+      elements.set(id, el);
+      return el;
+    };
+
+    const mockModal = createMockEl("upcoming-week-modal-overlay");
+    createMockEl("upcoming-modal-emoji");
+    createMockEl("upcoming-modal-title");
+    createMockEl("upcoming-modal-badge-dates");
+    createMockEl("upcoming-modal-badge-price");
+    createMockEl("upcoming-modal-organizer");
+    createMockEl("upcoming-modal-desc");
+    createMockEl("upcoming-modal-guide-link");
+    createMockEl("upcoming-modal-org-link");
+
+    const prevDoc = global.document;
+    global.document = {
+      getElementById: (id) => elements.get(id) || null,
+      body: { style: {} },
+      querySelectorAll: () => [],
+      querySelector: () => null
+    };
+
+    try {
+      const { openUpcomingWeekModal, closeUpcomingWeekModal } = await import("../js/app.js");
+
+      openUpcomingWeekModal("mac-and-cheese-2026");
+
+      expect(mockModal.classList.contains("open")).toBe(true);
+      expect(mockModal.getAttribute("aria-hidden")).toBe("false");
+      expect(elements.get("upcoming-modal-emoji").textContent).toBe("🧀");
+      expect(elements.get("upcoming-modal-title").textContent).toBe("Mac & Cheese Week 2026");
+      expect(elements.get("upcoming-modal-badge-dates").textContent).toBe("November 2–8, 2026");
+      expect(elements.get("upcoming-modal-badge-price").textContent).toBe("$10 specials");
+      expect(elements.get("upcoming-modal-organizer").textContent).toBe("The Actual Portland");
+      expect(elements.get("upcoming-modal-guide-link").href).toBe("weeks/mac-and-cheese-2026.html");
+
+      closeUpcomingWeekModal();
+      expect(mockModal.classList.contains("open")).toBe(false);
+      expect(mockModal.getAttribute("aria-hidden")).toBe("true");
+    } finally {
+      if (prevDoc) global.document = prevDoc;
+      else delete global.document;
+    }
+  });
 });
+
 
 

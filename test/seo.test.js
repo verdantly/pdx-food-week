@@ -68,6 +68,9 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     expect(macHtml).toContain('"name": "Mac & Cheese Week 2026"');
     expect(macHtml).toContain('"@type": "FAQPage"');
     expect(macHtml).toContain('When is Portland Mac & Cheese Week 2026?');
+    expect(macHtml).toContain('November 2–8, 2026');
+    expect(macHtml).toContain('"startDate": "2026-11-02"');
+    expect(macHtml).toContain('"endDate": "2026-11-08"');
     expect(macHtml).toContain('The Actual Portland');
     expect(macHtml).toContain('Upcoming Event');
     expect(macHtml).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html');
