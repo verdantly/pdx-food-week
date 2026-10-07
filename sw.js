@@ -1,11 +1,11 @@
-const CACHE_NAME = 'pdxfw-cache-5a996a8c';
+const CACHE_NAME = 'pdxfw-cache-9871b989';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=5a996a8c',
-  'js/app.js?v=5a996a8c',
-  'js/meta.js?v=5a996a8c',
+  'css/style.css?v=9871b989',
+  'js/app.js?v=9871b989',
+  'js/meta.js?v=9871b989',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
