@@ -1286,9 +1286,7 @@ export function cycleThemePreference() {
 function applyThemePreference(pref) {
   if (typeof document === 'undefined') return;
 
-  const metaTheme = document.querySelector('meta[name="theme-color"]');
   const isSystemDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
   const effectiveTheme = (pref === 'dark' || (pref === 'system' && isSystemDark)) ? 'dark' : 'light';
 
   document.documentElement.setAttribute('data-theme', effectiveTheme);
@@ -1298,9 +1296,10 @@ function applyThemePreference(pref) {
     document.body.setAttribute('data-theme-mode', pref);
   }
 
-  if (metaTheme) {
-    metaTheme.setAttribute('content', effectiveTheme === 'dark' ? '#141414' : '#1A1208');
-  }
+  const targetColor = effectiveTheme === 'dark' ? '#141414' : '#1A1208';
+  document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
+    meta.setAttribute('content', targetColor);
+  });
 
   document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.themeVal === pref);

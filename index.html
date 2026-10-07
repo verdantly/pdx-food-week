@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description"
     content="Track and share your favorites across Portland food weeks — Pizza Week, Burger Week, and more." />
-  <meta name="theme-color" content="#1A1208" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141414" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1A1208" />
+  <meta name="theme-color" content="#141414" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="PDX Food Week" />
 
   <script>
@@ -18,8 +20,9 @@
         var isDark = t === 'dark' || (t === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
         document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme-mode', t);
-        var metaTheme = document.querySelector('meta[name="theme-color"]');
-        if (metaTheme) metaTheme.setAttribute('content', isDark ? '#141414' : '#1A1208');
+        var targetColor = isDark ? '#141414' : '#1A1208';
+        var metaThemes = document.querySelectorAll('meta[name="theme-color"]');
+        metaThemes.forEach(function (m) { m.setAttribute('content', targetColor); });
       } catch (e) {}
     })();
   </script>
@@ -65,7 +68,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=115e8d53" />
+  <link rel="stylesheet" href="css/style.css?v=f6aabd1b" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1940,8 +1943,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=115e8d53"></script>
-  <script type="module" src="js/app.js?v=115e8d53"></script>
+  <script src="js/meta.js?v=f6aabd1b"></script>
+  <script type="module" src="js/app.js?v=f6aabd1b"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;

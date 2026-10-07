@@ -1836,7 +1836,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
   background: var(--header-bg);
   color: var(--header-ink);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 56px 0 32px;
+  padding: 56px 0 calc(32px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
 }
 
@@ -2044,7 +2044,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
 
 @media (max-width: 640px) {
   .landing-footer {
-    padding: 36px 0 24px;
+    padding: 36px 0 calc(24px + env(safe-area-inset-bottom, 0px));
   }
 
   .landing-footer-grid {
