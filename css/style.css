@@ -3483,16 +3483,25 @@ body[data-theme="dark"] .dish-card.bookmarked {
   bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%) translateY(80px);
-  background: var(--ink);
-  color: #fff;
+  background: #1A1208;
+  color: #FFFFFF;
   padding: 10px 20px;
   border-radius: 24px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   z-index: 3000;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
   transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   pointer-events: none;
+}
+
+[data-theme="dark"] .toast {
+  background: #2A2520;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
 }
 
 .toast.show {
