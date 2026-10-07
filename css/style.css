@@ -5072,6 +5072,9 @@ select:focus-visible {
 
   .app-header {
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    transition: padding 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.3s ease;
   }
 
   /* Scroll-to-Hide Transitions */
@@ -5087,6 +5090,7 @@ select:focus-visible {
     overflow: hidden;
   }
 
+  #app.compact-header .header-title,
   .compact-header .header-title {
     max-height: 0;
     opacity: 0;
@@ -5095,6 +5099,7 @@ select:focus-visible {
     pointer-events: none;
   }
 
+  #app.compact-header .header-meta,
   .compact-header .header-meta {
     max-height: 0;
     opacity: 0;
@@ -5103,6 +5108,7 @@ select:focus-visible {
     pointer-events: none;
   }
 
+  #app.compact-header .nav-tabs,
   .compact-header .nav-tabs {
     max-height: 0;
     opacity: 0;
@@ -5112,33 +5118,36 @@ select:focus-visible {
     border: none;
   }
 
+  #app.compact-header .app-header,
   .compact-header .app-header {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   }
 
   /* Make browse search and filter bar scroll away naturally instead of sticking, preventing layout shifts */
+  #app.compact-header .browse-header,
   .compact-header .browse-header,
+  #app.compact-header .saved-header,
   .compact-header .saved-header {
     position: relative !important;
     border-bottom-color: transparent;
   }
-
-
 
   /* Compact App Bar Styling */
   .compact-app-bar {
     display: none;
     align-items: center;
     justify-content: space-between;
-    padding: max(12px, env(safe-area-inset-top, 0px)) 0 0 0;
+    padding: max(12px, env(safe-area-inset-top, 0px)) 0 10px 0;
     transition: padding-bottom 0.3s ease;
     background: transparent;
     border-bottom: none;
   }
 
+  #app.compact-header .compact-app-bar,
   .compact-header .compact-app-bar {
-    padding-bottom: 12px;
+    padding-bottom: 10px;
   }
 
   .compact-brand {
