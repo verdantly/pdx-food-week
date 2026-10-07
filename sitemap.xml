@@ -81,6 +81,66 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.pdxfoodweek.com/weeks/wiener-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/dumpling-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/sandwich-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/pizza-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/highball-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/taco-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/nacho-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/slushie-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/salad-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/burger-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/fried-chicken-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/weeks/wing-2027.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.pdxfoodweek.com/diets/vegan.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

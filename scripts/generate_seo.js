@@ -491,9 +491,9 @@ ${JSON.stringify(faqSchema, null, 2)}
 
     <main>
       <section class="info-card">
-        <h3>🍽️ What is Portland Mac &amp; Cheese Week?</h3>
+        <h3>${escapeHtml(week.aboutTitle || `🍽️ What is Portland ${week.name}?`)}</h3>
         <p>
-          Organized by <strong>${escapeHtml(week.organizer)}</strong>, Mac &amp; Cheese Week celebrates Portland's best comfort food. Area restaurants, carts, and brewpubs present specialty creations—ranging from classic gourmet cheddar blends and smoked gouda skillets to buffalo chicken macs, crab and lobster bakes, and innovative plant-based vegan/gluten-free variations.
+          ${escapeHtml(week.aboutText || `Organized by ${week.organizer || 'local organizers'}, ${week.name} celebrates Portland's rich culinary scene with exclusive, limited-time food specials.`)}
         </p>
         <p>
           As the event approaches, this page and the PDX Food Week interactive web app will feature the complete directory of participating restaurants, dishes, addresses, hours, and customized filters.

@@ -75,6 +75,18 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     // Verify it is also listed in sitemap.xml
     const sitemapContent = fs.readFileSync(path.join(projectRoot, 'sitemap.xml'), 'utf8');
     expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html</loc>');
+
+    // Verify 2027 upcoming food week placeholder pages
+    for (const upcomingId of ['burger-2027', 'dumpling-2027', 'pizza-2027']) {
+      const pagePath = path.join(weeksDir, `${upcomingId}.html`);
+      expect(fs.existsSync(pagePath)).toBe(true);
+      const html = fs.readFileSync(pagePath, 'utf8');
+      expect(html).toContain('"@type": "FoodEvent"');
+      expect(html).toContain('"@type": "FAQPage"');
+      expect(html).toContain('Upcoming Event');
+      expect(html).toContain(`https://www.pdxfoodweek.com/weeks/${upcomingId}.html`);
+      expect(sitemapContent).toContain(`https://www.pdxfoodweek.com/weeks/${upcomingId}.html</loc>`);
+    }
   });
 
   test('Enhanced dish pages contain Restaurant and MenuItem JSON-LD and deep links without instant redirects', () => {
