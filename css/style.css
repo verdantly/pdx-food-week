@@ -7877,7 +7877,7 @@ body:has(.detail-overlay.open) #mobile-filter-fab {
 
 /* ── Upcoming Food Week Preview Modal ── */
 .upcoming-modal-body {
-  padding: 0 24px 24px;
+  padding: 0 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
