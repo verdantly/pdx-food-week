@@ -571,8 +571,11 @@ function renderLanding() {
     return dateA - dateB;
   });
 
-  // Combined list: prioritize active/upcoming first, then past weeks
-  const otherWeeks = [...upcomingSorted, ...otherActiveWeeks];
+  // Filter upcoming weeks to the next 3 upcoming events
+  const next3Upcoming = upcomingSorted.slice(0, 3);
+
+  // Combined list: next 3 upcoming food weeks first, then past/historical weeks
+  const otherWeeks = [...next3Upcoming, ...otherActiveWeeks];
 
   const featuredTiming = getWeekTiming(featuredWeek);
   const isFeaturedActive = featuredTiming.status === 'active';

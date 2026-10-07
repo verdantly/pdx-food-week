@@ -79,6 +79,18 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     const sitemapContent = fs.readFileSync(path.join(projectRoot, 'sitemap.xml'), 'utf8');
     expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html</loc>');
 
+    // Verify Holiday Drink Week 2026 placeholder page
+    const holidayDrinkPath = path.join(weeksDir, 'holiday-drink-2026.html');
+    expect(fs.existsSync(holidayDrinkPath)).toBe(true);
+    const holidayHtml = fs.readFileSync(holidayDrinkPath, 'utf8');
+    expect(holidayHtml).toContain('Portland Holiday Drink Week 2026');
+    expect(holidayHtml).toContain('"@type": "FoodEvent"');
+    expect(holidayHtml).toContain('"name": "Holiday Drink Week 2026"');
+    expect(holidayHtml).toContain('"startDate": "2026-12-07"');
+    expect(holidayHtml).toContain('"endDate": "2026-12-13"');
+    expect(holidayHtml).toContain('Portland Mercury');
+    expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/holiday-drink-2026.html</loc>');
+
     // Verify 2027 upcoming food week placeholder pages
     for (const upcomingId of ['burger-2027', 'dumpling-2027', 'pizza-2027']) {
       const pagePath = path.join(weeksDir, `${upcomingId}.html`);
