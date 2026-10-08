@@ -795,6 +795,15 @@ body[data-theme="dark"] .dish-card.bookmarked {
   padding-right: 64px;
 }
 
+[data-theme="dark"] .card-restaurant,
+body[data-theme="dark"] .card-restaurant,
+[data-theme="dark"] .landing-spot-card .card-restaurant,
+body[data-theme="dark"] .landing-spot-card .card-restaurant,
+[data-theme="dark"] .sheet-restaurant,
+body[data-theme="dark"] .sheet-restaurant {
+  color: var(--pizza) !important;
+}
+
 .card-neighborhood {
   font-size: 13px;
   /* Increased from 11px */

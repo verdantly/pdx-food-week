@@ -504,6 +504,23 @@ function contrastRatio(rgb1, rgb2) {
   return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
 }
 
+function blendHex(fgHex, alpha, bgHex) {
+  let fClean = fgHex.replace('#', '').trim();
+  if (fClean.length === 3) fClean = fClean.split('').map(c => c + c).join('');
+  let bClean = bgHex.replace('#', '').trim();
+  if (bClean.length === 3) bClean = bClean.split('').map(c => c + c).join('');
+  const fr = parseInt(fClean.substring(0, 2), 16);
+  const fg = parseInt(fClean.substring(2, 4), 16);
+  const fb = parseInt(fClean.substring(4, 6), 16);
+  const br = parseInt(bClean.substring(0, 2), 16);
+  const bg = parseInt(bClean.substring(2, 4), 16);
+  const bb = parseInt(bClean.substring(4, 6), 16);
+  const r = Math.round(fr * alpha + br * (1 - alpha));
+  const g = Math.round(fg * alpha + bg * (1 - alpha));
+  const b = Math.round(fb * alpha + bb * (1 - alpha));
+  return [r, g, b];
+}
+
 function getAccessibleDarkColor(hex, minRatio = 4.5) {
   let clean = hex.replace('#', '').trim();
   if (clean.length === 3) clean = clean.split('').map(c => c + c).join('');
@@ -511,15 +528,19 @@ function getAccessibleDarkColor(hex, minRatio = 4.5) {
   const r = parseInt(clean.substring(0, 2), 16);
   const g = parseInt(clean.substring(2, 4), 16);
   const b = parseInt(clean.substring(4, 6), 16);
-  const darkBg = [20, 20, 20]; // #141414
-  if (contrastRatio([r, g, b], darkBg) >= minRatio) return hex;
+  const darkCard = [30, 30, 30]; // #1E1E1E
+  const bookmarkedCard = blendHex(hex, 0.12, '#1E1E1E');
+
+  if (contrastRatio([r, g, b], darkCard) >= minRatio && contrastRatio([r, g, b], bookmarkedCard) >= minRatio) {
+    return hex;
+  }
 
   for (let i = 1; i <= 100; i++) {
     const factor = i / 100;
     const nr = Math.round(r + (255 - r) * factor);
     const ng = Math.round(g + (255 - g) * factor);
     const nb = Math.round(b + (255 - b) * factor);
-    if (contrastRatio([nr, ng, nb], darkBg) >= minRatio) {
+    if (contrastRatio([nr, ng, nb], darkCard) >= minRatio && contrastRatio([nr, ng, nb], bookmarkedCard) >= minRatio) {
       return '#' + [nr, ng, nb].map(x => x.toString(16).padStart(2, '0')).join('');
     }
   }
