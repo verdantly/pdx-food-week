@@ -1248,7 +1248,9 @@ function setupMobileScrollListener() {
     if (State.activeTab !== 'browse' && State.activeTab !== 'saved') return;
 
     const currentView = State.activeTab === 'browse' ? viewBrowse : viewSaved;
-    const st = currentView ? currentView.scrollTop : (window.scrollY || 0);
+    const viewScroll = currentView ? currentView.scrollTop : 0;
+    const docScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const st = Math.max(viewScroll, docScroll);
     const appContainer = document.getElementById('app');
     const fabButton = document.getElementById('mobile-filter-fab');
 
@@ -1258,7 +1260,7 @@ function setupMobileScrollListener() {
     }
 
     let scrollHeight, clientHeight;
-    if (currentView.scrollHeight > currentView.clientHeight) {
+    if (currentView && currentView.scrollHeight > currentView.clientHeight) {
       scrollHeight = currentView.scrollHeight;
       clientHeight = currentView.clientHeight;
     } else {
@@ -1279,11 +1281,11 @@ function setupMobileScrollListener() {
 
     const delta = st - State.lastScrollTop;
 
-    if (st <= 60) {
+    if (st <= 40) {
       appContainer.classList.remove('compact-header');
-    } else if (delta > 20 && st > 150) {
+    } else if (delta > 10 && st > 80) {
       appContainer.classList.add('compact-header');
-    } else if (delta < -30) {
+    } else if (delta < -15) {
       appContainer.classList.remove('compact-header');
     }
     State.lastScrollTop = st <= 0 ? 0 : st;
@@ -1292,6 +1294,7 @@ function setupMobileScrollListener() {
   viewBrowse.addEventListener('scroll', onScroll, { passive: true });
   viewSaved.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('scroll', onScroll, { passive: true });
 }
 
 function setupSavedDragEvents() {
