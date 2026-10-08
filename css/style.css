@@ -811,8 +811,19 @@ body[data-theme="dark"] .card-restaurant,
 [data-theme="dark"] .landing-spot-card .card-restaurant,
 body[data-theme="dark"] .landing-spot-card .card-restaurant,
 [data-theme="dark"] .sheet-restaurant,
-body[data-theme="dark"] .sheet-restaurant {
+body[data-theme="dark"] .sheet-restaurant,
+[data-theme="dark"] .sheet-schedule-day-row.is-today,
+body[data-theme="dark"] .sheet-schedule-day-row.is-today,
+[data-theme="dark"] .landing-section-title,
+body[data-theme="dark"] .landing-section-title,
+[data-theme="dark"] .landing-others-title,
+body[data-theme="dark"] .landing-others-title {
   color: var(--pizza) !important;
+}
+
+[data-theme="dark"] .friend-avatar,
+body[data-theme="dark"] .friend-avatar {
+  color: var(--ink) !important;
 }
 
 .card-neighborhood {
@@ -3709,7 +3720,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .swipe-card-neighborhood {
   font-size: 12px;
-  color: var(--ink-30);
+  color: var(--ink-60);
   margin-bottom: 8px;
 }
 
@@ -3898,6 +3909,14 @@ input[type="search"]::-webkit-search-cancel-button {
   border-color: var(--pizza-dark);
 }
 
+[data-theme="dark"] .swipe-pass,
+body[data-theme="dark"] .swipe-pass,
+[data-theme="dark"] .swipe-stamp-pass,
+body[data-theme="dark"] .swipe-stamp-pass {
+  color: var(--pizza);
+  border-color: var(--pizza);
+}
+
 .swipe-like {
   color: var(--teal);
   border-color: var(--teal);
@@ -3926,6 +3945,12 @@ input[type="search"]::-webkit-search-cancel-button {
   color: var(--pizza-dark);
   border-color: var(--pizza-dark);
   align-self: center;
+}
+
+[data-theme="dark"] .swipe-undo,
+body[data-theme="dark"] .swipe-undo {
+  color: var(--pizza);
+  border-color: var(--pizza);
 }
 
 .swipe-btn:disabled {
