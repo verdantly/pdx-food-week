@@ -477,24 +477,47 @@ export function renderHeader() {
   }
 }
 
+function hexToRgba(hex, alpha) {
+  if (!hex || typeof hex !== 'string') return `rgba(232, 91, 56, ${alpha})`;
+  let clean = hex.replace('#', '').trim();
+  if (clean.length === 3) {
+    clean = clean.split('').map(c => c + c).join('');
+  }
+  if (clean.length !== 6) return `rgba(232, 91, 56, ${alpha})`;
+  const r = parseInt(clean.substring(0, 2), 16);
+  const g = parseInt(clean.substring(2, 4), 16);
+  const b = parseInt(clean.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 export function applyWeekTheme(week) {
   const root = document.documentElement;
+  const isDark = root.getAttribute('data-theme') === 'dark' ||
+    (root.getAttribute('data-theme-mode') === 'system' && typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
   if (!week) {
-    root.style.setProperty('--pizza', '#E85B38');
-    root.style.setProperty('--pizza-dark', '#B5472E');
-    root.style.setProperty('--pizza-light', '#F5E6DF');
-    root.style.setProperty('--pizza-pale', '#FDF7F4');
+    const defaultColor = isDark ? '#FF6B4A' : '#E85B38';
+    const defaultDark = isDark ? '#E05332' : '#B5472E';
+    root.style.setProperty('--pizza', defaultColor);
+    root.style.setProperty('--pizza-dark', defaultDark);
+    root.style.setProperty('--pizza-light', isDark ? 'rgba(255, 107, 74, 0.20)' : '#F5E6DF');
+    root.style.setProperty('--pizza-pale', isDark ? 'rgba(255, 107, 74, 0.10)' : '#FDF7F4');
     return;
   }
+
   const themeColor = week.color || '#E85B38';
   const dark = week.colorDark || '#B5472E';
-  const light = week.colorLight || '#F5E6DF';
-  const pale = week.colorPale || '#FDF7F4';
 
   root.style.setProperty('--pizza', themeColor);
   root.style.setProperty('--pizza-dark', dark);
-  root.style.setProperty('--pizza-light', light);
-  root.style.setProperty('--pizza-pale', pale);
+
+  if (isDark) {
+    root.style.setProperty('--pizza-light', hexToRgba(themeColor, 0.22));
+    root.style.setProperty('--pizza-pale', hexToRgba(themeColor, 0.12));
+  } else {
+    root.style.setProperty('--pizza-light', week.colorLight || '#F5E6DF');
+    root.style.setProperty('--pizza-pale', week.colorPale || '#FDF7F4');
+  }
 }
 
 export function renderAll() {

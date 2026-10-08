@@ -1432,6 +1432,14 @@ function applyThemePreference(pref) {
     btn.classList.toggle('active', btn.dataset.themeVal === pref);
   });
 
+  // Re-apply week theme so translucent tints adapt to the newly active light/dark mode
+  if (State && State.currentWeekId && window.FOOD_WEEKS) {
+    const currentWeek = window.FOOD_WEEKS.find(w => w.id === State.currentWeekId);
+    applyWeekTheme(currentWeek || null);
+  } else {
+    applyWeekTheme(null);
+  }
+
   // Update landing hero theme toggle button icon & accessible label
   const heroToggleBtn = document.getElementById('landing-theme-toggle-btn');
   if (heroToggleBtn) {
