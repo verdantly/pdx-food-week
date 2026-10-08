@@ -206,7 +206,8 @@ body.is-landing .view {
   gap: 8px;
 }
 
-.app-wordmark {
+.app-wordmark,
+.compact-brand {
   font-family: var(--font-brand);
   font-size: 14px;
   font-weight: 600;
@@ -220,29 +221,11 @@ body.is-landing .view {
   transition: color var(--transition);
 }
 
-.compact-brand {
-  font-family: var(--font-brand);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0em;
-  text-transform: lowercase;
-  color: #E85B38 !important;
-  text-decoration: none;
-  font-style: normal;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: color var(--transition);
-}
-
 .app-wordmark:hover,
-.app-wordmark:focus-visible {
-  color: var(--pizza);
-}
-
+.app-wordmark:focus-visible,
 .compact-brand:hover,
 .compact-brand:focus-visible {
-  color: #E85B38 !important;
-  opacity: 0.9;
+  color: var(--pizza);
 }
 
 .week-switcher-select {
@@ -5173,7 +5156,7 @@ select:focus-visible {
     font-weight: 600;
     letter-spacing: 0em;
     text-transform: lowercase;
-    color: #E85B38 !important;
+    color: var(--header-ink);
     cursor: pointer;
     text-decoration: none;
     transition: color var(--transition);
