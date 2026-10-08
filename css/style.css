@@ -446,6 +446,12 @@ body.is-landing .view-footer,
   transition: opacity var(--transition);
 }
 
+[data-theme="dark"] .new-listings-banner,
+body[data-theme="dark"] .new-listings-banner {
+  color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 .new-listings-banner .banner-icon {
   font-size: 14px;
   flex-shrink: 0;
@@ -467,6 +473,11 @@ body.is-landing .view-footer,
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+[data-theme="dark"] .new-listings-banner .banner-close,
+body[data-theme="dark"] .new-listings-banner .banner-close {
+  color: var(--ink);
 }
 
 .new-listings-banner .banner-close:hover {
