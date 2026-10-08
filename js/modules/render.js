@@ -490,6 +490,54 @@ function hexToRgba(hex, alpha) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function luminance(r, g, b) {
+  const a = [r, g, b].map(v => {
+    v /= 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  });
+  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+}
+
+function contrastRatio(rgb1, rgb2) {
+  const l1 = luminance(...rgb1);
+  const l2 = luminance(...rgb2);
+  return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+}
+
+function getAccessibleDarkColor(hex, minRatio = 4.5) {
+  let clean = hex.replace('#', '').trim();
+  if (clean.length === 3) clean = clean.split('').map(c => c + c).join('');
+  if (clean.length !== 6) return hex;
+  const r = parseInt(clean.substring(0, 2), 16);
+  const g = parseInt(clean.substring(2, 4), 16);
+  const b = parseInt(clean.substring(4, 6), 16);
+  const darkBg = [20, 20, 20]; // #141414
+  if (contrastRatio([r, g, b], darkBg) >= minRatio) return hex;
+
+  for (let i = 1; i <= 100; i++) {
+    const factor = i / 100;
+    const nr = Math.round(r + (255 - r) * factor);
+    const ng = Math.round(g + (255 - g) * factor);
+    const nb = Math.round(b + (255 - b) * factor);
+    if (contrastRatio([nr, ng, nb], darkBg) >= minRatio) {
+      return '#' + [nr, ng, nb].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+  }
+  return hex;
+}
+
+function getBestContrastTextColor(hex) {
+  let clean = hex.replace('#', '').trim();
+  if (clean.length === 3) clean = clean.split('').map(c => c + c).join('');
+  if (clean.length !== 6) return '#FFFFFF';
+  const r = parseInt(clean.substring(0, 2), 16);
+  const g = parseInt(clean.substring(2, 4), 16);
+  const b = parseInt(clean.substring(4, 6), 16);
+  const crWhite = contrastRatio([255, 255, 255], [r, g, b]);
+  const crDark = contrastRatio([26, 18, 8], [r, g, b]);
+  return crWhite >= crDark ? '#FFFFFF' : '#1A1208';
+}
+
 export function applyWeekTheme(week) {
   const root = document.documentElement;
   const isDark = root.getAttribute('data-theme') === 'dark' ||
@@ -502,14 +550,17 @@ export function applyWeekTheme(week) {
     root.style.setProperty('--pizza-dark', defaultDark);
     root.style.setProperty('--pizza-light', isDark ? 'rgba(255, 107, 74, 0.20)' : '#F5E6DF');
     root.style.setProperty('--pizza-pale', isDark ? 'rgba(255, 107, 74, 0.10)' : '#FDF7F4');
+    root.style.setProperty('--theme-contrast-text', '#FFFFFF');
     return;
   }
 
-  const themeColor = week.color || '#E85B38';
+  const baseColor = week.color || '#E85B38';
+  const themeColor = isDark ? getAccessibleDarkColor(baseColor, 4.5) : baseColor;
   const dark = week.colorDark || '#B5472E';
 
   root.style.setProperty('--pizza', themeColor);
   root.style.setProperty('--pizza-dark', dark);
+  root.style.setProperty('--theme-contrast-text', getBestContrastTextColor(themeColor));
 
   if (isDark) {
     root.style.setProperty('--pizza-light', hexToRgba(themeColor, 0.22));

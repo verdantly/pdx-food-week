@@ -25,6 +25,7 @@ select {
   --theme-primary-dark: var(--pizza-dark);
   --theme-primary-light: var(--pizza-light);
   --theme-primary-pale: var(--pizza-pale);
+  --theme-contrast-text: #FFFFFF;
 
   --ink: #1A1208;
   --ink-70: rgba(26, 18, 8, 0.72);
@@ -304,9 +305,9 @@ body.is-landing .view {
 
 .header-meta .pill {
   background: var(--pizza);
-  color: #fff;
+  color: var(--theme-contrast-text, #fff);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 3px 10px;
   border-radius: 20px;
   letter-spacing: 0.03em;
@@ -678,7 +679,8 @@ body.is-landing .view-footer,
 .filter-chip.active {
   background: var(--pizza);
   border-color: var(--pizza);
-  color: #fff;
+  color: var(--theme-contrast-text, #fff);
+  font-weight: 600;
 }
 
 .filter-chip:active {
