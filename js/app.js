@@ -149,6 +149,11 @@ function switchTab(name, fromPopState = false) {
     crawlFab.style.display = ((name === 'map' || name === 'saved') && State.crawlModeActive) ? 'block' : 'none';
   }
 
+  const backToTopBtn = document.getElementById('back-to-top-btn');
+  if (backToTopBtn) {
+    backToTopBtn.classList.remove('show-btn');
+  }
+
   if (window.App && window.App.updateMobileFabBadge) window.App.updateMobileFabBadge();
   State.lastScrollTop = 0;
 
@@ -1232,12 +1237,46 @@ function populateLandingCarousel(spots, weekId) {
   initLandingCarousel(selected, weekId);
 }
 
+export function scrollToTop() {
+  const viewBrowse = document.getElementById('view-browse');
+  const viewSaved = document.getElementById('view-saved');
+  const viewMap = document.getElementById('view-map');
+  const activeTab = State.activeTab;
+  const currentView = activeTab === 'browse' ? viewBrowse : (activeTab === 'saved' ? viewSaved : (activeTab === 'map' ? viewMap : null));
+
+  if (currentView) {
+    currentView.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+  if (document.body) {
+    document.body.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
 function setupMobileScrollListener() {
   const viewBrowse = document.getElementById('view-browse');
   const viewSaved = document.getElementById('view-saved');
+  const viewMap = document.getElementById('view-map');
   if (!viewBrowse || !viewSaved) return;
 
   const onScroll = () => {
+    const isFoodWeek = State.activeTab === 'browse' || State.activeTab === 'saved' || State.activeTab === 'map';
+    const currentView = State.activeTab === 'browse' ? viewBrowse : (State.activeTab === 'saved' ? viewSaved : (State.activeTab === 'map' ? viewMap : null));
+    const viewScroll = currentView ? currentView.scrollTop : 0;
+    const docScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const st = Math.max(viewScroll, docScroll);
+    const backToTopBtn = document.getElementById('back-to-top-btn');
+
+    // Back-to-top button visibility (both mobile and desktop, food week views only)
+    if (backToTopBtn) {
+      if (isFoodWeek && !document.body.classList.contains('is-landing') && st > 250) {
+        backToTopBtn.classList.add('show-btn');
+      } else {
+        backToTopBtn.classList.remove('show-btn');
+      }
+    }
+
     if (window.innerWidth >= 1024) {
       document.getElementById('app').classList.remove('compact-header');
       const fab = document.getElementById('mobile-filter-fab');
@@ -1247,10 +1286,6 @@ function setupMobileScrollListener() {
 
     if (State.activeTab !== 'browse' && State.activeTab !== 'saved') return;
 
-    const currentView = State.activeTab === 'browse' ? viewBrowse : viewSaved;
-    const viewScroll = currentView ? currentView.scrollTop : 0;
-    const docScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    const st = Math.max(viewScroll, docScroll);
     const appContainer = document.getElementById('app');
     const fabButton = document.getElementById('mobile-filter-fab');
 
@@ -1293,6 +1328,7 @@ function setupMobileScrollListener() {
 
   viewBrowse.addEventListener('scroll', onScroll, { passive: true });
   viewSaved.addEventListener('scroll', onScroll, { passive: true });
+  if (viewMap) viewMap.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('scroll', onScroll, { passive: true });
   document.addEventListener('scroll', onScroll, { passive: true });
 }
@@ -2068,7 +2104,8 @@ const App = {
   closeResetGuestDataConfirm,
   executeResetGuestData,
   setThemePreference,
-  cycleThemePreference
+  cycleThemePreference,
+  scrollToTop
 };
 
 if (typeof window !== 'undefined') {

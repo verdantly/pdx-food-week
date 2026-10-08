@@ -5514,6 +5514,66 @@ select:focus-visible {
   }
 }
 
+/* ── Floating Back to Top Button ── */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--header-bg, var(--ink));
+  color: var(--header-ink, var(--cream));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1400;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.9);
+  transition: opacity 0.25s ease,
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.back-to-top-btn.show-btn {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.back-to-top-btn:active {
+  transform: translateY(0) scale(0.95);
+  background: var(--header-bg, var(--ink));
+}
+
+.back-to-top-btn .back-to-top-icon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--header-ink, var(--cream));
+  stroke-width: 2.5;
+  transition: transform 0.2s ease;
+}
+
+.back-to-top-btn:hover .back-to-top-icon {
+  transform: translateY(-1px);
+}
+
+body.is-landing .back-to-top-btn {
+  display: none !important;
+}
+
 /* ── Mobile Filter Drawer Overlay ── */
 .filter-drawer-overlay {
   position: fixed;
@@ -6547,14 +6607,21 @@ select:focus-visible {
   gap: 8px;
 }
 
-/* Hide Mobile FAB when Detail sheet, modals, drawers, bulk edit, or Crawl Mode are active to prevent layering overlap */
+/* Hide Mobile FAB & Back-to-Top when Detail sheet, modals, drawers, bulk edit, or Crawl Mode are active to prevent layering overlap */
 #app.detail-open #mobile-filter-fab,
+#app.detail-open #back-to-top-btn,
 body.crawl-mode-active #mobile-filter-fab,
+body.crawl-mode-active #back-to-top-btn,
 body.bulk-edit-active #mobile-filter-fab,
+body.bulk-edit-active #back-to-top-btn,
 body:has(.filter-drawer-overlay.open) #mobile-filter-fab,
+body:has(.filter-drawer-overlay.open) #back-to-top-btn,
 body:has(.crawl-modal-overlay.open) #mobile-filter-fab,
+body:has(.crawl-modal-overlay.open) #back-to-top-btn,
 body:has(#photo-zoom-overlay.open) #mobile-filter-fab,
-body:has(.detail-overlay.open) #mobile-filter-fab {
+body:has(#photo-zoom-overlay.open) #back-to-top-btn,
+body:has(.detail-overlay.open) #mobile-filter-fab,
+body:has(.detail-overlay.open) #back-to-top-btn {
   display: none !important;
 }
 
@@ -7792,6 +7859,11 @@ body:has(.detail-overlay.open) #mobile-filter-fab {
 
   body:not(.is-landing) .mobile-filter-fab {
     bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body:not(.is-landing) .back-to-top-btn {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 16px !important;
   }
 
   .app-header .nav-tabs {

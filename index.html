@@ -68,7 +68,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=5894d8de" />
+  <link rel="stylesheet" href="css/style.css?v=042c3303" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -947,6 +947,15 @@
         <line x1="17" y1="16" x2="23" y2="16"></line>
       </svg>
       <span>Filter &amp; Sort</span>
+    </button>
+
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top-btn" class="back-to-top-btn" onclick="App.scrollToTop()"
+      aria-label="Back to top" title="Back to top">
+      <svg viewBox="0 0 24 24" class="back-to-top-icon" width="20" height="20" fill="none" stroke="currentColor"
+        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
     </button>
 
   </div><!-- #app -->
@@ -1993,8 +2002,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-  <script src="js/meta.js?v=5894d8de"></script>
-  <script type="module" src="js/app.js?v=5894d8de"></script>
+  <script src="js/meta.js?v=042c3303"></script>
+  <script type="module" src="js/app.js?v=042c3303"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;
