@@ -53,14 +53,17 @@ export function haversineDistance(lat1, lon1, lat2, lon2) {
 }
 
 let toastTimer = null;
-export function showToast(msg) {
+export function showToast(msg, duration = 2000, className = '') {
   if (typeof document === 'undefined') return;
   const t = document.getElementById('toast');
   if (!t) return;
   t.textContent = msg;
-  t.classList.add('show');
+  t.className = 'toast show' + (className ? ' ' + className : '');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+  toastTimer = setTimeout(() => {
+    t.classList.remove('show');
+    if (className) t.classList.remove(className);
+  }, duration);
 }
 
 // ── Schedule & Day-of-Week Helpers ──

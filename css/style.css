@@ -563,8 +563,8 @@ body[data-theme="dark"] .new-listings-banner .banner-close {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: none;
   background: var(--border);
@@ -578,12 +578,26 @@ body[data-theme="dark"] .new-listings-banner .banner-close {
   line-height: 1;
   padding: 0;
   z-index: 2;
-  transition: background var(--transition), color var(--transition);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.search-clear-btn::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  left: -8px;
+  right: -8px;
 }
 
 .search-clear-btn:hover {
   background: rgba(201, 75, 44, 0.15);
   color: var(--pizza);
+}
+
+.search-clear-btn:focus-visible {
+  outline: 2px solid var(--pizza);
+  outline-offset: 2px;
 }
 
 .search-icon {
@@ -3534,6 +3548,30 @@ body[data-theme="dark"] .friend-avatar {
   transform: translateX(-50%) translateY(0);
 }
 
+.toast.toast-offline {
+  background: #3A2312;
+  border-color: rgba(224, 112, 32, 0.4);
+  color: #FFE6D0;
+}
+
+.toast.toast-online {
+  background: #143422;
+  border-color: rgba(46, 170, 95, 0.4);
+  color: #D4F5E2;
+}
+
+[data-theme="dark"] .toast.toast-offline {
+  background: #422614;
+  border-color: rgba(255, 140, 60, 0.5);
+  color: #FFEFE0;
+}
+
+[data-theme="dark"] .toast.toast-online {
+  background: #103822;
+  border-color: rgba(60, 190, 110, 0.5);
+  color: #E2FBE9;
+}
+
 /* ── Scrollbars ── */
 .view::-webkit-scrollbar {
   width: 4px;
@@ -4919,16 +4957,36 @@ body[data-theme="dark"] .swipe-undo {
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-    z-index: -1;
+    z-index: 1;
     padding: 0 40px;
+    opacity: 0.8;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .swipe-desktop-hints.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.95);
   }
 
   .swipe-desktop-hint {
-    font-family: var(--font-display);
-    font-size: 24px;
+    font-family: var(--font-body);
+    font-size: 14px;
     font-weight: 600;
-    color: var(--ink-20);
-    opacity: 0.5;
+    letter-spacing: 0.04em;
+    color: var(--ink-70);
+    background: var(--paper);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  [data-theme="dark"] .swipe-desktop-hint {
+    background: #251E18;
+    border-color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 }
 

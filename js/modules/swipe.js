@@ -36,8 +36,18 @@ export function renderSwipe() {
 
   if (undoBtn) undoBtn.disabled = (State.swipeIdx <= 0);
 
+  const hintsEl = document.querySelector('.swipe-desktop-hints');
+  if (hintsEl) {
+    try {
+      if (sessionStorage.getItem('pdxfw_swipe_cues_dismissed') === 'true') {
+        hintsEl.style.display = 'none';
+      }
+    } catch (_) {}
+  }
+
   const r = currentSwipeCard();
   if (!r) {
+    if (hintsEl) hintsEl.style.display = 'none';
     emptyEl.style.display = 'flex';
     if (passBtn) passBtn.disabled = true;
     if (infoBtn) infoBtn.disabled = true;
@@ -137,6 +147,13 @@ export function swipe(dir, fromGesture = false) {
   }
   saveState();
   updateBrowseBadge();
+
+  // Dismiss keyboard shortcut cues if visible
+  const hintsEl = document.querySelector('.swipe-desktop-hints');
+  if (hintsEl && !hintsEl.classList.contains('fade-out')) {
+    hintsEl.classList.add('fade-out');
+    try { sessionStorage.setItem('pdxfw_swipe_cues_dismissed', 'true'); } catch (_) {}
+  }
 
   State.swipeIdx++;
   State.swipeAnimating = true;

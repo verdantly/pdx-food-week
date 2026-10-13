@@ -9,7 +9,8 @@ export function isStandalone() {
 }
 
 export function isIOS() {
-  return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+  const isTouchMac = /macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1;
+  return (/iphone|ipad|ipod/i.test(navigator.userAgent) || isTouchMac) && !window.MSStream;
 }
 
 export function isSafari() {

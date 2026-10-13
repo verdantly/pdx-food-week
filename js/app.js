@@ -1863,6 +1863,18 @@ function init() {
     mql.addListener(updateSearchPlaceholders);
   }
   updateSearchPlaceholders();
+
+  // ── Network Connectivity Listeners ──
+  window.addEventListener('offline', () => {
+    showToast('📡 You are offline. Menus and saved spots remain available.', 4000, 'toast-offline');
+  });
+
+  window.addEventListener('online', () => {
+    showToast('⚡ Back online. Reconnected to live data.', 3000, 'toast-online');
+    if (typeof queueCloudSync === 'function') {
+      queueCloudSync();
+    }
+  });
   setupMobileScrollListener();
   renderWeekSwitchers();
 

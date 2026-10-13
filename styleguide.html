@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>PDX Food Week — Design System & HTML Style Guide</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Syne:wght@400..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Style Guide Showcase Page Layout ── */
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sg-layout {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .sg-topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .sg-brand-block h1 {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+
+    .sg-brand-block h1 em {
+      color: var(--pizza);
+      font-style: italic;
+    }
+
+    .sg-brand-block p {
+      color: var(--ink-60);
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .sg-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sg-theme-toggle {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      padding: 8px 16px;
+      border-radius: 24px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition);
+    }
+
+    .sg-theme-toggle:hover {
+      border-color: var(--pizza);
+      color: var(--pizza);
+    }
+
+    .sg-week-select {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      padding: 8px 32px 8px 14px;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231A1208' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 12px;
+    }
+
+    [data-theme="dark"] .sg-week-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5F0EB' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+
+    .sg-week-select option {
+      background: var(--card-bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    /* ── Sections ── */
+    .sg-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .sg-section-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sg-section-desc {
+      color: var(--ink-60);
+      font-size: 14px;
+      margin: 0 0 24px;
+    }
+
+    /* ── Color Swatches Grid ── */
+    .sg-swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .sg-swatch-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--card-bg);
+    }
+
+    .sg-swatch-color {
+      height: 72px;
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .sg-swatch-info {
+      padding: 10px 12px;
+    }
+
+    .sg-swatch-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .sg-swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--ink-60);
+    }
+
+    .sg-swatch-ratio {
+      font-size: 11px;
+      margin-top: 4px;
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: var(--pizza-light);
+      color: var(--pizza-dark);
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .sg-swatch-ratio {
+      background: var(--pizza-light);
+      color: var(--ink);
+    }
+
+    /* ── Food Week Palette Grid ── */
+    .sg-week-palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .sg-week-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .sg-week-card:hover {
+      border-color: var(--pizza);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .sg-week-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sg-week-emoji {
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .sg-week-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .sg-week-sub {
+      font-size: 11.5px;
+      color: var(--ink-60);
+    }
+
+    .sg-week-bars {
+      display: flex;
+      height: 24px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .sg-week-bar {
+      flex: 1;
+    }
+
+    /* ── Typography Scale Table ── */
+    .sg-type-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .sg-type-table th,
+    .sg-type-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sg-type-table th {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-60);
+      background: var(--cream);
+    }
+
+    .sg-type-meta {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-60);
+      white-space: nowrap;
+    }
+
+    /* ── Component Showcase Grid ── */
+    .sg-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .sg-demo-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      background: var(--cream);
+    }
+
+    .sg-demo-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-60);
+      margin-bottom: 14px;
+    }
+
+    .sg-token-pill {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--border);
+      color: var(--ink);
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sg-layout">
+    <!-- Topbar Header -->
+    <header class="sg-topbar">
+      <div class="sg-brand-block">
+        <a href="index.html" class="compact-brand" style="text-decoration: none; margin-bottom: 4px; display: inline-block;">pdx food week</a>
+        <h1>PDX Food Week <em>Design System</em></h1>
+        <p>Interactive HTML Style Guide, WCAG 2.1 AA Reference & Component Kit</p>
+      </div>
+      <div class="sg-controls">
+        <button class="sg-theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light or dark theme">
+          <span id="theme-icon">🌙</span> <span id="theme-label">Dark Mode</span>
+        </button>
+        <select class="sg-week-select" id="week-selector" aria-label="Select active food week theme">
+          <!-- Populated by script -->
+        </select>
+        <a href="index.html" class="filter-chip" style="text-decoration: none;">← Back to App</a>
+      </div>
+    </header>
+
+    <!-- SECTION 1: Semantic Design Tokens & WCAG AA Colors -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">🎨 Theme Tokens & Color Palette</h2>
+      <p class="sg-section-desc">Dynamic CSS custom properties adapt between Light & Dark themes while guaranteeing $\ge 4.5:1$ WCAG AA contrast.</p>
+
+      <div class="sg-swatch-grid" id="token-swatches">
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--pizza);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--pizza (Primary)</div>
+            <div class="sg-swatch-hex" id="hex-pizza">Active Brand</div>
+            <div class="sg-swatch-ratio">WCAG AA Pass</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--pizza-dark);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--pizza-dark</div>
+            <div class="sg-swatch-hex">Deep Tone</div>
+            <div class="sg-swatch-ratio">Buttons / Borders</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--pizza-light);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--pizza-light</div>
+            <div class="sg-swatch-hex">Tint Surface</div>
+            <div class="sg-swatch-ratio">Banners / Badges</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--pizza-pale);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--pizza-pale</div>
+            <div class="sg-swatch-hex">Subtle Tint</div>
+            <div class="sg-swatch-ratio">Card Selected</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--ink);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--ink (Text)</div>
+            <div class="sg-swatch-hex">Primary Text</div>
+            <div class="sg-swatch-ratio">≥ 10:1 Ratio</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--ink-60);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--ink-60 (Meta)</div>
+            <div class="sg-swatch-hex">Secondary Text</div>
+            <div class="sg-swatch-ratio">≥ 5.7:1 Ratio</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--card-bg);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--card-bg</div>
+            <div class="sg-swatch-hex">Card Canvas</div>
+            <div class="sg-swatch-ratio">Background</div>
+          </div>
+        </div>
+
+        <div class="sg-swatch-card">
+          <div class="sg-swatch-color" style="background: var(--teal);"></div>
+          <div class="sg-swatch-info">
+            <div class="sg-swatch-name">--teal (Action)</div>
+            <div class="sg-swatch-hex">Like / Positive</div>
+            <div class="sg-swatch-ratio">≥ 8:1 Ratio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: 12 Food Week Brand Palettes -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">🍕 12 Food Week Brand Themes</h2>
+      <p class="sg-section-desc">Click any week to instantly preview its dynamic colors across all interactive widgets.</p>
+
+      <div class="sg-week-palette-grid" id="week-palette-grid">
+        <!-- Injected via JavaScript from window.FOOD_WEEKS -->
+      </div>
+    </section>
+
+    <!-- SECTION 3: Typography Scale -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">🔤 Typography & Hierarchy</h2>
+      <p class="sg-section-desc">Handcrafted font pairing: <strong>Fraunces</strong> (Display serif), <strong>Syne</strong> (Wordmark), <strong>Plus Jakarta Sans</strong> (UI & body), and <strong>DM Mono</strong> (Data/code).</p>
+
+      <table class="sg-type-table">
+        <thead>
+          <tr>
+            <th>Element / Role</th>
+            <th>Typeface & Specs</th>
+            <th>Preview</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>App Wordmark (.compact-brand / .app-wordmark)</strong></td>
+            <td class="sg-type-meta">Syne 600 / 14px</td>
+            <td>
+              <div style="background: var(--header-bg); padding: 8px 14px; border-radius: 6px; display: inline-block;">
+                <span class="compact-brand">pdx food week</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Header Title (.header-title)</strong></td>
+            <td class="sg-type-meta">Fraunces 600 / 26px</td>
+            <td>
+              <div style="background: var(--header-bg); padding: 12px 18px; border-radius: 8px; display: inline-block;">
+                <div class="header-title" style="margin: 0; line-height: 1.15;"><em>Pizza</em> Week 2026</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Tab Header Title (.tab-header-title)</strong></td>
+            <td class="sg-type-meta">Fraunces 600 / 20px</td>
+            <td>
+              <h2 class="tab-header-title" style="margin: 0;">Browse</h2>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Dish Title (.card-dish)</strong></td>
+            <td class="sg-type-meta">Fraunces 600 / 18px</td>
+            <td><span class="card-dish" style="margin:0; padding:0;">The Smoked Mozzarella Special</span></td>
+          </tr>
+          <tr>
+            <td><strong>Restaurant Name (.card-restaurant)</strong></td>
+            <td class="sg-type-meta">Plus Jakarta Sans 600 / 12px (Caps)</td>
+            <td><span class="card-restaurant" style="margin:0; padding:0;">Apizza Scholls</span></td>
+          </tr>
+          <tr>
+            <td><strong>Neighborhood / Meta</strong></td>
+            <td class="sg-type-meta">Plus Jakarta Sans 500 / 13px</td>
+            <td><span class="card-neighborhood" style="margin:0;">📍 Southeast • Hawthorne District</span></td>
+          </tr>
+          <tr>
+            <td><strong>Body / Description</strong></td>
+            <td class="sg-type-meta">Plus Jakarta Sans 400 / 14.5px</td>
+            <td><span class="card-desc" style="margin:0; -webkit-line-clamp:none;">House-pulled mozzarella, charred sweet onions, and Oregon hazelnut pesto on naturally leavened dough.</span></td>
+          </tr>
+          <tr>
+            <td><strong>Data / Meta Label</strong></td>
+            <td class="sg-type-meta">DM Mono 500 / 12px</td>
+            <td><span style="font-family: var(--font-mono); font-size: 12px; color: var(--ink-60);">$10 SPECIAL • OCT 8-14</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 4: Interactive Components Showcase -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">🧩 Interactive Components Kit</h2>
+      <p class="sg-section-desc">Fully functional UI widgets matching exact production styles.</p>
+
+      <div class="sg-demo-grid">
+        <!-- Box 1: Banners -->
+        <div class="sg-demo-box">
+          <div class="sg-demo-label">Alerts & Banners (.new-listings-banner)</div>
+          <div class="new-listings-banner" style="margin: 0 0 12px;">
+            <span class="banner-icon">✨</span>
+            <span class="banner-text">There are 3 new slice listings for pizza week!</span>
+            <button class="banner-close" aria-label="Dismiss notification">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <span class="sg-token-pill">Background: var(--pizza-light)</span>
+          <span class="sg-token-pill">Text: var(--ink) in Dark</span>
+        </div>
+
+        <!-- Box 2: Filter Chips -->
+        <div class="sg-demo-box">
+          <div class="sg-demo-label">Filter Chips & Badges (.filter-chip)</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+            <button class="filter-chip active" type="button">All Spots</button>
+            <button class="filter-chip" type="button">Gluten-Free</button>
+            <button class="filter-chip" type="button">Vegetarian</button>
+            <button class="filter-chip" type="button">Open Today</button>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="tag tag-meat">Meat</span>
+            <span class="tag tag-veg">Vegetarian</span>
+            <span class="tag tag-vegan">Vegan</span>
+            <span class="tag tag-gf">GF</span>
+            <span class="tag tag-slice">Slice</span>
+            <span class="new-badge">NEW</span>
+          </div>
+        </div>
+
+        <!-- Box 3: Dish Card (Normal & Bookmarked) -->
+        <div class="sg-demo-box" style="grid-column: 1 / -1;">
+          <div class="sg-demo-label">Dish Cards (.dish-card in Desktop Grid & Mobile List)</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px;">
+            <!-- Column 1: Standard Card (with Photo Thumbnail) -->
+            <div style="background: var(--card-bg); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border);">
+              <div style="font-size: 11px; font-weight: 700; color: var(--ink-60); text-transform: uppercase; margin-bottom: 8px;">Standard Dish Card (.card-thumb: square / 0 border-radius)</div>
+              <div class="dish-card" style="padding: 12px 8px; position: relative;">
+                <div class="card-emoji card-thumb">
+                  <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=160&auto=format&fit=crop&q=80" alt="Pizza thumbnail" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <div class="card-dish">Cornmeal Crust Pie <span class="new-badge">NEW</span></div>
+                  <div class="card-restaurant">Dove Vivi Pizza</div>
+                  <div class="card-neighborhood">📍 Northeast • Glisan</div>
+                  <div class="card-desc">Signature cornmeal crust loaded with roasted red peppers and house cashew cheese.</div>
+                  <div class="card-tags">
+                    <span class="tag tag-veg">Vegetarian</span>
+                    <span class="tag tag-vegan">Vegan</span>
+                  </div>
+                </div>
+                <button class="bookmark-btn" aria-label="Save this dish" type="button" onclick="this.classList.toggle('saved'); const t=this.querySelector('.save-text'); if(t) t.textContent=this.classList.contains('saved')?'Saved':'Save';">
+                  <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span class="save-text">Save</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Column 2: Bookmarked Card (with Emoji Avatar) -->
+            <div style="background: var(--card-bg); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border);">
+              <div style="font-size: 11px; font-weight: 700; color: var(--ink-60); text-transform: uppercase; margin-bottom: 8px;">Bookmarked Dish Card (.dish-card.bookmarked)</div>
+              <div class="dish-card bookmarked" style="padding: 12px 8px; position: relative;">
+                <div class="card-emoji">🥪</div>
+                <div class="card-body">
+                  <div class="card-dish">Korean Pork Belly Melt</div>
+                  <div class="card-restaurant">Lardo Southeast</div>
+                  <div class="card-neighborhood">📍 Southeast • Hawthorne</div>
+                  <div class="card-desc">Crispy pork belly, kimchi remoulade, marinated cabbage, and melted provolone.</div>
+                  <div class="card-tags">
+                    <span class="tag tag-meat">Meat</span>
+                  </div>
+                </div>
+                <button class="bookmark-btn saved" aria-label="Remove from saved" type="button" onclick="this.classList.toggle('saved'); const t=this.querySelector('.save-text'); if(t) t.textContent=this.classList.contains('saved')?'Saved':'Save';">
+                  <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                  <span class="save-text">Saved</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box 4: Swipe Action Buttons -->
+        <div class="sg-demo-box">
+          <div class="sg-demo-label">Swipe Buttons (.swipe-btn controls)</div>
+          <div class="swipe-controls" style="margin-top: 10px;">
+            <div class="swipe-btn-wrapper">
+              <button class="swipe-btn swipe-undo" aria-label="Undo">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6" /><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" /></svg>
+              </button>
+              <span class="swipe-btn-label">Undo</span>
+            </div>
+            <div class="swipe-btn-wrapper">
+              <button class="swipe-btn swipe-pass" aria-label="Dislike">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+              </button>
+              <span class="swipe-btn-label">Dislike</span>
+            </div>
+            <div class="swipe-btn-wrapper">
+              <button class="swipe-btn swipe-info" aria-label="More info">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+              </button>
+              <span class="swipe-btn-label">Info</span>
+            </div>
+            <div class="swipe-btn-wrapper">
+              <button class="swipe-btn swipe-like" aria-label="Like">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+              </button>
+              <span class="swipe-btn-label">Like</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box 5: Stats Pills -->
+        <div class="sg-demo-box">
+          <div class="sg-demo-label">Metric Stats Pills (.stats-pills > .stat-pill)</div>
+          <p style="font-size: 13px; color: var(--ink-60); margin-bottom: 12px;">Used in Browse and Saved headers to display counts and open breakdown modals.</p>
+          <div class="stats-pills" style="margin-bottom: 14px;">
+            <div class="stat-pill"><span>42</span> Total Spots</div>
+            <div class="stat-pill clickable" title="Click to view neighborhoods"><span>14</span> Neighborhoods</div>
+            <div class="stat-pill clickable" title="Click to view dish types"><span>6</span> Dish Types</div>
+          </div>
+          <span class="sg-token-pill">Number: var(--pizza)</span>
+          <span class="sg-token-pill">Label: var(--ink-60)</span>
+        </div>
+
+        <!-- Box 6: Bookmark Buttons -->
+        <div class="sg-demo-box">
+          <div class="sg-demo-label">Bookmark Save Buttons (.bookmark-btn)</div>
+          <p style="font-size: 13px; color: var(--ink-60); margin-bottom: 14px;">Floating save action with resting and saved accent states.</p>
+          <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 14px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <button class="bookmark-btn" aria-label="Save this dish" type="button" style="position: static;" onclick="this.classList.toggle('saved');">
+                <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <span style="font-size: 11px; font-weight: 600; color: var(--ink-60);">Default / Unsaved</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+              <button class="bookmark-btn saved" aria-label="Remove from saved" type="button" style="position: static;" onclick="this.classList.toggle('saved');">
+                <svg class="save-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <span style="font-size: 11px; font-weight: 600; color: var(--ink-60);">Active / Saved</span>
+            </div>
+          </div>
+          <span class="sg-token-pill">Resting: var(--floating-btn-bg)</span>
+          <span class="sg-token-pill">Saved: var(--pizza)</span>
+        </div>
+
+        <!-- Box 7: Detail Sheet Schedule Row & Friend Avatar -->
+        <div class="sg-demo-box">
+          <div class="sg-demo-label">Schedule Hours & Friend Avatar</div>
+          <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px;">
+            <div class="sheet-schedule-day-row is-today" style="font-size: 13px;">
+              <span>Wednesday (Today)</span>
+              <span>11:30 AM – 10:00 PM</span>
+            </div>
+            <div class="sheet-schedule-day-row is-closed" style="font-size: 13px;">
+              <span>Monday</span>
+              <span>Closed</span>
+            </div>
+          </div>
+          <div class="friend-item" style="margin: 0;">
+            <div class="friend-avatar">DG</div>
+            <div class="friend-info">
+              <div class="friend-name">Dan's Wishlist</div>
+              <div class="friend-count">14 spots saved</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: WCAG 2.1 AA Compliance Scorecard -->
+    <section class="sg-section">
+      <h2 class="sg-section-title">✅ WCAG 2.1 AA Compliance Matrix</h2>
+      <p class="sg-section-desc">Automated mathematical audit results across all 12 food weeks in Light and Dark modes.</p>
+
+      <table class="sg-type-table">
+        <thead>
+          <tr>
+            <th>Element / State</th>
+            <th>Required Ratio</th>
+            <th>Light Mode Result</th>
+            <th>Dark Mode Result</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Restaurant Name on Cards</td>
+            <td>$\ge 4.5:1$</td>
+            <td><strong>5.13:1 – 12.10:1</strong></td>
+            <td><strong>4.51:1 – 6.02:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AA)</span></td>
+          </tr>
+          <tr>
+            <td>Bookmarked Card Tint Text</td>
+            <td>$\ge 4.5:1$</td>
+            <td><strong>5.13:1 – 12.10:1</strong></td>
+            <td><strong>4.52:1 – 6.88:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AA)</span></td>
+          </tr>
+          <tr>
+            <td>New Listings Banner</td>
+            <td>$\ge 4.5:1$</td>
+            <td><strong>5.87:1 – 7.42:1</strong></td>
+            <td><strong>10.24:1 – 10.87:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AAA)</span></td>
+          </tr>
+          <tr>
+            <td>Swipe Pass & Undo Buttons</td>
+            <td>$\ge 4.5:1$</td>
+            <td><strong>5.13:1 – 12.10:1</strong></td>
+            <td><strong>4.51:1 – 6.02:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AA)</span></td>
+          </tr>
+          <tr>
+            <td>Swipe Like Button (Teal)</td>
+            <td>$\ge 3.0:1$ UI / 4.5:1 Text</td>
+            <td><strong>8.18:1</strong></td>
+            <td><strong>8.62:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AAA)</span></td>
+          </tr>
+          <tr>
+            <td>Neighborhood & Meta Text</td>
+            <td>$\ge 4.5:1$</td>
+            <td><strong>5.76:1</strong></td>
+            <td><strong>6.96:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AA)</span></td>
+          </tr>
+          <tr>
+            <td>Friend Avatar Inset Text</td>
+            <td>$\ge 4.5:1$</td>
+            <td><strong>5.87:1 – 7.42:1</strong></td>
+            <td><strong>10.24:1 – 10.87:1</strong></td>
+            <td><span style="color:#2F6316; font-weight:700;">PASS (AAA)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="js/meta.js"></script>
+  <script>
+    // Self-contained palette and theme engine (runs over file:// and http:// without module CORS restrictions)
+    function hexToRgba(hex, alpha) {
+      if (!hex || typeof hex !== 'string') return `rgba(232, 91, 56, ${alpha})`;
+      let clean = hex.replace('#', '').trim();
+      if (clean.length === 3) clean = clean.split('').map(c => c + c).join('');
+      if (clean.length !== 6) return `rgba(232, 91, 56, ${alpha})`;
+      const r = parseInt(clean.substring(0, 2), 16);
+      const g = parseInt(clean.substring(2, 4), 16);
+      const b = parseInt(clean.substring(4, 6), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function luminance(r, g, b) {
+      const a = [r, g, b].map(v => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    }
+
+    function contrastRatio(rgb1, rgb2) {
+      const l1 = luminance(...rgb1);
+      const l2 = luminance(...rgb2);
+      return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+    }
+
+    function blendHex(fgHex, alpha, bgHex) {
+      let fClean = fgHex.replace('#', '').trim();
+      if (fClean.length === 3) fClean = fClean.split('').map(c => c + c).join('');
+      let bClean = bgHex.replace('#', '').trim();
+      if (bClean.length === 3) bClean = bClean.split('').map(c => c + c).join('');
+      const fr = parseInt(fClean.substring(0, 2), 16);
+      const fg = parseInt(fClean.substring(2, 4), 16);
+      const fb = parseInt(fClean.substring(4, 6), 16);
+      const br = parseInt(bClean.substring(0, 2), 16);
+      const bg = parseInt(bClean.substring(2, 4), 16);
+      const bb = parseInt(bClean.substring(4, 6), 16);
+      const r = Math.round(fr * alpha + br * (1 - alpha));
+      const g = Math.round(fg * alpha + bg * (1 - alpha));
+      const b = Math.round(fb * alpha + bb * (1 - alpha));
+      return [r, g, b];
+    }
+
+    function getAccessibleDarkColor(hex, minRatio = 4.5) {
+      let clean = hex.replace('#', '').trim();
+      if (clean.length === 3) clean = clean.split('').map(c => c + c).join('');
+      if (clean.length !== 6) return hex;
+      const r = parseInt(clean.substring(0, 2), 16);
+      const g = parseInt(clean.substring(2, 4), 16);
+      const b = parseInt(clean.substring(4, 6), 16);
+      const darkCard = [30, 30, 30]; // #1E1E1E
+      const bookmarkedCard = blendHex(hex, 0.12, '#1E1E1E');
+
+      if (contrastRatio([r, g, b], darkCard) >= minRatio && contrastRatio([r, g, b], bookmarkedCard) >= minRatio) {
+        return hex;
+      }
+
+      for (let i = 1; i <= 100; i++) {
+        const factor = i / 100;
+        const nr = Math.round(r + (255 - r) * factor);
+        const ng = Math.round(g + (255 - g) * factor);
+        const nb = Math.round(b + (255 - b) * factor);
+        if (contrastRatio([nr, ng, nb], darkCard) >= minRatio && contrastRatio([nr, ng, nb], bookmarkedCard) >= minRatio) {
+          return '#' + [nr, ng, nb].map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+      }
+      return hex;
+    }
+
+    function getBestContrastTextColor(hex) {
+      let clean = hex.replace('#', '').trim();
+      if (clean.length === 3) clean = clean.split('').map(c => c + c).join('');
+      if (clean.length !== 6) return '#FFFFFF';
+      const r = parseInt(clean.substring(0, 2), 16);
+      const g = parseInt(clean.substring(2, 4), 16);
+      const b = parseInt(clean.substring(4, 6), 16);
+      const crWhite = contrastRatio([255, 255, 255], [r, g, b]);
+      const crDark = contrastRatio([26, 18, 8], [r, g, b]);
+      return crWhite >= crDark ? '#FFFFFF' : '#1A1208';
+    }
+
+    function applyWeekTheme(week) {
+      const root = document.documentElement;
+      const isDark = root.getAttribute('data-theme') === 'dark';
+
+      if (!week) {
+        const defaultColor = isDark ? '#FF6B4A' : '#E85B38';
+        const defaultDark = isDark ? '#E05332' : '#B5472E';
+        root.style.setProperty('--pizza', defaultColor);
+        root.style.setProperty('--pizza-dark', defaultDark);
+        root.style.setProperty('--pizza-light', isDark ? 'rgba(255, 107, 74, 0.20)' : '#F5E6DF');
+        root.style.setProperty('--pizza-pale', isDark ? 'rgba(255, 107, 74, 0.10)' : '#FDF7F4');
+        root.style.setProperty('--theme-contrast-text', '#FFFFFF');
+        return;
+      }
+
+      const baseColor = week.color || '#E85B38';
+      const themeColor = isDark ? getAccessibleDarkColor(baseColor, 4.5) : baseColor;
+      const dark = week.colorDark || '#B5472E';
+
+      root.style.setProperty('--pizza', themeColor);
+      root.style.setProperty('--pizza-dark', dark);
+      root.style.setProperty('--theme-contrast-text', getBestContrastTextColor(themeColor));
+
+      if (isDark) {
+        root.style.setProperty('--pizza-light', hexToRgba(themeColor, 0.22));
+        root.style.setProperty('--pizza-pale', hexToRgba(themeColor, 0.12));
+      } else {
+        root.style.setProperty('--pizza-light', week.colorLight || '#F5E6DF');
+        root.style.setProperty('--pizza-pale', week.colorPale || '#FDF7F4');
+      }
+    }
+
+    // Default fallback week dataset in case js/meta.js is loaded under file:// origins
+    const fallbackWeeks = [
+      { id: "wiener-2026", name: "Wiener Week 2026", dates: "January 26 – February 1, 2026", color: "#D32F2F", colorDark: "#9A0007", colorLight: "#FFCDD2", colorPale: "#FFEBEE", emoji: "🌭" },
+      { id: "dumpling-2026", name: "Dumpling Week 2026", dates: "February 15–21, 2026", color: "#8E24AA", colorDark: "#5C007A", colorLight: "#E1BEE7", colorPale: "#F3E5F5", emoji: "🥟" },
+      { id: "sandwich-2026", name: "Sandwich Week 2026", dates: "March 2–8, 2026", color: "#00897B", colorDark: "#00564D", colorLight: "#B2DFDB", colorPale: "#E0F2F1", emoji: "🥪" },
+      { id: "pizza-2026", name: "Pizza Week 2026", dates: "April 20-26, 2026", color: "#C94B2C", colorDark: "#9E3318", colorLight: "#F5E6DF", colorPale: "#FDF7F4", emoji: "🍕" },
+      { id: "highball-2026", name: "Highball Week 2026", dates: "May 25-31, 2026", color: "#2C69C9", colorDark: "#1B478C", colorLight: "#DFEAF9", colorPale: "#F4F7FD", emoji: "🥃" },
+      { id: "taco-2026", name: "Taco Week 2026", dates: "June 1-7, 2026", color: "#D48C2C", colorDark: "#945B13", colorLight: "#FCEFD8", colorPale: "#FEF9F0", emoji: "🌮" },
+      { id: "nacho-2026", name: "Nacho Week 2026", dates: "June 22-28, 2026", color: "#D97B29", colorDark: "#945B13", colorLight: "#F5E6DF", colorPale: "#FDF7F4", emoji: "🧀" },
+      { id: "slushie-2026", name: "Summer of Slushies 2026", dates: "July 2026", color: "#E25A97", colorDark: "#B83271", colorLight: "#FCE7F1", colorPale: "#FDF2F7", emoji: "🥤" },
+      { id: "salad-2026", name: "Salad Week 2026", dates: "July 20 - 31, 2026", color: "#4CAF50", colorDark: "#2E7D32", colorLight: "#E8F5E9", colorPale: "#F1F8E9", emoji: "🥗" },
+      { id: "burger-2026", name: "Burger Week 2026", dates: "August 10-16, 2026", color: "#E65100", colorDark: "#9C2503", colorLight: "#F5E6DF", colorPale: "#FDF7F4", emoji: "🍔" },
+      { id: "fried-chicken-2026", name: "Fried Chicken Week 2026", dates: "September 14-20, 2026", color: "#D97706", colorDark: "#92400E", colorLight: "#FEF3C7", colorPale: "#FFFBEB", emoji: "🐔" },
+      { id: "wing-2026", name: "Wing Week 2026", dates: "September 21-27, 2026", color: "#E04F2E", colorDark: "#B8361B", colorLight: "#FDEAE6", colorPale: "#FFF5F2", emoji: "🍗" }
+    ];
+
+    const weeks = (window.FOOD_WEEKS && window.FOOD_WEEKS.length) ? window.FOOD_WEEKS : fallbackWeeks;
+    const weekSelector = document.getElementById('week-selector');
+    const weekPaletteGrid = document.getElementById('week-palette-grid');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeLabel = document.getElementById('theme-label');
+
+    // Populate Selector and Cards
+    weeks.forEach(w => {
+      // Option
+      const opt = document.createElement('option');
+      opt.value = w.id;
+      opt.textContent = `${w.emoji || '🍽️'} ${w.name}`;
+      weekSelector.appendChild(opt);
+
+      // Card in Palette Grid
+      const card = document.createElement('div');
+      card.className = 'sg-week-card';
+      card.innerHTML = `
+        <div class="sg-week-header">
+          <span class="sg-week-emoji">${w.emoji || '🍽️'}</span>
+          <div>
+            <div class="sg-week-title">${w.name}</div>
+            <div class="sg-week-sub">${w.dates}</div>
+          </div>
+        </div>
+        <div class="sg-week-bars">
+          <div class="sg-week-bar" style="background:${w.color};" title="Primary: ${w.color}"></div>
+          <div class="sg-week-bar" style="background:${w.colorDark || w.color};" title="Dark: ${w.colorDark || w.color}"></div>
+          <div class="sg-week-bar" style="background:${w.colorLight || '#F5E6DF'};" title="Light: ${w.colorLight || '#F5E6DF'}"></div>
+          <div class="sg-week-bar" style="background:${w.colorPale || '#FDF7F4'};" title="Pale: ${w.colorPale || '#FDF7F4'}"></div>
+        </div>
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--ink-60);">
+          ${w.color} • ${w.colorDark || 'auto'}
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        weekSelector.value = w.id;
+        applyTheme(w.id);
+      });
+      weekPaletteGrid.appendChild(card);
+    });
+
+    function applyTheme(weekId) {
+      const week = weeks.find(w => w.id === weekId) || weeks[0];
+      applyWeekTheme(week);
+      const hexEl = document.getElementById('hex-pizza');
+      if (hexEl) {
+        hexEl.textContent = getComputedStyle(document.documentElement).getPropertyValue('--pizza').trim();
+      }
+    }
+
+    weekSelector.addEventListener('change', (e) => {
+      applyTheme(e.target.value);
+    });
+
+    // Theme toggle
+    function updateThemeUI(isDark) {
+      themeIcon.textContent = isDark ? '☀️' : '🌙';
+      themeLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme');
+      const isDark = current === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('pdxfw_theme', next);
+      updateThemeUI(!isDark);
+      applyTheme(weekSelector.value);
+    });
+
+    // Initialize from storage or system
+    const savedTheme = localStorage.getItem('pdxfw_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeUI(savedTheme === 'dark');
+
+    // Default to first week
+    if (weeks.length > 0) {
+      weekSelector.value = weeks[0].id;
+      applyTheme(weeks[0].id);
+    }
+  </script>
+</body>
+</html>

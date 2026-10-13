@@ -1,11 +1,11 @@
-const CACHE_NAME = 'pdxfw-cache-69e29852';
+const CACHE_NAME = 'pdxfw-cache-8f1eea37';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=69e29852',
-  'js/app.js?v=69e29852',
-  'js/meta.js?v=69e29852',
+  'css/style.css?v=8f1eea37',
+  'js/app.js?v=8f1eea37',
+  'js/meta.js?v=8f1eea37',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
@@ -124,7 +124,38 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 3. Versioned static assets (?v=...) & CDN vendor libraries: Cache-First with network fallback & cache population
+  // 3. Map tiles (tile.openstreetmap.org): Network-First with cache fallback
+  // Ensures fresh tiles when online, but falls back to cached tiles when offline roaming
+  const isMapTile = url.hostname.includes('tile.openstreetmap.org');
+  if (isMapTile) {
+    const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200) {
+            const resClone = response.clone();
+            caches.open(TILE_CACHE_NAME).then((cache) => {
+              cache.put(event.request, resClone).catch(() => {});
+              // Bound tile cache to max 400 entries to prevent storage bloat
+              cache.keys().then((keys) => {
+                if (keys.length > 400) {
+                  cache.delete(keys[0]).catch(() => {});
+                }
+              });
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.open(TILE_CACHE_NAME).then((cache) => {
+            return cache.match(event.request);
+          });
+        })
+    );
+    return;
+  }
+
+  // 4. Versioned static assets (?v=...) & CDN vendor libraries: Cache-First with network fallback & cache population
   event.respondWith(
     caches.match(event.request, { ignoreSearch: false }).then((cachedResponse) => {
       if (cachedResponse) {
