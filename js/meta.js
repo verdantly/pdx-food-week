@@ -337,9 +337,9 @@ window.UPCOMING_FOOD_WEEKS = [
     id: "wiener-2027",
     name: "Wiener Week 2027",
     organizer: "Portland Mercury",
-    dates: "Late January 2027",
-    startDate: "2027-01-25",
-    endDate: "2027-01-31",
+    dates: "February 1-7, 2027",
+    startDate: "2027-02-01",
+    endDate: "2027-02-07",
     pricePills: ["$8 wieners"],
     color: "#D32F2F",
     colorDark: "#9A0007",
@@ -349,11 +349,11 @@ window.UPCOMING_FOOD_WEEKS = [
     url: "https://everout.com/portland/",
     aboutTitle: "What is Portland Wiener Week 2027?",
     aboutText: "Portland Wiener Week is the Portland Mercury's annual celebration of gourmet hot dogs, sausages, corn dogs, and vegan franks. Dozens of bars, pubs, and restaurants across Portland offer exclusive, one-of-a-kind wieners at an affordable fixed price.",
-    description: "Get ready for Portland Wiener Week 2027! Explore upcoming dates, $8 frank specials, participating Portland bars & restaurants, dietary options, and interactive crawl planning.",
+    description: "Get ready for Portland Wiener Week 2027! Explore upcoming dates (February 1-7, 2027), $8 frank specials, participating Portland bars & restaurants, dietary options, and interactive crawl planning.",
     faqs: [
       {
         question: "When is Portland Wiener Week 2027?",
-        answer: "Portland Wiener Week 2027 is projected to return in late January 2027 (typically late January through early February) across dozens of Portland restaurants and bars."
+        answer: "Portland Wiener Week 2027 is scheduled for February 1-7, 2027 across dozens of Portland restaurants and bars."
       },
       {
         question: "Who organizes Portland Wiener Week?",
