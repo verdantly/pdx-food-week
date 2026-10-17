@@ -269,46 +269,34 @@ window.FOOD_WEEKS = [
       { id: 'gf', label: 'Gluten-free' },
       { id: 'spicy', label: 'Spicy' }
     ]
-  }
-];
-
-window.UPCOMING_FOOD_WEEKS = [
+  },
   {
     id: "mac-and-cheese-2026",
     name: "Mac & Cheese Week 2026",
     organizer: "The Actual Portland",
+    dataFile: "macandcheeseweek2026.js",
     dates: "November 2–8, 2026",
     startDate: "2026-11-02",
     endDate: "2026-11-08",
-    pricePills: ["$10 specials"],
+    pricePills: ["$10 special"],
     color: "#E69500",
     colorDark: "#A66300",
     colorLight: "#FDE68A",
     colorPale: "#FFFBEB",
     emoji: "🧀",
-    url: "https://www.theactualportland.com",
-    aboutTitle: "What is Portland Mac & Cheese Week?",
-    aboutText: "Organized by The Actual Portland, Mac & Cheese Week celebrates Portland's best comfort food. Area restaurants, carts, and brewpubs present specialty creations—ranging from classic gourmet cheddar blends and smoked gouda skillets to buffalo chicken macs, crab and lobster bakes, and innovative plant-based vegan/gluten-free variations.",
-    description: "Portland Mac & Cheese Week celebrates cheesy, comforting culinary mastery across local Portland restaurants and food carts. Participating eateries offer limited-edition craft mac & cheese creations and special pairings from November 2–8, 2026.",
-    faqs: [
-      {
-        question: "When is Portland Mac & Cheese Week 2026?",
-        answer: "Portland Mac & Cheese Week takes place November 2–8, 2026 across restaurants, pubs, and food carts throughout Portland, Oregon."
-      },
-      {
-        question: "Who organizes Portland Mac & Cheese Week?",
-        answer: "Portland Mac & Cheese Week is presented by The Actual Portland (theactualportland.com), celebrating local culinary culture across the Rose City."
-      },
-      {
-        question: "How does Portland Mac & Cheese Week work?",
-        answer: "Participating restaurants and food carts feature signature mac & cheese specials for $10—often highlighting artisan cheeses, house-made pastas, dietary accommodations (gluten-free, vegetarian, vegan options), and decadent toppings. Diners visit participating venues, order the event special, and explore Portland's vibrant food scene."
-      },
-      {
-        question: "How do I get updates when participating restaurants are announced?",
-        answer: "Bookmark PDX Food Week or install the app to get direct access to interactive crawl maps, dietary filters, and live updates as participating spots and dishes are officially revealed."
-      }
+    totalLocations: 13,
+    url: "https://www.theactualportland.com/macandcheeselocations",
+    filters: [
+      { id: 'meat', label: 'Meat' },
+      { id: 'vegetarian', label: 'Vegetarian' },
+      { id: 'vegan', label: 'Vegan' },
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'spicy', label: 'Spicy' }
     ]
-  },
+  }
+];
+
+window.UPCOMING_FOOD_WEEKS = [
   {
     id: "holiday-drink-2026",
     name: "Holiday Drink Week 2026",

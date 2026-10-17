@@ -541,6 +541,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.pdxfoodweek.com/neighborhoods/nob-hill.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/neighborhoods/gresham.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.pdxfoodweek.com/neighborhoods/tanasbourne.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -1932,6 +1942,71 @@
   </url>
   <url>
     <loc>https://www.pdxfoodweek.com/d/highball-2026-240459.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-1.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-2.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-3.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-4.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-5.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-6.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-7.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-8.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-9.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-10.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-11.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-12.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-13.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -20,7 +20,7 @@ export function isAllCaps(str) {
 
 export function toTitleCase(str) {
   if (!str) return '';
-  return str.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())
+  return str.toLowerCase().replace(/(^|[\s\-\/])\p{L}/gu, c => c.toUpperCase())
     .replace(/\bBbq\b/g, 'BBQ')
     .replace(/\bGf\b/g, 'GF');
 }

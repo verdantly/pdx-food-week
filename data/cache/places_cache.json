@@ -38441,5 +38441,145 @@
       "Friday: Open",
       "Saturday: Open"
     ]
+  },
+  "adelleda/vtopian cheeses_103 ne grand ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "wonderboy's smokestack_1027 ne alberta st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "desipdx_3829 southeast division st, portland, or 97202": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "jade cow creamery_917 sw alder st, portland, or 97205": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "grays restaurant & bar_301 w 6th st, vancouver, wa 98660": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "pope house bourbon lounge_2075 nw glisan st, portland, or 97209": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "idella shepard_58 ne burnside rd, gresham, or 97030": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
   }
 }

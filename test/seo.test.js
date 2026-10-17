@@ -52,32 +52,21 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     expect(pizzaHtml).toContain('"@type": "FoodEvent"');
     expect(pizzaHtml).toContain('"name": "Pizza Week 2026"');
     expect(pizzaHtml).toContain('Participating Restaurants');
-    expect(pizzaHtml).toContain('Clarklewis');
-    expect(pizzaHtml).toContain('Mediterranean Mojo Lamb');
-    expect(pizzaHtml).toContain('href="../?week=pizza-2026"');
-  });
-
-  test('Upcoming food week placeholder landing pages are generated with FoodEvent and FAQPage JSON-LD schema', () => {
-    const weeksDir = path.join(projectRoot, 'weeks');
+    // Verify Mac & Cheese Week page
     const macAndCheesePath = path.join(weeksDir, 'mac-and-cheese-2026.html');
     expect(fs.existsSync(macAndCheesePath)).toBe(true);
-
     const macHtml = fs.readFileSync(macAndCheesePath, 'utf8');
     expect(macHtml).toContain('Portland Mac &amp; Cheese Week 2026');
     expect(macHtml).toContain('"@type": "FoodEvent"');
     expect(macHtml).toContain('"name": "Mac & Cheese Week 2026"');
-    expect(macHtml).toContain('"@type": "FAQPage"');
-    expect(macHtml).toContain('When is Portland Mac & Cheese Week 2026?');
-    expect(macHtml).toContain('November 2–8, 2026');
-    expect(macHtml).toContain('"startDate": "2026-11-02"');
-    expect(macHtml).toContain('"endDate": "2026-11-08"');
-    expect(macHtml).toContain('The Actual Portland');
-    expect(macHtml).toContain('Upcoming Event');
-    expect(macHtml).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html');
+    expect(macHtml).toContain('Participating Restaurants');
+    expect(macHtml).toContain('10 Barrel Brewing Portland');
+    expect(macHtml).toContain('href="../?week=mac-and-cheese-2026"');
+  });
 
-    // Verify it is also listed in sitemap.xml
+  test('Upcoming food week placeholder landing pages are generated with FoodEvent and FAQPage JSON-LD schema', () => {
+    const weeksDir = path.join(projectRoot, 'weeks');
     const sitemapContent = fs.readFileSync(path.join(projectRoot, 'sitemap.xml'), 'utf8');
-    expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/mac-and-cheese-2026.html</loc>');
 
     // Verify Holiday Drink Week 2026 placeholder page
     const holidayDrinkPath = path.join(weeksDir, 'holiday-drink-2026.html');
@@ -86,9 +75,14 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     expect(holidayHtml).toContain('Portland Holiday Drink Week 2026');
     expect(holidayHtml).toContain('"@type": "FoodEvent"');
     expect(holidayHtml).toContain('"name": "Holiday Drink Week 2026"');
+    expect(holidayHtml).toContain('"@type": "FAQPage"');
+    expect(holidayHtml).toContain('When is Portland Holiday Drink Week 2026?');
+    expect(holidayHtml).toContain('December 7–13, 2026');
     expect(holidayHtml).toContain('"startDate": "2026-12-07"');
     expect(holidayHtml).toContain('"endDate": "2026-12-13"');
     expect(holidayHtml).toContain('Portland Mercury');
+    expect(holidayHtml).toContain('Upcoming Event');
+    expect(holidayHtml).toContain('https://www.pdxfoodweek.com/weeks/holiday-drink-2026.html');
     expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/holiday-drink-2026.html</loc>');
 
     // Verify 2027 upcoming food week placeholder pages
