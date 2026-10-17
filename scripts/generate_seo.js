@@ -97,6 +97,320 @@ function formatHoursSummary(hours) {
   return hours.weekdayDescriptions.join(' • ');
 }
 
+// ── Shared Design System Tokens, Fonts & Styles for SEO Pages ──
+const SHARED_FONTS_HTML = `
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..800&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap">
+`;
+
+function getSharedStyles(themeColor = '#B5472E') {
+  return `
+    :root {
+      --pizza: ${themeColor};
+      --primary: ${themeColor};
+      --ink: #1A1208;
+      --ink-70: rgba(26, 18, 8, 0.72);
+      --ink-60: rgba(26, 18, 8, 0.60);
+      --ink-30: rgba(26, 18, 8, 0.35);
+      --cream: #FBF6EF;
+      --card-bg: #FFFFFF;
+      --border: rgba(26, 18, 8, 0.12);
+      --header-bg: #1A1208;
+      --header-ink: #FBF6EF;
+      --font-brand: 'Syne', sans-serif;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 12px rgba(26, 18, 8, 0.08);
+      --transition: 0.18s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #F5F0EB;
+        --ink-70: rgba(245, 240, 235, 0.75);
+        --ink-60: rgba(245, 240, 235, 0.65);
+        --ink-30: rgba(245, 240, 235, 0.35);
+        --cream: #141414;
+        --card-bg: #1E1E1E;
+        --border: rgba(255, 255, 255, 0.12);
+        --header-bg: #141414;
+        --header-ink: #F5F0EB;
+        --shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation Header */
+    .app-header-bar {
+      background: var(--header-bg);
+      color: var(--header-ink);
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .app-header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .app-wordmark {
+      font-family: var(--font-brand);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: lowercase;
+      color: var(--header-ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color var(--transition);
+    }
+    .app-wordmark:hover { color: var(--pizza); }
+    .btn-header-cta {
+      background: var(--pizza);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .btn-header-cta:hover { opacity: 0.92; transform: translateY(-1px); }
+
+    /* Page Container */
+    .container { max-width: 1080px; margin: 0 auto; padding: 28px 16px 64px; }
+    .breadcrumbs { font-size: 13px; color: var(--ink-70); margin-bottom: 14px; }
+    .breadcrumbs a { color: inherit; text-decoration: none; }
+    .breadcrumbs a:hover { text-decoration: underline; color: var(--pizza); }
+
+    /* Hero Typography */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 5.2vw, 46px);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--pizza);
+    }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+
+    /* Badges & Dietary Tags */
+    .badge {
+      display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 9999px;
+      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
+    }
+    .badge-primary { background: var(--pizza); color: #fff; }
+    .badge-dark { background: var(--header-bg); color: #fff; border: 1px solid var(--border); }
+    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
+    .badge-status { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
+
+    .tag {
+      display: inline-flex; align-items: center; font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .tag-meat { background: rgba(181, 71, 46, 0.12); color: #B5472E; }
+    .tag-veg { background: rgba(138, 92, 20, 0.14); color: #8A5C14; }
+    .tag-vegan { background: rgba(46, 125, 50, 0.14); color: #2E7D32; }
+    .tag-gf { background: rgba(40, 106, 95, 0.14); color: #286A5F; }
+    .tag-subtle { background: rgba(26, 18, 8, 0.06); color: var(--ink-70); }
+
+    [data-theme="dark"] .badge-subtle,
+    @media (prefers-color-scheme: dark) {
+      .badge-subtle { background: rgba(255, 255, 255, 0.1); color: var(--ink); }
+      .tag-meat { background: rgba(220, 80, 50, 0.22); color: #FF8A70; }
+      .tag-veg { background: rgba(220, 160, 40, 0.22); color: #F5C065; }
+      .tag-vegan { background: rgba(60, 180, 80, 0.22); color: #72E088; }
+      .tag-gf { background: rgba(70, 190, 170, 0.22); color: #6CE0D0; }
+      .tag-subtle { background: rgba(255, 255, 255, 0.08); color: var(--ink-70); }
+    }
+
+    .hero-desc { font-size: 16.5px; color: var(--ink-70); max-width: 760px; margin-bottom: 24px; line-height: 1.6; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 36px; }
+    .btn-main {
+      background: var(--pizza); color: #fff; padding: 12px 24px; border-radius: 24px;
+      font-weight: 700; font-size: 14.5px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: opacity var(--transition), transform var(--transition);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .btn-main:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-outline {
+      background: var(--card-bg); color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
+      border-radius: 24px; font-weight: 600; font-size: 14px; text-decoration: none;
+      transition: background var(--transition);
+    }
+    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
+
+    /* Dish Cards Grid */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin: 36px 0 20px;
+      letter-spacing: -0.01em;
+    }
+    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+
+    /* Dish Card Component matching app design */
+    .dish-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .dish-card:hover {
+      border-color: rgba(26, 18, 8, 0.25);
+      box-shadow: var(--shadow);
+    }
+    .dish-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .card-restaurant {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--pizza);
+      margin-bottom: 3px;
+    }
+    .card-dish {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+    .card-dish a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .card-dish a:hover {
+      color: var(--pizza);
+    }
+    .dish-emoji { font-size: 24px; line-height: 1; flex-shrink: 0; }
+    .dish-desc {
+      font-size: 13.5px;
+      color: var(--ink-70);
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+    .dish-meta {
+      font-size: 12.5px;
+      color: var(--ink-60);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .dish-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .dish-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      font-size: 13px;
+    }
+    .link-detail {
+      color: var(--pizza);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .link-detail:hover { text-decoration: underline; }
+    .btn-app-sm {
+      background: rgba(26, 18, 8, 0.06);
+      color: var(--ink);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition);
+    }
+    .btn-app-sm:hover { background: var(--pizza); color: #fff; }
+
+    /* Footer */
+    footer {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-60);
+      text-align: center;
+      line-height: 1.6;
+    }
+    footer a { color: inherit; }
+  `;
+}
+
+function getAppHeaderHtml(activeDeepLink = '../') {
+  return `
+  <header class="app-header-bar">
+    <div class="app-header-inner">
+      <a href="../" class="app-wordmark">
+        <span>🍔</span>
+        <span>pdx food week</span>
+      </a>
+      <a href="${activeDeepLink}" class="btn-header-cta">
+        <span>Open App</span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </a>
+    </div>
+  </header>
+  `;
+}
+
+function renderDishTagBadges(dish) {
+  const tagBadges = [];
+  if (dish.type) {
+    const t = String(dish.type).toLowerCase();
+    const tagClass = t === 'vegan' ? 'tag-vegan' : (t === 'vegetarian' ? 'tag-veg' : 'tag-meat');
+    tagBadges.push(`<span class="tag ${tagClass}">${escapeHtml(dish.type)}</span>`);
+  }
+  if (dish.glutenFree) tagBadges.push('<span class="tag tag-gf">GF</span>');
+  if (dish.wholePie) tagBadges.push('<span class="tag tag-subtle">Whole Pie</span>');
+  if (dish.minors) tagBadges.push('<span class="tag tag-subtle">Family OK</span>');
+  if (dish.takeout) tagBadges.push('<span class="tag tag-subtle">Takeout</span>');
+  return tagBadges.join(' ');
+}
+
 // 3. Generate Week Landing Pages (weeks/<weekId>.html)
 const generatedWeekPages = [];
 for (const week of foodWeeks) {
@@ -139,28 +453,25 @@ for (const week of foodWeeks) {
   const dishesListHtml = weekDishes.map(d => {
     const dishUrl = `../d/${d.weekId}-${d.id}.html`;
     const dishDeepLink = `../?week=${encodeURIComponent(d.weekId)}&amp;dish=${encodeURIComponent(d.id)}`;
-    const tagBadges = [];
-    if (d.type) tagBadges.push(`<span class="badge badge-subtle">${escapeHtml(d.type)}</span>`);
-    if (d.glutenFree) tagBadges.push('<span class="badge badge-gf">GF</span>');
-    if (d.wholePie) tagBadges.push('<span class="badge badge-subtle">Whole Pie</span>');
-    if (d.minors) tagBadges.push('<span class="badge badge-subtle">Family OK</span>');
-    if (d.takeout) tagBadges.push('<span class="badge badge-subtle">Takeout</span>');
+    const tagBadgesHtml = renderDishTagBadges(d);
 
     return `
       <div class="dish-card">
-        <div class="dish-card-header">
-          <div>
-            <div class="restaurant-name">${escapeHtml(d.restaurant)}</div>
-            <h3 class="dish-title"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+        <div>
+          <div class="dish-card-header">
+            <div>
+              <div class="card-restaurant">${escapeHtml(d.restaurant)}</div>
+              <h3 class="card-dish"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+            </div>
+            ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
           </div>
-          ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
+          ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
+          <div class="dish-meta">
+            ${d.neighborhood ? `<span>📍 ${escapeHtml(d.neighborhood)}</span>` : ''}
+            ${d.address ? `<span class="dish-address">${escapeHtml(d.address)}</span>` : ''}
+          </div>
+          ${tagBadgesHtml ? `<div class="dish-tags">${tagBadgesHtml}</div>` : ''}
         </div>
-        ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
-        <div class="dish-meta">
-          ${d.neighborhood ? `<span>📍 ${escapeHtml(d.neighborhood)}</span>` : ''}
-          ${d.address ? `<span class="dish-address">${escapeHtml(d.address)}</span>` : ''}
-        </div>
-        <div class="dish-tags">${tagBadges.join(' ')}</div>
         <div class="dish-card-footer">
           <a href="${dishUrl}" class="link-detail">View Dish Details &rarr;</a>
           <a href="${dishDeepLink}" class="btn-app-sm">Open in App</a>
@@ -177,6 +488,7 @@ for (const week of foodWeeks) {
   <title>${escapeHtml(weekTitle)} — Participating Restaurants, Menus &amp; Map</title>
   <meta name="description" content="${escapeHtml(metaDescription)}">
   <link rel="canonical" href="${canonicalUrl}">
+  ${SHARED_FONTS_HTML}
 
   <!-- OpenGraph -->
   <meta property="og:site_name" content="PDX Food Week">
@@ -198,72 +510,11 @@ ${JSON.stringify(foodEventSchema, null, 2)}
   </script>
 
   <style>
-    :root {
-      --primary: ${week.color || '#B5472E'};
-      --ink: #1A1208;
-      --cream: #FBF6EF;
-      --card-bg: #FFFFFF;
-      --border: rgba(26, 18, 8, 0.12);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.5;
-      padding: 24px 16px 64px;
-    }
-    .container { max-width: 1080px; margin: 0 auto; }
-    header { margin-bottom: 32px; }
-    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
-    .breadcrumbs a { color: inherit; text-decoration: none; }
-    .breadcrumbs a:hover { text-decoration: underline; }
-    .hero-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .badge {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
-      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
-    }
-    .badge-primary { background: var(--primary); color: #fff; }
-    .badge-dark { background: var(--ink); color: #fff; }
-    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
-    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
-    .hero-desc { font-size: 17px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .btn-main {
-      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
-      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-main:hover { opacity: 0.92; }
-    .btn-outline {
-      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
-      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
-    }
-    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
-    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
-    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-    .dish-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
-      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .restaurant-name { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.04em; }
-    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
-    .dish-title a { color: inherit; text-decoration: none; }
-    .dish-title a:hover { color: var(--primary); }
-    .dish-emoji { font-size: 22px; }
-    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
-    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
-    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
-    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
-    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
-    .link-detail:hover { text-decoration: underline; }
-    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
-    .btn-app-sm:hover { background: var(--primary); color: #fff; }
-    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+${getSharedStyles(week.color || '#B5472E')}
   </style>
 </head>
 <body>
+  ${getAppHeaderHtml(appDeepLink)}
   <div class="container">
     <header>
       <div class="breadcrumbs">
@@ -380,6 +631,7 @@ for (const week of upcomingFoodWeeks) {
   <title>${escapeHtml(weekTitle)} — Guide, Dates &amp; Participating Spots</title>
   <meta name="description" content="${escapeHtml(metaDescription)}">
   <link rel="canonical" href="${canonicalUrl}">
+  ${SHARED_FONTS_HTML}
 
   <!-- OpenGraph -->
   <meta property="og:site_name" content="PDX Food Week">
@@ -405,67 +657,31 @@ ${JSON.stringify(faqSchema, null, 2)}
   </script>` : ''}
 
   <style>
-    :root {
-      --primary: ${week.color || '#E69500'};
-      --ink: #1A1208;
-      --cream: #FBF6EF;
-      --card-bg: #FFFFFF;
-      --border: rgba(26, 18, 8, 0.12);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.5;
-      padding: 24px 16px 64px;
-    }
-    .container { max-width: 900px; margin: 0 auto; }
-    header { margin-bottom: 36px; }
-    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
-    .breadcrumbs a { color: inherit; text-decoration: none; }
-    .breadcrumbs a:hover { text-decoration: underline; }
-    .hero-title { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .badge {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
-      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
-    }
-    .badge-primary { background: var(--primary); color: #fff; }
-    .badge-dark { background: var(--ink); color: #fff; }
-    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
-    .badge-status { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
-    .hero-desc { font-size: 17px; color: rgba(26, 18, 8, 0.85); line-height: 1.6; margin-bottom: 24px; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .btn-main {
-      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
-      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-main:hover { opacity: 0.92; }
-    .btn-outline {
-      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
-      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
-    }
-    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
-    .section-title { font-size: 24px; font-weight: 700; margin: 36px 0 18px; }
+${getSharedStyles(week.color || '#E69500')}
     .info-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
-      padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
     }
-    .info-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
-    .info-card p { font-size: 15px; color: rgba(26, 18, 8, 0.8); line-height: 1.6; margin-bottom: 12px; }
+    .info-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--pizza);
+    }
+    .info-card p { font-size: 15px; color: var(--ink-70); line-height: 1.6; margin-bottom: 12px; }
     .info-card p:last-child { margin-bottom: 0; }
-    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-list { display: flex; flex-direction: column; gap: 14px; }
     .faq-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 18px 20px;
     }
-    .faq-question { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
-    .faq-answer { font-size: 14.5px; color: rgba(26, 18, 8, 0.75); line-height: 1.55; }
-    footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+    .faq-question {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--ink);
+    }
+    .faq-answer { font-size: 14.5px; color: var(--ink-70); line-height: 1.55; }
   </style>
 </head>
 <body>
+  ${getAppHeaderHtml('../')}
   <div class="container">
     <header>
       <div class="breadcrumbs">
@@ -565,12 +781,8 @@ for (const dish of restaurants) {
 
   const hoursSummary = dish.hours ? formatHoursSummary(dish.hours) : '';
 
-  const tagBadges = [];
-  if (dish.type) tagBadges.push(`<span class="badge badge-primary">${escapeHtml(dish.type)}</span>`);
-  if (dish.glutenFree) tagBadges.push('<span class="badge badge-gf">Gluten-Free</span>');
-  if (dish.wholePie) tagBadges.push('<span class="badge badge-subtle">Whole Pie</span>');
-  if (dish.minors) tagBadges.push('<span class="badge badge-subtle">Family Friendly</span>');
-  if (dish.takeout) tagBadges.push('<span class="badge badge-subtle">Takeout Available</span>');
+  const tagBadgesHtml = renderDishTagBadges(dish);
+  const themeColor = week ? (week.color || '#B5472E') : '#B5472E';
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -580,6 +792,7 @@ for (const dish of restaurants) {
   <title>${escapeHtml(dishTitle)} — ${escapeHtml(weekName)}</title>
   <meta name="description" content="${escapeHtml(metaDescription)}">
   <link rel="canonical" href="${canonicalUrl}">
+  ${SHARED_FONTS_HTML}
 
   <!-- OpenGraph -->
   <meta property="og:site_name" content="PDX Food Week">
@@ -601,101 +814,107 @@ ${JSON.stringify(restaurantSchema, null, 2)}
   </script>
 
   <style>
-    :root {
-      --primary: ${week ? (week.color || '#B5472E') : '#B5472E'};
-      --ink: #1A1208;
-      --cream: #FBF6EF;
-      --card-bg: #FFFFFF;
-      --border: rgba(26, 18, 8, 0.12);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.5;
+${getSharedStyles(themeColor)}
+    .detail-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
       padding: 24px 16px 64px;
     }
     .card-container {
-      max-width: 580px;
-      margin: 0 auto;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(26, 18, 8, 0.08);
+      box-shadow: var(--shadow);
     }
     .dish-img {
       width: 100%;
-      height: 280px;
+      height: 320px;
       object-fit: cover;
       display: block;
-      background: #eee;
+      background: rgba(26, 18, 8, 0.05);
     }
     .card-body { padding: 24px; }
-    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
-    .breadcrumbs a { color: inherit; text-decoration: none; }
-    .breadcrumbs a:hover { text-decoration: underline; }
-    .restaurant-label { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.04em; }
-    .dish-title { font-size: 26px; font-weight: 800; line-height: 1.2; margin: 4px 0 12px; }
+    .restaurant-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--pizza);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .dish-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 4px 0 12px;
+      color: var(--ink);
+    }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .badge {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
-      font-size: 12px; font-weight: 600;
-    }
-    .badge-primary { background: var(--primary); color: #fff; }
-    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
-    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
-    .desc { font-size: 15px; color: rgba(26, 18, 8, 0.85); line-height: 1.55; margin-bottom: 20px; }
+    .desc { font-size: 15px; color: var(--ink-70); line-height: 1.6; margin-bottom: 22px; }
     .info-box {
-      background: rgba(26, 18, 8, 0.03); border: 1px solid rgba(26, 18, 8, 0.08);
-      border-radius: 10px; padding: 14px; font-size: 13px; margin-bottom: 24px;
-      display: flex; flex-direction: column; gap: 8px;
+      background: rgba(26, 18, 8, 0.03); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 16px; font-size: 13px; margin-bottom: 24px;
+      display: flex; flex-direction: column; gap: 10px;
     }
-    .info-row { display: flex; gap: 8px; align-items: flex-start; }
+    @media (prefers-color-scheme: dark) {
+      .info-box { background: rgba(255, 255, 255, 0.04); }
+    }
+    .info-row { display: flex; gap: 10px; align-items: flex-start; color: var(--ink-70); }
+    .info-row strong { color: var(--ink); }
     .btn-main {
       display: flex; justify-content: center; align-items: center; width: 100%;
-      background: var(--primary); color: #fff; padding: 14px 20px; border-radius: 12px;
-      font-weight: 700; font-size: 15px; text-decoration: none; margin-bottom: 12px;
+      background: var(--pizza); color: #fff; padding: 14px 20px; border-radius: 24px;
+      font-weight: 700; font-size: 15px; text-decoration: none; margin-bottom: 14px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      transition: opacity var(--transition), transform var(--transition);
     }
-    .btn-main:hover { opacity: 0.92; }
-    .nav-links { display: flex; justify-content: space-between; font-size: 13px; }
-    .nav-links a { color: rgba(26, 18, 8, 0.6); text-decoration: underline; }
-    .nav-links a:hover { color: var(--ink); }
+    .btn-main:hover { opacity: 0.92; transform: translateY(-1px); }
+    .nav-links { display: flex; justify-content: space-between; font-size: 13px; margin-top: 10px; }
+    .nav-links a { color: var(--ink-70); text-decoration: underline; }
+    .nav-links a:hover { color: var(--pizza); }
   </style>
 </head>
 <body>
-  <div class="card-container">
-    ${dish.image ? `<img src="${escapeHtml(dish.image)}" alt="${escapeHtml(dishTitle)}" class="dish-img">` : ''}
-    <div class="card-body">
-      <div class="breadcrumbs">
-        <a href="../">PDX Food Week</a> &gt; <a href="${weekUrl}">${escapeHtml(weekName)}</a>
-      </div>
-      <div class="restaurant-label">${escapeHtml(dish.restaurant || 'Restaurant')}</div>
-      <h1 class="dish-title">${escapeHtml(dish.dish || 'Special Dish')}</h1>
-      
-      <div class="tags">
-        ${tagBadges.join(' ')}
-      </div>
+  ${getAppHeaderHtml(redirectUrl)}
+  <div class="detail-wrapper">
+    <div class="breadcrumbs">
+      <a href="../">PDX Food Week</a> &gt; <a href="${weekUrl}">${escapeHtml(weekName)}</a> &gt; <span>${escapeHtml(dish.dish || 'Special')}</span>
+    </div>
 
-      <p class="desc">${escapeHtml(dish.desc || rawDesc)}</p>
+    <div class="card-container">
+      ${dish.image ? `<img src="${escapeHtml(dish.image)}" alt="${escapeHtml(dishTitle)}" class="dish-img">` : ''}
+      <div class="card-body">
+        <div class="restaurant-label">${escapeHtml(dish.restaurant || 'Restaurant')}</div>
+        <h1 class="dish-title">${escapeHtml(dish.dish || 'Special Dish')}</h1>
+        
+        ${tagBadgesHtml ? `<div class="tags">${tagBadgesHtml}</div>` : ''}
 
-      <div class="info-box">
-        ${dish.neighborhood ? `<div class="info-row"><span>📍</span><div><strong>Neighborhood:</strong> ${escapeHtml(dish.neighborhood)}</div></div>` : ''}
-        ${dish.address ? `<div class="info-row"><span>🏠</span><div><strong>Address:</strong> ${escapeHtml(dish.address)}</div></div>` : ''}
-        ${hoursSummary ? `<div class="info-row"><span>🕒</span><div><strong>Hours:</strong> ${escapeHtml(hoursSummary)}</div></div>` : ''}
-      </div>
+        <p class="desc">${escapeHtml(dish.desc || rawDesc)}</p>
 
-      <a href="${redirectUrl}" class="btn-main">
-        🚀 Open in Interactive App &amp; Save Dish
-      </a>
+        <div class="info-box">
+          ${dish.neighborhood ? `<div class="info-row"><span>📍</span><div><strong>Neighborhood:</strong> ${escapeHtml(dish.neighborhood)}</div></div>` : ''}
+          ${dish.address ? `<div class="info-row"><span>🏠</span><div><strong>Address:</strong> ${escapeHtml(dish.address)}</div></div>` : ''}
+          ${hoursSummary ? `<div class="info-row"><span>🕒</span><div><strong>Hours:</strong> ${escapeHtml(hoursSummary)}</div></div>` : ''}
+        </div>
 
-      <div class="nav-links">
-        <a href="${weekUrl}">&larr; View all ${escapeHtml(weekName)} spots</a>
-        <a href="../">All Food Weeks</a>
+        <a href="${redirectUrl}" class="btn-main">
+          🚀 Open in Interactive App &amp; Save Dish
+        </a>
+
+        <div class="nav-links">
+          <a href="${weekUrl}">&larr; View all ${escapeHtml(weekName)} spots</a>
+          <a href="../">All Food Weeks</a>
+        </div>
       </div>
     </div>
+
+    <footer>
+      <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
+      <p style="margin-top: 8px;"><a href="../">Back to Home</a> • <a href="../privacy.html">Privacy Policy</a> • <a href="../terms.html">Terms of Use</a></p>
+    </footer>
   </div>
 </body>
 </html>`;
@@ -736,30 +955,27 @@ for (const [slug, hoodData] of neighborhoodMap.entries()) {
     const dishDeepLink = `../?week=${encodeURIComponent(d.weekId)}&amp;dish=${encodeURIComponent(d.id)}`;
     const week = weekMap.get(d.weekId);
     const weekName = week ? week.name : d.weekId;
-    const tagBadges = [];
-    if (d.type) tagBadges.push(`<span class="badge badge-subtle">${escapeHtml(d.type)}</span>`);
-    if (d.glutenFree) tagBadges.push('<span class="badge badge-gf">GF</span>');
-    if (d.wholePie) tagBadges.push('<span class="badge badge-subtle">Whole Pie</span>');
-    if (d.minors) tagBadges.push('<span class="badge badge-subtle">Family OK</span>');
-    if (d.takeout) tagBadges.push('<span class="badge badge-subtle">Takeout</span>');
+    const tagBadgesHtml = renderDishTagBadges(d);
 
     return `
       <div class="dish-card">
-        <div class="dish-card-header">
-          <div>
-            <div class="week-pill">${escapeHtml(weekName)}</div>
-            <div class="restaurant-name">${escapeHtml(d.restaurant)}</div>
-            <h3 class="dish-title"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+        <div>
+          <div class="dish-card-header">
+            <div>
+              <div class="badge badge-primary" style="font-size: 10.5px; padding: 2px 7px; margin-bottom: 6px;">${escapeHtml(weekName)}</div>
+              <div class="card-restaurant">${escapeHtml(d.restaurant)}</div>
+              <h3 class="card-dish"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+            </div>
+            ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
           </div>
-          ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
+          ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
+          <div class="dish-meta">
+            ${d.address ? `<span class="dish-address">🏠 ${escapeHtml(d.address)}</span>` : ''}
+          </div>
+          ${tagBadgesHtml ? `<div class="dish-tags">${tagBadgesHtml}</div>` : ''}
         </div>
-        ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
-        <div class="dish-meta">
-          ${d.address ? `<span class="dish-address">🏠 ${escapeHtml(d.address)}</span>` : ''}
-        </div>
-        <div class="dish-tags">${tagBadges.join(' ')}</div>
         <div class="dish-card-footer">
-          <a href="${dishUrl}" class="link-detail">View Dish &rarr;</a>
+          <a href="${dishUrl}" class="link-detail">View Dish Details &rarr;</a>
           <a href="${dishDeepLink}" class="btn-app-sm">Open in App</a>
         </div>
       </div>
@@ -792,6 +1008,7 @@ for (const [slug, hoodData] of neighborhoodMap.entries()) {
   <title>${escapeHtml(hoodTitle)}</title>
   <meta name="description" content="${escapeHtml(metaDescription)}">
   <link rel="canonical" href="${canonicalUrl}">
+  ${SHARED_FONTS_HTML}
 
   <!-- OpenGraph -->
   <meta property="og:site_name" content="PDX Food Week">
@@ -813,72 +1030,11 @@ ${JSON.stringify(hoodSchema, null, 2)}
   </script>
 
   <style>
-    :root {
-      --primary: #B5472E;
-      --ink: #1A1208;
-      --cream: #FBF6EF;
-      --card-bg: #FFFFFF;
-      --border: rgba(26, 18, 8, 0.12);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.5;
-      padding: 24px 16px 64px;
-    }
-    .container { max-width: 1080px; margin: 0 auto; }
-    header { margin-bottom: 32px; }
-    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
-    .breadcrumbs a { color: inherit; text-decoration: none; }
-    .breadcrumbs a:hover { text-decoration: underline; }
-    .hero-title { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .badge {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
-      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
-    }
-    .badge-primary { background: var(--primary); color: #fff; }
-    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
-    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
-    .hero-desc { font-size: 16.5px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .btn-main {
-      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
-      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-main:hover { opacity: 0.92; }
-    .btn-outline {
-      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
-      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
-    }
-    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
-    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
-    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-    .dish-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
-      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .week-pill { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 2px; }
-    .restaurant-name { font-size: 13px; font-weight: 700; color: var(--ink); }
-    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
-    .dish-title a { color: inherit; text-decoration: none; }
-    .dish-title a:hover { color: var(--primary); }
-    .dish-emoji { font-size: 22px; }
-    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
-    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
-    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
-    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
-    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
-    .link-detail:hover { text-decoration: underline; }
-    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
-    .btn-app-sm:hover { background: var(--primary); color: #fff; }
-    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+${getSharedStyles('#B5472E')}
   </style>
 </head>
 <body>
+  ${getAppHeaderHtml('../')}
   <div class="container">
     <header>
       <div class="breadcrumbs">
@@ -909,7 +1065,7 @@ ${JSON.stringify(hoodSchema, null, 2)}
 
     <footer>
       <p>PDX Food Week is an independent community project. Data referenced from organizer event listings. Not affiliated with Portland Mercury or The Oregonian.</p>
-      <p style="margin-top: 8px;"><a href="../" style="color: inherit;">Back to Home</a> • <a href="../privacy.html" style="color: inherit;">Privacy Policy</a> • <a href="../terms.html" style="color: inherit;">Terms of Use</a></p>
+      <p style="margin-top: 8px;"><a href="../">Back to Home</a> • <a href="../privacy.html">Privacy Policy</a> • <a href="../terms.html">Terms of Use</a></p>
     </footer>
   </div>
 </body>
@@ -961,31 +1117,28 @@ for (const cat of dietCategories) {
     const dishDeepLink = `../?week=${encodeURIComponent(d.weekId)}&amp;dish=${encodeURIComponent(d.id)}`;
     const week = weekMap.get(d.weekId);
     const weekName = week ? week.name : d.weekId;
-    const tagBadges = [];
-    if (d.type) tagBadges.push(`<span class="badge badge-subtle">${escapeHtml(d.type)}</span>`);
-    if (d.glutenFree) tagBadges.push('<span class="badge badge-gf">GF</span>');
-    if (d.wholePie) tagBadges.push('<span class="badge badge-subtle">Whole Pie</span>');
-    if (d.minors) tagBadges.push('<span class="badge badge-subtle">Family OK</span>');
-    if (d.takeout) tagBadges.push('<span class="badge badge-subtle">Takeout</span>');
+    const tagBadgesHtml = renderDishTagBadges(d);
 
     return `
       <div class="dish-card">
-        <div class="dish-card-header">
-          <div>
-            <div class="week-pill">${escapeHtml(weekName)}</div>
-            <div class="restaurant-name">${escapeHtml(d.restaurant)}</div>
-            <h3 class="dish-title"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+        <div>
+          <div class="dish-card-header">
+            <div>
+              <div class="badge badge-primary" style="font-size: 10.5px; padding: 2px 7px; margin-bottom: 6px;">${escapeHtml(weekName)}</div>
+              <div class="card-restaurant">${escapeHtml(d.restaurant)}</div>
+              <h3 class="card-dish"><a href="${dishUrl}">${escapeHtml(d.dish || 'Special Dish')}</a></h3>
+            </div>
+            ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
           </div>
-          ${d.emoji ? `<span class="dish-emoji">${escapeHtml(d.emoji)}</span>` : ''}
+          ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
+          <div class="dish-meta">
+            ${d.neighborhood ? `<span>📍 ${escapeHtml(d.neighborhood)}</span>` : ''}
+            ${d.address ? `<span class="dish-address">🏠 ${escapeHtml(d.address)}</span>` : ''}
+          </div>
+          ${tagBadgesHtml ? `<div class="dish-tags">${tagBadgesHtml}</div>` : ''}
         </div>
-        ${d.desc ? `<p class="dish-desc">${escapeHtml(d.desc)}</p>` : ''}
-        <div class="dish-meta">
-          ${d.neighborhood ? `<span>📍 ${escapeHtml(d.neighborhood)}</span>` : ''}
-          ${d.address ? `<span class="dish-address">🏠 ${escapeHtml(d.address)}</span>` : ''}
-        </div>
-        <div class="dish-tags">${tagBadges.join(' ')}</div>
         <div class="dish-card-footer">
-          <a href="${dishUrl}" class="link-detail">View Dish &rarr;</a>
+          <a href="${dishUrl}" class="link-detail">View Dish Details &rarr;</a>
           <a href="${dishDeepLink}" class="btn-app-sm">Open in App</a>
         </div>
       </div>
@@ -1008,6 +1161,7 @@ for (const cat of dietCategories) {
   <title>${escapeHtml(cat.title)}</title>
   <meta name="description" content="${escapeHtml(metaDescription)}">
   <link rel="canonical" href="${canonicalUrl}">
+  ${SHARED_FONTS_HTML}
 
   <!-- OpenGraph -->
   <meta property="og:site_name" content="PDX Food Week">
@@ -1029,72 +1183,11 @@ ${JSON.stringify(dietSchema, null, 2)}
   </script>
 
   <style>
-    :root {
-      --primary: ${cat.color};
-      --ink: #1A1208;
-      --cream: #FBF6EF;
-      --card-bg: #FFFFFF;
-      --border: rgba(26, 18, 8, 0.12);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.5;
-      padding: 24px 16px 64px;
-    }
-    .container { max-width: 1080px; margin: 0 auto; }
-    header { margin-bottom: 32px; }
-    .breadcrumbs { font-size: 13px; color: rgba(26, 18, 8, 0.6); margin-bottom: 12px; }
-    .breadcrumbs a { color: inherit; text-decoration: none; }
-    .breadcrumbs a:hover { text-decoration: underline; }
-    .hero-title { font-size: clamp(26px, 4.5vw, 40px); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .badge {
-      display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 9999px;
-      font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
-    }
-    .badge-primary { background: var(--primary); color: #fff; }
-    .badge-subtle { background: rgba(26, 18, 8, 0.08); color: var(--ink); }
-    .badge-gf { background: #E5EFEA; color: #286A5F; font-weight: 700; }
-    .hero-desc { font-size: 16.5px; color: rgba(26, 18, 8, 0.8); max-width: 760px; margin-bottom: 24px; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .btn-main {
-      background: var(--primary); color: #fff; padding: 12px 24px; border-radius: 9999px;
-      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-main:hover { opacity: 0.92; }
-    .btn-outline {
-      background: #fff; color: var(--ink); border: 1.5px solid var(--border); padding: 11px 20px;
-      border-radius: 9999px; font-weight: 600; font-size: 14px; text-decoration: none;
-    }
-    .btn-outline:hover { background: rgba(26, 18, 8, 0.04); }
-    .section-title { font-size: 22px; font-weight: 700; margin: 36px 0 18px; }
-    .dishes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-    .dish-card {
-      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
-      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .dish-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .week-pill { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--primary); margin-bottom: 2px; }
-    .restaurant-name { font-size: 13px; font-weight: 700; color: var(--ink); }
-    .dish-title { font-size: 17px; font-weight: 700; margin-top: 2px; }
-    .dish-title a { color: inherit; text-decoration: none; }
-    .dish-title a:hover { color: var(--primary); }
-    .dish-emoji { font-size: 22px; }
-    .dish-desc { font-size: 13.5px; color: rgba(26, 18, 8, 0.72); margin-bottom: 12px; line-height: 1.45; }
-    .dish-meta { font-size: 12.5px; color: rgba(26, 18, 8, 0.6); margin-bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
-    .dish-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
-    .dish-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(26, 18, 8, 0.06); padding-top: 10px; font-size: 13px; }
-    .link-detail { color: var(--primary); font-weight: 600; text-decoration: none; }
-    .link-detail:hover { text-decoration: underline; }
-    .btn-app-sm { background: rgba(26, 18, 8, 0.08); color: var(--ink); padding: 5px 12px; border-radius: 6px; font-weight: 600; text-decoration: none; }
-    .btn-app-sm:hover { background: var(--primary); color: #fff; }
-    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: rgba(26, 18, 8, 0.6); text-align: center; }
+${getSharedStyles(cat.color)}
   </style>
 </head>
 <body>
+  ${getAppHeaderHtml('../')}
   <div class="container">
     <header>
       <div class="breadcrumbs">
