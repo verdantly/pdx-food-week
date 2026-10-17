@@ -71,25 +71,10 @@
       --font-brand: 'Syne', sans-serif;
       --font-display: 'Fraunces', Georgia, serif;
       --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --radius: 12px;
-      --radius-sm: 8px;
+      --radius: 0;
+      --radius-sm: 0;
       --shadow: 0 2px 12px rgba(26, 18, 8, 0.08);
       --transition: 0.18s ease;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --ink: #F5F0EB;
-        --ink-70: rgba(245, 240, 235, 0.75);
-        --ink-60: rgba(245, 240, 235, 0.65);
-        --ink-30: rgba(245, 240, 235, 0.35);
-        --cream: #141414;
-        --card-bg: #1E1E1E;
-        --border: rgba(255, 255, 255, 0.12);
-        --header-bg: #141414;
-        --header-ink: #F5F0EB;
-        --shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
-      }
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -189,16 +174,6 @@
     .tag-vegan { background: rgba(46, 125, 50, 0.14); color: #2E7D32; }
     .tag-gf { background: rgba(40, 106, 95, 0.14); color: #286A5F; }
     .tag-subtle { background: rgba(26, 18, 8, 0.06); color: var(--ink-70); }
-
-    [data-theme="dark"] .badge-subtle,
-    @media (prefers-color-scheme: dark) {
-      .badge-subtle { background: rgba(255, 255, 255, 0.1); color: var(--ink); }
-      .tag-meat { background: rgba(220, 80, 50, 0.22); color: #FF8A70; }
-      .tag-veg { background: rgba(220, 160, 40, 0.22); color: #F5C065; }
-      .tag-vegan { background: rgba(60, 180, 80, 0.22); color: #72E088; }
-      .tag-gf { background: rgba(70, 190, 170, 0.22); color: #6CE0D0; }
-      .tag-subtle { background: rgba(255, 255, 255, 0.08); color: var(--ink-70); }
-    }
 
     .hero-desc { font-size: 16.5px; color: var(--ink-70); max-width: 760px; margin-bottom: 24px; line-height: 1.6; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 36px; }
@@ -370,9 +345,6 @@
       border-radius: var(--radius-sm); padding: 14px 16px; font-size: 13px; margin-bottom: 24px;
       display: flex; flex-direction: column; gap: 10px;
     }
-    @media (prefers-color-scheme: dark) {
-      .info-box { background: rgba(255, 255, 255, 0.04); }
-    }
     .info-row { display: flex; gap: 10px; align-items: flex-start; color: var(--ink-70); }
     .info-row strong { color: var(--ink); }
     .btn-main {
@@ -392,10 +364,7 @@
   
   <header class="app-header-bar">
     <div class="app-header-inner">
-      <a href="../" class="app-wordmark">
-        <span>🍔</span>
-        <span>pdx food week</span>
-      </a>
+      <a href="../" class="app-wordmark">PDX Food Week</a>
       <a href="../?week=burger-2026&dish=249324" class="btn-header-cta">
         <span>Open App</span>
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
