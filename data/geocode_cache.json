@@ -388,5 +388,20 @@
     "address": "107 Southeast Washington St, Portland, OR 97214",
     "streetAddress": "107 Southeast Washington St",
     "neighborhood": "Buckman"
+  },
+  "45.562792,-122.6800244": {
+    "address": "1233 North Killingsworth St, Portland, OR 97217",
+    "streetAddress": "1233 North Killingsworth St",
+    "neighborhood": "Overlook"
+  },
+  "45.5580267,-122.6752776": {
+    "address": "4835 North Albina Ave, Portland, OR 97217",
+    "streetAddress": "4835 North Albina Ave",
+    "neighborhood": "Humboldt"
+  },
+  "45.5123724,-122.624705": {
+    "address": "Southeast 38th Ave, Portland, OR 97214",
+    "streetAddress": "Southeast 38th Ave",
+    "neighborhood": "Sunnyside"
   }
 }

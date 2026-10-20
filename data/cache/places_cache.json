@@ -38581,5 +38581,65 @@
       "Friday: Open",
       "Saturday: Open"
     ]
+  },
+  "haymaker bar_1233 north killingsworth st, portland, or 97217": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "victoria bar_4835 north albina ave, portland, or 97217": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "mama chow's kitchen_3757 se hawthorne blvd, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
   }
 }

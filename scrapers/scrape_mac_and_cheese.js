@@ -20,7 +20,6 @@ function normalizeName(name) {
   if (!name) return '';
   return name
     .toLowerCase()
-    .replace(/\(.*?\)/g, '')
     .replace(/[^a-z0-9]/g, '');
 }
 
@@ -44,7 +43,9 @@ function saveGeocodeCache() {
 const NAME_MAP = {
   '10barrelbrewingportland': '10barrelbrewing',
   'graysrestaurantbar': 'graysrestaurantandbar',
-  'migrationbrewingwilliamsx5star': 'migrationbrewing'
+  'migrationbrewingwilliamsx5star': 'migrationbrewingwilliams',
+  'migrationbrewingglisan': 'migrationbrewingglisan',
+  'haymakerbar': 'haymaker'
 };
 
 const ADDRESS_OVERRIDES = {
@@ -103,6 +104,13 @@ const ADDRESS_OVERRIDES = {
     neighborhood: 'Downtown Tigard',
     lat: 45.428497,
     lng: -122.7711428
+  },
+  'Mama Chow\'s Kitchen': {
+    address: '3757 SE Hawthorne Blvd, Portland, OR 97214',
+    streetAddress: '3757 SE Hawthorne Blvd',
+    neighborhood: 'Hawthorne',
+    lat: 45.5122362,
+    lng: -122.6247001
   }
 };
 
@@ -171,6 +179,58 @@ const DISH_OVERRIDES = {
     veganOption: false,
     glutenFree: false,
     emoji: '🧀'
+  },
+  'Migration Brewing - Glisan': {
+    dish: 'Pepperoni Pizza Mac and Cheese',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🍕'
+  },
+  'The Rambler': {
+    dish: 'Southwest Chile Verde Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🧀'
+  },
+  'Haymaker Bar': {
+    dish: 'Mac and Cheese Eggrolls with Spicy Ranch',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🥢'
+  },
+  'Victoria Bar': {
+    dish: 'Roasted Corn & Hatch Chili Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🧀'
+  },
+  'Gin Thai Brasserie': {
+    dish: 'Fusilli Pad Ka Prao (Thai Basil)',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🍲'
+  },
+  'Mama Chow\'s Kitchen': {
+    dish: 'Chinatown Style Macaroni Soup',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🍲'
   },
   'Pope House Bourbon Lounge': {
     dish: 'Gochujang Burnt Ends Macaroni',

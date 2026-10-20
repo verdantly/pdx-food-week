@@ -284,7 +284,7 @@ window.FOOD_WEEKS = [
     colorLight: "#FDE68A",
     colorPale: "#FFFBEB",
     emoji: "🧀",
-    totalLocations: 13,
+    totalLocations: 19,
     url: "https://www.theactualportland.com/macandcheeselocations",
     filters: [
       { id: 'meat', label: 'Meat' },

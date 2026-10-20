@@ -1,5 +1,5 @@
 // The Actual Portland's Mac & Cheese Week 2026
-// 13 locations
+// 19 locations
 // Source: https://www.theactualportland.com/macandcheeselocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FDE68A",
     colorPale: "#FFFBEB",
     emoji: "🧀",
-    totalLocations: 13,
+    totalLocations: 19,
     url: "https://www.theactualportland.com/macandcheeselocations",
   }
 );
@@ -943,6 +943,457 @@ window.RESTAURANTS = window.RESTAURANTS || [];
             "time": "1200"
           }
         }
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Fusilli Pad Ka Prao (thai Basil)",
+    "restaurant": "Gin Thai Brasserie",
+    "neighborhood": "Tanasbourne",
+    "address": "3176 Northwest 185th Ave, Portland, OR 97229",
+    "lat": 45.5431096,
+    "lng": -122.8664026,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Fusilli pad ka prao (thai basil) a popular thai street food dish that we concocted from our best-seller menu, combining the two recipes to satisfy taste buds with an italian-thai fusion. It still features the bold and savory flavors of traditional stir-fried thai basil, plus an al dente texture of fusilli, topped with parmesan cheese. It is so incredibly delicious.",
+    "emoji": "🍲",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/9aca632c-edf0-4909-b161-f682ff0636a9/IMG_6994.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Southwest Chile Verde Mac",
+    "restaurant": "The Rambler",
+    "neighborhood": "Boise",
+    "address": "4205 North Mississippi Ave, Portland, OR 97217",
+    "lat": 45.5540579,
+    "lng": -122.67577,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Ultra cheesy velveeta-inspired southwest mac, with chile verde, local tillamook sharp cheddar, and a toasted cornbread topping.",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/2df4f89b-59be-43cd-b15b-8324e7826297/IMG_8272+-+Sarah+Fiscus.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 1:00 AM",
+        "Saturday: 2:00 PM – 1:00 AM",
+        "Sunday: 2:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1400"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1400"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Mac And Cheese Eggrolls With Spicy Ranch",
+    "restaurant": "Haymaker Bar",
+    "neighborhood": "Overlook",
+    "address": "1233 North Killingsworth St, Portland, OR 97217",
+    "lat": 45.562792,
+    "lng": -122.6800244,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Mac and cheese eggrolls with spicy ranch.",
+    "emoji": "🥢",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/be2b64a2-36f2-4568-a7b8-fd84e0e5e330/20261014_133311+-+Nick+Charles.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Roasted Corn & Hatch Chili Mac",
+    "restaurant": "Victoria Bar",
+    "neighborhood": "Humboldt",
+    "address": "4835 North Albina Ave, Portland, OR 97217",
+    "lat": 45.5580267,
+    "lng": -122.6752776,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Roasted corn and hatch chili mac with our signature 5 cheese mac sauce.",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c7862e7d-a751-48e2-a1e6-1e6320725e0d/IMG_1627+-+Cameron+Ocheltree.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Pepperoni Pizza Mac And Cheese",
+    "restaurant": "Migration Brewing - Glisan",
+    "neighborhood": "Kerns",
+    "address": "2828 Northeast Glisan St, Portland, OR 97232",
+    "lat": 45.5262222,
+    "lng": -122.6364306,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Pepperoni pizza mac and cheese: cavatappi pasta with mozzarella and parmesan cheese sauce, italian herbed breadcrumbs, pizza sauce, and crispy pepperoni.",
+    "emoji": "🍕",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/ed9bceef-161c-4d5f-b460-93982a6a106e/6194.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 9:00 PM",
+        "Tuesday: 12:00 – 9:00 PM",
+        "Wednesday: 12:00 – 9:00 PM",
+        "Thursday: 12:00 – 9:00 PM",
+        "Friday: 12:00 – 10:00 PM",
+        "Saturday: 12:00 – 10:00 PM",
+        "Sunday: 12:00 – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Chinatown Style Macaroni Soup",
+    "restaurant": "Mama Chow's Kitchen",
+    "neighborhood": "Hawthorne",
+    "address": "3757 SE Hawthorne Blvd, Portland, OR 97214",
+    "lat": 45.5122362,
+    "lng": -122.6247001,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Chinatown style macaroni soup with parmesan crisp.",
+    "emoji": "🍲",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/44a09cff-5972-4fdd-95d8-7db1c6459f86/49245E81-0363-4637-BCC4-128D4342BE55.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Sunday: Open",
+        "Monday: Open",
+        "Tuesday: Open",
+        "Wednesday: Open",
+        "Thursday: Open",
+        "Friday: Open",
+        "Saturday: Open"
       ]
     }
   }
