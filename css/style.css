@@ -279,6 +279,11 @@ body.is-landing .view {
   font-style: italic;
 }
 
+.header-title .amp {
+  color: var(--pizza);
+  font-style: normal;
+}
+
 .header-meta-row {
   display: flex;
   flex-direction: column;
