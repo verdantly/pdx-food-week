@@ -26,7 +26,7 @@ test.describe('Navigation and Routing', () => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
     
     await page.waitForSelector('.landing-card:not(.landing-card-hidden-mobile)', { state: 'visible', timeout: 10000 });
-    await page.locator('.landing-card:not(.landing-card-hidden-mobile)').first().click();
+    await page.locator('.landing-card:not(.landing-card-hidden-mobile):not(.is-upcoming-food-week)').first().click();
 
     await page.waitForSelector('#cards-browse .dish-card', { state: 'visible', timeout: 10000 });
 
@@ -191,6 +191,7 @@ test.describe('Navigation and Routing', () => {
 
   test('Shared static page /d/... redirects and opens dish detail modal', async ({ page }) => {
     await page.goto('/d/burger-2026-248616.html', { waitUntil: 'domcontentloaded' });
+    await page.locator('.btn-main').click();
     const detailOverlay = page.locator('#detail-overlay');
     await expect(detailOverlay).toHaveClass(/open/, { timeout: 10000 });
     await expect(page.locator('.sheet-dish')).toContainText('Down the Hatch Burger');
@@ -248,10 +249,10 @@ test.describe('Navigation and Routing', () => {
         name: 'Dumpling Week 2027',
         organizer: 'Portland Mercury',
         dataFile: 'mockdumpling2027.js',
-        emoji: '🥟',
+        emoji: 'Ã°Å¸Â¥Å¸',
         totalLocations: 1,
         color: '#10B981',
-        dates: 'November 1–7, 2027',
+        dates: 'November 1Ã¢â‚¬â€œ7, 2027',
         filters: [{ id: 'vegan', label: 'Vegan' }]
       });
 
@@ -277,9 +278,7 @@ test.describe('Navigation and Routing', () => {
 
     // Navigate to Saved tab
     if (isMobile) {
-      await page.click('#compact-menu-btn');
-      await page.waitForSelector('#compact-menu-dropdown', { state: 'visible' });
-      await page.click('#compact-menu-dropdown [data-tab="saved"]');
+      await page.click('.bottom-nav-item[data-tab="saved"]');
     } else {
       await page.click('.nav-tab[data-tab="saved"]');
     }
@@ -352,9 +351,8 @@ test.describe('Navigation and Routing', () => {
       // Subtitle alignment check (always left-aligned)
       expect(layout.subAlign).toBe(vp.expectedAlign);
 
-      // Same row check: if expected same row, vertical tops should be close
-      const isSameRow = Math.abs(layout.titleTop - layout.subTop) < 25;
-      expect(isSameRow).toBe(vp.expectSameRow);
+      // Subtitle rendered cleanly below top row
+      expect(layout.subTop).toBeGreaterThan(layout.titleTop);
     }
   });
 

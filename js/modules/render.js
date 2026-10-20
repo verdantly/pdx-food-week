@@ -1,4 +1,4 @@
-/* ── Rendering Loops & Week Switcher UI ── */
+/* â”€â”€ Rendering Loops & Week Switcher UI â”€â”€ */
 import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
 import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
@@ -307,7 +307,7 @@ export function renderWeekSwitchers() {
 
     sortedWeeks.forEach(w => {
       const displayName = w.name.replace(/\s*\d{4}/, '');
-      const emoji = w.emoji || '🍽️';
+      const emoji = w.emoji || 'ðŸ½ï¸';
       optionsHtml += `<option value="${esc(w.id)}">${emoji} ${esc(displayName)}</option>`;
     });
 
@@ -333,7 +333,7 @@ export function renderFilters() {
 
   const currentSet = State.filterDrawerOpen ? State.draftFilters : State.activeFilters;
   const labelHTML = `<span class="filter-label">Filter:</span>`;
-  const clearHTML = (currentSet.size > 0 || State.activeDayFilter !== null || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
+  const clearHTML = (currentSet.size > 0 || State.activeDayFilter !== null || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">âœ• Clear</button>` : '';
   const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
     const activeCls = currentSet.has(f.id) ? 'active' : '';
     return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
@@ -440,7 +440,7 @@ export function renderHeader() {
   }
   const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
   footers.forEach(el => {
-    el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;•&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;•&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
+    el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;â€¢&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;â€¢&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
   });
 
   const titleEl = document.getElementById('header-title');
@@ -565,7 +565,7 @@ export function applyWeekTheme(week) {
     (root.getAttribute('data-theme-mode') === 'system' && typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   if (!week) {
-    const defaultColor = isDark ? '#FF6B4A' : '#E85B38';
+    const defaultColor = isDark ? '#FF6B4A' : '#B5472E';
     const defaultDark = isDark ? '#E05332' : '#B5472E';
     root.style.setProperty('--pizza', defaultColor);
     root.style.setProperty('--pizza-dark', defaultDark);
@@ -575,7 +575,7 @@ export function applyWeekTheme(week) {
     return;
   }
 
-  const baseColor = week.color || '#E85B38';
+  const baseColor = week.color || '#B5472E';
   const themeColor = isDark ? getAccessibleDarkColor(baseColor, 4.5) : baseColor;
   const dark = week.colorDark || '#B5472E';
 
