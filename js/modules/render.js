@@ -447,6 +447,12 @@ export function renderHeader() {
   if (titleEl) {
     if (State.currentWeekId === 'slushie-2026') {
       titleEl.innerHTML = `Summer of <em>Slushies</em> 2026`;
+    } else if (State.currentWeekId && State.currentWeekId.startsWith('mac-and-cheese')) {
+      const rest = week.name.replace(/^Mac\s*&\s*Cheese\s*/i, '');
+      titleEl.innerHTML = `<em>Mac &amp; Cheese</em> ${esc(rest)}`;
+    } else if (State.currentWeekId && State.currentWeekId.startsWith('fried-chicken')) {
+      const rest = week.name.replace(/^Fried\s+Chicken\s*/i, '');
+      titleEl.innerHTML = `<em>Fried Chicken</em> ${esc(rest)}`;
     } else {
       const parts = week.name.split(' ');
       if (parts.length > 0) {

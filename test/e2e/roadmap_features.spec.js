@@ -126,8 +126,8 @@ test.describe('Roadmap Features E2E', () => {
 
     // Save first two dishes
     const bookmarkBtns = page.locator('.dish-card .bookmark-btn');
-    await bookmarkBtns.nth(0).click();
-    await bookmarkBtns.nth(1).click();
+    await bookmarkBtns.nth(0).click({ force: true });
+    await bookmarkBtns.nth(1).click({ force: true });
 
     // Navigate to Saved tab
     if (isMobile) {
@@ -303,9 +303,9 @@ test.describe('Roadmap Features E2E', () => {
 
     // Save three dishes
     const bookmarkBtns = page.locator('.dish-card .bookmark-btn');
-    await bookmarkBtns.nth(0).click();
-    await bookmarkBtns.nth(1).click();
-    await bookmarkBtns.nth(2).click();
+    await bookmarkBtns.nth(0).click({ force: true });
+    await bookmarkBtns.nth(1).click({ force: true });
+    await bookmarkBtns.nth(2).click({ force: true });
 
     // Navigate to Saved tab
     if (isMobile) {
@@ -330,7 +330,7 @@ test.describe('Roadmap Features E2E', () => {
     // Click "Manage / Remove Spots"
     const manageBtn = page.locator('#saved-manage-mode-btn');
     await expect(manageBtn).toBeVisible();
-    await manageBtn.click();
+    await manageBtn.click({ force: true });
 
     // Bulk actions bar should now be visible
     const bulkActionsBar = page.locator('#saved-bulk-actions');

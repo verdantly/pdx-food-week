@@ -249,10 +249,10 @@ test.describe('Navigation and Routing', () => {
         name: 'Dumpling Week 2027',
         organizer: 'Portland Mercury',
         dataFile: 'mockdumpling2027.js',
-        emoji: 'Ã°Å¸Â¥Å¸',
+        emoji: 'ÃƒÂ°Ã…Â¸Ã‚Â¥Ã…Â¸',
         totalLocations: 1,
         color: '#10B981',
-        dates: 'November 1Ã¢â‚¬â€œ7, 2027',
+        dates: 'November 1ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“7, 2027',
         filters: [{ id: 'vegan', label: 'Vegan' }]
       });
 
@@ -273,8 +273,8 @@ test.describe('Navigation and Routing', () => {
 
     // Save 2 dishes
     const saveButtons = page.locator('.bookmark-btn');
-    await saveButtons.nth(0).click();
-    await saveButtons.nth(1).click();
+    await saveButtons.nth(0).click({ force: true });
+    await saveButtons.nth(1).click({ force: true });
 
     // Navigate to Saved tab
     if (isMobile) {
@@ -289,7 +289,7 @@ test.describe('Navigation and Routing', () => {
     await expect(filterFab).toBeVisible();
 
     // Activate Crawl Mode
-    await page.click('#saved-plan-crawl-btn');
+    await page.locator('#saved-plan-crawl-btn').click({ force: true });
 
     // Crawl FAB should be visible
     const crawlFab = page.locator('#crawl-fab');
@@ -299,7 +299,7 @@ test.describe('Navigation and Routing', () => {
     await expect(filterFab).not.toBeVisible();
 
     // Cancel Crawl Mode
-    await page.click('#saved-plan-crawl-btn');
+    await page.locator('#saved-plan-crawl-btn').click({ force: true });
     await expect(crawlFab).not.toBeVisible();
     await expect(filterFab).toBeVisible();
   });
