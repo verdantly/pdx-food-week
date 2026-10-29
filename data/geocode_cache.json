@@ -403,5 +403,10 @@
     "address": "Southeast 38th Ave, Portland, OR 97214",
     "streetAddress": "Southeast 38th Ave",
     "neighborhood": "Sunnyside"
+  },
+  "45.4960511,-122.5784417": {
+    "address": "3612 Southeast 82nd Ave, Portland, OR 97266",
+    "streetAddress": "3612 Southeast 82nd Ave",
+    "neighborhood": "Foster-Powell"
   }
 }

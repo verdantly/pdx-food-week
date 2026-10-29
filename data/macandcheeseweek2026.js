@@ -1,5 +1,5 @@
 // The Actual Portland's Mac & Cheese Week 2026
-// 19 locations
+// 32 locations
 // Source: https://www.theactualportland.com/macandcheeselocations
 
 window.FOOD_WEEKS = window.FOOD_WEEKS || [];
@@ -17,7 +17,7 @@ window.FOOD_WEEKS.push(
     colorLight: "#FDE68A",
     colorPale: "#FFFBEB",
     emoji: "🧀",
-    totalLocations: 19,
+    totalLocations: 32,
     url: "https://www.theactualportland.com/macandcheeselocations",
   }
 );
@@ -1111,88 +1111,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 11,
     "weekId": "mac-and-cheese-2026",
-    "dish": "Pulled Pork / Cheeseburger Dirty Mac",
-    "restaurant": "Uncle Earl's BBQ Bistro",
-    "neighborhood": "Foster-Powell",
-    "address": "3612 Southeast 82nd Ave, Portland, OR 97266",
-    "lat": 45.4959609,
-    "lng": -122.5782451,
-    "type": "meat",
-    "vegOption": false,
-    "veganOption": false,
-    "glutenFree": false,
-    "spicy": false,
-    "minors": true,
-    "takeout": true,
-    "desc": "Pulled pork / cheeseburger dirty mac: a bed of our creamy mac n cheese topped with your choice of pulled pork or ground beef, bbq sauce, ancestors dust, and green onions.",
-    "emoji": "🧀",
-    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/75151757-ebc4-428b-8405-64a3ff2482f8/39F342E9-4B6E-4019-B415-14F866C1AA87.jpeg",
-    "url": "https://www.theactualportland.com/macandcheeselocations",
-    "hours": {
-      "openDays": [
-        3,
-        4,
-        5,
-        6
-      ],
-      "weekdayDescriptions": [
-        "Monday: Closed",
-        "Tuesday: Closed",
-        "Wednesday: 12:00 – 7:30 PM",
-        "Thursday: 12:00 – 7:30 PM",
-        "Friday: 12:00 – 7:30 PM",
-        "Saturday: 12:00 – 7:30 PM",
-        "Sunday: Closed"
-      ],
-      "periods": [
-        {
-          "close": {
-            "day": 3,
-            "time": "1930"
-          },
-          "open": {
-            "day": 3,
-            "time": "1200"
-          }
-        },
-        {
-          "close": {
-            "day": 4,
-            "time": "1930"
-          },
-          "open": {
-            "day": 4,
-            "time": "1200"
-          }
-        },
-        {
-          "close": {
-            "day": 5,
-            "time": "1930"
-          },
-          "open": {
-            "day": 5,
-            "time": "1200"
-          }
-        },
-        {
-          "close": {
-            "day": 6,
-            "time": "1930"
-          },
-          "open": {
-            "day": 6,
-            "time": "1200"
-          }
-        }
-      ]
-    }
-  },
-  {
-    "id": 12,
-    "weekId": "mac-and-cheese-2026",
     "dish": "Jalapeño Popper Mac & Cheese",
-    "restaurant": "Idella Shepard",
+    "restaurant": "Crazy Grates",
     "neighborhood": "Gresham",
     "address": "58 NE Burnside Rd, Gresham, OR 97030",
     "lat": 45.5082705,
@@ -1208,9 +1128,9 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "emoji": "🧀",
     "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/e2ac8707-7165-47a8-8f9e-9d64fb198ad8/IMG_0343+-+Idella+Shepard.jpeg",
     "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
     "hours": {
       "openDays": [
-        0,
         1,
         2,
         3,
@@ -1219,25 +1139,15 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Monday: 11:00 AM – 8:00 PM",
-        "Tuesday: 11:00 AM – 8:00 PM",
-        "Wednesday: 11:00 AM – 8:00 PM",
-        "Thursday: 11:00 AM – 8:00 PM",
-        "Friday: 11:00 AM – 8:00 PM",
-        "Saturday: 11:00 AM – 8:00 PM",
-        "Sunday: 11:00 AM – 8:00 PM"
+        "Monday: 11:00 AM – 8:00 PM",
+        "Tuesday: 11:00 AM – 8:00 PM",
+        "Wednesday: 11:00 AM – 8:00 PM",
+        "Thursday: 11:00 AM – 8:00 PM",
+        "Friday: 11:00 AM – 8:00 PM",
+        "Saturday: 11:00 AM – 8:00 PM",
+        "Sunday: Closed"
       ],
       "periods": [
-        {
-          "open": {
-            "day": 0,
-            "time": "1100"
-          },
-          "close": {
-            "day": 0,
-            "time": "2000"
-          }
-        },
         {
           "open": {
             "day": 1,
@@ -1302,7 +1212,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 13,
+    "id": 12,
     "weekId": "mac-and-cheese-2026",
     "dish": "Three-Cheese Béchamel Cavatappi",
     "restaurant": "Speakeasy Saloon",
@@ -1415,7 +1325,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 14,
+    "id": 13,
     "weekId": "mac-and-cheese-2026",
     "dish": "Fusilli Pad Ka Prao (thai Basil)",
     "restaurant": "Gin Thai Brasserie",
@@ -1517,7 +1427,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 15,
+    "id": 14,
     "weekId": "mac-and-cheese-2026",
     "dish": "Southwest Chile Verde Mac",
     "restaurant": "The Rambler",
@@ -1630,7 +1540,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 16,
+    "id": 15,
     "weekId": "mac-and-cheese-2026",
     "dish": "Mac And Cheese Eggrolls With Spicy Ranch",
     "restaurant": "Haymaker Bar",
@@ -1743,7 +1653,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 17,
+    "id": 16,
     "weekId": "mac-and-cheese-2026",
     "dish": "Roasted Corn & Hatch Chili Mac",
     "restaurant": "Victoria Bar",
@@ -1856,7 +1766,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 18,
+    "id": 17,
     "weekId": "mac-and-cheese-2026",
     "dish": "Pepperoni Pizza Mac And Cheese",
     "restaurant": "Migration Brewing - Glisan",
@@ -1969,7 +1879,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     }
   },
   {
-    "id": 19,
+    "id": 18,
     "weekId": "mac-and-cheese-2026",
     "dish": "Chinatown Style Macaroni Soup",
     "restaurant": "Mama Chow's Kitchen",
@@ -2043,6 +1953,1517 @@ window.RESTAURANTS = window.RESTAURANTS || [];
           "open": {
             "day": 6,
             "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Smoked Poblano & Bacon Mac",
+    "restaurant": "Nick's Famous Coney Island",
+    "neighborhood": "Richmond",
+    "address": "3746 SE Hawthorne Blvd, Portland, OR 97214",
+    "lat": 45.5118806,
+    "lng": -122.6249444,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Smoked poblanos and bacon folded into a creamy cheddar–american cheese sauce, topped with crunchy french-fried onions.",
+    "emoji": "🥓",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/f2f27f90-e553-4d7a-adcf-2b99e6ead01d/2547.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:00 – 10:00 PM",
+        "Tuesday: 12:00 – 10:00 PM",
+        "Wednesday: 12:00 – 10:00 PM",
+        "Thursday: 12:00 – 10:00 PM",
+        "Friday: 12:00 PM – 12:00 AM",
+        "Saturday: 12:00 PM – 12:00 AM",
+        "Sunday: 12:00 – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2200"
+          },
+          "open": {
+            "day": 0,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2200"
+          },
+          "open": {
+            "day": 1,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2200"
+          },
+          "open": {
+            "day": 2,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2200"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2200"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Creamy Tomato Basil Mac",
+    "restaurant": "Moreland Ale House",
+    "neighborhood": "Sellwood-Moreland",
+    "address": "7995 SE Milwaukie Ave, Portland, OR 97202",
+    "lat": 45.465858,
+    "lng": -122.647633,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Creamy mac and cheese infused with rich tomato flavor and fragrant fresh basil for a deliciously savory, taste.",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/4a467d8c-cc68-4d56-84e5-ccb0fe0803bd/IMG_6711+-+Benjamin+Gilmer.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 3:00 – 11:00 PM",
+        "Tuesday: 3:00 – 11:00 PM",
+        "Wednesday: 3:00 – 11:00 PM",
+        "Thursday: 3:00 – 11:00 PM",
+        "Friday: 3:00 – 11:00 PM",
+        "Saturday: 9:00 AM – 11:00 PM",
+        "Sunday: 9:00 AM – 11:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2300"
+          },
+          "open": {
+            "day": 0,
+            "time": "0900"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2300"
+          },
+          "open": {
+            "day": 1,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2300"
+          },
+          "open": {
+            "day": 2,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2300"
+          },
+          "open": {
+            "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2300"
+          },
+          "open": {
+            "day": 4,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2300"
+          },
+          "open": {
+            "day": 5,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2300"
+          },
+          "open": {
+            "day": 6,
+            "time": "0900"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "The Crispy Caprese Mac",
+    "restaurant": "Pomalo Bar",
+    "neighborhood": "University Park",
+    "address": "5903 N Lombard St, Portland, OR 97203",
+    "lat": 45.5841998,
+    "lng": -122.7283641,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "The crispy caprese mac",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/60d536ad-5588-409d-b664-07016ea4337f/IMG_3636+-+Bar+Manager.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 1:00 AM",
+        "Saturday: 4:00 PM – 1:00 AM",
+        "Sunday: 4:00 PM – 12:00 AM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 1,
+            "time": "0000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "0000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "0000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "0000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "0000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "0100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1600"
+          }
+        },
+        {
+          "close": {
+            "day": 0,
+            "time": "0100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1600"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Taco Mac",
+    "restaurant": "The Dusted Cup",
+    "neighborhood": "Downtown",
+    "address": "727 SW Naito Pkwy, Portland, OR 97204",
+    "lat": 45.5171198,
+    "lng": -122.6731335,
+    "type": "vegan",
+    "vegOption": true,
+    "veganOption": true,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Taco mac: creamy cashew plant-based mac n cheeze topped with black beans and corn, seasoned ground beef substitute, and finished with a creamy chipotle sauce.",
+    "emoji": "🌱",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/4fa9856c-3e35-4182-b57c-7de50d94ad9d/taco+mac+-+Stacey+Propst.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 7:00 AM – 3:00 PM",
+        "Tuesday: 7:00 AM – 3:00 PM",
+        "Wednesday: 7:00 AM – 3:00 PM",
+        "Thursday: 7:00 AM – 3:00 PM",
+        "Friday: 7:00 AM – 3:00 PM, 5:00 – 9:00 PM",
+        "Saturday: 7:00 AM – 3:00 PM, 5:00 – 9:00 PM",
+        "Sunday: 7:00 AM – 3:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "1500"
+          },
+          "open": {
+            "day": 0,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1500"
+          },
+          "open": {
+            "day": 1,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1500"
+          },
+          "open": {
+            "day": 2,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1500"
+          },
+          "open": {
+            "day": 3,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1500"
+          },
+          "open": {
+            "day": 4,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1500"
+          },
+          "open": {
+            "day": 5,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2100"
+          },
+          "open": {
+            "day": 5,
+            "time": "1700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1500"
+          },
+          "open": {
+            "day": 6,
+            "time": "0700"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2100"
+          },
+          "open": {
+            "day": 6,
+            "time": "1700"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Mac Of Fury",
+    "restaurant": "Yin Yang Burger",
+    "neighborhood": "Foster-Powell",
+    "address": "3612 SE 82nd Ave, Portland, OR 97266",
+    "lat": 45.4959609,
+    "lng": -122.5782451,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Mac of fury: an asian-inspired twist on mac & cheese! cavatappi tossed in a rich, creamy three-cheese blend of sharp cheddar, smoked gouda, and gruyère, dusted with bold xi’an-inspired seasoning. Topped with sweet and savory five-spice candied bacon, slow-cooked in soy sauce, garlic, brown sugar, and a touch of sriracha. Finished with fresh shredded scallions for the perfect balance of smoky, sweet, savory, and spice.",
+    "emoji": "🥓",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/87808d69-24b7-418a-af70-425105f15b07/file_000000005c4c81fd8e0f2b8d5c5a307b+-+Hanry+Ho2.png",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2100"
+          },
+          "open": {
+            "day": 0,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2100"
+          },
+          "open": {
+            "day": 1,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2100"
+          },
+          "open": {
+            "day": 2,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2100"
+          },
+          "open": {
+            "day": 3,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2100"
+          },
+          "open": {
+            "day": 4,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1100"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2200"
+          },
+          "open": {
+            "day": 6,
+            "time": "1100"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "New Orleans Baked Mac",
+    "restaurant": "Nolia",
+    "neighborhood": "Foster-Powell",
+    "address": "3612 SE 82nd Ave, Portland, OR 97266",
+    "lat": 45.4959609,
+    "lng": -122.5782451,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "New orleans baked mac: like all things new orleans, this classic recipe was born of cross-cultural exchange among the city's neighborhoods. Nolia's four-cheese blend, baked with long macaroni, procured straight from south louisiana. How we'd have it back home! address: 3612 se 82nd ave, portland, or 97266",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/d4c2b8d9-37c9-4a1a-9ebb-ed065f26f0ae/Photoroom_20261020_161928+-+Leslie+Jade+Nguyen.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 1:00 – 8:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 5:00 – 8:00 PM",
+        "Thursday: 1:00 – 8:00 PM",
+        "Friday: 1:00 – 9:00 PM",
+        "Saturday: 1:00 – 9:00 PM",
+        "Sunday: 1:00 – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 1,
+            "time": "1300"
+          },
+          "close": {
+            "day": 1,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "time": "1700"
+          },
+          "close": {
+            "day": 3,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "time": "1300"
+          },
+          "close": {
+            "day": 4,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1300"
+          },
+          "close": {
+            "day": 5,
+            "time": "2100"
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "time": "1300"
+          },
+          "close": {
+            "day": 6,
+            "time": "2100"
+          }
+        },
+        {
+          "open": {
+            "day": 0,
+            "time": "1300"
+          },
+          "close": {
+            "day": 0,
+            "time": "2000"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Pulled Pork / Cheeseburger Dirty Mac",
+    "restaurant": "Uncle Earl's BBQ Bistro",
+    "neighborhood": "Foster-Powell",
+    "address": "3612 Southeast 82nd Ave, Portland, OR 97266",
+    "lat": 45.4960511,
+    "lng": -122.5784417,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Pulled pork / cheeseburger dirty mac: a bed of our creamy mac n cheese topped with your choice of pulled pork or ground beef, bbq sauce, ancestors dust, and green onions. Address: 3612 se 82nd ave, portland, or 97266",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/75151757-ebc4-428b-8405-64a3ff2482f8/39F342E9-4B6E-4019-B415-14F866C1AA87.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "hours": {
+      "openDays": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 12:00 – 7:30 PM",
+        "Thursday: 12:00 – 7:30 PM",
+        "Friday: 12:00 – 7:30 PM",
+        "Saturday: 12:00 – 7:30 PM",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 3,
+            "time": "1930"
+          },
+          "open": {
+            "day": 3,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1930"
+          },
+          "open": {
+            "day": 4,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "1930"
+          },
+          "open": {
+            "day": 5,
+            "time": "1200"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "1930"
+          },
+          "open": {
+            "day": 6,
+            "time": "1200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Cajun Mac & Cheese With Fried Chicken & Hot Honey",
+    "restaurant": "Bunk Bar",
+    "neighborhood": "Central Eastside",
+    "address": "1028 SE Water Ave, Portland, OR 97214",
+    "lat": 45.5152079,
+    "lng": -122.6656553,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": true,
+    "minors": true,
+    "takeout": true,
+    "desc": "Cajun mac & cheese with fried chicken & hot honey: three-cheese baked mac & cheese topped with andouille sausage, caramelized peppers & onions, buttermilk-fried chicken drizzled with hot honey, and remoulade sauce..",
+    "emoji": "🍗",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/91f6947b-818f-4cc5-8ae1-d1e9f66e044b/IMG_0507+-+Nick+Wood.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:30 AM – 8:00 PM",
+        "Tuesday: 11:30 AM – 8:00 PM",
+        "Wednesday: 11:30 AM – 8:00 PM",
+        "Thursday: 11:30 AM – 8:00 PM",
+        "Friday: 11:30 AM – 8:00 PM",
+        "Saturday: 11:30 AM – 8:00 PM",
+        "Sunday: 11:30 AM – 8:00 PM"
+      ],
+      "periods": [
+        {
+          "close": {
+            "day": 0,
+            "time": "2000"
+          },
+          "open": {
+            "day": 0,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "2000"
+          },
+          "open": {
+            "day": 1,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "2000"
+          },
+          "open": {
+            "day": 2,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "2000"
+          },
+          "open": {
+            "day": 3,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "2000"
+          },
+          "open": {
+            "day": 4,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 5,
+            "time": "2000"
+          },
+          "open": {
+            "day": 5,
+            "time": "1130"
+          }
+        },
+        {
+          "close": {
+            "day": 6,
+            "time": "2000"
+          },
+          "open": {
+            "day": 6,
+            "time": "1130"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 27,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "The Adrian Pimento",
+    "restaurant": "Grassa (NW 23rd)",
+    "neighborhood": "Nob Hill",
+    "address": "1506 NW 23rd Ave, Portland, OR 97210",
+    "lat": 45.5335689,
+    "lng": -122.6984512,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "The adrian pimento: fusilli, pimento cheese, pulled pork shoulder, crispy fried onions,",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/11e30a6d-a008-44a5-be41-cc867209ad4f/pimento-mac-n-cheese4-scaled.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 10:00 PM",
+        "Tuesday: 11:00 AM – 10:00 PM",
+        "Wednesday: 11:00 AM – 10:00 PM",
+        "Thursday: 11:00 AM – 10:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "time": "1100"
+          },
+          "close": {
+            "day": 0,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "time": "1100"
+          },
+          "close": {
+            "day": 1,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "time": "1100"
+          },
+          "close": {
+            "day": 2,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "time": "1100"
+          },
+          "close": {
+            "day": 3,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "time": "1100"
+          },
+          "close": {
+            "day": 4,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1100"
+          },
+          "close": {
+            "day": 5,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "time": "1100"
+          },
+          "close": {
+            "day": 6,
+            "time": "2200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 28,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "The Adrian Pimento",
+    "restaurant": "Grassa (Washington)",
+    "neighborhood": "Downtown",
+    "address": "1205 SW Washington St, Portland, OR 97205",
+    "lat": 45.5220579,
+    "lng": -122.6836798,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "The adrian pimento: fusilli, pimento cheese, pulled pork shoulder, crispy fried onions.",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/11e30a6d-a008-44a5-be41-cc867209ad4f/pimento-mac-n-cheese4-scaled.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 10:00 PM",
+        "Tuesday: 11:00 AM – 10:00 PM",
+        "Wednesday: 11:00 AM – 10:00 PM",
+        "Thursday: 11:00 AM – 10:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "time": "1100"
+          },
+          "close": {
+            "day": 0,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "time": "1100"
+          },
+          "close": {
+            "day": 1,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "time": "1100"
+          },
+          "close": {
+            "day": 2,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "time": "1100"
+          },
+          "close": {
+            "day": 3,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "time": "1100"
+          },
+          "close": {
+            "day": 4,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1100"
+          },
+          "close": {
+            "day": 5,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "time": "1100"
+          },
+          "close": {
+            "day": 6,
+            "time": "2200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "The Adrian Pimento",
+    "restaurant": "Grassa (Hawthorne)",
+    "neighborhood": "Hawthorne",
+    "address": "1375 SE Hawthorne Blvd, Portland, OR 97214",
+    "lat": 45.5123763,
+    "lng": -122.6519272,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "The adrian pimento: fusilli, pimento cheese, pulled pork shoulder, crispy fried onions.",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/11e30a6d-a008-44a5-be41-cc867209ad4f/pimento-mac-n-cheese4-scaled.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 10:00 PM",
+        "Tuesday: 11:00 AM – 10:00 PM",
+        "Wednesday: 11:00 AM – 10:00 PM",
+        "Thursday: 11:00 AM – 10:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 10:00 PM"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "time": "1100"
+          },
+          "close": {
+            "day": 0,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "time": "1100"
+          },
+          "close": {
+            "day": 1,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "time": "1100"
+          },
+          "close": {
+            "day": 2,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "time": "1100"
+          },
+          "close": {
+            "day": 3,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "time": "1100"
+          },
+          "close": {
+            "day": 4,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1100"
+          },
+          "close": {
+            "day": 5,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "time": "1100"
+          },
+          "close": {
+            "day": 6,
+            "time": "2200"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 30,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Bulgarian Feta Brulee Mac",
+    "restaurant": "The European Job, PDX",
+    "neighborhood": "Hollywood",
+    "address": "1607 NE 41st Ave, Portland, OR 97232",
+    "lat": 45.5346334,
+    "lng": -122.6217363,
+    "type": "vegetarian",
+    "vegOption": true,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Creamy sauce tossed with cavatappi pasta topped with bulgarian feta and finished with bruleed cane sugar and nutmeg.",
+    "emoji": "🧀",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/4522b235-3d99-4826-88d6-3687c6f6e860/1000091447+%281%29.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 12:15 – 8:00 PM",
+        "Tuesday: 12:15 – 8:00 PM",
+        "Wednesday: 12:15 – 8:00 PM",
+        "Thursday: 12:15 – 8:00 PM",
+        "Friday: 12:15 – 8:00 PM",
+        "Saturday: 12:15 – 8:00 PM",
+        "Sunday: 12:15 – 6:30 PM"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 1,
+            "time": "1215"
+          },
+          "close": {
+            "day": 1,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "time": "1215"
+          },
+          "close": {
+            "day": 2,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "time": "1215"
+          },
+          "close": {
+            "day": 3,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "time": "1215"
+          },
+          "close": {
+            "day": 4,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1215"
+          },
+          "close": {
+            "day": 5,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "time": "1215"
+          },
+          "close": {
+            "day": 6,
+            "time": "2000"
+          }
+        },
+        {
+          "open": {
+            "day": 0,
+            "time": "1215"
+          },
+          "close": {
+            "day": 0,
+            "time": "1830"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 31,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "BBQ Tempeh Sandwich With Mac & Cheese Croquette",
+    "restaurant": "Office Lunch (by Exquisite Creatures x Verdure)",
+    "neighborhood": "Central Eastside",
+    "address": "107 SE Washington St, Portland, OR 97214",
+    "lat": 45.51874,
+    "lng": -122.664236,
+    "type": "vegan",
+    "vegOption": true,
+    "veganOption": true,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "A bbq tempeh sandwich with a mac and cheese croquette topped with apple & fennel slaw.",
+    "emoji": "🥪",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/abda311f-2ae1-4068-88c8-deee3f3fd008/IMG_9839+-+Adolfo+Tigerino.jpeg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        4,
+        5
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 11:00 AM – 2:00 PM",
+        "Friday: 11:00 AM – 2:00 PM",
+        "Saturday: Closed",
+        "Sunday: Closed"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 4,
+            "time": "1100"
+          },
+          "close": {
+            "day": 4,
+            "time": "1400"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1100"
+          },
+          "close": {
+            "day": 5,
+            "time": "1400"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": 32,
+    "weekId": "mac-and-cheese-2026",
+    "dish": "Classic Roman Alla Gricia Mac",
+    "restaurant": "The Italian Job",
+    "neighborhood": "Richmond",
+    "address": "3829 SE Division St, Portland, OR 97202",
+    "lat": 45.5049814,
+    "lng": -122.6235704,
+    "type": "meat",
+    "vegOption": false,
+    "veganOption": false,
+    "glutenFree": false,
+    "spicy": false,
+    "minors": true,
+    "takeout": true,
+    "desc": "Classic roman alla gricia cream sauce with rendered bacon fat and pecorino, tossed with fusilli corti pasta, topped with toasted breadcrumbs, parmigiano, crispy bacon, and bacon dust.",
+    "emoji": "🥓",
+    "image": "https://images.squarespace-cdn.com/content/v1/65b43e25bf004551fd66bdde/c6c3bcf1-be9b-4492-98e1-17bdd7a22a9b/IMG-20261026-WA0003.jpg",
+    "url": "https://www.theactualportland.com/macandcheeselocations",
+    "isNew": true,
+    "hours": {
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 10:00 PM",
+        "Saturday: 11:00 AM – 10:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
+      ],
+      "periods": [
+        {
+          "open": {
+            "day": 1,
+            "time": "1100"
+          },
+          "close": {
+            "day": 1,
+            "time": "2100"
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "time": "1100"
+          },
+          "close": {
+            "day": 2,
+            "time": "2100"
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "time": "1100"
+          },
+          "close": {
+            "day": 3,
+            "time": "2100"
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "time": "1100"
+          },
+          "close": {
+            "day": 4,
+            "time": "2100"
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "time": "1100"
+          },
+          "close": {
+            "day": 5,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "time": "1100"
+          },
+          "close": {
+            "day": 6,
+            "time": "2200"
+          }
+        },
+        {
+          "open": {
+            "day": 0,
+            "time": "1100"
+          },
+          "close": {
+            "day": 0,
+            "time": "2100"
           }
         }
       ]

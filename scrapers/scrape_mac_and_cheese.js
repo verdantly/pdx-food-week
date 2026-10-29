@@ -45,7 +45,9 @@ const NAME_MAP = {
   'graysrestaurantbar': 'graysrestaurantandbar',
   'migrationbrewingwilliamsx5star': 'migrationbrewingwilliams',
   'migrationbrewingglisan': 'migrationbrewingglisan',
-  'haymakerbar': 'haymaker'
+  'haymakerbar': 'haymaker',
+  'thedustedcup': 'thedustedcupvegan',
+  'theeuropeanjobpdx': 'theeuropeanjob'
 };
 
 const ADDRESS_OVERRIDES = {
@@ -111,6 +113,111 @@ const ADDRESS_OVERRIDES = {
     neighborhood: 'Hawthorne',
     lat: 45.5122362,
     lng: -122.6247001
+  },
+  'Nolia': {
+    address: '3612 SE 82nd Ave, Portland, OR 97266',
+    streetAddress: '3612 SE 82nd Ave',
+    neighborhood: 'Foster-Powell',
+    lat: 45.4959609,
+    lng: -122.5782451
+  },
+  "Nick's Famous Coney Island": {
+    address: '3746 SE Hawthorne Blvd, Portland, OR 97214',
+    streetAddress: '3746 SE Hawthorne Blvd',
+    neighborhood: 'Richmond',
+    lat: 45.5118806,
+    lng: -122.6249444
+  },
+  'Moreland Ale House': {
+    address: '7995 SE Milwaukie Ave, Portland, OR 97202',
+    streetAddress: '7995 SE Milwaukie Ave',
+    neighborhood: 'Sellwood-Moreland',
+    lat: 45.465858,
+    lng: -122.647633
+  },
+  'Pomalo Bar': {
+    address: '5903 N Lombard St, Portland, OR 97203',
+    streetAddress: '5903 N Lombard St',
+    neighborhood: 'University Park',
+    lat: 45.5841998,
+    lng: -122.7283641
+  },
+  'The Dusted Cup': {
+    address: '727 SW Naito Pkwy, Portland, OR 97204',
+    streetAddress: '727 SW Naito Pkwy',
+    neighborhood: 'Downtown',
+    lat: 45.5171198,
+    lng: -122.6731335
+  },
+  'Crazy Grates': {
+    address: '58 NE Burnside Rd, Gresham, OR 97030',
+    streetAddress: '58 NE Burnside Rd',
+    neighborhood: 'Gresham',
+    lat: 45.5082705,
+    lng: -122.4301784
+  },
+  'Yin Yang Burger': {
+    address: '3612 SE 82nd Ave, Portland, OR 97266',
+    streetAddress: '3612 SE 82nd Ave',
+    neighborhood: 'Foster-Powell',
+    lat: 45.4959609,
+    lng: -122.5782451
+  },
+  'Bunk Bar': {
+    address: '1028 SE Water Ave, Portland, OR 97214',
+    streetAddress: '1028 SE Water Ave',
+    neighborhood: 'Central Eastside',
+    lat: 45.5152079,
+    lng: -122.6656553
+  },
+  'Grassa (NW 23rd)': {
+    address: '1506 NW 23rd Ave, Portland, OR 97210',
+    streetAddress: '1506 NW 23rd Ave',
+    neighborhood: 'Nob Hill',
+    lat: 45.5335689,
+    lng: -122.6984512
+  },
+  'Grassa (Washington)': {
+    address: '1205 SW Washington St, Portland, OR 97205',
+    streetAddress: '1205 SW Washington St',
+    neighborhood: 'Downtown',
+    lat: 45.5220579,
+    lng: -122.6836798
+  },
+  'Grassa (Hawthorne)': {
+    address: '1375 SE Hawthorne Blvd, Portland, OR 97214',
+    streetAddress: '1375 SE Hawthorne Blvd',
+    neighborhood: 'Hawthorne',
+    lat: 45.5123763,
+    lng: -122.6519272
+  },
+  'The European Job, PDX': {
+    address: '1607 NE 41st Ave, Portland, OR 97232',
+    streetAddress: '1607 NE 41st Ave',
+    neighborhood: 'Hollywood',
+    lat: 45.5346334,
+    lng: -122.6217363
+  },
+  'The European Job': {
+    address: '1607 NE 41st Ave, Portland, OR 97232',
+    streetAddress: '1607 NE 41st Ave',
+    neighborhood: 'Hollywood',
+    lat: 45.5346334,
+    lng: -122.6217363
+  },
+  'Office Lunch (by Exquisite Creatures x Verdure)': {
+    address: '107 SE Washington St, Portland, OR 97214',
+    streetAddress: '107 SE Washington St',
+    neighborhood: 'Central Eastside',
+    lat: 45.51874,
+    lng: -122.664236
+  },
+  'The Italian Job': {
+    address: '3829 SE Division St, Portland, OR 97202',
+    streetAddress: '3829 SE Division St',
+    neighborhood: 'Richmond',
+    lat: 45.5049814,
+    lng: -122.6235704
   }
 };
 
@@ -273,6 +380,131 @@ const DISH_OVERRIDES = {
     veganOption: false,
     glutenFree: false,
     emoji: '🧀'
+  },
+  'Nolia': {
+    dish: 'New Orleans Baked Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  "Nick's Famous Coney Island": {
+    dish: 'Smoked Poblano & Bacon Mac',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🥓'
+  },
+  'Moreland Ale House': {
+    dish: 'Creamy Tomato Basil Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'Pomalo Bar': {
+    dish: 'The Crispy Caprese Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'The Dusted Cup': {
+    dish: 'Taco Mac',
+    type: 'vegan',
+    vegOption: true,
+    veganOption: true,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🌱'
+  },
+  'Crazy Grates': {
+    dish: 'Jalapeño Popper Mac & Cheese',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🧀'
+  },
+  'Grassa (Hawthorne)': {
+    dish: 'The Adrian Pimento',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'Grassa (Washington)': {
+    dish: 'The Adrian Pimento',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'Grassa (NW 23rd)': {
+    dish: 'The Adrian Pimento',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'Yin Yang Burger': {
+    dish: 'Mac of Fury',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🥓'
+  },
+  'Bunk Bar': {
+    dish: 'Cajun Mac & Cheese with Fried Chicken & Hot Honey',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🍗'
+  },
+  'The European Job, PDX': {
+    dish: 'Bulgarian Feta Brulee Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'The European Job': {
+    dish: 'Bulgarian Feta Brulee Mac',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🧀'
+  },
+  'Office Lunch (by Exquisite Creatures x Verdure)': {
+    dish: 'BBQ Tempeh Sandwich with Mac & Cheese Croquette',
+    type: 'vegan',
+    vegOption: true,
+    veganOption: true,
+    glutenFree: false,
+    emoji: '🥪'
+  },
+  'The Italian Job': {
+    dish: 'Classic Roman Alla Gricia Mac',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🥓'
   }
 };
 
