@@ -450,3 +450,62 @@ describe("App Features: Saved Custom Order Rank Badges", () => {
 
 
 
+describe("App Features: Recently Added Filter After Async Data Load", () => {
+  test("renderAll updates browse-filters with Recently Added when new listings load", async () => {
+    const { renderFilters, renderAll } = await import("../js/modules/render.js");
+    const { getFiltered } = await import("../js/modules/data.js");
+
+    if (typeof global.window === "undefined") {
+      global.window = {};
+    }
+    global.window.FOOD_WEEKS = [
+      {
+        id: "mac-and-cheese-2026",
+        name: "Mac & Cheese Week 2026",
+        dates: "November 2–8, 2026",
+        pricePills: ["$10 special"],
+        totalLocations: 2,
+        url: "https://www.theactualportland.com/macandcheeselocations",
+        filters: [{ id: "meat", label: "Meat" }, { id: "vegetarian", label: "Vegetarian" }]
+      }
+    ];
+
+    State.currentWeekId = "mac-and-cheese-2026";
+    State.viewedNew.clear();
+    State.activeFilters.clear();
+
+    const browseFiltersEl = { innerHTML: "" };
+    const prevDoc = global.document;
+    global.document = {
+      getElementById: (id) => (id === "browse-filters" ? browseFiltersEl : null),
+      querySelectorAll: () => [],
+      querySelector: () => null
+    };
+
+    try {
+      // 1. Before week data loads, RESTAURANTS is empty -> Recently Added is not rendered
+      global.window.RESTAURANTS = [];
+      renderFilters();
+      expect(browseFiltersEl.innerHTML).toContain("Meat");
+      expect(browseFiltersEl.innerHTML).not.toContain("Recently Added");
+
+      // 2. After week data loads with an isNew item, renderAll refreshes filters and adds Recently Added
+      global.window.RESTAURANTS = [
+        { id: 1, weekId: "mac-and-cheese-2026", restaurant: "Old Spot", dish: "Classic Mac", type: "vegetarian" },
+        { id: 2, weekId: "mac-and-cheese-2026", restaurant: "New Spot", dish: "New Mac", type: "meat", isNew: true }
+      ];
+      renderAll();
+      expect(browseFiltersEl.innerHTML).toContain("Recently Added");
+
+      // 3. Filtering by 'new' returns only the unviewed isNew item
+      State.activeFilters.add("new");
+      const filtered = getFiltered();
+      expect(filtered.length).toBe(1);
+      expect(filtered[0].restaurant).toBe("New Spot");
+      State.activeFilters.clear();
+    } finally {
+      if (prevDoc) global.document = prevDoc;
+      else delete global.document;
+    }
+  });
+});

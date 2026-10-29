@@ -147,6 +147,7 @@ export function swipe(dir, fromGesture = false) {
   }
   saveState();
   updateBrowseBadge();
+  if (window.App && window.App.renderFilters) window.App.renderFilters();
 
   // Dismiss keyboard shortcut cues if visible
   const hintsEl = document.querySelector('.swipe-desktop-hints');

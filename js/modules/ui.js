@@ -363,6 +363,7 @@ export function openDetail(id, fromPopState = false) {
         if (badge) badge.remove();
       }
       updateBrowseBadge();
+      if (window.App && window.App.renderFilters) window.App.renderFilters();
     }
 
     if (window.innerWidth <= 768) {

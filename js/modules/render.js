@@ -599,6 +599,8 @@ export function applyWeekTheme(week) {
 }
 
 export function renderAll() {
+  renderHeader();
+  renderFilters();
   renderBrowse();
   renderSaved();
   renderFriends();

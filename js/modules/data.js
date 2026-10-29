@@ -44,7 +44,7 @@ export function updateBrowseBadge() {
       banner.style.display = 'flex';
       banner.innerHTML = `
         <span class="banner-icon">✨</span>
-        <span class="banner-text">${message}</span>
+        <span class="banner-text" style="cursor: pointer;" onclick="App.toggleFilter('new')">${message} <span style="text-decoration: underline; font-weight: 600; margin-left: 4px;">Filter</span></span>
         <button class="banner-close" aria-label="Dismiss notification" onclick="App.dismissNewBanner()">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
