@@ -1,4 +1,4 @@
-/* â”€â”€ Rendering Loops & Week Switcher UI â”€â”€ */
+/* ── Rendering Loops & Week Switcher UI ── */
 import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
 import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
@@ -333,7 +333,7 @@ export function renderFilters() {
 
   const currentSet = State.filterDrawerOpen ? State.draftFilters : State.activeFilters;
   const labelHTML = `<span class="filter-label">Filter:</span>`;
-  const clearHTML = (currentSet.size > 0 || State.activeDayFilter !== null || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">âœ• Clear</button>` : '';
+  const clearHTML = (currentSet.size > 0 || State.activeDayFilter !== null || State.searchQuery !== '' || State.activeSort === 'distance') ? `<button class="filter-chip clear-filters" style="background:var(--pizza-light); color:var(--pizza-dark); font-weight:bold; border: 1px solid var(--pizza-dark);" onclick="App.clearAllFilters()">✕ Clear</button>` : '';
   const chipsHTML = `<div class="filter-chips-wrapper">` + clearHTML + filters.map(f => {
     const activeCls = currentSet.has(f.id) ? 'active' : '';
     return `<button class="filter-chip ${activeCls}" onclick="App.toggleFilter('${f.id}')">${esc(f.label)}</button>`;
@@ -440,7 +440,7 @@ export function renderHeader() {
   }
   const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
   footers.forEach(el => {
-    el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;â€¢&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;â€¢&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
+    el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;&bull;&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;&bull;&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
   });
 
   const titleEl = document.getElementById('header-title');

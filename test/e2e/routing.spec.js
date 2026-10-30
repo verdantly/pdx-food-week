@@ -249,10 +249,10 @@ test.describe('Navigation and Routing', () => {
         name: 'Dumpling Week 2027',
         organizer: 'Portland Mercury',
         dataFile: 'mockdumpling2027.js',
-        emoji: 'ÃƒÂ°Ã…Â¸Ã‚Â¥Ã…Â¸',
+        emoji: '🥟',
         totalLocations: 1,
         color: '#10B981',
-        dates: 'November 1ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“7, 2027',
+        dates: 'November 1–7, 2027',
         filters: [{ id: 'vegan', label: 'Vegan' }]
       });
 
