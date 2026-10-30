@@ -1,11 +1,12 @@
-const CACHE_NAME = 'pdxfw-cache-a5a3489e';
+const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
+const CACHE_NAME = 'pdxfw-cache-e3315e30';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=a5a3489e',
-  'js/app.js?v=a5a3489e',
-  'js/meta.js?v=a5a3489e',
+  'css/style.css?v=e3315e30',
+  'js/app.js?v=e3315e30',
+  'js/meta.js?v=e3315e30',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
@@ -47,7 +48,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
+          if (cacheName !== CACHE_NAME && cacheName !== TILE_CACHE_NAME) {
             return caches.delete(cacheName);
           }
         })
@@ -128,7 +129,6 @@ self.addEventListener('fetch', (event) => {
   // Ensures fresh tiles when online, but falls back to cached tiles when offline roaming
   const isMapTile = url.hostname.includes('tile.openstreetmap.org');
   if (isMapTile) {
-    const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
     event.respondWith(
       fetch(event.request)
         .then((response) => {

@@ -1,5 +1,5 @@
 /* ── UI Components & Detail Overlays ── */
-import { State, saveState, isDishSaved, toggleDishSaved, getDishKey } from './state.js';
+import { State, saveState, isDishSaved, toggleDishSaved, getDishKey, isDishViewedNew, markDishViewedNew } from './state.js';
 import { esc, safeUrl, showToast, getRestaurantScheduleText } from './utils.js';
 import { getRestaurants, getFiltered, getSaved, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
@@ -87,6 +87,9 @@ export function getActiveFriends() {
   const activeWeekRestaurants = getRestaurants();
   const currentWeekRestaurantIds = new Set(activeWeekRestaurants.map(r => r.id));
   return State.friends.map((f, index) => {
+    if (f.weekId && State.currentWeekId && f.weekId !== State.currentWeekId) {
+      return { ...f, weekIds: [], originalIndex: index };
+    }
     const weekIds = (f.ids || []).filter(id => currentWeekRestaurantIds.has(id));
     return { ...f, weekIds, originalIndex: index };
   }).filter(f => f.weekIds.length > 0);
@@ -186,7 +189,7 @@ export function openDetail(id, fromPopState = false) {
   }
 
   const wasAlreadyOpen = document.getElementById('detail-overlay').classList.contains('open');
-  const isNew = r.isNew && !State.viewedNew.has(r.id);
+  const isNew = r.isNew && !isDishViewedNew(r.id, r.weekId);
 
   if (document.activeElement && document.activeElement !== document.body) {
     State.lastActiveElement = document.activeElement;
@@ -350,7 +353,7 @@ export function openDetail(id, fromPopState = false) {
     sheetEl.innerHTML = contentHtml;
 
     if (isNew) {
-      State.viewedNew.add(r.id);
+      markDishViewedNew(r.id, r.weekId);
       saveState();
       const card = document.querySelector(`.dish-card[data-id="${r.id}"]`);
       if (card) {

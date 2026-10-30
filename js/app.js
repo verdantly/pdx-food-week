@@ -1,7 +1,7 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
-import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState, backupGuestUserData, restoreGuestUserData } from './modules/state.js';
+import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState, backupGuestUserData, restoreGuestUserData, getDishKey } from './modules/state.js';
 import { esc, debounce, showToast, getWeekTiming } from './modules/utils.js';
-import { getRestaurants, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
+import { getRestaurants, getSaved, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
   openDetail, closeDetail, shareDish, toggleSave, setRating, setNote, handleNoteInput,
   openPhotoZoom, closePhotoZoom, showMetricDetails, closeMetricModal, getActiveFriends, getCurrentContextList,
@@ -307,7 +307,7 @@ async function loadWeekData(weekId, callback) {
 
   // Modern fetch with fallback to script injection
   try {
-    const res = await fetch(`data/${dataFile}?v=2`);
+    const res = await fetch(`data/${dataFile}`);
     if (res && res.ok) {
       const code = await res.text();
       const fn = new Function(code);
@@ -320,7 +320,7 @@ async function loadWeekData(weekId, callback) {
   }
 
   const script = document.createElement('script');
-  script.src = `data/${dataFile}?v=2`;
+  script.src = `data/${dataFile}`;
   script.onload = finalizeLoad;
   script.onerror = handleError;
   document.body.appendChild(script);
@@ -347,10 +347,14 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
     State.activeFilters.clear();
     State.activeSort = 'restaurant';
   }
-  // Search query should not persist across week switches
+  // Search query and crawl selection should not persist across week switches
   State.searchQuery = '';
   State.savedSearchQuery = '';
   State.mapSearchQuery = '';
+  State.crawlSelection = [];
+  if (State.crawlModeActive) {
+    toggleCrawlMode();
+  }
 
   saveState();
 
@@ -391,9 +395,10 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
   const mapStatsRow = document.getElementById('map-stats-row');
   if (mapStatsRow) mapStatsRow.style.display = 'none';
 
-  State.activeSort = 'restaurant';
+  const sortLabelMap = { restaurant: 'Restaurant', dish: 'Dish', distance: 'Distance', id: 'Default' };
+  const activeSortLabel = sortLabelMap[State.activeSort] || 'Restaurant';
   document.querySelectorAll('#sort-row button.filter-chip, #sort-section button.filter-chip').forEach(btn => {
-    if (btn.textContent.includes('Restaurant')) {
+    if (btn.textContent.includes(activeSortLabel)) {
       btn.classList.add('active');
     } else {
       btn.classList.remove('active');
@@ -1338,11 +1343,11 @@ function setupSavedDragEvents() {
   let draggedCardId = null;
   cards.forEach(card => {
     card.addEventListener('dragstart', (e) => {
-      if (State.activeSavedSort !== 'custom') return;
+      if (State.activeSavedSort !== 'custom' && !State.rankingModeActive) return;
       draggedCardId = Number(card.getAttribute('data-id'));
       card.classList.add('dragging');
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', draggedCardId);
+      e.dataTransfer.setData('text/plain', String(draggedCardId));
     });
 
     card.addEventListener('dragend', () => {
@@ -1355,12 +1360,58 @@ function setupSavedDragEvents() {
     });
 
     card.addEventListener('dragover', (e) => {
-      if (State.activeSavedSort !== 'custom' || draggedCardId === null) return;
+      if ((State.activeSavedSort !== 'custom' && !State.rankingModeActive) || draggedCardId === null) return;
       const targetId = Number(card.getAttribute('data-id'));
       if (targetId === draggedCardId) return;
 
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
+
+      const rect = card.getBoundingClientRect();
+      const midY = rect.top + rect.height / 2;
+      if (e.clientY < midY) {
+        card.classList.add('drag-over-top');
+        card.classList.remove('drag-over-bottom');
+      } else {
+        card.classList.add('drag-over-bottom');
+        card.classList.remove('drag-over-top');
+      }
+    });
+
+    card.addEventListener('dragleave', () => {
+      card.classList.remove('drag-over-top');
+      card.classList.remove('drag-over-bottom');
+    });
+
+    card.addEventListener('drop', (e) => {
+      if ((State.activeSavedSort !== 'custom' && !State.rankingModeActive) || draggedCardId === null) return;
+      e.preventDefault();
+      const targetId = Number(card.getAttribute('data-id'));
+      card.classList.remove('drag-over-top');
+      card.classList.remove('drag-over-bottom');
+      if (targetId === draggedCardId) return;
+
+      const currentSavedItems = getSaved();
+      const savedKeys = currentSavedItems.map(r => getDishKey(r.id, r.weekId));
+      const draggedKey = getDishKey(draggedCardId, State.currentWeekId);
+      const targetKey = getDishKey(targetId, State.currentWeekId);
+
+      const fromIdx = savedKeys.indexOf(draggedKey);
+      let toIdx = savedKeys.indexOf(targetKey);
+      if (fromIdx === -1 || toIdx === -1) return;
+
+      const rect = card.getBoundingClientRect();
+      const dropAfter = e.clientY >= (rect.top + rect.height / 2);
+
+      savedKeys.splice(fromIdx, 1);
+      toIdx = savedKeys.indexOf(targetKey);
+      const insertIdx = dropAfter ? toIdx + 1 : toIdx;
+      savedKeys.splice(insertIdx, 0, draggedKey);
+
+      const remainingKeys = [...State.saved].filter(x => !savedKeys.includes(x));
+      State.customSavedOrder = [...savedKeys, ...remainingKeys];
+      saveState();
+      renderSaved();
     });
   });
 }
@@ -1744,9 +1795,8 @@ function init() {
 
   document.addEventListener('click', e => {
     const isCompactClick = e.target.closest('.compact-app-bar') || e.target.closest('.compact-dropdown');
-    if (!isCompactClick && compactSearchDropdown && compactMenuDropdown) {
+    if (!isCompactClick && compactSearchDropdown) {
       compactSearchDropdown.style.display = 'none';
-      compactMenuDropdown.style.display = 'none';
     }
 
     const isSavedDropdownClick = e.target.closest('#saved-more-dropdown-wrap');

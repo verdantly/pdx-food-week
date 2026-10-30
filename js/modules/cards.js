@@ -1,5 +1,5 @@
 /* ── Card HTML Generation ── */
-import { State, isDishSaved } from './state.js';
+import { State, isDishSaved, isDishViewedNew } from './state.js';
 import { esc, highlightMatch, haversineDistance } from './utils.js';
 import { isVeganFriendly, isVegetarianFriendly } from './data.js';
 
@@ -88,7 +88,7 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
     ? ` <span style="font-size: 13px; font-weight: normal; color: var(--ink-60);">(${haversineDistance(State.userLat, State.userLng, r.lat, r.lng).toFixed(1)} mi)</span>`
     : '';
 
-  const isNew = r.isNew && !State.viewedNew.has(r.id);
+  const isNew = r.isNew && !isDishViewedNew(r.id, r.weekId);
 
   let dragHandleHtml = '';
   const isRankingMode = isSavedTab && (State.rankingModeActive || State.activeSavedSort === 'custom') && !isCrawlSelectable && !isBulkEditMode;

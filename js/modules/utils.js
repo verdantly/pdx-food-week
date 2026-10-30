@@ -40,7 +40,7 @@ export function safeUrl(u) {
 }
 
 export function haversineDistance(lat1, lon1, lat2, lon2) {
-  if (!lat1 || !lon1 || !lat2 || !lon2) return Infinity;
+  if (lat1 == null || lon1 == null || lat2 == null || lon2 == null || !isFinite(lat1) || !isFinite(lon1) || !isFinite(lat2) || !isFinite(lon2)) return Infinity;
   const R = 3958.8; // Radius of the Earth in miles
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;

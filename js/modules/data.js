@@ -1,5 +1,5 @@
 /* ── Data Helpers & Queries ── */
-import { State, isDishSaved, getDishKey } from './state.js';
+import { State, isDishSaved, getDishKey, isDishViewedNew } from './state.js';
 import { haversineDistance, isRestaurantOpenOnDay, isRestaurantOpenNow } from './utils.js';
 
 export function getRestaurants() {
@@ -22,7 +22,7 @@ export function updateBrowseBadge() {
 
   const activeWeekRestaurants = getRestaurants();
   const newItems = activeWeekRestaurants.filter(r => r.isNew);
-  const unviewedNewItems = newItems.filter(r => !State.viewedNew.has(r.id));
+  const unviewedNewItems = newItems.filter(r => !isDishViewedNew(r.id, r.weekId));
   const hasUnviewedNew = unviewedNewItems.length > 0;
 
   badge.classList.toggle('show', hasUnviewedNew);
@@ -99,7 +99,7 @@ export function getFiltered() {
     if (State.activeFilters.has('gf') && !r.glutenFree) return false;
     if (State.activeFilters.has('pie') && !r.wholePie) return false;
     if (State.activeFilters.has('spicy') && !r.spicy) return false;
-    if (State.activeFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
+    if (State.activeFilters.has('new') && (!r.isNew || isDishViewedNew(r.id, r.weekId))) return false;
     if (State.activeDayFilters && State.activeDayFilters.size > 0) {
       let matchesAny = false;
       for (const day of State.activeDayFilters) {
@@ -161,7 +161,7 @@ export function getSaved() {
     if (State.activeSavedFilters.has('gf') && !r.glutenFree) return false;
     if (State.activeSavedFilters.has('pie') && !r.wholePie) return false;
     if (State.activeSavedFilters.has('spicy') && !r.spicy) return false;
-    if (State.activeSavedFilters.has('new') && (!r.isNew || State.viewedNew.has(r.id))) return false;
+    if (State.activeSavedFilters.has('new') && (!r.isNew || isDishViewedNew(r.id, r.weekId))) return false;
     if (State.savedSearchQuery) {
       const q = State.savedSearchQuery.toLowerCase();
       if (!(r.dish || '').toLowerCase().includes(q) &&

@@ -508,4 +508,98 @@ describe("App Features: Recently Added Filter After Async Data Load", () => {
       else delete global.document;
     }
   });
+
+  test("moveSavedItem persists compound keys in customSavedOrder across saveState and loadState", async () => {
+    const { toggleDishSaved, loadState } = await import("../js/modules/state.js");
+    const { moveSavedItem } = await import("../js/modules/filters.js");
+    const { getSaved } = await import("../js/modules/data.js");
+
+    if (typeof global.window === "undefined") global.window = {};
+    const store = {};
+    const prevStorage = global.localStorage;
+    const prevDoc = global.document;
+    global.localStorage = {
+      getItem: (k) => (k in store ? store[k] : null),
+      setItem: (k, v) => { store[k] = String(v); },
+      removeItem: (k) => { delete store[k]; }
+    };
+    global.document = {
+      activeElement: null,
+      getElementById: () => null,
+      querySelectorAll: () => [],
+      querySelector: () => null
+    };
+
+    try {
+      State.currentWeekId = "mac-and-cheese-2026";
+      State.saved.clear();
+      State.customSavedOrder = [];
+      State.activeSavedSort = "custom";
+      State.activeSavedFilters.clear();
+      State.savedSearchQuery = "";
+
+      global.window.RESTAURANTS = [
+        { id: 1, weekId: "mac-and-cheese-2026", restaurant: "Alpha Mac", dish: "Mac A" },
+        { id: 2, weekId: "mac-and-cheese-2026", restaurant: "Beta Mac", dish: "Mac B" }
+      ];
+
+      toggleDishSaved(1, "mac-and-cheese-2026");
+      toggleDishSaved(2, "mac-and-cheese-2026");
+      expect(getSaved().map(r => r.id)).toEqual([1, 2]);
+
+      // Move dish 2 up (-1) so order becomes [2, 1]
+      moveSavedItem(2, -1);
+      expect(State.customSavedOrder).toEqual(["mac-and-cheese-2026_2", "mac-and-cheese-2026_1"]);
+      expect(getSaved().map(r => r.id)).toEqual([2, 1]);
+
+      // Reload state from localStorage and verify customSavedOrder is preserved (not pruned!)
+      loadState();
+      expect(State.customSavedOrder).toEqual(["mac-and-cheese-2026_2", "mac-and-cheese-2026_1"]);
+      expect(getSaved().map(r => r.id)).toEqual([2, 1]);
+    } finally {
+      if (prevStorage) global.localStorage = prevStorage;
+      else delete global.localStorage;
+      if (prevDoc) global.document = prevDoc;
+      else delete global.document;
+      State.saved.clear();
+      State.customSavedOrder = [];
+      State.activeSavedSort = "restaurant";
+    }
+  });
+
+  test("viewedNew and friends lists are scoped per food week without cross-week ID collisions", async () => {
+    const { markDishViewedNew, isDishViewedNew } = await import("../js/modules/state.js");
+    const { getActiveFriends } = await import("../js/modules/ui.js");
+
+    if (typeof global.window === "undefined") global.window = {};
+    global.window.RESTAURANTS = [
+      { id: 11, weekId: "wing-2026", restaurant: "Wing Spot", dish: "Hot Wings", isNew: true },
+      { id: 11, weekId: "mac-and-cheese-2026", restaurant: "Mac Spot", dish: "Truffle Mac", isNew: true }
+    ];
+
+    State.viewedNew.clear();
+    markDishViewedNew(11, "wing-2026");
+    expect(isDishViewedNew(11, "wing-2026")).toBe(true);
+    expect(isDishViewedNew(11, "mac-and-cheese-2026")).toBe(false);
+
+    // Friends list scoped to wing-2026 should not appear in mac-and-cheese-2026
+    State.friends = [
+      { name: "Sam", ids: [11], code: "wingcode", weekId: "wing-2026" }
+    ];
+    State.currentWeekId = "wing-2026";
+    expect(getActiveFriends().length).toBe(1);
+
+    State.currentWeekId = "mac-and-cheese-2026";
+    expect(getActiveFriends().length).toBe(0);
+
+    State.viewedNew.clear();
+    State.friends = [];
+  });
+
+  test("haversineDistance handles 0 coordinates accurately and rejects null/NaN", async () => {
+    const { haversineDistance } = await import("../js/modules/utils.js");
+    expect(haversineDistance(0, 0, 0, 0)).toBe(0);
+    expect(haversineDistance(null, -122.67, 45.52, -122.67)).toBe(Infinity);
+    expect(haversineDistance(undefined, -122.67, 45.52, -122.67)).toBe(Infinity);
+  });
 });

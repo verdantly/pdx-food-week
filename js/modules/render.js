@@ -1,5 +1,5 @@
 /* ── Rendering Loops & Week Switcher UI ── */
-import { State, saveState, getWeekFilters, isDishSaved } from './state.js';
+import { State, saveState, getWeekFilters, isDishSaved, isDishViewedNew } from './state.js';
 import { esc } from './utils.js';
 import { getRestaurants, getFiltered, getSaved } from './data.js';
 import { cardHTML } from './cards.js';
@@ -307,7 +307,7 @@ export function renderWeekSwitchers() {
 
     sortedWeeks.forEach(w => {
       const displayName = w.name.replace(/\s*\d{4}/, '');
-      const emoji = w.emoji || 'ðŸ½ï¸';
+      const emoji = w.emoji || '🍽️';
       optionsHtml += `<option value="${esc(w.id)}">${emoji} ${esc(displayName)}</option>`;
     });
 
@@ -319,7 +319,7 @@ export function renderWeekSwitchers() {
 export function renderFilters() {
   let filters = [...getWeekFilters(State.currentWeekId)];
   const activeWeekRestaurants = getRestaurants();
-  const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
+  const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !isDishViewedNew(r.id, r.weekId));
   if (hasUnviewedNew || State.activeFilters.has('new')) {
     filters.push({ id: 'new', label: 'Recently Added' });
   }

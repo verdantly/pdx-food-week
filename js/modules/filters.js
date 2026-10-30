@@ -1,5 +1,5 @@
 /* ── Filters & Search & Sort Logic ── */
-import { State, saveState, getWeekFilters, getDishKey } from './state.js';
+import { State, saveState, getWeekFilters, getDishKey, isDishViewedNew } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, getSaved } from './data.js';
 import { queueCloudSync } from './sync.js';
@@ -297,7 +297,7 @@ export function toggleSavedFilter(f) {
 export function renderSavedFilters() {
   let filters = [...getWeekFilters(State.currentWeekId)];
   const activeWeekRestaurants = getRestaurants();
-  const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !State.viewedNew.has(r.id));
+  const hasUnviewedNew = activeWeekRestaurants.some(r => r.isNew && !isDishViewedNew(r.id, r.weekId));
   if (hasUnviewedNew || State.activeSavedFilters.has('new')) {
     filters.push({ id: 'new', label: 'Recently Added' });
   }
@@ -428,8 +428,9 @@ export async function applySavedZipCode() {
 
 export function moveSavedItem(id, direction) {
   const currentSavedItems = getSaved();
-  const savedIds = currentSavedItems.map(r => r.id);
-  const idx = savedIds.indexOf(id);
+  const savedIds = currentSavedItems.map(r => getDishKey(r.id, r.weekId));
+  const itemKey = getDishKey(id, State.currentWeekId);
+  const idx = savedIds.indexOf(itemKey);
   if (idx === -1) return;
 
   const newIdx = idx + direction;
@@ -437,7 +438,7 @@ export function moveSavedItem(id, direction) {
 
   const targetId = savedIds[newIdx];
   savedIds[idx] = targetId;
-  savedIds[newIdx] = id;
+  savedIds[newIdx] = itemKey;
 
   const remainingIds = [...State.saved].filter(x => !savedIds.includes(x));
   State.customSavedOrder = [...savedIds, ...remainingIds];

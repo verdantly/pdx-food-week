@@ -50,7 +50,7 @@ export function exportSavedKML() {
     <name>PDX Food Week - Saved Spots</name>`;
 
   items.forEach(r => {
-    if (r.lat && r.lng) {
+    if (r.lat != null && r.lng != null && isFinite(r.lat) && isFinite(r.lng)) {
       kml += `
     <Placemark>
       <name>${esc(r.restaurant)}</name>
@@ -343,11 +343,13 @@ export async function addFriend() {
 
   let listId = null;
   let fallbackCode = null;
+  let friendWeekId = State.currentWeekId;
   try {
     if (rawVal.startsWith('http')) {
       const urlParams = new URL(rawVal).searchParams;
       listId = urlParams.get('list');
       fallbackCode = urlParams.get('fallback');
+      if (urlParams.get('week')) friendWeekId = urlParams.get('week');
     } else {
       if (rawVal.length <= 10 && !rawVal.startsWith('PDX')) listId = rawVal;
       else fallbackCode = rawVal;
@@ -366,6 +368,7 @@ export async function addFriend() {
         const data = doc.data();
         ids = data.ids || [];
         if (data.name) friendName = data.name;
+        if (data.weekId) friendWeekId = data.weekId;
       }
     } catch (e) {
       console.error("Failed to fetch shared list", e);
@@ -381,7 +384,7 @@ export async function addFriend() {
     return;
   }
 
-  State.friends.push({ name: friendName, ids, code: fallbackCode || listId });
+  State.friends.push({ name: friendName, ids, code: fallbackCode || listId, weekId: friendWeekId });
   saveState();
   input.value = '';
   renderFriends();

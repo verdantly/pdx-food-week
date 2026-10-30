@@ -190,6 +190,20 @@ export function toggleDishSaved(id, weekId = State.currentWeekId) {
   return !currentlySaved;
 }
 
+export function isDishViewedNew(id, weekId = State.currentWeekId) {
+  if (id == null) return false;
+  const key = getDishKey(id, weekId);
+  return State.viewedNew.has(key) || State.viewedNew.has(id) || State.viewedNew.has(Number(id));
+}
+
+export function markDishViewedNew(id, weekId = State.currentWeekId) {
+  if (id == null) return;
+  const key = getDishKey(id, weekId);
+  State.viewedNew.add(key);
+  State.viewedNew.delete(id);
+  State.viewedNew.delete(Number(id));
+}
+
 export function isDishPassed(id, weekId = State.currentWeekId) {
   if (id == null) return false;
   const key = getDishKey(id, weekId);
@@ -267,7 +281,7 @@ export function checkWeekVisited(weekId) {
   const visitedKey = 'pdxfw_visited_v1_' + weekId;
   if (!localStorage.getItem(visitedKey)) {
     const activeRestaurants = (window.RESTAURANTS || []).filter(r => r.weekId === weekId);
-    activeRestaurants.filter(r => r.isNew).forEach(r => State.viewedNew.add(r.id));
+    activeRestaurants.filter(r => r.isNew).forEach(r => markDishViewedNew(r.id, weekId));
     localStorage.setItem(visitedKey, 'true');
     saveState();
   }

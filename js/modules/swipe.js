@@ -1,5 +1,5 @@
 /* ── Swipe Deck Module ── */
-import { State, saveState, isDishSaved, isDishPassed, passDish, getDishKey } from './state.js';
+import { State, saveState, isDishSaved, isDishPassed, passDish, getDishKey, isDishViewedNew, markDishViewedNew } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
@@ -90,7 +90,7 @@ export function renderSwipe() {
       ? `<img src="${esc(item.image)}" alt="Photo of ${esc(item.dish)}" loading="eager" onerror="this.parentElement.style.display='none'">`
       : `<div class="swipe-card-emoji">${esc(item.emoji)}</div>`;
 
-    const isNew = item.isNew && !State.viewedNew.has(item.id);
+    const isNew = item.isNew && !isDishViewedNew(item.id, item.weekId);
 
     const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
       ? window.getWeekMeta(State.currentWeekId)
@@ -142,8 +142,8 @@ export function swipe(dir, fromGesture = false) {
     passDish(r.id, r.weekId);
   }
 
-  if (r.isNew && !State.viewedNew.has(r.id)) {
-    State.viewedNew.add(r.id);
+  if (r.isNew && !isDishViewedNew(r.id, r.weekId)) {
+    markDishViewedNew(r.id, r.weekId);
   }
   saveState();
   updateBrowseBadge();
