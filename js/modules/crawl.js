@@ -268,32 +268,84 @@ export function updateCrawlFab() {
 }
 
 export function calculateOptimizedOrder(spots) {
-  if (spots.length <= 2) return [...spots];
+  const n = spots.length;
+  if (n <= 1) return [...spots];
 
-  let bestOrder = null;
-  let minDistance = Infinity;
+  const hasUserLoc = State.userLat != null && State.userLng != null && isFinite(State.userLat) && isFinite(State.userLng);
 
-  const permute = (arr, m = []) => {
-    if (arr.length === 0) {
-      let dist = 0;
-      for (let i = 0; i < m.length - 1; i++) {
-        dist += haversineDistance(m[i].lat, m[i].lng, m[i+1].lat, m[i+1].lng);
-      }
-      if (dist < minDistance) {
-        minDistance = dist;
-        bestOrder = [...m];
-      }
+  if (n === 2) {
+    if (hasUserLoc) {
+      const d0 = haversineDistance(State.userLat, State.userLng, spots[0].lat, spots[0].lng);
+      const d1 = haversineDistance(State.userLat, State.userLng, spots[1].lat, spots[1].lng);
+      return d1 < d0 ? [spots[1], spots[0]] : [spots[0], spots[1]];
+    }
+    return [...spots];
+  }
+
+  // Precompute pairwise distances in O(N^2)
+  const dist = Array.from({ length: n }, () => new Float64Array(n));
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      const d = haversineDistance(spots[i].lat, spots[i].lng, spots[j].lat, spots[j].lng);
+      dist[i][j] = isFinite(d) ? d : 999999;
+      dist[j][i] = dist[i][j];
+    }
+  }
+
+  // Held-Karp dynamic programming O(N^2 * 2^N)
+  const totalMasks = 1 << n;
+  const dp = Array.from({ length: totalMasks }, () => new Float64Array(n).fill(Infinity));
+  const parent = Array.from({ length: totalMasks }, () => new Int32Array(n).fill(-1));
+
+  for (let i = 0; i < n; i++) {
+    if (hasUserLoc) {
+      const dStart = haversineDistance(State.userLat, State.userLng, spots[i].lat, spots[i].lng);
+      dp[1 << i][i] = isFinite(dStart) ? dStart : 0;
     } else {
-      for (let i = 0; i < arr.length; i++) {
-        let curr = arr.slice();
-        let next = curr.splice(i, 1);
-        permute(curr.slice(), m.concat(next));
+      dp[1 << i][i] = 0;
+    }
+  }
+
+  for (let mask = 1; mask < totalMasks; mask++) {
+    for (let u = 0; u < n; u++) {
+      if (!(mask & (1 << u))) continue;
+      const prevCost = dp[mask][u];
+      if (prevCost === Infinity) continue;
+
+      for (let v = 0; v < n; v++) {
+        if (mask & (1 << v)) continue;
+        const nextMask = mask | (1 << v);
+        const nextCost = prevCost + dist[u][v];
+        if (nextCost < dp[nextMask][v]) {
+          dp[nextMask][v] = nextCost;
+          parent[nextMask][v] = u;
+        }
       }
     }
-  };
+  }
 
-  permute(spots);
-  return bestOrder || spots;
+  const fullMask = totalMasks - 1;
+  let bestEnd = 0;
+  let minDistance = Infinity;
+  for (let u = 0; u < n; u++) {
+    if (dp[fullMask][u] < minDistance) {
+      minDistance = dp[fullMask][u];
+      bestEnd = u;
+    }
+  }
+
+  // Reconstruct optimal path
+  const order = new Array(n);
+  let currMask = fullMask;
+  let currNode = bestEnd;
+  for (let idx = n - 1; idx >= 0; idx--) {
+    order[idx] = spots[currNode];
+    const prevNode = parent[currMask][currNode];
+    currMask ^= (1 << currNode);
+    currNode = prevNode;
+  }
+
+  return order;
 }
 
 export function openCrawlItineraryModal(skipOptimize = false) {

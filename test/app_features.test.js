@@ -602,4 +602,40 @@ describe("App Features: Recently Added Filter After Async Data Load", () => {
     expect(haversineDistance(null, -122.67, 45.52, -122.67)).toBe(Infinity);
     expect(haversineDistance(undefined, -122.67, 45.52, -122.67)).toBe(Infinity);
   });
+
+  test("calculateOptimizedOrder finds optimal crawl path in O(N^2 * 2^N) and anchors to user location when present", async () => {
+    const { calculateOptimizedOrder } = await import("../js/modules/crawl.js");
+
+    // 4 collinear stops along latitude 45.50 at longitudes -122.60, -122.65, -122.70, -122.75
+    const spots = [
+      { id: 1, lat: 45.50, lng: -122.70 },
+      { id: 2, lat: 45.50, lng: -122.60 },
+      { id: 3, lat: 45.50, lng: -122.75 },
+      { id: 4, lat: 45.50, lng: -122.65 }
+    ];
+
+    // 1. Without user location: optimal path visits in monotonic longitude order ([2, 4, 1, 3] or [3, 1, 4, 2])
+    State.userLat = null;
+    State.userLng = null;
+    const orderNoUser = calculateOptimizedOrder(spots).map(s => s.id);
+    expect(
+      JSON.stringify(orderNoUser) === JSON.stringify([2, 4, 1, 3]) ||
+      JSON.stringify(orderNoUser) === JSON.stringify([3, 1, 4, 2])
+    ).toBe(true);
+
+    // 2. With user location near stop 3 (-122.76): must start at stop 3 and proceed [3, 1, 4, 2]
+    State.userLat = 45.50;
+    State.userLng = -122.76;
+    const orderFromWest = calculateOptimizedOrder(spots).map(s => s.id);
+    expect(orderFromWest).toEqual([3, 1, 4, 2]);
+
+    // 3. With user location near stop 2 (-122.59): must start at stop 2 and proceed [2, 4, 1, 3]
+    State.userLat = 45.50;
+    State.userLng = -122.59;
+    const orderFromEast = calculateOptimizedOrder(spots).map(s => s.id);
+    expect(orderFromEast).toEqual([2, 4, 1, 3]);
+
+    State.userLat = null;
+    State.userLng = null;
+  });
 });

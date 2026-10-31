@@ -444,7 +444,6 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
   document.body.classList.remove('is-landing');
 
   switchTab('browse', true);
-  renderShimmer();
 
   const loadDataAndRender = () => {
     renderAll();
@@ -455,9 +454,14 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
     }
   };
 
-  loadWeekData(weekId, () => {
-    setTimeout(loadDataAndRender, 450);
-  });
+  if (State.loadedWeeks.has(weekId)) {
+    loadWeekData(weekId, loadDataAndRender);
+  } else {
+    renderShimmer();
+    loadWeekData(weekId, () => {
+      setTimeout(loadDataAndRender, 150);
+    });
+  }
 }
 
 let landingCarouselState = {
@@ -802,15 +806,31 @@ function ensureAllWeeksLoaded() {
 
   allWeeksLoadedPromise = new Promise((resolve) => {
     const weeks = window.FOOD_WEEKS || [];
-    let remaining = weeks.length;
-    if (remaining === 0) return resolve();
+    const unloaded = weeks.filter(w => !State.loadedWeeks.has(w.id));
+    if (unloaded.length === 0) return resolve();
 
-    weeks.forEach(w => {
-      loadWeekData(w.id, () => {
-        remaining--;
-        if (remaining <= 0) resolve();
-      });
-    });
+    const CONCURRENCY = 3;
+    let index = 0;
+    let active = 0;
+    let completed = 0;
+
+    function next() {
+      if (completed >= unloaded.length) {
+        resolve();
+        return;
+      }
+      while (active < CONCURRENCY && index < unloaded.length) {
+        const w = unloaded[index++];
+        active++;
+        loadWeekData(w.id, () => {
+          active--;
+          completed++;
+          next();
+        });
+      }
+    }
+
+    next();
   });
 
   return allWeeksLoadedPromise;
@@ -853,29 +873,26 @@ function initLandingSearch() {
 
       const allDishes = window.RESTAURANTS || [];
       const allWeeks = window.FOOD_WEEKS || [];
+      const weekMap = new Map(allWeeks.map(w => [w.id, w]));
       const queryWords = currentQuery.split(/\s+/).filter(Boolean);
 
       // Match food weeks
       const matchingWeeks = allWeeks.filter(w => {
-        const name = (w.name || '').toLowerCase();
-        const org = (w.organizer || '').toLowerCase();
-        const dates = (w.dates || '').toLowerCase();
-        const id = (w.id || '').toLowerCase();
-        const fullText = `${name} ${org} ${dates} ${id}`;
-        return queryWords.every(word => fullText.includes(word));
+        if (!w._searchText) {
+          w._searchText = `${w.name || ''} ${w.organizer || ''} ${w.dates || ''} ${w.id || ''}`.toLowerCase();
+        }
+        return queryWords.every(word => w._searchText.includes(word));
       });
 
       // Match dishes (search dish name, restaurant, neighborhood, desc, plus food week name and organizer)
       const matches = allDishes.filter(r => {
-        const dish = (r.dish || '').toLowerCase();
-        const rest = (r.restaurant || '').toLowerCase();
-        const hood = (r.neighborhood || r.address || '').toLowerCase();
-        const desc = (r.desc || r.whatsOnIt || r.whatTheySay || '').toLowerCase();
-        const week = allWeeks.find(w => w.id === r.weekId);
-        const weekName = week ? week.name.toLowerCase() : '';
-        const weekOrg = week ? (week.organizer || '').toLowerCase() : '';
-        const fullText = `${dish} ${rest} ${hood} ${desc} ${weekName} ${weekOrg} ${r.weekId || ''}`;
-        return queryWords.every(word => fullText.includes(word));
+        if (!r._searchText) {
+          const week = weekMap.get(r.weekId);
+          const weekName = week ? (week.name || '') : '';
+          const weekOrg = week ? (week.organizer || '') : '';
+          r._searchText = `${r.dish || ''} ${r.restaurant || ''} ${r.neighborhood || r.address || ''} ${r.desc || r.whatsOnIt || r.whatTheySay || ''} ${weekName} ${weekOrg} ${r.weekId || ''}`.toLowerCase();
+        }
+        return queryWords.every(word => r._searchText.includes(word));
       });
 
       if (matchingWeeks.length === 0 && matches.length === 0) {
@@ -925,7 +942,7 @@ function initLandingSearch() {
           </div>
           <div class="search-results-list">
             ${topMatches.map(r => {
-          const week = allWeeks.find(w => w.id === r.weekId);
+          const week = weekMap.get(r.weekId);
           const weekName = week ? week.name.replace(/\s+\d{4}\b/, '') : '';
           const weekColor = week ? week.color : 'var(--pizza)';
           const weekEmoji = week ? week.emoji : '🍽️';

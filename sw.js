@@ -1,12 +1,12 @@
 const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
-const CACHE_NAME = 'pdxfw-cache-e3315e30';
+const CACHE_NAME = 'pdxfw-cache-b2fa399b';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=e3315e30',
-  'js/app.js?v=e3315e30',
-  'js/meta.js?v=e3315e30',
+  'css/style.css?v=b2fa399b',
+  'js/app.js?v=b2fa399b',
+  'js/meta.js?v=b2fa399b',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
@@ -31,7 +31,7 @@ const STATIC_ASSETS = [
   'https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
   'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js',
-  'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js'
+  'https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js'
 ];
 
 self.addEventListener('install', (event) => {
