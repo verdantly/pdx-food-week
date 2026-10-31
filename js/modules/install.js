@@ -1,10 +1,11 @@
 /* ── PWA Installation Module ── */
 import { State } from './state.js';
+import { activateModalFocusTrap, deactivateModalFocusTrap, showToast } from './utils.js';
 
 let deferredPrompt = null;
 
 export function isStandalone() {
-  return window.matchMedia('(display-mode: standalone)').matches ||
+  return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
          window.navigator.standalone === true;
 }
 
@@ -33,7 +34,16 @@ export function initInstallPrompt() {
     State.deferredInstallPrompt = null;
     updateInstallUI();
     closeInstallModal();
+    showToast('PDX Food Week installed! 🎉');
   });
+
+  // React dynamically if display-mode transitions to standalone
+  if (window.matchMedia) {
+    const standaloneMql = window.matchMedia('(display-mode: standalone)');
+    if (standaloneMql.addEventListener) {
+      standaloneMql.addEventListener('change', updateInstallUI);
+    }
+  }
 
   // Attach click listener for PWA install banner actions
   const installBtn = document.getElementById('pwa-install-btn');
@@ -58,13 +68,16 @@ export function initInstallPrompt() {
 
 export function updateInstallUI() {
   const installed = isStandalone();
-  const installButtons = document.querySelectorAll('.install-app-btn, #install-app-menu-item, #compact-install-btn');
+  const installButtons = document.querySelectorAll('.install-app-btn, .install-app-link, #install-app-menu-item, #compact-install-btn');
   
   installButtons.forEach(btn => {
+    const liParent = btn.closest('.landing-footer-links li');
     if (installed) {
       btn.style.display = 'none';
+      if (liParent) liParent.style.display = 'none';
     } else {
       btn.style.display = '';
+      if (liParent) liParent.style.display = '';
     }
   });
 
@@ -125,7 +138,7 @@ export function openInstallModal() {
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 
-  // Keyboard accessibility: close on Escape key
+  // Keyboard accessibility: close on Escape key and trap focus
   if (handleModalKeydown) {
     document.removeEventListener('keydown', handleModalKeydown);
   }
@@ -135,6 +148,7 @@ export function openInstallModal() {
     }
   };
   document.addEventListener('keydown', handleModalKeydown);
+  activateModalFocusTrap(modal);
 }
 
 export function closeInstallModal() {
@@ -148,12 +162,17 @@ export function closeInstallModal() {
     document.removeEventListener('keydown', handleModalKeydown);
     handleModalKeydown = null;
   }
+  deactivateModalFocusTrap(modal);
 
   // Restore banner display state if still valid
   updateInstallUI();
 }
 
 export async function triggerInstall() {
+  if (isStandalone()) {
+    showToast('PDX Food Week is already installed ✓');
+    return;
+  }
   if (deferredPrompt) {
     deferredPrompt.prompt();
     const choiceResult = await deferredPrompt.userChoice;

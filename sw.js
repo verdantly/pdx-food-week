@@ -1,12 +1,12 @@
 const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
-const CACHE_NAME = 'pdxfw-cache-3f9829ca';
+const CACHE_NAME = 'pdxfw-cache-b9de70c3';
 
-const STATIC_ASSETS = [
+const LOCAL_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=3f9829ca',
-  'js/app.js?v=3f9829ca',
-  'js/meta.js?v=3f9829ca',
+  'css/style.css?v=b9de70c3',
+  'js/app.js?v=b9de70c3',
+  'js/meta.js?v=b9de70c3',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
@@ -21,7 +21,10 @@ const STATIC_ASSETS = [
   'js/modules/swipe.js',
   'js/modules/sync.js',
   'js/modules/ui.js',
-  'js/modules/utils.js',
+  'js/modules/utils.js'
+];
+
+const VENDOR_ASSETS = [
   'https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js',
   'https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js',
   'https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js',
@@ -34,31 +37,50 @@ const STATIC_ASSETS = [
   'https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js'
 ];
 
+const STATIC_ASSETS = [...LOCAL_ASSETS, ...VENDOR_ASSETS];
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch(() => {});
-    })
+    caches.open(CACHE_NAME)
+      .then(async (cache) => {
+        // Fetch local assets with cache: 'no-cache' so SW install always bypasses stale HTTP disk cache
+        await Promise.allSettled(
+          LOCAL_ASSETS.map((url) =>
+            fetch(new Request(url, { cache: 'no-cache' })).then((res) => {
+              if (res && res.status === 200) {
+                return cache.put(url, res);
+              }
+            })
+          )
+        );
+        // Cache vendor assets resiliently so a single CDN hiccup never aborts local asset precaching
+        await Promise.allSettled(
+          VENDOR_ASSETS.map((url) => cache.add(url))
+        );
+      })
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME && cacheName !== TILE_CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME && cacheName !== TILE_CACHE_NAME) {
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   const url = new URL(event.request.url);
 
   // Skip non-http/https requests (e.g. chrome-extension://, moz-extension://)
@@ -70,7 +92,7 @@ self.addEventListener('fetch', (event) => {
   const isCSS = url.pathname.includes('/css/') || url.pathname.endsWith('.css');
 
   // 1. Navigation requests (HTML / entrypoint): Network-First with cache: 'no-cache'
-  // Guarantees online visitors immediately receive the latest index.html from server without force-refreshing,
+  // Guarantees online visitors and resumed PWAs immediately receive the latest index.html from server,
   // while seamlessly falling back to cached HTML when offline.
   if (isNavigation) {
     const navRequest = new Request(event.request.url, {
@@ -103,11 +125,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Unversioned app code & dynamic datasets: Network-First with cache fallback
+  // 2. Unversioned app code & dynamic datasets: Network-First with cache: 'no-cache' revalidation & offline fallback
+  // Ensures data/*.js and js/modules/*.js always revalidate with the server (ETag / 304) instead of serving stale disk cache.
   const isUnversionedCode = (isAppCode || isDataFile || isCSS) && !url.searchParams.has('v');
   if (isUnversionedCode) {
+    const revalidateReq = new Request(event.request.url, {
+      headers: event.request.headers,
+      credentials: event.request.credentials,
+      cache: 'no-cache'
+    });
+
     event.respondWith(
-      fetch(event.request)
+      fetch(revalidateReq)
         .then((response) => {
           if (response && response.status === 200) {
             const resClone = response.clone();
@@ -155,26 +184,33 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 4. Versioned static assets (?v=...) & CDN vendor libraries: Cache-First with network fallback & cache population
+  // 4. Versioned static assets (?v=...) & CDN vendor libraries:
+  // Exact Cache-First (ignoreSearch: false) -> Network fetch (cache: 'no-cache' for local assets) -> Offline fallback (ignoreSearch: true)
   event.respondWith(
     caches.match(event.request, { ignoreSearch: false }).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
-      return caches.match(event.request, { ignoreSearch: true }).then((fallbackResponse) => {
-        if (fallbackResponse) {
-          return fallbackResponse;
-        }
-        return fetch(event.request).then((response) => {
-          if (response && response.status === 200 && response.type === 'basic' && event.request.method === 'GET') {
+
+      const isLocalOrigin = url.origin === self.location.origin;
+      const fetchTarget = isLocalOrigin
+        ? new Request(event.request.url, { credentials: event.request.credentials, cache: 'no-cache' })
+        : event.request;
+
+      return fetch(fetchTarget)
+        .then((response) => {
+          if (response && response.status === 200 && (response.type === 'basic' || response.type === 'cors')) {
             const resClone = response.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, resClone).catch(() => {});
             });
           }
           return response;
+        })
+        .catch(() => {
+          // Only fall back to ignoreSearch: true when offline and exact version isn't cached
+          return caches.match(event.request, { ignoreSearch: true });
         });
-      });
     })
   );
 });

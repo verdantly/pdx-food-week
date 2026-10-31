@@ -209,52 +209,141 @@ function renderShimmer() {
   `;
 }
 
-async function checkMetadataUpdate() {
+let lastMetadataCheckTime = 0;
+
+async function refreshActiveWeekData(weekId) {
+  if (!weekId || !State.loadedWeeks.has(weekId)) return false;
+  const dataFile = getWeekFile(weekId);
+  if (!dataFile) return false;
+
   try {
-    const res = await fetch(`js/meta.js?t=${Date.now()}`, { cache: 'no-cache' });
-    if (!res || !res.ok) return;
-    const text = await res.text();
+    const res = await fetch(`data/${dataFile}`, { cache: 'no-cache' });
+    if (!res || !res.ok) return false;
+    const code = await res.text();
 
-    // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS and UPCOMING_FOOD_WEEKS
-    const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*(?:window\.UPCOMING_FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*)?window\.getWeekMeta/);
-    if (!match) return;
+    // Evaluate the week data file in an isolated sandbox to extract its dishes without mutating globals prematurely
+    const sandbox = { FOOD_WEEKS: [], RESTAURANTS: [] };
+    const fn = new Function('window', code);
+    fn.call(sandbox, sandbox);
 
-    let freshWeeks;
-    try {
-      freshWeeks = (new Function(`return ${match[1]}`))();
-      if (match[2]) {
-        const freshUpcoming = (new Function(`return ${match[2]}`))();
-        if (Array.isArray(freshUpcoming)) {
-          window.UPCOMING_FOOD_WEEKS = freshUpcoming;
-        }
+    const freshItems = (sandbox.RESTAURANTS || []).filter(r => r && r.weekId === weekId);
+    if (freshItems.length === 0) return false;
+
+    const currentItems = (window.RESTAURANTS || []).filter(r => r && r.weekId === weekId);
+    const hasChanged =
+      freshItems.length !== currentItems.length ||
+      JSON.stringify(freshItems) !== JSON.stringify(currentItems);
+
+    if (!hasChanged) return false;
+
+    console.log(`[refreshActiveWeekData] Updated dish lineup detected for ${weekId} (${currentItems.length} -> ${freshItems.length}). Refreshing UI...`);
+    const otherItems = (window.RESTAURANTS || []).filter(r => !r || r.weekId !== weekId);
+    window.RESTAURANTS = [...otherItems, ...freshItems];
+
+    // Also sync totalLocations on window.FOOD_WEEKS if present in sandbox
+    const freshWeekMeta = (sandbox.FOOD_WEEKS || []).find(w => w && w.id === weekId);
+    if (freshWeekMeta && window.FOOD_WEEKS) {
+      const targetMeta = window.FOOD_WEEKS.find(w => w && w.id === weekId);
+      if (targetMeta && freshWeekMeta.totalLocations) {
+        targetMeta.totalLocations = freshWeekMeta.totalLocations;
       }
-    } catch (e) {
-      return;
     }
 
-    if (!Array.isArray(freshWeeks) || freshWeeks.length === 0) return;
+    migrateWeekSavedState(weekId);
+    if (State.currentWeekId === weekId) {
+      renderHeader();
+      renderFilters();
+      renderSavedFilters();
+      renderAll();
+      updateBrowseBadge();
+      if (freshItems.length > currentItems.length) {
+        const diff = freshItems.length - currentItems.length;
+        showToast(`${diff} new ${diff === 1 ? 'dish' : 'dishes'} added!`, 3000);
+      }
+    } else if (!State.currentWeekId) {
+      renderLanding();
+    }
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
 
-    const currentIds = (window.FOOD_WEEKS || []).map(w => w.id).join(',');
-    const freshIds = freshWeeks.map(w => w.id).join(',');
+async function checkMetadataUpdate(force = false) {
+  const now = Date.now();
+  if (!force && now - lastMetadataCheckTime < 5000) return;
+  lastMetadataCheckTime = now;
 
-    if (currentIds !== freshIds) {
-      console.log('[checkMetadataUpdate] New food weeks detected. Hydrating UI...');
-      const mergedWeeks = [...freshWeeks];
-      (window.FOOD_WEEKS || []).forEach(w => {
-        if (!mergedWeeks.some(f => f.id === w.id)) {
-          mergedWeeks.push(w);
+  try {
+    const res = await fetch('js/meta.js', { cache: 'no-cache' });
+    if (res && res.ok) {
+      const text = await res.text();
+
+      // Evaluate fresh meta in a safe sandbox or context to extract window.FOOD_WEEKS and UPCOMING_FOOD_WEEKS
+      const match = text.match(/window\.FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*(?:window\.UPCOMING_FOOD_WEEKS\s*=\s*(\[[\s\S]*?\]);\s*)?window\.getWeekMeta/);
+      if (match) {
+        let freshWeeks;
+        let upcomingChanged = false;
+        try {
+          freshWeeks = (new Function(`return ${match[1]}`))();
+          if (match[2]) {
+            const freshUpcoming = (new Function(`return ${match[2]}`))();
+            if (Array.isArray(freshUpcoming)) {
+              if (JSON.stringify(window.UPCOMING_FOOD_WEEKS || []) !== JSON.stringify(freshUpcoming)) {
+                window.UPCOMING_FOOD_WEEKS = freshUpcoming;
+                upcomingChanged = true;
+              }
+            }
+          }
+        } catch (e) {
+          freshWeeks = null;
         }
-      });
-      window.FOOD_WEEKS = mergedWeeks;
-      renderWeekSwitchers();
-      if (!State.currentWeekId) {
-        renderLanding();
-      } else {
-        showToast('New food weeks added to PDX Food Week!');
+
+        if (Array.isArray(freshWeeks) && freshWeeks.length > 0) {
+          const currentIds = (window.FOOD_WEEKS || []).map(w => w.id).join(',');
+          const freshIds = freshWeeks.map(w => w.id).join(',');
+          const metaSignature = list => JSON.stringify((list || []).map(w => ({
+            id: w.id,
+            name: w.name,
+            dates: w.dates,
+            startDate: w.startDate,
+            endDate: w.endDate,
+            totalLocations: w.totalLocations,
+            pricePills: w.pricePills,
+            dataFile: w.dataFile
+          })));
+          const metaChanged = metaSignature(window.FOOD_WEEKS) !== metaSignature(freshWeeks);
+
+          if (currentIds !== freshIds || metaChanged || upcomingChanged) {
+            const hadNewWeek = currentIds !== freshIds;
+            const mergedWeeks = [...freshWeeks];
+            (window.FOOD_WEEKS || []).forEach(w => {
+              if (!mergedWeeks.some(f => f.id === w.id)) {
+                mergedWeeks.push(w);
+              }
+            });
+            window.FOOD_WEEKS = mergedWeeks;
+            renderWeekSwitchers();
+            if (!State.currentWeekId) {
+              renderLanding();
+            } else {
+              renderHeader();
+              if (hadNewWeek) {
+                showToast('New food weeks added to PDX Food Week!');
+              }
+            }
+          }
+        }
       }
     }
   } catch (err) {
     // Silently ignore network failures (e.g. offline)
+  }
+
+  // Also check if the currently viewed (or landing-featured) food week has newly added or updated dishes
+  const targetWeekId = State.currentWeekId || landingCarouselState.weekId;
+  if (targetWeekId && State.loadedWeeks.has(targetWeekId)) {
+    await refreshActiveWeekData(targetWeekId);
   }
 }
 
@@ -307,7 +396,7 @@ async function loadWeekData(weekId, callback) {
 
   // Modern fetch with fallback to script injection
   try {
-    const res = await fetch(`data/${dataFile}`);
+    const res = await fetch(`data/${dataFile}`, { cache: 'no-cache' });
     if (res && res.ok) {
       const code = await res.text();
       const fn = new Function(code);
@@ -1955,14 +2044,20 @@ function init() {
   setupMobileScrollListener();
   renderWeekSwitchers();
 
-  // Background SWR check for newly published food weeks
+  // Background SWR check for newly published food weeks & updated dish lineups
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       checkMetadataUpdate();
     }
   });
+  window.addEventListener('pageshow', () => {
+    checkMetadataUpdate();
+  });
   window.addEventListener('focus', () => {
     checkMetadataUpdate();
+  });
+  window.addEventListener('online', () => {
+    checkMetadataUpdate(true);
   });
   checkMetadataUpdate();
 
@@ -2174,6 +2269,7 @@ const App = {
   pushLocalToCloud,
   queueCloudSync,
   checkMetadataUpdate,
+  refreshActiveWeekData,
   moveLandingCarousel,
   setLandingCarouselIndex,
   startLandingCarouselTimer,

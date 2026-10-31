@@ -3246,7 +3246,7 @@ body[data-theme="dark"] .landing-status-badge.upcoming {
 /* ── PWA Install Floating Banner ── */
 .pwa-install-banner {
   position: fixed;
-  bottom: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   left: 20px;
   right: 20px;
   max-width: 460px;
@@ -3258,6 +3258,19 @@ body[data-theme="dark"] .landing-status-badge.upcoming {
   border: 1px solid var(--border);
   padding: 12px 14px;
   animation: slide-up-pwa 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 767.98px) {
+  body:not(.is-landing) .pwa-install-banner {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+#app.detail-open ~ .pwa-install-banner,
+body:has(#detail-overlay.open) .pwa-install-banner,
+body:has(.filter-drawer-overlay.open) .pwa-install-banner,
+body:has(.crawl-modal-overlay.open) .pwa-install-banner {
+  display: none !important;
 }
 
 @keyframes slide-up-pwa {

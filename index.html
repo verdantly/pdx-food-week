@@ -10,6 +10,7 @@
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1A1208" />
   <meta name="theme-color" content="#141414" />
   <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="PDX Food Week" />
 
@@ -68,7 +69,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=3f9829ca" />
+  <link rel="stylesheet" href="css/style.css?v=b9de70c3" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1266,7 +1267,7 @@
           </svg>
         </button>
       </div>
-      <div class="modal-body-scroll" style="padding: 0 24px 24px;">
+      <div class="modal-body-scroll" style="padding: 0 0 8px;">
         <p class="install-hero-desc">
           Add the app to your device for instant offline access to menus, full-screen interactive maps, and faster load
           times.
@@ -1365,7 +1366,7 @@
         </button>
       </div>
 
-      <div class="modal-body-scroll more-modal-body" style="padding: 0 20px 24px;">
+      <div class="modal-body-scroll more-modal-body" style="padding: 0 0 8px;">
         <!-- Food Week Switcher Section -->
         <div class="more-section">
           <div class="more-section-header">
@@ -1546,7 +1547,7 @@
       </div>
 
       <!-- Logged-in View -->
-      <div class="auth-logged-in modal-body-scroll account-modal-body" style="display: none; padding: 0 20px 24px;">
+      <div class="auth-logged-in modal-body-scroll account-modal-body" style="display: none; padding: 0 0 8px;">
         <!-- User Profile Header Section -->
         <div class="account-section" style="padding-top: 0;">
           <div class="user-profile-header" style="display: flex; align-items: center; gap: 14px;">
@@ -1612,7 +1613,7 @@
       </div>
 
       <!-- Logged-out View -->
-      <div class="auth-logged-out modal-body-scroll account-modal-body" style="padding: 0 20px 24px;">
+      <div class="auth-logged-out modal-body-scroll account-modal-body" style="padding: 0 0 8px;">
         <!-- Intro Hero Section -->
         <div class="account-section" style="padding-top: 0;">
           <p class="account-section-desc" style="font-size: 13.5px; line-height: 1.55; margin-bottom: 16px;">
@@ -2002,8 +2003,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
-  <script src="js/meta.js?v=3f9829ca"></script>
-  <script type="module" src="js/app.js?v=3f9829ca"></script>
+  <script src="js/meta.js?v=b9de70c3"></script>
+  <script type="module" src="js/app.js?v=b9de70c3"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;
@@ -2017,16 +2018,22 @@
       });
 
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').then((registration) => {
+        navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then((registration) => {
           // Immediately check for updates on page load
           registration.update().catch(() => { });
-          // Proactively check for Service Worker updates when returning to tab/window
+          // Proactively check for Service Worker updates when returning to app/tab or reconnecting
           document.addEventListener('visibilitychange', () => {
             if (document.visibilityState === 'visible') {
               registration.update().catch(() => { });
             }
           });
+          window.addEventListener('pageshow', () => {
+            registration.update().catch(() => { });
+          });
           window.addEventListener('focus', () => {
+            registration.update().catch(() => { });
+          });
+          window.addEventListener('online', () => {
             registration.update().catch(() => { });
           });
         }).catch(() => { });
