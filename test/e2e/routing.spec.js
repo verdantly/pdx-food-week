@@ -447,23 +447,30 @@ test.describe('Navigation and Routing', () => {
   });
 
   test('Landing grid stacks featured showcase before other weeks on mobile', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
+    await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await page.waitForSelector('.landing-featured-showcase', { state: 'visible' });
+    await page.waitForSelector('.landing-featured-showcase .landing-spot-card', { state: 'visible' });
 
     const order = await page.evaluate(() => {
       const showcase = document.querySelector('.landing-featured-showcase');
       const others = document.querySelector('.landing-others-column');
+      const firstOtherCard = document.querySelector('.landing-others-list .landing-card');
 
       const sRect = showcase.getBoundingClientRect();
       const oRect = others.getBoundingClientRect();
+      const firstCardRect = firstOtherCard ? firstOtherCard.getBoundingClientRect() : null;
 
       return {
         showcaseBeforeOthers: sRect.bottom <= oRect.top + 10,
+        othersTop: oRect.top,
+        firstCardTop: firstCardRect ? firstCardRect.top : 9999,
       };
     });
 
     expect(order.showcaseBeforeOthers).toBe(true);
+    // "More Food Weeks" heading and top of the first card peek above the fold on iPhone 14+ (390x844)
+    expect(order.othersTop).toBeLessThan(800);
+    expect(order.firstCardTop).toBeLessThan(835);
   });
 
   test('Landing grid on tablet stacks showcase above a 2-column food weeks grid', async ({ page }) => {
