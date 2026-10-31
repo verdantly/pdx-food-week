@@ -328,3 +328,85 @@ export function getWeekTiming(w, now = new Date()) {
   };
 }
 
+export function shuffleArray(items) {
+  const arr = [...(items || [])];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return arr;
+}
+
+const activeModalTraps = new Map();
+
+export function activateModalFocusTrap(modalId, onClose) {
+  if (typeof document === 'undefined' || ! document.getElementById) return;
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+
+  if (activeModalTraps.has(modalId)) {
+    const existing = activeModalTraps.get(modalId);
+    if (document.removeEventListener) {
+      document.removeEventListener('keydown', existing.handler);
+    }
+  }
+
+  const triggerEl = (document.activeElement && document.activeElement !== document.body)
+    ? document.activeElement
+    : null;
+
+  const handler = (e) => {
+    if (!modal.classList || !modal.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      if (typeof onClose === 'function') onClose();
+      return;
+    }
+    if (e.key === 'Tab' && typeof modal.querySelectorAll === 'function') {
+      const focusable = Array.from(
+        modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      ).filter(el => el.offsetParent !== null || el.getClientRects?.().length > 0);
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        if (typeof last.focus === 'function') last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        if (typeof first.focus === 'function') first.focus();
+      }
+    }
+  };
+
+  activeModalTraps.set(modalId, { handler, triggerEl });
+  if (document.addEventListener) {
+    document.addEventListener('keydown', handler);
+  }
+
+  if (typeof requestAnimationFrame === 'function' && typeof modal.querySelector === 'function') {
+    requestAnimationFrame(() => {
+      const firstFocusable = modal.querySelector('button:not([disabled]), input:not([disabled]), select:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable && typeof firstFocusable.focus === 'function') {
+        firstFocusable.focus();
+      }
+    });
+  }
+}
+
+export function deactivateModalFocusTrap(modalId) {
+  if (!activeModalTraps.has(modalId)) return;
+  const { handler, triggerEl } = activeModalTraps.get(modalId);
+  activeModalTraps.delete(modalId);
+  if (typeof document !== 'undefined' && document.removeEventListener) {
+    document.removeEventListener('keydown', handler);
+  }
+  if (triggerEl && typeof triggerEl.focus === 'function') {
+    try {
+      triggerEl.focus();
+    } catch (_) {}
+  }
+}
+

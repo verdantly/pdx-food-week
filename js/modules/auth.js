@@ -1,5 +1,5 @@
 import { State, purgeAllUserData } from './state.js';
-import { showToast, esc } from './utils.js';
+import { showToast, esc, safeUrl } from './utils.js';
 import { onUserSignedIn, onUserSignedOut, deleteCloudUserData } from './sync.js';
 
 let authListenerAttached = false;
@@ -74,9 +74,11 @@ export function updateAuthUI() {
       ? user.displayName.split(' ').map(n => n[0]).filter(Boolean).join('').toUpperCase().slice(0, 2)
       : (user.email ? user.email[0].toUpperCase() : '👤');
 
-    const avatarHtml = user.photoURL 
-      ? `<img src="${user.photoURL}" alt="Profile" class="avatar-img" referrerpolicy="no-referrer" onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('span'),{className:'avatar-initials',textContent:'${initials}'}))" />`
-      : `<span class="avatar-initials">${initials}</span>`;
+    const safeInitials = esc(initials);
+    const safePhotoUrl = user.photoURL ? esc(safeUrl(user.photoURL)) : '';
+    const avatarHtml = (safePhotoUrl && safePhotoUrl !== '#')
+      ? `<img src="${safePhotoUrl}" data-initials="${safeInitials}" alt="Profile" class="avatar-img" referrerpolicy="no-referrer" onerror="this.onerror=null;const s=document.createElement('span');s.className='avatar-initials';s.textContent=this.getAttribute('data-initials')||'';this.replaceWith(s);" />`
+      : `<span class="avatar-initials">${safeInitials}</span>`;
 
     userAvatarBtns.forEach(btn => {
       btn.innerHTML = avatarHtml;

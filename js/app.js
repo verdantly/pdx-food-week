@@ -1,6 +1,6 @@
 /* ── PDX Food Week App (ES Module Entrypoint) ── */
 import { State, loadState, saveState, checkWeekVisited, getWeekFile, migrateWeekSavedState, clearUserDataState, backupGuestUserData, restoreGuestUserData, getDishKey } from './modules/state.js';
-import { esc, debounce, showToast, getWeekTiming } from './modules/utils.js';
+import { esc, debounce, showToast, getWeekTiming, shuffleArray, activateModalFocusTrap, deactivateModalFocusTrap } from './modules/utils.js';
 import { getRestaurants, getSaved, updateBrowseBadge, dismissNewBanner } from './modules/data.js';
 import {
   openDetail, closeDetail, shareDish, toggleSave, setRating, setNote, handleNoteInput,
@@ -1052,6 +1052,7 @@ export function openMoreModal() {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  activateModalFocusTrap('more-modal-overlay', closeMoreModal);
 }
 
 export function closeMoreModal() {
@@ -1060,6 +1061,7 @@ export function closeMoreModal() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  deactivateModalFocusTrap('more-modal-overlay');
 }
 
 export function openUpcomingWeekModal(weekId) {
@@ -1106,6 +1108,7 @@ export function openUpcomingWeekModal(weekId) {
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  activateModalFocusTrap('upcoming-week-modal-overlay', closeUpcomingWeekModal);
 }
 
 export function closeUpcomingWeekModal() {
@@ -1114,6 +1117,7 @@ export function closeUpcomingWeekModal() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  deactivateModalFocusTrap('upcoming-week-modal-overlay');
 }
 
 // ── Notification Preferences Modal ──
@@ -1128,11 +1132,17 @@ export function openNotificationsModal() {
 
   updateNotifPermissionStatus();
   modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  activateModalFocusTrap('notifications-modal', closeNotificationsModal);
 }
 
 export function closeNotificationsModal() {
   const modal = document.getElementById('notifications-modal');
-  if (modal) modal.classList.remove('open');
+  if (modal) {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+  deactivateModalFocusTrap('notifications-modal');
 }
 
 export async function toggleNotificationPref(key, enabled) {
@@ -1223,8 +1233,8 @@ function populateLandingCarousel(spots, weekId) {
     return;
   }
 
-  // Pick up to 8 randomized spots
-  const shuffled = [...spots].sort(() => 0.5 - Math.random());
+  // Pick up to 8 randomized spots using unbiased Fisher-Yates shuffle
+  const shuffled = shuffleArray(spots);
   const selected = shuffled.slice(0, 8);
 
   track.innerHTML = selected.map((r, idx) => {

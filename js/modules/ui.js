@@ -1,6 +1,6 @@
 /* ── UI Components & Detail Overlays ── */
 import { State, saveState, isDishSaved, toggleDishSaved, getDishKey, isDishViewedNew, markDishViewedNew } from './state.js';
-import { esc, safeUrl, showToast, getRestaurantScheduleText } from './utils.js';
+import { esc, safeUrl, showToast, getRestaurantScheduleText, activateModalFocusTrap, deactivateModalFocusTrap } from './utils.js';
 import { getRestaurants, getFiltered, getSaved, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
 
@@ -482,17 +482,23 @@ export function showMetricDetails(type) {
   }
 
   body.innerHTML = `<ul style="list-style: none; padding: 0; margin: 0;">` +
-    list.map(item => `<li style="padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; text-transform: capitalize;">${item}</li>`).join('') +
+    list.map(item => `<li style="padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; text-transform: capitalize;">${esc(item)}</li>`).join('') +
     `</ul>`;
 
   overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+  activateModalFocusTrap('metric-modal-overlay', closeMetricModal);
 }
 
 export function closeMetricModal() {
   const overlay = document.getElementById('metric-modal-overlay');
-  if (overlay) overlay.classList.remove('open');
+  if (overlay) {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
   document.body.style.overflow = '';
+  deactivateModalFocusTrap('metric-modal-overlay');
 }
 
 export function shareDish(id) {

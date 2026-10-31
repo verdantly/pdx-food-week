@@ -36,10 +36,18 @@ export function renderBrowse() {
   const container = document.getElementById('cards-browse');
   if (!container) return;
   if (filtered.length === 0) {
+    const hasActiveBrowseFilters = State.activeFilters.size > 0 ||
+      State.activeDayFilter !== null ||
+      (State.activeDayFilters && State.activeDayFilters.size > 0) ||
+      State.searchQuery !== '';
+    const resetBtnHtml = hasActiveBrowseFilters
+      ? `<button type="button" class="filter-chip clear-filters" style="margin-top: 14px; background: var(--pizza-light); color: var(--pizza-dark); font-weight: 600; border: 1px solid var(--pizza-dark); padding: 8px 16px; cursor: pointer;" onclick="App.clearAllFilters()">✕ Reset Filters</button>`
+      : '';
     container.innerHTML = `<div class="no-results">
       <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48" fill="#e3e3e3" style="margin-bottom: 16px; opacity: 0.8;"><path d="M280-80v-366q-51-14-85.5-56T160-596v-284h80v280h40v-280h80v280h40v-280h80v284q0 52-34.5 94T360-446v366h-80Zm400 0v-320H560v-480q66 0 113 47t47 113v640h-40Z"/></svg>
       <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">Nothing on the menu</p>
       <p style="color: var(--ink-60);">Try a different filter!</p>
+      ${resetBtnHtml}
     </div>`;
   } else {
     container.innerHTML = filtered.map(r => cardHTML(r)).join('');
@@ -248,12 +256,23 @@ export function renderSaved(focusSelector = null) {
   }
 
   if (items.length === 0) {
+    const hasActiveSavedFilters = hasSavedItems && (State.activeSavedFilters.size > 0 || State.savedSearchQuery !== '');
+    const emptyTitle = hasActiveSavedFilters
+      ? "No matching saved spots"
+      : (State.viewingFriendIndex !== null ? "Friend hasn't saved spots yet" : "No saved spots yet");
+    const emptySub = hasActiveSavedFilters
+      ? "None of your saved spots match the current filter or search."
+      : (State.viewingFriendIndex !== null ? "Check back later!" : "Save spots from Browse to build your list!");
+    const resetSavedBtnHtml = hasActiveSavedFilters
+      ? `<button type="button" class="filter-chip clear-filters" style="margin-top: 14px; background: var(--pizza-light); color: var(--pizza-dark); font-weight: 600; border: 1px solid var(--pizza-dark); padding: 8px 16px; cursor: pointer;" onclick="App.clearAllSavedFilters()">✕ Reset Filters</button>`
+      : '';
     container.innerHTML = `<div class="no-results" style="text-align: center; margin-top: 40px; grid-column: 1 / -1;">
       <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="var(--pizza-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.8; margin-left: auto; margin-right: auto;">
         <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
       </svg>
-      <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">${State.viewingFriendIndex !== null ? "Friend hasn't saved spots yet" : "No saved spots yet"}</p>
-      <p style="color: var(--ink-60);">${State.viewingFriendIndex !== null ? "Check back later!" : "Save spots from Browse to build your list!"}</p>
+      <p style="font-family: var(--font-display); font-size: 20px; color: var(--ink); margin-bottom: 4px; font-weight: 600;">${emptyTitle}</p>
+      <p style="color: var(--ink-60);">${emptySub}</p>
+      ${resetSavedBtnHtml}
     </div>`;
   } else {
     container.innerHTML = items.map((r, index) => cardHTML(r, false, true, index, items.length)).join('');

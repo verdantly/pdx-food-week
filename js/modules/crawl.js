@@ -1,6 +1,6 @@
 /* ── Crawl Builder Module ── */
 import { State, isDishSaved } from './state.js';
-import { esc, haversineDistance, showToast } from './utils.js';
+import { esc, haversineDistance, showToast, activateModalFocusTrap, deactivateModalFocusTrap } from './utils.js';
 import { getRestaurants } from './data.js';
 import { closeDetail } from './ui.js';
 import { renderMap } from './map.js';
@@ -121,14 +121,18 @@ export function openCrawlOptionsModal() {
   }
   modal.style.display = 'flex';
   modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  activateModalFocusTrap('crawl-options-modal', closeCrawlOptionsModal);
 }
 
 export function closeCrawlOptionsModal() {
   const modal = document.getElementById('crawl-options-modal');
   if (modal) {
     modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
     modal.style.display = 'none';
   }
+  deactivateModalFocusTrap('crawl-options-modal');
 }
 
 export function startMapPinCrawlMode() {
@@ -160,14 +164,18 @@ export function openSavedCrawlPicker() {
   renderSavedPickerList();
   modal.style.display = 'flex';
   modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  activateModalFocusTrap('crawl-saved-picker-modal', closeSavedPickerModal);
 }
 
 export function closeSavedPickerModal() {
   const modal = document.getElementById('crawl-saved-picker-modal');
   if (modal) {
     modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
     modal.style.display = 'none';
   }
+  deactivateModalFocusTrap('crawl-saved-picker-modal');
 }
 
 export function renderSavedPickerList() {
@@ -366,14 +374,18 @@ export function openCrawlItineraryModal(skipOptimize = false) {
   renderCrawlItineraryModal();
   modal.style.display = 'flex';
   modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  activateModalFocusTrap('crawl-itinerary-modal', closeCrawlItineraryModal);
 }
 
 export function closeCrawlItineraryModal() {
   const modal = document.getElementById('crawl-itinerary-modal');
   if (modal) {
     modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
     modal.style.display = 'none';
   }
+  deactivateModalFocusTrap('crawl-itinerary-modal');
 }
 
 export function renderCrawlItineraryModal() {

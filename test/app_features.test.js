@@ -638,4 +638,80 @@ describe("App Features: Recently Added Filter After Async Data Load", () => {
     State.userLat = null;
     State.userLng = null;
   });
+
+  test("renderBrowse empty state renders Reset Filters button when filters are active", async () => {
+    const { renderBrowse } = await import("../js/modules/render.js");
+
+    if (typeof global.window === "undefined") global.window = {};
+    global.window.RESTAURANTS = [
+      { id: 1, weekId: "mac-and-cheese-2026", restaurant: "Mac Spot", dish: "Classic Mac", type: "meat" }
+    ];
+
+    State.currentWeekId = "mac-and-cheese-2026";
+    State.activeFilters = new Set(["vegan"]);
+    State.searchQuery = "";
+
+    const cardsBrowse = {
+      innerHTML: "",
+      classList: { remove: () => {}, add: () => {} },
+      offsetWidth: 0
+    };
+    const prevDoc = global.document;
+    global.document = {
+      getElementById: (id) => (id === "cards-browse" ? cardsBrowse : null),
+      querySelectorAll: () => [],
+      querySelector: () => null
+    };
+
+    try {
+      renderBrowse();
+      expect(cardsBrowse.innerHTML).toContain("Nothing on the menu");
+      expect(cardsBrowse.innerHTML).toContain("✕ Reset Filters");
+      expect(cardsBrowse.innerHTML).toContain("App.clearAllFilters()");
+    } finally {
+      if (prevDoc) global.document = prevDoc;
+      else delete global.document;
+      State.activeFilters.clear();
+    }
+  });
+
+  test("shuffleArray returns an unbiased permutation with identical elements without mutating input", async () => {
+    const { shuffleArray } = await import("../js/modules/utils.js");
+    const input = [1, 2, 3, 4, 5, 6, 7, 8];
+    const copy = [...input];
+    const shuffled = shuffleArray(input);
+    expect(input).toEqual(copy);
+    expect(shuffled.length).toBe(input.length);
+    expect([...shuffled].sort((a, b) => a - b)).toEqual(copy);
+  });
+
+  test("updateAuthUI escapes user.photoURL and initials to prevent attribute injection", async () => {
+    const { updateAuthUI } = await import("../js/modules/auth.js");
+
+    const avatarBtn = {
+      innerHTML: "",
+      classList: { add: () => {}, remove: () => {} },
+      setAttribute: () => {}
+    };
+    const prevDoc = global.document;
+    global.document = {
+      querySelectorAll: (sel) => (sel === ".user-avatar-btn" ? [avatarBtn] : [])
+    };
+
+    try {
+      State.user = {
+        displayName: "'><script>alert(1)</script>",
+        email: "test@example.com",
+        photoURL: 'https://example.com/pic.jpg" onload="alert(1)'
+      };
+      updateAuthUI();
+      expect(avatarBtn.innerHTML).not.toContain("<script>");
+      expect(avatarBtn.innerHTML).toContain("&quot;");
+      expect(avatarBtn.innerHTML).toContain("data-initials=");
+    } finally {
+      State.user = null;
+      if (prevDoc) global.document = prevDoc;
+      else delete global.document;
+    }
+  });
 });

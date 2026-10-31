@@ -1,12 +1,12 @@
 const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
-const CACHE_NAME = 'pdxfw-cache-b2fa399b';
+const CACHE_NAME = 'pdxfw-cache-16f57418';
 
 const STATIC_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=b2fa399b',
-  'js/app.js?v=b2fa399b',
-  'js/meta.js?v=b2fa399b',
+  'css/style.css?v=16f57418',
+  'js/app.js?v=16f57418',
+  'js/meta.js?v=16f57418',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
