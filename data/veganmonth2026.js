@@ -7,6 +7,7 @@ window.FOOD_WEEKS.push(
   {
     id: "world-vegan-month-2026",
     name: "World Vegan Month 2026",
+    whatTheySayLabel: "Cause",
     organizer: "Veganizer PDX",
     dates: "November 1–30, 2026",
     startDate: "2026-11-01",
