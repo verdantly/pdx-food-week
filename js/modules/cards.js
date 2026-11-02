@@ -22,24 +22,27 @@ export function buildTags(r) {
 
   const t = [];
 
-  // Meat / Vegetarian / Vegan badges
-  if (r.type === 'meat') {
-    t.push('<span class="tag tag-meat">Meat</span>');
-    if (isVeganFriendly(r)) {
-      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-    } else if (isVegetarianFriendly(r)) {
-      t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
-    }
-  } else if (r.type === 'vegetarian') {
-    t.push('<span class="tag tag-veg">Vegetarian</span>');
-    if (isVeganFriendly(r)) {
-      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-    }
-  } else if (r.type === 'vegan') {
-    if (hasVeganOptionInDesc(r)) {
-      t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
-    } else {
-      t.push('<span class="tag tag-vegan">Vegan</span>');
+  // Meat / Vegetarian / Vegan badges (omitted when week specifies hideDietTags, e.g. all-vegan events)
+  const isAllVeganWeek = (weekMeta && weekMeta.hideDietTags) || (r.weekId === 'world-vegan-month-2026' || State.currentWeekId === 'world-vegan-month-2026');
+  if (!isAllVeganWeek) {
+    if (r.type === 'meat') {
+      t.push('<span class="tag tag-meat">Meat</span>');
+      if (isVeganFriendly(r)) {
+        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+      } else if (isVegetarianFriendly(r)) {
+        t.push('<span class="tag tag-veg" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Veg option</span>');
+      }
+    } else if (r.type === 'vegetarian') {
+      t.push('<span class="tag tag-veg">Vegetarian</span>');
+      if (isVeganFriendly(r)) {
+        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+      }
+    } else if (r.type === 'vegan') {
+      if (hasVeganOptionInDesc(r)) {
+        t.push('<span class="tag tag-vegan" style="border: 1px dashed currentColor; background: transparent; font-weight: 500;">Vegan option</span>');
+      } else {
+        t.push('<span class="tag tag-vegan">Vegan</span>');
+      }
     }
   }
 

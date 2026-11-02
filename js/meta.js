@@ -298,6 +298,7 @@ window.FOOD_WEEKS = [
     id: "world-vegan-month-2026",
     name: "World Vegan Month 2026",
     whatTheySayLabel: "Cause",
+    hideDietTags: true,
     organizer: "Veganizer PDX",
     dataFile: "veganmonth2026.js",
     dates: "November 1–30, 2026",
