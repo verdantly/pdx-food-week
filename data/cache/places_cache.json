@@ -43146,5 +43146,735 @@
         }
       }
     ]
+  },
+  "adelleda_103 ne grand ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 5:00 PM – 9:00 PM",
+      "Tuesday: 5:00 PM – 9:00 PM",
+      "Wednesday: 5:00 PM – 9:00 PM",
+      "Thursday: 5:00 PM – 9:00 PM",
+      "Friday: 5:00 PM – 9:00 PM",
+      "Saturday: 10:00 AM – 2:00 PM, 5:00 PM – 9:00 PM",
+      "Sunday: 10:00 AM – 2:00 PM, 5:00 PM – 9:00 PM"
+    ]
+  },
+  "black water_5115 ne sandy blvd, portland, or 97213": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:00 AM – 1:00 AM",
+      "Tuesday: 11:00 AM – 1:00 AM",
+      "Wednesday: 11:00 AM – 1:00 AM",
+      "Thursday: 11:00 AM – 1:00 AM",
+      "Friday: 11:00 AM – 2:00 AM",
+      "Saturday: 11:00 AM – 2:00 AM",
+      "Sunday: 11:00 AM – 1:00 AM"
+    ]
+  },
+  "buddy's_304 se 2nd ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 12:00 PM – 9:00 PM",
+      "Tuesday: 12:00 PM – 9:00 PM",
+      "Wednesday: 12:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 10:00 PM",
+      "Saturday: 12:00 PM – 10:00 PM",
+      "Sunday: 12:00 PM – 9:00 PM"
+    ]
+  },
+  "carina's bakery_4725 sw lombard ave #108, beaverton, or 97005": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 9:00 AM – 5:00 PM",
+      "Tuesday: 9:00 AM – 5:00 PM",
+      "Wednesday: 9:00 AM – 5:00 PM",
+      "Thursday: 9:00 AM – 7:00 PM",
+      "Friday: 9:00 AM – 7:00 PM",
+      "Saturday: 9:00 AM – 7:00 PM",
+      "Sunday: 9:00 AM – 5:00 PM"
+    ]
+  },
+  "catscratch co-op bakery_2816 ne halsey st, portland, or 97232": {
+    "openDays": [
+      0,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: Closed",
+      "Thursday: 8:00 AM – 2:00 PM",
+      "Friday: 8:00 AM – 2:00 PM",
+      "Saturday: 8:00 AM – 2:00 PM",
+      "Sunday: 8:00 AM – 2:00 PM"
+    ]
+  },
+  "cooper's co-op cafe_2420 se belmont st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:00 AM – 10:00 PM",
+      "Tuesday: 8:00 AM – 10:00 PM",
+      "Wednesday: 8:00 AM – 10:00 PM",
+      "Thursday: 8:00 AM – 10:00 PM",
+      "Friday: 8:00 AM – 11:00 PM",
+      "Saturday: 10:00 AM – 11:00 PM",
+      "Sunday: 10:00 AM – 10:00 PM"
+    ]
+  },
+  "cultured kindness_1217 se stark st, portland, or 97214": {
+    "openDays": [
+      0,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: 11:30 AM – 4:00 PM",
+      "Thursday: 11:30 AM – 4:00 PM",
+      "Friday: 11:30 AM – 5:00 PM",
+      "Saturday: 10:00 AM – 5:00 PM",
+      "Sunday: 11:30 AM – 4:00 PM"
+    ]
+  },
+  "dinger's deli at wayfinder beer_304 se 2nd ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 12:00 PM – 9:00 PM",
+      "Tuesday: 12:00 PM – 9:00 PM",
+      "Wednesday: 12:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 10:00 PM",
+      "Saturday: 12:00 PM – 10:00 PM",
+      "Sunday: 12:00 PM – 9:00 PM"
+    ]
+  },
+  "doe donuts + ice cream_4110 ne sandy blvd, portland, or 97212": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:00 AM – 4:00 PM",
+      "Tuesday: 8:00 AM – 4:00 PM",
+      "Wednesday: 8:00 AM – 4:00 PM",
+      "Thursday: 8:00 AM – 4:00 PM",
+      "Friday: 7:00 AM – 6:00 PM",
+      "Saturday: 7:00 AM – 6:00 PM",
+      "Sunday: 7:00 AM – 6:00 PM"
+    ]
+  },
+  "epif_404 ne 28th ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 9:00 AM – 2:00 PM",
+      "Tuesday: Closed",
+      "Wednesday: Closed",
+      "Thursday: Closed",
+      "Friday: 9:00 AM – 2:00 PM",
+      "Saturday: 9:00 AM – 2:00 PM",
+      "Sunday: 9:00 AM – 2:00 PM"
+    ]
+  },
+  "exquisite creatures_537 se ash st #108, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:00 AM – 1:00 PM",
+      "Tuesday: 8:00 AM – 1:00 PM",
+      "Wednesday: 8:00 AM – 1:00 PM",
+      "Thursday: 8:00 AM – 1:00 PM",
+      "Friday: 8:00 AM – 2:00 PM",
+      "Saturday: 8:00 AM – 2:00 PM",
+      "Sunday: 9:00 AM – 2:00 PM"
+    ]
+  },
+  "feral_1640 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: 5:00 PM – 9:00 PM",
+      "Thursday: 5:00 PM – 9:00 PM",
+      "Friday: 5:00 PM – 10:00 PM",
+      "Saturday: 5:00 PM – 10:00 PM",
+      "Sunday: Closed"
+    ]
+  },
+  "fortune_614 sw 11th ave, portland, or 97205": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 4:00 PM – 12:00 AM",
+      "Tuesday: 4:00 PM – 12:00 AM",
+      "Wednesday: 4:00 PM – 12:00 AM",
+      "Thursday: 4:00 PM – 12:00 AM",
+      "Friday: 4:00 PM – 2:00 AM",
+      "Saturday: 4:00 PM – 2:00 AM",
+      "Sunday: 4:00 PM – 12:00 AM"
+    ]
+  },
+  "harlow (division)_3715 se division st, portland, or 97202": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:30 AM – 7:30 PM",
+      "Tuesday: 8:30 AM – 7:30 PM",
+      "Wednesday: 8:30 AM – 7:30 PM",
+      "Thursday: 8:30 AM – 7:30 PM",
+      "Friday: 8:30 AM – 7:30 PM",
+      "Saturday: 8:30 AM – 7:30 PM",
+      "Sunday: 8:30 AM – 7:30 PM"
+    ]
+  },
+  "harlow (nw 23rd)_505 nw 23rd ave, portland, or 97210": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:30 AM – 7:30 PM",
+      "Tuesday: 8:30 AM – 7:30 PM",
+      "Wednesday: 8:30 AM – 7:30 PM",
+      "Thursday: 8:30 AM – 7:30 PM",
+      "Friday: 8:30 AM – 7:30 PM",
+      "Saturday: 8:30 AM – 7:30 PM",
+      "Sunday: 8:30 AM – 7:30 PM"
+    ]
+  },
+  "ice queen_2012 se 11th ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 3:00 PM – 9:00 PM",
+      "Tuesday: Closed",
+      "Wednesday: 3:00 PM – 9:00 PM",
+      "Thursday: 3:00 PM – 9:00 PM",
+      "Friday: 3:00 PM – 10:00 PM",
+      "Saturday: 3:00 PM – 10:00 PM",
+      "Sunday: 3:00 PM – 9:00 PM"
+    ]
+  },
+  "jade rabbit_3632 se hawthorne blvd, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 12:00 PM – 9:00 PM",
+      "Tuesday: 12:00 PM – 9:00 PM",
+      "Wednesday: 12:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 9:00 PM",
+      "Saturday: 11:00 AM – 9:00 PM",
+      "Sunday: 11:00 AM – 9:00 PM"
+    ]
+  },
+  "june_4589 sw watson ave #110, beaverton, or 97005": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 4:00 PM – 12:00 AM",
+      "Tuesday: 4:00 PM – 12:00 AM",
+      "Wednesday: 4:00 PM – 12:00 AM",
+      "Thursday: 4:00 PM – 12:00 AM",
+      "Friday: 4:00 PM – 1:00 AM",
+      "Saturday: 12:00 PM – 1:00 AM",
+      "Sunday: 12:00 PM – 10:00 PM"
+    ]
+  },
+  "kate's ice cream (mississippi)_3713 n mississippi ave, portland, or 97227": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 2:00 PM – 9:00 PM",
+      "Tuesday: 2:00 PM – 9:00 PM",
+      "Wednesday: 2:00 PM – 9:00 PM",
+      "Thursday: 2:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 10:00 PM",
+      "Saturday: 12:00 PM – 10:00 PM",
+      "Sunday: 12:00 PM – 9:00 PM"
+    ]
+  },
+  "kate's ice cream (nw 23rd)_1430 nw 23rd ave, portland, or 97210": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 3:00 PM – 9:00 PM",
+      "Tuesday: 3:00 PM – 9:00 PM",
+      "Wednesday: 3:00 PM – 9:00 PM",
+      "Thursday: 3:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 10:00 PM",
+      "Saturday: 12:00 PM – 10:00 PM",
+      "Sunday: 12:00 PM – 9:00 PM"
+    ]
+  },
+  "la casa de mamá_1670 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 3:00 PM – 9:00 PM",
+      "Tuesday: 3:00 PM – 9:00 PM",
+      "Wednesday: 3:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 10:00 PM",
+      "Saturday: 10:00 AM – 10:00 PM",
+      "Sunday: 10:00 AM – 8:00 PM"
+    ]
+  },
+  "maruti indian restaurant_1925 se hawthorne blvd, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 4:30 PM – 8:30 PM",
+      "Tuesday: Closed",
+      "Wednesday: 4:30 PM – 8:30 PM",
+      "Thursday: 4:30 PM – 8:30 PM",
+      "Friday: 4:30 PM – 8:45 PM",
+      "Saturday: 4:30 PM – 8:45 PM",
+      "Sunday: 4:30 PM – 8:30 PM"
+    ]
+  },
+  "mis tacones_1670 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 3:00 PM – 9:00 PM",
+      "Tuesday: 3:00 PM – 9:00 PM",
+      "Wednesday: 3:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 10:00 PM",
+      "Saturday: 10:00 AM – 10:00 PM",
+      "Sunday: 10:00 AM – 8:00 PM"
+    ]
+  },
+  "nate's oatmeal cookies_3308 se belmont st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:00 AM – 9:00 PM",
+      "Tuesday: 11:00 AM – 9:00 PM",
+      "Wednesday: 11:00 AM – 9:00 PM",
+      "Thursday: 11:00 AM – 9:00 PM",
+      "Friday: 11:00 AM – 9:00 PM",
+      "Saturday: 11:00 AM – 9:00 PM",
+      "Sunday: 11:00 AM – 9:00 PM"
+    ]
+  },
+  "norah (belmont)_3801 se belmont st, portland, or 97214": {
+    "openDays": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Wednesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Saturday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Sunday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM"
+    ]
+  },
+  "norah (alberta)_1451 ne alberta st, portland, or 97211": {
+    "openDays": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Wednesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Thursday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Friday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Saturday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+      "Sunday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM"
+    ]
+  },
+  "obon shokudo_720 se grand ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:30 AM – 9:00 PM",
+      "Tuesday: Closed",
+      "Wednesday: 11:30 AM – 9:00 PM",
+      "Thursday: 11:30 AM – 9:00 PM",
+      "Friday: 11:30 AM – 9:00 PM",
+      "Saturday: 11:30 AM – 9:00 PM",
+      "Sunday: 11:30 AM – 9:00 PM"
+    ]
+  },
+  "office lunch at olympic mills_107 se washington st, portland, or 97214": {
+    "openDays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:00 AM – 3:00 PM",
+      "Tuesday: 11:00 AM – 3:00 PM",
+      "Wednesday: 11:00 AM – 3:00 PM",
+      "Thursday: 11:00 AM – 3:00 PM",
+      "Friday: 11:00 AM – 3:00 PM",
+      "Saturday: Closed",
+      "Sunday: Closed"
+    ]
+  },
+  "orange & blossom_1612 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: 9:00 AM – 3:00 PM",
+      "Thursday: 9:00 AM – 3:00 PM",
+      "Friday: 9:00 AM – 3:00 PM",
+      "Saturday: 9:00 AM – 3:00 PM",
+      "Sunday: 9:00 AM – 3:00 PM"
+    ]
+  },
+  "pain au nikki at exquisite creatures_537 se ash st #108, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:00 AM – 1:00 PM",
+      "Tuesday: 8:00 AM – 1:00 PM",
+      "Wednesday: 8:00 AM – 1:00 PM",
+      "Thursday: 8:00 AM – 1:00 PM",
+      "Friday: 8:00 AM – 2:00 PM",
+      "Saturday: 8:00 AM – 2:00 PM",
+      "Sunday: 9:00 AM – 2:00 PM"
+    ]
+  },
+  "pain au nikki at la lucha coffee_1416 se stark st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 7:00 AM – 2:30 PM",
+      "Tuesday: 7:00 AM – 2:30 PM",
+      "Wednesday: 7:00 AM – 2:30 PM",
+      "Thursday: 7:00 AM – 2:30 PM",
+      "Friday: 7:00 AM – 2:30 PM",
+      "Saturday: 7:00 AM – 12:30 PM",
+      "Sunday: 7:00 AM – 12:30 PM"
+    ]
+  },
+  "rad magic subs_2824 se gladstone st, portland, or 97202": {
+    "openDays": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: 11:00 AM – 6:00 PM",
+      "Wednesday: 11:00 AM – 6:00 PM",
+      "Thursday: 11:00 AM – 6:00 PM",
+      "Friday: 11:00 AM – 6:00 PM",
+      "Saturday: 11:00 AM – 6:00 PM",
+      "Sunday: Closed"
+    ]
+  },
+  "secret pizza society_7201 ne glisan st, portland, or 97213": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 1:00 PM – 9:00 PM",
+      "Tuesday: 1:00 PM – 9:00 PM",
+      "Wednesday: 1:00 PM – 9:00 PM",
+      "Thursday: 1:00 PM – 9:00 PM",
+      "Friday: 1:00 PM – 10:00 PM",
+      "Saturday: 1:00 PM – 10:00 PM",
+      "Sunday: 1:00 PM – 9:00 PM"
+    ]
+  },
+  "the wagon_3518 sw multnomah blvd, portland, or 97219": {
+    "openDays": [
+      0,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: Closed",
+      "Thursday: 12:00 PM – 7:00 PM",
+      "Friday: 12:00 PM – 7:00 PM",
+      "Saturday: 9:30 AM – 3:00 PM",
+      "Sunday: 9:30 AM – 2:00 PM"
+    ]
+  },
+  "theoberto's at swan dive_727 se grand ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 6:00 PM – 12:00 AM",
+      "Tuesday: Closed",
+      "Wednesday: 6:00 PM – 12:00 AM",
+      "Thursday: 6:00 PM – 12:00 AM",
+      "Friday: 6:00 PM – 12:00 AM",
+      "Saturday: 6:00 PM – 12:00 AM",
+      "Sunday: 6:00 PM – 12:00 AM"
+    ]
+  },
+  "verdure at malpractice_77 se yamhill st, portland, or 97214": {
+    "openDays": [
+      0,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: 4:00 PM – 11:00 PM",
+      "Thursday: 4:00 PM – 11:00 PM",
+      "Friday: 4:00 PM – 12:00 AM",
+      "Saturday: 2:00 PM – 12:00 AM",
+      "Sunday: 4:00 PM – 8:00 PM"
+    ]
+  },
+  "verdure at exquisite creatures_537 se ash st #108, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 8:00 AM – 1:00 PM",
+      "Tuesday: 8:00 AM – 1:00 PM",
+      "Wednesday: 8:00 AM – 1:00 PM",
+      "Thursday: 8:00 AM – 1:00 PM",
+      "Friday: 8:00 AM – 2:00 PM",
+      "Saturday: 8:00 AM – 2:00 PM",
+      "Sunday: 9:00 AM – 2:00 PM"
+    ]
+  },
+  "vtopian artisan cheeses_103 ne grand ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:00 AM – 3:00 PM",
+      "Tuesday: Closed",
+      "Wednesday: Closed",
+      "Thursday: 11:00 AM – 3:00 PM",
+      "Friday: 11:00 AM – 3:00 PM",
+      "Saturday: 11:00 AM – 3:00 PM",
+      "Sunday: 11:00 AM – 3:00 PM"
+    ]
   }
 }

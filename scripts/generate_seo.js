@@ -371,7 +371,8 @@ function getAppHeaderHtml(activeDeepLink = '../') {
 
 function renderDishTagBadges(dish) {
   const tagBadges = [];
-  if (dish.type) {
+  const isAllVeganWeek = dish.weekId === 'world-vegan-month-2026';
+  if (dish.type && !isAllVeganWeek) {
     const t = String(dish.type).toLowerCase();
     const tagClass = t === 'vegan' ? 'tag-vegan' : (t === 'vegetarian' ? 'tag-veg' : 'tag-meat');
     tagBadges.push(`<span class="tag ${tagClass}">${escapeHtml(dish.type)}</span>`);

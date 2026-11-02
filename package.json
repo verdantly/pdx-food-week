@@ -23,7 +23,8 @@
     "enrich:hours": "node scripts/enrich_hours.js",
     "submit:indexnow": "node scripts/ping_indexnow.js",
     "test:unit": "node -c js/app.js && node scripts/hash_assets.js && vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "scrape:vegan": "node scrapers/scrape_vegan_month.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0",
