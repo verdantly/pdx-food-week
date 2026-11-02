@@ -293,6 +293,27 @@ window.FOOD_WEEKS = [
       { id: 'gf', label: 'Gluten-free' },
       { id: 'spicy', label: 'Spicy' }
     ]
+  },
+  {
+    id: "world-vegan-month-2026",
+    name: "World Vegan Month 2026",
+    organizer: "Veganizer PDX",
+    dataFile: "veganmonth2026.js",
+    dates: "November 1–30, 2026",
+    startDate: "2026-11-01",
+    endDate: "2026-11-30",
+    pricePills: ["Vegan specials for a cause"],
+    color: "#2E7D32",
+    colorDark: "#1B5E20",
+    colorLight: "#C8E6C9",
+    colorPale: "#E8F5E9",
+    emoji: "🌱",
+    totalLocations: 52,
+    url: "https://veganizerpdx.com/world-vegan-month/",
+    filters: [
+      { id: 'gf', label: 'Gluten-free' },
+      { id: 'spicy', label: 'Spicy' }
+    ]
   }
 ];
 

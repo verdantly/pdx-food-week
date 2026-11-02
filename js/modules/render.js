@@ -466,6 +466,9 @@ export function renderHeader() {
   if (titleEl) {
     if (State.currentWeekId === 'slushie-2026') {
       titleEl.innerHTML = `Summer of <em>Slushies</em> 2026`;
+    } else if (State.currentWeekId && State.currentWeekId.startsWith('world-vegan-month')) {
+      const rest = week.name.replace(/^World\s+Vegan\s+Month\s*/i, '');
+      titleEl.innerHTML = `World <em>Vegan</em> Month ${esc(rest)}`.trim();
     } else if (State.currentWeekId && State.currentWeekId.startsWith('mac-and-cheese')) {
       const rest = week.name.replace(/^Mac\s*&\s*Cheese\s*/i, '');
       titleEl.innerHTML = `<em>Mac</em> <span class="amp">&amp;</span> <em>Cheese</em> ${esc(rest)}`;

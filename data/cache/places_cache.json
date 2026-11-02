@@ -43146,5 +43146,765 @@
         }
       }
     ]
+  },
+  "adelleda_103 ne grand ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "black water_5115 ne sandy blvd, portland, or 97213": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "buddy's_304 se 2nd ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "carina's bakery_4725 sw lombard ave #108, beaverton, or 97005": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "catscratch co-op bakery_2816 ne halsey st, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "cooper's co-op cafe_2420 se belmont st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "cultured kindness_1217 se stark st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "dinger's deli at wayfinder beer_304 se 2nd ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "doe donuts + ice cream_4110 ne sandy blvd, portland, or 97212": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "epif_404 ne 28th ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "exquisite creatures_537 se ash st #108, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "feral_1640 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "fortune_614 sw 11th ave, portland, or 97205": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "harlow (division)_3715 se division st, portland, or 97202": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "harlow (nw 23rd)_505 nw 23rd ave, portland, or 97210": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "ice queen_2012 se 11th ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "jade rabbit_3632 se hawthorne blvd, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "june_4589 sw watson ave #110, beaverton, or 97005": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "kate's ice cream (mississippi)_3713 n mississippi ave, portland, or 97227": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "kate's ice cream (nw 23rd)_1430 nw 23rd ave, portland, or 97210": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "la casa de mamá_1670 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "maruti indian restaurant_1925 se hawthorne blvd, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "mis tacones_1670 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "nate's oatmeal cookies_3308 se belmont st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "norah (belmont)_3801 se belmont st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "norah (alberta)_1451 ne alberta st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "obon shokudo_720 se grand ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "office lunch at olympic mills_107 se washington st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "orange & blossom_1612 ne killingsworth st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "pain au nikki at exquisite creatures_537 se ash st #108, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "pain au nikki at la lucha coffee_1416 se stark st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "rad magic subs_2824 se gladstone st, portland, or 97202": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "secret pizza society_7201 ne glisan st, portland, or 97213": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "the wagon_3518 sw multnomah blvd, portland, or 97219": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "theoberto's at swan dive_727 se grand ave, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "verdure at malpractice_77 se yamhill st, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "verdure at exquisite creatures_537 se ash st #108, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
+  },
+  "vtopian artisan cheeses_103 ne grand ave, portland, or 97232": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Sunday: Open",
+      "Monday: Open",
+      "Tuesday: Open",
+      "Wednesday: Open",
+      "Thursday: Open",
+      "Friday: Open",
+      "Saturday: Open"
+    ]
   }
 }
