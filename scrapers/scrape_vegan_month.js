@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import * as cheerio from 'cheerio';
 import { fileURLToPath } from 'url';
-import { decodeHTML, toTitleCase, toSentenceCase, updateMetaTotalLocations, loadExistingData } from './scraper_utils.js';
+import { decodeHTML, toTitleCase, toSentenceCase, updateMetaTotalLocations, loadExistingData, loadPlacesCache, lookupOperatingHours } from './scraper_utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CACHE_PATH = path.resolve(__dirname, '../data/geocode_cache.json');
@@ -592,6 +592,8 @@ export async function scrape() {
   ];
 
   const entries = [];
+  const placesCache = loadPlacesCache();
+  const existingDataMap = loadExistingData(OUTPUT_PATH);
   let counter = 1;
 
   for (const def of entriesDef) {
@@ -657,6 +659,8 @@ export async function scrape() {
       whatTheySay = venue.note;
     }
 
+    const hours = lookupOperatingHours(venue.restaurant, venue.address, placesCache, existingDataMap);
+
     entries.push({
       id: counter,
       weekId: 'world-vegan-month-2026',
@@ -679,7 +683,8 @@ export async function scrape() {
       url: LOCATIONS_URL,
       whatsOnIt: rawDesc ? toSentenceCase(rawDesc) : undefined,
       whatTheySay: whatTheySay || undefined,
-      restaurantUrl: biz && biz.causeUrl ? biz.causeUrl : undefined
+      restaurantUrl: biz && biz.causeUrl ? biz.causeUrl : undefined,
+      ...(hours ? { hours } : {})
     });
 
     counter++;

@@ -7,8 +7,6 @@ window.FOOD_WEEKS.push(
   {
     id: "world-vegan-month-2026",
     name: "World Vegan Month 2026",
-    whatTheySayLabel: "Cause",
-    hideDietTags: true,
     organizer: "Veganizer PDX",
     dates: "November 1–30, 2026",
     startDate: "2026-11-01",
@@ -65,13 +63,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 5:00 PM – 9:00 PM",
+        "Tuesday: 5:00 PM – 9:00 PM",
+        "Wednesday: 5:00 PM – 9:00 PM",
+        "Thursday: 5:00 PM – 9:00 PM",
+        "Friday: 5:00 PM – 9:00 PM",
+        "Saturday: 10:00 AM – 2:00 PM, 5:00 PM – 9:00 PM",
+        "Sunday: 10:00 AM – 2:00 PM, 5:00 PM – 9:00 PM"
       ]
     }
   },
@@ -109,13 +107,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 1:00 AM",
+        "Tuesday: 11:00 AM – 1:00 AM",
+        "Wednesday: 11:00 AM – 1:00 AM",
+        "Thursday: 11:00 AM – 1:00 AM",
+        "Friday: 11:00 AM – 2:00 AM",
+        "Saturday: 11:00 AM – 2:00 AM",
+        "Sunday: 11:00 AM – 1:00 AM"
       ]
     }
   },
@@ -269,13 +267,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 12:00 PM – 9:00 PM",
+        "Tuesday: 12:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 10:00 PM",
+        "Saturday: 12:00 PM – 10:00 PM",
+        "Sunday: 12:00 PM – 9:00 PM"
       ]
     }
   },
@@ -313,13 +311,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 9:00 AM – 5:00 PM",
+        "Tuesday: 9:00 AM – 5:00 PM",
+        "Wednesday: 9:00 AM – 5:00 PM",
+        "Thursday: 9:00 AM – 7:00 PM",
+        "Friday: 9:00 AM – 7:00 PM",
+        "Saturday: 9:00 AM – 7:00 PM",
+        "Sunday: 9:00 AM – 5:00 PM"
       ]
     }
   },
@@ -357,13 +355,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 9:00 AM – 5:00 PM",
+        "Tuesday: 9:00 AM – 5:00 PM",
+        "Wednesday: 9:00 AM – 5:00 PM",
+        "Thursday: 9:00 AM – 7:00 PM",
+        "Friday: 9:00 AM – 7:00 PM",
+        "Saturday: 9:00 AM – 7:00 PM",
+        "Sunday: 9:00 AM – 5:00 PM"
       ]
     }
   },
@@ -393,21 +391,18 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
-        3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 8:00 AM – 2:00 PM",
+        "Friday: 8:00 AM – 2:00 PM",
+        "Saturday: 8:00 AM – 2:00 PM",
+        "Sunday: 8:00 AM – 2:00 PM"
       ]
     }
   },
@@ -437,21 +432,18 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
-        3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 8:00 AM – 2:00 PM",
+        "Friday: 8:00 AM – 2:00 PM",
+        "Saturday: 8:00 AM – 2:00 PM",
+        "Sunday: 8:00 AM – 2:00 PM"
       ]
     }
   },
@@ -489,13 +481,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 10:00 PM",
+        "Tuesday: 8:00 AM – 10:00 PM",
+        "Wednesday: 8:00 AM – 10:00 PM",
+        "Thursday: 8:00 AM – 10:00 PM",
+        "Friday: 8:00 AM – 11:00 PM",
+        "Saturday: 10:00 AM – 11:00 PM",
+        "Sunday: 10:00 AM – 10:00 PM"
       ]
     }
   },
@@ -525,21 +517,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:30 AM – 4:00 PM",
+        "Thursday: 11:30 AM – 4:00 PM",
+        "Friday: 11:30 AM – 5:00 PM",
+        "Saturday: 10:00 AM – 5:00 PM",
+        "Sunday: 11:30 AM – 4:00 PM"
       ]
     }
   },
@@ -569,21 +559,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 11:30 AM – 4:00 PM",
+        "Thursday: 11:30 AM – 4:00 PM",
+        "Friday: 11:30 AM – 5:00 PM",
+        "Saturday: 10:00 AM – 5:00 PM",
+        "Sunday: 11:30 AM – 4:00 PM"
       ]
     }
   },
@@ -621,13 +609,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 12:00 PM – 9:00 PM",
+        "Tuesday: 12:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 10:00 PM",
+        "Saturday: 12:00 PM – 10:00 PM",
+        "Sunday: 12:00 PM – 9:00 PM"
       ]
     }
   },
@@ -665,13 +653,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 4:00 PM",
+        "Tuesday: 8:00 AM – 4:00 PM",
+        "Wednesday: 8:00 AM – 4:00 PM",
+        "Thursday: 8:00 AM – 4:00 PM",
+        "Friday: 7:00 AM – 6:00 PM",
+        "Saturday: 7:00 AM – 6:00 PM",
+        "Sunday: 7:00 AM – 6:00 PM"
       ]
     }
   },
@@ -709,13 +697,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 4:00 PM",
+        "Tuesday: 8:00 AM – 4:00 PM",
+        "Wednesday: 8:00 AM – 4:00 PM",
+        "Thursday: 8:00 AM – 4:00 PM",
+        "Friday: 7:00 AM – 6:00 PM",
+        "Saturday: 7:00 AM – 6:00 PM",
+        "Sunday: 7:00 AM – 6:00 PM"
       ]
     }
   },
@@ -746,20 +734,17 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
-        3,
-        4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 9:00 AM – 2:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: Closed",
+        "Friday: 9:00 AM – 2:00 PM",
+        "Saturday: 9:00 AM – 2:00 PM",
+        "Sunday: 9:00 AM – 2:00 PM"
       ]
     }
   },
@@ -797,13 +782,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 1:00 PM",
+        "Tuesday: 8:00 AM – 1:00 PM",
+        "Wednesday: 8:00 AM – 1:00 PM",
+        "Thursday: 8:00 AM – 1:00 PM",
+        "Friday: 8:00 AM – 2:00 PM",
+        "Saturday: 8:00 AM – 2:00 PM",
+        "Sunday: 9:00 AM – 2:00 PM"
       ]
     }
   },
@@ -832,22 +817,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.buddingroses.org/",
     "hours": {
       "openDays": [
-        0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 5:00 PM – 9:00 PM",
+        "Thursday: 5:00 PM – 9:00 PM",
+        "Friday: 5:00 PM – 10:00 PM",
+        "Saturday: 5:00 PM – 10:00 PM",
+        "Sunday: Closed"
       ]
     }
   },
@@ -876,22 +858,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.buddingroses.org/",
     "hours": {
       "openDays": [
-        0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 5:00 PM – 9:00 PM",
+        "Thursday: 5:00 PM – 9:00 PM",
+        "Friday: 5:00 PM – 10:00 PM",
+        "Saturday: 5:00 PM – 10:00 PM",
+        "Sunday: Closed"
       ]
     }
   },
@@ -929,13 +908,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 2:00 AM",
+        "Saturday: 4:00 PM – 2:00 AM",
+        "Sunday: 4:00 PM – 12:00 AM"
       ]
     }
   },
@@ -973,13 +952,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 2:00 AM",
+        "Saturday: 4:00 PM – 2:00 AM",
+        "Sunday: 4:00 PM – 12:00 AM"
       ]
     }
   },
@@ -1017,13 +996,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:30 AM – 7:30 PM",
+        "Tuesday: 8:30 AM – 7:30 PM",
+        "Wednesday: 8:30 AM – 7:30 PM",
+        "Thursday: 8:30 AM – 7:30 PM",
+        "Friday: 8:30 AM – 7:30 PM",
+        "Saturday: 8:30 AM – 7:30 PM",
+        "Sunday: 8:30 AM – 7:30 PM"
       ]
     }
   },
@@ -1061,13 +1040,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:30 AM – 7:30 PM",
+        "Tuesday: 8:30 AM – 7:30 PM",
+        "Wednesday: 8:30 AM – 7:30 PM",
+        "Thursday: 8:30 AM – 7:30 PM",
+        "Friday: 8:30 AM – 7:30 PM",
+        "Saturday: 8:30 AM – 7:30 PM",
+        "Sunday: 8:30 AM – 7:30 PM"
       ]
     }
   },
@@ -1098,20 +1077,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 3:00 PM – 9:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 3:00 PM – 9:00 PM",
+        "Thursday: 3:00 PM – 9:00 PM",
+        "Friday: 3:00 PM – 10:00 PM",
+        "Saturday: 3:00 PM – 10:00 PM",
+        "Sunday: 3:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1149,13 +1127,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 12:00 PM – 9:00 PM",
+        "Tuesday: 12:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
       ]
     }
   },
@@ -1192,13 +1170,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 1:00 AM",
+        "Saturday: 12:00 PM – 1:00 AM",
+        "Sunday: 12:00 PM – 10:00 PM"
       ]
     }
   },
@@ -1235,13 +1213,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 12:00 AM",
+        "Tuesday: 4:00 PM – 12:00 AM",
+        "Wednesday: 4:00 PM – 12:00 AM",
+        "Thursday: 4:00 PM – 12:00 AM",
+        "Friday: 4:00 PM – 1:00 AM",
+        "Saturday: 12:00 PM – 1:00 AM",
+        "Sunday: 12:00 PM – 10:00 PM"
       ]
     }
   },
@@ -1279,13 +1257,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 2:00 PM – 9:00 PM",
+        "Tuesday: 2:00 PM – 9:00 PM",
+        "Wednesday: 2:00 PM – 9:00 PM",
+        "Thursday: 2:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 10:00 PM",
+        "Saturday: 12:00 PM – 10:00 PM",
+        "Sunday: 12:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1323,13 +1301,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 3:00 PM – 9:00 PM",
+        "Tuesday: 3:00 PM – 9:00 PM",
+        "Wednesday: 3:00 PM – 9:00 PM",
+        "Thursday: 3:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 10:00 PM",
+        "Saturday: 12:00 PM – 10:00 PM",
+        "Sunday: 12:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1367,13 +1345,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 3:00 PM – 9:00 PM",
+        "Tuesday: 3:00 PM – 9:00 PM",
+        "Wednesday: 3:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 10:00 PM",
+        "Saturday: 10:00 AM – 10:00 PM",
+        "Sunday: 10:00 AM – 8:00 PM"
       ]
     }
   },
@@ -1404,20 +1382,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:30 PM – 8:30 PM",
+        "Tuesday: Closed",
+        "Wednesday: 4:30 PM – 8:30 PM",
+        "Thursday: 4:30 PM – 8:30 PM",
+        "Friday: 4:30 PM – 8:45 PM",
+        "Saturday: 4:30 PM – 8:45 PM",
+        "Sunday: 4:30 PM – 8:30 PM"
       ]
     }
   },
@@ -1687,13 +1664,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 3:00 PM – 9:00 PM",
+        "Tuesday: 3:00 PM – 9:00 PM",
+        "Wednesday: 3:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 10:00 PM",
+        "Saturday: 10:00 AM – 10:00 PM",
+        "Sunday: 10:00 AM – 8:00 PM"
       ]
     }
   },
@@ -1731,13 +1708,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 9:00 PM",
+        "Tuesday: 11:00 AM – 9:00 PM",
+        "Wednesday: 11:00 AM – 9:00 PM",
+        "Thursday: 11:00 AM – 9:00 PM",
+        "Friday: 11:00 AM – 9:00 PM",
+        "Saturday: 11:00 AM – 9:00 PM",
+        "Sunday: 11:00 AM – 9:00 PM"
       ]
     }
   },
@@ -1767,7 +1744,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -1775,13 +1751,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Saturday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Sunday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1811,7 +1787,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -1819,13 +1794,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Saturday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Sunday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1855,7 +1830,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -1863,13 +1837,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Saturday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Sunday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1899,7 +1873,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -1907,13 +1880,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Wednesday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Thursday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Friday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Saturday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM",
+        "Sunday: 12:00 PM – 3:00 PM, 4:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1944,20 +1917,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:30 AM – 9:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 11:30 AM – 9:00 PM",
+        "Thursday: 11:30 AM – 9:00 PM",
+        "Friday: 11:30 AM – 9:00 PM",
+        "Saturday: 11:30 AM – 9:00 PM",
+        "Sunday: 11:30 AM – 9:00 PM"
       ]
     }
   },
@@ -1986,22 +1958,20 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://clear-clinic.org",
     "hours": {
       "openDays": [
-        0,
         1,
         2,
         3,
         4,
-        5,
-        6
+        5
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 3:00 PM",
+        "Tuesday: 11:00 AM – 3:00 PM",
+        "Wednesday: 11:00 AM – 3:00 PM",
+        "Thursday: 11:00 AM – 3:00 PM",
+        "Friday: 11:00 AM – 3:00 PM",
+        "Saturday: Closed",
+        "Sunday: Closed"
       ]
     }
   },
@@ -2031,21 +2001,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 9:00 AM – 3:00 PM",
+        "Thursday: 9:00 AM – 3:00 PM",
+        "Friday: 9:00 AM – 3:00 PM",
+        "Saturday: 9:00 AM – 3:00 PM",
+        "Sunday: 9:00 AM – 3:00 PM"
       ]
     }
   },
@@ -2083,13 +2051,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 1:00 PM",
+        "Tuesday: 8:00 AM – 1:00 PM",
+        "Wednesday: 8:00 AM – 1:00 PM",
+        "Thursday: 8:00 AM – 1:00 PM",
+        "Friday: 8:00 AM – 2:00 PM",
+        "Saturday: 8:00 AM – 2:00 PM",
+        "Sunday: 9:00 AM – 2:00 PM"
       ]
     }
   },
@@ -2127,13 +2095,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 7:00 AM – 2:30 PM",
+        "Tuesday: 7:00 AM – 2:30 PM",
+        "Wednesday: 7:00 AM – 2:30 PM",
+        "Thursday: 7:00 AM – 2:30 PM",
+        "Friday: 7:00 AM – 2:30 PM",
+        "Saturday: 7:00 AM – 12:30 PM",
+        "Sunday: 7:00 AM – 12:30 PM"
       ]
     }
   },
@@ -2162,8 +2130,6 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.portlandstreetmedicine.org/",
     "hours": {
       "openDays": [
-        0,
-        1,
         2,
         3,
         4,
@@ -2171,13 +2137,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 11:00 AM – 6:00 PM",
+        "Wednesday: 11:00 AM – 6:00 PM",
+        "Thursday: 11:00 AM – 6:00 PM",
+        "Friday: 11:00 AM – 6:00 PM",
+        "Saturday: 11:00 AM – 6:00 PM",
+        "Sunday: Closed"
       ]
     }
   },
@@ -2215,13 +2181,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 1:00 PM – 9:00 PM",
+        "Tuesday: 1:00 PM – 9:00 PM",
+        "Wednesday: 1:00 PM – 9:00 PM",
+        "Thursday: 1:00 PM – 9:00 PM",
+        "Friday: 1:00 PM – 10:00 PM",
+        "Saturday: 1:00 PM – 10:00 PM",
+        "Sunday: 1:00 PM – 9:00 PM"
       ]
     }
   },
@@ -2251,21 +2217,18 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
-        3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 12:00 PM – 7:00 PM",
+        "Friday: 12:00 PM – 7:00 PM",
+        "Saturday: 9:30 AM – 3:00 PM",
+        "Sunday: 9:30 AM – 2:00 PM"
       ]
     }
   },
@@ -2296,20 +2259,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 6:00 PM – 12:00 AM",
+        "Tuesday: Closed",
+        "Wednesday: 6:00 PM – 12:00 AM",
+        "Thursday: 6:00 PM – 12:00 AM",
+        "Friday: 6:00 PM – 12:00 AM",
+        "Saturday: 6:00 PM – 12:00 AM",
+        "Sunday: 6:00 PM – 12:00 AM"
       ]
     }
   },
@@ -2340,20 +2302,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 6:00 PM – 12:00 AM",
+        "Tuesday: Closed",
+        "Wednesday: 6:00 PM – 12:00 AM",
+        "Thursday: 6:00 PM – 12:00 AM",
+        "Friday: 6:00 PM – 12:00 AM",
+        "Saturday: 6:00 PM – 12:00 AM",
+        "Sunday: 6:00 PM – 12:00 AM"
       ]
     }
   },
@@ -2383,21 +2344,19 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "hours": {
       "openDays": [
         0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 2:00 PM – 12:00 AM",
+        "Sunday: 4:00 PM – 8:00 PM"
       ]
     }
   },
@@ -2435,13 +2394,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 8:00 AM – 1:00 PM",
+        "Tuesday: 8:00 AM – 1:00 PM",
+        "Wednesday: 8:00 AM – 1:00 PM",
+        "Thursday: 8:00 AM – 1:00 PM",
+        "Friday: 8:00 AM – 2:00 PM",
+        "Saturday: 8:00 AM – 2:00 PM",
+        "Sunday: 9:00 AM – 2:00 PM"
       ]
     }
   },
@@ -2472,20 +2431,18 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
-        3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 3:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 11:00 AM – 3:00 PM",
+        "Friday: 11:00 AM – 3:00 PM",
+        "Saturday: 11:00 AM – 3:00 PM",
+        "Sunday: 11:00 AM – 3:00 PM"
       ]
     }
   },
@@ -2515,20 +2472,18 @@ window.RESTAURANTS = window.RESTAURANTS || [];
       "openDays": [
         0,
         1,
-        2,
-        3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 3:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: Closed",
+        "Thursday: 11:00 AM – 3:00 PM",
+        "Friday: 11:00 AM – 3:00 PM",
+        "Saturday: 11:00 AM – 3:00 PM",
+        "Sunday: 11:00 AM – 3:00 PM"
       ]
     }
   }

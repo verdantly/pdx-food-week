@@ -1,5 +1,10 @@
 import * as cheerio from 'cheerio';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Robustly decodes HTML entities (e.g. &amp;, &#39;, &rsquo;)
@@ -120,4 +125,65 @@ export function updateMetaTotalLocations(weekId, totalLocations, metaPath = null
   } catch (e) {
     console.warn(`  ⚠ Could not update js/meta.js for ${weekId}: ${e.message}`);
   }
+}
+
+/**
+ * Loads the places_cache.json map for operating hours lookup.
+ */
+export function loadPlacesCache(cachePath = null) {
+  const resolved = cachePath || path.resolve(__dirname, '../data/cache/places_cache.json');
+  if (fs.existsSync(resolved)) {
+    try {
+      return JSON.parse(fs.readFileSync(resolved, 'utf8'));
+    } catch (e) {
+      console.warn('  ⚠ Failed to parse places cache:', e.message);
+    }
+  }
+  return {};
+}
+
+/**
+ * Looks up accurate operating hours for a restaurant and address from cache or existing items.
+ * Avoids default fallback of generic 'Open'.
+ */
+export function lookupOperatingHours(restaurant, address, placesCache = null, existingMap = null) {
+  const norm = (s) => (s || '').trim().toLowerCase();
+  const cacheKey = (norm(restaurant) + '_' + norm(address)).trim();
+
+  // 1. Check placesCache direct match
+  if (placesCache && placesCache[cacheKey]) {
+    const h = placesCache[cacheKey];
+    if (h && h.weekdayDescriptions && !h.weekdayDescriptions.every(d => /: (Open|Closed)$/i.test(d.trim()))) {
+      return h;
+    }
+  }
+
+  // 2. Check placesCache fuzzy match by restaurant name
+  if (placesCache) {
+    const restClean = (restaurant || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    for (const [key, val] of Object.entries(placesCache)) {
+      const keyRest = key.split('_')[0].replace(/[^a-z0-9]/g, '');
+      if (keyRest && (keyRest === restClean || keyRest.includes(restClean) || restClean.includes(keyRest))) {
+        if (val && val.weekdayDescriptions && !val.weekdayDescriptions.every(d => /: (Open|Closed)$/i.test(d.trim()))) {
+          return val;
+        }
+      }
+    }
+  }
+
+  // 3. Check existingMap if available
+  if (existingMap) {
+    for (const [_, item] of existingMap.entries()) {
+      if (item && item.hours && item.hours.weekdayDescriptions) {
+        const itemRestClean = (item.restaurant || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const targetRestClean = (restaurant || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (itemRestClean === targetRestClean) {
+          const isHeuristic = item.hours.weekdayDescriptions.every(d => /: (Open|Closed)$/i.test(d.trim()));
+          if (!isHeuristic) return item.hours;
+        }
+      }
+    }
+  }
+
+  return undefined;
 }
