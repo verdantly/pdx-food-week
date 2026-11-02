@@ -5282,7 +5282,7 @@
     "weekdayDescriptions": [
       "Monday: 11:00 AM – 8:00 PM",
       "Tuesday: 11:00 AM – 8:00 PM",
-      "Wednesday: 11:00���AM – 8:00 PM",
+      "Wednesday: 11:00 AM – 8:00 PM",
       "Thursday: 11:00 AM – 8:00 PM",
       "Friday: 11:00 AM – 8:00 PM",
       "Saturday: 11:00 AM – 8:00 PM",
@@ -12821,7 +12821,7 @@
     "weekdayDescriptions": [
       "Monday: 11:00 AM – 8:00 PM",
       "Tuesday: 11:00 AM – 8:00 PM",
-      "Wednesday: 11:00���AM – 8:00 PM",
+      "Wednesday: 11:00 AM – 8:00 PM",
       "Thursday: 11:00 AM – 8:00 PM",
       "Friday: 11:00 AM – 8:00 PM",
       "Saturday: 11:00 AM – 8:00 PM",
@@ -18749,7 +18749,7 @@
     "weekdayDescriptions": [
       "Monday: 11:00 AM – 8:00 PM",
       "Tuesday: 11:00 AM – 8:00 PM",
-      "Wednesday: 11:00���AM – 8:00 PM",
+      "Wednesday: 11:00 AM – 8:00 PM",
       "Thursday: 11:00 AM – 8:00 PM",
       "Friday: 11:00 AM – 8:00 PM",
       "Saturday: 11:00 AM – 8:00 PM",
@@ -42646,6 +42646,503 @@
         "close": {
           "day": 0,
           "time": "2100"
+        }
+      }
+    ]
+  },
+  "gold dust meridian_3701 se hawthorne blvd, portland, or 97214": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 2:00 PM – 2:30 AM",
+      "Tuesday: 2:00 PM – 2:30 AM",
+      "Wednesday: 2:00 PM – 2:30 AM",
+      "Thursday: 2:00 PM – 2:30 AM",
+      "Friday: 2:00 PM – 2:30 AM",
+      "Saturday: 2:00 PM – 2:30 AM",
+      "Sunday: 2:00 PM – 2:30 AM"
+    ],
+    "periods": [
+      {
+        "close": {
+          "day": 1,
+          "time": "0230"
+        },
+        "open": {
+          "day": 0,
+          "time": "1400"
+        }
+      },
+      {
+        "close": {
+          "day": 2,
+          "time": "0230"
+        },
+        "open": {
+          "day": 1,
+          "time": "1400"
+        }
+      },
+      {
+        "close": {
+          "day": 3,
+          "time": "0230"
+        },
+        "open": {
+          "day": 2,
+          "time": "1400"
+        }
+      },
+      {
+        "close": {
+          "day": 4,
+          "time": "0230"
+        },
+        "open": {
+          "day": 3,
+          "time": "1400"
+        }
+      },
+      {
+        "close": {
+          "day": 5,
+          "time": "0230"
+        },
+        "open": {
+          "day": 4,
+          "time": "1400"
+        }
+      },
+      {
+        "close": {
+          "day": 6,
+          "time": "0230"
+        },
+        "open": {
+          "day": 5,
+          "time": "1400"
+        }
+      },
+      {
+        "close": {
+          "day": 0,
+          "time": "0230"
+        },
+        "open": {
+          "day": 6,
+          "time": "1400"
+        }
+      }
+    ]
+  },
+  "christina's cartel_8145 se 82nd ave, portland, or 97266": {
+    "openDays": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:00 AM – 8:00 PM",
+      "Tuesday: 11:00 AM – 8:00 PM",
+      "Wednesday: 11:00 AM – 8:00 PM",
+      "Thursday: 11:00 AM – 8:00 PM",
+      "Friday: 11:00 AM – 8:00 PM",
+      "Saturday: 11:00 AM – 8:00 PM",
+      "Sunday: Closed"
+    ],
+    "periods": [
+      {
+        "close": {
+          "day": 1,
+          "time": "2000"
+        },
+        "open": {
+          "day": 1,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 2,
+          "time": "2000"
+        },
+        "open": {
+          "day": 2,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 3,
+          "time": "2000"
+        },
+        "open": {
+          "day": 3,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 4,
+          "time": "2000"
+        },
+        "open": {
+          "day": 4,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 5,
+          "time": "2000"
+        },
+        "open": {
+          "day": 5,
+          "time": "1100"
+        }
+      },
+      {
+        "close": {
+          "day": 6,
+          "time": "2000"
+        },
+        "open": {
+          "day": 6,
+          "time": "1100"
+        }
+      }
+    ]
+  },
+  "bring! treats for dogs_3350 se division st, portland, or 97202": {
+    "openDays": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: 12:00 – 7:00 PM",
+      "Wednesday: 12:00 – 7:00 PM",
+      "Thursday: 12:00 – 7:00 PM",
+      "Friday: 12:00 – 7:00 PM",
+      "Saturday: 12:00 – 7:00 PM",
+      "Sunday: 12:00 – 5:00 PM"
+    ],
+    "periods": [
+      {
+        "open": {
+          "day": 2,
+          "time": "1200"
+        },
+        "close": {
+          "day": 2,
+          "time": "1900"
+        }
+      },
+      {
+        "open": {
+          "day": 3,
+          "time": "1200"
+        },
+        "close": {
+          "day": 3,
+          "time": "1900"
+        }
+      },
+      {
+        "open": {
+          "day": 4,
+          "time": "1200"
+        },
+        "close": {
+          "day": 4,
+          "time": "1900"
+        }
+      },
+      {
+        "open": {
+          "day": 5,
+          "time": "1200"
+        },
+        "close": {
+          "day": 5,
+          "time": "1900"
+        }
+      },
+      {
+        "open": {
+          "day": 6,
+          "time": "1200"
+        },
+        "close": {
+          "day": 6,
+          "time": "1900"
+        }
+      },
+      {
+        "open": {
+          "day": 0,
+          "time": "1200"
+        },
+        "close": {
+          "day": 0,
+          "time": "1700"
+        }
+      }
+    ]
+  },
+  "matt’s bbq tacos (great notion brewing)_2204 ne alberta st, portland, or 97211": {
+    "openDays": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: 11:00 AM – 9:00 PM",
+      "Tuesday: 11:00 AM – 9:00 PM",
+      "Wednesday: 11:00 AM – 9:00 PM",
+      "Thursday: 11:00 AM – 9:00 PM",
+      "Friday: 11:00 AM – 10:00 PM",
+      "Saturday: 10:00 AM – 10:00 PM",
+      "Sunday: 10:00 AM – 9:00 PM"
+    ],
+    "periods": [
+      {
+        "open": {
+          "day": 1,
+          "time": "1100"
+        },
+        "close": {
+          "day": 1,
+          "time": "2100"
+        }
+      },
+      {
+        "open": {
+          "day": 2,
+          "time": "1100"
+        },
+        "close": {
+          "day": 2,
+          "time": "2100"
+        }
+      },
+      {
+        "open": {
+          "day": 3,
+          "time": "1100"
+        },
+        "close": {
+          "day": 3,
+          "time": "2100"
+        }
+      },
+      {
+        "open": {
+          "day": 4,
+          "time": "1100"
+        },
+        "close": {
+          "day": 4,
+          "time": "2100"
+        }
+      },
+      {
+        "open": {
+          "day": 5,
+          "time": "1100"
+        },
+        "close": {
+          "day": 5,
+          "time": "2200"
+        }
+      },
+      {
+        "open": {
+          "day": 6,
+          "time": "1000"
+        },
+        "close": {
+          "day": 6,
+          "time": "2200"
+        }
+      },
+      {
+        "open": {
+          "day": 0,
+          "time": "1000"
+        },
+        "close": {
+          "day": 0,
+          "time": "2100"
+        }
+      }
+    ]
+  },
+  "mama's little meatball_7317 n alta ave, portland, or 97203": {
+    "openDays": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: 1:00 PM – 8:00 PM",
+      "Wednesday: 1:00 PM – 8:00 PM",
+      "Thursday: 1:00 PM – 8:00 PM",
+      "Friday: 1:00 PM – 8:00 PM",
+      "Saturday: 1:00 PM – 8:00 PM",
+      "Sunday: 4:00 PM – 8:00 PM"
+    ],
+    "periods": [
+      {
+        "open": {
+          "day": 2,
+          "time": "1300"
+        },
+        "close": {
+          "day": 2,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 3,
+          "time": "1300"
+        },
+        "close": {
+          "day": 3,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 4,
+          "time": "1300"
+        },
+        "close": {
+          "day": 4,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 5,
+          "time": "1300"
+        },
+        "close": {
+          "day": 5,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 6,
+          "time": "1300"
+        },
+        "close": {
+          "day": 6,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 0,
+          "time": "1600"
+        },
+        "close": {
+          "day": 0,
+          "time": "2000"
+        }
+      }
+    ]
+  },
+  "flourish plant-based kitchen_7317 n alta ave, portland, or 97203": {
+    "openDays": [
+      0,
+      3,
+      4,
+      5,
+      6
+    ],
+    "weekdayDescriptions": [
+      "Monday: Closed",
+      "Tuesday: Closed",
+      "Wednesday: 12:00 PM – 8:00 PM",
+      "Thursday: 12:00 PM – 8:00 PM",
+      "Friday: 12:00 PM – 9:00 PM",
+      "Saturday: 12:00 PM – 9:00 PM",
+      "Sunday: 12:00 PM – 8:00 PM"
+    ],
+    "periods": [
+      {
+        "open": {
+          "day": 3,
+          "time": "1200"
+        },
+        "close": {
+          "day": 3,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 4,
+          "time": "1200"
+        },
+        "close": {
+          "day": 4,
+          "time": "2000"
+        }
+      },
+      {
+        "open": {
+          "day": 5,
+          "time": "1200"
+        },
+        "close": {
+          "day": 5,
+          "time": "2100"
+        }
+      },
+      {
+        "open": {
+          "day": 6,
+          "time": "1200"
+        },
+        "close": {
+          "day": 6,
+          "time": "2100"
+        }
+      },
+      {
+        "open": {
+          "day": 0,
+          "time": "1200"
+        },
+        "close": {
+          "day": 0,
+          "time": "2000"
         }
       }
     ]

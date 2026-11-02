@@ -47,7 +47,13 @@ const NAME_MAP = {
   'migrationbrewingglisan': 'migrationbrewingglisan',
   'haymakerbar': 'haymaker',
   'thedustedcup': 'thedustedcupvegan',
-  'theeuropeanjobpdx': 'theeuropeanjob'
+  'theeuropeanjobpdx': 'theeuropeanjob',
+  'mamaslittlemeatball': 'mamaslittlemeatballvegan',
+  'bringtreatsfordogs': 'bringtreatsfordogsandbringbarkerypetboutiquefordogsonlyglutenfree',
+  'mattsbbqtacosgreatnotionbrewing': 'mattsbbqtacosgreatnotionbrewery',
+  'flourishplantbasedkitchen': 'flourishplantbasedkitchenveganglutenfree',
+  'grassawashington': 'grassaswwashington',
+  'grassahawthorne': 'grassasehawthorne'
 };
 
 const ADDRESS_OVERRIDES = {
@@ -218,6 +224,48 @@ const ADDRESS_OVERRIDES = {
     neighborhood: 'Richmond',
     lat: 45.5049814,
     lng: -122.6235704
+  },
+  "Mama's Little Meatball": {
+    address: '7317 N Alta Ave, Portland, OR 97203',
+    streetAddress: '7317 N Alta Ave',
+    neighborhood: 'St. Johns',
+    lat: 45.5874973,
+    lng: -122.7424
+  },
+  'Gold Dust Meridian': {
+    address: '3701 SE Hawthorne Blvd, Portland, OR 97214',
+    streetAddress: '3701 SE Hawthorne Blvd',
+    neighborhood: 'Hawthorne',
+    lat: 45.5122575,
+    lng: -122.6312632
+  },
+  'Matt’s BBQ Tacos (Great Notion Brewing)': {
+    address: '2204 NE Alberta St, Portland, OR 97211',
+    streetAddress: '2204 NE Alberta St',
+    neighborhood: 'Alberta Arts',
+    lat: 45.5588618,
+    lng: -122.6426498
+  },
+  'Flourish Plant-Based Kitchen': {
+    address: '7317 N Alta Ave, Portland, OR 97203',
+    streetAddress: '7317 N Alta Ave',
+    neighborhood: 'St. Johns',
+    lat: 45.5876091,
+    lng: -122.7423419
+  },
+  "Christina's Cartel": {
+    address: '8145 SE 82nd Ave, Portland, OR 97266',
+    streetAddress: '8145 SE 82nd Ave',
+    neighborhood: 'Lents',
+    lat: 45.4785209,
+    lng: -122.5673856
+  },
+  'Bring! Treats for Dogs': {
+    address: '3350 SE Division St, Portland, OR 97202',
+    streetAddress: '3350 SE Division St',
+    neighborhood: 'Richmond',
+    lat: 45.5053271,
+    lng: -122.6279751
   }
 };
 
@@ -505,6 +553,56 @@ const DISH_OVERRIDES = {
     veganOption: false,
     glutenFree: false,
     emoji: '🥓'
+  },
+  "Mama's Little Meatball": {
+    dish: 'Vegan Nut-Free Pesto Mac with Sausage Crumbles',
+    type: 'vegan',
+    vegOption: true,
+    veganOption: true,
+    glutenFree: false,
+    emoji: '🌱'
+  },
+  'Gold Dust Meridian': {
+    dish: 'Chili Crisp Chicken Mac',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🍗'
+  },
+  'Matt’s BBQ Tacos (Great Notion Brewing)': {
+    dish: 'Queso Mac and Cheese with Brisket Burnt Ends or Supremo Beef',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    emoji: '🌮'
+  },
+  'Flourish Plant-Based Kitchen': {
+    dish: 'Three Cheese Mac',
+    type: 'vegan',
+    vegOption: true,
+    veganOption: true,
+    glutenFree: true,
+    emoji: '🌱'
+  },
+  "Christina's Cartel": {
+    dish: 'Trash Mac',
+    type: 'meat',
+    vegOption: false,
+    veganOption: false,
+    glutenFree: false,
+    spicy: true,
+    emoji: '🥓'
+  },
+  'Bring! Treats for Dogs': {
+    dish: 'Doggy Butternut Squash Macaroni & Cheese (For Dogs)',
+    type: 'vegetarian',
+    vegOption: true,
+    veganOption: false,
+    glutenFree: true,
+    emoji: '🐶'
   }
 };
 
@@ -545,17 +643,31 @@ async function scrape() {
   console.log(`Parsed ${Object.keys(squarespaceMap).length} items from Squarespace page.`);
 
   const $kml = cheerio.load(kmlText, { xmlMode: true });
-  const existingMap = loadExistingData(OUTPUT_PATH);
+  let existingItems = [];
+  if (fs.existsSync(OUTPUT_PATH)) {
+    try {
+      const existingContent = fs.readFileSync(OUTPUT_PATH, 'utf8');
+      const jsonMatch = existingContent.match(/const newItems = (\[[\s\S]*?\]);/);
+      if (jsonMatch) {
+        existingItems = JSON.parse(jsonMatch[1]);
+      }
+    } catch (e) {
+      console.warn(`Could not parse existing items: ${e.message}`);
+    }
+  }
+
+  const existingByCleanName = new Map();
   const existingRestaurants = new Set();
-  for (const item of existingMap.values()) {
+  for (const item of existingItems) {
     if (item && item.restaurant) {
       existingRestaurants.add(item.restaurant.toLowerCase().trim());
+      existingByCleanName.set(normalizeName(item.restaurant), item);
     }
   }
 
   const entries = [];
   const processedKeys = new Set();
-  let counter = 1;
+  let nextNewId = existingItems.reduce((max, item) => Math.max(max, item.id || 0), 0) + 1;
 
   const placemarks = $kml('Placemark').toArray();
   console.log(`Found ${placemarks.length} Placemarks in KML map.`);
@@ -591,6 +703,10 @@ async function scrape() {
     if (sqKey) {
       processedKeys.add(sqKey);
       processedKeys.add(cleanKey);
+    }
+    for (const [k, v] of Object.entries(NAME_MAP)) {
+      if (cleanKey === k && squarespaceMap[v]) processedKeys.add(v);
+      if (cleanKey === v && squarespaceMap[k]) processedKeys.add(k);
     }
 
     let image = (sqItem && sqItem.image) || '';
@@ -708,13 +824,17 @@ async function scrape() {
     } else if (type === 'vegan') emoji = '🌱';
     else if (type === 'vegetarian') emoji = '🌿';
 
-    const isNew = existingRestaurants.size > 0 && !existingRestaurants.has(name.toLowerCase().trim());
+    const existingMatch = existingByCleanName.get(cleanKey) || (cleanKey === 'theeuropeanjob' ? existingByCleanName.get('theeuropeanjobpdx') : null);
+    const id = existingMatch ? existingMatch.id : nextNewId++;
+    const isNew = !existingMatch;
+    const hours = existingMatch && existingMatch.hours ? existingMatch.hours : undefined;
+    const finalRestaurantName = existingMatch ? existingMatch.restaurant : name;
 
     entries.push({
-      id: counter,
+      id,
       weekId: 'mac-and-cheese-2026',
       dish,
-      restaurant: name,
+      restaurant: finalRestaurantName,
       neighborhood: neighborhood || 'Portland',
       address,
       lat,
@@ -730,11 +850,25 @@ async function scrape() {
       emoji,
       image,
       url: LOCATIONS_URL,
-      ...(isNew ? { isNew: true } : {})
+      ...(isNew ? { isNew: true } : {}),
+      ...(hours ? { hours } : {})
     });
-
-    counter++;
   }
+
+  // Preserve any existing entries not found in KML (such as DesiPDX)
+  const entriesCleanNames = new Set(entries.map(e => normalizeName(e.restaurant)));
+  for (const item of existingItems) {
+    const cName = normalizeName(item.restaurant);
+    if (!entriesCleanNames.has(cName)) {
+      console.log(`Preserving existing entry not present in KML: "${item.restaurant}" (ID: ${item.id})`);
+      entries.push(item);
+      entriesCleanNames.add(cName);
+      if (item.restaurant) processedKeys.add(cName);
+    }
+  }
+
+  // Sort entries by ID for consistent ordering
+  entries.sort((a, b) => a.id - b.id);
 
   for (const [sqKey, sqItem] of Object.entries(squarespaceMap)) {
     if (!processedKeys.has(sqKey)) {

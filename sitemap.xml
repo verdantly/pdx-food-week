@@ -586,6 +586,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.pdxfoodweek.com/neighborhoods/alberta-arts.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.pdxfoodweek.com/neighborhoods/lents.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -2127,6 +2132,36 @@
   </url>
   <url>
     <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-32.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-33.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-34.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-35.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-36.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-37.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pdxfoodweek.com/d/mac-and-cheese-2026-38.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
