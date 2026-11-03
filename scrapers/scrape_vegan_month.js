@@ -634,9 +634,6 @@ export async function scrape() {
                      kmlImages.get(def.bizKey.toLowerCase());
       if (kmlImg) image = kmlImg;
     }
-    if (!image && def.bizKey === 'feral') {
-      image = 'https://veganizerpdx.com/world-vegan-month/images/feral-2025.jpg';
-    }
 
     const combinedText = `${rawDish} ${rawDesc} ${rawSpecialText}`.toLowerCase();
     const isGlutenFree = combinedText.includes('gluten free') ||
