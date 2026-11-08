@@ -357,6 +357,42 @@ window.UPCOMING_FOOD_WEEKS = [
     ]
   },
   {
+    id: "zero-proof-2027",
+    name: "Zero Proof Week 2027",
+    organizer: "Portland Mercury",
+    dates: "January 11–17, 2027",
+    startDate: "2027-01-11",
+    endDate: "2027-01-17",
+    pricePills: ["$10 mocktails"],
+    color: "#00897B",
+    colorDark: "#004D40",
+    colorLight: "#B2DFDB",
+    colorPale: "#E0F2F1",
+    emoji: "🍹",
+    url: "https://everout.com/portland/events/the-portland-mercurys-zero-proof-week-2027/e257673/",
+    aboutTitle: "What is Portland Zero Proof Week 2027?",
+    aboutText: "Portland Zero Proof Week is the Portland Mercury's annual celebration of craft non-alcoholic beverages. Participating bars, lounges, and restaurants across Portland shake, stir, and pour inventive, high-flavor zero-proof cocktails and mocktails for just $10.",
+    description: "Portland Zero Proof Week 2027 guide: Dates (January 11–17, 2027), $10 non-alcoholic craft cocktails, participating Portland bars and restaurants, and interactive crawl planning.",
+    faqs: [
+      {
+        question: "When is Portland Zero Proof Week 2027?",
+        answer: "Portland Zero Proof Week 2027 takes place January 11–17, 2027 at participating bars and restaurants throughout Portland, Oregon."
+      },
+      {
+        question: "Who organizes Portland Zero Proof Week?",
+        answer: "Zero Proof Week is organized and presented by the Portland Mercury and EverOut Portland."
+      },
+      {
+        question: "How much are drinks during Zero Proof Week 2027?",
+        answer: "Participating locations offer special, handcrafted zero-proof cocktails priced at $10 each."
+      },
+      {
+        question: "Are drinks completely non-alcoholic?",
+        answer: "Yes! Zero Proof Week celebrates alcohol-free mixology, highlighting innovative dealcoholized spirits, botanicals, housemade shrubs, and premium alcohol-free creations."
+      }
+    ]
+  },
+  {
     id: "wiener-2027",
     name: "Wiener Week 2027",
     organizer: "Portland Mercury",
