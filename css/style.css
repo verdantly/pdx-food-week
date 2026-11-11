@@ -829,7 +829,8 @@ body[data-theme="dark"] .dish-card.bookmarked {
 }
 
 .dish-price-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
@@ -838,7 +839,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
   padding: 3px 8px;
   border-radius: 20px;
   margin-left: 6px;
-  vertical-align: middle;
+  vertical-align: 0.12em;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1;
@@ -850,6 +851,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
   padding: 4px 10px;
   border-radius: 20px;
   margin-left: 8px;
+  vertical-align: 0.16em;
   white-space: normal;
 }
 
