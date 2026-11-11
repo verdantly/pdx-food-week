@@ -11,6 +11,21 @@ export function hasVeganOptionInDesc(r) {
     txt.includes('vegan available');
 }
 
+export function formatCompactPrice(price) {
+  if (!price) return '';
+  const dollars = price.match(/\$\d+(?:\.\d{2})?/g);
+  if (dollars && dollars.length > 1) {
+    const first = dollars[0];
+    const last = dollars[dollars.length - 1];
+    return (first === last) ? first : `${first}–${last}`;
+  }
+  if (price.includes('·') || price.includes('/') || price.includes(',')) {
+    const firstMatch = price.match(/\$\d+(?:\.\d{2})?/);
+    if (firstMatch) return firstMatch[0];
+  }
+  return price;
+}
+
 export function buildTags(r) {
   const weekMeta = typeof window !== 'undefined' && typeof window.getWeekMeta === 'function'
     ? window.getWeekMeta(State.currentWeekId)
@@ -145,13 +160,17 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
     ? `App.handleCrawlCardClick(${r.id})`
     : (isBulkEditMode ? `App.toggleBulkEditItem(${r.id})` : `App.openDetail(${r.id})`);
 
+  const priceBadge = r.price
+    ? ` <span class="dish-price-badge">${esc(formatCompactPrice(r.price))}</span>`
+    : '';
+
   return `
     <div class="${cls}" data-id="${r.id}" onclick="${cardClickAction}" ${isRankingMode ? 'draggable="true"' : ''}>
       ${dragHandleHtml}
       ${crawlBadgeHtml}
       ${thumb}
       <div class="card-body">
-        <div class="card-dish">${highlightMatch(r.dish, q)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+        <div class="card-dish">${highlightMatch(r.dish, q)}${priceBadge}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
         <div class="card-restaurant">${highlightMatch(r.restaurant, q)}${dist}</div>
         <div class="card-neighborhood">📍 ${highlightMatch(locationText, q)}</div>
         <div class="card-desc">${esc(r.desc)}</div>

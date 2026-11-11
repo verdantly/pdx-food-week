@@ -2,7 +2,7 @@
 import { State, saveState, isDishSaved, isDishPassed, passDish, getDishKey, isDishViewedNew, markDishViewedNew } from './state.js';
 import { esc, showToast } from './utils.js';
 import { getRestaurants, updateBrowseBadge } from './data.js';
-import { buildTags } from './cards.js';
+import { buildTags, formatCompactPrice } from './cards.js';
 import { openDetail } from './ui.js';
 
 export function buildSwipeQueue() {
@@ -97,10 +97,14 @@ export function renderSwipe() {
       : null;
     const locationText = (weekMeta && weekMeta.preferStreetAddress) ? item.address : (item.neighborhood || item.address);
 
+    const priceBadge = item.price
+      ? ` <span class="dish-price-badge">${esc(formatCompactPrice(item.price))}</span>`
+      : '';
+
     cardEl.innerHTML = `
       <div class="swipe-card-image">${imageBlock}</div>
       <div class="swipe-card-body">
-        <div class="swipe-card-dish">${esc(item.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+        <div class="swipe-card-dish">${esc(item.dish)}${priceBadge}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
         <div class="swipe-card-restaurant">${esc(item.restaurant)}</div>
         <div class="swipe-card-neighborhood">📍 ${esc(locationText)}</div>
         <div class="swipe-card-desc">${esc(item.desc)}</div>

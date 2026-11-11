@@ -828,6 +828,39 @@ body[data-theme="dark"] .dish-card.bookmarked {
   line-height: 1;
 }
 
+.dish-price-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: #92400E;
+  background: #FEF3C7;
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-left: 6px;
+  vertical-align: 3px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sheet-price-badge {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: 4px;
+  white-space: normal;
+}
+
+[data-theme="dark"] .dish-price-badge {
+  background: rgba(217, 145, 32, 0.22) !important;
+  color: #FCD34D !important;
+  border: 1px solid rgba(217, 145, 32, 0.35) !important;
+}
+
 .card-restaurant {
   font-size: 12px;
   color: var(--pizza-dark);
@@ -926,6 +959,13 @@ body[data-theme="dark"] .friend-avatar {
   color: #185FA5;
 }
 
+.tag-price {
+  background: #FEF3C7;
+  color: #92400E;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 [data-theme="dark"] .tag-meat {
   background: rgba(224, 83, 50, 0.18) !important;
   color: #FFA085 !important;
@@ -966,6 +1006,12 @@ body[data-theme="dark"] .friend-avatar {
   background: rgba(224, 83, 50, 0.18) !important;
   color: #FFA085 !important;
   border: 1px solid rgba(224, 83, 50, 0.3) !important;
+}
+
+[data-theme="dark"] .tag-price {
+  background: rgba(217, 145, 32, 0.22) !important;
+  color: #FCD34D !important;
+  border: 1px solid rgba(217, 145, 32, 0.35) !important;
 }
 
 .bookmark-btn {

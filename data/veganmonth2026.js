@@ -32,7 +32,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 1,
     "weekId": "world-vegan-month-2026",
-    "dish": "Parisian Gnocchi $22",
+    "dish": "Parisian Gnocchi",
+    "price": "$22",
     "restaurant": "Adelleda",
     "neighborhood": "Kerns",
     "address": "103 NE Grand Ave, Portland, OR 97232",
@@ -76,7 +77,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 2,
     "weekId": "world-vegan-month-2026",
-    "dish": "48 Smash $18",
+    "dish": "48 Smash",
+    "price": "$18",
     "restaurant": "Black Water",
     "neighborhood": "Hollywood",
     "address": "5115 NE Sandy Blvd, Portland, OR 97213",
@@ -120,7 +122,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 3,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pdx Municipal Waste $21",
+    "dish": "Pdx Municipal Waste",
+    "price": "$21",
     "restaurant": "Boxcar Pizza",
     "neighborhood": "Kerns",
     "address": "2701 NE Sandy Blvd, Portland, OR 97232",
@@ -280,7 +283,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 5,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pumpkin Spice Swedish Kreme $8",
+    "dish": "Pumpkin Spice Swedish Kreme",
+    "price": "$8",
     "restaurant": "Carina's Bakery",
     "neighborhood": "Beaverton",
     "address": "4725 SW Lombard Ave #108, Beaverton, OR 97005",
@@ -324,7 +328,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 6,
     "weekId": "world-vegan-month-2026",
-    "dish": "Thanksgiving Smórgåstårta $10 Slice",
+    "dish": "Thanksgiving Smörgåstårta",
+    "price": "$10 / slice",
     "restaurant": "Carina's Bakery",
     "neighborhood": "Beaverton",
     "address": "4725 SW Lombard Ave #108, Beaverton, OR 97005",
@@ -368,7 +373,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 7,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pumpkin Chai Loaf $7",
+    "dish": "Pumpkin Chai Loaf",
+    "price": "$7",
     "restaurant": "Catscratch Co-op Bakery",
     "neighborhood": "Sullivan's Gulch",
     "address": "2816 NE Halsey St, Portland, OR 97232",
@@ -409,7 +415,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 8,
     "weekId": "world-vegan-month-2026",
-    "dish": "Sweet Potato Latte $7",
+    "dish": "Sweet Potato Latte",
+    "price": "$7",
     "restaurant": "Catscratch Co-op Bakery",
     "neighborhood": "Sullivan's Gulch",
     "address": "2816 NE Halsey St, Portland, OR 97232",
@@ -450,7 +457,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 9,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pumpkin Spice Pancakes, Stack $13, Combo $16",
+    "dish": "Pumpkin Spice Pancakes",
+    "price": "$13 stack · $16 combo",
     "restaurant": "Cooper's Co-op Cafe",
     "neighborhood": "Buckman",
     "address": "2420 SE Belmont St, Portland, OR 97214",
@@ -494,7 +502,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 10,
     "weekId": "world-vegan-month-2026",
-    "dish": "Seasonal Cheesecake $7.50 Slice",
+    "dish": "Seasonal Cheesecake",
+    "price": "$7.50 / slice",
     "restaurant": "Cultured Kindness",
     "neighborhood": "Buckman",
     "address": "1217 SE Stark St, Portland, OR 97214",
@@ -536,7 +545,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 11,
     "weekId": "world-vegan-month-2026",
-    "dish": "Nachos $10",
+    "dish": "Nachos",
+    "price": "$10",
     "restaurant": "Cultured Kindness",
     "neighborhood": "Buckman",
     "address": "1217 SE Stark St, Portland, OR 97214",
@@ -578,7 +588,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 12,
     "weekId": "world-vegan-month-2026",
-    "dish": "Dinger's Pastramo Reuben $17",
+    "dish": "Dinger's Pastramo Reuben",
+    "price": "$17",
     "restaurant": "Dinger's Deli at Wayfinder Beer",
     "neighborhood": "Central Eastside",
     "address": "304 SE 2nd Ave, Portland, OR 97214",
@@ -622,7 +633,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 13,
     "weekId": "world-vegan-month-2026",
-    "dish": "Curried Butternut Squash Fritter $4.25",
+    "dish": "Curried Butternut Squash Fritter",
+    "price": "$4.25",
     "restaurant": "Doe Donuts + Ice Cream",
     "neighborhood": "Hollywood",
     "address": "4110 NE Sandy Blvd, Portland, OR 97212",
@@ -666,7 +678,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 14,
     "weekId": "world-vegan-month-2026",
-    "dish": "House-Made Pumpkin Cold Coffee $5",
+    "dish": "House-Made Pumpkin Cold Coffee",
+    "price": "$5",
     "restaurant": "Doe Donuts + Ice Cream",
     "neighborhood": "Hollywood",
     "address": "4110 NE Sandy Blvd, Portland, OR 97212",
@@ -711,6 +724,7 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "id": 15,
     "weekId": "world-vegan-month-2026",
     "dish": "Autumn Benedict",
+    "price": "$11–$22",
     "restaurant": "Epif",
     "neighborhood": "Kerns",
     "address": "404 NE 28th Ave, Portland, OR 97232",
@@ -751,7 +765,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 16,
     "weekId": "world-vegan-month-2026",
-    "dish": "Big Warm Hug $9",
+    "dish": "Big Warm Hug",
+    "price": "$9",
     "restaurant": "Exquisite Creatures",
     "neighborhood": "Central Eastside",
     "address": "537 SE Ash St #108, Portland, OR 97214",
@@ -795,7 +810,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 17,
     "weekId": "world-vegan-month-2026",
-    "dish": "Filet O' Tofu Tft $16",
+    "dish": "Filet O' Tofu TFT",
+    "price": "$16",
     "restaurant": "Feral",
     "neighborhood": "Vernon",
     "address": "1640 NE Killingsworth St, Portland, OR 97211",
@@ -836,7 +852,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 18,
     "weekId": "world-vegan-month-2026",
-    "dish": "Fig Wasp $15",
+    "dish": "Fig Wasp",
+    "price": "$15",
     "restaurant": "Feral",
     "neighborhood": "Vernon",
     "address": "1640 NE Killingsworth St, Portland, OR 97211",
@@ -921,7 +938,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 20,
     "weekId": "world-vegan-month-2026",
-    "dish": "Watermelon Margarita $13",
+    "dish": "Watermelon Margarita",
+    "price": "$13",
     "restaurant": "Fortune",
     "neighborhood": "Downtown",
     "address": "614 SW 11th Ave, Portland, OR 97205",
@@ -965,7 +983,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 21,
     "weekId": "world-vegan-month-2026",
-    "dish": "Creamy Porcini Mushroom Pasta $16",
+    "dish": "Creamy Porcini Mushroom Pasta",
+    "price": "$16",
     "restaurant": "Harlow (Division)",
     "neighborhood": "Richmond",
     "address": "3715 SE Division St, Portland, OR 97202",
@@ -1009,7 +1028,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 22,
     "weekId": "world-vegan-month-2026",
-    "dish": "Creamy Porcini Mushroom Pasta $16",
+    "dish": "Creamy Porcini Mushroom Pasta",
+    "price": "$16",
     "restaurant": "Harlow (NW 23rd)",
     "neighborhood": "Nob Hill",
     "address": "505 NW 23rd Ave, Portland, OR 97210",
@@ -1053,7 +1073,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 23,
     "weekId": "world-vegan-month-2026",
-    "dish": "Masa Cookie Ice Cream Sandwich $9",
+    "dish": "Masa Cookie Ice Cream Sandwich",
+    "price": "$9",
     "restaurant": "Ice Queen",
     "neighborhood": "Hosford-Abernethy",
     "address": "2012 SE 11th Ave, Portland, OR 97214",
@@ -1096,7 +1117,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 24,
     "weekId": "world-vegan-month-2026",
-    "dish": "Guabao Wing $10",
+    "dish": "Guabao Wing",
+    "price": "$10",
     "restaurant": "Jade Rabbit",
     "neighborhood": "Hawthorne",
     "address": "3632 SE Hawthorne Blvd, Portland, OR 97214",
@@ -1140,7 +1162,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 25,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pickled Apple And Feta Burger $16",
+    "dish": "Pickled Apple And Feta Burger",
+    "price": "$16",
     "restaurant": "JUNE",
     "neighborhood": "Beaverton",
     "address": "4589 SW Watson Ave #110, Beaverton, OR 97005",
@@ -1183,7 +1206,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 26,
     "weekId": "world-vegan-month-2026",
-    "dish": "The Dapper Apple $15",
+    "dish": "The Dapper Apple",
+    "price": "$15",
     "restaurant": "JUNE",
     "neighborhood": "Beaverton",
     "address": "4589 SW Watson Ave #110, Beaverton, OR 97005",
@@ -1226,7 +1250,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 27,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pumpkin Pie Sundae  $10",
+    "dish": "Pumpkin Pie Sundae",
+    "price": "$10",
     "restaurant": "Kate's Ice Cream (Mississippi)",
     "neighborhood": "Boise",
     "address": "3713 N Mississippi Ave, Portland, OR 97227",
@@ -1270,7 +1295,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 28,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pumpkin Pie Sundae  $10",
+    "dish": "Pumpkin Pie Sundae",
+    "price": "$10",
     "restaurant": "Kate's Ice Cream (NW 23rd)",
     "neighborhood": "Nob Hill",
     "address": "1430 NW 23rd Ave, Portland, OR 97210",
@@ -1314,7 +1340,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 29,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pumpkin Tres Leches $12",
+    "dish": "Pumpkin Tres Leches",
+    "price": "$12",
     "restaurant": "La Casa de Mamá",
     "neighborhood": "Vernon",
     "address": "1670 NE Killingsworth St, Portland, OR 97211",
@@ -1358,7 +1385,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 30,
     "weekId": "world-vegan-month-2026",
-    "dish": "Vegan Butter Chicken $22",
+    "dish": "Vegan Butter Chicken",
+    "price": "$22",
     "restaurant": "Maruti Indian Restaurant",
     "neighborhood": "Buckman",
     "address": "1925 SE Hawthorne Blvd, Portland, OR 97214",
@@ -1401,7 +1429,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 31,
     "weekId": "world-vegan-month-2026",
-    "dish": "Chicken Mulligatawny $15",
+    "dish": "Chicken Mulligatawny",
+    "price": "$15",
     "restaurant": "Mirisata",
     "neighborhood": "Buckman",
     "address": "2420 SE Belmont St, Portland, OR 97214",
@@ -1517,7 +1546,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 32,
     "weekId": "world-vegan-month-2026",
-    "dish": "Hibiscus-Ginger Warmer  $14",
+    "dish": "Hibiscus-Ginger Warmer",
+    "price": "$14",
     "restaurant": "Mirisata",
     "neighborhood": "Buckman",
     "address": "2420 SE Belmont St, Portland, OR 97214",
@@ -1633,7 +1663,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 33,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pozole Verde De Pollo $16",
+    "dish": "Pozole Verde De Pollo",
+    "price": "$16",
     "restaurant": "Mis Tacones",
     "neighborhood": "Vernon",
     "address": "1670 NE Killingsworth St, Portland, OR 97211",
@@ -1677,7 +1708,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 34,
     "weekId": "world-vegan-month-2026",
-    "dish": "Stay Gold Sundae $11",
+    "dish": "Stay Gold Sundae",
+    "price": "$11",
     "restaurant": "Nate's Oatmeal Cookies",
     "neighborhood": "Sunnyside",
     "address": "3308 SE Belmont St, Portland, OR 97214",
@@ -1721,7 +1753,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 35,
     "weekId": "world-vegan-month-2026",
-    "dish": "Crispy Coconut Rice $10",
+    "dish": "Crispy Coconut Rice",
+    "price": "$10",
     "restaurant": "Norah (Belmont)",
     "neighborhood": "Sunnyside",
     "address": "3801 SE Belmont St, Portland, OR 97214",
@@ -1764,7 +1797,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 36,
     "weekId": "world-vegan-month-2026",
-    "dish": "Kabocha Bread Pudding (dessert) $9",
+    "dish": "Kabocha Bread Pudding",
+    "price": "$9",
     "restaurant": "Norah (Belmont)",
     "neighborhood": "Sunnyside",
     "address": "3801 SE Belmont St, Portland, OR 97214",
@@ -1807,7 +1841,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 37,
     "weekId": "world-vegan-month-2026",
-    "dish": "Crispy Coconut Rice $10",
+    "dish": "Crispy Coconut Rice",
+    "price": "$10",
     "restaurant": "Norah (Alberta)",
     "neighborhood": "Alberta Arts",
     "address": "1451 NE Alberta St, Portland, OR 97211",
@@ -1850,7 +1885,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 38,
     "weekId": "world-vegan-month-2026",
-    "dish": "Kabocha Bread Pudding (dessert) $9",
+    "dish": "Kabocha Bread Pudding",
+    "price": "$9",
     "restaurant": "Norah (Alberta)",
     "neighborhood": "Alberta Arts",
     "address": "1451 NE Alberta St, Portland, OR 97211",
@@ -1893,7 +1929,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 39,
     "weekId": "world-vegan-month-2026",
-    "dish": "Wild Mushroom Bo-Gyoza $12",
+    "dish": "Wild Mushroom Bo-Gyoza",
+    "price": "$12",
     "restaurant": "Obon Shokudo",
     "neighborhood": "Central Eastside",
     "address": "720 SE Grand Ave, Portland, OR 97214",
@@ -1936,7 +1973,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 40,
     "weekId": "world-vegan-month-2026",
-    "dish": "The Auto-Reply Arancini Pesto $15",
+    "dish": "The Auto-Reply Arancini Pesto",
+    "price": "$15",
     "restaurant": "Office Lunch at Olympic Mills",
     "neighborhood": "Central Eastside",
     "address": "107 SE Washington St, Portland, OR 97214",
@@ -1978,7 +2016,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 41,
     "weekId": "world-vegan-month-2026",
-    "dish": "Apple Cider Madeleine, $3.75 For One, $7 For Two",
+    "dish": "Apple Cider Madeleine",
+    "price": "$3.75 · 2 for $7",
     "restaurant": "Orange & Blossom",
     "neighborhood": "Vernon",
     "address": "1612 NE Killingsworth St, Portland, OR 97211",
@@ -2108,7 +2147,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 44,
     "weekId": "world-vegan-month-2026",
-    "dish": "Pastrami Dog $14",
+    "dish": "Pastrami Dog",
+    "price": "$14",
     "restaurant": "Rad Magic Subs",
     "neighborhood": "Creston-Kenilworth",
     "address": "2824 SE Gladstone St, Portland, OR 97202",
@@ -2150,7 +2190,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 45,
     "weekId": "world-vegan-month-2026",
-    "dish": "Diligent Don (sloppy Joe's More Mature Older Brother) $11",
+    "dish": "Diligent Don",
+    "price": "$11",
     "restaurant": "Secret Pizza Society",
     "neighborhood": "Montavilla",
     "address": "7201 NE Glisan St, Portland, OR 97213",
@@ -2194,7 +2235,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 46,
     "weekId": "world-vegan-month-2026",
-    "dish": "Hot Honey Chick'n (biscuit $12, Sandwich $14)",
+    "dish": "Hot Honey Chick'n",
+    "price": "$12 biscuit · $14 sandwich",
     "restaurant": "The Wagon",
     "neighborhood": "Multnomah Village",
     "address": "3518 SW Multnomah Blvd, Portland, OR 97219",
@@ -2235,7 +2277,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 47,
     "weekId": "world-vegan-month-2026",
-    "dish": "Sonoran Patty Enchiladas $13",
+    "dish": "Sonoran Patty Enchiladas",
+    "price": "$13",
     "restaurant": "Theoberto's at Swan Dive",
     "neighborhood": "Central Eastside",
     "address": "727 SE Grand Ave, Portland, OR 97214",
@@ -2278,7 +2321,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 48,
     "weekId": "world-vegan-month-2026",
-    "dish": "Hibiscus Margarita $12",
+    "dish": "Hibiscus Margarita",
+    "price": "$12",
     "restaurant": "Theoberto's at Swan Dive",
     "neighborhood": "Central Eastside",
     "address": "727 SE Grand Ave, Portland, OR 97214",
@@ -2321,7 +2365,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 49,
     "weekId": "world-vegan-month-2026",
-    "dish": "Kabocha Frangipane Tart $14",
+    "dish": "Kabocha Frangipane Tart",
+    "price": "$14",
     "restaurant": "Verdure at Malpractice",
     "neighborhood": "Central Eastside",
     "address": "77 SE Yamhill St, Portland, OR 97214",
@@ -2363,7 +2408,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 50,
     "weekId": "world-vegan-month-2026",
-    "dish": "Caramelized Leek Focaccia $8",
+    "dish": "Caramelized Leek Focaccia",
+    "price": "$8",
     "restaurant": "Verdure at Exquisite Creatures",
     "neighborhood": "Central Eastside",
     "address": "537 SE Ash St #108, Portland, OR 97214",
@@ -2407,7 +2453,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 51,
     "weekId": "world-vegan-month-2026",
-    "dish": "Seasonal Cheese At Vtopian And Farmers Markets $14",
+    "dish": "Seasonal Cheese: Cranberry Brie",
+    "price": "$14",
     "restaurant": "Vtopian Artisan Cheeses",
     "neighborhood": "Kerns",
     "address": "103 NE Grand Ave, Portland, OR 97232",
@@ -2449,7 +2496,8 @@ window.RESTAURANTS = window.RESTAURANTS || [];
   {
     "id": 52,
     "weekId": "world-vegan-month-2026",
-    "dish": "Likely Ivy Buttered Rum Banana Cupcake $3.25",
+    "dish": "Likely Ivy Buttered Rum Banana Cupcake",
+    "price": "$3.25",
     "restaurant": "Vtopian Artisan Cheeses",
     "neighborhood": "Kerns",
     "address": "103 NE Grand Ave, Portland, OR 97232",

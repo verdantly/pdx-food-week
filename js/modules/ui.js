@@ -238,7 +238,7 @@ export function openDetail(id, fromPopState = false) {
     </div>
     <div class="sheet-handle"></div>
     ${hero}
-    <div class="sheet-dish">${esc(r.dish)}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+    <div class="sheet-dish">${esc(r.dish)}${r.price ? ` <span class="dish-price-badge sheet-price-badge">${esc(r.price)}</span>` : ''}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
     <div class="sheet-restaurant">
       ${r.restaurantUrl ? `<a href="${esc(safeUrl(r.restaurantUrl))}" target="_blank" rel="noopener" class="venue-link sheet-link-grid" style="color: inherit;"><span class="link-text">${esc(r.restaurant)}</span><span class="link-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></span></a>` : esc(r.restaurant)}
     </div>
