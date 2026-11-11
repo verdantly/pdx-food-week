@@ -457,7 +457,7 @@ export function renderHeader() {
     const label = week.organizer || 'EverOut';
     dataSrcHtml = `<a href="${esc(week.url)}" target="_blank" rel="noopener">${esc(label)}</a>`;
   }
-  const footers = document.querySelectorAll('.sidebar-footer, .view-footer');
+  const footers = document.querySelectorAll('.sidebar-footer, .view-footer, .more-footer-meta');
   footers.forEach(el => {
     el.innerHTML = `PDX Food Week<br><a href="#" class="install-app-link" onclick="App.triggerPwaInstall(event)">Install App</a> &nbsp;&bull;&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;&bull;&nbsp; <a href="terms.html">Terms of Use</a><br>Data from ${dataSrcHtml}.<br>Not affiliated with either.<br>Created by <a href="https://github.com/verdantly" target="_blank" rel="noopener">@verdantly</a> &amp; <a href="https://github.com/oberonix" target="_blank" rel="noopener">@oberonix</a>`;
   });
