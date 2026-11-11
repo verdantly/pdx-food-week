@@ -1360,6 +1360,7 @@ function populateLandingCarousel(spots, weekId) {
             <div class="card-restaurant">${esc(r.restaurant)}</div>
             ${locationText ? `<div class="card-neighborhood">📍 ${esc(locationText)}</div>` : ''}
             ${descText ? `<div class="card-desc">${esc(descText)}</div>` : ''}
+            ${r.price ? `<div class="card-tags"><span class="tag tag-price">${esc(r.price)}</span></div>` : ''}
           </div>
         </a>
       </div>

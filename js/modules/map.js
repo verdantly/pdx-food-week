@@ -93,7 +93,7 @@ export function renderMap() {
         riseOnHover: true,
       });
       
-      let popupHtml = `<div class="popup-dish">${esc(r.dish)}</div><div class="popup-restaurant">${esc(r.restaurant)}</div>`;
+      let popupHtml = `<div class="popup-dish">${esc(r.dish)}${r.price ? ` <span class="tag tag-price" style="font-size: 11px; vertical-align: middle; padding: 2px 6px;">${esc(r.price)}</span>` : ''}</div><div class="popup-restaurant">${esc(r.restaurant)}</div>`;
       
       if (State.crawlModeActive) {
         popupHtml += `<div style="margin-top: 10px; text-align: center;">

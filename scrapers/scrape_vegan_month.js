@@ -616,14 +616,55 @@ export async function scrape() {
 
     // Clean trailing location markers in special title (e.g. "... at Exquisite Creatures")
     let dish = rawDish;
-    if (def.bizKey === 'painaunikki') {
+    let price = '';
+
+    if (def.bizKey === 'epif' && def.specialIdx === 0) {
+      dish = 'Autumn Benedict';
+      price = '$11–$22';
+    } else if (def.bizKey === 'painaunikki') {
       dish = 'Macaron Box';
-    } else if (def.bizKey === 'verdure') {
-      dish = rawDish.replace(/\s+at\s+(Malpractice|Exquisite Creatures).*$/i, '').trim();
+      price = '';
+    } else if (dish.includes('Hot Honey Chick\'n')) {
+      dish = 'Hot Honey Chick\'n';
+      price = '$12 biscuit · $14 sandwich';
+    } else if (dish.includes('Pumpkin Spice Pancakes')) {
+      dish = 'Pumpkin Spice Pancakes';
+      price = '$13 stack · $16 combo';
+    } else if (dish.includes('Apple Cider Madeleine')) {
+      dish = 'Apple Cider Madeleine';
+      price = '$3.75 · 2 for $7';
     } else if (def.bizKey === 'vtopian' && def.specialIdx === 0) {
       dish = 'Seasonal Cheese: Cranberry Brie';
-    } else if (def.bizKey === 'epif' && def.specialIdx === 0) {
-      dish = 'Autumn Benedict';
+      price = '$14';
+    } else if (dish.toLowerCase().includes('seasonal cheese at vtopian')) {
+      dish = 'Seasonal Cheese: Cranberry Brie';
+      price = '$14';
+    } else if (dish.toLowerCase().includes('thanksgiving sm')) {
+      dish = 'Thanksgiving Smörgåstårta';
+      price = '$10 / slice';
+    } else if (dish.toLowerCase().includes('seasonal cheesecake')) {
+      dish = 'Seasonal Cheesecake';
+      price = '$7.50 / slice';
+    } else if (dish.toLowerCase().includes('filet o\' tofu')) {
+      dish = 'Filet O\' Tofu TFT';
+      price = '$16';
+    } else if (dish.toLowerCase().includes('diligent don')) {
+      dish = 'Diligent Don';
+      price = '$11';
+    } else if (dish.toLowerCase().includes('kabocha bread pudding')) {
+      dish = 'Kabocha Bread Pudding';
+      price = '$9';
+    } else if (def.bizKey === 'verdure') {
+      dish = rawDish.replace(/\s+at\s+(Malpractice|Exquisite Creatures).*$/i, '').trim();
+    }
+
+    if (!price) {
+      // General extraction: trailing price e.g. "$18", "$4.25", "  $10"
+      const priceMatch = dish.match(/\s+\$?(\d+(?:\.\d{2})?)\s*$/);
+      if (priceMatch) {
+        price = `$${priceMatch[1]}`;
+        dish = dish.slice(0, priceMatch.index).trim();
+      }
     }
 
     let image = (biz && biz.image) || '';
@@ -661,10 +702,12 @@ export async function scrape() {
 
     const hours = lookupOperatingHours(venue.restaurant, venue.address, placesCache, existingDataMap);
 
+    const finalDish = (dish === 'Filet O\' Tofu TFT') ? 'Filet O\' Tofu TFT' : toTitleCase(dish);
     entries.push({
       id: counter,
       weekId: 'world-vegan-month-2026',
-      dish: toTitleCase(dish),
+      dish: finalDish,
+      price: price || undefined,
       restaurant: venue.restaurant,
       neighborhood: venue.neighborhood,
       address: venue.address,

@@ -926,6 +926,13 @@ body[data-theme="dark"] .friend-avatar {
   color: #185FA5;
 }
 
+.tag-price {
+  background: #FEF3C7;
+  color: #92400E;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 [data-theme="dark"] .tag-meat {
   background: rgba(224, 83, 50, 0.18) !important;
   color: #FFA085 !important;
@@ -966,6 +973,12 @@ body[data-theme="dark"] .friend-avatar {
   background: rgba(224, 83, 50, 0.18) !important;
   color: #FFA085 !important;
   border: 1px solid rgba(224, 83, 50, 0.3) !important;
+}
+
+[data-theme="dark"] .tag-price {
+  background: rgba(217, 145, 32, 0.22) !important;
+  color: #FCD34D !important;
+  border: 1px solid rgba(217, 145, 32, 0.35) !important;
 }
 
 .bookmark-btn {

@@ -223,6 +223,7 @@ function getSharedStyles(themeColor = '#B5472E') {
     .tag-veg { background: rgba(138, 92, 20, 0.14); color: #8A5C14; }
     .tag-vegan { background: rgba(46, 125, 50, 0.14); color: #2E7D32; }
     .tag-gf { background: rgba(40, 106, 95, 0.14); color: #286A5F; }
+    .tag-price { background: rgba(217, 145, 32, 0.15); color: #8A5C14; font-weight: 600; }
     .tag-subtle { background: rgba(26, 18, 8, 0.06); color: var(--ink-70); }
 
     .hero-desc { font-size: 16.5px; color: var(--ink-70); max-width: 760px; margin-bottom: 24px; line-height: 1.6; }
@@ -371,6 +372,9 @@ function getAppHeaderHtml(activeDeepLink = '../') {
 
 function renderDishTagBadges(dish) {
   const tagBadges = [];
+  if (dish.price) {
+    tagBadges.push(`<span class="tag tag-price">${escapeHtml(dish.price)}</span>`);
+  }
   const isAllVeganWeek = dish.weekId === 'world-vegan-month-2026';
   if (dish.type && !isAllVeganWeek) {
     const t = String(dish.type).toLowerCase();

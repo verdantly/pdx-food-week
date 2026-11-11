@@ -22,6 +22,11 @@ export function buildTags(r) {
 
   const t = [];
 
+  // Per-dish price tag (e.g. for variable-price weeks like World Vegan Month, Salad Week, Dumpling Week)
+  if (r.price) {
+    t.push(`<span class="tag tag-price">${esc(r.price)}</span>`);
+  }
+
   // Meat / Vegetarian / Vegan badges (omitted when week specifies hideDietTags, e.g. all-vegan events)
   const isAllVeganWeek = (weekMeta && weekMeta.hideDietTags) || (r.weekId === 'world-vegan-month-2026' || State.currentWeekId === 'world-vegan-month-2026');
   if (!isAllVeganWeek) {
