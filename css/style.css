@@ -830,25 +830,25 @@ body[data-theme="dark"] .dish-card.bookmarked {
 
 .dish-price-badge {
   display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 12.5px;
+  font-family: var(--font-body);
+  font-size: 11px;
   font-weight: 600;
   color: #92400E;
   background: #FEF3C7;
-  border: 1px solid rgba(217, 145, 32, 0.35);
-  padding: 2px 7px;
-  border-radius: 6px;
+  padding: 3px 8px;
+  border-radius: 20px;
   margin-left: 6px;
   vertical-align: middle;
-  letter-spacing: 0.01em;
-  line-height: 1.2;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1;
   white-space: nowrap;
 }
 
 .sheet-price-badge {
-  font-size: 14.5px;
-  padding: 3px 9px;
-  border-radius: 8px;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 20px;
   margin-left: 8px;
   white-space: normal;
 }
@@ -856,7 +856,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
 [data-theme="dark"] .dish-price-badge {
   background: rgba(217, 145, 32, 0.22) !important;
   color: #FCD34D !important;
-  border-color: rgba(217, 145, 32, 0.4) !important;
+  border: 1px solid rgba(217, 145, 32, 0.35) !important;
 }
 
 .card-restaurant {
