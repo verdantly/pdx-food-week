@@ -839,7 +839,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
   padding: 3px 8px;
   border-radius: 20px;
   margin-left: 6px;
-  vertical-align: 0.12em;
+  vertical-align: 3px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   line-height: 1;
@@ -851,7 +851,7 @@ body[data-theme="dark"] .dish-card.bookmarked {
   padding: 4px 10px;
   border-radius: 20px;
   margin-left: 8px;
-  vertical-align: 0.16em;
+  vertical-align: 4px;
   white-space: normal;
 }
 
