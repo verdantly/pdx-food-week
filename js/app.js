@@ -1348,6 +1348,7 @@ function populateLandingCarousel(spots, weekId) {
 
     const locationText = r.neighborhood || r.address || '';
     const descText = r.desc || r.whatsOnIt || '';
+    const priceText = r.price ? (r.price.includes('·') || r.price.includes('/') ? r.price.replace(/·.*/, '').trim() : r.price) : '';
 
     return `
       <div class="landing-carousel-slide" role="group" aria-roledescription="slide" aria-label="${idx + 1} of ${selected.length}">
@@ -1356,11 +1357,10 @@ function populateLandingCarousel(spots, weekId) {
             ${thumb}
           </div>
           <div class="card-body">
-            <div class="card-dish">${esc(r.dish)}</div>
+            <div class="card-dish">${esc(r.dish)}${priceText ? ` <span class="dish-price-badge">${esc(priceText)}</span>` : ''}</div>
             <div class="card-restaurant">${esc(r.restaurant)}</div>
             ${locationText ? `<div class="card-neighborhood">📍 ${esc(locationText)}</div>` : ''}
             ${descText ? `<div class="card-desc">${esc(descText)}</div>` : ''}
-            ${r.price ? `<div class="card-tags"><span class="tag tag-price">${esc(r.price)}</span></div>` : ''}
           </div>
         </a>
       </div>
