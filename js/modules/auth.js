@@ -134,6 +134,9 @@ function getFriendlyAuthErrorMessage(error) {
     case 'auth/popup-blocked':
       return 'Popup was blocked by your browser. Please allow popups for this site and try again.';
     default:
+      if (error.message && /missing initial state|sessionStorage/i.test(error.message)) {
+        return "Google sign-in was blocked by your browser's privacy or storage settings. Please sign in with Email instead, or allow cross-site cookies for this site.";
+      }
       return error.message || 'Authentication error. Please try again.';
   }
 }
