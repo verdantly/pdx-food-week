@@ -316,14 +316,12 @@ window.FOOD_WEEKS = [
       { id: 'gf', label: 'Gluten-free' },
       { id: 'spicy', label: 'Spicy' }
     ]
-  }
-];
-
-window.UPCOMING_FOOD_WEEKS = [
+  },
   {
     id: "holiday-drink-2026",
     name: "Holiday Drink Week 2026",
     organizer: "Portland Mercury",
+    dataFile: "holidaydrink2026.js",
     dates: "December 7–13, 2026",
     startDate: "2026-12-07",
     endDate: "2026-12-13",
@@ -333,29 +331,17 @@ window.UPCOMING_FOOD_WEEKS = [
     colorLight: "#F8BBD0",
     colorPale: "#FCE4EC",
     emoji: "🍸",
-    url: "https://everout.com/portland/",
-    aboutTitle: "What is Portland Holiday Drink Week 2026?",
-    aboutText: "Portland Holiday Drink Week is the Portland Mercury's festive annual cocktail showcase. Top mixologists, bars, pubs, and lounges across Portland craft festive holiday concoctions, warm winter sippers, and boozy holiday specials for just $10.",
-    description: "Portland Holiday Drink Week 2026 guide: Dates (December 7–13, 2026), $10 craft holiday cocktails, participating bars, lounges, non-alcoholic mocktails, and interactive crawl map.",
-    faqs: [
-      {
-        question: "When is Portland Holiday Drink Week 2026?",
-        answer: "Portland Holiday Drink Week 2026 takes place December 7–13, 2026 across bars, pubs, and restaurants in Portland, Oregon."
-      },
-      {
-        question: "Who organizes Portland Holiday Drink Week?",
-        answer: "Holiday Drink Week is presented by the Portland Mercury and EverOut Portland."
-      },
-      {
-        question: "How much are drinks during Holiday Drink Week?",
-        answer: "Specialty holiday cocktails and featured drinks are priced at $10 each at participating locations."
-      },
-      {
-        question: "Are non-alcoholic drinks included?",
-        answer: "Yes, participating venues frequently offer festive non-alcoholic mocktails alongside spirit-forward cocktails so everyone can celebrate the season."
-      }
+    totalLocations: 30,
+    url: "https://everout.com/portland/events/the-portland-mercurys-holiday-drink-week-2026/e222752/",
+    filters: [
+      { id: 'alcoholFree', label: 'Zero-Proof / NA' },
+      { id: 'minors', label: 'Minors OK' },
+      { id: 'takeout', label: 'Takeout' }
     ]
-  },
+  }
+];
+
+window.UPCOMING_FOOD_WEEKS = [
   {
     id: "zero-proof-2027",
     name: "Zero Proof Week 2027",

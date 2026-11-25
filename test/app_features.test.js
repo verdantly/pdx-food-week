@@ -427,16 +427,16 @@ describe("App Features: Saved Custom Order Rank Badges", () => {
     try {
       const { openUpcomingWeekModal, closeUpcomingWeekModal } = await import("../js/app.js");
 
-      openUpcomingWeekModal("holiday-drink-2026");
+      openUpcomingWeekModal("zero-proof-2027");
 
       expect(mockModal.classList.contains("open")).toBe(true);
       expect(mockModal.getAttribute("aria-hidden")).toBe("false");
-      expect(elements.get("upcoming-modal-emoji").textContent).toBe("🍸");
-      expect(elements.get("upcoming-modal-title").textContent).toBe("Holiday Drink Week 2026");
-      expect(elements.get("upcoming-modal-badge-dates").textContent).toBe("December 7–13, 2026");
-      expect(elements.get("upcoming-modal-badge-price").textContent).toBe("$10 holiday drinks");
+      expect(elements.get("upcoming-modal-emoji").textContent).toBe("🍹");
+      expect(elements.get("upcoming-modal-title").textContent).toBe("Zero Proof Week 2027");
+      expect(elements.get("upcoming-modal-badge-dates").textContent).toBe("January 11–17, 2027");
+      expect(elements.get("upcoming-modal-badge-price").textContent).toBe("$10 mocktails");
       expect(elements.get("upcoming-modal-organizer").textContent).toBe("Portland Mercury");
-      expect(elements.get("upcoming-modal-guide-link").href).toBe("weeks/holiday-drink-2026.html");
+      expect(elements.get("upcoming-modal-guide-link").href).toBe("weeks/zero-proof-2027.html");
 
       closeUpcomingWeekModal();
       expect(mockModal.classList.contains("open")).toBe(false);

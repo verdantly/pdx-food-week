@@ -68,22 +68,22 @@ describe('Search Engine Optimization (SEO) & Discoverability Suite', () => {
     const weeksDir = path.join(projectRoot, 'weeks');
     const sitemapContent = fs.readFileSync(path.join(projectRoot, 'sitemap.xml'), 'utf8');
 
-    // Verify Holiday Drink Week 2026 placeholder page
-    const holidayDrinkPath = path.join(weeksDir, 'holiday-drink-2026.html');
-    expect(fs.existsSync(holidayDrinkPath)).toBe(true);
-    const holidayHtml = fs.readFileSync(holidayDrinkPath, 'utf8');
-    expect(holidayHtml).toContain('Portland Holiday Drink Week 2026');
-    expect(holidayHtml).toContain('"@type": "FoodEvent"');
-    expect(holidayHtml).toContain('"name": "Holiday Drink Week 2026"');
-    expect(holidayHtml).toContain('"@type": "FAQPage"');
-    expect(holidayHtml).toContain('When is Portland Holiday Drink Week 2026?');
-    expect(holidayHtml).toContain('December 7–13, 2026');
-    expect(holidayHtml).toContain('"startDate": "2026-12-07"');
-    expect(holidayHtml).toContain('"endDate": "2026-12-13"');
-    expect(holidayHtml).toContain('Portland Mercury');
-    expect(holidayHtml).toContain('Upcoming Event');
-    expect(holidayHtml).toContain('https://www.pdxfoodweek.com/weeks/holiday-drink-2026.html');
-    expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/holiday-drink-2026.html</loc>');
+    // Verify Zero Proof Week 2027 placeholder page
+    const zeroProofPath = path.join(weeksDir, 'zero-proof-2027.html');
+    expect(fs.existsSync(zeroProofPath)).toBe(true);
+    const zeroProofHtml = fs.readFileSync(zeroProofPath, 'utf8');
+    expect(zeroProofHtml).toContain('Portland Zero Proof Week 2027');
+    expect(zeroProofHtml).toContain('"@type": "FoodEvent"');
+    expect(zeroProofHtml).toContain('"name": "Zero Proof Week 2027"');
+    expect(zeroProofHtml).toContain('"@type": "FAQPage"');
+    expect(zeroProofHtml).toContain('When is Portland Zero Proof Week 2027?');
+    expect(zeroProofHtml).toContain('January 11–17, 2027');
+    expect(zeroProofHtml).toContain('"startDate": "2027-01-11"');
+    expect(zeroProofHtml).toContain('"endDate": "2027-01-17"');
+    expect(zeroProofHtml).toContain('Portland Mercury');
+    expect(zeroProofHtml).toContain('Upcoming Event');
+    expect(zeroProofHtml).toContain('https://www.pdxfoodweek.com/weeks/zero-proof-2027.html');
+    expect(sitemapContent).toContain('https://www.pdxfoodweek.com/weeks/zero-proof-2027.html</loc>');
 
     // Verify 2027 upcoming food week placeholder pages
     for (const upcomingId of ['burger-2027', 'dumpling-2027', 'pizza-2027']) {
