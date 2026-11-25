@@ -690,10 +690,22 @@ function renderLanding() {
 
   // Prioritize any other currently active events at the very top of "More Food Weeks"
   const concurrentActiveWeeks = otherActiveWeeks.filter(w => getWeekTiming(w).status === 'active');
-  const pastActiveWeeks = otherActiveWeeks.filter(w => getWeekTiming(w).status !== 'active');
+  const upcomingActiveWeeks = otherActiveWeeks.filter(w => {
+    const s = getWeekTiming(w).status;
+    return s === 'next' || s === 'upcoming';
+  });
+  const pastActiveWeeks = otherActiveWeeks.filter(w => {
+    const s = getWeekTiming(w).status;
+    return s !== 'active' && s !== 'next' && s !== 'upcoming';
+  });
 
-  // Combined list: any other currently active weeks first, then next 3 upcoming food weeks, then past/historical weeks
-  const otherWeeks = [...concurrentActiveWeeks, ...next3Upcoming, ...pastActiveWeeks];
+  // Merge full-data upcoming weeks with upcoming-only placeholders, sorted chronologically by startDate
+  const allUpcoming = [...upcomingActiveWeeks, ...next3Upcoming].sort((a, b) =>
+    (a.startDate || '9999-12-31').localeCompare(b.startDate || '9999-12-31')
+  );
+
+  // Combined list: any other currently active weeks first, then upcoming food weeks, then past/historical weeks
+  const otherWeeks = [...concurrentActiveWeeks, ...allUpcoming, ...pastActiveWeeks];
 
   const featuredTiming = getWeekTiming(featuredWeek);
   const isFeaturedActive = featuredTiming.status === 'active';
