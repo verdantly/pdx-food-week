@@ -6096,69 +6096,109 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Monday: 7:00 AM – 9:30 PM",
-        "Tuesday: 7:00 AM – 9:30 PM",
-        "Wednesday: 7:00 AM – 9:30 PM",
-        "Thursday: 7:00 AM – 9:30 PM",
-        "Friday: 7:00 AM – 9:30 PM",
-        "Saturday: 7:00 AM – 9:30 PM",
-        "Sunday: 7:00 AM – 9:30 PM"
+        "Monday: 7:00 AM – 2:00 PM, 3:00 PM – 10:00 PM",
+        "Tuesday: 7:00 AM – 2:00 PM, 3:00 PM – 10:00 PM",
+        "Wednesday: 7:00 AM – 2:00 PM, 3:00 PM – 10:00 PM",
+        "Thursday: 7:00 AM – 2:00 PM, 3:00 PM – 10:00 PM",
+        "Friday: 7:00 AM – 2:00 PM, 3:00 PM – 10:00 PM",
+        "Saturday: 3:00 PM – 10:00 PM",
+        "Sunday: 3:00 PM – 10:00 PM"
       ],
       "periods": [
         {
           "close": {
             "day": 0,
-            "time": "2130"
+            "time": "2200"
           },
           "open": {
             "day": 0,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 1,
+            "time": "1400"
+          },
+          "open": {
+            "day": 1,
             "time": "0700"
           }
         },
         {
           "close": {
             "day": 1,
-            "time": "2130"
+            "time": "2200"
           },
           "open": {
             "day": 1,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 2,
+            "time": "1400"
+          },
+          "open": {
+            "day": 2,
             "time": "0700"
           }
         },
         {
           "close": {
             "day": 2,
-            "time": "2130"
+            "time": "2200"
           },
           "open": {
             "day": 2,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 3,
+            "time": "1400"
+          },
+          "open": {
+            "day": 3,
             "time": "0700"
           }
         },
         {
           "close": {
             "day": 3,
-            "time": "2130"
+            "time": "2200"
           },
           "open": {
             "day": 3,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
+            "day": 4,
+            "time": "1400"
+          },
+          "open": {
+            "day": 4,
             "time": "0700"
           }
         },
         {
           "close": {
             "day": 4,
-            "time": "2130"
+            "time": "2200"
           },
           "open": {
             "day": 4,
-            "time": "0700"
+            "time": "1500"
           }
         },
         {
           "close": {
             "day": 5,
-            "time": "2130"
+            "time": "1400"
           },
           "open": {
             "day": 5,
@@ -6167,12 +6207,22 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         },
         {
           "close": {
+            "day": 5,
+            "time": "2200"
+          },
+          "open": {
+            "day": 5,
+            "time": "1500"
+          }
+        },
+        {
+          "close": {
             "day": 6,
-            "time": "2130"
+            "time": "2200"
           },
           "open": {
             "day": 6,
-            "time": "0700"
+            "time": "1500"
           }
         }
       ]
