@@ -45464,5 +45464,1007 @@
         }
       }
     ]
+  },
+  "Grand Central Bowl & Arcade | 808 SE Morrison St, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 10:00 PM",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 11:00 AM – 12:00 AM",
+        "Sunday: 11:00 AM – 10:00 PM"
+      ]
+    }
+  },
+  "Hide-A-While | 7771 SW Capitol Hwy, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 4:00 PM – 12:00 AM",
+        "Sunday: Closed"
+      ]
+    }
+  },
+  "Little Bitter Bar | 509 SE Grand Avenue, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 21,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 4:00 PM – 9:00 PM",
+        "Thursday: 4:00 PM – 9:00 PM",
+        "Friday: 4:00 PM – 9:00 PM",
+        "Saturday: 4:00 PM – 9:00 PM",
+        "Sunday: 4:00 PM – 9:00 PM"
+      ]
+    }
+  },
+  "McMenamins Annex The Nightcap Before Christmas | 1223 SW Harvey Milk St., Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 11:00 PM",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 4:00 PM – 12:00 AM",
+        "Sunday: 4:00 PM – 11:00 PM"
+      ]
+    }
+  },
+  "Palomar | 1422 NW 23rd Avenue, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 10:00 PM",
+        "Tuesday: 4:00 PM – 10:00 PM",
+        "Wednesday: 4:00 PM – 10:00 PM",
+        "Thursday: 4:00 PM – 10:00 PM",
+        "Friday: 4:00 PM – 10:00 PM",
+        "Saturday: 4:00 PM – 10:00 PM",
+        "Sunday: 4:00 PM – 10:00 PM"
+      ]
+    }
+  },
+  "St. Jack | 1610 NW 23rd, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 5:00 PM – 10:00 PM",
+        "Tuesday: 5:00 PM – 10:00 PM",
+        "Wednesday: 5:00 PM – 10:00 PM",
+        "Thursday: 5:00 PM – 10:00 PM",
+        "Friday: 5:00 PM – 10:00 PM",
+        "Saturday: 5:00 PM – 10:00 PM",
+        "Sunday: 5:00 PM – 10:00 PM"
+      ]
+    }
+  },
+  "The Callback | 1607 NE 41st Ave, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 10,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 23,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 11:00 AM – 11:00 PM",
+        "Tuesday: 11:00 AM – 11:00 PM",
+        "Wednesday: 11:00 AM – 11:00 PM",
+        "Thursday: 11:00 AM – 11:00 PM",
+        "Friday: 11:00 AM – 11:00 PM",
+        "Saturday: 11:00 AM – 11:00 PM",
+        "Sunday: 10:00 AM – 11:00 PM"
+      ]
+    }
+  },
+  "Thunderbird Mississippi | 3560 N Mississippi Ave., Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 14,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 14,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 4:00 PM – 11:00 PM",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 2:00 PM – 12:00 AM",
+        "Sunday: 2:00 PM – 11:00 PM"
+      ]
+    }
+  },
+  "Tigard Tap & Table | 12950 Southwest Pacific Highway STE. 285, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 12,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 18,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 14,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 20,
+            "minute": 30
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 13,
+            "minute": 30
+          },
+          "close": {
+            "day": 4,
+            "hour": 20,
+            "minute": 30
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 12,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 12,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 21,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: Closed",
+        "Tuesday: 4:00 PM – 8:00 PM",
+        "Wednesday: 2:00 PM – 8:30 PM",
+        "Thursday: 1:30 PM – 8:30 PM",
+        "Friday: 12:00 PM – 9:00 PM",
+        "Saturday: 12:00 PM – 9:00 PM",
+        "Sunday: 12:00 PM – 6:00 PM"
+      ]
+    }
+  },
+  "Tréla Greek Kitchen | 6000 NE Glisan Street, Portland, OR": {
+    "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          }
+        }
+      ],
+      "openDays": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weekdayDescriptions": [
+        "Monday: 5:00 PM – 10:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 5:00 PM – 10:00 PM",
+        "Thursday: 5:00 PM – 10:00 PM",
+        "Friday: 5:00 PM – 10:00 PM",
+        "Saturday: 4:00 PM – 10:00 PM",
+        "Sunday: 4:00 PM – 10:00 PM"
+      ]
+    }
   }
 }

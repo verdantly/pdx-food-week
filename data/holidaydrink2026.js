@@ -708,6 +708,92 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://grandcentralbowl.com/",
     "url": "https://everout.com/portland/events/mistletoe-mule/e264639/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
@@ -718,13 +804,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 10:00 PM",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 11:00 AM – 12:00 AM",
+        "Sunday: 11:00 AM – 10:00 PM"
       ]
     }
   },
@@ -860,9 +946,69 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://hideawhilepdx.com/",
     "url": "https://everout.com/portland/events/hide-a-cider/e264433/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
-        0,
-        1,
         2,
         3,
         4,
@@ -870,13 +1016,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 4:00 PM – 12:00 AM",
+        "Sunday: Closed"
       ]
     }
   },
@@ -1124,23 +1270,83 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.littlebitterbarpdx.com/",
     "url": "https://everout.com/portland/events/bitter-candy-cane/e264574/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 21,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
-        1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: Closed",
+        "Wednesday: 4:00 PM – 9:00 PM",
+        "Thursday: 4:00 PM – 9:00 PM",
+        "Friday: 4:00 PM – 9:00 PM",
+        "Saturday: 4:00 PM – 9:00 PM",
+        "Sunday: 4:00 PM – 9:00 PM"
       ]
     }
   },
@@ -1164,6 +1370,92 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "mcmenamins.com",
     "url": "https://everout.com/portland/events/father-kissmass/e264429/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
@@ -1174,13 +1466,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 11:00 PM",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 4:00 PM – 12:00 AM",
+        "Sunday: 4:00 PM – 11:00 PM"
       ]
     }
   },
@@ -1540,6 +1832,92 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.barpalomar.com",
     "url": "https://everout.com/portland/events/christmas-in-july/e264436/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
@@ -1550,13 +1928,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 10:00 PM",
+        "Tuesday: 4:00 PM – 10:00 PM",
+        "Wednesday: 4:00 PM – 10:00 PM",
+        "Thursday: 4:00 PM – 10:00 PM",
+        "Friday: 4:00 PM – 10:00 PM",
+        "Saturday: 4:00 PM – 10:00 PM",
+        "Sunday: 4:00 PM – 10:00 PM"
       ]
     }
   },
@@ -1916,6 +2294,92 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "http://www.stjackpdx.com",
     "url": "https://everout.com/portland/events/french-64/e264786/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
@@ -1926,13 +2390,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 5:00 PM – 10:00 PM",
+        "Tuesday: 5:00 PM – 10:00 PM",
+        "Wednesday: 5:00 PM – 10:00 PM",
+        "Thursday: 5:00 PM – 10:00 PM",
+        "Friday: 5:00 PM – 10:00 PM",
+        "Saturday: 5:00 PM – 10:00 PM",
+        "Sunday: 5:00 PM – 10:00 PM"
       ]
     }
   },
@@ -2168,6 +2632,92 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.callbackpdx.com",
     "url": "https://everout.com/portland/events/santas-nightcap/e264419/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 10,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 11,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 23,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
@@ -2178,13 +2728,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 11:00 AM – 11:00 PM",
+        "Tuesday: 11:00 AM – 11:00 PM",
+        "Wednesday: 11:00 AM – 11:00 PM",
+        "Thursday: 11:00 AM – 11:00 PM",
+        "Friday: 11:00 AM – 11:00 PM",
+        "Saturday: 11:00 AM – 11:00 PM",
+        "Sunday: 10:00 AM – 11:00 PM"
       ]
     }
   },
@@ -2432,6 +2982,92 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://l.instagram.com/?u=http%3A%2F%2Fthunderbirdbarpdx.com%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaczX_ODIQGdvC7intqEGolzgsjzdJUoXqokuz3sT6LK6POqv",
     "url": "https://everout.com/portland/events/navy-sour/e264420/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 14,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 23,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 0,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 14,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 0,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
@@ -2442,13 +3078,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 4:00 PM – 11:00 PM",
+        "Tuesday: 4:00 PM – 11:00 PM",
+        "Wednesday: 4:00 PM – 11:00 PM",
+        "Thursday: 4:00 PM – 11:00 PM",
+        "Friday: 4:00 PM – 12:00 AM",
+        "Saturday: 2:00 PM – 12:00 AM",
+        "Sunday: 2:00 PM – 11:00 PM"
       ]
     }
   },
@@ -2472,9 +3108,82 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://tigardtapandtable.com/",
     "url": "https://everout.com/portland/events/sleigh-my-name/e264430/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 12,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 18,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 2,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 2,
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 14,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 20,
+            "minute": 30
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 13,
+            "minute": 30
+          },
+          "close": {
+            "day": 4,
+            "hour": 20,
+            "minute": 30
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 12,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 21,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 12,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 21,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
-        1,
         2,
         3,
         4,
@@ -2482,13 +3191,13 @@ window.RESTAURANTS = window.RESTAURANTS || [];
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: Closed",
+        "Tuesday: 4:00 PM – 8:00 PM",
+        "Wednesday: 2:00 PM – 8:30 PM",
+        "Thursday: 1:30 PM – 8:30 PM",
+        "Friday: 12:00 PM – 9:00 PM",
+        "Saturday: 12:00 PM – 9:00 PM",
+        "Sunday: 12:00 PM – 6:00 PM"
       ]
     }
   },
@@ -2512,23 +3221,96 @@ window.RESTAURANTS = window.RESTAURANTS || [];
     "restaurantUrl": "https://www.trelagreekkitchen.com/",
     "url": "https://everout.com/portland/events/greek-santa/e264931/",
     "hours": {
+      "periods": [
+        {
+          "open": {
+            "day": 0,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 0,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 1,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 1,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 3,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 4,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 5,
+            "hour": 17,
+            "minute": 0
+          },
+          "close": {
+            "day": 5,
+            "hour": 22,
+            "minute": 0
+          }
+        },
+        {
+          "open": {
+            "day": 6,
+            "hour": 16,
+            "minute": 0
+          },
+          "close": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          }
+        }
+      ],
       "openDays": [
         0,
         1,
-        2,
         3,
         4,
         5,
         6
       ],
       "weekdayDescriptions": [
-        "Sunday: Open",
-        "Monday: Open",
-        "Tuesday: Open",
-        "Wednesday: Open",
-        "Thursday: Open",
-        "Friday: Open",
-        "Saturday: Open"
+        "Monday: 5:00 PM – 10:00 PM",
+        "Tuesday: Closed",
+        "Wednesday: 5:00 PM – 10:00 PM",
+        "Thursday: 5:00 PM – 10:00 PM",
+        "Friday: 5:00 PM – 10:00 PM",
+        "Saturday: 4:00 PM – 10:00 PM",
+        "Sunday: 4:00 PM – 10:00 PM"
       ]
     }
   },
