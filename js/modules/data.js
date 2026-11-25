@@ -1,6 +1,30 @@
 /* ── Data Helpers & Queries ── */
-import { State, isDishSaved, getDishKey, isDishViewedNew } from './state.js';
+import { State, isDishSaved, getDishKey, isDishViewedNew, getUserDishRating, getCommunityDishRating } from './state.js';
 import { haversineDistance, isRestaurantOpenOnDay, isRestaurantOpenNow } from './utils.js';
+
+function compareDishesByRating(a, b, preferPersonal = false) {
+  const aWid = a.weekId || State.currentWeekId;
+  const bWid = b.weekId || State.currentWeekId;
+  const aUser = getUserDishRating(a.id, aWid);
+  const bUser = getUserDishRating(b.id, bWid);
+  const aComm = getCommunityDishRating(a.id, aWid);
+  const bComm = getCommunityDishRating(b.id, bWid);
+
+  const aScore = preferPersonal
+    ? (aUser ? aUser.score : (aComm ? aComm.avg : -1))
+    : (aComm ? aComm.avg : (aUser ? aUser.score : -1));
+  const bScore = preferPersonal
+    ? (bUser ? bUser.score : (bComm ? bComm.avg : -1))
+    : (bComm ? bComm.avg : (bUser ? bUser.score : -1));
+
+  if (bScore !== aScore) return bScore - aScore;
+
+  const aCount = aComm ? aComm.count : (aUser ? 1 : 0);
+  const bCount = bComm ? bComm.count : (bUser ? 1 : 0);
+  if (bCount !== aCount) return bCount - aCount;
+
+  return (a.restaurant || '').localeCompare(b.restaurant || '');
+}
 
 export function getRestaurants() {
   return (window.RESTAURANTS || []).filter(r => r.weekId === State.currentWeekId);
@@ -127,7 +151,9 @@ export function getFiltered() {
     return true;
   });
 
-  if (State.activeSort === 'dish') {
+  if (State.activeSort === 'rating') {
+    filtered.sort((a, b) => compareDishesByRating(a, b, false));
+  } else if (State.activeSort === 'dish') {
     filtered.sort((a, b) => (a.dish || '').localeCompare(b.dish || ''));
   } else if (State.activeSort === 'restaurant') {
     filtered.sort((a, b) => (a.restaurant || '').localeCompare(b.restaurant || ''));
@@ -172,7 +198,9 @@ export function getSaved() {
     return true;
   });
 
-  if (State.activeSavedSort === 'dish') {
+  if (State.activeSavedSort === 'rating') {
+    savedItems.sort((a, b) => compareDishesByRating(a, b, true));
+  } else if (State.activeSavedSort === 'dish') {
     savedItems.sort((a, b) => (a.dish || '').localeCompare(b.dish || ''));
   } else if (State.activeSavedSort === 'restaurant') {
     savedItems.sort((a, b) => (a.restaurant || '').localeCompare(b.restaurant || ''));

@@ -69,7 +69,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css?v=888cdc0a" />
+  <link rel="stylesheet" href="css/style.css?v=db1f1d77" />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -441,6 +441,7 @@
               <div class="sort-main-group">
                 <button class="filter-chip active" onclick="App.setSort('restaurant', this)">Restaurant (A-Z)</button>
                 <button class="filter-chip" onclick="App.setSort('dish', this)">Name (A-Z)</button>
+                <button class="filter-chip" onclick="App.setSort('rating', this)">Highest Rated</button>
               </div>
               <span class="sort-label-empty"></span>
               <div class="sort-distance-group">
@@ -610,6 +611,7 @@
                 <button class="filter-chip active" onclick="App.setSavedSort('restaurant', this)">Restaurant
                   (A-Z)</button>
                 <button class="filter-chip" onclick="App.setSavedSort('dish', this)">Name (A-Z)</button>
+                <button class="filter-chip" onclick="App.setSavedSort('rating', this)">Highest Rated</button>
                 <button class="filter-chip" onclick="App.setSavedSort('custom', this)">Custom</button>
               </div>
               <span class="sort-label-empty"></span>
@@ -1996,6 +1998,14 @@
     </button>
   </nav>
 
+  <!-- ── Beli-Style Dish Rating Modal ── -->
+  <div id="beli-rating-modal" class="crawl-modal-overlay" role="dialog" aria-modal="true"
+    aria-labelledby="beli-modal-title" onclick="if(event.target===this)App.closeRatingModal()">
+    <div class="crawl-modal-card beli-modal-card" onclick="event.stopPropagation()">
+      <div id="beli-modal-content"></div>
+    </div>
+  </div>
+
   <!-- ── Scripts ── -->
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -2003,8 +2013,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics-compat.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
-  <script src="js/meta.js?v=888cdc0a"></script>
-  <script type="module" src="js/app.js?v=888cdc0a"></script>
+  <script src="js/meta.js?v=db1f1d77"></script>
+  <script type="module" src="js/app.js?v=db1f1d77"></script>
   <script>
     if ('serviceWorker' in navigator) {
       let refreshing = false;

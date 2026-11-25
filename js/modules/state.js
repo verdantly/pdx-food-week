@@ -28,6 +28,8 @@ export const State = {
   viewedNew: new Set(),
   notificationPrefs: { weekAlerts: false, menuDrops: false },
   notes: {},
+  ratings: {},
+  communityRatings: {},
   selectedDish: null,
   currentWeekId: null,
   weekFilters: {},
@@ -120,6 +122,7 @@ const STORAGE_KEY_CUSTOM_ORDER = 'pdxfw_custom_order_v1';
 const STORAGE_KEY_WEEK_FILTERS = 'pdxfw_week_filters_v1';
 const STORAGE_KEY_NOTIF_PREFS = 'pdxfw_notif_prefs_v1';
 const STORAGE_KEY_VISITED = 'pdxfw_visited_v1';
+const STORAGE_KEY_RATINGS = 'pdxfw_ratings_v1';
 
 export function loadState() {
   try {
@@ -141,6 +144,14 @@ export function loadState() {
     if (wf) State.weekFilters = JSON.parse(wf);
     const np = localStorage.getItem(STORAGE_KEY_NOTIF_PREFS);
     if (np) State.notificationPrefs = Object.assign({ weekAlerts: false, menuDrops: false }, JSON.parse(np));
+
+    const ratingsRaw = localStorage.getItem(STORAGE_KEY_RATINGS);
+    if (ratingsRaw) {
+      const parsedRatings = JSON.parse(ratingsRaw);
+      if (parsedRatings && typeof parsedRatings === 'object') {
+        State.ratings = parsedRatings;
+      }
+    }
     const co = localStorage.getItem(STORAGE_KEY_CUSTOM_ORDER);
     if (co) {
       State.customSavedOrder = JSON.parse(co);
@@ -269,6 +280,7 @@ export function saveState() {
     localStorage.setItem(STORAGE_KEY_CUSTOM_ORDER, JSON.stringify(State.customSavedOrder));
     localStorage.setItem(STORAGE_KEY_WEEK_FILTERS, JSON.stringify(State.weekFilters));
     localStorage.setItem(STORAGE_KEY_NOTIF_PREFS, JSON.stringify(State.notificationPrefs));
+    localStorage.setItem(STORAGE_KEY_RATINGS, JSON.stringify(State.ratings || {}));
   } catch (e) { }
 
   if (window.App && window.App.queueCloudSync) {
@@ -298,6 +310,7 @@ export function backupGuestUserData() {
         saved: [...State.saved],
         passed: [...State.passed],
         notes: State.notes || {},
+        ratings: State.ratings || {},
         crawlSelection: State.crawlSelection || [],
         customSavedOrder: State.customSavedOrder || []
       };
@@ -314,6 +327,7 @@ export function restoreGuestUserData() {
       State.saved = new Set(backup.saved || []);
       State.passed = new Set(backup.passed || []);
       State.notes = backup.notes || {};
+      State.ratings = (backup.ratings && typeof backup.ratings === 'object') ? backup.ratings : {};
       State.crawlSelection = backup.crawlSelection || [];
       State.customSavedOrder = backup.customSavedOrder || [...State.saved];
 
@@ -332,6 +346,7 @@ export function clearUserDataState() {
   State.saved.clear();
   State.passed.clear();
   State.notes = {};
+  State.ratings = {};
   State.crawlSelection = [];
   State.customSavedOrder = [];
 
@@ -339,6 +354,7 @@ export function clearUserDataState() {
     localStorage.removeItem(STORAGE_KEY_SAVED);
     localStorage.removeItem(STORAGE_KEY_PASSED);
     localStorage.removeItem(STORAGE_KEY_NOTES);
+    localStorage.removeItem(STORAGE_KEY_RATINGS);
     localStorage.removeItem(STORAGE_KEY_CUSTOM_ORDER);
   } catch (e) { }
 }
@@ -349,4 +365,65 @@ export function purgeAllUserData() {
     localStorage.removeItem(STORAGE_KEY_GUEST_BACKUP);
     localStorage.removeItem('pdxfw_logged_in_uid');
   } catch (e) { }
+}
+
+/* ── Beli-Style Dish Rating Helpers (Per-Week) ── */
+export const TIER_BANDS = {
+  liked: { min: 7.0, max: 10.0 },
+  fine: { min: 4.0, max: 6.9 },
+  disliked: { min: 1.0, max: 3.9 }
+};
+
+export function normalizeRatingDishId(dishId) {
+  if (dishId == null) return null;
+  const num = Number(dishId);
+  return Number.isFinite(num) && String(dishId).trim() !== '' ? num : String(dishId);
+}
+
+export function computeTierScore(tier, index, total) {
+  const band = TIER_BANDS[tier];
+  if (!band || total <= 0 || index < 0 || index >= total) return null;
+  const raw = band.max - ((index + 0.5) / total) * (band.max - band.min);
+  return Math.round(raw * 10) / 10;
+}
+
+export function getWeekRatingsMap(weekId) {
+  const wid = weekId || State.currentWeekId;
+  const map = new Map();
+  if (!wid || !State.ratings || !State.ratings[wid]) return map;
+  const bucket = State.ratings[wid];
+  ['liked', 'fine', 'disliked'].forEach(tier => {
+    const arr = Array.isArray(bucket[tier]) ? bucket[tier] : [];
+    const total = arr.length;
+    arr.forEach((rawId, idx) => {
+      const id = normalizeRatingDishId(rawId);
+      if (id == null) return;
+      const score = computeTierScore(tier, idx, total);
+      map.set(id, { score, tier, rankIndex: idx, tierTotal: total });
+    });
+  });
+  return map;
+}
+
+export function getUserDishRating(dishId, weekId) {
+  const id = normalizeRatingDishId(dishId);
+  if (id == null) return null;
+  const wid = weekId || State.currentWeekId;
+  return getWeekRatingsMap(wid).get(id) || null;
+}
+
+export function isDishTried(dishId, weekId) {
+  return getUserDishRating(dishId, weekId) !== null;
+}
+
+export function getCommunityDishRating(dishId, weekId) {
+  const wid = weekId || State.currentWeekId;
+  const id = normalizeRatingDishId(dishId);
+  if (!wid || id == null || !State.communityRatings || !State.communityRatings[wid]) {
+    return null;
+  }
+  const weekMap = State.communityRatings[wid];
+  const entry = weekMap[id] || weekMap[String(id)];
+  if (!entry || !entry.count) return null;
+  return entry;
 }

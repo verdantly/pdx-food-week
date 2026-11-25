@@ -1,6 +1,6 @@
 /* ── Card HTML Generation ── */
-import { State, isDishSaved, isDishViewedNew } from './state.js';
-import { esc, highlightMatch, haversineDistance } from './utils.js';
+import { State, isDishSaved, isDishViewedNew, getUserDishRating, getCommunityDishRating } from './state.js';
+import { esc, highlightMatch, haversineDistance, renderBeliBadgeHTML } from './utils.js';
 import { isVeganFriendly, isVegetarianFriendly } from './data.js';
 
 export function hasVeganOptionInDesc(r) {
@@ -171,6 +171,28 @@ export function cardHTML(r, overlap, isSavedTab = false, index = -1, totalCount 
       ${thumb}
       <div class="card-body">
         <div class="card-dish">${highlightMatch(r.dish, q)}${priceBadge}${isNew ? ' <span class="new-badge">NEW</span>' : ''}</div>
+        ${(() => {
+          const ratingWid = r.weekId || State.currentWeekId;
+          const userRating = getUserDishRating(r.id, ratingWid);
+          const commRating = getCommunityDishRating(r.id, ratingWid);
+          if (!userRating && !commRating) return '';
+          const userBadge = userRating
+            ? renderBeliBadgeHTML(userRating.score, {
+                prefix: 'You',
+                className: 'beli-badge-sm beli-badge-user',
+                title: `Your rating: ${userRating.score.toFixed(1)}`
+              })
+            : '';
+          const commBadge = commRating
+            ? renderBeliBadgeHTML(commRating.avg, {
+                prefix: 'Avg',
+                suffix: `(${commRating.count})`,
+                className: 'beli-badge-sm beli-badge-community',
+                title: `Community average: ${commRating.avg.toFixed(1)} from ${commRating.count} ${commRating.count === 1 ? 'rating' : 'ratings'}`
+              })
+            : '';
+          return `<div class="card-rating-row">${userBadge}${commBadge}</div>`;
+        })()}
         <div class="card-restaurant">${highlightMatch(r.restaurant, q)}${dist}</div>
         <div class="card-neighborhood">📍 ${highlightMatch(locationText, q)}</div>
         <div class="card-desc">${esc(r.desc)}</div>

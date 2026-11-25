@@ -1,8 +1,75 @@
 /* ── UI Components & Detail Overlays ── */
-import { State, saveState, isDishSaved, toggleDishSaved, getDishKey, isDishViewedNew, markDishViewedNew } from './state.js';
-import { esc, safeUrl, showToast, getRestaurantScheduleText, activateModalFocusTrap, deactivateModalFocusTrap } from './utils.js';
+import { State, saveState, isDishSaved, toggleDishSaved, getDishKey, isDishViewedNew, markDishViewedNew, getUserDishRating, getCommunityDishRating } from './state.js';
+import { esc, safeUrl, showToast, getRestaurantScheduleText, activateModalFocusTrap, deactivateModalFocusTrap, getTierLabel, renderBeliBadgeHTML } from './utils.js';
 import { getRestaurants, getFiltered, getSaved, updateBrowseBadge } from './data.js';
 import { buildTags } from './cards.js';
+
+export function buildDetailRatingSummaryHTML(r) {
+  if (!r) return '';
+  const ratingWid = r.weekId || State.currentWeekId;
+  const userRating = getUserDishRating(r.id, ratingWid);
+  const commRating = getCommunityDishRating(r.id, ratingWid);
+
+  const communityHTML = commRating
+    ? `<div class="sheet-rating-row">
+         <span class="sheet-rating-label">Community Score</span>
+         <span class="sheet-rating-value">
+           ${renderBeliBadgeHTML(commRating.avg)}
+           <span class="sheet-rating-meta">${commRating.count} ${commRating.count === 1 ? 'rating' : 'ratings'}</span>
+         </span>
+       </div>`
+    : `<div class="sheet-rating-row is-empty">
+         <span class="sheet-rating-label">Community Score</span>
+         <span class="sheet-rating-meta">No ratings yet — be the first to rank it!</span>
+       </div>`;
+
+  const personalHTML = userRating
+    ? `<div class="sheet-rating-row is-personal">
+         <span class="sheet-rating-label">Your Beli Rank</span>
+         <span class="sheet-rating-value">
+           ${renderBeliBadgeHTML(userRating.score)}
+           <span class="sheet-rating-meta">${esc(getTierLabel(userRating.tier))} &middot; #${userRating.rankIndex + 1} of ${userRating.tierTotal}</span>
+         </span>
+       </div>`
+    : '';
+
+  return `<div class="sheet-rating-summary" id="sheet-rating-summary">${communityHTML}${personalHTML}</div>`;
+}
+
+export function buildRateActionBtnContent(dishId, weekId) {
+  const wid = weekId || State.currentWeekId;
+  const userRating = getUserDishRating(dishId, wid);
+  if (userRating) {
+    return `Tried &middot; ${userRating.score.toFixed(1)}`;
+  }
+  return 'Rate / Tried';
+}
+
+export function refreshDetailRatingUI(dishId) {
+  if (typeof document === 'undefined' || !State.selectedDish) return;
+  if (
+    dishId != null &&
+    Number(State.selectedDish.id) !== Number(dishId) &&
+    String(State.selectedDish.id) !== String(dishId)
+  ) {
+    return;
+  }
+  const r = State.selectedDish;
+  const wid = r.weekId || State.currentWeekId;
+  const summaryEl = document.getElementById('sheet-rating-summary');
+  if (summaryEl) {
+    summaryEl.outerHTML = buildDetailRatingSummaryHTML(r);
+  }
+  const rateBtn = document.getElementById('sheet-rate-btn');
+  if (rateBtn) {
+    const userRating = getUserDishRating(r.id, wid);
+    rateBtn.classList.toggle('is-rated', Boolean(userRating));
+    const labelEl = rateBtn.querySelector('.sheet-rate-btn-label');
+    if (labelEl) {
+      labelEl.innerHTML = buildRateActionBtnContent(r.id, wid);
+    }
+  }
+}
 
 export function showSaveIndicator() {
   const ind = document.getElementById('note-save-indicator');
@@ -317,7 +384,12 @@ export function openDetail(id, fromPopState = false) {
     })() : ''}
     ${!r.whatsOnIt && !r.whatTheySay && r.desc ? `<div class="sheet-desc" style="margin-bottom: 16px;">${esc(r.desc)}</div>` : ''}
     <div class="sheet-tags">${buildTags(r)}</div>
-    <div class="sheet-actions" style="display: flex; gap: 8px;">
+    ${buildDetailRatingSummaryHTML(r)}
+    <div class="sheet-actions" style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <button type="button" id="sheet-rate-btn" class="btn sheet-rate-btn${getUserDishRating(r.id, r.weekId || State.currentWeekId) ? ' is-rated' : ''}" onclick="App.openRatingModal(${JSON.stringify(r.id)}, '${esc(r.weekId || State.currentWeekId || '')}')">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span class="sheet-rate-btn-label">${buildRateActionBtnContent(r.id, r.weekId || State.currentWeekId)}</span>
+      </button>
       <a class="btn btn-link" style="flex: 1;" href="${esc(safeUrl(r.url))}" target="_blank" rel="noopener">
         ${esc((() => { if (r.url && r.url.includes('veganizerpdx.com')) return 'Veganizer PDX'; if (r.url && r.url.includes('theactualportland.com')) return 'The Actual Portland'; if (r.url && r.url.includes('bridgetownbites.com')) return 'Bridgetown Bites'; if (r.url && r.url.includes('everout.com')) return 'EverOut'; return 'Website'; })())} ↗
       </a>

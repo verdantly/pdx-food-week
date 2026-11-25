@@ -1,5 +1,5 @@
 /* ── Shareable Graphic Card Canvas Exporter ── */
-import { State } from './state.js';
+import { State, getUserDishRating } from './state.js';
 import { getSaved } from './data.js';
 import { showToast } from './utils.js';
 
@@ -171,13 +171,33 @@ export async function exportTopPicksCard() {
       ctx.fillText(`📍 ${truncateText(ctx, hood, width - textStartX - 120)}`, textStartX, y + 130);
     }
 
-    // Personal Star Rating if given
-    const userNote = State.notes[item.id] || (item.weekId && State.notes[`${item.weekId}_${item.id}`]);
-    const starCount = (userNote && userNote.rating) ? Number(userNote.rating) : 0;
-    if (starCount > 0) {
-      ctx.font = '24px sans-serif';
-      ctx.fillStyle = '#F5B041';
-      ctx.fillText('★'.repeat(starCount) + '☆'.repeat(5 - starCount), textStartX, y + 172);
+    // Beli 0-10 score badge if ranked, otherwise fallback to legacy star rating
+    const beliRating = getUserDishRating(item.id, item.weekId || State.currentWeekId);
+    if (beliRating) {
+      const scoreText = beliRating.score.toFixed(1);
+      const pillColor = beliRating.score >= 7.0 ? '#16A34A' : (beliRating.score >= 4.0 ? '#D97706' : '#DC2626');
+      ctx.save();
+      ctx.fillStyle = pillColor;
+      if (typeof ctx.roundRect === 'function') {
+        ctx.beginPath();
+        ctx.roundRect(textStartX, y + 148, 76, 32, 16);
+        ctx.fill();
+      } else {
+        ctx.fillRect(textStartX, y + 148, 76, 32);
+      }
+      ctx.font = 'bold 20px sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.fillText(scoreText, textStartX + 38, y + 171);
+      ctx.restore();
+    } else {
+      const userNote = State.notes[item.id] || (item.weekId && State.notes[`${item.weekId}_${item.id}`]);
+      const starCount = (userNote && userNote.rating) ? Number(userNote.rating) : 0;
+      if (starCount > 0) {
+        ctx.font = '24px sans-serif';
+        ctx.fillStyle = '#F5B041';
+        ctx.fillText('★'.repeat(starCount) + '☆'.repeat(5 - starCount), textStartX, y + 172);
+      }
     }
   }
 

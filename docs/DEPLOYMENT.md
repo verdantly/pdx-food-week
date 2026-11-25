@@ -154,6 +154,18 @@ service cloud.firestore {
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
+    match /week_user_ratings/{docId} {
+      allow read: if true;
+      allow create, update: if request.auth != null
+                            && docId == (request.resource.data.weekId + '_' + request.auth.uid)
+                            && request.resource.data.keys().hasAll(['uid', 'weekId', 'scores'])
+                            && request.resource.data.keys().hasOnly(['uid', 'weekId', 'scores', 'updatedAt'])
+                            && request.resource.data.uid == request.auth.uid
+                            && request.resource.data.weekId is string
+                            && request.resource.data.scores is map
+                            && request.resource.data.scores.size() <= 200;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
   }
 }
 ```

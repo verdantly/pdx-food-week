@@ -1,12 +1,12 @@
 const TILE_CACHE_NAME = 'pdxfw-tiles-v1';
-const CACHE_NAME = 'pdxfw-cache-888cdc0a';
+const CACHE_NAME = 'pdxfw-cache-db1f1d77';
 
 const LOCAL_ASSETS = [
   './',
   'index.html',
-  'css/style.css?v=888cdc0a',
-  'js/app.js?v=888cdc0a',
-  'js/meta.js?v=888cdc0a',
+  'css/style.css?v=db1f1d77',
+  'js/app.js?v=db1f1d77',
+  'js/meta.js?v=db1f1d77',
   'js/modules/auth.js',
   'js/modules/cards.js',
   'js/modules/crawl.js',
@@ -16,6 +16,7 @@ const LOCAL_ASSETS = [
   'js/modules/install.js',
   'js/modules/map.js',
   'js/modules/picks_exporter.js',
+  'js/modules/ratings.js',
   'js/modules/render.js',
   'js/modules/state.js',
   'js/modules/swipe.js',

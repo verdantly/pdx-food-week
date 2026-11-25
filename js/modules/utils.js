@@ -410,3 +410,30 @@ export function deactivateModalFocusTrap(modalId) {
   }
 }
 
+export function getBeliBadgeClass(score) {
+  const num = Number(score);
+  if (!Number.isFinite(num)) return 'beli-fine';
+  if (num >= 7.0) return 'beli-good';
+  if (num >= 4.0) return 'beli-fine';
+  return 'beli-bad';
+}
+
+export function getTierLabel(tier) {
+  if (tier === 'liked') return 'Liked it!';
+  if (tier === 'fine') return 'It was fine';
+  if (tier === 'disliked') return "Didn't like it";
+  return 'Rated';
+}
+
+export function renderBeliBadgeHTML(score, opts = {}) {
+  const num = Number(score);
+  if (!Number.isFinite(num)) return '';
+  const cls = getBeliBadgeClass(num);
+  const extraClass = opts.className ? ` ${opts.className}` : '';
+  const prefix = opts.prefix ? `<span class="beli-badge-prefix">${esc(opts.prefix)}</span>` : '';
+  const suffix = opts.suffix ? `<span class="beli-badge-suffix">${esc(opts.suffix)}</span>` : '';
+  const titleAttr = opts.title ? ` title="${esc(opts.title)}"` : '';
+  return `<span class="beli-score-badge ${cls}${extraClass}"${titleAttr}>${prefix}<span class="beli-badge-value">${num.toFixed(1)}</span>${suffix}</span>`;
+}
+
+

@@ -49,7 +49,13 @@ import {
   openDeleteAccountConfirm, closeDeleteAccountConfirm, executeDeleteAccount,
   openResetGuestDataConfirm, closeResetGuestDataConfirm, executeResetGuestData
 } from './modules/auth.js';
-import { pushLocalToCloud, queueCloudSync } from './modules/sync.js';
+import { pushLocalToCloud, queueCloudSync, subscribeToWeekRatings, syncPublicWeekRatings } from './modules/sync.js';
+import {
+  openRatingModal, closeRatingModal, selectRatingTier,
+  handleComparisonChoice, handleComparisonTie, startRerateFlow,
+  removeDishRating
+} from './modules/ratings.js';
+import { refreshDetailRatingUI } from './modules/ui.js';
 
 // Firebase init reference
 if (window.firebase) {
@@ -484,7 +490,7 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
   const mapStatsRow = document.getElementById('map-stats-row');
   if (mapStatsRow) mapStatsRow.style.display = 'none';
 
-  const sortLabelMap = { restaurant: 'Restaurant', dish: 'Dish', distance: 'Distance', id: 'Default' };
+  const sortLabelMap = { rating: 'Highest Rated', restaurant: 'Restaurant', dish: 'Dish', distance: 'Distance', id: 'Default' };
   const activeSortLabel = sortLabelMap[State.activeSort] || 'Restaurant';
   document.querySelectorAll('#sort-row button.filter-chip, #sort-section button.filter-chip').forEach(btn => {
     if (btn.textContent.includes(activeSortLabel)) {
@@ -535,6 +541,7 @@ function switchWeek(weekId, fromPopState = false, targetDishId = null) {
   switchTab('browse', true);
 
   const loadDataAndRender = () => {
+    subscribeToWeekRatings(State.currentWeekId);
     renderAll();
     updateBrowseBadge();
     showToast(`Switched to ${week.name}!`);
@@ -2106,6 +2113,7 @@ function init() {
     switchTab('browse', true);
   }
 
+  subscribeToWeekRatings(State.currentWeekId);
   loadWeekData(State.currentWeekId, () => {
     renderAll();
     updateBrowseBadge();
@@ -2314,7 +2322,17 @@ const App = {
   executeResetGuestData,
   setThemePreference,
   cycleThemePreference,
-  scrollToTop
+  scrollToTop,
+  openRatingModal,
+  closeRatingModal,
+  selectRatingTier,
+  handleComparisonChoice,
+  handleComparisonTie,
+  startRerateFlow,
+  removeDishRating,
+  refreshDetailRatingUI,
+  subscribeToWeekRatings,
+  syncPublicWeekRatings
 };
 
 if (typeof window !== 'undefined') {

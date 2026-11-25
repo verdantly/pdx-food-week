@@ -1,11 +1,100 @@
 /* ── Cloud Synchronization Module ── */
-import { State, saveState, backupGuestUserData, restoreGuestUserData } from './state.js';
+import { State, saveState, backupGuestUserData, restoreGuestUserData, getWeekRatingsMap } from './state.js';
 import { showToast } from './utils.js';
 import { renderBrowse, renderSaved, renderAll } from './render.js';
 
 let syncUnsubscribe = null;
 let syncDebounceTimer = null;
 let isApplyingCloudUpdate = false;
+let weekRatingsUnsubscribe = null;
+let subscribedRatingsWeekId = null;
+let rawRemoteWeekDocs = new Map();
+
+function mergeRatingsBuckets(localRatings = {}, cloudRatings = {}) {
+  const merged = {};
+  const allWeeks = new Set([
+    ...Object.keys(localRatings || {}),
+    ...Object.keys(cloudRatings || {})
+  ]);
+  allWeeks.forEach(wid => {
+    const cloudBucket = (cloudRatings && cloudRatings[wid]) || {};
+    const localBucket = (localRatings && localRatings[wid]) || {};
+    const seen = new Set();
+    const out = { liked: [], fine: [], disliked: [] };
+    ['liked', 'fine', 'disliked'].forEach(tier => {
+      const cloudArr = Array.isArray(cloudBucket[tier]) ? cloudBucket[tier] : [];
+      const localArr = Array.isArray(localBucket[tier]) ? localBucket[tier] : [];
+      [...cloudArr, ...localArr].forEach(rawId => {
+        const key = String(rawId);
+        if (!seen.has(key)) {
+          seen.add(key);
+          out[tier].push(rawId);
+        }
+      });
+    });
+    merged[wid] = out;
+  });
+  return merged;
+}
+
+export function recomputeCommunityRatingsForWeek(weekId) {
+  const wid = weekId || State.currentWeekId;
+  if (!wid) return {};
+  if (!State.communityRatings || typeof State.communityRatings !== 'object') {
+    State.communityRatings = {};
+  }
+
+  const byUser = new Map();
+  if (subscribedRatingsWeekId === wid) {
+    rawRemoteWeekDocs.forEach((scores, docUid) => {
+      byUser.set(docUid, scores);
+    });
+  }
+
+  // Optimistic local overlay for currently signed-in user
+  if (State.user && State.user.uid) {
+    const localBucket = State.ratings?.[wid];
+    if (localBucket && typeof localBucket === 'object') {
+      const localScores = {};
+      getWeekRatingsMap(wid).forEach((info, dishId) => {
+        localScores[String(dishId)] = info.score;
+      });
+      byUser.set(State.user.uid, localScores);
+    }
+  }
+
+  const agg = {};
+  byUser.forEach(scores => {
+    if (!scores || typeof scores !== 'object') return;
+    Object.entries(scores).forEach(([rawDishId, rawScore]) => {
+      const score = Number(rawScore);
+      if (!Number.isFinite(score)) return;
+      const dishKey = String(rawDishId);
+      if (!agg[dishKey]) {
+        agg[dishKey] = { sum: 0, count: 0, avg: 0 };
+      }
+      agg[dishKey].sum += score;
+      agg[dishKey].count += 1;
+    });
+  });
+
+  Object.keys(agg).forEach(dishKey => {
+    const entry = agg[dishKey];
+    entry.avg = Math.round((entry.sum / entry.count) * 10) / 10;
+  });
+
+  State.communityRatings[wid] = agg;
+  return agg;
+}
+
+export function resetWeekRatingsCache() {
+  rawRemoteWeekDocs = new Map();
+  subscribedRatingsWeekId = null;
+  if (weekRatingsUnsubscribe) {
+    try { weekRatingsUnsubscribe(); } catch (_) { }
+    weekRatingsUnsubscribe = null;
+  }
+}
 
 export function onUserSignedIn(user, fromGuest = false) {
   // Capture a snapshot of guest entries right before any cloud merging happens (only if transitioning from guest)
@@ -125,10 +214,14 @@ export function applyRemoteCloudState(cloudData) {
     State.saved = new Set(cloudData.saved || []);
     State.passed = new Set(cloudData.passed || []);
     State.notes = cloudData.notes || {};
+    State.ratings = (cloudData.ratings && typeof cloudData.ratings === 'object') ? cloudData.ratings : {};
     State.crawlSelection = Array.isArray(cloudData.crawlSelection) ? cloudData.crawlSelection : [];
     State.customSavedOrder = (cloudData.customSavedOrder || []).filter(id => State.saved.has(id));
 
     saveState();
+    if (State.currentWeekId) {
+      recomputeCommunityRatingsForWeek(State.currentWeekId);
+    }
 
     if (State.activeTab === 'saved') renderSaved();
     if (State.activeTab === 'browse') renderBrowse();
@@ -163,6 +256,10 @@ export function mergeCloudWithLocal(cloudData) {
     // Merge notes & ratings
     if (cloudData.notes && typeof cloudData.notes === 'object') {
       State.notes = { ...State.notes, ...cloudData.notes };
+      changed = true;
+    }
+    if (cloudData.ratings && typeof cloudData.ratings === 'object') {
+      State.ratings = mergeRatingsBuckets(State.ratings, cloudData.ratings);
       changed = true;
     }
 
@@ -207,6 +304,7 @@ export async function pushLocalToCloud(uid) {
       saved: [...State.saved],
       passed: [...State.passed],
       notes: State.notes || {},
+      ratings: State.ratings || {},
       crawlSelection: State.crawlSelection || [],
       customSavedOrder: State.customSavedOrder || [],
       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -248,9 +346,116 @@ export async function deleteCloudUserData(uid) {
   if (!targetUid) return;
 
   try {
-    await window.db.collection('users').doc(targetUid).delete();
+    if (window.db && typeof window.db.collection === 'function') {
+      try {
+        const ratingsSnap = await window.db.collection('week_user_ratings')
+          .where('uid', '==', targetUid)
+          .get();
+        if (ratingsSnap && !ratingsSnap.empty) {
+          const deletions = [];
+          ratingsSnap.forEach(doc => deletions.push(doc.ref.delete()));
+          await Promise.all(deletions);
+        }
+      } catch (e) {
+        console.warn('Could not clean up week_user_ratings docs:', e);
+      }
+      rawRemoteWeekDocs.delete(targetUid);
+      if (State.currentWeekId) {
+        recomputeCommunityRatingsForWeek(State.currentWeekId);
+      }
+      await window.db.collection('users').doc(targetUid).delete();
+    }
   } catch (e) {
     console.error('Failed to delete cloud user data:', e);
     throw e;
+  }
+}
+
+export async function syncPublicWeekRatings(weekId, uid) {
+  const wid = weekId || State.currentWeekId;
+  if (!wid) return;
+
+  recomputeCommunityRatingsForWeek(wid);
+
+  const targetUid = uid || State.user?.uid;
+  if (!targetUid || typeof window === 'undefined' || !window.db || typeof window.db.collection !== 'function') {
+    return;
+  }
+
+  const ratingsMap = getWeekRatingsMap(wid);
+  const scores = {};
+  ratingsMap.forEach((info, dishId) => {
+    scores[String(dishId)] = info.score;
+  });
+
+  const docRef = window.db.collection('week_user_ratings').doc(`${wid}_${targetUid}`);
+  try {
+    if (Object.keys(scores).length === 0) {
+      rawRemoteWeekDocs.delete(targetUid);
+      await docRef.delete();
+    } else {
+      rawRemoteWeekDocs.set(targetUid, scores);
+      const payload = {
+        uid: targetUid,
+        weekId: wid,
+        scores,
+        updatedAt: (typeof firebase !== 'undefined' && firebase.firestore?.FieldValue?.serverTimestamp)
+          ? firebase.firestore.FieldValue.serverTimestamp()
+          : Date.now()
+      };
+      await docRef.set(payload);
+    }
+    recomputeCommunityRatingsForWeek(wid);
+  } catch (e) {
+    console.warn('Failed to sync public week ratings:', e);
+  }
+}
+
+export function subscribeToWeekRatings(weekId) {
+  const wid = weekId || State.currentWeekId;
+  if (!wid) return;
+
+  if (subscribedRatingsWeekId === wid && weekRatingsUnsubscribe) {
+    recomputeCommunityRatingsForWeek(wid);
+    return;
+  }
+
+  if (weekRatingsUnsubscribe) {
+    try { weekRatingsUnsubscribe(); } catch (_) { }
+    weekRatingsUnsubscribe = null;
+  }
+
+  rawRemoteWeekDocs = new Map();
+  subscribedRatingsWeekId = wid;
+  recomputeCommunityRatingsForWeek(wid);
+
+  if (typeof window === 'undefined' || !window.db || typeof window.db.collection !== 'function') {
+    return;
+  }
+
+  try {
+    weekRatingsUnsubscribe = window.db.collection('week_user_ratings')
+      .where('weekId', '==', wid)
+      .onSnapshot(snapshot => {
+        const nextDocs = new Map();
+        snapshot.forEach(doc => {
+          const data = doc.data ? doc.data() : {};
+          const docUid = data.uid || doc.id;
+          if (data.scores && typeof data.scores === 'object') {
+            nextDocs.set(docUid, data.scores);
+          }
+        });
+        rawRemoteWeekDocs = nextDocs;
+        recomputeCommunityRatingsForWeek(wid);
+        try {
+          if (typeof document !== 'undefined') {
+            renderAll();
+          }
+        } catch (_) { }
+      }, err => {
+        console.warn('Community ratings listener error:', err);
+      });
+  } catch (e) {
+    console.warn('Could not subscribe to week ratings:', e);
   }
 }
